@@ -1,8 +1,13 @@
 "use client"
 import { Button, Dropdown } from "@jeiltodo/ui";
+import { useState } from "react";
 
 export default function Page(): JSX.Element {
-  
+const [selectedValue, setSelectedValue] = useState<string | null>(null);
+
+  const handleSelect = (value: string) => {
+    setSelectedValue(value);
+  };
   const handleClick = () => {
     console.log('Button clicked!');
   };
@@ -53,7 +58,7 @@ export default function Page(): JSX.Element {
 
     {/* 가로로 길고 양쪽이 둥근 모양  */}
     <Button onClick={handleClick}>불러오기</Button> 
-    <Dropdown>
+    <Dropdown onSelect={handleSelect}>
       <Dropdown.Toggle>목표를 선택하세요</Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item value="목표 1">목표 1</Dropdown.Item>
