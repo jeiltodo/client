@@ -1,4 +1,5 @@
-import { Button } from "@repo/ui";
+"use client"
+import { Button, Dropdown } from "@jeiltodo/ui";
 
 export default function Page(): JSX.Element {
   
@@ -52,5 +53,13 @@ export default function Page(): JSX.Element {
 
     {/* 가로로 길고 양쪽이 둥근 모양  */}
     <Button onClick={handleClick}>불러오기</Button> 
+    <Dropdown>
+      <Dropdown.Toggle>목표를 선택하세요</Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item value="목표 1">목표 1</Dropdown.Item>
+        <Dropdown.Item value="목표 2">목표 2</Dropdown.Item>
+        <Dropdown.Item value="목표 3">목표 3</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   </main>;
 }
