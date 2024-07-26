@@ -1,59 +1,79 @@
 "use client"
-import { Button, Dropdown } from "@jeiltodo/ui";
+import { Button, ButtonGroup, Dropdown } from "@jeiltodo/ui";
+import { useState } from "react";
 
 export default function Page(): JSX.Element {
-  
+const [selectedValue, setSelectedValue] = useState<string | null>(null);
+
+  const handleSelect = (value: string) => {
+    setSelectedValue(value);
+  };
   const handleClick = () => {
     console.log('Button clicked!');
   };
 
-  return <main>메인
-
-    <Button variant="primary">primary</Button>
-    <Button variant="primary" isDisabled>primary disabled</Button>
-    <Button variant="primary" fullWidth >primary full-Width </Button>
-    <Button variant="rounded">secondary button</Button>
-    <Button variant="outline">outline button</Button>
-    <Button variant="success">success button</Button>
-    <Button variant="warning">waring button</Button>
-    <Button variant="error">error button</Button>
-    <Button variant="error" size="sm">error button sm</Button>
-    <Button variant="error" size="md">error button md</Button>
-    <Button variant="error" size="lg">error button lg</Button>
-    <Button variant="error" size="xl">error button xl</Button>
-
+  return <main>
     {/* 로그인 */}
-    <Button isDisabled onClick={handleClick}>로그인 하기 disabled</Button>
-    <Button onClick={handleClick}>로그인 하기</Button>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">로그인</h2>
+      <Button isDisabled fullWidth onClick={handleClick}>로그인 하기</Button>
+      <Button fullWidth onClick={handleClick}>로그인 하기</Button>
+    </div>
 
     {/* 네비게이션바 */}
-    <Button onClick={handleClick}>+ 새 할 일</Button>
-    <Button onClick={handleClick}>+ 새 목표</Button>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">네비게이션바</h2>
+      <Button onClick={handleClick}>+ 새 할 일</Button>
+      <Button variant="outline" onClick={handleClick}>+ 새 목표</Button>
+    </div>
 
-    {/* 대비보드 */}
-    <Button onClick={handleClick}>모두 보기 {'>'}</Button>
-    <Button onClick={handleClick}>+ 할일 추가</Button>
-    <Button onClick={handleClick}>더보기 {'>'}</Button>
+    {/* 대시보드 */}
+    <div className="mb-3 bg-blue-50 py-5">
+      <h2 className="font-pretendard-bold text-2xl">대시보드</h2>
+      <Button variant="text-gray" onClick={handleClick}>모두 보기 {'>'}</Button>
+      <Button variant="text-blue" onClick={handleClick}>+ 할일 추가</Button>
+      <Button variant="rounded-white" onClick={handleClick}>더보기 {'>'}</Button>
+    </div>
 
 
     {/* 모달팝업 */}
-    <Button isDisabled fullWidth onClick={handleClick}>확인 full-Width disabled</Button>
-    <Button fullWidth onClick={handleClick}>확인full-Width </Button>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">모달팝업</h2>
+      <Button isDisabled fullWidth onClick={handleClick}>확인 full-Width</Button>
+      <Button fullWidth onClick={handleClick}>확인 full-Width </Button>
+    </div>
 
     {/* 모달 두 버튼 나란히 */}
-    <Button onClick={handleClick}>취소</Button>
-    <Button onClick={handleClick}>확인</Button>
-
-    <Button onClick={handleClick}>취소</Button>
-    <Button onClick={handleClick}>불러오기</Button>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">flex button group - minWidth 120px</h2>
+      <ButtonGroup>
+        <Button variant="outline" onClick={handleClick}>취소</Button>
+        <Button onClick={handleClick}>확인</Button>
+      </ButtonGroup>
+    </div>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">flex button group - full width</h2>
+      <ButtonGroup gap={1}>
+        <Button variant="outline" fullWidth onClick={handleClick}>취소</Button>
+        <Button fullWidth onClick={handleClick}>불러오기</Button>
+      </ButtonGroup>
+    </div>
 
     {/* 노트 작성 */}
-    <Button onClick={handleClick}>작성완료 disabled</Button>
-    <Button onClick={handleClick}>작성완료</Button>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">노트 작성</h2>
+      <Button isDisabled onClick={handleClick}>작성완료</Button>
+      <Button onClick={handleClick}>작성완료</Button>
+    </div>
 
     {/* 가로로 길고 양쪽이 둥근 모양  */}
-    <Button onClick={handleClick}>불러오기</Button> 
-    <Dropdown>
+    <div className="mb-3">
+      <h2 className="font-pretendard-bold text-2xl">둥근 버튼</h2>
+      <Button variant="rounded-blue" onClick={handleClick}>불러오기</Button> 
+      <Button variant="rounded-blue" isDisabled onClick={handleClick}>불러오기</Button> 
+    </div>
+
+    <Dropdown onSelect={handleSelect}>
       <Dropdown.Toggle>목표를 선택하세요</Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item value="목표 1">목표 1</Dropdown.Item>

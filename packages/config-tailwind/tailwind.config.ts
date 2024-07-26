@@ -1,16 +1,21 @@
 import type { Config } from "tailwindcss";
 import plugin from 'tailwindcss/plugin';
-import colors from 'tailwindcss/colors';
 import type { PluginAPI } from 'tailwindcss/types/config';
 
 const config: Omit<Config, "content"> = {
+  mode: 'jit',
+  safelist: [
+    {
+      pattern: /^gap-x-/,
+    },
+  ],
   theme: {
     screens: {
       'mobile' : '280px',
       'tablet' : '744px',
       'desktop' : '1920px',
     },
-   
+    
     extend: {
       fontFamily: {
         'pretendard-light': ['Pretendard Light', 'sans-serif'],
@@ -28,50 +33,12 @@ const config: Omit<Config, "content"> = {
         '2xl': ['24px', '32px'],
         '3xl': ['30px', '36px'],
       },
-      colors: {
-        primary: {
-          light: colors.blue[300],
-          DEFAULT: colors.blue[500],
-          dark: colors.blue[700],
-        },
-        secondary: {
-          light: colors.slate[300],
-          DEFAULT: colors.slate[500],
-          dark: colors.slate[700],
-        },
-        'text-primary': {
-          light: colors.blue[300],
-          DEFAULT: colors.blue[500],
-          dark: colors.blue[700],
-        },
-        'text-secondary': {
-          light: colors.slate[300],
-          DEFAULT: colors.slate[500],
-          dark: colors.slate[700],
-        },
-        'bg-primary': {
-          light: colors.blue[300],
-          DEFAULT: colors.blue[500],
-          dark: colors.blue[700],
-        },
-        'bg-secondary': {
-          light: colors.slate[300],
-          DEFAULT: colors.slate[500],
-          dark: colors.slate[700],
-        },
-        success: '#63C714',
-        info: '#2D9AFF',
-        warning: '#F5A020',
-        error: '#F6403F',
-        link: colors.blue[50],
-        highlight: colors.blue[50],
-        active: colors.blue[300],
-        inactive: colors.slate[100],
-        hover1: colors.blue[200],
-        hover2: colors.slate[200],
-        focus1: colors.blue[100],
-        focus2: colors.slate[100],
-        blue: { //기존 기획 컬러, tailwind
+      padding :{
+        'base' : '24px',
+        'mobile' : '16px'
+      },
+      colors: { 
+        blue: { // 기획 컬러, tailwind
           50: '#EFF6FF',
           100: '#DBEAFE',
           200: '#BFDBFE',
