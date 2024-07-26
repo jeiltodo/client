@@ -1,0 +1,33 @@
+{
+  "name": "@jeiltodo/icons",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "lint": "eslint src/",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@jeiltodo/eslint-config": "*",
+    "@jeiltodo/typescript-config": "*",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@types/react": "^18.2.61",
+    "esbuild-plugin-svgr": "^2.1.0",
+    "tsup": "^8.2.3",
+    "typescript": "^5.3.3"
+  }
+}
