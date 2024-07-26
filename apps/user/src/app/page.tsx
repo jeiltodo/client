@@ -1,6 +1,6 @@
 'use client';
 import { Button, ButtonGroup, Dropdown, Input } from '@jeiltodo/ui';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 export default function Page(): JSX.Element {
   const [inputValue, setInputValue] = useState<string | number>();
@@ -18,6 +18,10 @@ export default function Page(): JSX.Element {
     // TODO: 인자로 only value or event (target의 name 사용 가능)
     setInputValue(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(selectedValue);
+  }, [selectedValue]);
 
   return (
     <main>
