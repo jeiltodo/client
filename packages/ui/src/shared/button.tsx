@@ -1,7 +1,15 @@
-import { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
+import { ArrowUp } from '@jeiltodo/icons';
 import '../../dist/index.css';
 
-type Variant = 'default' | 'primary' |'rounded' |'outline' | 'success' | 'warning' | 'error';
+type Variant =
+  | 'default'
+  | 'primary'
+  | 'rounded'
+  | 'outline'
+  | 'success'
+  | 'warning'
+  | 'error';
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,7 +24,7 @@ const voidFn = () => {
   // 빈함수
 };
 
-export const Button = ({ 
+export const Button = ({
   children,
   variant = 'primary',
   size = 'md',
@@ -26,23 +34,28 @@ export const Button = ({
   onClick,
   ...props
 }: ButtonProps) => {
-  const baseClasses = 'font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none m-6';
+  const baseClasses =
+    'font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none m-6';
 
   const variantClasses = {
-    'default': 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-600',
-    'primary': 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-600',
-    'outline': 'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
-    'rounded': 'border bg-gray-500 text-white hover:bg-gray-600',
-    'success': 'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
-    'warning': 'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
-    'error': 'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
+    default: 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-600',
+    primary: 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-600',
+    outline:
+      'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
+    rounded: 'border bg-gray-500 text-white hover:bg-gray-600',
+    success:
+      'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
+    warning:
+      'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
+    error:
+      'bg-transparent text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white',
   };
 
   const sizeClasses = {
-    'sm': 'px-3 py-1 text-sm',
-    'md': 'px-4 py-2 text-base',
-    'lg': 'px-6 py-3 text-lg',
-    'xl': 'px-8 py-4 text-xl',
+    sm: 'px-3 py-1 text-sm',
+    md: 'px-4 py-2 text-base',
+    lg: 'px-6 py-3 text-lg',
+    xl: 'px-8 py-4 text-xl',
   };
 
   const buttonClasses = `
@@ -52,13 +65,17 @@ export const Button = ({
   ${fullWidth ? 'w-full' : ''}
   ${isDisabled ? 'bg-slate-400 cursor-not-allowed no-hover' : ''}
   ${className || ''}
-`
-// `.trim().replace(/\s+/g, ' ');
+`;
+  // `.trim().replace(/\s+/g, ' ');
 
   return (
-    <button className={buttonClasses} {...props} onClick={onClick ? onClick : voidFn}>
+    <button
+      className={buttonClasses}
+      {...props}
+      onClick={onClick ? onClick : voidFn}
+    >
+      <ArrowUp />
       {children}
     </button>
   );
 };
-

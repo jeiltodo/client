@@ -1,6 +1,6 @@
 'use client';
 import { Button, Dropdown } from '@jeiltodo/ui';
-import { IconCheck } from '@jeiltodo/icons';
+import { Check } from '@jeiltodo/icons';
 
 export default function Page(): JSX.Element {
   const handleClick = () => {
@@ -9,7 +9,6 @@ export default function Page(): JSX.Element {
 
   return (
     <main>
-      <IconCheck />
       메인
       <Button variant='primary'>primary</Button>
       <Button variant='primary' isDisabled>
