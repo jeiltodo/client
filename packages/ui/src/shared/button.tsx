@@ -1,13 +1,14 @@
-import { ButtonHTMLAttributes, Children } from 'react';
+import { ButtonHTMLAttributes, MouseEvent } from 'react';
 import '../../dist/index.css';
 
-type Variant = 'default' | 'primary' | 'rounded-white' | 'rounded-blue' | 'success' | 'warning' | 'error' | 'outline' | 'text-gray' | 'text-blue';
+type Variant = 'default' | 'primary' | 'outline' | 'outline-date' | 'rounded-white' | 'rounded-outline-blue' | 'text-gray' | 'text-blue' | 'success' | 'warning' | 'error' ;
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant; // button 색상
   fullWidth?: boolean; // 부모의 full-width를 차지할 것인지
   isDisabled?: boolean; //disabled 인지
-  onClick?: () => void;
+  isSelected?: boolean; //select된 버튼인지
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface ButtonGroupProps {
@@ -24,6 +25,7 @@ export const Button = ({
   variant = 'primary',
   fullWidth = false,
   isDisabled = false,
+  isSelected = false,
   className,
   onClick,
   ...props
@@ -34,8 +36,9 @@ export const Button = ({
     'default': 'bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:bg-blue-800',
     'primary': 'bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:bg-blue-800',
     'outline': 'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+    'outline-date': 'bg-transparent text-blue-500 border border-blue-500 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'rounded-white': 'text-slate-700 rounded-full bg-white hover:text-slate-800',
-    'rounded-blue': 'border border-[1px] border-blue-500 rounded-full text-blue-500 hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+    'rounded-outline-blue': 'border border-[1px] border-blue-500 rounded-full text-blue-500 hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'text-gray' : 'text-slate-600 hover:text-slate-700 active:text-slate-800',
     'text-blue' : 'text-blue-500 hover:text-blue-600 active:text-blue-800 active:border-none',
     'success': 'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white',
@@ -44,11 +47,13 @@ export const Button = ({
   };
 
   const buttonClasses = `
+  items-center justify-center
   ${ baseClasses }
   ${ variantClasses[variant] }
   ${ fullWidth ? 'w-full' : '' }
-  ${ isDisabled && variant !== 'outline' && variant !== 'rounded-blue'? 'disabled:bg-slate-400 cursor' : ''}
-  ${ isDisabled && (variant === 'outline' || variant === 'rounded-blue') ? 'disabled:text-slate-400 disabled:border-slate-400': ''}
+  ${ isDisabled && variant !== 'outline' && variant !== 'rounded-outline-blue'? 'disabled:bg-slate-400 cursor' : ''}
+  ${ isDisabled && (variant === 'outline' || variant === 'rounded-outline-blue') ? 'disabled:text-slate-400 disabled:border-slate-400': ''}
+  ${ isSelected && variant === 'outline-date' ? '!bg-blue-600  text-white hover:text-white active:border-blue-800 active:bg-blue-800 active:text-white' : ''}
   ${ className || '' }
 `
 // `.trim().replace(/\s+/g, ' ');

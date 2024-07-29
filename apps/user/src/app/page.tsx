@@ -1,18 +1,22 @@
 'use client';
 
 import { Button, ButtonGroup, Dropdown, Input } from '@jeiltodo/ui';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 
 export default function Page(): JSX.Element {
   const [inputValue, setInputValue] = useState<string | number>();
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
-
+  const [selectedDateButton, setSelectedDateButton] = useState<string | null>("오늘");
+  
+  const buttonOptions: string[] = [
+    "오늘", "3일", "7일", "30일", "기간"
+  ];
   const handleSelect = (value: string) => {
     setSelectedValue(value);
   };
 
-  const handleClick = () => {
-    console.log('Button clicked!');
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    setSelectedDateButton(e.currentTarget.textContent);
   };
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,11 +81,15 @@ export default function Page(): JSX.Element {
           flex button group - minWidth 120px
         </h2>
         <ButtonGroup>
-          <Button variant='outline' onClick={handleClick}>
-            취소
-          </Button>
-          <Button onClick={handleClick}>확인</Button>
+          {buttonOptions.map((period : string, index) => {
+            return(
+              <Button key={period + index} variant="outline-date" isSelected={selectedDateButton === period} onClick={handleClick}>{period}</Button>
+            )
+          })}
         </ButtonGroup>
+        <div>
+
+        </div>
       </div>
       <div className='mb-3'>
         <h2 className='font-pretendard-bold text-2xl'>
@@ -109,10 +117,10 @@ export default function Page(): JSX.Element {
       {/* 가로로 길고 양쪽이 둥근 모양  */}
       <div className='mb-3'>
         <h2 className='font-pretendard-bold text-2xl'>둥근 버튼</h2>
-        <Button variant='rounded-blue' onClick={handleClick}>
+        <Button variant='rounded-outline-blue' onClick={handleClick}>
           불러오기
         </Button>
-        <Button variant='rounded-blue' isDisabled onClick={handleClick}>
+        <Button variant='rounded-outline-blue' isDisabled onClick={handleClick}>
           불러오기
         </Button>
       </div>
