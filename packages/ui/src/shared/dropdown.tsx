@@ -1,5 +1,6 @@
 'use client';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+// import { IconArrowDown, IconArrowUp } from "@jeiltodo/icons";
 
 type DropdownContextType = {
   isOpen: boolean;
@@ -15,16 +16,32 @@ type DropdownProps = {
 
 type DropdownToggleProps = {
   children?: ReactNode;
+  size: 'lg' | 'fixed' | 'sm';
+  round: 'round' | 'rect';
 };
 
 type DropdownMenuProps = {
   children: ReactNode;
+  round: 'round' | 'rect';
 };
 
 type DropdownItemProps = {
   children: ReactNode;
   value: string;
+  size: 'lg' | 'fixed' | 'sm';
+  round: 'round' | 'rect';
 };
+
+const sizeClass = {
+  lg: 'w-[478px] h-[48px] py-[12px] pr-[8px] pl-[12px]',
+  fixed: 'w-full h-[44px] py-[12px] pr-[8px] pl-[12px]',
+  sm: 'w-[124px] h-[36px] py-[8px] pr-[8px] pl-[12px]'
+}
+
+const roundClass = {
+  round: 'rounded-[12px]',
+  rect: 'rounded-[4px]'
+}
 
 // Dropdown context 설정
 const DropdownContext = createContext<DropdownContextType | undefined>(
@@ -39,25 +56,26 @@ const useDropdownContext = () => {
   return context;
 };
 
-const DropdownToggle = ({ children }: DropdownToggleProps) => {
+const DropdownToggle = ({ children, size, round }: DropdownToggleProps) => {
   const { toggle, selectedItem } = useDropdownContext();
 
   return (
     <button
       onClick={toggle}
-      className='flex items-center justify-between text-sm w-[472px] h-[48px] py-[12px] px-[20px] bg-slate-50 rounded-[12px]'
+      className={`flex items-center justify-between ${sizeClass[size]} ${roundClass[round]} bg-slate-50`}
     >
-      {selectedItem || children || '목표를 선택해주세요'}
+      <div>{selectedItem || children || '목표를 선택해주세요'}</div>
+      <div className='pl-[4px] border-l-[2px] border-l-[#E2E8F0]'>아이콘~</div>
     </button>
   );
 };
 
-const DropdownMenu = ({ children }: DropdownMenuProps) => {
+const DropdownMenu = ({ children, round }: DropdownMenuProps) => {
   const { isOpen } = useDropdownContext();
 
   return (
     <div
-      className={`absolute mt-2 w-[472px] bg-slate-50 rounded-[12px] ${
+      className={`absolute mt-2 ${roundClass[round]} bg-slate-50 ${
         isOpen ? 'block' : 'hidden'
       }`}
     >
@@ -66,7 +84,7 @@ const DropdownMenu = ({ children }: DropdownMenuProps) => {
   );
 };
 
-const DropdownItem = ({ children, value }: DropdownItemProps) => {
+const DropdownItem = ({ children, value, size, round }: DropdownItemProps) => {
   const { selectItem, toggle } = useDropdownContext();
 
   const handleClick = () => {
@@ -77,7 +95,7 @@ const DropdownItem = ({ children, value }: DropdownItemProps) => {
   return (
     <div
       onClick={handleClick}
-      className='cursor-pointer w-[472px] py-[12px] px-[20px] hover:bg-gray-200 rounded-[12px] text-sm '
+      className={`cursor-pointer ${sizeClass[size]} ${roundClass[round]} bg-slate-50`}
     >
       {children}
     </div>
