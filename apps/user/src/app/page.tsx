@@ -2,8 +2,7 @@
 
 import { Button, ButtonGroup, Dropdown, Input } from '@jeiltodo/ui';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { IconCheck } from '@jeiltodo/icons';
-    
+
 export default function Page(): JSX.Element {
   const [inputValue, setInputValue] = useState<string | number>();
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
@@ -119,11 +118,11 @@ export default function Page(): JSX.Element {
       </div>
 
       <Dropdown onSelect={handleSelect}>
-        <Dropdown.Toggle>목표를 선택하세요</Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item value='목표 1'>목표 1</Dropdown.Item>
-          <Dropdown.Item value='목표 2'>목표 2</Dropdown.Item>
-          <Dropdown.Item value='목표 3'>목표 3</Dropdown.Item>
+        <Dropdown.Toggle size='lg' round='round'>목표를 선택하세요</Dropdown.Toggle>
+        <Dropdown.Menu round='round'>
+          <Dropdown.Item size='lg' round='round' value='목표 1'>목표 1</Dropdown.Item>
+          <Dropdown.Item size='lg' round='round' value='목표 2'>목표 2</Dropdown.Item>
+          <Dropdown.Item size='lg' round='round' value='목표 3'>목표 3</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
