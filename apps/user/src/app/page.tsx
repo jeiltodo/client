@@ -1,9 +1,7 @@
 'use client';
-
 import { Button, ButtonGroup, Dropdown, Input } from '@jeiltodo/ui';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { IconCheck } from '@jeiltodo/icons';
-    
+
 export default function Page(): JSX.Element {
   const [inputValue, setInputValue] = useState<string | number>();
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
