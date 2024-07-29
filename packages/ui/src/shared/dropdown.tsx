@@ -2,30 +2,30 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 // import { IconArrowDown, IconArrowUp } from "@jeiltodo/icons";
 
-type DropdownContextType = {
+interface DropdownContextType {
   isOpen: boolean;
   toggle: () => void;
   selectedItem: string | null;
   selectItem: (item: string) => void;
 };
 
-type DropdownProps = {
+interface DropdownProps {
   children: ReactNode;
   onSelect?: (item: string) => void;
 };
 
-type DropdownToggleProps = {
+interface DropdownToggleProps {
   children?: ReactNode;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
 };
 
-type DropdownMenuProps = {
+interface DropdownMenuProps {
   children: ReactNode;
   round: 'round' | 'rect';
 };
 
-type DropdownItemProps = {
+interface DropdownItemProps {
   children: ReactNode;
   value: string;
   size: 'lg' | 'fixed' | 'sm';

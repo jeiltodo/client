@@ -1,3 +1,9 @@
+import { AdminFilter } from "../widgets/ui/admin-filter";
+
 export default function Page(): JSX.Element {
-  return <main> 어드민 메인</main>;
+  return (
+    <main> 
+      <AdminFilter />
+    </main>
+  )
 }
