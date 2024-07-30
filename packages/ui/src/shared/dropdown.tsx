@@ -1,5 +1,5 @@
-"use client";
-import React, { createContext, useContext, useState, ReactNode } from "react";
+'use client';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 type DropdownContextType = {
   isOpen: boolean;
@@ -10,6 +10,7 @@ type DropdownContextType = {
 
 type DropdownProps = {
   children: ReactNode;
+  onSelect?: (item: string) => void;
 };
 
 type DropdownToggleProps = {
@@ -33,7 +34,7 @@ const DropdownContext = createContext<DropdownContextType | undefined>(
 const useDropdownContext = () => {
   const context = useContext(DropdownContext);
   if (!context) {
-    throw new Error("Dropdown context not found");
+    throw new Error('No context');
   }
   return context;
 };
@@ -42,8 +43,11 @@ const DropdownToggle = ({ children }: DropdownToggleProps) => {
   const { toggle, selectedItem } = useDropdownContext();
 
   return (
-    <button onClick={toggle} className="p-2 border rounded">
-      {selectedItem || children || "목표를 선택하세요"}
+    <button
+      onClick={toggle}
+      className='flex items-center justify-between text-sm w-[472px] h-[48px] py-[12px] px-[20px] bg-slate-50 rounded-[12px]'
+    >
+      {selectedItem || children || '목표를 선택해주세요'}
     </button>
   );
 };
@@ -53,8 +57,8 @@ const DropdownMenu = ({ children }: DropdownMenuProps) => {
 
   return (
     <div
-      className={`absolute mt-2 bg-white border rounded shadow ${
-        isOpen ? "block" : "hidden"
+      className={`absolute mt-2 w-[472px] bg-slate-50 rounded-[12px] ${
+        isOpen ? 'block' : 'hidden'
       }`}
     >
       {children}
@@ -73,7 +77,7 @@ const DropdownItem = ({ children, value }: DropdownItemProps) => {
   return (
     <div
       onClick={handleClick}
-      className="cursor-pointer p-2 hover:bg-gray-200"
+      className='cursor-pointer w-[472px] py-[12px] px-[20px] hover:bg-gray-200 rounded-[12px] text-sm '
     >
       {children}
     </div>
@@ -81,7 +85,7 @@ const DropdownItem = ({ children, value }: DropdownItemProps) => {
 };
 
 // Dropdown context 초기값 지정 및
-export const Dropdown = ({ children }: DropdownProps) => {
+export const Dropdown = ({ children, onSelect }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
@@ -91,13 +95,16 @@ export const Dropdown = ({ children }: DropdownProps) => {
 
   const selectItem = (item: string) => {
     setSelectedItem(item);
+    if (onSelect) {
+      onSelect(item);
+    }
   };
 
   return (
     <DropdownContext.Provider
       value={{ isOpen, toggle, selectedItem, selectItem }}
     >
-      <div className="relative">{children}</div>
+      <div className='relative'>{children}</div>
     </DropdownContext.Provider>
   );
 };
