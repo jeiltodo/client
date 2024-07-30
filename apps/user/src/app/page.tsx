@@ -6,6 +6,7 @@ export default function Page() {
     <main>
       메인
       <Check />
+
     </main>
   );
 }

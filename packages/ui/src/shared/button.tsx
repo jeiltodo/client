@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, Children } from 'react';
+import { ButtonHTMLAttributes, MouseEvent } from 'react';
 import '../../dist/index.css';
 
 type Variant =
@@ -17,7 +17,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant; // button 색상
   fullWidth?: boolean; // 부모의 full-width를 차지할 것인지
   isDisabled?: boolean; //disabled 인지
-  onClick?: () => void;
+  isSelected?: boolean; //select된 버튼인지
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface ButtonGroupProps {
@@ -36,6 +37,7 @@ export const Button = ({
   variant = 'primary',
   fullWidth = false,
   isDisabled = false,
+  isSelected = false,
   className,
   onClick,
   ...props
