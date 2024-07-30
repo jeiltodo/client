@@ -10,31 +10,34 @@ interface FormType {
   label: string;
   name: string;
   type?: 'email' | 'date'; // 선택
+  placeholder?: string;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
 }
 
-export const AdminFilter= () => {
-  const [name, setName] = useState<string>('');
-  const [keyword, setKeyword] = useState<string>('');
-  const [period, setPeriod] = useState<string>('');
-  const goalGroupForm: FormType[] = [
-    { label: '이름', name: 'name', value: name, setValue: setName},
-    { label: '키워드', name: 'keyword', value: keyword, setValue: setKeyword },
-    { label: '기간', name: 'period', type: 'date', value: period, setValue: setPeriod }
-  ];
-  const queryData = {
-    name: '가나',
-    data: 3,
-  };
+interface QueryData {
+  [key: string]: string | number;
+}
+
+interface AdminFilterProps {
+  setState: Dispatch<SetStateAction<string>>[];
+  formType: FormType[];
+  queryData: QueryData;
+}
+
+export const AdminFilter: React.FC<AdminFilterProps> = ({
+  setState,
+  formType,
+  queryData,
+}) => {
   return (
-    <div>
+    <div className='flex flex-col gap-3 w-[930px] py-[16px] px-[20px] bg-white rounded-xl'>
       <div>
-        <FilterForm formType={goalGroupForm} />
+        <FilterForm formType={formType} />
       </div>
-      <div>
+      <div className='flex items-center justify-end border-t-[1px] border-slate-200 pt-3'>
         <ButtonGroup gap={2}>
-          <FilterClear setStates={[setName]} />
+          <FilterClear setStates={setState} />
           <FilterSearch<typeof queryData> queryData={queryData} />
         </ButtonGroup>
       </div>

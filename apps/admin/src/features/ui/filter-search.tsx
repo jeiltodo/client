@@ -6,7 +6,7 @@ interface FilterSearchProps<T> {
 
 export const FilterSearch = <T,>({ queryData }: FilterSearchProps<T>) => {
   return (
-    <Button variant="primary">
+    <Button variant="primary" className='w-[84px] h-[36px]'>
       검색
     </Button>
   )

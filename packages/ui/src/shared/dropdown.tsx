@@ -7,41 +7,41 @@ interface DropdownContextType {
   toggle: () => void;
   selectedItem: string | null;
   selectItem: (item: string) => void;
-};
+}
 
 interface DropdownProps {
   children: ReactNode;
   onSelect?: (item: string) => void;
-};
+}
 
 interface DropdownToggleProps {
   children?: ReactNode;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
-};
+}
 
 interface DropdownMenuProps {
   children: ReactNode;
   round: 'round' | 'rect';
-};
+}
 
 interface DropdownItemProps {
   children: ReactNode;
   value: string;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
-};
+}
 
 const sizeClass = {
   lg: 'w-[478px] h-[48px] py-[12px] pr-[8px] pl-[12px]',
   fixed: 'w-full h-[44px] py-[12px] pr-[8px] pl-[12px]',
-  sm: 'w-[124px] h-[36px] py-[8px] pr-[8px] pl-[12px]'
-}
+  sm: 'w-[124px] h-[36px] py-[8px] pr-[8px] pl-[12px]',
+};
 
 const roundClass = {
-  round: 'rounded-[12px]',
-  rect: 'rounded-[4px]'
-}
+  round: 'rounded-xl',
+  rect: 'rounded-[4px]',
+};
 
 // Dropdown context 설정
 const DropdownContext = createContext<DropdownContextType | undefined>(

@@ -1,9 +1,9 @@
-import { AdminFilter } from "../widgets/ui/admin-filter";
+import { AdminUser } from "../pages/user/admin-user";
 
 export default function Page(): JSX.Element {
   return (
-    <main> 
-      <AdminFilter />
+    <main className="bg-gray-100"> 
+      <AdminUser />
     </main>
   )
 }
