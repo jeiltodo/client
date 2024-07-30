@@ -16,7 +16,6 @@ type Variant =
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant; // button 색상
-  fullWidth?: boolean; // 부모의 full-width를 차지할 것인지
   isDisabled?: boolean; //disabled 인지
   isSelected?: boolean; //select된 버튼인지
   width?: number; //버튼 너비
@@ -37,8 +36,6 @@ const voidFn = () => {
 export const Button = ({
   children,
   variant = 'primary',
-  fullWidth = false,
-  width = 120,
   isDisabled = false,
   isSelected = false,
   className,
@@ -71,12 +68,10 @@ export const Button = ({
     error:
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white',
   };
-
   const buttonClasses = `
   items-center justify-center
   ${baseClasses}
   ${variantClasses[variant]}
-  ${fullWidth ? 'w-full' : `w-[${width}px]`}
   ${isDisabled && variant !== 'outline' && variant !== 'rounded-outline-blue' ? 'disabled:bg-slate-400 cursor' : ''}
   ${isDisabled && (variant === 'outline' || variant === 'rounded-outline-blue') ? 'disabled:text-slate-400 disabled:border-slate-400' : ''}
   ${isSelected && variant === 'outline-date' ? '!bg-blue-600  text-white hover:text-white active:border-blue-800 active:bg-blue-800 active:text-white' : ''}
