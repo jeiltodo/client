@@ -1,5 +1,4 @@
-import { logoutApi } from "../api/logout-api";
-
+import { logoutApi } from '../api/logoutApi';
 
 export const handleLogout = async () => {
   try {
