@@ -1,1 +1,2 @@
-export { LoginForm } from "../auth/ui/login-form";
+export { LoginForm } from "./login/ui/login-form";
+export { logoutButton } from "./logout/ui/logout-button";

@@ -3,8 +3,9 @@
 import type { Config } from "tailwindcss";
 import sharedConfig from "@jeiltodo/tailwind-config";
 
-const config: Pick<Config, "content" | "presets"> = {
-  content: ["./src/app/**/*.tsx"],
+const config: Pick<Config, "mode" | "content" | "presets"> = {
+  mode: 'jit',
+  content: ["./src/**/*.tsx"],
   presets: [sharedConfig],
 };
 

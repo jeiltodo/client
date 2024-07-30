@@ -8,6 +8,9 @@ const config: Omit<Config, "content"> = {
     {
       pattern: /^gap-x-/,
     },
+    {
+      pattern: /^mb/,
+    },
   ],
   theme: {
     screens: {
