@@ -1,21 +1,17 @@
 'use client';
-import { Button, ButtonGroup, Input } from '@jeiltodo/ui';
-import React, { Dispatch, SetStateAction, useState } from 'react';
 
-interface FilterField {
-  label: string;
-  name: string;
-  type?: 'email' | 'date'; // 선택
-  placeholder?: string;
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
-}
+import { Button, ButtonGroup, Input } from '@jeiltodo/ui';
+import React, { useState } from 'react';
+import { Filter } from '../../../app/page';
+import { useTableContext } from '../../hooks';
+import { TableQuery } from '../../model/type';
 
 interface FilterFormProps {
-  formType: FilterField[];
+  filters: Filter[];
 }
 
-export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
+export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
+  const { tableFilters, setTableFilters } = useTableContext();
   const [activeBtn, setActiveBtn] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
@@ -57,9 +53,12 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
     setStartDate(start);
     setEndDate(end);
 
-    formType.forEach((field) => {
+    filters.forEach((field) => {
       if (field.label === '기간') {
-        field.setValue(`${start}&${end}`);
+        setTableFilters((prev) => ({
+          ...prev,
+          [field.query]: `${start}&${end}`,
+        }));
       }
     });
   };
@@ -71,18 +70,21 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
       setEndDate(value);
     }
 
-    formType.forEach((formField) => {
-      if (formField.label === '기간') {
+    filters.forEach((filter) => {
+      if (filter.label === '기간') {
         const newStart = isStart ? value : startDate;
         const newEnd = isStart ? endDate : value;
-        formField.setValue(`${newStart}&${newEnd}`);
+        setTableFilters((prev) => ({
+          ...prev,
+          [filter.query]: `${newStart}&${newEnd}`,
+        }));
       }
     });
   };
 
   return (
     <div className='flex flex-col gap-3 '>
-      {formType.map((field, id) => (
+      {filters.map((field, id) => (
         <div key={id} className='font-pretendard-medium'>
           {field.label === '기간' ? (
             <div className='flex items-center justify-start'>
@@ -108,7 +110,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
                 <div className='ml-2 flex items-center justify-start gap-2'>
                   <input
                     type='date'
-                    name={`${field.name}Start`}
+                    name={`${field.query}Start`}
                     value={startDate}
                     onChange={(e) => {
                       handleDateChange(e.target.value, true);
@@ -118,7 +120,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
                   <div>~</div>
                   <input
                     type='date'
-                    name={`${field.name}End`}
+                    name={`${field.query}End`}
                     value={endDate}
                     onChange={(e) => {
                       handleDateChange(e.target.value, false);
@@ -135,11 +137,18 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
               </label>
               <Input
                 type={field.type || 'text'}
-                name={field.name}
-                value={field.value}
+                name={field.query}
+                value={
+                  tableFilters && field.query in tableFilters
+                    ? tableFilters[field.query as TableQuery]
+                    : ''
+                }
                 placeholder={field.placeholder}
                 onChange={(e) => {
-                  field.setValue(e.target.value);
+                  setTableFilters((prev) => ({
+                    ...prev,
+                    [field.query]: e.target.value,
+                  }));
                 }}
                 className='block w-[810px] h-[48px] rounded-md'
               />

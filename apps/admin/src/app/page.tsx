@@ -1,10 +1,12 @@
 'use client';
 
+import { GROUP_FIILTERS } from '../entities/group';
 import { User } from '../entities/user';
 import { TableProvider } from '../shared/model/table-provider';
 import { Pagination } from '../shared/ui/pagination';
 import { TableToolBar } from '../shared/ui/table-toolbar';
-import { AdminUsersTable } from '../widget/user';
+import { AdminFilter } from '../widgets/ui/admin-filter';
+import { AdminUsersTable } from '../widgets/user';
 
 const tableMock: User[] = [
   {
@@ -32,10 +34,12 @@ const tableMock: User[] = [
     groupCount: 1,
   },
 ];
+
 export default function Page(): JSX.Element {
   return (
     <main>
       <TableProvider<User> initialData={tableMock}>
+        <AdminFilter filters={GROUP_FIILTERS} />
         <TableToolBar />
         <AdminUsersTable />
         <Pagination totalCount={tableMock.length} limit={4} currentPage={1} />

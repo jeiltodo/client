@@ -9,9 +9,8 @@ import { Table } from '../../../shared/ui/table';
 import { useTableContext, useTableCheck } from '../../../shared/hooks';
 
 import type { User } from '../../../entities/user/model/type';
-
-import { TableHeadList } from '../../../feature/user/ui/table-head-list';
-import { USER_TABLE_HEAD_MAP } from '../../../feature/user/model';
+import { TableHeadList } from '../../../features/user/ui/table-head-list';
+import { USER_TABLE_HEAD_MAP } from '../../../features/user/model';
 
 export function AdminUsersTable() {
   // TODO: 이런건 빼내야 할까?
@@ -20,10 +19,10 @@ export function AdminUsersTable() {
     router.push(path);
   };
 
-  const { tableData: userTableData } = useTableContext<User>();
+  const { tableRows: userRows } = useTableContext<User>();
 
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(userTableData);
+    useTableCheck(userRows);
 
   return (
     <Table>
@@ -38,27 +37,27 @@ export function AdminUsersTable() {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {userTableData.map((table) => (
+        {userRows.map((user) => (
           <Table.Row>
             <Table.Cell>
               <Checkbox
-                isChecked={getIsChecked(table.id)}
+                isChecked={getIsChecked(user.id)}
                 onChange={() => {
-                  handleCheck(table.id);
+                  handleCheck(user.id);
                 }}
               />
             </Table.Cell>
-            <Table.Cell>{table.id}</Table.Cell>
-            <Table.Cell>{table.name}</Table.Cell>
-            <Table.Cell>{table.email}</Table.Cell>
-            <Table.Cell>{formatDateString(table.createdAt)}</Table.Cell>
-            <Table.Cell>{formatDateString(table.updatedAt)}</Table.Cell>
-            <Table.Cell>{table.groupCount}개</Table.Cell>
+            <Table.Cell>{user.id}</Table.Cell>
+            <Table.Cell>{user.name}</Table.Cell>
+            <Table.Cell>{user.email}</Table.Cell>
+            <Table.Cell>{formatDateString(user.createdAt)}</Table.Cell>
+            <Table.Cell>{formatDateString(user.updatedAt)}</Table.Cell>
+            <Table.Cell>{user.groupCount}개</Table.Cell>
             <Table.Cell>
               <Button
                 className='text-sm px-7 py-2'
                 onClick={() => {
-                  handleClick(`path/${table.id}`);
+                  handleClick(`path/${user.id}`);
                 }}
                 variant='outline'
               >
