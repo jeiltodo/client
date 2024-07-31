@@ -1,6 +1,6 @@
 'use client';
 import { Button, ButtonGroup, Input } from '@jeiltodo/ui';
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 interface FilterField {
   label: string;
@@ -64,10 +64,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
     });
   };
 
-  const handleDateChange = (
-    value: string,
-    isStart: boolean
-  ) => {
+  const handleDateChange = (value: string, isStart: boolean) => {
     if (isStart) {
       setStartDate(value);
     } else {
@@ -85,7 +82,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
 
   return (
     <div className='flex flex-col gap-3 '>
-      {formType?.map((field, id) => (
+      {formType.map((field, id) => (
         <div key={id} className='font-pretendard-medium'>
           {field.label === '기간' ? (
             <div className='flex items-center justify-start'>
@@ -99,7 +96,9 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
                     isSelected={activeBtn === label}
                     variant='outline-date'
                     className='w-[84px] h-[36px]'
-                    onClick={() => handleButtonClick(label)}
+                    onClick={() => {
+                      handleButtonClick(label);
+                    }}
                   >
                     {label}
                   </Button>
@@ -111,9 +110,9 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
                     type='date'
                     name={`${field.name}Start`}
                     value={startDate}
-                    onChange={(e) =>
-                      handleDateChange(e.target.value, true)
-                    }
+                    onChange={(e) => {
+                      handleDateChange(e.target.value, true);
+                    }}
                     className='px-2 block w-[138px] h-[36px] text-base text-slate-800  placeholder-slate-400 rounded-[8px] border border-slate-50 hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none'
                   />
                   <div>~</div>
@@ -121,9 +120,9 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
                     type='date'
                     name={`${field.name}End`}
                     value={endDate}
-                    onChange={(e) =>
-                      handleDateChange(e.target.value, false)
-                    }
+                    onChange={(e) => {
+                      handleDateChange(e.target.value, false);
+                    }}
                     className='px-2 block w-[138px] h-[36px] text-base text-slate-800  placeholder-slate-400 rounded-[8px] border border-slate-50 hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none'
                   />
                 </div>
@@ -139,7 +138,9 @@ export const FilterForm: React.FC<FilterFormProps> = ({ formType }) => {
                 name={field.name}
                 value={field.value}
                 placeholder={field.placeholder}
-                onChange={(e) => field.setValue(e.target.value)}
+                onChange={(e) => {
+                  field.setValue(e.target.value);
+                }}
                 className='block w-[810px] h-[48px] rounded-md'
               />
             </div>

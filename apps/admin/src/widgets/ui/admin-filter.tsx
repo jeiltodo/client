@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 import { ButtonGroup } from '@jeiltodo/ui';
 import { FilterClear } from '../../features/ui/filter-clear';
@@ -15,9 +15,7 @@ interface FormType {
   setValue: Dispatch<SetStateAction<string>>;
 }
 
-interface QueryData {
-  [key: string]: string | number;
-}
+type QueryData = Record<string, string | number>;
 
 interface AdminFilterProps {
   setState: Dispatch<SetStateAction<string>>[];
@@ -44,6 +42,3 @@ export const AdminFilter: React.FC<AdminFilterProps> = ({
     </div>
   );
 };
-// const queryData = { name: '가나', data: 3 };
-
-// <FilterButton<typeof queryData> queryData={queryData} />;

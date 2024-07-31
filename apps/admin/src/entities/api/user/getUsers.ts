@@ -1,3 +1,3 @@
-export const getUsers = async () => {
+// export const getUsers = async () => {
 
-}
+// }

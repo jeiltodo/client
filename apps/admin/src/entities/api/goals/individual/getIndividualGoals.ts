@@ -1,3 +1,3 @@
-export const getIndividualGoals = async () => {
+// export const getIndividualGoals = async () => {
 
-}
+// }

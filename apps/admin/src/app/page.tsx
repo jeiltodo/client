@@ -1,9 +1,10 @@
-import { AdminUser } from "../pages/user/admin-user";
+import React from 'react';
+import { Sidebar } from '@jeiltodo/ui';
 
-export default function Page(): JSX.Element {
+export default function Page() {
   return (
-    <main className="bg-gray-100"> 
-      <AdminUser />
+    <main className='bg-gray-100'>
+      <Sidebar>사이드바~</Sidebar>
     </main>
-  )
+  );
 }

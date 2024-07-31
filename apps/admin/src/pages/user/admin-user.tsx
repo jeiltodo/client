@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
 import { AdminFilter } from '../../widgets/ui/admin-filter';
 
@@ -12,7 +12,7 @@ interface FormType {
   setValue: Dispatch<SetStateAction<string>>;
 }
 
-export const AdminUser = () => {
+const AdminUser = () => {
   const [name, setName] = useState<string>('');
   const [keyword, setKeyword] = useState<string>('');
   const [period, setPeriod] = useState<string>('');
@@ -55,3 +55,5 @@ export const AdminUser = () => {
     </div>
   );
 };
+
+export default AdminUser;
