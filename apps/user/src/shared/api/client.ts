@@ -5,7 +5,7 @@ import axios, {
 } from 'axios';
 import { sessionService } from '../../features/session';
 
-const API_URL = 'http://localhost:3000/api'; // 실제 API 주소로 변경	//http://52.78.126.130:8080/ - Ec2 Server url
+const API_URL = 'http://52.78.126.130:8080/api'; // - Ec2 Server url 실제 API 주소로 변경해야 함
 
 // Token management functions - 파일 분리해서 accessToken 상태관리 라이브러리 추가?
 let accessToken: string | null = null;
@@ -47,15 +47,18 @@ export const deleteCookieToken = () => {
 const client: AxiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
+    accept: '*/*',
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 // 요청 인터셉터
 client.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-    const noSessionRequired = ['/login'];
+    const noSessionRequired = ['/auth/login', '/auth/user'];
     if (noSessionRequired.includes(config.url ?? '')) {
+      console.log('noSessionRequired', config.url);
       return config;
     }
 
