@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import { Check } from '@jeiltodo/icons';
 
 export default function Page() {

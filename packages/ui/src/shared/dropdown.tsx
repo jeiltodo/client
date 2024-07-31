@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { FullArrowDown, FullArrowUp } from '@jeiltodo/icons';
 
-type DropdownContextType = {
+interface DropdownContextType {
   isOpen: boolean;
   toggle: () => void;
   selectedValue: string | null;
@@ -20,7 +20,7 @@ type DropdownContextType = {
   round: 'round' | 'rect';
 };
 
-type DropdownProps = {
+interface DropdownProps {
   children: ReactNode;
   onSelect: React.Dispatch<React.SetStateAction<string>>;
   hasInitialValue: boolean;
@@ -28,15 +28,15 @@ type DropdownProps = {
   round: 'round' | 'rect';
 };
 
-type DropdownToggleProps = {
+interface DropdownToggleProps {
   children?: ReactNode;
 };
 
-type DropdownMenuProps = {
+interface DropdownMenuProps {
   children: ReactNode;
 };
 
-type DropdownItemProps = {
+interface DropdownItemProps {
   children: ReactNode;
   value: string;
 };
