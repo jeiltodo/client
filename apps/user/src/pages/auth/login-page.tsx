@@ -11,8 +11,8 @@ export const LoginPage: React.FC = () => {
 
   const onLogin = async (credentials: LoginCredentials) => {
     const success = await sessionService.login(credentials);
+
     if (success) {
-      // 로그인 성공하면 홈페이지로 리다이렉트
       router.push('/');
     } else {
       alert('Login failed. Please try again.');

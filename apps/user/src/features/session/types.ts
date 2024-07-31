@@ -3,7 +3,7 @@ export interface LoginCredentials {
   password?: string;
 }
 
-export interface ApiResponse {
+export interface SessionApiResponse {
   status: number;
   message: 'string';
   data: any;

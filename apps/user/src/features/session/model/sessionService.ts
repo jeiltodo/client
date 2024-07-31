@@ -2,15 +2,19 @@ import client, {
   deleteCookieToken,
   setCookieTokens,
 } from '../../../shared/api/client';
-import { loginApi } from '../api/loginApi';
-import { logoutApi } from '../api/logoutApi';
-import { refreshTokenApi } from '../api/refreshTokenApi';
-import { ApiResponse, LoginCredentials } from '../types';
+import {
+  loginApi,
+  logoutApi,
+  refreshTokenApi,
+  SessionApiResponse,
+  LoginCredentials,
+} from '../../session';
 
 export const sessionService = {
   login: async (credentials: LoginCredentials) => {
     try {
-      const response: ApiResponse = await loginApi(credentials);
+      const response: SessionApiResponse = await loginApi(credentials);
+      console.log('sessionService.login response: ', response);
 
       setCookieTokens('accessToken', response.data.accessToken);
       setCookieTokens('refreshToken', response.data.refreshToken);
@@ -24,7 +28,7 @@ export const sessionService = {
 
   logout: async () => {
     try {
-      const response: ApiResponse = await logoutApi();
+      const response: SessionApiResponse = await logoutApi();
 
       if (response.status === 200 || response.status === 204) {
         deleteCookieToken();

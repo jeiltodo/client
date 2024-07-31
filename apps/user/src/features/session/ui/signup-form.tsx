@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { Button, Input } from '@jeiltodo/ui';
 import Link from 'next/link';
 import { SignUpData } from '../../../entities/session';
@@ -15,11 +21,12 @@ interface SignUpFormProps {
 }
 
 export const SignUpForm = (onSubmit: SignUpFormProps) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
+  const [debouncedValue, setDebouncedValue] = useState<string>('');
 
   const handleChange = (field: string) => (value: string) => {
     switch (field) {
@@ -36,6 +43,7 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
         setConfirmPassword(value);
         break;
     }
+    setDebouncedValue(value);
   };
 
   const validateField = async (field: string) => {
@@ -59,6 +67,16 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
     setErrors((prev) => ({ ...prev, [field]: error }));
   };
 
+  const handleBlur = (field: string) => {
+    validateField(field);
+  };
+
+  const handleFocus = (field: string) => {
+    setTimeout(() => {
+      validateField(field);
+    }, 1000);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await Promise.all(
@@ -76,6 +94,16 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
     }
   };
 
+  // useEffect(() => {
+  //   const handler = setTimeout(() => {
+  //     validateField('name', debouncedValue);
+  //   }, 1000);
+
+  //   return () => {
+  //     clearTimeout(handler);
+  //   };
+  // }, [debouncedValue]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
@@ -87,9 +115,11 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           name='name'
           value={name}
           onChange={() => handleChange('name')}
-          onBlur={() => validateField('name')}
+          onBlur={() => handleBlur('name')}
+          onFocus={() => handleFocus('name')}
           placeholder='이름을 입력해주세요'
         />
+        {errors.name && <p>{errors.name}</p>}
         <label htmlFor='name' className='font-pretendard-semibold text-base'>
           이메일
         </label>
@@ -100,6 +130,7 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           onChange={() => handleChange('email')}
           placeholder='이메일을 입력해주세요'
         />
+        {errors.email && <p>{errors.email}</p>}
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
@@ -113,6 +144,7 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           onChange={() => handleChange('password')}
           placeholder='비밀번호를 입력해주세요'
         />
+        {errors.password && <p>{errors.password}</p>}
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
@@ -126,15 +158,16 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           onChange={() => handleChange('confirmPassword')}
           placeholder='비밀번호를 다시 한 번 입력해주세요'
         />
+        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
       </div>
       <Button variant='primary' className='mb-[40px] w-full'>
         회원가입하기
       </Button>
-      <p className='text-center'>
+      <p className='text-center text-[15px]'>
         이미 회원이신가요?
         <Link
           href='/login'
-          className='text-blue-500 font-pretendard-regular underline underline-offset-4'
+          className='text-blue-500 font-pretendard-regular underline underline-offset-4 ml-1'
         >
           로그인
         </Link>

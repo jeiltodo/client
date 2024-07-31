@@ -1,23 +1,37 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui';
 import Link from 'next/link';
-import { LoginCredentials } from '../model/sessionService';
+
+import { LoginCredentials } from '../types';
+import { validateEmail } from '../../../entities/session/model';
 
 interface LoginFormProps {
   onSubmit: (credentials: LoginCredentials) => void;
 }
 
+interface ErrorMessages {
+  id?: string;
+  password?: string;
+}
+
 export const LoginForm = ({ onSubmit }: LoginFormProps) => {
-  const [userId, setUserId] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit({ userId, password });
+    onSubmit({ email, password });
   };
 
   const onChangeId = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setUserId(e.target.value);
+    const inputEmail = e.target.value;
+    const validationError = validateEmail(inputEmail);
+
+    if (validationError) {
+      setErrorMessages((prev) => ({ ...prev, userId: validationError }));
+    }
+    setEmail(e.target.value);
   }, []);
 
   const onChangePassword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +40,15 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
 
   return (
     <form onSubmit={handleSubmit} className='w-[640px] flex flex-col space-y-4'>
-      <label htmlFor='userId'>아이디</label>
+      <label htmlFor='email'>아이디</label>
       <Input
-        type='text'
-        name='userId'
-        value={userId}
+        type='email'
+        name='email'
+        value={email}
         onChange={onChangeId}
         placeholder='이메일을 입력해주세요'
       />
+      {errorMessages.id && <p>{errorMessages.id}</p>}
       <label htmlFor='password'>비밀번호</label>
       <Input
         type='password'

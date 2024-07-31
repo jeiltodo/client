@@ -7,4 +7,4 @@ export { sessionService } from './model/sessionService';
 export { LoginForm } from './ui/login-form';
 export { logoutButton } from './ui/logout-button';
 
-export { type ApiResponse, type LoginCredentials } from './types';
+export { type SessionApiResponse, type LoginCredentials } from './types';
