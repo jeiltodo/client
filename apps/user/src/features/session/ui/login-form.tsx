@@ -49,7 +49,7 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
       <p className='text-center'>
         슬리드 투 두가 처음이신가요?
         <Link
-          href='/'
+          href='/signup'
           className='text-blue-500 font-pretendard-regular underline underline-offset-4'
         >
           회원가입

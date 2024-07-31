@@ -4,7 +4,7 @@ import {
   LoginCredentials,
   sessionService,
   LoginForm,
-} from '../../../features/session';
+} from '../../features/session';
 
 export const LoginPage: React.FC = () => {
   const router = useRouter();
