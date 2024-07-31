@@ -9,36 +9,39 @@ import React, {
 } from 'react';
 import { FullArrowDown, FullArrowUp } from '@jeiltodo/icons';
 
-type DropdownContextType = {
+interface DropdownContextType {
   isOpen: boolean;
   toggle: () => void;
-  selectedItem: string | null;
-  selectItem: (item: string) => void;
-};
-
-type DropdownProps = {
-  children: ReactNode;
-  onSelect?: (item: string) => void;
-  hasInitialValue: boolean;
-};
-
-type DropdownToggleProps = {
-  children?: ReactNode;
+  selectedValue: string | null;
+  selectedText: ReactNode | null;
+  selectValue: (item: string) => void;
+  selectText: (item: ReactNode) => void;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
-};
+}
 
-type DropdownMenuProps = {
+interface DropdownProps {
   children: ReactNode;
+  onSelect: React.Dispatch<React.SetStateAction<string>>;
+  hasInitialValue: boolean;
+  size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
-};
+}
 
-type DropdownItemProps = {
+interface DropdownToggleProps {
+  children?: ReactNode;
+}
+
+interface DropdownMenuProps {
+  children: ReactNode;
+}
+
+interface DropdownItemProps {
   children: ReactNode;
   value: string;
-  size: 'lg' | 'fixed' | 'sm';
-  round: 'round' | 'rect';
-};
+}
+
+type InitialItem = { value: string; text: ReactNode } | null;
 
 const sizeClass = {
   lg: 'w-[478px] h-[48px] py-[12px] pr-[8px] pl-[12px]',
@@ -64,20 +67,17 @@ const useDropdownContext = () => {
   return context;
 };
 
-const DropdownToggle = ({ children, size, round }: DropdownToggleProps) => {
-  const { isOpen, toggle, selectedItem } = useDropdownContext();
-
+const DropdownToggle = ({ children }: DropdownToggleProps) => {
+  const { isOpen, toggle, selectedText, size, round } = useDropdownContext();
   return (
     <button
       onClick={toggle}
       className={`flex items-center justify-between ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-semibold`}
     >
       <div
-        className={`flex items-center ${selectedItem ? 'text-black' : 'text-slate-400'}`}
+        className={`flex items-center ${selectedText ? 'text-black' : 'text-slate-400'}`}
       >
-        {selectedItem === null
-          ? ''
-          : selectedItem || children || '목표를 선택해주세요'}
+        {selectedText === null ? children : selectedText}
       </div>
       {isOpen ? (
         <div className='pl-[4px] border-l-[2px] border-slate-200'>
@@ -92,8 +92,8 @@ const DropdownToggle = ({ children, size, round }: DropdownToggleProps) => {
   );
 };
 
-const DropdownMenu = ({ children, round }: DropdownMenuProps) => {
-  const { isOpen } = useDropdownContext();
+const DropdownMenu = ({ children }: DropdownMenuProps) => {
+  const { isOpen, round } = useDropdownContext();
 
   return (
     <div
@@ -106,11 +106,12 @@ const DropdownMenu = ({ children, round }: DropdownMenuProps) => {
   );
 };
 
-const DropdownItem = ({ children, value, size, round }: DropdownItemProps) => {
-  const { selectItem, toggle } = useDropdownContext();
+const DropdownItem = ({ children, value }: DropdownItemProps) => {
+  const { selectValue, selectText, toggle, size, round } = useDropdownContext();
 
   const handleClick = () => {
-    selectItem(value);
+    selectValue(value);
+    selectText(children);
     toggle();
   };
 
@@ -129,36 +130,45 @@ export const Dropdown = ({
   children,
   onSelect,
   hasInitialValue,
+  size,
+  round,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+  const [selectedText, setSelectedText] = useState<ReactNode | null>(null);
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const selectItem = (item: string) => {
-    setSelectedItem(item);
+  const selectValue = (value: string) => {
+    setSelectedValue(value);
     if (onSelect) {
-      onSelect(item);
+      onSelect(value);
     }
   };
 
-  // 초기값 설정
-  const initialValue = useMemo(() => {
+  const selectText = (text: ReactNode) => {
+    setSelectedText(text);
+  };
+
+  const initialValue = useMemo<InitialItem>(() => {
     if (!hasInitialValue) return null;
 
-    // DropdownMenu의 자식 요소 중 첫 번째 DropdownItem을 찾기
-    let initialItem: string | null = null;
+    let initialItem: InitialItem = null;
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child) && child.type === DropdownMenu) {
         const items = React.Children.toArray(child.props.children);
         const firstItem = items.find(
-          (item) => React.isValidElement(item) && item.type === DropdownItem
+          (item): item is React.ReactElement<DropdownItemProps> =>
+            React.isValidElement(item) && item.type === DropdownItem
         );
 
-        if (firstItem && React.isValidElement(firstItem)) {
-          initialItem = (firstItem.props as DropdownItemProps).value;
+        if (firstItem) {
+          initialItem = {
+            value: firstItem.props.value,
+            text: firstItem.props.children,
+          };
         }
       }
     });
@@ -167,14 +177,24 @@ export const Dropdown = ({
 
   // 상태 업데이트
   useEffect(() => {
-    if (initialValue) {
-      selectItem(initialValue);
+    if (initialValue && selectedValue === null) {
+      selectValue(initialValue.value);
+      selectText(initialValue.text);
     }
-  }, [initialValue]);
+  }, [initialValue, selectedValue]);
 
   return (
     <DropdownContext.Provider
-      value={{ isOpen, toggle, selectedItem, selectItem }}
+      value={{
+        isOpen,
+        toggle,
+        selectedValue,
+        selectedText,
+        selectValue,
+        selectText,
+        size,
+        round,
+      }}
     >
       <div className='relative'>{children}</div>
     </DropdownContext.Provider>

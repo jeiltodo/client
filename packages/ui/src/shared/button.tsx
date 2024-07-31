@@ -46,11 +46,11 @@ export const Button = ({
     'font-pretendard-medium text-base transition-all duration-300 ease-in-out';
 
   const variantClasses = {
-    default:
+    'default':
       'bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:bg-blue-800',
-    primary:
+    'primary':
       'bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:bg-blue-800',
-    outline:
+    'outline':
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'outline-date':
       'bg-transparent text-blue-500 border border-blue-500 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
@@ -61,11 +61,11 @@ export const Button = ({
     'text-gray': 'text-slate-600 hover:text-slate-700 active:text-slate-800',
     'text-blue':
       'text-blue-500 hover:text-blue-600 active:text-blue-800 active:border-none',
-    success:
+    'success':
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white',
-    warning:
+    'warning':
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white',
-    error:
+    'error':
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white',
   };
   const buttonClasses = `
