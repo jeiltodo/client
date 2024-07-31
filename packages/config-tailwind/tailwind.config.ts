@@ -4,7 +4,7 @@ import type { PluginAPI } from 'tailwindcss/types/config';
 
 const config: Omit<Config, 'content'> = {
   mode: 'jit',
-  safelist: [{ pattern: /^gap-x-/ }, { pattern: /^w-\[.*px\]$/ }],
+  safelist: [{ pattern: /^gap-x-/ }],
   theme: {
     screens: {
       mobile: '280px',
