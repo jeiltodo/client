@@ -1,9 +1,9 @@
 import client from '../../../shared/api/client';
-import { ApiResponse, LoginCredentials } from '../model/sessionService';
+import { ApiResponse, LoginCredentials } from '../types';
 
 export const loginApi = async (credentials: LoginCredentials) => {
   try {
-    const response: ApiResponse = await client.post('/login', credentials);
+    const response: ApiResponse = await client.post('/auth/login', credentials);
 
     return response;
   } catch (error) {

@@ -5,16 +5,7 @@ import client, {
 import { loginApi } from '../api/loginApi';
 import { logoutApi } from '../api/logoutApi';
 import { refreshTokenApi } from '../api/refreshTokenApi';
-
-export interface LoginCredentials {
-  userId: string;
-  password: string;
-}
-
-export interface ApiResponse {
-  data: any;
-  status: number;
-}
+import { ApiResponse, LoginCredentials } from '../types';
 
 export const sessionService = {
   login: async (credentials: LoginCredentials) => {
