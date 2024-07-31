@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui';
 import Link from 'next/link';
 import { SignUpData } from '../../../entities/session';
@@ -20,16 +14,18 @@ interface SignUpFormProps {
   onSubmit: (credentials: SignUpData) => void;
 }
 
-export const SignUpForm = (onSubmit: SignUpFormProps) => {
+export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
-  const [debouncedValue, setDebouncedValue] = useState<string>('');
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  const handleChange = (field: string) => (value: string) => {
-    switch (field) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    switch (name) {
       case 'name':
         setName(value);
         break;
@@ -43,13 +39,20 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
         setConfirmPassword(value);
         break;
     }
-    setDebouncedValue(value);
+
+    validateField(e);
+    const isValid = Object.values(errors).every((error) => !error);
+    console.log('isValid: ', isValid);
+    isValid ? setIsDisabled(false) : setIsDisabled(true);
   };
 
-  const validateField = async (field: string) => {
+  const validateField = async (
+    e: ChangeEvent<HTMLInputElement> | FocusEvent<HTMLInputElement>
+  ) => {
     let error: string | undefined;
+    const inputName = e.target.name;
 
-    switch (field) {
+    switch (inputName) {
       case 'name':
         error = validateName(name);
         break;
@@ -63,49 +66,29 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
         error = validateConfirmPassword(password, confirmPassword);
         break;
     }
+    console.log('validation', error);
 
-    setErrors((prev) => ({ ...prev, [field]: error }));
+    setErrors((prev) => ({ ...prev, [inputName]: error }));
   };
 
-  const handleBlur = (field: string) => {
-    validateField(field);
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    validateField(e);
   };
 
-  const handleFocus = (field: string) => {
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     setTimeout(() => {
-      validateField(field);
+      validateField(e);
     }, 1000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await Promise.all(
-      ['name', 'email', 'password', 'confirmPassword'].map(validateField)
-    );
-
-    // 모든 필드가 유효한지 확인
-    const isValid = Object.values(errors).every((error) => !error);
-
-    if (isValid) {
-      // 여기에 폼 제출 로직을 추가합니다.
-      console.log('Form is valid. Submitting...', { name, email, password });
-    } else {
-      console.log('Form has errors. Please correct them.');
-    }
+    console.log({ name, email, password });
+    // onSubmit({ name, email, password });
   };
 
-  // useEffect(() => {
-  //   const handler = setTimeout(() => {
-  //     validateField('name', debouncedValue);
-  //   }, 1000);
-
-  //   return () => {
-  //     clearTimeout(handler);
-  //   };
-  // }, [debouncedValue]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
         <label htmlFor='name' className='font-pretendard-semibold text-base'>
           이름
@@ -114,9 +97,9 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           type='text'
           name='name'
           value={name}
-          onChange={() => handleChange('name')}
-          onBlur={() => handleBlur('name')}
-          onFocus={() => handleFocus('name')}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           placeholder='이름을 입력해주세요'
         />
         {errors.name && <p>{errors.name}</p>}
@@ -127,7 +110,9 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           type='email'
           name='email'
           value={email}
-          onChange={() => handleChange('email')}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           placeholder='이메일을 입력해주세요'
         />
         {errors.email && <p>{errors.email}</p>}
@@ -141,7 +126,9 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           type='password'
           name='password'
           value={password}
-          onChange={() => handleChange('password')}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           placeholder='비밀번호를 입력해주세요'
         />
         {errors.password && <p>{errors.password}</p>}
@@ -155,12 +142,18 @@ export const SignUpForm = (onSubmit: SignUpFormProps) => {
           type='password'
           name='confirmPassword'
           value={confirmPassword}
-          onChange={() => handleChange('confirmPassword')}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
           placeholder='비밀번호를 다시 한 번 입력해주세요'
         />
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
       </div>
-      <Button variant='primary' className='mb-[40px] w-full'>
+      <Button
+        variant='primary'
+        isDisabled={isDisabled}
+        className='w-full mb-[40px]'
+      >
         회원가입하기
       </Button>
       <p className='text-center text-[15px]'>

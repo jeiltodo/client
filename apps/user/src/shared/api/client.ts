@@ -1,9 +1,16 @@
 import axios, {
   AxiosError,
   AxiosInstance,
+  AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
 import { sessionService } from '../../features/session';
+
+// 에러 응답 데이터 타입 정의
+interface ErrorResponseData {
+  path?: string;
+  [key: string]: any; // 다른 임의의 속성을 허용
+}
 
 const API_URL = 'http://52.78.126.130:8080/api'; // - Ec2 Server url 실제 API 주소로 변경해야 함
 
@@ -58,18 +65,17 @@ client.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
     const noSessionRequired = ['/auth/login', '/auth/user'];
     if (noSessionRequired.includes(config.url ?? '')) {
-      console.log('noSessionRequired', config.url);
       return config;
     }
 
-    accessToken = getAccessToken();
+    // accessToken = getAccessToken();
 
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
-    } else {
-      window.location.href = '/login';
-      return Promise.reject('No access token available');
-    }
+    // if (accessToken) {
+    //   config.headers['Authorization'] = `Bearer ${accessToken}`;
+    // } else {
+    //   // window.location.href = '/login';
+    //   return Promise.reject('No access token available');
+    // }
 
     return config;
   },
@@ -81,10 +87,22 @@ client.interceptors.request.use(
 // 응답 인터셉터
 client.interceptors.response.use(
   (response) => response,
-  async (error: AxiosError) => {
+  async (error: AxiosError<ErrorResponseData>) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
+
+    console.log('response: ', error.response);
+    // 이메일 validation
+    if (error.response?.status === 400) return Promise.resolve(error.response);
+    if (error.response?.status === 409) return Promise.resolve(error.response);
+
+    if (
+      error.response?.status === 500 &&
+      error.response?.data?.path === '/api/auth/user'
+    )
+      return Promise.resolve(error.response);
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       //originalRequest._retry 플래그를 사용하여 이미 리프레시 토큰 요청을 시도했는지 확인 -> 무한 루프 방지
       originalRequest._retry = true;

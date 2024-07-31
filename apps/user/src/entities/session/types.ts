@@ -1,11 +1,11 @@
 export interface SignUpData {
+  name?: string;
   email: string;
-  password: string;
-  name: string;
+  password?: string;
 }
 
 export interface SignUpResponse {
-  id: 0;
+  id: number;
   email: string;
   name: string;
   createdAt: string;
@@ -17,4 +17,9 @@ export interface ValidationErrors {
   email?: string;
   password?: string;
   confirmPassword?: string;
+}
+
+export interface MessageResponse {
+  status: number;
+  message: string;
 }
