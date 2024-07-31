@@ -75,7 +75,9 @@ const DropdownToggle = ({ children, size, round }: DropdownToggleProps) => {
       <div
         className={`flex items-center ${selectedItem ? 'text-black' : 'text-slate-400'}`}
       >
-        {selectedItem === null ? '' : (selectedItem || children || '목표를 선택해주세요')}
+        {selectedItem === null
+          ? ''
+          : selectedItem || children || '목표를 선택해주세요'}
       </div>
       {isOpen ? (
         <div className='pl-[4px] border-l-[2px] border-slate-200'>

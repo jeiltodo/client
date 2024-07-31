@@ -1,12 +1,13 @@
-import Image, { ImageProps } from 'next/image';
-import IconSort from '../../../public/assets/icons/sort.svg';
+import type { ImageProps } from 'next/image';
+import Image from 'next/image';
 import { useState } from 'react';
+import IconSort from '../../../public/assets/icons/sort.svg';
 
 interface Props extends Omit<ImageProps, 'src' | 'alt'> {
   onSort: (isAscending: boolean) => void;
 }
 
-const SortButton = ({ onSort, ...props }: Props) => {
+export function SortButton({ onSort, ...props }: Props) {
   const [isAscending, setIsAscending] = useState<boolean>(true);
 
   const handleSort = () => {
@@ -15,14 +16,13 @@ const SortButton = ({ onSort, ...props }: Props) => {
   };
   return (
     <Image
-      src={IconSort}
       alt='sort button'
-      width={24}
       height={24}
       onClick={handleSort}
+      src={IconSort}
+      width={24}
+      className='cursor-pointer'
       {...props}
     />
   );
-};
-
-export default SortButton;
+}

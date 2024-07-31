@@ -7,7 +7,7 @@ export interface SortOptions<T> {
   isAscending?: boolean;
 }
 
-type ObjectWithOptionalFields = {
+interface ObjectWithOptionalFields {
   id?: number;
   email?: string;
   todo?: string;
@@ -21,7 +21,7 @@ type ObjectWithOptionalFields = {
   creator?: string;
   assignee?: string;
   progress?: number;
-};
+}
 
 function determineType(
   key: keyof ObjectWithOptionalFields,
@@ -53,8 +53,8 @@ export function sortBy<T extends ObjectWithOptionalFields>(
   const { criteria, isAscending = true } = options;
 
   return [...array].sort((a, b) => {
-    let aValue = a[criteria] as SortableValue;
-    let bValue = b[criteria] as SortableValue;
+    const aValue = a[criteria] as SortableValue;
+    const bValue = b[criteria] as SortableValue;
 
     // Handle undefined values
     if (aValue === undefined && bValue === undefined) return 0;
