@@ -68,14 +68,14 @@ client.interceptors.request.use(
       return config;
     }
 
-    // accessToken = getAccessToken();
+    accessToken = getAccessToken();
 
-    // if (accessToken) {
-    //   config.headers['Authorization'] = `Bearer ${accessToken}`;
-    // } else {
-    //   // window.location.href = '/login';
-    //   return Promise.reject('No access token available');
-    // }
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    } else {
+      window.location.href = '/login';
+      return Promise.reject('No access token available');
+    }
 
     return config;
   },
@@ -91,30 +91,41 @@ client.interceptors.response.use(
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
+    // 이메일 validation, 로그인
+    if (error.response?.status === 400 || error.response?.status === 409)
+      return Promise.resolve(error.response);
 
-    console.log('response: ', error.response);
-    // 이메일 validation
-    if (error.response?.status === 400) return Promise.resolve(error.response);
-    if (error.response?.status === 409) return Promise.resolve(error.response);
-
+    // 500 또는 404 응답이 특정 경로에서 온 경우 그대로 반환
     if (
-      error.response?.status === 500 &&
-      error.response?.data?.path === '/api/auth/user'
+      (error.response?.status === 500 ||
+        error.response?.status === 404 ||
+        error.response?.status === 401) &&
+      (error.response?.data?.path === '/api/auth/user' ||
+        error.response?.data?.path === '/api/auth/login')
     )
       return Promise.resolve(error.response);
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       //originalRequest._retry 플래그를 사용하여 이미 리프레시 토큰 요청을 시도했는지 확인 -> 무한 루프 방지
       originalRequest._retry = true;
+
+      // 쿠키에서 리프레시 토큰 가져오기
+      const refreshToken = getAccessToken();
+      if (!refreshToken) {
+        // 리프레시 토큰이 없으면 로그인 페이지로 이동
+        window.location.href = '/login';
+        return Promise.reject(error);
+      }
+
       try {
-        const response = await sessionService.refreshToken();
+        const response = await sessionService.newAccessToken();
         if (originalRequest.headers) {
           originalRequest.headers['Authorization'] =
             `Bearer ${response.data.accessToken}`;
         }
-
         return client(originalRequest);
       } catch (refreshError) {
+        // 리프레시 토큰 요청 실패 시 쿠키 삭제 및 로그인 페이지로 이동
         deleteCookieToken();
         window.location.href = '/login';
         return Promise.reject(refreshError);

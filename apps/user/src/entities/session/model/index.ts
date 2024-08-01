@@ -5,4 +5,5 @@ export {
   validateEmail,
   validatePassword,
   validateConfirmPassword,
+  validateLogIn,
 } from '../model/validation';

@@ -1,75 +1,135 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui';
-import Link from 'next/link';
 
-import { LoginCredentials } from '../types';
-import { validateEmail } from '../../../entities/session/model';
+import { LoginCredentials, User } from '../types';
+import { validateEmail, validateLogIn } from '../../../entities/session/model';
+import { ValidationErrors } from '../../../entities/session/types';
+import { useDebounce } from '@jeiltodo/lib/hooks';
 
 interface LoginFormProps {
   onSubmit: (credentials: LoginCredentials) => void;
 }
 
-interface ErrorMessages {
-  id?: string;
-  password?: string;
-}
-
 export const LoginForm = ({ onSubmit }: LoginFormProps) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errorMessages, setErrorMessages] = useState<ErrorMessages>({});
+  const [errors, setErrors] = useState<ValidationErrors>({});
+
+  const debouncedEmail = useDebounce(email, 1000);
+  const debouncedPassword = useDebounce(password, 1000);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit({ email, password });
   };
 
-  const onChangeId = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const inputEmail = e.target.value;
-    const validationError = validateEmail(inputEmail);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-    if (validationError) {
-      setErrorMessages((prev) => ({ ...prev, userId: validationError }));
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
     }
-    setEmail(e.target.value);
-  }, []);
+  };
 
-  const onChangePassword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  }, []);
+  const validateField = async (inputName: string, value: string) => {
+    let errorMessage: string | undefined;
+    let loginResult: User | undefined;
+
+    switch (inputName) {
+      case 'email':
+        errorMessage = await validateEmail(value);
+        break;
+      case 'password':
+        loginResult = await validateLogIn({ email, password });
+        break;
+    }
+
+    // 아이디 error message
+    if (inputName === 'email' && !errorMessage) {
+      errorMessage = '가입되지 않은 이메일입니다.';
+    }
+    if (
+      inputName === 'email' &&
+      errorMessage === '이미 사용 중인 이메일입니다.'
+    ) {
+      errorMessage = undefined;
+    }
+    // 비밀번호 error message
+    function isUser(user: any): user is User {
+      return user && 'name' in user;
+    }
+
+    if (inputName === 'password' && !isUser(loginResult) && !errors.email) {
+      errorMessage = '비밀번호가 올바르지 않습니다.';
+    } else {
+      errorMessage = undefined;
+    }
+
+    setErrors((prev) => ({ ...prev, [inputName]: errorMessage }));
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    validateField(name, value);
+  };
+
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTimeout(() => {
+      validateField(name, value);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    debouncedEmail && validateField('email', debouncedEmail);
+  }, [debouncedEmail]);
+
+  useEffect(() => {
+    debouncedPassword && validateField('password', debouncedPassword);
+  }, [debouncedPassword]);
 
   return (
-    <form onSubmit={handleSubmit} className='w-[640px] flex flex-col space-y-4'>
-      <label htmlFor='email'>아이디</label>
-      <Input
-        type='email'
-        name='email'
-        value={email}
-        onChange={onChangeId}
-        placeholder='이메일을 입력해주세요'
-      />
-      {errorMessages.id && <p>{errorMessages.id}</p>}
-      <label htmlFor='password'>비밀번호</label>
-      <Input
-        type='password'
-        name='password'
-        value={password}
-        onChange={onChangePassword}
-        className='mb-[48px]'
-        placeholder='비밀번호를 입력해주세요'
-      />
-      <Button variant='primary' className='mb-[40px]'>
+    <form onSubmit={handleSubmit}>
+      <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
+        <label htmlFor='email' className='font-pretendard-semibold text-base'>
+          아이디
+        </label>
+        <Input
+          type='email'
+          name='email'
+          value={email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          placeholder='이메일을 입력해주세요'
+        />
+        {errors.email && <p>{errors.email}</p>}
+        <label
+          htmlFor='password'
+          className='font-pretendard-semibold text-base'
+        >
+          비밀번호
+        </label>
+        <Input
+          type='password'
+          name='password'
+          value={password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          className='mb-[48px]'
+          placeholder='비밀번호를 입력해주세요'
+        />
+        {errors.password && <p>{errors.password}</p>}
+      </div>
+      <Button variant='primary' className='w-full mb-[40px]'>
         로그인하기
       </Button>
-      <p className='text-center'>
-        슬리드 투 두가 처음이신가요?
-        <Link
-          href='/signup'
-          className='text-blue-500 font-pretendard-regular underline underline-offset-4'
-        >
-          회원가입
-        </Link>
-      </p>
     </form>
   );
 };

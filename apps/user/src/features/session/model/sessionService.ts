@@ -84,7 +84,8 @@ export const sessionService = {
 
   logout: async () => {
     try {
-      const response: SessionApiResponse = await logoutApi();
+      const response: AxiosResponse<LoginResponse | MessageResponse> =
+        await logoutApi();
 
       if (response.status === 200 || response.status === 204) {
         deleteCookieToken();
