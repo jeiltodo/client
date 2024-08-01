@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { ChangeEvent, FocusEvent, useEffect, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui';
 import Link from 'next/link';
 import { SignUpData } from '../../../entities/session';
@@ -9,6 +9,7 @@ import {
   validateName,
   validatePassword,
 } from '../../../entities/session/model';
+import { useDebounce } from '@jeiltodo/lib/hooks';
 
 interface SignUpFormProps {
   onSubmit: (credentials: SignUpData) => void;
@@ -21,6 +22,11 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+  const debouncedName = useDebounce(name, 1000);
+  const debouncedEmail = useDebounce(email, 1000);
+  const debouncedPassword = useDebounce(password, 1000);
+  const debouncedConfirmPassword = useDebounce(confirmPassword, 1000);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,53 +45,69 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
         setConfirmPassword(value);
         break;
     }
-
-    validateField(e);
-    const isValid = Object.values(errors).every((error) => !error);
-    console.log('isValid: ', isValid);
-    isValid ? setIsDisabled(false) : setIsDisabled(true);
   };
 
-  const validateField = async (
-    e: ChangeEvent<HTMLInputElement> | FocusEvent<HTMLInputElement>
-  ) => {
+  const validateField = async (inputName: string, value: string) => {
     let error: string | undefined;
-    const inputName = e.target.name;
 
     switch (inputName) {
       case 'name':
-        error = validateName(name);
+        error = validateName(value);
         break;
       case 'email':
-        error = await validateEmail(email);
+        error = await validateEmail(value);
         break;
       case 'password':
-        error = validatePassword(password);
+        error = validatePassword(value);
         break;
       case 'confirmPassword':
-        error = validateConfirmPassword(password, confirmPassword);
+        error = validateConfirmPassword(password, value);
         break;
     }
-    console.log('validation', error);
 
     setErrors((prev) => ({ ...prev, [inputName]: error }));
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    validateField(e);
+    const { name, value } = e.target;
+    validateField(name, value);
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setTimeout(() => {
-      validateField(e);
+      validateField(name, value);
     }, 1000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ name, email, password });
-    // onSubmit({ name, email, password });
+    onSubmit({ name, email, password });
   };
+
+  // 디바운스된 값이 변할 때마다 유효성 검사 호출
+  useEffect(() => {
+    debouncedName && validateField('name', debouncedName);
+  }, [debouncedName]);
+
+  useEffect(() => {
+    debouncedEmail && validateField('email', debouncedEmail);
+  }, [debouncedEmail]);
+
+  useEffect(() => {
+    debouncedPassword && validateField('password', debouncedPassword);
+  }, [debouncedPassword]);
+
+  useEffect(() => {
+    debouncedConfirmPassword &&
+      validateField('confirmPassword', debouncedConfirmPassword);
+  }, [debouncedConfirmPassword]);
+
+  const isValid = Object.values(errors).every((error) => !error);
+
+  useEffect(() => {
+    setIsDisabled(!isValid);
+  }, [errors, isValid]);
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
