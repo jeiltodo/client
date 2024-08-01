@@ -37,7 +37,7 @@ const tableMock: User[] = [
 
 export default function Page(): JSX.Element {
   return (
-    <main>
+    <main className='max-w-[930px] '>
       <TableProvider<User> initialData={tableMock}>
         <AdminFilter filters={GROUP_FIILTERS} />
         <TableToolBar />

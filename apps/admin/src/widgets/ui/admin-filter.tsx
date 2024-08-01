@@ -1,13 +1,13 @@
 'use client';
 
 import { ButtonGroup } from '@jeiltodo/ui';
-import { Filter } from '../../app/page';
 import { FilterForm } from '../../shared/ui/table-filter/filter-form';
 import { FilterClear } from '../../shared/ui/table-filter/filter-clear';
 import { FilterSearch } from '../../shared/ui/table-filter/filter-search';
+import { TableFilter } from '../../shared/model/type';
 
 interface AdminFilterProps {
-  filters: Filter[];
+  filters: TableFilter[];
 }
 
 export const AdminFilter: React.FC<AdminFilterProps> = ({ filters }) => {

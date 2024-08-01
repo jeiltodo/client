@@ -2,16 +2,16 @@
 
 import { Button, ButtonGroup, Input } from '@jeiltodo/ui';
 import React, { useState } from 'react';
-import { Filter } from '../../../app/page';
 import { useTableContext } from '../../hooks';
-import { TableQuery } from '../../model/type';
+import { TableFilter, TableQuery } from '../../model/type';
 
 interface FilterFormProps {
-  filters: Filter[];
+  filters: TableFilter[];
 }
 
 export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
   const { tableFilters, setTableFilters } = useTableContext();
+
   const [activeBtn, setActiveBtn] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
   const [endDate, setEndDate] = useState<string>('');
