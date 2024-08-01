@@ -1,6 +1,6 @@
 export { loginApi } from './api/loginApi';
 export { logoutApi } from './api/logoutApi';
-export { refreshTokenApi } from './api/refreshTokenApi';
+export { newAccessTokenApi } from './api/newAccessTokenApi';
 
 export { sessionService } from './model/sessionService';
 
