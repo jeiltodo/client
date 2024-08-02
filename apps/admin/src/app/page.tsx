@@ -1,3 +1,11 @@
-export default function Page(): JSX.Element {
-  return <main> 어드민 메인</main>;
+
+import React from 'react';
+
+
+export default function Page() {
+  return (
+    <main className=' p-4 '>
+      ㅇㅇ
+    </main>
+  );
 }
