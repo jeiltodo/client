@@ -19,7 +19,8 @@ import {
 import { signUpApi } from '../../../entities/session/model';
 // 타입 가드 함수 정의
 function isLoginResponse(response: any): response is LoginResponse {
-  return response && response.data && response.data.user;
+  console.log('typeGard is loginResponse: ', response);
+  return response.status === 200 && response.data.data.user;
 }
 function isSignUpResponse(response: any): response is SignUpResponse {
   return response && (response as SignUpResponse).id !== undefined;
@@ -58,11 +59,13 @@ export const sessionService = {
         await loginApi(credentials);
 
       // 성공적인 응답 처리
-      if (isLoginResponse(response.data)) {
+      if (isLoginResponse(response)) {
         const authHeader = response.headers['authorization'];
         const accessToken = authHeader ? authHeader.split(' ')[1] : undefined;
-        const refreshToken = response.data.data.user.refreshToken;
+        const refreshToken = response.data.user.refreshToken;
 
+        console.log('accessToken: ', accessToken);
+        console.log('refreshToken: ', refreshToken);
         // 성공적인 응답의 경우 토큰을 저장
         if (accessToken) {
           setCookieTokens('accessToken', accessToken);
@@ -71,10 +74,11 @@ export const sessionService = {
           setCookieTokens('refreshToken', refreshToken);
         }
 
+        console.log('session response: ', response);
         return response.data;
       } else {
         // 실패한 응답 처리
-        throw new Error('Invalid response format');
+        // throw new Error('Invalid response format');
       }
     } catch (error) {
       console.error('Login error:', error);

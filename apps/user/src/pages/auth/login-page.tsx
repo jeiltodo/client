@@ -12,12 +12,13 @@ export const LoginPage: React.FC = () => {
 
   const onLogin = async (credentials: LoginCredentials) => {
     const success = await sessionService.login(credentials);
+    console.log('success: ', success);
 
-    if (success) {
-      router.push('/');
-    } else {
-      alert('Login failed. Please try again.');
-    }
+    // if (success) {
+    //   router.push('/');
+    // } else {
+    //   alert('Login failed. Please try again.');
+    // }
   };
 
   return (

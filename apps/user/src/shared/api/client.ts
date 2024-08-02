@@ -91,17 +91,18 @@ client.interceptors.response.use(
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
+
     // 이메일 validation, 로그인
     if (error.response?.status === 400 || error.response?.status === 409)
       return Promise.resolve(error.response);
 
     // 500 또는 404 응답이 특정 경로에서 온 경우 그대로 반환
     if (
-      (error.response?.status === 500 ||
-        error.response?.status === 404 ||
-        error.response?.status === 401) &&
-      (error.response?.data?.path === '/api/auth/user' ||
-        error.response?.data?.path === '/api/auth/login')
+      error.response?.status === 500 ||
+      error.response?.status === 404 ||
+      (error.response?.status === 401 &&
+        ((error.config && error.config.url === '/auth/login') ||
+          (error.config && error.config.url === '/auth/user')))
     )
       return Promise.resolve(error.response);
 

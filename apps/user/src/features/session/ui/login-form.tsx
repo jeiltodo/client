@@ -1,10 +1,9 @@
 import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
+import { useDebounce } from '@jeiltodo/lib/hooks';
 import { Button, Input } from '@jeiltodo/ui';
-
 import { LoginCredentials, User } from '../types';
 import { validateEmail, validateLogIn } from '../../../entities/session/model';
 import { ValidationErrors } from '../../../entities/session/types';
-import { useDebounce } from '@jeiltodo/lib/hooks';
 
 interface LoginFormProps {
   onSubmit: (credentials: LoginCredentials) => void;
@@ -15,8 +14,8 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
 
-  const debouncedEmail = useDebounce(email, 1000);
-  const debouncedPassword = useDebounce(password, 1000);
+  const debouncedEmail = useDebounce(email, 2000);
+  const debouncedPassword = useDebounce(password, 2000);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -108,7 +107,9 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
           onFocus={handleFocus}
           placeholder='이메일을 입력해주세요'
         />
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && (
+          <p className='text-slate-400 text-sm'>{errors.email}</p>
+        )}
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
