@@ -35,16 +35,15 @@ export const validateConfirmPassword = (
 
 //로그인
 function isLoginResponse(response: any): response is LoginResponse {
-  return response && response.data && response.data.user;
+  return response.status === 200 && response.data.data.user;
 }
 
 export const validateLogIn = async (
   credentials: LoginCredentials
-): Promise<User | undefined> => {
+): Promise<number | undefined> => {
   const response = await loginApi(credentials);
-
   if (isLoginResponse(response)) {
-    return response.data.user;
+    return response.data.status;
   }
 
   return undefined;

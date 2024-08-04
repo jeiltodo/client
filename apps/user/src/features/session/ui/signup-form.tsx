@@ -110,11 +110,10 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
     }
   }, [debouncedConfirmPassword]);
 
-  const isValid = Object.values(errors).every((error) => !error);
-
   useEffect(() => {
-    setIsDisabled(!isValid);
-  }, [errors, isValid]);
+    const isValid = Object.values(errors).every((error) => !error);
+    name && email && password && confirmPassword && setIsDisabled(!isValid);
+  }, [errors]);
 
   return (
     <form onSubmit={(e) => handleSubmit(e)}>

@@ -7,6 +7,5 @@ export const loginApi = async (
   credentials: LoginCredentials
 ): Promise<AxiosResponse<LoginResponse | MessageResponse>> => {
   const response = await client.post('/auth/login', credentials);
-  console.log('api response: ', response);
   return response;
 };

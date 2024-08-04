@@ -11,14 +11,17 @@ export const LoginPage: React.FC = () => {
   const router = useRouter();
 
   const onLogin = async (credentials: LoginCredentials) => {
-    const success = await sessionService.login(credentials);
-    console.log('success: ', success);
+    try {
+      const success = await sessionService.login(credentials);
 
-    // if (success) {
-    //   router.push('/');
-    // } else {
-    //   alert('Login failed. Please try again.');
-    // }
+      if (success.status === 200) {
+        router.push('/');
+      } else {
+        alert('Login failed. Please try again.');
+      }
+    } catch (error) {
+      console.log('로그인 에러', error);
+    }
   };
 
   return (
