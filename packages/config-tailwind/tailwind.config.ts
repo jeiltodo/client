@@ -8,8 +8,8 @@ const config: Omit<Config, 'content'> = {
   theme: {
     screens: {
       mobile: '280px',
-      tablet: '744px',
-      desktop: '1920px',
+      tablet: '480px',
+      desktop: '1024px',
     },
 
     extend: {

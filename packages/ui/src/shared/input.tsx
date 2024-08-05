@@ -2,7 +2,7 @@
 
 import { ChangeEvent, InputHTMLAttributes } from 'react';
 
-type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url';
+type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'date';
 
 interface Props
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
