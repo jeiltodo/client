@@ -1,6 +1,5 @@
 'use client';
 import { ButtonHTMLAttributes, MouseEvent } from 'react';
-import '../../dist/index.css';
 
 type Variant =
   | 'default'

@@ -11,7 +11,7 @@ import {
   ImgLogo,
   LogoCheck,
 } from '@jeiltodo/icons';
-import { useResponsive } from './hooks/useResponsive';
+import { useResponsive } from './../hooks/useResponsive';
 import { SidebarUserInfo } from './sidebar-user-info';
 
 interface SidebarProps {
