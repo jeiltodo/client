@@ -2,6 +2,7 @@ import './globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
+import { SidebarUser } from '../widgets/sidebar/ui/sidebar-user';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -16,8 +17,13 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className='font-pretendard-regular'>
-        <ToastContainer limit={1} />
-        {children}
+        <div className=''>
+          <SidebarUser />
+          <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>
+            <ToastContainer limit={1} />
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

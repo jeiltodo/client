@@ -1,5 +1,10 @@
-'use client';
+import React from 'react';
+
 
 export default function Page() {
-  return <main>메인</main>;
+  return (
+    <main className=' p-4 '>
+      ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+    </main>
+  );
 }
