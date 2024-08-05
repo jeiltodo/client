@@ -58,7 +58,7 @@ export const Button = ({
     'rounded-white':
       'text-slate-700 rounded-full bg-white hover:text-slate-800',
     'rounded-outline-blue':
-      'border border-[1px] border-blue-500 rounded-full text-blue-500 hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+      'border border-[1px] border-blue-500 rounded-full text-blue-500 bg-white hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'text-gray': 'text-slate-600 hover:text-slate-700 active:text-slate-800',
     'text-blue':
       'text-blue-500 hover:text-blue-600 active:text-blue-800 active:border-none',
