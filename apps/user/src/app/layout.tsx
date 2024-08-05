@@ -1,6 +1,7 @@
 import './globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -14,7 +15,10 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang='en'>
-      <body className='font-pretendard-regular'>{children}</body>
+      <body className='font-pretendard-regular'>
+        <ToastContainer limit={1} />
+        {children}
+      </body>
     </html>
   );
 }
