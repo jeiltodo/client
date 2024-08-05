@@ -1,6 +1,6 @@
 'use client';
 
-import { GROUP_FIILTERS, GroupMemberList } from '../entities/group';
+import { GROUP_FIILTERS } from '../entities/group';
 import { User } from '../entities/user';
 import { TableProvider } from '../shared/model/table-provider';
 import { Pagination } from '../shared/ui/pagination';
