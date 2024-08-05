@@ -1,6 +1,10 @@
 import './globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { SidebarUser } from '../widgets/sidebar/ui/sidebar-user';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -14,7 +18,14 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang='en'>
-      <body className='font-pretendard-regular'>{children}</body>
+      <body className={inter.className}>
+        <div className=''>
+          <SidebarUser />
+          <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

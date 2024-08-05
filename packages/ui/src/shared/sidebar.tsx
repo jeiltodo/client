@@ -1,51 +1,78 @@
 'use client';
-import { Expand, Fold, ImgLogo, LogoCheck } from '@jeiltodo/icons';
-import React, { ReactNode, useState } from 'react';
 
-// interface SidebarProps {
-//   children: ReactNode;
-// }
+import React, { ReactNode, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-export const Sidebar = () => {
+import {
+  DeleteMenu,
+  Expand,
+  Fold,
+  HamburgerMenu,
+  ImgLogo,
+  LogoCheck,
+} from '@jeiltodo/icons';
+import { useResponsive } from './hooks/useResponsive';
+import { SidebarUserInfo } from './sidebar-user-info';
+
+interface SidebarProps {
+  type?: string;
+  children?: ReactNode;
+}
+
+const userData = {
+  id: 6,
+  email: 'ross1222@naver.com',
+  name: '닉네임1',
+  createdAt: '2024-08-01T00:32:06.587081',
+  updatedAt: '2024-08-01T00:32:06.587097',
+};
+
+export const Sidebar = ({ type, children }: SidebarProps) => {
+  const isTablet = useResponsive();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(!isTablet);
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
   };
 
-  const openSidebar = () => {
-    setIsOpen(true);
+  const toggleMobileSidebar = () => {
+    setIsOpen(!isOpen);
   };
 
-  const closeSidebar = () => {
-    setIsOpen(false);
-  };
+  useEffect(() => {
+    setIsSidebarExpanded(!isTablet);
+  }, [isTablet]);
 
   return (
-    <div>
+    <div className='min-w-[280px]'>
       <div
         className={`tablet:flex mobile:hidden h-full fixed top-0 left-0
            transition-all duration-300 ease-in-out ${
              isSidebarExpanded ? 'w-[280px]' : 'w-[60px]'
-           } bg-white flex-col overflow-hidden px-4`}
+           } bg-white flex-col overflow-hidden`}
       >
         <div
-          className={`sidebar-header flex ${isSidebarExpanded ? 'items-center justify-between pt-3' : 'flex-col justify-center gap-3 pt-4'}`}
+          className={`sidebar-header flex ${isSidebarExpanded ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
             className={`flex items-center gap-2 ${isSidebarExpanded ? 'block' : 'hidden'} transition-none`}
           >
             <ImgLogo className='w-[106px] h-[35px]' />
-            <p
-              className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-300 whitespace-nowrap overflow-hidden ${
-                isSidebarExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0'
-              }`}
-            >
-              관리자 센터
-            </p>
+            {type && (
+              <p
+                className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-300 whitespace-nowrap overflow-hidden ${
+                  isSidebarExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0'
+                }`}
+              >
+                {type}
+              </p>
+            )}
           </div>
-          <LogoCheck className={`w-[32px] h-[32px] ${isSidebarExpanded ? 'hidden' : 'block'} `} />
+          <LogoCheck
+            className={`w-[32px] h-[32px] ${isSidebarExpanded ? 'hidden' : 'block'} `}
+          />
           <div
             onClick={toggleSidebar}
             className='cursor-pointer flex items-center justify-center w-[32px] h-[32px]'
@@ -57,105 +84,64 @@ export const Sidebar = () => {
             )}
           </div>
         </div>
-        
-        
+
         {isSidebarExpanded && (
           // 엔티티에 get으로 프로필 및 유저 정보
-          <div className='pt-3 pb-[18px]'>
-            
-          </div>
+          <>
+            <div className='mt-3 mb-[18px] py-3'>
+              <SidebarUserInfo userData={userData} />
+            </div>
+            {children}
+          </>
         )}
-
-  
       </div>
 
-      {/* Sidebar Overlay for Tablet */}
-      {!isSidebarExpanded && isOpen && (
+      {isSidebarExpanded && (
         <div
-          onClick={closeSidebar}
-          className='fixed top-0 left-0 w-full h-full bg-black opacity-50'
+          onClick={toggleSidebar}
+          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-black z-30 transition-opacity transition-width duration-300 ease-in-out`}
+          style={{
+            width: `calc(100% - ${isSidebarExpanded ? '280px' : '60px'})`,
+            height: '100%',
+          }}
         ></div>
       )}
 
-      {/* Sidebar for Mobile */}
+      {/* mobile version */}
       <div
         className={`tablet:hidden top-0 left-0 w-full transition-all duration-300 ease-in-out ${
           isOpen ? 'h-full' : 'h-[48px]'
-        } bg-gray-800 text-white flex flex-col fixed overflow-hidden`}
+        } bg-white flex flex-col fixed overflow-hidden`}
       >
-        {/* Mobile Toggle Button */}
+        {/* onClose */}
         {!isOpen && (
-          <button
-            onClick={openSidebar}
-            className='absolute top-0 left-0 p-2 text-white'
-          >
-            열기
-          </button>
-        )}
-
-        {/* Mobile Close Button */}
-        {isOpen && (
-          <button
-            onClick={closeSidebar}
-            className='absolute top-4 right-4 p-2 text-white'
-          >
-            닫기
-          </button>
-        )}
-
-        {/* Mobile Header */}
-        <div className='sidebar-header flex items-center justify-center p-4'>
-          <h1 className='text-2xl font-bold'>Logo</h1>
-        </div>
-
-        {/* Mobile Navigation Links */}
-        {isOpen && (
-          <nav className='flex-grow'>
-            <ul className='flex flex-col p-4 space-y-4'>
-              <li>
-                <a
-                  href='/home'
-                  className='flex items-center px-4 py-2 text-lg rounded-md hover:bg-gray-700'
-                >
-                  <span className='icon mr-2'>🏠</span>
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href='/about'
-                  className='flex items-center px-4 py-2 text-lg rounded-md hover:bg-gray-700'
-                >
-                  <span className='icon mr-2'>ℹ️</span>
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  href='/contact'
-                  className='flex items-center px-4 py-2 text-lg rounded-md hover:bg-gray-700'
-                >
-                  <span className='icon mr-2'>📞</span>
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </nav>
-        )}
-
-        {/* Mobile User Info */}
-        {isOpen && (
-          <div className='sidebar-footer p-4'>
-            <div className='flex items-center'>
-              <div className='avatar w-10 h-10 bg-gray-600 rounded-full'></div>
-              <div className='ml-3'>
-                <p className='text-sm'>John Doe</p>
-                <a href='/profile' className='text-xs text-gray-400'>
-                  View Profile
-                </a>
-              </div>
-            </div>
+          <div className='flex items-center justify-start gap-4 py-3 px-4'>
+            <button onClick={toggleMobileSidebar} className='cursor-pointer'>
+              <HamburgerMenu className='w-6 h-6' />
+            </button>
+            {pathname === '/' && (
+              <div className='text-base font-pretendard-semibold'>대시보드</div>
+            )}
           </div>
+        )}
+        {/* onOpen */}
+        {isOpen && (
+          <div className='flex items-center justify-between py-3 px-4'>
+            <ImgLogo className='w-[106px] h-[35px]' />
+            <button onClick={toggleMobileSidebar} className='cursor-pointer'>
+              <DeleteMenu className='w-6 h-6' />
+            </button>
+          </div>
+        )}
+
+        {isOpen && (
+          // 엔티티에 get으로 프로필 및 유저 정보
+          <>
+            <div className='mt-3 mb-[18px] py-3 '>
+              <SidebarUserInfo userData={userData} />
+            </div>
+            {children}
+          </>
         )}
       </div>
     </div>
