@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { SidebarUser } from '../widgets/user/ui/sidebar-user';
 import { ToastContainer } from 'react-toastify';
 
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
