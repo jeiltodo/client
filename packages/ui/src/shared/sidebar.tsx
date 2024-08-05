@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 import {
@@ -11,7 +11,6 @@ import {
   ImgLogo,
   LogoCheck,
 } from '@jeiltodo/icons';
-import { useResponsive } from './hooks/useResponsive';
 import { SidebarUserInfo } from './sidebar-user-info';
 
 interface SidebarProps {
@@ -28,42 +27,44 @@ const userData = {
 };
 
 export const Sidebar = ({ type, children }: SidebarProps) => {
-  const isTablet = useResponsive();
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(!isTablet);
+  const [isDesktopOpen, setIsDesktopOpen] = useState(true);
+  const [isTabletOpen, setIsTabletOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
 
-  const toggleSidebar = () => {
-    setIsSidebarExpanded(!isSidebarExpanded);
+  const toggleDesktopSidebar = () => {
+    setIsDesktopOpen(!isDesktopOpen);
+  };
+
+  const toggleTabletSidebar = () => {
+    setIsTabletOpen(!isTabletOpen);
   };
 
   const toggleMobileSidebar = () => {
-    setIsOpen(!isOpen);
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
   };
 
-  useEffect(() => {
-    setIsSidebarExpanded(!isTablet);
-  }, [isTablet]);
-
   return (
-    <div className='min-w-[280px]'>
+    <div className='min-w-[60px] desktop:min-w-[280px]'>
+      {/* 데스크톱 버전 */}
       <div
-        className={`tablet:flex mobile:hidden h-full fixed top-0 left-0
+        className={`desktop:flex tablet:hidden h-full fixed top-0 left-0 z-10
            transition-all duration-300 ease-in-out ${
-             isSidebarExpanded ? 'w-[280px]' : 'w-[60px]'
+            isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}
       >
         <div
-          className={`sidebar-header flex ${isSidebarExpanded ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
+          className={`sidebar-header flex ${isDesktopOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
-            className={`flex items-center gap-2 ${isSidebarExpanded ? 'block' : 'hidden'} transition-none`}
+            className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'}`}
           >
             <ImgLogo className='w-[106px] h-[35px]' />
             {type && (
               <p
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-300 whitespace-nowrap overflow-hidden ${
-                  isSidebarExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0'
+                  isDesktopOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
                 }`}
               >
                 {type}
@@ -71,13 +72,13 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <LogoCheck
-            className={`w-[32px] h-[32px] ${isSidebarExpanded ? 'hidden' : 'block'} `}
+            className={`w-[32px] h-[32px] ${isDesktopOpen ? 'hidden' : 'block'} `}
           />
           <div
-            onClick={toggleSidebar}
+            onClick={toggleDesktopSidebar}
             className='cursor-pointer flex items-center justify-center w-[32px] h-[32px]'
           >
-            {isSidebarExpanded ? (
+            {isDesktopOpen ? (
               <Fold className='w-6 h-6' />
             ) : (
               <Expand className='w-6 h-6' />
@@ -85,8 +86,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {isSidebarExpanded && (
-          // 엔티티에 get으로 프로필 및 유저 정보
+        {isDesktopOpen && (
           <>
             <div className='mt-3 mb-[18px] py-3'>
               <SidebarUserInfo userData={userData} />
@@ -96,25 +96,74 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         )}
       </div>
 
-      {isSidebarExpanded && (
+ 
+      {/* 태블릿 버전 */}
+      <div
+        className={`desktop:hidden tablet:flex mobile:hidden h-full fixed top-0 left-0 z-10
+           transition-all duration-300 ease-in-out ${
+             isTabletOpen ? 'w-[280px]' : 'w-[60px]'
+           } bg-white flex-col overflow-hidden`}
+      >
         <div
-          onClick={toggleSidebar}
-          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-black z-30 transition-opacity transition-width duration-300 ease-in-out`}
+          className={`sidebar-header flex ${isTabletOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
+        >
+          <div
+            className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
+          >
+            <ImgLogo className='w-[106px] h-[35px]' />
+            {type && (
+              <p
+                className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-300 whitespace-nowrap overflow-hidden ${
+                  isTabletOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
+                }`}
+              >
+                {type}
+              </p>
+            )}
+          </div>
+          <LogoCheck
+            className={`w-[32px] h-[32px] ${isTabletOpen ? 'hidden' : 'block'} `}
+          />
+          <div
+            onClick={toggleTabletSidebar}
+            className='cursor-pointer flex items-center justify-center w-[32px] h-[32px]'
+          >
+            {isTabletOpen ? (
+              <Fold className='w-6 h-6' />
+            ) : (
+              <Expand className='w-6 h-6' />
+            )}
+          </div>
+        </div>
+
+        {isTabletOpen && (
+          <>
+            <div className='mt-3 mb-[18px] py-3'>
+              <SidebarUserInfo userData={userData} />
+            </div>
+            {children}
+          </>
+        )}
+      </div>
+
+      {isTabletOpen && (
+        <div
+          onClick={toggleTabletSidebar}
+          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-black z-20 transition-opacity transition-width duration-300 ease-in-out`}
           style={{
-            width: `calc(100% - ${isSidebarExpanded ? '280px' : '60px'})`,
+            width: `calc(100% - ${isTabletOpen ? '280px' : '60px'})`,
             height: '100%',
           }}
         ></div>
       )}
 
-      {/* mobile version */}
+      {/* 모바일 버전 */}
       <div
-        className={`tablet:hidden top-0 left-0 w-full transition-all duration-300 ease-in-out ${
-          isOpen ? 'h-full' : 'h-[48px]'
-        } bg-white flex flex-col fixed overflow-hidden`}
+        className={`tablet:hidden mobile:flex top-0 left-0 w-full transition-all duration-300 ease-in-out ${
+          isMobileSidebarOpen ? 'h-full' : 'h-[48px]'
+        } bg-white flex-col fixed overflow-hidden`}
       >
-        {/* onClose */}
-        {!isOpen && (
+        {!isMobileSidebarOpen && (
           <div className='flex items-center justify-start gap-4 py-3 px-4'>
             <button onClick={toggleMobileSidebar} className='cursor-pointer'>
               <HamburgerMenu className='w-6 h-6' />
@@ -124,8 +173,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
         )}
-        {/* onOpen */}
-        {isOpen && (
+        {isMobileSidebarOpen && (
           <div className='flex items-center justify-between py-3 px-4'>
             <ImgLogo className='w-[106px] h-[35px]' />
             <button onClick={toggleMobileSidebar} className='cursor-pointer'>
@@ -134,8 +182,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         )}
 
-        {isOpen && (
-          // 엔티티에 get으로 프로필 및 유저 정보
+        {isMobileSidebarOpen && (
           <>
             <div className='mt-3 mb-[18px] py-3 '>
               <SidebarUserInfo userData={userData} />
