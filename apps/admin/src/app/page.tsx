@@ -1,10 +1,11 @@
 'use client';
 
-import { GROUP_FIILTERS } from '../entities/group';
+import { GROUP_FIILTERS, GroupMemberList } from '../entities/group';
 import { User } from '../entities/user';
 import { TableProvider } from '../shared/model/table-provider';
 import { Pagination } from '../shared/ui/pagination';
 import { TableToolBar } from '../shared/ui/table-toolbar';
+import { GroupMembersBorad } from '../widgets/group/group-members-board';
 import { AdminFilter } from '../widgets/ui/admin-filter';
 import { AdminUsersTable } from '../widgets/user';
 
@@ -38,12 +39,13 @@ const tableMock: User[] = [
 export default function Page(): JSX.Element {
   return (
     <main className='max-w-[930px] '>
-      <TableProvider<User> initialData={tableMock}>
+      {/* <TableProvider<User> initialData={tableMock}>
         <AdminFilter filters={GROUP_FIILTERS} />
         <TableToolBar />
         <AdminUsersTable />
         <Pagination totalCount={tableMock.length} limit={4} currentPage={1} />
-      </TableProvider>
+      </TableProvider> */}
+      <GroupMembersBorad />
     </main>
   );
 }
