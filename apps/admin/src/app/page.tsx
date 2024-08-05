@@ -5,7 +5,7 @@ import { User } from '../entities/user';
 import { TableProvider } from '../shared/model/table-provider';
 import { Pagination } from '../shared/ui/pagination';
 import { TableToolBar } from '../shared/ui/table-toolbar';
-import { GroupMembersBorad } from '../widgets/group/group-members-board';
+import { GroupMembersBorad } from '../widgets/group/ui/group-members-board';
 import { AdminFilter } from '../widgets/ui/admin-filter';
 import { AdminUsersTable } from '../widgets/user';
 
