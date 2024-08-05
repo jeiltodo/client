@@ -1,0 +1,14 @@
+{
+  "name": "@jeiltodo/lib",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./hooks": "./dist/hooks/index.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {}
+}
