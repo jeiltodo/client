@@ -6,4 +6,4 @@ export {
   validatePassword,
   validateConfirmPassword,
   validateLogIn,
-} from '../model/validation';
+} from './validation';

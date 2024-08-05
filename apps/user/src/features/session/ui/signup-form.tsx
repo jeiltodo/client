@@ -1,6 +1,7 @@
 import { type ChangeEvent, type FocusEvent, useEffect, useState } from 'react';
 import { useDebounce } from '@jeiltodo/lib/hooks';
 import { Button, Input } from '@jeiltodo/ui';
+import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
 import type { SignUpData } from '../../../entities/session';
 import type { ValidationErrors } from '../../../entities/session/types';
 import {
@@ -22,6 +23,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState<boolean>(false);
 
   const debouncedName = useDebounce(name, 1000);
   const debouncedEmail = useDebounce(email, 1000);
@@ -80,7 +84,15 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
     }, 1000);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prevState) => !prevState);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setIsConfirmPasswordVisible((prevState) => !prevState);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({ name, email, password });
   };
@@ -121,73 +133,131 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
         <label htmlFor='name' className='font-pretendard-semibold text-base'>
           이름
         </label>
-        <Input
-          type='text'
-          name='name'
-          value={name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='이름을 입력해주세요'
-        />
-        {errors.name && (
-          <p className='text-blue-400 text-sm -mt-[10px]'>{errors.name}</p>
-        )}
+        <div className='relative h-[96px]'>
+          <Input
+            className='absolute left-0 top-0 w-full'
+            type='text'
+            name='name'
+            value={name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='이름을 입력해주세요'
+          />
+          {errors.name && (
+            <p className='absolute bottom-[16px] left-2 text-error text-sm'>
+              {errors.name}
+            </p>
+          )}
+        </div>
         <label htmlFor='name' className='font-pretendard-semibold text-base'>
           이메일
         </label>
-        <Input
-          type='email'
-          name='email'
-          value={email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='이메일을 입력해주세요'
-        />
-        {errors.email && (
-          <p className='text-blue-400 text-sm -mt-[10px]'>{errors.email}</p>
-        )}
+        <div className='relative h-[96px]'>
+          <Input
+            className='absolute left-0 top-0 w-full'
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='이메일을 입력해주세요'
+          />
+          {errors.email && (
+            <p className='absolute bottom-[16px] left-2 text-error text-sm'>
+              {errors.email}
+            </p>
+          )}
+        </div>
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
         >
           비밀번호
         </label>
-        <Input
-          type='password'
-          name='password'
-          value={password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='비밀번호를 입력해주세요'
-        />
-        {errors.password && (
-          <p className='text-blue-400 text-sm -mt-[10px] mb-4'>
-            {errors.password}
-          </p>
-        )}
+        <div className='relative h-[96px]'>
+          <Input
+            className='absolute left-0 top-0 w-full'
+            type={isPasswordVisible ? 'text' : 'password'}
+            name='password'
+            value={password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='비밀번호를 입력해주세요'
+          />
+          <div className='absolute w-[24px] h-[24px] right-[24px] top-3'>
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                isPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOn className='w-[24px] h-[24px]' />
+            </button>
+
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                !isPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOff className='w-[24px] h-[24px]' />
+            </button>
+          </div>
+          {errors.password && (
+            <p className='absolute bottom-[16px] left-2 text-error text-sm'>
+              {errors.password}
+            </p>
+          )}
+        </div>
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
         >
           비밀번호 확인
         </label>
-        <Input
-          type='password'
-          name='confirmPassword'
-          value={confirmPassword}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='비밀번호를 다시 한 번 입력해주세요'
-        />
-        {errors.confirmPassword && (
-          <p className='text-blue-400 text-sm -mt-[10px] mb-4'>
-            {errors.confirmPassword}
-          </p>
-        )}
+        <div className='relative h-[96px]'>
+          <Input
+            className='absolute left-0 top-0 w-full'
+            type={isConfirmPasswordVisible ? 'text' : 'password'}
+            name='confirmPassword'
+            value={confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='비밀번호를 다시 한 번 입력해주세요'
+          />
+          <div className='absolute w-[24px] h-[24px] right-[24px] top-3'>
+            <button
+              type='button'
+              onClick={toggleConfirmPasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                isConfirmPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOn className='w-[24px] h-[24px]' />
+            </button>
+
+            <button
+              type='button'
+              onClick={toggleConfirmPasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                !isConfirmPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOff className='w-[24px] h-[24px]' />
+            </button>
+          </div>
+          {errors.confirmPassword && (
+            <p className='absolute bottom-[16px] left-2 text-error text-sm'>
+              {errors.confirmPassword}
+            </p>
+          )}
+        </div>
       </div>
       <Button
         variant='primary'

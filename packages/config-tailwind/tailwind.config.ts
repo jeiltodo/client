@@ -61,6 +61,7 @@ const config: Omit<Config, 'content'> = {
           900: '#0F172A',
           950: '#020617',
         },
+        error: '#B91C1C',
       },
     },
   },

@@ -1,10 +1,16 @@
-import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
+import {
+  type ChangeEvent,
+  type FocusEvent,
+  type FormEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { useDebounce } from '@jeiltodo/lib/hooks';
 import { Button, Input } from '@jeiltodo/ui';
-import { LoginCredentials, User } from '../types';
+import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
+import type { LoginCredentials } from '../types';
 import { validateEmail, validateLogIn } from '../../../entities/session/model';
-import { ValidationErrors } from '../../../entities/session/types';
-
+import type { ValidationErrors } from '../../../entities/session/types';
 interface LoginFormProps {
   onSubmit: (credentials: LoginCredentials) => void;
 }
@@ -14,14 +20,19 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const debouncedEmail = useDebounce(email, 2000);
   const debouncedPassword = useDebounce(password, 2000);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    validateField('email', email);
-    validateField('password', password);
+    try {
+      await validateField('email', email);
+      await validateField('password', password);
+    } catch {
+      return;
+    }
     onSubmit({ email, password });
   };
 
@@ -63,65 +74,114 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
     setErrors((prev) => ({ ...prev, [inputName]: errorMessage }));
   };
 
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleBlur = async (e: FocusEvent<HTMLInputElement>) => {
     const { name: inputName, value } = e.target;
-    validateField(inputName, value);
+    try {
+      await validateField(inputName, value);
+    } catch (error) {
+      console.error('Error validating field:', error);
+    }
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
     const { name: inputName, value } = e.target;
     setTimeout(() => {
-      validateField(inputName, value);
+      validateField(inputName, value).catch((error) => {
+        console.error('Error validating field:', error);
+      });
     }, 1000);
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prevState) => !prevState);
+  };
+
   useEffect(() => {
-    debouncedEmail && validateField('email', debouncedEmail);
+    debouncedEmail &&
+      validateField('email', debouncedEmail).catch((error) => {
+        console.error('Error validating field:', error);
+      });
   }, [debouncedEmail]);
 
   useEffect(() => {
-    debouncedPassword && validateField('password', debouncedPassword);
+    debouncedPassword &&
+      validateField('password', debouncedPassword).catch((error) => {
+        console.error('Error validating field:', error);
+      });
   }, [debouncedPassword]);
 
   useEffect(() => {
     const isValid = Object.values(errors).every((error) => !error);
     email && password && setIsDisabled(!isValid);
   }, [errors]);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
         <label htmlFor='email' className='font-pretendard-semibold text-base'>
           아이디
         </label>
-        <Input
-          type='email'
-          name='email'
-          value={email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='이메일을 입력해주세요'
-        />
-        {errors.email && (
-          <p className='text-slate-400 text-sm'>{errors.email}</p>
-        )}
+        <div className='relative h-[96px]'>
+          <Input
+            className='absolute left-0 top-0 w-full'
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='이메일을 입력해주세요'
+          />
+          {errors.email && (
+            <p className='absolute bottom-[16px] left-2 text-error text-sm'>
+              {errors.email}
+            </p>
+          )}
+        </div>
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
         >
           비밀번호
         </label>
-        <Input
-          type='password'
-          name='password'
-          value={password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          className='mb-[48px]'
-          placeholder='비밀번호를 입력해주세요'
-        />
-        {errors.password && <p>{errors.password}</p>}
+        <div className='relative h-[96px]'>
+          <Input
+            className='absolute left-0 top-0 w-full'
+            name='password'
+            type={isPasswordVisible ? 'text' : 'password'}
+            value={password}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            placeholder='비밀번호를 입력해주세요'
+          />
+          <div className='absolute w-[24px] h-[24px] right-[24px] top-3'>
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                isPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOn className='w-[24px] h-[24px]' />
+            </button>
+
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                !isPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOff className='w-[24px] h-[24px]' />
+            </button>
+          </div>
+          {errors.password && (
+            <p className='absolute bottom-[16px] left-2 text-error text-sm'>
+              {errors.password}
+            </p>
+          )}
+        </div>
       </div>
       <Button
         variant='primary'
