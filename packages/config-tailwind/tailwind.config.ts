@@ -68,6 +68,16 @@ const config: Omit<Config, 'content'> = {
   plugins: [
     plugin(function ({ addUtilities }: PluginAPI) {
       addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
         '.scrollbar-thin': {
           scrollbarWidth: 'thin',
           scrollbarColor: 'rgb(94,166,219) white',
