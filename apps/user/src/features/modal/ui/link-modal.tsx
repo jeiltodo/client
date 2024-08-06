@@ -28,7 +28,7 @@ export const LinkModal = ({ setLinkToggle, id }: LinkModalProps) => {
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!link} className='w-full mt-10'>
+      <Button isDisabled={!link} className='w-full h-12 mt-10'>
         확인
       </Button>
     </BaseModal>

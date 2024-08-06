@@ -49,7 +49,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
     <div className='min-w-[60px] desktop:min-w-[280px]'>
       {/* 데스크톱 버전 */}
       <div
-        className={`desktop:flex tablet:hidden h-full fixed top-0 left-0 z-10
+        className={`desktop:flex mobile:hidden h-full fixed top-0 left-0 z-10
            transition-all duration-300 ease-in-out ${
             isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}

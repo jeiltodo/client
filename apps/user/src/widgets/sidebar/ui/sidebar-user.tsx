@@ -59,7 +59,7 @@ export const SidebarUser = () => {
         <div className='px-6 mt-6 mb-[18px]'>
           <Button
             variant='outline'
-            className='flex items-center justify-center gap-1 w-full'
+            className='flex items-center justify-center gap-1 w-full h-12'
             onClick={() => setGoalToggle(true)}
           >
             <Plus className='w-6 h-6' />
@@ -72,7 +72,7 @@ export const SidebarUser = () => {
         <div className='px-6 mt-6 mb-3'>
           <Button
             variant='outline'
-            className='flex items-center justify-center gap-1 w-full'
+            className='flex items-center justify-center gap-1 w-full h-12'
             onClick={() => setGroupCreateToggle(true)}
           >
             <Plus className='w-6 h-6' />
@@ -84,7 +84,7 @@ export const SidebarUser = () => {
         <div className='px-6'>
           <Button
             variant='outline'
-            className='flex items-center justify-center gap-1 w-full'
+            className='flex items-center justify-center gap-1 w-full h-12'
             onClick={() => setGroupAttendToggle(true)}
           >
             <Search className='w-6 h-6' />

@@ -29,7 +29,7 @@ export const GroupAttendModal = ({
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!secretCode} className='w-full mt-10'>
+      <Button isDisabled={!secretCode} className='w-full h-12 mt-10'>
         확인
       </Button>
     </BaseModal>

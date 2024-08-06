@@ -1,6 +1,8 @@
 'use client'
-import { DeleteMenu } from '@jeiltodo/icons';
+import ReactDOM from 'react-dom';
 import { Dispatch, ReactNode, SetStateAction, MouseEvent } from 'react';
+
+import { DeleteMenu } from '@jeiltodo/icons';
 
 interface BaseModalProps {
   title?: string;
@@ -14,7 +16,7 @@ export const BaseModal = ({ title, setToggle, children, width }: BaseModalProps)
     e.stopPropagation();
   };
   
-  return (
+  return ReactDOM.createPortal(
     <div onClick={() => setToggle(false)} className='z-30 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full y-full min-h-full bg-black/[.08]'>
       <div onClick={handleModalClick} className={`bg-white ${width} mobile:w-3/4 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl p-6`}>
         <div className='flex items-center justify-between mb-6'>
@@ -29,6 +31,7 @@ export const BaseModal = ({ title, setToggle, children, width }: BaseModalProps)
         </div>
         <div>{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
