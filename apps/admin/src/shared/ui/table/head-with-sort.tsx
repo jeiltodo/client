@@ -1,4 +1,4 @@
-import { SortButton } from '../sort-button';
+import { SortButton } from '../table-tools/sort-button';
 import type { TableHeadProps } from './head';
 import { TableHead } from './head';
 

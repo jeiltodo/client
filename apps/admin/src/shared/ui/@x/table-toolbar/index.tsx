@@ -1,6 +1,6 @@
 import { Dropdown } from '@jeiltodo/ui/shared';
-import { DeleteButton } from '../../delete-button';
-import { SearchSummary } from '../../search-summary';
+import { DeleteButton } from '../../table-tools/delete-button';
+import { SearchSummary } from '../../table-tools/search-summary';
 
 interface Props {
   onSelectDropdown: () => void;

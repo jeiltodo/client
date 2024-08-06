@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@jeiltodo/eslint-config": "*",
-    "@jeiltodo/icons": "*",
     "@jeiltodo/tailwind-config": "*",
     "@jeiltodo/typescript-config": "*",
     "@types/react": "^18.2.61",

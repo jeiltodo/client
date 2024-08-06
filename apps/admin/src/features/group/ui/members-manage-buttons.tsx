@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useBoardContext } from '@jeiltodo/ui/shared';
-import { BoardMode } from '@jeiltodo/ui/entities';
+import { BoardMode } from '@jeiltodo/ui/shared';
 
 export const MembersManageButtons = () => {
   const { mode, changeMode } = useBoardContext();

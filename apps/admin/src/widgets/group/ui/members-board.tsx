@@ -1,10 +1,10 @@
 import { Group } from '@jeiltodo/icons';
-import { Pagination } from '../../../shared/ui/pagination';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import { MembersBoardProvider } from '@jeiltodo/ui/shared';
 import { changeLeader } from '../../../features/group/api/changeLeader';
 import { removeMember } from '../../../features/group/api/removeMember';
 import { MemberList } from '../../../features/group/ui/member-list';
+import { Pagination } from '../../../shared';
 
 export const MembersBorad = () => {
   return (

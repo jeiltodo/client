@@ -14,8 +14,7 @@
   "scripts": {
     "type-check": "tsc --noEmit"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@jeiltodo/typescript-config": "*",
     "typescript": "^5.3.3"

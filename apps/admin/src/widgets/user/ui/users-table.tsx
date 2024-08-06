@@ -6,11 +6,11 @@ import { Button, Checkbox } from '@jeiltodo/ui/shared';
 import { formatDateString } from '@jeiltodo/lib';
 
 import { Table } from '../../../shared/ui/table';
-import { useTableContext, useTableCheck } from '../../../shared/hooks';
+import { useTableContext, useTableCheck } from '../../../shared';
 
 import type { User } from '../../../entities/user/model/type';
 import { TableHeadList } from '../../../features/user/ui/table-head-list';
-import { USER_TABLE_HEAD_MAP } from '../../../features/user/model';
+import { USER_TABLE_HEAD_MAP } from '../../../features/user';
 
 export function UsersTable() {
   const router = useRouter();
