@@ -1,12 +1,12 @@
 import { TodoRecently } from '@jeiltodo/icons';
 import { GroupsInterface } from '../model/type';
-import { UserGroupCard } from '../../../shared/ui/user/ui/user-group-card';
+import { GroupCard } from '../../../shared/ui/user/ui/group-card';
 
-interface UserGroupBoardProps {
+interface GroupBoardProps {
   groups: GroupsInterface[];
 }
 
-export const UserGroupBoard: React.FC<UserGroupBoardProps> = ({ groups }) => {
+export const GroupBoard: React.FC<GroupBoardProps> = ({ groups }) => {
   const groupTotalCount = 10;
   return (
     <div className='bg-white w-[623px] p-6 rounded-xl'>
@@ -20,7 +20,7 @@ export const UserGroupBoard: React.FC<UserGroupBoardProps> = ({ groups }) => {
       </div>
       <div className={`mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide`}>
         {groups.map((group) => (
-          <UserGroupCard
+          <GroupCard
             key={group.id}
             name={group.name}
             registerAt={group.registerAt}

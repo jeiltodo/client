@@ -1,8 +1,8 @@
 import React from 'react';
-import { UserGroupBoard } from '../widgets/user';
-import { UserGroupBoardProps } from '../widgets/user/model/type';
+import { GroupBoard } from '../widgets/user';
+import { GroupBoardProps } from '../widgets/user/model/type';
 
-const userGroupBoardMock: UserGroupBoardProps = {
+const GroupBoardMock: GroupBoardProps = {
   user: {
     id: 1,
     email: 'johndoe@example.com',
@@ -50,7 +50,7 @@ export default function Page() {
   
   return (
     <main className=' p-4 '>
-      <UserGroupBoard groups={userGroupBoardMock.groups} />
+      <GroupBoard groups={GroupBoardMock.groups} />
     </main>
   );
 }

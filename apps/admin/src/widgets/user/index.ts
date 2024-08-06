@@ -1,1 +1,1 @@
-export * from './ui/user-group-board';
+export * from './ui/group-board';

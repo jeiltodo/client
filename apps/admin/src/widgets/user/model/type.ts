@@ -19,7 +19,7 @@ export interface GoalsInterface {
 }
 
 
-export interface UserGroupBoardProps {
+export interface GroupBoardProps {
   user: UserInterface
   groups: GroupsInterface[]
   goals: GoalsInterface[]

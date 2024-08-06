@@ -2,12 +2,12 @@ import { formatDateString } from '@jeiltodo/lib';
 import { Button } from '@jeiltodo/ui';
 
 
-interface UserGroupCardProps {
+interface GroupCardProps {
   name: string;
   registerAt: string;
 }
 
-export const UserGroupCard = ({ name, registerAt }: UserGroupCardProps) => {
+export const GroupCard = ({ name, registerAt }: GroupCardProps) => {
   return (
     <div className='w-full bg-blue-50 flex items-end justify-between p-6 rounded-xl'>
       <div className='flex items-center justify-start gap-2'>
