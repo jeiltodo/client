@@ -9,8 +9,8 @@
   ],
   "exports": {
     "./styles.css": "./dist/index.css",
-    ".": "./src/shared/index.ts",
-    "./asset/index.ts": "./src/shared/asset/index.ts"
+    "./shared": "./src/shared/index.ts",
+    "./entities": "./src/entities/index.ts"
   },
   "license": "MIT",
   "scripts": {

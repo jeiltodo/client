@@ -62,6 +62,9 @@ const config: Omit<Config, 'content'> = {
           900: '#0F172A',
           950: '#020617',
         },
+        black: {
+          500: '#3A4354',
+        },
       },
     },
   },

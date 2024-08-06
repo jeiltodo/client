@@ -1,4 +1,3 @@
-
 'use client';
 
 import { GROUP_FIILTERS } from '../entities/group';
@@ -38,7 +37,6 @@ const tableMock: User[] = [
     groupCount: 1,
   },
 ];
-
 
 const GroupBoardMock: GroupBoardProps = {
   user: {
@@ -84,7 +82,6 @@ const GroupBoardMock: GroupBoardProps = {
   ],
 };
 
-
 export default function Page(): JSX.Element {
   return (
     <main className='max-w-[930px] '>
@@ -94,7 +91,8 @@ export default function Page(): JSX.Element {
         <AdminUsersTable />
         <Pagination totalCount={tableMock.length} limit={4} currentPage={1} />
       </TableProvider>
-        
+
       <GroupBoard groups={GroupBoardMock.groups} />
-        </main>
-)}
+    </main>
+  );
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import {
@@ -31,7 +31,6 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   const [isDesktopOpen, setIsDesktopOpen] = useState(true);
   const [isTabletOpen, setIsTabletOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  
 
   const toggleDesktopSidebar = () => {
     setIsDesktopOpen(!isDesktopOpen);
@@ -51,7 +50,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       <div
         className={`desktop:flex tablet:hidden h-full fixed top-0 left-0 z-10
            transition-all duration-300 ease-in-out ${
-            isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
+             isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}
       >
         <div
@@ -96,7 +95,6 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         )}
       </div>
 
- 
       {/* 태블릿 버전 */}
       <div
         className={`desktop:hidden tablet:flex mobile:hidden h-full fixed top-0 left-0 z-10

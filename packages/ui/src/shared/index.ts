@@ -1,6 +1,7 @@
-export * from './button';
-export * from './dropdown';
-export * from './input';
-export * from './checkbox';
+export * from './ui/button';
+export * from './ui/dropdown';
+export * from './ui/input';
+export * from './ui/sidebar';
 
-export * from './sidebar';
+export * from './ui/board-title';
+export * from './ui/sidebar-user-info';

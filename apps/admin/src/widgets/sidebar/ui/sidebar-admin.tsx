@@ -1,10 +1,10 @@
-import { Sidebar } from '@jeiltodo/ui';
+import { Sidebar } from '@jeiltodo/ui/shared';
 import { SidebarNav } from '../../../shared/ui/sidebar/sidebar-nav';
 import { Home, Group, Post } from '@jeiltodo/icons';
 
 export const SidebarAdmin = () => {
   return (
-    <Sidebar type="관리자 센터">
+    <Sidebar type='관리자 센터'>
       <SidebarNav icon={Home} title='회원관리' href='/' />
       <SidebarNav icon={Group} title='그룹관리' href='/group' />
       <SidebarNav

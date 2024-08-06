@@ -19,8 +19,10 @@ export default function RootLayout({
     <html lang='ko'>
       <body className={inter.className}>
         <div className=''>
-          <SidebarAdmin/>
-          <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>{children}</main>
+          <SidebarAdmin />
+          <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>
+            {children}
+          </main>
         </div>
       </body>
     </html>
