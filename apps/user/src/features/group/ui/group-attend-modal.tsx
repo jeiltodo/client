@@ -1,7 +1,7 @@
 'use client';
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import { Button, Input } from '@jeiltodo/ui';
+import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
 interface GroupAttendModalProps {
@@ -11,7 +11,7 @@ export const GroupAttendModal = ({
   setGroupAttendToggle,
 }: GroupAttendModalProps) => {
   const [secretCode, setSecretCode] = useState<string>('');
- 
+
   return (
     <BaseModal
       title='그룹 참여'

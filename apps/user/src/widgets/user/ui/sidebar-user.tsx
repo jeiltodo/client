@@ -1,15 +1,15 @@
 'use client';
 import { useState } from 'react';
 
-import { Button, Sidebar } from '@jeiltodo/ui';
+import { Button, Sidebar } from '@jeiltodo/ui/shared';
 import { SidebarNav } from '../../../shared/ui/sidebar/sidebar-nav';
 import { Home, Individual, Group, Plus, Search } from '@jeiltodo/icons';
-import { SidebarIndividualNav } from '../../../features/sidebar/ui/sidebar-individual-nav';
-import { SidebarGroupNav } from '../../../features/sidebar/ui/sidebar-group-nav';
-import { GoalModal } from '../../../features/modal/ui/goal-modal';
-import { GroupCreateModal } from '../../../features/modal/ui/group-create-modal';
-import { GroupAttendModal } from '../../../features/modal/ui/group-attend-modal';
-import { LoadDraftModal } from '../../../features/modal/ui/load-draft-modal';
+import { SidebarIndividualNav } from '../../../features/user/ui/sidebar-individual-nav';
+import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
+import { GoalModal } from '../../../features/goal/ui/goal-modal';
+import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
+import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
+import { LoadDraftModal } from '../../../features/note/ui/load-draft-modal';
 
 // entities에서 데이터 individual/goals로 불러올 예정
 const data = [
@@ -47,8 +47,12 @@ export const SidebarUser = () => {
   return (
     <>
       {goalToggle && <GoalModal setGoalToggle={setGoalToggle} />}
-      {groupCreateToggle && <GroupCreateModal setGroupCreateToggle={setGroupCreateToggle} />}
-      {groupAttendToggle && <GroupAttendModal setGroupAttendToggle={setGroupAttendToggle} />}
+      {groupCreateToggle && (
+        <GroupCreateModal setGroupCreateToggle={setGroupCreateToggle} />
+      )}
+      {groupAttendToggle && (
+        <GroupAttendModal setGroupAttendToggle={setGroupAttendToggle} />
+      )}
       <Sidebar>
         <SidebarNav icon={Home} title='대시보드' href='/' />
         <SidebarIndividualNav

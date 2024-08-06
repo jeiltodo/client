@@ -1,12 +1,12 @@
 'use client';
 import { Expand, Fold, ImgLogo, LogoCheck } from '@jeiltodo/icons';
-import React, { ReactNode, useState } from 'react';
+import React, { PropsWithChildren, ReactNode, useState } from 'react';
 
 // interface SidebarProps {
 //   children: ReactNode;
 // }
 
-export const Sidebar = () => {
+export const Sidebar = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 

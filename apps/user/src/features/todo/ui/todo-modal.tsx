@@ -1,7 +1,7 @@
 'use client';
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import { Button, Dropdown, Input } from '@jeiltodo/ui';
+import { Button, Dropdown, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
 interface TodoModalProps {

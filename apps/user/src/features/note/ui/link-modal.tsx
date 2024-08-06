@@ -1,7 +1,7 @@
 'use client';
 import { Dispatch, SetStateAction, useState } from 'react';
 
-import { Button, Input } from '@jeiltodo/ui';
+import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
 interface LinkModalProps {
@@ -10,7 +10,7 @@ interface LinkModalProps {
 }
 export const LinkModal = ({ setLinkToggle, id }: LinkModalProps) => {
   const [link, setLink] = useState<string>('');
- 
+
   return (
     <BaseModal
       title='링크 업로드'

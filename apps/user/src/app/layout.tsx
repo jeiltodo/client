@@ -2,7 +2,7 @@ import './globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { SidebarUser } from '../widgets/sidebar/ui/sidebar-user';
+import { SidebarUser } from '../widgets/user/ui/sidebar-user';
 
 const inter = Inter({ subsets: ['latin'] });
 
