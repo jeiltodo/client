@@ -9,15 +9,7 @@ interface GoalModalProps {
 }
 export const GoalModal = ({ setGoalToggle }: GoalModalProps) => {
   const [title, setTitle] = useState<string>('');
-  const [submit, setSubmit] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (title) {
-      setSubmit(false);
-    } else {
-      setSubmit(true);
-    }
-  }, [title]);
   return (
     <BaseModal
       title='체다치즈의 목표 생성'
@@ -35,7 +27,7 @@ export const GoalModal = ({ setGoalToggle }: GoalModalProps) => {
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={submit} className='w-full mt-10'>
+      <Button isDisabled={!title} className='w-full mt-10'>
         확인
       </Button>
     </BaseModal>
