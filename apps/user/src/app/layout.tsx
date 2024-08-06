@@ -1,10 +1,8 @@
 import './globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { ToastContainer } from 'react-toastify';
 import { SidebarUser } from '../widgets/sidebar/ui/sidebar-user';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -18,10 +16,11 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className='font-pretendard-regular'>
         <div className=''>
           <SidebarUser />
           <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>
+            <ToastContainer limit={1} />
             {children}
           </main>
         </div>
