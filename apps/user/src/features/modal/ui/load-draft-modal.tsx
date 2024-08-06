@@ -18,10 +18,10 @@ export const LoadDraftModal = ({ setLoadDraftToggle }: LoadDraftModalProps) => {
         <p className='text-base font-meduim'>불러올 내용</p>
       
       <ButtonGroup gap={2} >
-        <Button variant='outline' className='w-[120px]'>
+        <Button variant='outline' className='w-[120px] h-12'>
           취소하기
         </Button>
-        <Button  className='w-[120px]'>
+        <Button  className='w-[120px] h-12'>
           불러오기
         </Button>
       </ButtonGroup>

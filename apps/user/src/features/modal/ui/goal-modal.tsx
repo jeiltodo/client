@@ -27,7 +27,7 @@ export const GoalModal = ({ setGoalToggle }: GoalModalProps) => {
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!title} className='w-full mt-10'>
+      <Button isDisabled={!title} className='w-full mt-10 h-12'>
         확인
       </Button>
     </BaseModal>
