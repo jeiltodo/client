@@ -1,3 +1,2 @@
-import { UsersTable } from './ui/users-table';
-
-export { UsersTable };
+export * from './ui/users-table';
+export * from './ui/group-board';

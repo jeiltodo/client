@@ -1,5 +1,6 @@
 import { useTableContext } from './useTableContext';
-import { sortBy, type SortOptions } from '../../lib/sortBy';
+import type { SortOptions } from '../../lib/sortBy';
+import { sortBy } from '../../lib/sortBy';
 
 export function useTableSort<T>() {
   const { tableRows, setTableRows } =

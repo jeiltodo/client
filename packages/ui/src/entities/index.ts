@@ -1,5 +1,4 @@
-import { Profile } from './group/ui/profile';
-import { BoardMode } from '../shared/model/type';
+export * from './user/ui/user-overview-board';
+export * from './group/ui/group-overview-board';
 
-export { Profile };
-export type { BoardMode };
+export * from './group/ui/profile';

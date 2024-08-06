@@ -45,7 +45,9 @@ export const Sidebar = () => {
               관리자 센터
             </p>
           </div>
-          <LogoCheck className={`w-[32px] h-[32px] ${isSidebarExpanded ? 'hidden' : 'block'} `} />
+          <LogoCheck
+            className={`w-[32px] h-[32px] ${isSidebarExpanded ? 'hidden' : 'block'} `}
+          />
           <div
             onClick={toggleSidebar}
             className='cursor-pointer flex items-center justify-center w-[32px] h-[32px]'
@@ -57,16 +59,11 @@ export const Sidebar = () => {
             )}
           </div>
         </div>
-        
-        
+
         {isSidebarExpanded && (
           // 엔티티에 get으로 프로필 및 유저 정보
-          <div className='pt-3 pb-[18px]'>
-            
-          </div>
+          <div className='pt-3 pb-[18px]'></div>
         )}
-
-  
       </div>
 
       {/* Sidebar Overlay for Tablet */}
