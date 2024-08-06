@@ -44,7 +44,7 @@ export const TodoModal = ({ taskOwner, setTodoToggle }: TodoModalProps) => {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <Button isDisabled={!title && !goal} className='w-full mt-10'>
+      <Button isDisabled={!title && !goal} className='w-full h-12 mt-10'>
         확인
       </Button>
     </BaseModal>
