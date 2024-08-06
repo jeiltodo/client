@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui';
 import { BaseModal } from '../../../shared/ui/base-modal';
@@ -10,15 +10,7 @@ interface LinkModalProps {
 }
 export const LinkModal = ({ setLinkToggle, id }: LinkModalProps) => {
   const [link, setLink] = useState<string>('');
-  const [submit, setSubmit] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (link) {
-      setSubmit(false);
-    } else {
-      setSubmit(true);
-    }
-  }, [link]);
+ 
   return (
     <BaseModal
       title='링크 업로드'
@@ -36,7 +28,7 @@ export const LinkModal = ({ setLinkToggle, id }: LinkModalProps) => {
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={submit} className='w-full mt-10'>
+      <Button isDisabled={!link} className='w-full mt-10'>
         확인
       </Button>
     </BaseModal>

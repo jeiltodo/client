@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Dropdown, Input } from '@jeiltodo/ui';
 import { BaseModal } from '../../../shared/ui/base-modal';
@@ -11,15 +11,7 @@ interface TodoModalProps {
 export const TodoModal = ({ taskOwner, setTodoToggle }: TodoModalProps) => {
   const [title, setTitle] = useState<string>('');
   const [goal, setGoal] = useState<string>('');
-  const [submit, setSubmit] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (title && goal) {
-      setSubmit(false);
-    } else {
-      setSubmit(true);
-    }
-  }, [title, goal]);
   return (
     <BaseModal
       title={`${taskOwner}의 할 일 생성`}
@@ -52,7 +44,7 @@ export const TodoModal = ({ taskOwner, setTodoToggle }: TodoModalProps) => {
           </Dropdown.Menu>
         </Dropdown>
       </div>
-      <Button isDisabled={submit} className='w-full mt-10'>
+      <Button isDisabled={!title && !goal} className='w-full mt-10'>
         확인
       </Button>
     </BaseModal>

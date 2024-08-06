@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui';
 import { BaseModal } from '../../../shared/ui/base-modal';
@@ -11,15 +11,7 @@ export const GroupCreateModal = ({
   setGroupCreateToggle,
 }: GroupCreateModalProps) => {
   const [title, setTitle] = useState<string>('');
-  const [submit, setSubmit] = useState<boolean>(true);
 
-  useEffect(() => {
-    if (title) {
-      setSubmit(false);
-    } else {
-      setSubmit(true);
-    }
-  }, [title]);
   return (
     <BaseModal
       title='그룹 생성'
@@ -37,7 +29,7 @@ export const GroupCreateModal = ({
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={submit} className='w-full mt-10'>
+      <Button isDisabled={!title} className='w-full mt-10'>
         확인
       </Button>
     </BaseModal>

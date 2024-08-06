@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui';
 import { BaseModal } from '../../../shared/ui/base-modal';
@@ -11,15 +11,7 @@ export const GroupAttendModal = ({
   setGroupAttendToggle,
 }: GroupAttendModalProps) => {
   const [secretCode, setSecretCode] = useState<string>('');
-  const [submit, setSubmit] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (secretCode) {
-      setSubmit(false);
-    } else {
-      setSubmit(true);
-    }
-  }, [secretCode]);
+ 
   return (
     <BaseModal
       title='그룹 참여'
@@ -37,7 +29,7 @@ export const GroupAttendModal = ({
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={submit} className='w-full mt-10'>
+      <Button isDisabled={!secretCode} className='w-full mt-10'>
         확인
       </Button>
     </BaseModal>

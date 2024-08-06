@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui';
 import { BaseModal } from '../../../shared/ui/base-modal';
@@ -27,7 +27,7 @@ export const GoalModal = ({ setGoalToggle }: GoalModalProps) => {
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!title} className='w-full mt-10'>
+      <Button isDisabled={!title} className='w-full mt-10'>
         확인
       </Button>
     </BaseModal>
