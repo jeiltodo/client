@@ -1,3 +1,3 @@
-import { sortTableByFilter } from './sortTableByFilter';
+import { useTableSort } from '../hooks/table/useTableSort';
 
-export { sortTableByFilter };
+export { useTableSort as sortTableByFilter };
