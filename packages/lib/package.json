@@ -1,14 +1,24 @@
 {
   "name": "@jeiltodo/lib",
   "version": "0.0.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist"
   ],
   "exports": {
-    "./hooks": "./dist/hooks/index.js"
+    ".": "./format/index.ts"
   },
+  "license": "MIT",
   "scripts": {
-    "build": "tsc --build"
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+  },
+  "devDependencies": {
+    "@jeiltodo/typescript-config": "*",
+    "typescript": "^5.3.3"
   },
   "dependencies": {}
 }

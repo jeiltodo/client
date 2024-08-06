@@ -9,6 +9,7 @@ const config: Omit<Config, 'content'> = {
     screens: {
       mobile: '280px',
       tablet: '480px',
+      modal_sm: '640px',
       desktop: '1024px',
     },
 

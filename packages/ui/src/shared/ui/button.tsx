@@ -43,7 +43,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const baseClasses =
-    'font-pretendard-medium text-base h-12 transition-all duration-300 ease-in-out';
+    'font-pretendard-medium text-base transition-all duration-300 ease-in-out';
 
   const variantClasses = {
     default:
