@@ -1,6 +1,8 @@
+'use client'
 import { Plus } from '@jeiltodo/icons';
 import { Button } from '@jeiltodo/ui';
-import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
+import { SVGProps, ForwardRefExoticComponent, RefAttributes, useState } from 'react';
+import { TodoModal } from '../../modal/ui/todo-modal';
 
 interface IndividualGoalsProps {
   id: number;
@@ -23,8 +25,10 @@ export const SidebarIndividualNav = ({
   title,
   individualGoals,
 }: SidebarIndividualNavProps) => {
+  const [todoToggle, setTodoToggle] = useState<boolean>(false);
   return (
     <div>
+      {todoToggle && <TodoModal taskOwner='체다치즈' setTodoToggle={setTodoToggle} />}
       <div className='px-6 py-[18px] flex items-center justify-between gap-2 border-t-[1px] border-slate-200'>
         <div className='flex items-center gap-2'>
           <Icon className='w-6 h-6' />
@@ -32,7 +36,7 @@ export const SidebarIndividualNav = ({
             {title}
           </div>
         </div>
-        <button className='flex items-center gap-1'>
+        <button className='flex items-center gap-1' onClick={() => setTodoToggle(true)}>
           <Plus className='w-4 h-4' />
           <div className='text-blue-500 text-sm font-pretendard-semibold'>
             할 일 추가

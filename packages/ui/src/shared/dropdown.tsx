@@ -93,11 +93,11 @@ const DropdownToggle = ({ children }: DropdownToggleProps) => {
 };
 
 const DropdownMenu = ({ children }: DropdownMenuProps) => {
-  const { isOpen, round } = useDropdownContext();
+  const { isOpen, round, size } = useDropdownContext();
 
   return (
     <div
-      className={`absolute mt-2 ${roundClass[round]} bg-slate-50 ${
+      className={`absolute mt-2 w-full ${roundClass[round]} bg-slate-50 ${
         isOpen ? 'block' : 'hidden'
       }`}
     >
@@ -118,7 +118,7 @@ const DropdownItem = ({ children, value }: DropdownItemProps) => {
   return (
     <div
       onClick={handleClick}
-      className={`cursor-pointer ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-semibold`}
+      className={`cursor-pointer ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-semibold hover:bg-slate-300 transition-all duration-300 ease-in-out`}
     >
       {children}
     </div>
@@ -188,7 +188,7 @@ export const Dropdown = ({
     <DropdownContext.Provider
       value={{ isOpen, toggle, selectedValue, selectedText, selectValue, selectText, size, round}}
     >
-      <div className='relative'>{children}</div>
+      <div className='relative '>{children}</div>
     </DropdownContext.Provider>
   );
 };
