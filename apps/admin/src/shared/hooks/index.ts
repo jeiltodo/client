@@ -1,4 +1,3 @@
-import { useTableCheck } from './table/useTableCheck';
-import { useTableContext } from './table/useTableContext';
-
-export { useTableCheck, useTableContext };
+export * from './table/useTableCheck';
+export * from './table/useTableContext';
+export * from './table/useTableSort';

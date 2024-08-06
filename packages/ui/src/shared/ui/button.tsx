@@ -1,9 +1,9 @@
-'use client';
 import { ButtonHTMLAttributes, MouseEvent } from 'react';
 
 type Variant =
   | 'default'
   | 'primary'
+  | 'dark'
   | 'outline'
   | 'outline-date'
   | 'rounded-white'
@@ -50,6 +50,7 @@ export const Button = ({
       'bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:bg-blue-800',
     primary:
       'bg-blue-500 text-white rounded-xl hover:bg-blue-600 active:bg-blue-800',
+    dark: 'bg-slate-900 py-2 px-[10px] text-white rounded-xl hover:bg-slate-600 active:bg-slate-800',
     outline:
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'outline-date':

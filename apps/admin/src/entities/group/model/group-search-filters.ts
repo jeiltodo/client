@@ -1,6 +1,6 @@
 import { TableFilter } from '../../../shared/model/type';
 
-export const GROUP_FIILTERS: TableFilter[] = [
+export const GROUP_SEARCH_FIILTERS: TableFilter[] = [
   {
     label: '이름',
     query: 'name',

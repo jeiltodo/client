@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { Button, Checkbox } from '@jeiltodo/ui';
+import { Button, Checkbox } from '@jeiltodo/ui/shared';
 import { formatDateString } from '@jeiltodo/lib';
 
 import { Table } from '../../../shared/ui/table';
@@ -12,8 +12,7 @@ import type { User } from '../../../entities/user/model/type';
 import { TableHeadList } from '../../../features/user/ui/table-head-list';
 import { USER_TABLE_HEAD_MAP } from '../../../features/user/model';
 
-export function AdminUsersTable() {
-  // TODO: 이런건 빼내야 할까?
+export function UsersTable() {
   const router = useRouter();
   const handleClick = (path: string) => {
     router.push(path);
