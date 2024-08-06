@@ -1,3 +1,2 @@
-import { AdminUsersTable } from './ui/admin-users-table';
-
-export { AdminUsersTable };
+export * from './ui/admin-users-table';
+export * from './ui/group-board';
