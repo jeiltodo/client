@@ -1,3 +1,1 @@
-import { sortTableByFilter } from './sortTableByFilter';
-
-export { sortTableByFilter };
+export * from './sortBy';

@@ -6,7 +6,7 @@ interface Props {
   onRemoveMember: (id: number) => void;
 }
 
-export const GroupMemberList = ({ onChangeLeader, onRemoveMember }: Props) => {
+export const MemberList = ({ onChangeLeader, onRemoveMember }: Props) => {
   const { mode, changeMode } = useBoardContext();
 
   const members = [

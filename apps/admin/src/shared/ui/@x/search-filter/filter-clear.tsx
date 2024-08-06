@@ -1,5 +1,5 @@
-import { Button } from '@jeiltodo/ui';
-import { useTableContext } from '../../hooks';
+import { Button } from '@jeiltodo/ui/shared';
+import { useTableContext } from '../../../hooks';
 
 export const FilterClear = () => {
   const { setTableFilters } = useTableContext();

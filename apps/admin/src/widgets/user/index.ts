@@ -1,3 +1,3 @@
-import { AdminUsersTable } from './ui/admin-users-table';
+import { UsersTable } from './ui/users-table';
 
-export { AdminUsersTable };
+export { UsersTable };

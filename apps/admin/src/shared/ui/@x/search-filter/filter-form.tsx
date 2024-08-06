@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, ButtonGroup, Input } from '@jeiltodo/ui';
+import { Button, ButtonGroup, Input } from '@jeiltodo/ui/shared';
 import React, { useState } from 'react';
-import { useTableContext } from '../../hooks';
-import { TableFilter, TableQuery } from '../../model/type';
+import { useTableContext } from '../../../hooks';
+import { TableFilter, TableQuery } from '../../../model/type';
 
 interface FilterFormProps {
   filters: TableFilter[];

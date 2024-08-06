@@ -4,9 +4,9 @@ import { MembersManageButtons } from '../../../features/group/ui/members-manage-
 import { MembersBoardProvider } from '@jeiltodo/ui/shared';
 import { changeLeader } from '../../../features/group/api/changeLeader';
 import { removeMember } from '../../../features/group/api/removeMember';
-import { GroupMemberList } from '../../../features/group';
+import { MemberList } from '../../../features/group/ui/member-list';
 
-export const GroupMembersBorad = () => {
+export const MembersBorad = () => {
   return (
     <MembersBoardProvider>
       <div className='max-w-[652px] px-6 py-4 rounded-lg bg-blue-500'>
@@ -25,7 +25,7 @@ export const GroupMembersBorad = () => {
 
             <MembersManageButtons />
           </div>
-          <GroupMemberList
+          <MemberList
             onChangeLeader={changeLeader}
             onRemoveMember={removeMember}
           />

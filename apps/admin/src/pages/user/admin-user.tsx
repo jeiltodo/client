@@ -1,7 +1,7 @@
 'use client';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 
-import { AdminFilter } from '../../widgets/ui/admin-filter';
+import { SearchFilter } from '../../shared/ui/@x/search-filter/search-filter';
 
 interface FormType {
   label: string;
@@ -47,7 +47,7 @@ const AdminUser = () => {
   };
   return (
     <div>
-      <AdminFilter
+      <SearchFilter
         setState={[setName, setKeyword, setPeriod]}
         formType={goalGroupForm}
         queryData={queryData}

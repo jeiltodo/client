@@ -1,16 +1,16 @@
 'use client';
 
-import { ButtonGroup } from '@jeiltodo/ui';
-import { FilterForm } from '../../shared/ui/table-filter/filter-form';
-import { FilterClear } from '../../shared/ui/table-filter/filter-clear';
-import { FilterSearch } from '../../shared/ui/table-filter/filter-search';
-import { TableFilter } from '../../shared/model/type';
+import { ButtonGroup } from '@jeiltodo/ui/shared';
+import { TableFilter } from '../../../model/type';
+import { FilterForm } from './filter-form';
+import { FilterClear } from './filter-clear';
+import { FilterSearch } from './filter-search';
 
-interface AdminFilterProps {
+interface Props {
   filters: TableFilter[];
 }
 
-export const AdminFilter: React.FC<AdminFilterProps> = ({ filters }) => {
+export const SearchFilter: React.FC<Props> = ({ filters }) => {
   return (
     <div className='flex flex-col gap-3 w-[930px] py-[16px] px-[20px] bg-white rounded-xl'>
       <div>

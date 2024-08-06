@@ -1,3 +1,3 @@
-import { GROUP_FIILTERS } from './model/group-table-filters';
+import { GROUP_SEARCH_FIILTERS } from './model/group-search-filters';
 
-export { GROUP_FIILTERS };
+export { GROUP_SEARCH_FIILTERS as GROUP_FIILTERS };
