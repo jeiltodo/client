@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { BoardTitle } from '..';
+import { BoardTitle } from '../board-title';
 
 interface Props extends PropsWithChildren {
   title: string;

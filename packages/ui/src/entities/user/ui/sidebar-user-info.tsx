@@ -1,19 +1,12 @@
 import { ImgProfile } from '@jeiltodo/icons';
+import { User } from '../model/type';
 
-interface UserDataProps {
-  id: number;
-  email: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
+interface Props {
+  user: User;
 }
 
-interface SidebarUserInfoProps {
-  userData: UserDataProps;
-}
-
-export const SidebarUserInfo = ({ userData }: SidebarUserInfoProps) => {
-  const { id, email, name } = userData;
+export const SidebarUserInfo = ({ user }: Props) => {
+  const { id, email, name } = user;
 
   return (
     <>

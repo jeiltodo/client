@@ -16,10 +16,10 @@ export const InputSwapMode = ({
   defaultValue,
   className,
 }: Props) => {
-  const [isEditMode, setMode] = useState<boolean>(false);
+  const [isEditMode, swapMode] = useState<boolean>(false);
 
   const handleToggle = () => {
-    setMode((prev) => !prev);
+    swapMode((prev) => !prev);
   };
   return (
     <div className={`w-full h-fit ${className}`}>

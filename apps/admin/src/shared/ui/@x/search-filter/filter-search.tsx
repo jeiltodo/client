@@ -1,4 +1,4 @@
-import { Button } from '@jeiltodo/ui';
+import { Button } from '@jeiltodo/ui/shared';
 
 interface FilterSearchProps<T> {
   queries: T;

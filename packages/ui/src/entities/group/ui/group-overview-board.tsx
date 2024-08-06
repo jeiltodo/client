@@ -1,6 +1,6 @@
 'use client';
 
-import { BoardLayout } from '../../../shared/ui/board-layout';
+import { BoardLayout } from '../../../shared/ui/@x/board-layout';
 import { InputSwapMode } from '../../../shared/ui/input-swap-mode';
 import { Field } from '../../../shared/ui/field';
 import { useState } from 'react';

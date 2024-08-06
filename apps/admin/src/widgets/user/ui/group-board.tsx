@@ -1,6 +1,6 @@
 import { TodoRecently } from '@jeiltodo/icons';
 import { GroupsInterface } from '../model/type';
-import { GroupCard } from '../../../shared/ui/user/ui/group-card';
+import { GroupCard } from '../../../entities/user/ui/group-card';
 
 interface GroupBoardProps {
   groups: GroupsInterface[];
@@ -18,7 +18,9 @@ export const GroupBoard: React.FC<GroupBoardProps> = ({ groups }) => {
           <span className='text-blue-500'>{GROUP_TOTAL_COUNT}</span>
         </div>
       </div>
-      <div className={`mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide`}>
+      <div
+        className={`mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide`}
+      >
         {groups.map((group) => (
           <GroupCard
             key={group.id}

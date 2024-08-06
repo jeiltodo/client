@@ -1,4 +1,4 @@
-import { sortTableByFilter } from '../../../shared/lib';
+import { useTableSort } from '../../../shared';
 import { Table } from '../../../shared/ui';
 import { TableHeadMap } from '../../../shared/ui/table/type';
 
@@ -7,7 +7,7 @@ interface Props<T> {
 }
 
 export function TableHeadList<T>({ headMap }: Props<T>) {
-  const handleSort = sortTableByFilter<T>();
+  const handleSort = useTableSort<T>();
   return (
     <>
       {headMap.map(({ criteria, title, withSort }) => {
