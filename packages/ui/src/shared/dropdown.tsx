@@ -18,7 +18,7 @@ interface DropdownContextType {
   selectText: (item: ReactNode) => void;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
-};
+}
 
 interface DropdownProps {
   children: ReactNode;
@@ -26,20 +26,20 @@ interface DropdownProps {
   hasInitialValue: boolean;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
-};
+}
 
 interface DropdownToggleProps {
   children?: ReactNode;
-};
+}
 
 interface DropdownMenuProps {
   children: ReactNode;
-};
+}
 
 interface DropdownItemProps {
   children: ReactNode;
   value: string;
-};
+}
 
 type InitialItem = { value: string; text: ReactNode } | null;
 
@@ -77,7 +77,7 @@ const DropdownToggle = ({ children }: DropdownToggleProps) => {
       <div
         className={`flex items-center ${selectedText ? 'text-black' : 'text-slate-400'}`}
       >
-        {selectedText === null ? (children) : (selectedText)}
+        {selectedText === null ? children : selectedText}
       </div>
       {isOpen ? (
         <div className='pl-[4px] border-l-[2px] border-slate-200'>
@@ -108,10 +108,10 @@ const DropdownMenu = ({ children }: DropdownMenuProps) => {
 
 const DropdownItem = ({ children, value }: DropdownItemProps) => {
   const { selectValue, selectText, toggle, size, round } = useDropdownContext();
-  
+
   const handleClick = () => {
     selectValue(value);
-    selectText(children)
+    selectText(children);
     toggle();
   };
 
@@ -131,7 +131,7 @@ export const Dropdown = ({
   onSelect,
   hasInitialValue,
   size,
-  round
+  round,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
@@ -154,7 +154,7 @@ export const Dropdown = ({
 
   const initialValue = useMemo<InitialItem>(() => {
     if (!hasInitialValue) return null;
-  
+
     let initialItem: InitialItem = null;
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child) && child.type === DropdownMenu) {
@@ -163,7 +163,7 @@ export const Dropdown = ({
           (item): item is React.ReactElement<DropdownItemProps> =>
             React.isValidElement(item) && item.type === DropdownItem
         );
-  
+
         if (firstItem) {
           initialItem = {
             value: firstItem.props.value,
@@ -174,8 +174,7 @@ export const Dropdown = ({
     });
     return initialItem;
   }, [hasInitialValue, children]);
-  
-  
+
   // 상태 업데이트
   useEffect(() => {
     if (initialValue && selectedValue === null) {
@@ -186,7 +185,16 @@ export const Dropdown = ({
 
   return (
     <DropdownContext.Provider
-      value={{ isOpen, toggle, selectedValue, selectedText, selectValue, selectText, size, round}}
+      value={{
+        isOpen,
+        toggle,
+        selectedValue,
+        selectedText,
+        selectValue,
+        selectText,
+        size,
+        round,
+      }}
     >
       <div className='relative '>{children}</div>
     </DropdownContext.Provider>

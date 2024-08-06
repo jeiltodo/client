@@ -34,6 +34,6 @@ module.exports = {
   rules: {
     'import/no-default-export': 'off',
     'no-console': 'off',
-    'unicorn/filename-case': 'off', 
+    'unicorn/filename-case': 'off',
   },
 };

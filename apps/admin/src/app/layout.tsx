@@ -2,7 +2,6 @@ import './globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Sidebar } from '@jeiltodo/ui';
 import { SidebarAdmin } from '../widgets/sidebar/ui/sidebar-admin';
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang='en'>
+    <html lang='ko'>
       <body className={inter.className}>
         <div className=''>
           <SidebarAdmin/>

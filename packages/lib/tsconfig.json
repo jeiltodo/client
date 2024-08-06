@@ -1,4 +1,5 @@
 {
+  "extends": "@jeiltodo/typescript-config/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
@@ -7,7 +8,8 @@
     "target": "es6",
     "jsx": "react",
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
   },
   "include": ["**/*.ts", "**/*.tsx"], // TypeScript 파일만 포함
   "exclude": ["dist", "node_modules"]
