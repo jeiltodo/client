@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className='font-pretendard-regular'>
         <div className=''>
           <SidebarUser />
-          <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>
+          <main className='desktop:pl-[360px] tablet:pl-[84px]  tablet:pr-[24px] mobile:pl-[16px] mobile:pl-[16px] mobile:pr-[16px] bg-gray-100 min-h-screen'>
             <ToastContainer limit={1} />
             {children}
           </main>
