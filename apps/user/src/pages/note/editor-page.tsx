@@ -1,5 +1,12 @@
 'use client';
-import { Button, ButtonGroup, LayoutTitle } from '@jeiltodo/ui/shared';
+import { UserOverviewBoard } from '@jeiltodo/ui/entities';
+import {
+  BoardLayout,
+  BoardTitle,
+  Button,
+  ButtonGroup,
+  LayoutTitle,
+} from '@jeiltodo/ui/shared';
 
 export const EditorPage = () => {
   return (
@@ -14,6 +21,12 @@ export const EditorPage = () => {
           </Button>
         </ButtonGroup>
       </LayoutTitle>
+      <BoardTitle
+        title='자바스크립트로 웹 서비스 만들기'
+        icon='flag'
+        iconSize={24}
+      />
+      <div>note-editor-form</div>
     </div>
   );
 };

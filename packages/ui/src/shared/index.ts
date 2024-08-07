@@ -3,6 +3,7 @@ export * from './ui/dropdown';
 export * from './ui/input';
 export * from './ui/checkbox';
 export * from './ui/radio';
+export * from './ui/board-title';
 export * from './ui/layout-title';
 
 export * from './ui/@x/sidebar';
