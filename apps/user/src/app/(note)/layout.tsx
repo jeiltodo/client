@@ -16,7 +16,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang='en'>
-      <body className='font-pretendard-regular'>
+      <body className='font-pretendard-regular text-slate-800'>
         <div className=''>
           <SidebarUser />
           <main className='desktop:pl-[360px] tablet:pl-[84px]  tablet:pr-[24px] mobile:pl-[16px] mobile:pr-[16px] bg-white min-h-screen'>
