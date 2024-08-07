@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export const EditorForm = () => {
   const [title, setTitle] = useState<string>('');
-  const [body, setBody] = useState<string>('');
+  const [content, setContent] = useState<string>('');
   const [lengthWithoutSpaces, setLengthWithoutSpaces] = useState<number>(0);
   //todo:: 5분마다 임시저장 & 임시저장 완료 텍스트
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,12 +12,12 @@ export const EditorForm = () => {
       setTitle(value);
     }
   };
-  const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
-    const bodyWithoutSpace = changeTextWithoutSpace(value);
+    const contentWithoutSpace = changeTextWithoutSpace(value);
 
-    setBody(value);
-    setLengthWithoutSpaces(bodyWithoutSpace.length);
+    setContent(value);
+    setLengthWithoutSpaces(contentWithoutSpace.length);
   };
 
   const changeTextWithoutSpace = (text: string) => {
@@ -41,7 +41,7 @@ export const EditorForm = () => {
       <div className='flex flex-row text-right text-sm font-pretendard-medium py-[12px]'>
         <span>{`공백포함 : 총 `}</span>
         <span className='inline-block min-w-[20px] pl-[5px] pr-[1px]'>
-          {body.length}
+          {content.length}
         </span>
         <span className='pr-[2px]'>{`자 |`}</span>
         <span>{`공백포함 : 총 `}</span>
@@ -51,10 +51,10 @@ export const EditorForm = () => {
         <span>{'자'}</span>
       </div>
       <textarea
-        name='body'
-        value={body}
+        name='content'
+        value={content}
         placeholder='이 곳을 클릭해 노트 작성을 시작해주세요'
-        onChange={handleBodyChange}
+        onChange={handleContentChange}
         className='py-1 w-full h-screen resize-none placeholder:text-base placeholder:font-pretendard-medium rounded-xl focus:border-blue-500 focus:outline-none'
       ></textarea>
     </div>
