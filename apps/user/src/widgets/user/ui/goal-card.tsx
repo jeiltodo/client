@@ -55,14 +55,18 @@ export const GoalCard = (goal: Goal) => {
         </Button>
       </div>
       <div className='w-full grid grid-cols-2 divide-x divide-gray-200 mt-4 mb-5'>
-        <div className='pr-6'>
-          <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-          <TodoList todos={notDone} />
-        </div>
-        <div className='pl-6'>
-          <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-          <TodoList todos={done} />
-        </div>
+        {notDone.length !== 0 && (
+          <div className='pr-6'>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
+            <TodoList todos={notDone} />
+          </div>
+        )}
+        {done.length !== 0 && (
+          <div className='pl-6'>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
+            <TodoList todos={done} />
+          </div>
+        )}
       </div>
       <div className='w-full flex justify-center'>
         <Button

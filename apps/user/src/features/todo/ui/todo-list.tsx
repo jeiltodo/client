@@ -18,7 +18,9 @@ export const TodoList = ({ todos }: Props) => {
 
   const handleClickNote = () => {};
 
-  const handleCheck = () => {};
+  const handleCheck = () => {
+    // todos.map(todo => ({...todo, done: !todo.done}))
+  };
   return (
     <div>
       <ul className='w-full flex flex-wrap gap-2'>
