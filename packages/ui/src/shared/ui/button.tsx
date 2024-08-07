@@ -29,8 +29,16 @@ interface ButtonGroupProps {
   gap?: number;
 }
 
-const voidFn = () => {
+const voidFn = (): void => {
   // 빈함수
+};
+
+const addClass = (className: string): string => {
+  let addedClassName = className;
+  if (!addedClassName.includes('h-')) {
+    addedClassName += ' h-12';
+  }
+  return addedClassName;
 };
 
 export const Button = ({
@@ -41,7 +49,7 @@ export const Button = ({
   className,
   onClick,
   ...props
-}: ButtonProps) => {
+}: ButtonProps): React.ReactElement => {
   const baseClasses =
     'font-pretendard-medium text-base transition-all duration-300 ease-in-out';
 
@@ -76,7 +84,7 @@ export const Button = ({
   ${isDisabled && variant !== 'outline' && variant !== 'rounded-outline-blue' ? 'disabled:bg-slate-400 cursor' : ''}
   ${isDisabled && (variant === 'outline' || variant === 'rounded-outline-blue') ? 'disabled:text-slate-400 disabled:border-slate-400' : ''}
   ${isSelected && variant === 'outline-date' ? '!bg-blue-600  text-white hover:text-white active:border-blue-800 active:bg-blue-800 active:text-white' : ''}
-  ${className || ''}
+  ${addClass(className || '')}
 `
     .trim()
     .replace(/\s+/g, ' ');
@@ -94,7 +102,10 @@ export const Button = ({
   );
 };
 
-export const ButtonGroup = ({ children, gap = 2 }: ButtonGroupProps) => {
+export const ButtonGroup = ({
+  children,
+  gap = 2,
+}: ButtonGroupProps): React.ReactElement => {
   const gapClass = `gap-x-${gap}`;
   return <div className={`flex ${gapClass}`}>{children}</div>;
 };
