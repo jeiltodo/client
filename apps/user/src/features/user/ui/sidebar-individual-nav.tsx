@@ -7,7 +7,7 @@ import {
   RefAttributes,
   useState,
 } from 'react';
-import { TodoModal } from '../../todo/ui/todo-modal';
+import { TodoModal } from '../../../entities/todo/ui/todo-modal';
 
 interface IndividualGoalsProps {
   id: number;
