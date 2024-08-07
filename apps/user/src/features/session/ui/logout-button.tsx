@@ -1,4 +1,4 @@
-import { Button } from '@jeiltodo/ui';
+import { Button } from '@jeiltodo/ui/shared';
 import { sessionService } from '../model/sessionService';
 
 export function logoutButton() {

@@ -2,8 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { SignUpData } from '../../entities/session';
 import { signUpApi } from '../../entities/session/model';
-import { SignUpForm } from '../../features/session/ui/signup-form';
-import { Button, useToast } from '@jeiltodo/ui';
+import { useToast } from '@jeiltodo/ui/shared';
 import { useCallback } from 'react';
 
 export const SignUpPage: React.FC = () => {
@@ -30,7 +29,7 @@ export const SignUpPage: React.FC = () => {
   return (
     <div className='flex flex-col items-center py-[120px]'>
       <h1 className='mb-[40px]'>Slid to-do</h1>
-      <SignUpForm onSubmit={onSignUp} />
+      {/* <SignUpForm onSubmit={onSignUp} /> */}
     </div>
   );
 };
