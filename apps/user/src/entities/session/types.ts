@@ -1,5 +1,5 @@
 export interface SignUpData {
-  name?: string;
+  nickname?: string;
   email: string;
   password?: string;
 }
@@ -22,4 +22,23 @@ export interface ValidationErrors {
 export interface MessageResponse {
   status: number;
   message: string;
+}
+export interface LoginCredentials {
+  email: string;
+  password?: string;
+}
+
+export interface SessionApiResponse {
+  status: number;
+  message: 'string';
+  data: any;
+  total: number;
+}
+
+export interface LoginResponse {
+  status: number;
+  message: string;
+  data: {
+    user: User;
+  };
 }

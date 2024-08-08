@@ -1,30 +1,11 @@
-import { AxiosResponse } from 'axios';
-import client, {
-  deleteCookieToken,
-  setCookieTokens,
-} from '../../../shared/api/client';
 import {
-  loginApi,
-  logoutApi,
-  newAccessTokenApi,
-  SessionApiResponse,
-  LoginCredentials,
-} from '../../session';
-import { LoginResponse } from '../types';
-import {
-  MessageResponse,
-  SignUpData,
-  SignUpResponse,
-} from '../../../entities/session/types';
-import { signUpApi } from '../../../entities/session/model';
-// 타입 가드 함수 정의
-function isLoginResponse(response: any): response is LoginResponse {
-  console.log('typeGard is loginResponse: ', response);
-  return response.status === 200 && response.data.data.user;
-}
-function isSignUpResponse(response: any): response is SignUpResponse {
-  return response && (response as SignUpResponse).id !== undefined;
-}
+  signUpApi,
+  type LoginCredentials,
+  type LoginResponse,
+  type MessageResponse,
+  type SignUpData,
+  type SignUpResponse,
+} from '..';
 
 export const sessionService = {
   signUp: async (
@@ -32,21 +13,7 @@ export const sessionService = {
   ): Promise<SignUpResponse | MessageResponse | undefined> => {
     try {
       const response = await signUpApi(signUpData);
-
-      if (
-        'status' in response &&
-        response.status === 200 &&
-        isSignUpResponse(response)
-      ) {
-        // 성공적인 응답 처리
-        return response as SignUpResponse;
-      } else if (
-        'status' in response &&
-        (response.status === 400 || response.status === 409)
-      ) {
-        // 실패한 응답 처리
-        return response as MessageResponse;
-      }
+      console.log('sessionServiece response: ', response);
     } catch (error) {
       console.error('SignUp error:', error);
       throw error;
@@ -105,17 +72,6 @@ export const sessionService = {
     } catch (error) {
       console.error('Logout failed:', error);
       return false;
-    }
-  },
-
-  newAccessToken: async () => {
-    try {
-      const response = await newAccessTokenApi();
-
-      return response;
-    } catch (error) {
-      console.error('Token refresh error:', error);
-      throw error;
     }
   },
 };

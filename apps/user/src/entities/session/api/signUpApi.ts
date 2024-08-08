@@ -1,5 +1,5 @@
-import client from '../../../shared/api/client';
-import { MessageResponse, SignUpData, SignUpResponse } from '../types';
+import { client } from '../../../shared';
+import type { MessageResponse, SignUpData, SignUpResponse } from '../types';
 
 export const signUpApi = async (
   signUpData: SignUpData

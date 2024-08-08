@@ -1,7 +1,10 @@
-import { AxiosResponse } from 'axios';
-import { MessageResponse } from '../../../entities/session/types';
-import client from '../../../shared/api/client';
-import { LoginCredentials, LoginResponse } from '../types';
+import type { AxiosResponse } from 'axios';
+import {
+  type LoginCredentials,
+  type LoginResponse,
+  type MessageResponse,
+} from '..';
+import { client } from '../../../shared';
 
 export const loginApi = async (
   credentials: LoginCredentials

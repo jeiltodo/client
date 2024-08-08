@@ -1,7 +1,10 @@
-import { loginApi, LoginCredentials } from '../../../features/session';
-import { LoginResponse, User } from '../../../features/session/types';
-import { signUpApi } from '../api/signUpApi';
-import { MessageResponse } from '../types';
+import {
+  loginApi,
+  type LoginCredentials,
+  type LoginResponse,
+  signUpApi,
+} from '../../../entities/session';
+import type { User } from '../types';
 
 //회원가입
 export const validateName = (name: string): string | undefined => {
@@ -12,7 +15,7 @@ export const validateEmail = async (email: string) => {
   const response = await signUpApi({ email });
 
   if ('message' in response) {
-    return (response as MessageResponse).message;
+    return response.message;
   }
 
   return undefined;

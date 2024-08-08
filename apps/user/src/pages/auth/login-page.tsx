@@ -1,24 +1,22 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import {
-  LoginCredentials,
-  sessionService,
-  LoginForm,
-} from '../../features/session';
+import { LoginForm } from '../../features/session';
 import Link from 'next/link';
+import { LoginCredentials, sessionService } from '../../entities/session';
+import { client } from '../../shared';
 
 export const LoginPage: React.FC = () => {
   const router = useRouter();
 
   const onLogin = async (credentials: LoginCredentials) => {
-    const success = await sessionService.login(credentials);
+    const success = await client.post('/auth/login', credentials);
     console.log('success: ', success);
 
-    // if (success) {
-    //   router.push('/');
-    // } else {
-    //   alert('Login failed. Please try again.');
-    // }
+    if (success) {
+      router.push('/');
+    } else {
+      alert('Login failed. Please try again.');
+    }
   };
 
   return (

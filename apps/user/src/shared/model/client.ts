@@ -1,10 +1,8 @@
 import axios, {
   AxiosError,
   AxiosInstance,
-  AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { sessionService } from '../../features/session';
 
 // 에러 응답 데이터 타입 정의
 interface ErrorResponseData {
@@ -50,8 +48,19 @@ export const deleteCookieToken = () => {
   document.cookie = 'refreshToken=; path=/; max-age=0';
 };
 
+const newAccessToken = async () => {
+  try {
+    const response = await client.get('/api/auth/tokens');
+
+    return response;
+  } catch (error) {
+    console.error('Token refresh error:', error);
+    throw error;
+  }
+};
+
 // Axios 인스턴스 생성
-const client: AxiosInstance = axios.create({
+export const client: AxiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
     accept: '*/*',
@@ -119,7 +128,7 @@ client.interceptors.response.use(
       }
 
       try {
-        const response = await sessionService.newAccessToken();
+        const response = await newAccessToken();
         if (originalRequest.headers) {
           originalRequest.headers['Authorization'] =
             `Bearer ${response.data.accessToken}`;
@@ -135,5 +144,3 @@ client.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default client;
