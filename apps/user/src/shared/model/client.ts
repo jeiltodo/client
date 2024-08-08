@@ -1,8 +1,14 @@
-import axios, {
+import type {
   AxiosError,
   AxiosInstance,
   InternalAxiosRequestConfig,
 } from 'axios';
+import axios from 'axios';
+import { deleteCookie, getCookie } from '../lib/cookie';
+import {
+  ACCESS_TOKEN_COOKIE_NAME,
+  REFRESH_TOKEN_COOKIE_NAME,
+} from '../config/token';
 
 // 에러 응답 데이터 타입 정의
 interface ErrorResponseData {
@@ -10,54 +16,7 @@ interface ErrorResponseData {
   [key: string]: any; // 다른 임의의 속성을 허용
 }
 
-const API_URL = 'http://52.78.126.130:8080/api'; // - Ec2 Server url 실제 API 주소로 변경해야 함
-
-// Token management functions - 파일 분리해서 accessToken 상태관리 라이브러리 추가?
-let accessToken: string | null = null;
-
-// 토큰 저장하기
-export const setCookieTokens = (cookieName: string, token: string) => {
-  accessToken = token; // 메모리에 저장
-  const TOKEN_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
-  const REFRESH_TOKEN_EXPIRY_TIME = 24 * 3600 * 1000 * 7;
-
-  // 쿠키에 저장 (HTTP-only 쿠키는 서버 측에서 설정해야 함)
-  document.cookie = `${cookieName}=${token}; path=/; max-age=${cookieName === 'accessToken' ? TOKEN_EXPIRY_TIME : REFRESH_TOKEN_EXPIRY_TIME}; SameSite=Strict; Secure`;
-};
-
-// 액세스 토큰 가져오기
-export const getAccessToken = () => {
-  // 메모리에서 먼저 확인
-  if (accessToken) return accessToken;
-
-  const cookieToken = document.cookie.replace(
-    /(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/,
-    '$1'
-  );
-  if (cookieToken) {
-    accessToken = cookieToken;
-    return cookieToken;
-  }
-
-  return null;
-};
-
-export const deleteCookieToken = () => {
-  accessToken = null;
-  document.cookie = 'accessToken=; path=/; max-age=0';
-  document.cookie = 'refreshToken=; path=/; max-age=0';
-};
-
-const newAccessToken = async () => {
-  try {
-    const response = await client.get('/api/auth/tokens');
-
-    return response;
-  } catch (error) {
-    console.error('Token refresh error:', error);
-    throw error;
-  }
-};
+const API_URL = 'https://api.jtodo.site/'; // - 실제 server url
 
 // Axios 인스턴스 생성
 export const client: AxiosInstance = axios.create({
@@ -71,14 +30,13 @@ export const client: AxiosInstance = axios.create({
 
 // 요청 인터셉터
 client.interceptors.request.use(
-  async (config: InternalAxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     const noSessionRequired = ['/auth/login', '/auth/user'];
     if (noSessionRequired.includes(config.url ?? '')) {
       return config;
     }
 
-    accessToken = getAccessToken();
-
+    const accessToken = getCookie(ACCESS_TOKEN_COOKIE_NAME);
     if (!accessToken) {
       window.location.href = '/login';
     }
@@ -117,7 +75,7 @@ client.interceptors.response.use(
       originalRequest._retry = true;
 
       // 쿠키에서 리프레시 토큰 가져오기
-      const refreshToken = getAccessToken();
+      const refreshToken = getCookie(REFRESH_TOKEN_COOKIE_NAME);
       if (!refreshToken) {
         // 리프레시 토큰이 없으면 로그인 페이지로 이동
         window.location.href = '/login';
@@ -126,18 +84,33 @@ client.interceptors.response.use(
 
       try {
         const response = await newAccessToken();
-        if (originalRequest.headers) {
-          originalRequest.headers['Authorization'] =
-            `Bearer ${response.data.accessToken}`;
-        }
+
+        originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+
         return client(originalRequest);
       } catch (refreshError) {
         // 리프레시 토큰 요청 실패 시 쿠키 삭제 및 로그인 페이지로 이동
-        deleteCookieToken();
+        deleteCookie(REFRESH_TOKEN_COOKIE_NAME);
         window.location.href = '/login';
-        return Promise.reject(refreshError);
+        return refreshError;
       }
     }
     return Promise.reject(error);
   }
 );
+
+/**
+ * ////////////////////////////////////////////////////////////
+ */
+
+const newAccessToken = async () => {
+  try {
+    const response = await client.get<{ accessToken: string }>(
+      '/api/auth/tokens'
+    );
+    return response;
+  } catch (error) {
+    console.error('Token refresh error:', error);
+    throw error;
+  }
+};
