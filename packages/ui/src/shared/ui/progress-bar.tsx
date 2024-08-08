@@ -12,7 +12,7 @@ interface Props {
   className?: string;
 }
 
-const ProgressBar: React.FC<Props> = ({ progress, className }) => {
+export const ProgressBar: React.FC<Props> = ({ progress, className }) => {
   const isGroup = typeof progress === 'object';
 
   if (!isGroup) {
@@ -58,7 +58,7 @@ const ProgressBar: React.FC<Props> = ({ progress, className }) => {
               onMouseLeave={() => setHoveredMember(null)}
             >
               {hoveredMember === member.name && (
-                <div className="absolute left-1/2 top-2 transform -translate-x-1/2 text-slate-600 bg-white border border-slate-100 text-sm font-noraml rounded-[5px] px-3 py-2">
+                <div className='absolute left-1/2 top-2 transform -translate-x-1/2 text-slate-600 bg-white border border-slate-100 text-sm font-noraml rounded-[5px] px-3 py-2'>
                   {member.name}
                 </div>
               )}
@@ -72,5 +72,3 @@ const ProgressBar: React.FC<Props> = ({ progress, className }) => {
     </div>
   );
 };
-
-export default ProgressBar;

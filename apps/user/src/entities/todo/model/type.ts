@@ -9,3 +9,9 @@ export type Todo = {
   // "updatedAt": "2024-07-23T05:00:43.689Z",
   // "createdAt": "2024-07-23T05:00:43.689Z"
 };
+
+export type Asignee = {
+  id: number;
+  name: string;
+  color: string;
+};

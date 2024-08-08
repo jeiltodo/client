@@ -1,4 +1,5 @@
-import { GoalCard } from '../widgets/user';
+import { GroupGoalCard } from '../widgets/\bgroup/ui/goal-card';
+import { UserGoalCard } from '../widgets/user';
 
 const Goals = [
   {
@@ -39,7 +40,7 @@ export default function Page() {
     <main className='p-4 '>
       <div className='w-full flex flex-wrap gap-5'>
         {Goals.map((goal) => (
-          <GoalCard key={goal.id} {...goal} />
+          <GroupGoalCard key={goal.id} {...goal} />
         ))}
       </div>
     </main>
