@@ -10,6 +10,7 @@ import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
 import { LoadDraftModal } from '../../../features/note/ui/load-draft-modal';
+import { SidebarUserInfo } from '@jeiltodo/ui/entities';
 
 // entities에서 데이터 individual/goals로 불러올 예정
 const data = [
@@ -40,6 +41,14 @@ const group = [
   },
 ];
 
+const userData = {
+  id: 6,
+  email: 'ross1222@naver.com',
+  name: '닉네임1',
+  createdAt: '2024-08-01T00:32:06.587081',
+  updatedAt: '2024-08-01T00:32:06.587097',
+};
+
 export const SidebarUser = () => {
   const [goalToggle, setGoalToggle] = useState<boolean>(false);
   const [groupCreateToggle, setGroupCreateToggle] = useState<boolean>(false);
@@ -54,6 +63,7 @@ export const SidebarUser = () => {
         <GroupAttendModal setGroupAttendToggle={setGroupAttendToggle} />
       )}
       <Sidebar>
+        <SidebarUserInfo userData={userData} />
         <SidebarNav icon={Home} title='대시보드' href='/' />
         <SidebarIndividualNav
           icon={Individual}

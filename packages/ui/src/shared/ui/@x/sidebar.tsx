@@ -17,14 +17,6 @@ interface SidebarProps {
   children?: ReactNode;
 }
 
-const userData = {
-  id: 6,
-  email: 'ross1222@naver.com',
-  name: '닉네임1',
-  createdAt: '2024-08-01T00:32:06.587081',
-  updatedAt: '2024-08-01T00:32:06.587097',
-};
-
 export const Sidebar = ({ type, children }: SidebarProps) => {
   const pathname = usePathname();
   const [isDesktopOpen, setIsDesktopOpen] = useState(true);
@@ -84,14 +76,11 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {/* {isDesktopOpen && (
+        {isDesktopOpen && (
           <>
-            <div className='mt-3 mb-[18px] py-3'>
-              <SidebarUserInfo userData={userData} />
-            </div>
             {children}
           </>
-        )} */}
+        )}
       </div>
 
       {/* 태블릿 버전 */}
@@ -133,14 +122,11 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {/* {isTabletOpen && (
+        {isTabletOpen && (
           <>
-            <div className='mt-3 mb-[18px] py-3'>
-              <SidebarUserInfo userData={userData} />
-            </div>
             {children}
           </>
-        )} */}
+        )}
       </div>
 
       {isTabletOpen && (
@@ -179,14 +165,11 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         )}
 
-        {/* {isMobileSidebarOpen && (
+        {isMobileSidebarOpen && (
           <>
-            <div className='mt-3 mb-[18px] py-3 '>
-              <SidebarUserInfo userData={userData} />
-            </div>
             {children}
           </>
-        )} */}
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-export type User = {
+export interface UserDataprops {
   id: number;
   email: string;
   name: string;
