@@ -4,12 +4,20 @@ import {
   type LoginResponse,
   type MessageResponse,
 } from '..';
-import { client } from '../../../shared';
+import { client, setCookieTokens } from '../../../shared';
 
 export const loginApi = async (
   credentials: LoginCredentials
 ): Promise<AxiosResponse<LoginResponse | MessageResponse>> => {
   const response = await client.post('/auth/login', credentials);
-  console.log('api response: ', response);
+  const authHeader = response.headers['authorization'];
+  const accessToken = authHeader ? authHeader.split(' ')[1] : undefined;
+  const refreshToken = response.data.user.refreshToken;
+  if (accessToken) {
+    setCookieTokens('accessToken', accessToken);
+  }
+  if (refreshToken) {
+    setCookieTokens('refreshToken', refreshToken);
+  }
   return response;
 };

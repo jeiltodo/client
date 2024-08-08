@@ -13,7 +13,7 @@ export interface SignUpResponse {
 }
 
 export interface ValidationErrors {
-  name?: string;
+  nickname?: string;
   email?: string;
   password?: string;
   confirmPassword?: string;

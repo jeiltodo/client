@@ -1,6 +1,6 @@
 import { Button } from '@jeiltodo/ui/shared';
-import { sessionService } from '../../../entities/session';
+import { logoutApi } from '../../../entities/session';
 
 export function logoutButton() {
-  return <Button onClick={sessionService.logout}>로그아웃</Button>;
+  return <Button onClick={logoutApi}>로그아웃</Button>;
 }

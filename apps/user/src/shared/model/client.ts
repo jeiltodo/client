@@ -79,11 +79,8 @@ client.interceptors.request.use(
 
     accessToken = getAccessToken();
 
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
-    } else {
+    if (!accessToken) {
       window.location.href = '/login';
-      return Promise.reject('No access token available');
     }
 
     return config;

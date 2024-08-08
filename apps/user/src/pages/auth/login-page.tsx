@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { LoginForm } from '../../features/session';
 import Link from 'next/link';
-import { LoginCredentials, sessionService } from '../../entities/session';
+import { LoginCredentials } from '../../entities/session';
 import { client } from '../../shared';
 
 export const LoginPage: React.FC = () => {

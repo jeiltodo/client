@@ -1,10 +1,13 @@
 import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
 
 import { Button, Input, useDebounce } from '@jeiltodo/ui/shared';
-
 import { User } from '../types';
-import { LoginCredentials, ValidationErrors } from '../../../entities/session';
-import { validateEmail, validateLogIn } from '../model/validation';
+
+import {
+  LoginCredentials,
+  ValidationErrors,
+} from '../../../entities/session/types';
+import { validateEmail, validateLogIn } from '..';
 
 interface LoginFormProps {
   onSubmit: (credentials: LoginCredentials) => void;
@@ -36,64 +39,62 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
     }
   };
 
-  // const validateField = async (inputName: string, value: string) => {
-  //   let errorMessage: string | undefined;
-  //   let loginResult: User | undefined;
+  const validateField = async (inputName: string, value: string) => {
+    let errorMessage: string | undefined;
+    let loginResult: User | undefined;
 
-  //   switch (inputName) {
-  //     case 'email':
-  //       errorMessage = await validateEmail(value);
-  //       break;
-  //     case 'password':
-  //       loginResult = await validateLogIn({ email, password });
-  //       break;
-  //   }
+    switch (inputName) {
+      case 'email':
+        errorMessage = await validateEmail(value);
+        break;
+      case 'password':
+        loginResult = await validateLogIn({ email, password });
+        break;
+    }
 
-  //   // 아이디 error message
-  //   if (inputName === 'email' && !errorMessage) {
-  //     errorMessage = '가입되지 않은 이메일입니다.';
-  //   }
-  //   if (
-  //     inputName === 'email' &&
-  //     errorMessage === '이미 사용 중인 이메일입니다.'
-  //   ) {
-  //     errorMessage = undefined;
-  //   }
-  //   // 비밀번호 error message
-  //   function isUser(user: any): user is User {
-  //     return user && 'name' in user;
-  //   }
+    // 아이디 error message
+    if (inputName === 'email' && !errorMessage) {
+      errorMessage = '가입되지 않은 이메일입니다.';
+    }
+    if (
+      inputName === 'email' &&
+      errorMessage === '이미 사용 중인 이메일입니다.'
+    ) {
+      errorMessage = undefined;
+    }
+    // 비밀번호 error message
+    function isUser(user: any): user is User {
+      return user && 'name' in user;
+    }
 
-  //   if (inputName === 'password' && !isUser(loginResult) && !errors.email) {
-  //     errorMessage = '비밀번호가 올바르지 않습니다.';
-  //   } else {
-  //     errorMessage = undefined;
-  //   }
+    if (inputName === 'password' && !isUser(loginResult) && !errors.email) {
+      errorMessage = '비밀번호가 올바르지 않습니다.';
+    } else {
+      errorMessage = undefined;
+    }
 
-  //   setErrors((prev) => ({ ...prev, [inputName]: errorMessage }));
-  // };
+    setErrors((prev) => ({ ...prev, [inputName]: errorMessage }));
+  };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    // const { name, value } = e.target;
-    console.log('e.target: ', e.target);
-    // validateField(name, value);
+    const { name, value } = e.target;
+    validateField(name, value);
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
-    // const { name, value } = e.target;
-    // setTimeout(() => {
-    //   validateField(name, value);
-    // }, 1000);
-    console.log('e.target: ', e.target);
+    const { name, value } = e.target;
+    setTimeout(() => {
+      validateField(name, value);
+    }, 1000);
   };
 
-  // useEffect(() => {
-  //   debouncedEmail && validateField('email', debouncedEmail);
-  // }, [debouncedEmail]);
+  useEffect(() => {
+    debouncedEmail && validateField('email', debouncedEmail);
+  }, [debouncedEmail]);
 
-  // useEffect(() => {
-  //   debouncedPassword && validateField('password', debouncedPassword);
-  // }, [debouncedPassword]);
+  useEffect(() => {
+    debouncedPassword && validateField('password', debouncedPassword);
+  }, [debouncedPassword]);
 
   return (
     <form onSubmit={handleSubmit}>

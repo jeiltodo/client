@@ -1,9 +1,9 @@
 import { type ChangeEvent, type FocusEvent, useEffect, useState } from 'react';
-
-import { Button, Input, useDebounce } from '@jeiltodo/ui/shared';
+import { useDebounce, Button, Input } from '@jeiltodo/ui/shared';
+import type { SignUpData } from '../../../entities/session';
+import type { ValidationErrors } from '../../../entities/session/types';
 
 import Link from 'next/link';
-import { SignUpData, ValidationErrors } from '../../../entities/session';
 import {
   validateConfirmPassword,
   validateEmail,
@@ -47,39 +47,37 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
     }
   };
 
-  // const validateField = async (inputName: string, value: string) => {
-  //   let error: string | undefined;
+  const validateField = async (inputName: string, value: string) => {
+    let error: string | undefined;
 
-  //   switch (inputName) {
-  //     case 'name':
-  //       error = validateName(value);
-  //       break;
-  //     case 'email':
-  //       error = await validateEmail(value);
-  //       break;
-  //     case 'password':
-  //       error = validatePassword(value);
-  //       break;
-  //     case 'confirmPassword':
-  //       error = validateConfirmPassword(password, value);
-  //       break;
-  //   }
+    switch (inputName) {
+      case 'nickname':
+        error = validateName(value);
+        break;
+      case 'email':
+        error = await validateEmail(value);
+        break;
+      case 'password':
+        error = validatePassword(value);
+        break;
+      case 'confirmPassword':
+        error = validateConfirmPassword(password, value);
+        break;
+    }
 
-  //   setErrors((prev) => ({ ...prev, [inputName]: error }));
-  // };
+    setErrors((prev) => ({ ...prev, [inputName]: error }));
+  };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    // const { name: inputName, value } = e.target;
-    console.log('e.target: ', e.target);
-    // void validateField(inputName, value);
+    const { name: inputName, value } = e.target;
+    void validateField(inputName, value);
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => {
-    // const { name: inputName, value } = e.target;
-    // setTimeout(() => {
-    //   void validateField(inputName, value);
-    // }, 1000);
-    console.log('e.target: ', e.target);
+    const { name: inputName, value } = e.target;
+    setTimeout(() => {
+      void validateField(inputName, value);
+    }, 1000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,40 +86,43 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   };
 
   // 디바운스된 값이 변할 때마다 유효성 검사 호출
-  // useEffect(() => {
-  //   if (debouncedName) {
-  //     void validateField('name', debouncedName);
-  //   }
-  // }, [debouncedName]);
+  useEffect(() => {
+    if (debouncedName) {
+      void validateField('name', debouncedName);
+    }
+  }, [debouncedName]);
 
-  // useEffect(() => {
-  //   if (debouncedEmail) {
-  //     void validateField('email', debouncedEmail);
-  //   }
-  // }, [debouncedEmail]);
+  useEffect(() => {
+    if (debouncedEmail) {
+      void validateField('email', debouncedEmail);
+    }
+  }, [debouncedEmail]);
 
-  // useEffect(() => {
-  //   if (debouncedPassword) {
-  //     void validateField('password', debouncedPassword);
-  //   }
-  // }, [debouncedPassword]);
+  useEffect(() => {
+    if (debouncedPassword) {
+      void validateField('password', debouncedPassword);
+    }
+  }, [debouncedPassword]);
 
-  // useEffect(() => {
-  //   if (debouncedConfirmPassword) {
-  //     void validateField('confirmPassword', debouncedConfirmPassword);
-  //   }
-  // }, [debouncedConfirmPassword]);
+  useEffect(() => {
+    if (debouncedConfirmPassword) {
+      void validateField('confirmPassword', debouncedConfirmPassword);
+    }
+  }, [debouncedConfirmPassword]);
 
-  // const isValid = Object.values(errors).every((error) => !error);
+  const isValid = Object.values(errors).every((error) => !error);
 
-  // useEffect(() => {
-  //   setIsDisabled(!isValid);
-  // }, [errors, isValid]);
+  useEffect(() => {
+    setIsDisabled(!isValid);
+  }, [errors, isValid]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
-        <label htmlFor='name' className='font-pretendard-semibold text-base'>
+        <label
+          htmlFor='nickname'
+          className='font-pretendard-semibold text-base'
+        >
           이름
         </label>
         <Input
@@ -133,9 +134,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
           onFocus={handleFocus}
           placeholder='이름을 입력해주세요'
         />
-        {/* {errors.name && ( 
-          <p className='text-blue-400 text-sm -mt-[10px]'>{errors.name}</p>
-        )}*/}
+        {errors.nickname && (
+          <p className='text-blue-400 text-sm -mt-[10px]'>{errors.nickname}</p>
+        )}
         <label htmlFor='name' className='font-pretendard-semibold text-base'>
           이메일
         </label>
@@ -148,9 +149,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
           onFocus={handleFocus}
           placeholder='이메일을 입력해주세요'
         />
-        {/* {errors.email && (
+        {errors.email && (
           <p className='text-blue-400 text-sm -mt-[10px]'>{errors.email}</p>
-        )} */}
+        )}
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
@@ -166,11 +167,11 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
           onFocus={handleFocus}
           placeholder='비밀번호를 입력해주세요'
         />
-        {/* {errors.password && (
+        {errors.password && (
           <p className='text-blue-400 text-sm -mt-[10px] mb-4'>
             {errors.password}
           </p>
-        )} */}
+        )}
         <label
           htmlFor='password'
           className='font-pretendard-semibold text-base'
@@ -186,13 +187,17 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
           onFocus={handleFocus}
           placeholder='비밀번호를 다시 한 번 입력해주세요'
         />
-        {/* {errors.confirmPassword && (
+        {errors.confirmPassword && (
           <p className='text-blue-400 text-sm -mt-[10px] mb-4'>
             {errors.confirmPassword}
           </p>
-        )} */}
+        )}
       </div>
-      <Button variant='primary' isDisabled={false} className='w-full mb-[40px]'>
+      <Button
+        variant='primary'
+        isDisabled={isDisabled}
+        className='w-full mb-[40px]'
+      >
         회원가입하기
       </Button>
       <p className='text-center text-[15px]'>

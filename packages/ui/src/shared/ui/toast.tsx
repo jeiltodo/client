@@ -8,7 +8,7 @@ interface Toast {
   onClose?: () => void;
   button?: JSX.Element;
 }
-const useToast = () => {
+export const useToast = () => {
   return ({ message, type, onClose, button }: Toast) => {
     const alertConfig: ToastOptions = {
       //커스터마이징 옵션
@@ -62,8 +62,6 @@ const checkIcon = () => {
 const deleteCircleIcon = () => {
   return <DeleteCircle />;
 };
-
-export default useToast;
 
 // 임시 저장 토스트 예시
 // showToast({
