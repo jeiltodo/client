@@ -17,8 +17,8 @@ export const BaseModal = ({ title, setToggle, children, width }: BaseModalProps)
   };
   
   return ReactDOM.createPortal(
-    <div onClick={() => setToggle(false)} className='z-30 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full y-full min-h-full bg-black/[.08]'>
-      <div onClick={handleModalClick} className={`bg-white ${width} mobile:w-3/4 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-xl p-6`}>
+    <div onClick={() => setToggle(false)} className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'>
+      <div onClick={handleModalClick} className={`bg-white ${width} mobile:w-3/4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl p-6`}>
         <div className='flex items-center justify-between mb-6'>
           {title ? (
             <div className='text-lg font-bold text-slate-800'>
