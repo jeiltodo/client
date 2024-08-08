@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'USER AUTH | jeiltodo',
-  description: 'jeiltodo 서비스의 인증 페이지입니다',
+  title: 'USER NOTE | jeiltodo',
+  description: 'jeiltodo 서비스의 유저의 노트 에디터 페이지입니다',
 };
 
-export default function AuthLayout({
+export default function NoteEditorLayout({
   children,
 }: {
   children: React.ReactNode;

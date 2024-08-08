@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
 
 export default function Page() {
   const goalid = 1;
@@ -8,7 +7,6 @@ export default function Page() {
   const noteid = 3;
   return (
     <main>
-      <ToastContainer limit={1} />
       배경이 bg-slate-100인 유저 페이지- 대시보드, 모든 할일 목록 페이지, 목표
       상세 페이지, 노트 모아보기 <br />
       <br />
