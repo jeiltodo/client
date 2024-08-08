@@ -1,6 +1,11 @@
-import { Card } from '../../../features/note';
+import { Card, GoalTitleCard } from '../../../features/note';
 
-export const CardListBoard = () => {
+interface CardListBoardProps {
+  handleSlideOpen: (arg: number) => void;
+}
+
+export const CardListBoard = ({ handleSlideOpen }: CardListBoardProps) => {
+  const goalTitle = '목표의 제목';
   const noteDataArray = [
     {
       noteId: 1,
@@ -27,14 +32,20 @@ export const CardListBoard = () => {
       todoTitle: '자바스크립트 기초 챕터4 듣기',
     },
   ];
-  return noteDataArray.map((note) => {
-    return (
-      <Card
-        noteId={note.noteId}
-        noteTitle={note.noteTitle}
-        todoId={note.todoId}
-        todoTitle={note.todoTitle}
-      ></Card>
-    );
-  });
+
+  return (
+    <>
+      <GoalTitleCard title={goalTitle} />
+      {noteDataArray.map((note) => (
+        <Card
+          key={note.noteId}
+          noteId={note.noteId}
+          noteTitle={note.noteTitle}
+          todoId={note.todoId}
+          todoTitle={note.todoTitle}
+          handleSlideOpen={handleSlideOpen}
+        />
+      ))}
+    </>
+  );
 };

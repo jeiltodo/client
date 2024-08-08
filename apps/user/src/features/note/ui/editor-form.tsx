@@ -1,11 +1,23 @@
+'use client';
+
 import { Counter, Input } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
 
-export const EditorForm = () => {
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
+interface EditorFormProps {
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const EditorForm = ({
+  title,
+  setTitle,
+  content,
+  setContent,
+}: EditorFormProps) => {
   const [lengthWithoutSpaces, setLengthWithoutSpaces] = useState<number>(0);
-  //todo:: 5분마다 임시저장 & 임시저장 완료 텍스트
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value.length <= 30) {
@@ -56,7 +68,7 @@ export const EditorForm = () => {
         placeholder='이 곳을 클릭해 노트 작성을 시작해주세요'
         onChange={handleContentChange}
         className='py-1 w-full h-screen resize-none placeholder:text-base placeholder:font-pretendard-medium rounded-xl focus:border-blue-500 focus:outline-none'
-      ></textarea>
+      />
     </div>
   );
 };
