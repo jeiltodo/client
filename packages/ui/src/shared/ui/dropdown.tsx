@@ -22,7 +22,7 @@ interface DropdownContextType {
 
 interface DropdownProps {
   children: ReactNode;
-  onSelect: React.Dispatch<React.SetStateAction<string>>;
+  onSelect: React.Dispatch<React.SetStateAction<string | number | undefined>>;
   hasInitialValue: boolean;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
