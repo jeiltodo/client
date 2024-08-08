@@ -4,6 +4,7 @@ export * from './ui/input';
 export * from './ui/checkbox';
 export * from './ui/radio';
 export * from './ui/flyout-menu';
+export * from './ui/progress-bar'
 
 export * from './ui/@x/sidebar';
 export * from './ui/toast';
