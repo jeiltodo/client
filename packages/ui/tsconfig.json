@@ -1,6 +1,10 @@
 {
   "extends": "@jeiltodo/typescript-config/react-library.json",
-  "include": ["src"],
+  "include": [
+    "src",
+    "../../apps/user/src/entities/todo",
+    "../../apps/user/src/entities/todo/ui/todo-item.tsx"
+  ],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "esModuleInterop": true,

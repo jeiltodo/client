@@ -6,6 +6,8 @@ type Variant =
   | 'dark'
   | 'outline'
   | 'outline-date'
+  | 'outline-status'
+  | 'outline-goal'
   | 'rounded-white'
   | 'rounded-outline-blue'
   | 'text-gray'
@@ -18,6 +20,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant; // button 색상
   isDisabled?: boolean; //disabled 인지
   isSelected?: boolean; //select된 버튼인지
+  isSelectDuplicated?: boolean; //중복select된 버튼인지
   width?: number; //버튼 너비
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
@@ -46,6 +49,7 @@ export const Button = ({
   variant = 'primary',
   isDisabled = false,
   isSelected = false,
+  isSelectDuplicated = false,
   className,
   onClick,
   ...props
@@ -63,6 +67,10 @@ export const Button = ({
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'outline-date':
       'bg-transparent text-blue-500 border border-blue-500 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+    'outline-status':
+      'bg-transparent text-slate-800 border border-slate-200 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+    'outline-goal':
+      'bg-transparent text-slate-800 border border-slate-200 rounded-[99px] hover:border-blue-500 active:border-blue-100',
     'rounded-white':
       'text-slate-700 rounded-full bg-white hover:text-slate-800',
     'rounded-outline-blue':
@@ -83,8 +91,9 @@ export const Button = ({
   ${variantClasses[variant]}
   ${isDisabled && variant !== 'outline' && variant !== 'rounded-outline-blue' ? 'disabled:bg-slate-400 cursor' : ''}
   ${isDisabled && (variant === 'outline' || variant === 'rounded-outline-blue') ? 'disabled:text-slate-400 disabled:border-slate-400' : ''}
-  ${isSelected && variant === 'outline-date' ? '!bg-blue-600  text-white hover:text-white active:border-blue-800 active:bg-blue-800 active:text-white' : ''}
-  ${addClass(className || '')}
+  ${isSelected && (variant === 'outline-date' || 'outline-status') ? '!bg-blue-500  text-white hover:text-white active:border-blue-800 active:bg-blue-800 active:text-white' : ''}
+  ${isSelectDuplicated && variant === 'outline-goal' ? '!bg-blue-100 border !border-blue-500 active:border-blue-800 active:bg-blue-800' : ''}
+  ${className || ''}
 `
     .trim()
     .replace(/\s+/g, ' ');
@@ -102,10 +111,7 @@ export const Button = ({
   );
 };
 
-export const ButtonGroup = ({
-  children,
-  gap = 2,
-}: ButtonGroupProps): React.ReactElement => {
-  const gapClass = `gap-x-${gap}`;
-  return <div className={`flex ${gapClass}`}>{children}</div>;
+export const ButtonGroup = ({ children, gap = 2 }: ButtonGroupProps) => {
+  const gapClass = `gap-${gap}`;
+  return <div className={`flex flex-wrap ${gapClass}`}>{children}</div>;
 };
