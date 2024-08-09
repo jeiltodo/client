@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { RecentFilter } from '../entities/user';
 import { GroupGoalCard } from '../widgets/group/ui/grouop-goal-card';
 import { UserGoalCard } from '../widgets/user';
 
@@ -35,14 +39,27 @@ const Goals = [
     ],
   },
 ];
+
+export type Query = { goalIds: number[] | []; status?: boolean | null };
 export default function Page() {
+  const [query, setQuery] = useState<Query>({
+    goalIds: Goals.map((goal) => goal.id),
+    status: null,
+  });
+
+  const handleClick = (query: Query) => {
+    setQuery(query);
+  };
+
+  useEffect(() => {
+    console.log('🐶🐶🐶🐶🐶🐶', query);
+  }, [query]);
   return (
     <main className='p-4 '>
-      <div className='w-full flex flex-wrap gap-5'>
-        {Goals.map((goal) => (
-          <GroupGoalCard key={goal.id} {...goal} />
-        ))}
-      </div>
+      <RecentFilter
+        goals={Goals.map((goal) => ({ id: goal.id, title: goal.title }))}
+        onClickFilter={handleClick}
+      />
     </main>
   );
 }
