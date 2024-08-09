@@ -1,4 +1,3 @@
-import type { AxiosResponse } from 'axios';
 import { Token, type LoginCredentials, type Response } from '..';
 import { client, setCookie } from '../../../shared';
 

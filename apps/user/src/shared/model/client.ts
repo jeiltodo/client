@@ -17,17 +17,18 @@ interface ErrorResponseData {
   [key: string]: any; // 다른 임의의 속성을 허용
 }
 
-const API_URL = 'https://api.jtodo.site/'; // - 실제 server url
+const API_URL = 'https://api.jtodo.site'; // - 실제 server url
 
 // Axios 인스턴스 생성
 export const client: AxiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
-    accept: '*/*',
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
+
+axios.defaults.withCredentials = true;
 
 // 요청 인터셉터
 client.interceptors.request.use(
@@ -56,18 +57,12 @@ client.interceptors.response.use(
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
-
-    // 이메일 validation, 로그인
-    if (error.response?.status === 400 || error.response?.status === 409)
-      return Promise.resolve(error.response);
-
-    // 500 또는 404 응답이 특정 경로에서 온 경우 그대로 반환
+    //로그인/ 회원가입 에러메세지를 위한 분기처리
     if (
-      error.response?.status === 500 ||
-      error.response?.status === 404 ||
-      (error.response?.status === 401 &&
-        ((error.config && error.config.url === '/auth/login') ||
-          (error.config && error.config.url === '/auth/user')))
+      error.response?.status === 400 ||
+      (error.response?.status === 404 &&
+        ((error.config && error.config.url === '/member/signin') ||
+          (error.config && error.config.url === '/member/signup')))
     )
       return Promise.resolve(error.response);
 

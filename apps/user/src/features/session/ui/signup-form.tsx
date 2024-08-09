@@ -1,14 +1,12 @@
+import Link from 'next/link';
 import { type ChangeEvent, type FocusEvent, useEffect, useState } from 'react';
 import { useDebounce, Button, Input } from '@jeiltodo/ui/shared';
-import type { SignUpData } from '../../../entities/session';
-import type { ValidationErrors } from '../../../entities/session/types';
-
-import Link from 'next/link';
+import type { SignUpData, ValidationErrors } from '../../../entities/session';
 import {
-  validateConfirmPassword,
-  validateEmail,
-  validateName,
-  validatePassword,
+  validateSiginupConfirmPassword,
+  validateSiginupEmail,
+  validateSiginupPassword,
+  validateSignupNickname,
 } from '../model/validation';
 
 interface SignUpFormProps {
@@ -16,7 +14,7 @@ interface SignUpFormProps {
 }
 
 export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
-  const [nickname, setNickName] = useState<string>('');
+  const [nickname, setNickname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -33,7 +31,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
 
     switch (inputName) {
       case 'nickname':
-        setNickName(value);
+        setNickname(value);
         break;
       case 'email':
         setEmail(value);
@@ -48,20 +46,20 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   };
 
   const validateField = async (inputName: string, value: string) => {
-    let error: string | undefined;
+    let error: string | null;
 
     switch (inputName) {
       case 'nickname':
-        error = validateName(value);
+        error = validateSignupNickname(value);
         break;
       case 'email':
-        error = await validateEmail(value);
+        error = await validateSiginupEmail(value);
         break;
       case 'password':
-        error = validatePassword(value);
+        error = validateSiginupPassword(value);
         break;
       case 'confirmPassword':
-        error = validateConfirmPassword(password, value);
+        error = validateSiginupConfirmPassword(password, value);
         break;
     }
 
@@ -88,7 +86,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   // 디바운스된 값이 변할 때마다 유효성 검사 호출
   useEffect(() => {
     if (debouncedName) {
-      void validateField('name', debouncedName);
+      void validateField('nickname', debouncedName);
     }
   }, [debouncedName]);
 
@@ -117,7 +115,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   }, [errors, isValid]);
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={handleSubmit}>
       <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
         <label
           htmlFor='nickname'

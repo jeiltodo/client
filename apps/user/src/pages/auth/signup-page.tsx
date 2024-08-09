@@ -1,11 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { SignUpData } from '../../entities/session';
-import { signUpApi } from '../../entities/session';
-
+import { SignUpForm } from '../../features/session/';
 import { useCallback } from 'react';
+import { signUpApi, SignUpData } from '../../entities/session';
 import { useToast } from '@jeiltodo/ui/shared';
-import { SignUpForm } from '../../features/session/ui/signup-form';
 
 export const SignUpPage: React.FC = () => {
   const router = useRouter();
@@ -15,11 +13,11 @@ export const SignUpPage: React.FC = () => {
     async (credentials: SignUpData) => {
       try {
         const response = await signUpApi(credentials);
-        showToast({ message: '가입이 완료되었습니다!', type: 'alert' });
-        if ('id' in response) {
+        if (response.code === 201) {
           router.push('/login');
+          showToast({ message: '가입이 완료되었습니다!', type: 'alert' });
         } else {
-          console.log(response.message || 'Sign up failed. Please try again.');
+          console.log(response.msg || 'Sign up failed. Please try again.');
         }
       } catch (error) {
         console.error('Sign up failed:', error);

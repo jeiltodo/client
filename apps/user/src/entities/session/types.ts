@@ -4,36 +4,18 @@ export interface SignUpData {
   password?: string;
 }
 
-export interface SignUpResponse {
-  id: number;
-  email: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface ValidationErrors {
-  nickname?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
+  nickname?: string | null;
+  email?: string | null;
+  password?: string | null;
+  confirmPassword?: string | null;
 }
 
-export interface MessageResponse {
-  code: number;
-  msg: string;
-}
 export interface LoginCredentials {
   email: string;
   password: string;
 }
 
-export interface SessionApiResponse {
-  code: number;
-  msg: 'string';
-  data: any;
-  total: number;
-}
 export interface Response<T> {
   code: number;
   msg: string;
