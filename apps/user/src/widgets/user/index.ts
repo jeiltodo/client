@@ -1,2 +1,2 @@
 export * from './ui/sidebar-user';
-export * from './ui/goal-card'
+export * from './ui/user-goal-card';

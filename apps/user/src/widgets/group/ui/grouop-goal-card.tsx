@@ -6,6 +6,7 @@ import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
+import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 
 export const GroupGoalCard = (goal: Goal) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -40,6 +41,17 @@ export const GroupGoalCard = (goal: Goal) => {
           <Plus width={16} height={16} />
           할일 추가
         </Button>
+      </div>
+      <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>
+        <GroupProgressBar
+          progress={{
+            completedPercent: 64,
+            members: [
+              { name: '김철수', color: '#3b82f6', contributionPercent: 24 },
+              { name: '이영희', color: '#3b8243', contributionPercent: 38 },
+            ],
+          }}
+        />
       </div>
       <div className='w-full tablet:grid tablet:grid-cols-2 tablet:divide-x tablet:divide-gray-200 mt-4 mb-5'>
         {notDone.length !== 0 && (

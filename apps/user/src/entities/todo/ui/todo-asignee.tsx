@@ -32,7 +32,7 @@ export const TodoAsignee = () => {
     >
       {asignee && (
         <span
-          className={`inline-flex w-full h-full rounded-full justify-center items-center text-xs ${getGroupColorClass(asignee.color)}`}
+          className={`inline-flex w-full h-full  min-w-6 min-h-6 rounded-full justify-center items-center text-xs ${getGroupColorClass(asignee.color)}`}
         >
           {getInitialLetter(asignee.name)}
         </span>

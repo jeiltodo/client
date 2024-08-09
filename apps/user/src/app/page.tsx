@@ -1,4 +1,4 @@
-import { GroupGoalCard } from '../widgets/\bgroup/ui/goal-card';
+import { GroupGoalCard } from '../widgets/group/ui/grouop-goal-card';
 import { UserGoalCard } from '../widgets/user';
 
 const Goals = [
