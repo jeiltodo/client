@@ -1,23 +1,21 @@
 import type { AxiosResponse } from 'axios';
-import {
-  type LoginCredentials,
-  type LoginResponse,
-  type MessageResponse,
-} from '..';
-import { client, setCookieTokens } from '../../../shared';
+import { Token, type LoginCredentials, type Response } from '..';
+import { client, setCookie } from '../../../shared';
 
-export const loginApi = async (
-  credentials: LoginCredentials
-): Promise<AxiosResponse<LoginResponse | MessageResponse>> => {
-  const response = await client.post('/auth/login', credentials);
-  const authHeader = response.headers['authorization'];
-  const accessToken = authHeader ? authHeader.split(' ')[1] : undefined;
-  const refreshToken = response.data.user.refreshToken;
-  if (accessToken) {
-    setCookieTokens('accessToken', accessToken);
+export const loginApi = async (credentials: LoginCredentials) => {
+  try {
+    const response = await client.post<Response<Token | null>>(
+      '/member/signin',
+      credentials
+    );
+
+    const accessToken = response.data.data?.access_token;
+    if (accessToken) {
+      setCookie('accessToken', accessToken);
+    }
+    return response.data;
+  } catch (error) {
+    console.error('Login API error:', error);
+    throw error;
   }
-  if (refreshToken) {
-    setCookieTokens('refreshToken', refreshToken);
-  }
-  return response;
 };

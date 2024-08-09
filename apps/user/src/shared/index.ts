@@ -1,3 +1,5 @@
+export * from './lib/cookie';
+
 export * from './model/client';
 
 export * from './ui/base-modal';

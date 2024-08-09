@@ -1,28 +1,13 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { LoginForm } from '../../features/session';
+
 import Link from 'next/link';
-import { LoginCredentials } from '../../entities/session';
-import { client } from '../../shared';
+import { LoginForm } from '../../features/session';
 
 export const LoginPage: React.FC = () => {
-  const router = useRouter();
-
-  const onLogin = async (credentials: LoginCredentials) => {
-    const success = await client.post('/auth/login', credentials);
-    console.log('success: ', success);
-
-    if (success) {
-      router.push('/');
-    } else {
-      alert('Login failed. Please try again.');
-    }
-  };
-
   return (
     <div className='flex flex-col items-center py-[120px]'>
       <h1 className='mb-[60px]'>slid to-do</h1>
-      <LoginForm onSubmit={onLogin} />
+      <LoginForm />
       <p className='text-center text-[15px]'>
         슬리드 투 두가 처음이신가요?
         <Link

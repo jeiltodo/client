@@ -20,25 +20,36 @@ export interface ValidationErrors {
 }
 
 export interface MessageResponse {
-  status: number;
-  message: string;
+  code: number;
+  msg: string;
 }
 export interface LoginCredentials {
   email: string;
-  password?: string;
+  password: string;
 }
 
 export interface SessionApiResponse {
-  status: number;
-  message: 'string';
+  code: number;
+  msg: 'string';
   data: any;
   total: number;
 }
+export interface Response<T> {
+  code: number;
+  msg: string;
+  data?: T;
+}
+export interface Token {
+  access_token: string;
+  refresh_token: string;
+}
 
-export interface LoginResponse {
-  status: number;
-  message: string;
-  data: {
-    user: User;
-  };
+export interface User {
+  memId: number;
+  email: string;
+  name: string;
+  role: string;
+  refreshToken: string;
+  createDt: string;
+  updateDt: string;
 }
