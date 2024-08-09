@@ -12,3 +12,4 @@ export * from './ui/@x/table-toolbar';
 export * from './ui/sidebar/sidebar-nav';
 
 export * from './ui/table';
+export * from './model/query/query-provider';

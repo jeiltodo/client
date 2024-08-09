@@ -24,6 +24,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@tanstack/react-query": "^5.51.23",
     "react-toastify": "^10.0.5"
   }
 }
