@@ -9,7 +9,7 @@ import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
 import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
-import { LoadDraftModal } from '../../../features/note/ui/load-draft-modal';
+import { LoadDraftModal } from '../../../shared/ui/confirmation-modal';
 import { SidebarUserInfo } from '@jeiltodo/ui/entities';
 
 // entities에서 데이터 individual/goals로 불러올 예정

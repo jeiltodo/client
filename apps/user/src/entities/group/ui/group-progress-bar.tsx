@@ -1,38 +1,14 @@
 'use client';
-import React, { useState } from 'react';
 
-interface Member {
-  name: string;
-  color: string;
-  contributionPercent: number;
-}
+import { useState } from 'react';
+import { Member } from '../indext';
 
 interface Props {
-  progress: number | { completedPercent: number; members: Member[] };
+  progress: { completedPercent: number; members: Member[] };
   className?: string;
 }
 
-export const ProgressBar: React.FC<Props> = ({ progress, className }) => {
-  const isGroup = typeof progress === 'object';
-
-  if (!isGroup) {
-    return (
-      <div className='flex items-center justify-start gap-2'>
-        <div
-          className={`flex items-center w-full h-1 bg-slate-100 rounded-md ${className}`}
-        >
-          <div
-            className='h-full bg-slate-900 rounded-md transition-all duration-500 ease-in-out'
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-        <p className='block text-xs font-semibold text-slate-900 '>
-          {progress}%
-        </p>
-      </div>
-    );
-  }
-
+export const GroupProgressBar = ({ progress, className }: Props) => {
   const [hoveredMember, setHoveredMember] = useState<string | null>(null);
   const { members, completedPercent } = progress;
   let accumulatedPercent = 0;
