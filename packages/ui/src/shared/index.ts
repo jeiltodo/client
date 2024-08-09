@@ -5,6 +5,11 @@ export * from './ui/checkbox';
 export * from './ui/radio';
 export * from './ui/flyout-menu';
 export * from './ui/progress-bar';
+export * from './ui/counter';
+export * from './ui/todo-title';
+export * from './ui/board-title';
+export * from './ui/layout-title';
+export * from './ui/note-detail-slide';
 
 export * from './ui/@x/sidebar';
 export * from './ui/toast';

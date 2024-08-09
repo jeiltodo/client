@@ -1,10 +1,9 @@
-import './globals.css';
+import './style/globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { SidebarUser } from '../widgets/user/ui/sidebar-user';
 import { ToastContainer } from 'react-toastify';
 import { QueryProvider } from '../shared/model/query/query-provider';
+import { SidebarUser } from '../widgets/user';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
