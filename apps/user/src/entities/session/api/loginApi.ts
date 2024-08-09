@@ -1,4 +1,4 @@
-import { Token, type LoginCredentials, type Response } from '..';
+import type { Token, LoginCredentials, Response } from '..';
 import { client, setCookie } from '../../../shared';
 
 export const loginApi = async (credentials: LoginCredentials) => {

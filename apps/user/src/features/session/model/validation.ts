@@ -1,7 +1,7 @@
 import {
+  EmailDuplicateApi,
   loginApi,
   type LoginCredentials,
-  signUpApi,
 } from '../../../entities/session';
 
 //회원가입
@@ -20,8 +20,12 @@ export const validateSiginupEmail = async (email: string) => {
     console.log('맞지않는', email);
     return '이메일 형식으로 입력해주세요';
   }
-  // const response = await signUpApi({email});
-  // if(response.code === 401) return "이미 사용 중인 이메일입니다."
+
+  const response = await EmailDuplicateApi(email);
+  if (response.data?.is_duplicated) {
+    return '이미 사용 중인 이메일입니다.';
+  }
+
   return null;
 };
 

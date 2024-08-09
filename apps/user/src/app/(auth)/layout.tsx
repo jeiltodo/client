@@ -10,5 +10,5 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  return <main className='common-layout bg-white'>{children}</main>;
+  return <main className='min-h-screen bg-white'>{children}</main>;
 }

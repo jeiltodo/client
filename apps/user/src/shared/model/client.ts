@@ -33,10 +33,18 @@ axios.defaults.withCredentials = true;
 // 요청 인터셉터
 client.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const noSessionRequired = ['/member/signin', '/member/signup'];
+    const noSessionRequired = [
+      '/member/signin',
+      '/member/signup',
+      '/member/email/duplicate',
+    ];
     if (noSessionRequired.includes(config.url ?? '')) {
       return config;
     }
+    //TODO:: noSessionRequired에 /member/email/duplicate?email="" 추가하기
+    // if (config.url noSessionRequired.some((path)=> config.url.startsWith(path)){
+    //   return config;
+    // }
 
     const accessToken = getCookie(ACCESS_TOKEN_COOKIE_NAME);
     if (!accessToken) {
