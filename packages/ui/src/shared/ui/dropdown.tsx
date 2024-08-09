@@ -12,9 +12,9 @@ import { FullArrowDown, FullArrowUp } from '@jeiltodo/icons';
 interface DropdownContextType {
   isOpen: boolean;
   toggle: () => void;
-  selectedValue: string | null;
+  selectedValue: string | number | null;
   selectedText: ReactNode | null;
-  selectValue: (item: string) => void;
+  selectValue: (item: string | number) => void;
   selectText: (item: ReactNode) => void;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
@@ -26,6 +26,7 @@ interface DropdownProps {
   hasInitialValue: boolean;
   size: 'lg' | 'fixed' | 'sm';
   round: 'round' | 'rect';
+  defaultValue?: InitialItem;
 }
 
 interface DropdownToggleProps {
@@ -38,10 +39,10 @@ interface DropdownMenuProps {
 
 interface DropdownItemProps {
   children: ReactNode;
-  value: string;
+  value: string | number;
 }
 
-type InitialItem = { value: string; text: ReactNode } | null;
+type InitialItem = { value: string | number; text: ReactNode } | null;
 
 const sizeClass = {
   lg: 'w-[478px] h-[48px] py-[12px] pr-[8px] pl-[12px]',
@@ -129,19 +130,22 @@ const DropdownItem = ({ children, value }: DropdownItemProps) => {
 export const Dropdown = ({
   children,
   onSelect,
+  defaultValue,
   hasInitialValue,
   size,
   round,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
+  const [selectedValue, setSelectedValue] = useState<string | number | null>(
+    null
+  );
   const [selectedText, setSelectedText] = useState<ReactNode | null>(null);
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const selectValue = (value: string) => {
+  const selectValue = (value: string | number) => {
     setSelectedValue(value);
     if (onSelect) {
       onSelect(value);
@@ -156,6 +160,10 @@ export const Dropdown = ({
     if (!hasInitialValue) return null;
 
     let initialItem: InitialItem = null;
+    if (hasInitialValue && defaultValue) {
+      initialItem = defaultValue;
+      return initialItem;
+    }
     React.Children.forEach(children, (child) => {
       if (React.isValidElement(child) && child.type === DropdownMenu) {
         const items = React.Children.toArray(child.props.children);
