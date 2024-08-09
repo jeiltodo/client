@@ -1,15 +1,34 @@
-import { BlueMarker } from '@jeiltodo/icons';
+import { BlueMarker, Flag } from '@jeiltodo/icons';
 
 interface Props {
+  icon?: string;
+  iconColor?: string;
+  iconSize?: number;
   title: string;
   className?: string;
 }
 
-export const BoardTitle = ({ title, className }: Props) => {
+export const BoardTitle = ({
+  icon = 'BlueMarker',
+  iconColor = '#1E293B',
+  iconSize = 40,
+  title,
+  className,
+}: Props) => {
   return (
     <div className={`flex gap-2 items-center ${className}`}>
-      <BlueMarker width={40} height={40} />
-      <span className='font-semibold text-lg text-black-500'>{title}</span>
+      {icon === 'BlueMarker' && (
+        <BlueMarker width={iconSize} height={iconSize} />
+      )}
+      {icon === 'flag' && (
+        <Flag width={iconSize} height={iconSize} color={iconColor} />
+      )}
+
+      <span
+        className={`${iconSize !== 40 ? 'font-medium text-base' : 'font-semibold text-lg'} text-black-500`}
+      >
+        {title}
+      </span>
     </div>
   );
 };

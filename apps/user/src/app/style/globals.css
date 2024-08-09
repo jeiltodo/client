@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.common-layout {
+  padding-left: 16px;
+  padding-right: 16px;
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .common-layout {
+    padding-left: 84px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .common-layout {
+    padding-left: 360px;
+  }
+}

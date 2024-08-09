@@ -32,8 +32,16 @@ interface ButtonGroupProps {
   gap?: number;
 }
 
-const voidFn = () => {
+const voidFn = (): void => {
   // 빈함수
+};
+
+const addClass = (className: string): string => {
+  let addedClassName = className;
+  if (!addedClassName.includes('h-')) {
+    addedClassName += ' h-12';
+  }
+  return addedClassName;
 };
 
 export const Button = ({
@@ -41,11 +49,11 @@ export const Button = ({
   variant = 'primary',
   isDisabled = false,
   isSelected = false,
-  isSelectDuplicated= false,
+  isSelectDuplicated = false,
   className,
   onClick,
   ...props
-}: ButtonProps) => {
+}: ButtonProps): React.ReactElement => {
   const baseClasses =
     'font-pretendard-medium text-base transition-all duration-300 ease-in-out';
 
