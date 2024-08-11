@@ -108,7 +108,12 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
     }
   }, [debouncedConfirmPassword]);
 
-  const isValid = Object.values(errors).every((error) => !error);
+  const isValid =
+    Object.values(errors).every((error) => !error) &&
+    nickname.trim() &&
+    email.trim() &&
+    password.trim() &&
+    confirmPassword.trim();
 
   useEffect(() => {
     setIsDisabled(!isValid);
@@ -116,80 +121,92 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
-        <label
-          htmlFor='nickname'
-          className='font-pretendard-semibold text-base'
-        >
-          이름
-        </label>
-        <Input
-          type='text'
-          name='nickname'
-          value={nickname}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='이름을 입력해주세요'
-        />
-        {errors.nickname && (
-          <p className='text-blue-400 text-sm -mt-[10px]'>{errors.nickname}</p>
-        )}
-        <label htmlFor='name' className='font-pretendard-semibold text-base'>
-          이메일
-        </label>
-        <Input
-          type='email'
-          name='email'
-          value={email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='이메일을 입력해주세요'
-        />
-        {errors.email && (
-          <p className='text-blue-400 text-sm -mt-[10px]'>{errors.email}</p>
-        )}
-        <label
-          htmlFor='password'
-          className='font-pretendard-semibold text-base'
-        >
-          비밀번호
-        </label>
-        <Input
-          type='password'
-          name='password'
-          value={password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='비밀번호를 입력해주세요'
-        />
-        {errors.password && (
-          <p className='text-blue-400 text-sm -mt-[10px] mb-4'>
-            {errors.password}
-          </p>
-        )}
-        <label
-          htmlFor='password'
-          className='font-pretendard-semibold text-base'
-        >
-          비밀번호 확인
-        </label>
-        <Input
-          type='password'
-          name='confirmPassword'
-          value={confirmPassword}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          placeholder='비밀번호를 다시 한 번 입력해주세요'
-        />
-        {errors.confirmPassword && (
-          <p className='text-blue-400 text-sm -mt-[10px] mb-4'>
-            {errors.confirmPassword}
-          </p>
-        )}
+      <div className='w-[640px] flex flex-col gap-y-[24px] mb-[48px]'>
+        <div className='h-[102px] flex flex-col gap-y-[12px]'>
+          <label
+            htmlFor='nickname'
+            className='font-pretendard-semibold text-base'
+          >
+            이름
+          </label>
+          <Input
+            type='text'
+            name='nickname'
+            value={nickname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='이름을 입력해주세요'
+          />
+          {errors.nickname && (
+            <p className='text-error pl-[24px] text-xs -mt-[10px]'>
+              {errors.nickname}
+            </p>
+          )}
+        </div>
+        <div className='h-[102px] flex flex-col gap-y-[12px]'>
+          <label htmlFor='name' className='font-pretendard-semibold text-base'>
+            이메일
+          </label>
+          <Input
+            type='email'
+            name='email'
+            value={email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='이메일을 입력해주세요'
+          />
+          {errors.email && (
+            <p className='text-error pl-[24px] text-xs -mt-[10px]'>
+              {errors.email}
+            </p>
+          )}
+        </div>
+        <div className='h-[102px] flex flex-col gap-y-[12px]'>
+          <label
+            htmlFor='password'
+            className='font-pretendard-semibold text-base'
+          >
+            비밀번호
+          </label>
+          <Input
+            type='password'
+            name='password'
+            value={password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='비밀번호를 입력해주세요'
+          />
+          {errors.password && (
+            <p className='text-error pl-[24px] text-xs -mt-[10px] mb-4'>
+              {errors.password}
+            </p>
+          )}
+        </div>
+        <div className='h-[102px] flex flex-col gap-y-[12px]'>
+          <label
+            htmlFor='password'
+            className='font-pretendard-semibold text-base'
+          >
+            비밀번호 확인
+          </label>
+          <Input
+            type='password'
+            name='confirmPassword'
+            value={confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onFocus={handleFocus}
+            placeholder='비밀번호를 다시 한 번 입력해주세요'
+          />
+          {errors.confirmPassword && (
+            <p className='text-error pl-[24px] text-xs -mt-[10px] mb-4'>
+              {errors.confirmPassword}
+            </p>
+          )}
+        </div>
       </div>
       <Button
         variant='primary'
