@@ -52,7 +52,6 @@ export const validateSiginupConfirmPassword = (
 //로그인 validation
 export const validateLogIn = async (credentials: LoginCredentials) => {
   const response = await loginApi(credentials);
-  console.log('response: ', response);
   if (response.code === 200) return null;
   if (response.code === 400 && response.msg.includes('Wrong password'))
     return '비밀번호가 올바르지 않습니다.';
