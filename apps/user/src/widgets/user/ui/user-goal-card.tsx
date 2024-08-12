@@ -1,46 +1,50 @@
 'use client';
 
 import { Button, ProgressBar } from '@jeiltodo/ui/shared';
-import { Goal } from '../../../entities/goal';
-import { Todo, TodoModal } from '../../../entities/todo';
+import { GoalWithTodos } from '../../../entities/goal';
+import { TodoCreateBody, TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
+import { useCreateTodo } from '../../../features/todo/hooks/useCreateTodo';
+import { useQueryClient } from '@tanstack/react-query';
+import { goalQueryKeys } from '../../../features/goal/api/queryKey';
+import { useProgressAll } from '../../../features/goal';
 
-const Todos: Todo[] = [
-  {
-    id: 1,
-    done: false,
-    title: '자바스크립트 비동기 처리',
-  },
-  {
-    id: 2,
-    done: true,
-    title: '타입스크립트 처리',
-  },
-];
-
-export const UserGoalCard = (goal: Goal) => {
+export const UserGoalCard = (goal: GoalWithTodos) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { mutate: createTodo } = useCreateTodo();
+  const queryClient = useQueryClient();
 
   const done = goal.todos
     .filter((todo) => todo.done === true)
     .map((todo) => ({
       ...todo,
-      goal: { id: goal.id, title: goal.title },
+      goal,
     }));
   const notDone = goal.todos
     .filter((todo) => todo.done === false)
     .map((todo) => ({
       ...todo,
-      goal: { id: goal.id, title: goal.title },
+      goal,
     }));
 
-  const handleAdd = () => {
+  const handleAddModal = () => {
     setModalOpen(true);
   };
 
   const handleMore = () => {};
+
+  const handleCreate = (newTodo: TodoCreateBody) => {
+    createTodo(newTodo, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.todos(),
+        });
+        setModalOpen(false);
+      },
+    });
+  };
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>
       <div className='flex justify-between'>
@@ -48,7 +52,7 @@ export const UserGoalCard = (goal: Goal) => {
         <Button
           variant='text-blue'
           className='flex gap-1 items-center text-sm'
-          onClick={handleAdd}
+          onClick={handleAddModal}
         >
           <Plus width={16} height={16} />
           할일 추가
@@ -56,7 +60,7 @@ export const UserGoalCard = (goal: Goal) => {
       </div>
 
       <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>
-        <ProgressBar progress={64} />
+        <ProgressBar progress={goal.progress} />
       </div>
       <div className='w-full tablet:grid tablet:grid-cols-2 tablet:divide-x tablet:divide-gray-200 mt-4 mb-5'>
         {notDone.length !== 0 && (
@@ -89,6 +93,9 @@ export const UserGoalCard = (goal: Goal) => {
           taskOwner='User'
           setTodoToggle={setModalOpen}
           initialGoal={goal}
+          onSubmit={() => {
+            setModalOpen(false);
+          }}
         />
       )}
     </div>

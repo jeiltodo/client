@@ -53,6 +53,7 @@ client.interceptors.request.use(
       window.location.href = '/login';
     }
 
+    client.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return config;
   },
   (error: AxiosError) => {

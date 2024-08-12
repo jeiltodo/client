@@ -5,35 +5,64 @@ import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 import { Todo } from '../model/type';
 import { Goal, GoalDropdown } from '../../goal';
+import { useCreateTodo } from '../../../features/todo/hooks/useCreateTodo';
+import { useIndividualGoals } from '../../../features/goal';
+import { useQueryClient } from '@tanstack/react-query';
+import { goalQueryKeys } from '../../../features/goal/api/queryKey';
+import { useUpdateTodo } from '../../../features/todo/hooks/useUpdateTodo';
 
 interface Props {
   taskOwner: string;
   setTodoToggle: Dispatch<SetStateAction<boolean>>;
+  onSubmit: () => void;
   initialTodo?: Todo;
-  initialGoal?: Pick<Goal, 'id' | 'title'>;
+  initialGoal?: Goal;
 }
-
-const goalsMock: Pick<Goal, 'id' | 'title'>[] = [
-  { id: 1, title: 'JavaScript' },
-
-  { id: 2, title: 'TypeScript' },
-];
 
 export const TodoModal = ({
   taskOwner,
   setTodoToggle,
+  onSubmit,
   initialTodo,
   initialGoal,
 }: Props) => {
   const [title, setTitle] = useState<string>(initialTodo?.title ?? '');
-  const [goalId, setGoalId] = useState<string | number | undefined>(
+  const [goalId, setGoalId] = useState<number | string | undefined>(
     initialGoal?.id
   );
   const [goalTitle, setGoalTitle] = useState<string | undefined>(
     initialGoal?.title
   );
+  const { data: goals } = useIndividualGoals();
+  const { mutate: createTodo } = useCreateTodo();
+  const { mutate: updateTodo } = useUpdateTodo();
+  const queryClient = useQueryClient();
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    initialTodo
+      ? updateTodo(
+          { id: initialTodo.id, title },
+          {
+            onSuccess: () => {
+              queryClient.invalidateQueries({
+                queryKey: goalQueryKeys.individual.todos(),
+              });
+            },
+          }
+        )
+      : createTodo(
+          { goal_id: goalId as number, title },
+          {
+            onSuccess: () => {
+              queryClient.invalidateQueries({
+                queryKey: goalQueryKeys.individual.todos(),
+              });
+            },
+          }
+        );
+
+    onSubmit();
+  };
 
   return (
     <BaseModal
@@ -56,11 +85,13 @@ export const TodoModal = ({
       <div className='flex flex-col gap-3 mt-6'>
         <p className='text-base font-pretendard-semibold'>목표 선택</p>
 
-        <GoalDropdown
-          goals={goalsMock}
-          onSelect={setGoalId}
-          defaultGoal={initialGoal}
-        />
+        {goals && (
+          <GoalDropdown
+            goals={goals?.individualGoals}
+            onSelect={setGoalId}
+            defaultGoal={initialGoal}
+          />
+        )}
       </div>
       <Button
         isDisabled={!title || !goalId}

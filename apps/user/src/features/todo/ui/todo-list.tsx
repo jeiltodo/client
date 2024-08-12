@@ -6,19 +6,28 @@ import {
   TodoAsignee,
   TodoButtons,
   TodoModal,
+  TodoUpdateBody,
 } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
+import { useCheckTodo } from '../hooks/useCheckTodo';
+import { useQueryClient } from '@tanstack/react-query';
+import { goalQueryKeys } from '../../goal/api/queryKey';
+import { useUpdateTodo } from '../hooks/useUpdateTodo';
 
 interface Props {
-  todos: (Todo & { goal: Pick<Goal, 'id' | 'title'> })[];
+  todos: (Todo & { goal: Goal })[];
   variant?: 'user' | 'group';
 }
 
 export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
+
+  const { mutate: checkTodo } = useCheckTodo();
+  const { mutate: updateTodo } = useUpdateTodo();
+  const queryClinet = useQueryClient();
 
   const handleClickEdit = () => {
     setEditModalOpen(true);
@@ -30,9 +39,17 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
 
   const handleClickNote = () => {};
 
-  const handleCheck = () => {
-    // todos.map(todo => ({...todo, done: !todo.done}))
-    // group의 경우 asignee가 있는 경우에만 done처리
+  const handleCheck = (todoId: number) => {
+    checkTodo(todoId, {
+      onSuccess: () => {
+        queryClinet.invalidateQueries({
+          queryKey: goalQueryKeys.individual.todos(),
+        });
+        queryClinet.invalidateQueries({
+          queryKey: goalQueryKeys.individual.progress.all(),
+        });
+      },
+    });
   };
 
   const handleRemove = () => {
@@ -61,6 +78,9 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
               setTodoToggle={setEditModalOpen}
               initialTodo={{ id, title, done }}
               initialGoal={goal}
+              onSubmit={() => {
+                setEditModalOpen(false);
+              }}
             />
           )}
           {removeModalOpen && (
