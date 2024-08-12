@@ -9,7 +9,9 @@ export const loginApi = async (credentials: LoginCredentials) => {
     );
 
     const accessToken = response.data.data?.access_token;
+    
     if (accessToken) {
+      client.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
       setCookie('accessToken', accessToken);
     }
     return response.data;
