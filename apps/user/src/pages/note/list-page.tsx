@@ -11,7 +11,6 @@ export const ListPage = () => {
   const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
   const params = useParams();
   const goalid = params?.goalid as string;
-  console.log('goalid: ', goalid);
 
   const page = 1;
   const limit = 10;
@@ -21,12 +20,8 @@ export const ListPage = () => {
     page,
     limit,
   });
-  console.log('goalNotes: ', goalNotes);
-  console.log('error: ', error);
-  console.log('isLoading: ', isLoading);
 
   const handleSlideOpen = (noteid: number) => {
-    console.log('열리는 노트 noteid', noteid);
     if (noteid) {
       setIsSlideOpen((prev) => !prev);
     }
