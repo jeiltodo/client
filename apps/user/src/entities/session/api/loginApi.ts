@@ -12,6 +12,7 @@ export const loginApi = async (credentials: LoginCredentials) => {
 
     if (accessToken) {
       client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+
       setCookie('accessToken', accessToken);
     }
     return response.data;
