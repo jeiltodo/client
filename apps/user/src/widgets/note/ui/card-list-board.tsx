@@ -1,16 +1,11 @@
 import { NoteResponse } from '../../../entities/note';
-import { Response } from '../../../entities/session';
 import { Card, GoalTitleCard } from '../../../features/note';
 
 interface CardListBoardProps {
-  handleSlideOpen: (arg: number) => void;
   cardListData: NoteResponse;
 }
 
-export const CardListBoard = ({
-  handleSlideOpen,
-  cardListData,
-}: CardListBoardProps) => {
+export const CardListBoard = ({ cardListData }: CardListBoardProps) => {
   const goalTitle = '목표의 제목';
 
   return (
@@ -23,7 +18,6 @@ export const CardListBoard = ({
           noteTitle={note.title}
           todoId={note.todo.id}
           todoTitle={note.todo.title}
-          handleSlideOpen={handleSlideOpen}
         />
       ))}
     </>

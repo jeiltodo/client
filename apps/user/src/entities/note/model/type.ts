@@ -1,6 +1,6 @@
 import { Todo } from '../../todo';
 
-export type Note = {
+export interface Note {
   id: number;
   title: string;
   content: string;
@@ -8,10 +8,10 @@ export type Note = {
   updated_at: Date;
   link_url?: string;
   todo: Todo;
-};
+}
 
-export type NoteResponse = {
+export interface NoteResponse {
   current_page: number;
-  notes: Note[];
+  notes: Note[] | [];
   total_count: number;
-};
+}
