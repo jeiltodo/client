@@ -15,3 +15,23 @@ export type Note = {
 	updated_at: Date;
 	goal: Goal;
 };
+
+export interface IndividualGoalsResponse {
+  msg: string;
+  code: number;
+  data: {
+    individualGoals: IndividualGoals[];
+  };
+}
+
+/*
+================================================
+*/
+
+interface IndividualGoals {
+  id: number;
+  title: string;
+  memberId: number;
+  createdAt: string;
+  updatedAt: string;
+}

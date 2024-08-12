@@ -35,6 +35,7 @@ const config: Omit<Config, 'content'> = {
         mobile: '16px',
       },
       colors: {
+        error: '#D32F2F',
         blue: {
           // 기획 컬러, tailwind
           50: '#EFF6FF',

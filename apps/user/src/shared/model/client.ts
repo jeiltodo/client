@@ -33,8 +33,18 @@ axios.defaults.withCredentials = true;
 // 요청 인터셉터
 client.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const noSessionRequired = ['/member/signin', '/member/signup'];
-    if (noSessionRequired.includes(config.url ?? '')) {
+    if (!config.url) {
+      throw new Error('API 요청에 URL이 누락되었습니다.'); // 오류 발생
+    }
+
+    const url = config.url;
+
+    const noSessionRequired = [
+      '/member/signin',
+      '/member/signup',
+      '/member/email/duplicate?email=',
+    ];
+    if (noSessionRequired.some((path) => url.startsWith(path))) {
       return config;
     }
 

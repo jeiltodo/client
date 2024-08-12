@@ -1,4 +1,4 @@
-import { Token, type LoginCredentials, type Response } from '..';
+import type { Token, LoginCredentials, Response } from '..';
 import { client, setCookie } from '../../../shared';
 
 export const loginApi = async (credentials: LoginCredentials) => {
@@ -9,7 +9,10 @@ export const loginApi = async (credentials: LoginCredentials) => {
     );
 
     const accessToken = response.data.data?.access_token;
+
     if (accessToken) {
+      client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+
       setCookie('accessToken', accessToken);
     }
     return response.data;

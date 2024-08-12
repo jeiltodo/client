@@ -6,9 +6,12 @@ import { validateLogIn } from '../model/validation';
 export const LoginForm = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errors, setErrors] = useState<{ email: string; password: string }>({
-    email: '',
-    password: '',
+  const [errors, setErrors] = useState<{
+    email: string | null;
+    password: string | null;
+  }>({
+    email: null,
+    password: null,
   });
 
   const router = useRouter();
@@ -30,9 +33,9 @@ export const LoginForm = () => {
   };
   const handleValidationErrors = (errorMsg: string) => {
     if (errorMsg.includes('이메일')) {
-      setErrors((prevErrors) => ({ ...prevErrors, email: errorMsg }));
+      setErrors({ email: errorMsg, password: null });
     } else if (errorMsg.includes('비밀번호')) {
-      setErrors((prevErrors) => ({ ...prevErrors, password: errorMsg }));
+      setErrors({ email: null, password: errorMsg });
     }
   };
 
@@ -50,37 +53,50 @@ export const LoginForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className='w-[640px] flex flex-col space-y-4 mb-[48px]'>
-        <label className='font-pretendard-semibold text-base' htmlFor='email'>
-          아이디
-        </label>
-        <Input
-          name='email'
-          onChange={handleChange}
-          placeholder='이메일을 입력해주세요'
-          type='email'
-          value={email}
-        />
-        {errors.email ? (
-          <p className='text-slate-400 text-sm'>{errors.email}</p>
-        ) : null}
-        <label
-          className='font-pretendard-semibold text-base'
-          htmlFor='password'
-        >
-          비밀번호
-        </label>
-        <Input
-          className='mb-[48px]'
-          name='password'
-          onChange={handleChange}
-          placeholder='비밀번호를 입력해주세요'
-          type='password'
-          value={password}
-        />
-        {errors.password ? <p>{errors.password}</p> : null}
+      <div className='w-[640px] flex flex-col gap-y-[24px] mb-[48px]'>
+        <div className='h-[102px] flex flex-col gap-y-[12px]'>
+          <label className='font-pretendard-semibold text-base' htmlFor='email'>
+            아이디
+          </label>
+          <Input
+            name='email'
+            onChange={handleChange}
+            placeholder='이메일을 입력해주세요'
+            type='email'
+            value={email}
+          />
+          {errors.email ? (
+            <p className='text-error pl-[24px] text-xs -mt-[10px]'>
+              {errors.email}
+            </p>
+          ) : null}
+        </div>
+        <div className='h-[102px] flex flex-col gap-y-[12px]'>
+          <label
+            className='font-pretendard-semibold text-base'
+            htmlFor='password'
+          >
+            비밀번호
+          </label>
+          <Input
+            name='password'
+            onChange={handleChange}
+            placeholder='비밀번호를 입력해주세요'
+            type='password'
+            value={password}
+          />
+          {errors.password ? (
+            <p className='text-error pl-[24px] text-xs -mt-[10px]'>
+              {errors.password}
+            </p>
+          ) : null}
+        </div>
       </div>
-      <Button className='w-full mb-[40px]' variant='primary'>
+      <Button
+        className='w-full mb-[40px]'
+        isDisabled={!email.trim() || !password.trim()}
+        variant='primary'
+      >
         로그인하기
       </Button>
     </form>
