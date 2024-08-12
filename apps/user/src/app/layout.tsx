@@ -3,7 +3,6 @@ import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 import { QueryProvider } from '../shared/model/query/query-provider';
-import { SidebarUser } from '../widgets/user';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -19,12 +18,8 @@ export default function RootLayout({
     <html lang='en'>
       <body className='font-pretendard-regular'>
         <QueryProvider>
-          <div className=''>
-            <main>
-              <ToastContainer limit={1} />
-              {children}
-            </main>
-          </div>
+          <ToastContainer />
+          {children}
         </QueryProvider>
       </body>
     </html>
