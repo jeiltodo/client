@@ -2,9 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function Page() {
-  const goalid = 1;
+  const goalid = 9;
   const todoid = 2;
-  const noteid = 3;
+  const noteid = 1;
   return (
     <main>
       배경이 bg-slate-100인 유저 페이지- 대시보드, 모든 할일 목록 페이지, 목표
