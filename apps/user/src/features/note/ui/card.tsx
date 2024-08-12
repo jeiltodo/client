@@ -1,18 +1,15 @@
 import { NoteList, Meatball } from '@jeiltodo/icons';
-import { Flyout, TodoTitle } from '@jeiltodo/ui/shared';
+import { Flyout, Note, TodoTitle } from '@jeiltodo/ui/shared';
 import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
 import { deleteNote } from '../../../entities/note';
 import { NoteDetailSlide } from '../../../widgets/note/ui/note-detail-slide';
 
 interface CardProps {
-  noteId: number;
-  noteTitle: string;
-  todoId: number;
-  todoTitle: string;
+  data: Note;
 }
 
-export const Card = ({ noteId, noteTitle, todoId, todoTitle }: CardProps) => {
+export const Card = ({ data }: CardProps) => {
   const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,8 +18,8 @@ export const Card = ({ noteId, noteTitle, todoId, todoTitle }: CardProps) => {
   const goalid = params?.goalid as string;
 
   const handleSlideOpen = () => {
-    console.log('noteId: ', noteId);
-    if (noteId) {
+    console.log();
+    if (data.id) {
       setIsSlideOpen((prev) => !prev);
     }
   };
@@ -32,9 +29,10 @@ export const Card = ({ noteId, noteTitle, todoId, todoTitle }: CardProps) => {
   };
 
   const handleRoute = () => {
-    route.push(`/note/${goalid}/${todoId}/${noteId}`);
+    route.push(`/note/${goalid}/${data.todo.id}/${data.id}`);
   };
   const handleDelete = () => {
+    const noteId = data.id;
     const response = deleteNote({ noteId });
     console.log('deleteNote response: ', response);
   };
@@ -66,12 +64,12 @@ export const Card = ({ noteId, noteTitle, todoId, todoTitle }: CardProps) => {
           {isOpen && <Flyout onEdit={handleRoute} onDelete={handleDelete} />}
         </span>
       </div>
-      <h2 className='text-lg font-pretendard-medium'>{noteTitle}</h2>
+      <h2 className='text-lg font-pretendard-medium'>{data.title}</h2>
       <span className='w-full h-[1px] bg-slate-200'></span>
-      <TodoTitle title={todoTitle} />
+      <TodoTitle title={data.todo.title} />
 
       {isSlideOpen && (
-        <NoteDetailSlide noteId={noteId} setToggle={setIsSlideOpen} />
+        <NoteDetailSlide data={data} setToggle={setIsSlideOpen} />
       )}
     </div>
   );

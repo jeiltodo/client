@@ -10,8 +10,8 @@ export type Todo = {
   is_done: boolean;
   title: string;
   note_id?: number;
-  updatedAt: '2024-07-23T05:00:43.689Z';
-  createdAt: '2024-07-23T05:00:43.689Z';
+  updatedAt: string;
+  createdAt: string;
   goal: Goal;
 };
 
@@ -19,14 +19,14 @@ export type Note = {
   id: number;
   title: string;
   content: string;
-  created_at: Date;
-  updated_at: Date;
-  link_url?: string;
+  created_at: string;
+  updated_at: string;
+  link_url: string | null;
   todo: Todo;
 };
 
 export type NoteResponse = {
   current_page: number;
-  notes: Note[];
+  notes: Note[] | [];
   total_count: number;
 };

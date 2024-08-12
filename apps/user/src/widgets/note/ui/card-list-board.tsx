@@ -6,20 +6,13 @@ interface CardListBoardProps {
 }
 
 export const CardListBoard = ({ cardListData }: CardListBoardProps) => {
+  console.log('cardListData: ', cardListData);
   const goalTitle = '목표의 제목';
 
   return (
     <>
       <GoalTitleCard title={goalTitle} />
-      {cardListData?.notes?.map((note) => (
-        <Card
-          key={note.id}
-          noteId={note.id}
-          noteTitle={note.title}
-          todoId={note.todo.id}
-          todoTitle={note.todo.title}
-        />
-      ))}
+      {cardListData?.notes?.map((note) => <Card key={note.id} data={note} />)}
     </>
   );
 };
