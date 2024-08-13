@@ -10,6 +10,13 @@ export interface GroupResponse {
   data: GroupsProps[];
 }
 
+export interface GroupPostResponse {
+  msg: string;
+  code: number;
+  data: GroupsPostProps;
+}
+
+
 /*
 ================================================
 */
@@ -17,4 +24,12 @@ export interface GroupResponse {
 interface GroupsProps {
   id: number;
   title: string;
+}
+
+interface GroupsPostProps {
+  id: number;
+  title: string;
+  secretCode: string;
+  createAt: string;
+  updatedAt: string;
 }

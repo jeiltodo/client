@@ -10,37 +10,67 @@ import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
 import { SidebarUserInfo } from '@jeiltodo/ui/entities';
-import { useIndividualGoals } from '../../../entities/goal';
-import { useGroup } from '../../../entities/group/indext';
-import { useUserInfo } from '../../../entities/user';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import { individualGoalsOptions } from '../../../entities/goal/api/individualOptions';
+import { groupOptions, useGroupMutation, useGroupAttendMutation } from '../../../entities/group/indext';
+import { useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { individualGoalsOptions, useIndividualGoalMutation } from '../../../entities/goal/hooks/individualOptions';
+import { AxiosError } from 'axios';
+import { userOptions } from '../../../entities/user';
 
 export const SidebarUser = () => {
   const [goalToggle, setGoalToggle] = useState<boolean>(false);
   const [groupCreateToggle, setGroupCreateToggle] = useState<boolean>(false);
   const [groupAttendToggle, setGroupAttendToggle] = useState<boolean>(false);
 
-  const { individualGoalsData } = useIndividualGoals();
-  const { groupData } = useGroup();
-  const { userInfoData } = useUserInfo();
-  const { data } = useQuery(individualGoalsOptions());
+  const queryClient = useQueryClient();
+
+  const { data: individualGoalsData } = useQuery(individualGoalsOptions());
+  const createIndividualGoalMutation = useIndividualGoalMutation();
+
+  const { data: groupData } = useQuery(groupOptions());
+  const createGroupMutation = useGroupMutation();
+  const AttendGroupMutation = useGroupAttendMutation();
+
+  const { data: userInfoData } = useQuery(userOptions());
+
+  const handleCreateIndividualGoal = (title: string) => {
+    createIndividualGoalMutation.mutate(title, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: individualGoalsOptions().queryKey });
+      }
+    })
+  }
+
+  const handleCreateGroup = (title: string) => {
+    createGroupMutation.mutate(title, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: individualGoalsOptions().queryKey });
+      }
+    })
+  }
+
+  const handleAttendGroup = (secretCode: string) => {
+    AttendGroupMutation.mutate(secretCode, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: individualGoalsOptions().queryKey });
+      }
+    })
+  }
+  
   return (
     <>
-      {goalToggle && <GoalModal setGoalToggle={setGoalToggle} />}
+      {goalToggle && <GoalModal setGoalToggle={setGoalToggle} handleCreateIndividualGoal={handleCreateIndividualGoal} />}
       {groupCreateToggle && (
-        <GroupCreateModal setGroupCreateToggle={setGroupCreateToggle} />
+        <GroupCreateModal setGroupCreateToggle={setGroupCreateToggle} handleCreateGroup={handleCreateGroup} />
       )}
       {groupAttendToggle && (
-        <GroupAttendModal setGroupAttendToggle={setGroupAttendToggle} />
+        <GroupAttendModal setGroupAttendToggle={setGroupAttendToggle} handleAttendGroup={handleAttendGroup}/>
       )}
       <Sidebar>
         <SidebarUserInfo userInfo={userInfoData?.data} />
         <SidebarIndividualNav
           icon={Individual}
           title='개인'
-          // individualGoals={individualGoalsData?.data.individualGoals}
-          individualGoals={data?.data.individualGoals}
+          individualGoals={individualGoalsData?.data.individualGoals}
         />
         <div className='px-5 mb-[18px]'>
           <Button

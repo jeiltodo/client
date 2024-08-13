@@ -77,14 +77,14 @@ client.interceptors.response.use(
     };
 
     // 로그인/회원가입 에러 메시지를 위한 분기 처리
-    if (
-      error.response?.status === 400 ||
-      (error.response?.status === 404 &&
-        ((error.config && error.config.url === '/member/signin') ||
-          (error.config && error.config.url === '/member/signup')))
-    ) {
-      return Promise.resolve(error.response);
-    }
+    // if (
+    //   error.response?.status === 400 ||
+    //   (error.response?.status === 404 &&
+    //     ((error.config && error.config.url === '/member/signin') ||
+    //       (error.config && error.config.url === '/member/signup')))
+    // ) {
+    //   return Promise.resolve(error.response);
+    // }
 
     // access token 없이 요청 시 401 에러 처리
     if (error.response?.status === 401 && !originalRequest._retry) {
