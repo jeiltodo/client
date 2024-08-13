@@ -13,6 +13,7 @@ export const TodoButtons = ({
   onClickNote,
 }: Props) => {
   const [isFlyoutOpen, setFlyoutOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleKebab = () => {
     setFlyoutOpen((prev) => !prev);
@@ -28,16 +29,23 @@ export const TodoButtons = ({
     setFlyoutOpen(false);
   };
   return (
-    <span className='inline-flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100 relative'>
-      <NoteView width={24} height={24} onClick={onClickNote} />
-      <Kebab
-        width={24}
-        height={24}
-        onClick={handleKebab}
-        className='cursor-pointer '
-      />
-
-      {isFlyoutOpen && <Flyout onEdit={handleEdit} onDelete={handleRemove} />}
-    </span>
+    <div className='relative' onMouseLeave={() => setFlyoutOpen(false)}>
+      <span className='inline-flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100'>
+        <NoteView width={24} height={24} onClick={onClickNote} />
+        <Kebab
+          width={24}
+          height={24}
+          onClick={handleKebab}
+          className='cursor-pointer '
+        />
+      </span>
+      {isFlyoutOpen && (
+        <Flyout
+          onEdit={handleEdit}
+          onDelete={handleRemove}
+          onLeave={() => setFlyoutOpen(false)}
+        />
+      )}
+    </div>
   );
 };

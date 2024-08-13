@@ -64,7 +64,7 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   return (
     <ul className='w-full flex flex-wrap gap-2'>
       {todos.map(({ id, title, done, goal }) => (
-        <li className='list-none w-full flex justify-between group '>
+        <li key={id} className='list-none w-full flex justify-between group '>
           <span className='inline-flex gap-4 items-center min-w-[280px]'>
             <TodoContent
               key={id}
@@ -80,13 +80,9 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
           />
           {editModalOpen && (
             <TodoModal
-              taskOwner={`${id}의 이름`}
               setTodoToggle={setEditModalOpen}
               initialTodo={{ id, title, done }}
               initialGoal={goal}
-              onSubmit={() => {
-                setEditModalOpen(false);
-              }}
             />
           )}
           {removeModalOpen && (

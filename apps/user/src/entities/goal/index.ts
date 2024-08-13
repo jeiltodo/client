@@ -6,4 +6,4 @@ export * from './api/individualGoalsApi';
 export * from './hooks/individualOptions';
 export * from './hooks/useGoalsWithTodos';
 export * from './hooks/useIndividualGoals';
-export * from './hooks/useProgressAll';
+export * from './hooks/progressAllOptions';
