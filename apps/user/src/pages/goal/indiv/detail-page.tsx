@@ -11,10 +11,10 @@ export const DetailPage = ({ params }: { params: { goalid: string } }) => {
 
   return (
     <div className='max-w-[1200px]'>
-      {individualSingleGoal && (
+      {!isLoading && individualSingleGoal && individualSingleGoal.data && (
         <>
           <LayoutTitle title={'목표'} />
-          <TitleProgressBarCard goalData={individualSingleGoal} />
+          <TitleProgressBarCard goalData={individualSingleGoal.data} />
         </>
       )}
     </div>

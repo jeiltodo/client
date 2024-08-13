@@ -77,7 +77,9 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
               setModalToggle={setIsComfirmOpen}
               submitButtonText={'삭제'}
               onSubmit={handleDelete}
-            />
+            >
+              정말 삭제 하시겠어요?
+            </ConfirmationModal>
           )}
         </span>
       </div>
