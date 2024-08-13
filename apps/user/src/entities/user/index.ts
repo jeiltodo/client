@@ -3,8 +3,8 @@ export * from './ui/percent-display';
 
 export * from './ui/recent-filter';
 
-export * from './api/getUserInfo';
+export * from './api/userApi';
 
-export * from './hooks/useUserInfo';
+export * from './hooks/userOptions';
 
 export * from './model/type';

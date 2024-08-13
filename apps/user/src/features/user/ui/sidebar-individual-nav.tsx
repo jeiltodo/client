@@ -47,7 +47,7 @@ export const SidebarIndividualNav = ({
       {individualGoals?.map((goal) => (
         <div
           key={goal.id}
-          className='flex items-center text-sm font-pretendard-medium text-slate-700 w-[240px] h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'
+          className='flex items-center text-sm font-pretendard-medium text-slate-700 w-[240px] h-9 max-h-36 overflow-y-scroll scrollbar-hide hover:bg-slate-50 active:bg-slate-100 rounded-lg'
         >
           · {goal.title}
         </div>

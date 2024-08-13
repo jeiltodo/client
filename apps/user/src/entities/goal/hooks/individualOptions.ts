@@ -1,6 +1,6 @@
 import { queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
 import { goalQueryKeys } from './queryKeys';
-import { getGoals } from '../api/individualGoalsApi';
+import { individualGoalsApi } from '../api/individualGoalsApi';
 import { AxiosError } from 'axios';
 
 export const individualGoalsOptions = () =>
@@ -14,7 +14,7 @@ export const useIndividualGoalMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: individualGoalsApi.createIndividualGoal,
+    mutationFn: individualGoalsApi.createGoal,
     onSuccess: () => {
       // 목표 생성 후 개인 목표 목록 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: goalQueryKeys.individual.lists() });
