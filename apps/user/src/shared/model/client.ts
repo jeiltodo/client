@@ -76,13 +76,9 @@ client.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // 로그인/회원가입 에러 메시지를 위한 분기 처리
-    // if (
-    //   error.response?.status === 400 ||
-    //   (error.response?.status === 404 &&
-    //     ((error.config && error.config.url === '/member/signin') ||
-    //       (error.config && error.config.url === '/member/signup')))
-    // ) {
+    //에러 메시지를 return 하기 위한 분기 처리
+    // if (axios.isAxiosError(error) && error.response) {
+    //   // 모든 에러 코드의 response를 반환
     //   return Promise.resolve(error.response);
     // }
 
