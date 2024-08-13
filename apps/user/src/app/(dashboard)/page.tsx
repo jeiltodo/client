@@ -1,4 +1,4 @@
-import { UserDashboardPage } from '../../pages/user/ui/user-dashboard-page';
+import { UserDashboardPage } from '../../page/user/ui/user-dashboard-page';
 
 export default function Page() {
   return (

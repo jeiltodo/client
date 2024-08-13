@@ -1,5 +1,6 @@
 import { GroupResponse, GroupPostResponse } from '../model/type';
-import { client } from '../../../shared';
+import { client, ResponseWith } from '../../../shared';
+import { GroupWithMembers } from '@jeiltodo/ui/entities';
 
 export const groupApi = {
   // GET 요청: 개인 그룹 조회
@@ -31,6 +32,18 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Failed to attend groups:', error);
+      throw error;
+    }
+  },
+
+  getGroupDetail: async (id: Number) => {
+    try {
+      const response = await client.get<ResponseWith<GroupWithMembers>>(
+        `/groups/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
       throw error;
     }
   },

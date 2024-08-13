@@ -1,9 +1,3 @@
-export type Member = {
-  name: string;
-  color: string;
-  contributionPercent: number;
-};
-
 export interface GroupResponse {
   msg: string;
   code: number;
@@ -15,7 +9,6 @@ export interface GroupPostResponse {
   code: number;
   data: GroupsPostProps;
 }
-
 
 /*
 ================================================

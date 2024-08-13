@@ -24,7 +24,7 @@ export const UserDashboardPage = () => {
     <div>
       <ProgressBoard completedPercent={progress?.progress ?? 0} />
       <div className='flex flex-wrap gap-4 bg-white px-5 rounded-xl py-5 mt-5'>
-        <BoardTitle title='개인 목표' iconName='Flag' />
+        <BoardTitle title='개인 목표' />
         {data?.pages.map((group, i) => (
           <React.Fragment key={i}>
             {group.data.goals.map((goal) => (
