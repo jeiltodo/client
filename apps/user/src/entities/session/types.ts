@@ -14,11 +14,6 @@ export interface AuthBody {
   password: string;
 }
 
-// export interface Response<T> {
-//   code: number;
-//   msg: string;
-//   data?: T;
-// }
 export interface Token {
   access_token: string;
   refresh_token: string;

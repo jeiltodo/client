@@ -1,12 +1,11 @@
 import { client } from '../../../shared';
-import { Response } from '../../session';
-import { GoalWithoutTodos } from '../model/type';
+import type { Goal } from '../model/type';
 
-export const getIndividualSingleGoal = async (
-  goalId: number
-): Promise<Response<GoalWithoutTodos>> => {
+export const getIndividualSingleGoal = async (goalId: number) => {
   try {
-    const response = await client.get(`/individual/goals/single/${goalId}`);
+    const response = await client.get<Goal>(
+      `/individual/goals/single/${goalId}`
+    );
     return response.data;
   } catch (error) {
     // 오류가 발생한 경우 적절히 처리
