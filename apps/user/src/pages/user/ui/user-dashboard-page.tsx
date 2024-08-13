@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useGoalsWithTodos, useProgressAll } from '../../../entities/goal';
+import { progressAllOptions, useGoalsWithTodos } from '../../../entities/goal';
 import { ProgressBoard, UserGoalCard } from '../../../widgets/user';
 import { useInView } from 'react-intersection-observer';
+import { BoardTitle } from '@jeiltodo/ui/shared';
+import { useQuery } from '@tanstack/react-query';
 
 export const UserDashboardPage = () => {
-  const { data: progress } = useProgressAll();
+  const { data: progress } = useQuery(progressAllOptions());
   const { data, hasNextPage, fetchNextPage } = useGoalsWithTodos({
     limit: 3,
   });
@@ -21,7 +23,8 @@ export const UserDashboardPage = () => {
   return (
     <div>
       <ProgressBoard completedPercent={progress?.progress ?? 0} />
-      <div className='flex flex-wrap gap-4'>
+      <div className='flex flex-wrap gap-4 bg-white px-5 rounded-xl py-5 mt-5'>
+        <BoardTitle title='개인 목표' iconName='Flag' />
         {data?.pages.map((group, i) => (
           <React.Fragment key={i}>
             {group.data.goals.map((goal) => (
