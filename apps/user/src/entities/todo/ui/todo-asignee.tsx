@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Asignee } from '../model/type';
-import { getGroupColorClass } from '../../group/indext';
+import { getGroupColorClass } from '../../group';
 
 export const TodoAsignee = () => {
   const [asignee, setAsignee] = useState<Asignee | null>(null);

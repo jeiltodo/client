@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Member } from '../indext';
+import { Member } from '..';
 
 interface Props {
   progress: { completedPercent: number; members: Member[] };
