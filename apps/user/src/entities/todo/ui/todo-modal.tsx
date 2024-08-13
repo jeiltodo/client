@@ -5,23 +5,19 @@ import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 import { Todo } from '../model/type';
 import { Goal, GoalDropdown, useIndividualGoals } from '../../goal';
-import { useQueryClient } from '@tanstack/react-query';
 import { useCreateTodo } from '../hooks/useCreateTodo';
 import { useUpdateTodo } from '../hooks/useUpdateTodo';
-import { goalQueryKeys } from '../../goal/hooks/queryKey';
+import { userOptions } from '../../user';
+import { useQuery } from '@tanstack/react-query';
 
 interface Props {
-  taskOwner: string;
   setTodoToggle: Dispatch<SetStateAction<boolean>>;
-  onSubmit: () => void;
   initialTodo?: Todo;
   initialGoal?: Goal;
 }
 
 export const TodoModal = ({
-  taskOwner,
-  setTodoToggle,
-  onSubmit,
+  setTodoToggle: toggleModal,
   initialTodo,
   initialGoal,
 }: Props) => {
@@ -29,44 +25,24 @@ export const TodoModal = ({
   const [goalId, setGoalId] = useState<number | string | undefined>(
     initialGoal?.id
   );
-  const [goalTitle, setGoalTitle] = useState<string | undefined>(
-    initialGoal?.title
-  );
+
+  const { data: user } = useQuery(userOptions());
   const { data: goals } = useIndividualGoals();
+
   const { mutate: createTodo } = useCreateTodo();
   const { mutate: updateTodo } = useUpdateTodo();
-  const queryClient = useQueryClient();
 
   const handleSubmit = () => {
     initialTodo
-      ? updateTodo(
-          { id: initialTodo.id, title },
-          {
-            onSuccess: () => {
-              queryClient.invalidateQueries({
-                queryKey: goalQueryKeys.individual.todos(),
-              });
-            },
-          }
-        )
-      : createTodo(
-          { goal_id: goalId as number, title },
-          {
-            onSuccess: () => {
-              queryClient.invalidateQueries({
-                queryKey: goalQueryKeys.individual.todos(),
-              });
-            },
-          }
-        );
-
-    onSubmit();
+      ? updateTodo({ id: initialTodo.id, title })
+      : createTodo({ goal_id: goalId as number, title });
+    toggleModal(false);
   };
 
   return (
     <BaseModal
-      title={`${taskOwner}의 할 일 ${initialTodo ? '수정' : '생성'}`}
-      setToggle={setTodoToggle}
+      title={`${user?.data.nickname}의 할 일 ${initialTodo ? '수정' : '생성'}`}
+      setToggle={toggleModal}
       width='modal_sm:w-[520px]'
     >
       <div className='flex flex-col gap-3'>

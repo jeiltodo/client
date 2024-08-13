@@ -73,14 +73,7 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
         </Button>
       </div>
       {modalOpen && (
-        <TodoModal
-          taskOwner='User'
-          setTodoToggle={setModalOpen}
-          initialGoal={goal}
-          onSubmit={() => {
-            setModalOpen(false);
-          }}
-        />
+        <TodoModal setTodoToggle={setModalOpen} initialGoal={goal} />
       )}
     </div>
   );
