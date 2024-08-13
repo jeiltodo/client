@@ -10,7 +10,7 @@ import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
 import { SidebarUserInfo } from '@jeiltodo/ui/entities';
-import { useIndividualGoals } from '../../../features/goal';
+import { useIndividualGoals } from '../../../entities/goal';
 
 // entities에서 데이터 individual/goals로 불러올 예정
 const data = [

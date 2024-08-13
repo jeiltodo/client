@@ -4,12 +4,11 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 import { Todo } from '../model/type';
-import { Goal, GoalDropdown } from '../../goal';
-import { useCreateTodo } from '../../../features/todo/hooks/useCreateTodo';
-import { useIndividualGoals } from '../../../features/goal';
+import { Goal, GoalDropdown, useIndividualGoals } from '../../goal';
 import { useQueryClient } from '@tanstack/react-query';
-import { goalQueryKeys } from '../../../features/goal/api/queryKey';
-import { useUpdateTodo } from '../../../features/todo/hooks/useUpdateTodo';
+import { useCreateTodo } from '../hooks/useCreateTodo';
+import { useUpdateTodo } from '../hooks/useUpdateTodo';
+import { goalQueryKeys } from '../../goal/hooks/queryKey';
 
 interface Props {
   taskOwner: string;

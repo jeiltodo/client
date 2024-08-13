@@ -10,6 +10,8 @@ import {
   ACCESS_TOKEN_EXPIRY_TIME,
   REFRESH_TOKEN_COOKIE_NAME,
 } from '../config/token';
+import { isServer } from '@tanstack/react-query';
+import { getServerToken } from './getServerToken';
 
 // 에러 응답 데이터 타입 정의
 interface ErrorResponseData {
@@ -32,7 +34,7 @@ axios.defaults.withCredentials = true;
 
 // 요청 인터셉터
 client.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  async (config: InternalAxiosRequestConfig) => {
     if (!config.url) {
       throw new Error('API 요청에 URL이 누락되었습니다.'); // 오류 발생
     }
@@ -48,12 +50,20 @@ client.interceptors.request.use(
       return config;
     }
 
+    // let accessToken: string | undefined | null;
+    // if (isServer) {
+    //   accessToken = await getServerToken();
+    // } else {
     const accessToken = getCookie(ACCESS_TOKEN_COOKIE_NAME);
-    if (!accessToken) {
-      window.location.href = '/login';
-    }
+    // }
 
-    client.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    if (!accessToken) {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
+      return Promise.reject(new Error('No access token found'));
+    }
+    if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
     return config;
   },
   (error: AxiosError) => {

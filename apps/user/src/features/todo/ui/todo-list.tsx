@@ -6,15 +6,14 @@ import {
   TodoAsignee,
   TodoButtons,
   TodoModal,
-  TodoUpdateBody,
 } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
-import { useCheckTodo } from '../hooks/useCheckTodo';
 import { useQueryClient } from '@tanstack/react-query';
-import { goalQueryKeys } from '../../goal/api/queryKey';
-import { useUpdateTodo } from '../hooks/useUpdateTodo';
+import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
+import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
+import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 
 interface Props {
   todos: (Todo & { goal: Goal })[];
@@ -26,7 +25,7 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
 
   const { mutate: checkTodo } = useCheckTodo();
-  const { mutate: updateTodo } = useUpdateTodo();
+  const { mutate: deleteTodo } = useDeleteTodo();
   const queryClinet = useQueryClient();
 
   const handleClickEdit = () => {
@@ -46,13 +45,20 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
           queryKey: goalQueryKeys.individual.todos(),
         });
         queryClinet.invalidateQueries({
-          queryKey: goalQueryKeys.individual.progress.all(),
+          queryKey: goalQueryKeys.individual.progress(),
         });
       },
     });
   };
 
-  const handleRemove = () => {
+  const handleRemove = (id: number) => {
+    deleteTodo(id, {
+      onSuccess: () => {
+        queryClinet.invalidateQueries({
+          queryKey: goalQueryKeys.individual.todos(),
+        });
+      },
+    });
     setRemoveModalOpen(false);
   };
   return (
@@ -86,7 +92,9 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
           {removeModalOpen && (
             <ConfirmationModal
               setModalToggle={setRemoveModalOpen}
-              onSubmit={handleRemove}
+              onSubmit={() => {
+                handleRemove(id);
+              }}
               submitButtonText='삭제'
             >
               정말 삭제하시겠습니까?

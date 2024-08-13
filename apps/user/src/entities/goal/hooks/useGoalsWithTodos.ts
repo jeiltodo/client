@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { goalQueryKeys } from '../api/queryKey';
 import { goalApi } from '../../../entities/goal/api/goalApi';
 import { LIMIT_DEFAULT, PAGE_DEFAULT } from '../../../shared';
+import { goalQueryKeys } from './queryKey';
 
 interface PageAndLimit {
   page?: number;

@@ -2,14 +2,12 @@
 
 import { Button, ProgressBar } from '@jeiltodo/ui/shared';
 import { GoalWithTodos } from '../../../entities/goal';
-import { TodoCreateBody, TodoModal } from '../../../entities/todo';
+import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
-import { useCreateTodo } from '../../../features/todo/hooks/useCreateTodo';
 import { useQueryClient } from '@tanstack/react-query';
-import { goalQueryKeys } from '../../../features/goal/api/queryKey';
-import { useProgressAll } from '../../../features/goal';
+import { useCreateTodo } from '../../../entities/todo/hooks/useCreateTodo';
 
 export const UserGoalCard = (goal: GoalWithTodos) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,16 +33,16 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
 
   const handleMore = () => {};
 
-  const handleCreate = (newTodo: TodoCreateBody) => {
-    createTodo(newTodo, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.todos(),
-        });
-        setModalOpen(false);
-      },
-    });
-  };
+  // const handleCreate = (newTodo: TodoCreateBody) => {
+  //   createTodo(newTodo, {
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries({
+  //         queryKey: goalQueryKeys.individual.todos(),
+  //       });
+  //       setModalOpen(false);
+  //     },
+  //   });
+  // };
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>
       <div className='flex justify-between'>

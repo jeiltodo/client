@@ -1,5 +1,4 @@
 import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
-import { serverFetch } from '../../../shared/model/server';
 import { Goal, GoalWithTodos, UserProgress } from '../model/type';
 
 export const goalApi = {
@@ -14,16 +13,6 @@ export const goalApi = {
       throw error;
     }
   },
-
-  // getAllProgressWithServer: async () => {
-  //   try {
-  //     const response = await serverFetch('/individual/goals/progress');
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error('goal API - getAllProgress error:', error);
-  //     throw error;
-  //   }
-  // },
 
   getGoalWithTodos: async (page: number, limit: number) => {
     try {
