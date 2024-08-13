@@ -1,14 +1,15 @@
 import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
-import { GoalWithoutTodos } from '../../entities/goal';
+
 import { useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
 import { GoalModal } from '../../features/goal';
 import { ConfirmationModal } from '../../shared';
 import { deleteIndividualGoals } from '../../entities/goal/api/deleteIndividualGoals';
 import { patchIndividualGoals } from '../../entities/goal/api/patchIndividualGoals';
+import { Goal } from '../../entities/goal';
 
 interface Props {
-  goalData: GoalWithoutTodos;
+  goalData: Goal;
 }
 
 export const TitleProgressBarCard = ({ goalData }: Props) => {
@@ -63,6 +64,7 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
               }}
             />
           )}
+          {/* TODO:: onblur 일 떄 Flyout닫히도록.*/}
           {isGoalToggleOpen && (
             <GoalModal
               nickname={`체다치이즈`}
@@ -86,7 +88,7 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
       <div className='flex flex-col justify-center w-full rounded-3xl  bg-white mt-2'>
         <h3 className='text-xs font-pretendard-semibold'>Progress</h3>
         <div className='py-[6px]'>
-          <ProgressBar progress={goalData.progress} />
+          <ProgressBar progress={goalData.progress || 0} />
         </div>
       </div>
     </div>

@@ -1,9 +1,9 @@
 import { client } from '../../../shared';
-import type { Goal } from '../model/type';
+import type { GoalSingleResponse } from '../model/type';
 
 export const getIndividualSingleGoal = async (goalId: number) => {
   try {
-    const response = await client.get<Goal>(
+    const response = await client.get<GoalSingleResponse>(
       `/individual/goals/single/${goalId}`
     );
     return response.data;

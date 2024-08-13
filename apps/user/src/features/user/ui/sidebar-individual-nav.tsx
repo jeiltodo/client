@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react';
 import { TodoModal } from '../../../entities/todo/ui/todo-modal';
+import { useRouter } from 'next/navigation';
 
 interface IndividualGoalsProps {
   id: number;
@@ -31,6 +32,8 @@ export const SidebarIndividualNav = ({
   individualGoals,
 }: SidebarIndividualNavProps) => {
   const [todoToggle, setTodoToggle] = useState<boolean>(false);
+  const router = useRouter();
+
   return (
     <div className='border-t-[1px] border-slate-200 py-4 flex flex-col items-center'>
       {todoToggle && (
@@ -48,7 +51,8 @@ export const SidebarIndividualNav = ({
         {individualGoals?.map((goal) => (
           <div
             key={goal.id}
-            className='flex items-center text-sm font-pretendard-medium text-slate-700 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'
+            onClick={() => router.push(`/goal/aaa/${goal.id}`)} //임시
+            className='flex items-center text-sm font-pretendard-medium text-slate-700 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg cursor-pointer'
           >
             · {goal.title}
           </div>
