@@ -9,7 +9,7 @@ interface Props {
 
 export const ProgressBoard: React.FC<Props> = ({ completedPercent }) => {
   return (
-    <section className='relative h-[250px] flex flex-row bg-blue-500 w-full tablet:max-w-[306px] desktop:max-w-[50%] rounded-[12px] p-base'>
+    <section className='relative h-[250px] flex flex-row min-w-[280px] bg-blue-500 w-full tablet:max-w-[306px] desktop:max-w-[50%] rounded-[12px] p-base'>
       <div className='absolute flex flex-col gap-y-1 text-white text-lg'>
         <span className='w-[40px] h-[40px] flex items-center justify-center bg-slate-900 rounded-[15px] mb-3'>
           <DoughnutGraph className='w-[17px]' />

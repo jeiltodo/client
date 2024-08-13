@@ -6,13 +6,9 @@ import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-import { useCreateTodo } from '../../../entities/todo/hooks/useCreateTodo';
 
 export const UserGoalCard = (goal: GoalWithTodos) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const { mutate: createTodo } = useCreateTodo();
-  const queryClient = useQueryClient();
 
   const done = goal.todos
     .filter((todo) => todo.done === true)
@@ -33,16 +29,6 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
 
   const handleMore = () => {};
 
-  // const handleCreate = (newTodo: TodoCreateBody) => {
-  //   createTodo(newTodo, {
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries({
-  //         queryKey: goalQueryKeys.individual.todos(),
-  //       });
-  //       setModalOpen(false);
-  //     },
-  //   });
-  // };
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>
       <div className='flex justify-between'>
