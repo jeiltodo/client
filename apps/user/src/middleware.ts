@@ -24,21 +24,9 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  const requestHeaders = new Headers(request.headers);
-  console.log('requestHeaders: ', requestHeaders);
-
-  if (token) {
-    requestHeaders.set('Authorization', `Bearer ${token}`);
-  }
-
-  return NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
 }
 
 //특정 path로만 해당 미들웨어가 동작
 export const config = {
-  matcher: ['/', '/login', '/individual/goals'],
+  matcher: ['/', '/login'],
 };

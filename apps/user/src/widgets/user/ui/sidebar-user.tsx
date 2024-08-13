@@ -82,7 +82,7 @@ export const SidebarUser = () => {
             <div className='text-base font-pretendard-semibold'>새 목표</div>
           </Button>
         </div>
-        <SidebarGroupNav icon={Group} title='그룹' group={groupData?.data} />
+        <SidebarGroupNav icon={Group} group={groupData?.data} />
         <div className='px-5 mb-3'>
           <Button
             variant='outline-dark'
