@@ -5,6 +5,13 @@ export type Goal = {
   title: string;
   todos: Todo[];
 };
+export type GoalDetail = Goal & {
+  memberId: number;
+  createdAt: string;
+  updatedAt: string;
+  progress: number;
+};
+export type GoalWithoutTodos = Omit<GoalDetail, 'todos'>;
 
 export interface IndividualGoalsResponse {
   msg: string;
