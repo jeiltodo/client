@@ -76,11 +76,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {isDesktopOpen && (
-          <>
-            {children}
-          </>
-        )}
+        {isDesktopOpen && <>{children}</>}
       </div>
 
       {/* 태블릿 버전 */}
@@ -122,11 +118,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {isTabletOpen && (
-          <>
-            {children}
-          </>
-        )}
+        {isTabletOpen && <>{children}</>}
       </div>
 
       {isTabletOpen && (
@@ -165,11 +157,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         )}
 
-        {isMobileSidebarOpen && (
-          <>
-            {children}
-          </>
-        )}
+        {isMobileSidebarOpen && <>{children}</>}
       </div>
     </div>
   );

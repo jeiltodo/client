@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { signUpApi, SignUpData } from '../../entities/session';
+import { signUpApi, SignUpBody } from '../../entities/session';
 import { useToast } from '@jeiltodo/ui/shared';
 import { useCallback } from 'react';
 import { SignUpForm } from '../../features/session';
@@ -10,7 +10,7 @@ export const SignUpPage: React.FC = () => {
   const showToast = useToast();
 
   const onSignUp = useCallback(
-    async (credentials: SignUpData) => {
+    async (credentials: SignUpBody) => {
       try {
         const response = await signUpApi(credentials);
         if (response.code === 201) {

@@ -1,21 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { goalQueryKeys } from '../queryKeys';
-import { getIndividualGoals } from '../api/getIndividualGoals';
+import { goalApi } from '../../../entities/goal/api/goalApi';
+import { goalQueryKeys } from './queryKey';
 
 export const useIndividualGoals = () => {
-
-  const {
-    data: individualGoals,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: goalQueryKeys.individual.lists(),
-    queryFn: getIndividualGoals,
+  return useQuery({
+    queryKey: goalQueryKeys.individual.default(),
+    queryFn: goalApi.getGoals,
+    select: (data) => data.data,
   });
-
-  return {
-    individualGoals,
-    error,
-    isLoading,
-  };
 };

@@ -10,7 +10,7 @@ import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
 import { SidebarUserInfo } from '@jeiltodo/ui/entities';
-import { useIndividualGoals } from '../../../entities/goal/hooks/useIndividualGoals';
+import { useIndividualGoals } from '../../../entities/goal';
 
 // entities에서 데이터 individual/goals로 불러올 예정
 const data = [
@@ -54,8 +54,8 @@ export const SidebarUser = () => {
   const [groupCreateToggle, setGroupCreateToggle] = useState<boolean>(false);
   const [groupAttendToggle, setGroupAttendToggle] = useState<boolean>(false);
 
-  const { individualGoals, error, isLoading } = useIndividualGoals();
-  console.log(individualGoals)
+  const { data: individualGoals, error, isLoading } = useIndividualGoals();
+
   return (
     <>
       {goalToggle && <GoalModal setGoalToggle={setGoalToggle} />}

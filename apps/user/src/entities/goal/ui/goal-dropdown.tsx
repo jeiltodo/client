@@ -3,8 +3,8 @@ import { Goal } from '../model/type';
 import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
-  goals: Pick<Goal, 'id' | 'title'>[];
-  defaultGoal?: Pick<Goal, 'id' | 'title'>;
+  goals: Goal[];
+  defaultGoal?: Goal;
   onSelect: Dispatch<SetStateAction<string | number | undefined>>;
 }
 

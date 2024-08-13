@@ -12,20 +12,20 @@ export const TodoButtons = ({
   onClickRemove,
   onClickNote,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFlyoutOpen, setFlyoutOpen] = useState(false);
 
   const handleKebab = () => {
-    setIsOpen((prev) => !prev);
+    setFlyoutOpen((prev) => !prev);
   };
 
   const handleEdit = () => {
     onClickEdit();
-    setIsOpen(false);
+    setFlyoutOpen(false);
   };
 
   const handleRemove = () => {
     onClickRemove();
-    setIsOpen(false);
+    setFlyoutOpen(false);
   };
   return (
     <span className='inline-flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100 relative'>
@@ -37,7 +37,7 @@ export const TodoButtons = ({
         className='cursor-pointer '
       />
 
-      {isOpen && <Flyout onEdit={handleEdit} onDelete={handleRemove} />}
+      {isFlyoutOpen && <Flyout onEdit={handleEdit} onDelete={handleRemove} />}
     </span>
   );
 };

@@ -1,7 +1,7 @@
 import {
   EmailDuplicateApi,
   loginApi,
-  type LoginCredentials,
+  type AuthBody,
 } from '../../../entities/session';
 
 //회원가입
@@ -50,7 +50,7 @@ export const validateSiginupConfirmPassword = (
 };
 
 //로그인 validation
-export const validateLogIn = async (credentials: LoginCredentials) => {
+export const validateLogIn = async (credentials: AuthBody) => {
   const response = await loginApi(credentials);
   if (response.code === 200) return null;
   if (response.code === 400 && response.msg.includes('Wrong password'))
