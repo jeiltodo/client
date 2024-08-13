@@ -40,9 +40,9 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
   };
 
   return (
-    <div className={`min-w-[1200px] bg-white p-6 rounded-xl`}>
-      <div className='flex flex-row items-center justify-between'>
-        <BoardTitle className='mb-[24px]' icon='flag' title={goalData.title} />
+    <div className='bg-white p-6 rounded-xl'>
+      <div className='flex flex-row items-center justify-between mb-[24px]'>
+        <BoardTitle icon='flag' title={goalData.title} />
         <span className='inline-flex items-center gap-2 relative'>
           <Kebab
             width={24}
