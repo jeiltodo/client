@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { goalApi } from '../../../entities/goal/api/goalApi';
+import { individualGoalsApi } from '../api/individualGoalsApi';
 import { goalQueryKeys } from './queryKey';
 
 interface PageLimit {
@@ -15,7 +15,7 @@ export const useGoalsWithTodos = ({ limit }: PageLimit) => {
   return useInfiniteQuery({
     queryKey: goalQueryKeys.individual.todos(),
     queryFn: ({ pageParam }) =>
-      goalApi.getGoalWithTodos({ page: pageParam, limit }),
+      individualGoalsApi.getGoalWithTodos({ page: pageParam, limit }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       const { totalCount, currPage } = lastPage.data as GoalWithTodosResponse;

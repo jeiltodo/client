@@ -4,11 +4,19 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
-interface GoalModalProps {
+interface Props {
   setGoalToggle: Dispatch<SetStateAction<boolean>>;
+  handleCreateIndividualGoal: (title: string) => void;
 }
-export const GoalModal = ({ setGoalToggle }: GoalModalProps) => {
+export const GoalModal = ({ setGoalToggle, handleCreateIndividualGoal }: Props) => {
   const [title, setTitle] = useState<string>('');
+
+  const handleSubmit = () => {
+    if (title) {
+      handleCreateIndividualGoal(title);
+      setGoalToggle(false); // 모달 닫기
+    }
+  };
 
   return (
     <BaseModal
@@ -27,7 +35,7 @@ export const GoalModal = ({ setGoalToggle }: GoalModalProps) => {
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!title} className='w-full mt-10 h-12'>
+      <Button isDisabled={!title} className='w-full mt-10 h-12' onClick={handleSubmit}>
         확인
       </Button>
     </BaseModal>

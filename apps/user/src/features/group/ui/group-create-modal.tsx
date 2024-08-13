@@ -6,11 +6,20 @@ import { BaseModal } from '../../../shared/ui/base-modal';
 
 interface GroupCreateModalProps {
   setGroupCreateToggle: Dispatch<SetStateAction<boolean>>;
+  handleCreateGroup: (title: string) => void;
 }
 export const GroupCreateModal = ({
   setGroupCreateToggle,
+  handleCreateGroup
 }: GroupCreateModalProps) => {
   const [title, setTitle] = useState<string>('');
+
+  const handleSubmit = () => {
+    if (title) {
+      handleCreateGroup(title);
+      setGroupCreateToggle(false); // 모달 닫기
+    }
+  };
 
   return (
     <BaseModal
@@ -29,7 +38,7 @@ export const GroupCreateModal = ({
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!title} className='w-full mt-10 h-12'>
+      <Button isDisabled={!title} className='w-full mt-10 h-12' onClick={handleSubmit}>
         확인
       </Button>
     </BaseModal>
