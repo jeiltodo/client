@@ -55,7 +55,7 @@ export function Button({
   ...props
 }: ButtonProps): React.ReactElement {
   const baseClasses =
-    'font-pretendard-medium text-base transition-all duration-300 ease-in-out';
+    'font-pretendard-medium text-base transition-all duration-300 ease-in-out cursor';
 
   const variantClasses = {
     default:

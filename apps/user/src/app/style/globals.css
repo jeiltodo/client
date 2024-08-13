@@ -12,13 +12,12 @@
   .common-layout {
     padding-left: 84px;
     padding-right: 24px;
-    padding-top: 16px;
+    padding-top: 24px;
   }
 }
 
 @media (min-width: 1024px) {
   .common-layout {
     padding-left: 360px;
-    padding-top: 24px;
   }
 }
