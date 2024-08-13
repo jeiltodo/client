@@ -1,5 +1,5 @@
 export type PageList = {
-  nextCursor: number;
+  currPage: number;
   totalCount: number;
 };
 

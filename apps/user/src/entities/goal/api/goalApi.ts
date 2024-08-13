@@ -14,15 +14,12 @@ export const goalApi = {
     }
   },
 
-  getGoalWithTodos: async (page: number, limit: number) => {
+  getGoalWithTodos: async (params: { page: number; limit: number }) => {
     try {
       const response = await client.get<
         ResponsePageListWith<{ goals: GoalWithTodos[] }>
       >('/individual/goals/todos', {
-        params: {
-          page,
-          limit,
-        },
+        params,
       });
       return response.data;
     } catch (error) {
