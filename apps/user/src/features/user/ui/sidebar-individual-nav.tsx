@@ -36,22 +36,24 @@ export const SidebarIndividualNav = ({
       {todoToggle && (
         <TodoModal taskOwner='체다치즈' setTodoToggle={setTodoToggle} />
       )}
-      <div className='mb-4 flex items-center justify-between gap-2 w-[240px] h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
-        <div className='flex items-center gap-2'>
+      <div className='px-5 mb-4 flex items-center justify-start gap-2 w-full h-9'>
+        <div className='flex items-center gap-2 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
           <Icon className='w-6 h-6' />
           <div className='block text-lg font-pretendard-medium text-slate-800'>
             {title}
           </div>
         </div>
       </div>
-      {individualGoals?.map((goal) => (
-        <div
-          key={goal.id}
-          className='flex items-center text-sm font-pretendard-medium text-slate-700 w-[240px] h-9 max-h-36 overflow-y-scroll scrollbar-hide hover:bg-slate-50 active:bg-slate-100 rounded-lg'
-        >
-          · {goal.title}
-        </div>
-      ))}
+      <div className='px-5 max-h-36 overflow-y-scroll scrollbar-hide w-full'>
+        {individualGoals?.map((goal) => (
+          <div
+            key={goal.id}
+            className='flex items-center text-sm font-pretendard-medium text-slate-700 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'
+          >
+            · {goal.title}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
