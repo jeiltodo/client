@@ -1,23 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { goalQueryKeys } from '../queryKeys';
-import { getIndividualGoals } from '../api/getIndividualGoals';
+import { individualGoalsApi } from '../api/individualGoalsApi';
+import { goalQueryKeys } from './queryKey';
 import { getIndividualSingleGoal } from '../api/getIndividualSignleGoal';
 
 export const useIndividualGoals = () => {
-  const {
-    data: individualGoals,
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: goalQueryKeys.individual.lists(),
-    queryFn: getIndividualGoals,
+  return useQuery({
+    queryKey: goalQueryKeys.individual.default(),
+    queryFn: individualGoalsApi.getGoals,
+    select: (data) => data.data,
   });
-
-  return {
-    individualGoals,
-    error,
-    isLoading,
-  };
 };
 export const useIndividualSingleGoal = (goalId: number) => {
   const {
@@ -27,7 +18,6 @@ export const useIndividualSingleGoal = (goalId: number) => {
   } = useQuery({
     queryKey: goalQueryKeys.individual.single(),
     queryFn: () => getIndividualSingleGoal(goalId),
-    enabled: goalId !== null,
   });
 
   return {

@@ -1,39 +1,30 @@
-import { Plus, Search } from '@jeiltodo/icons';
-import { Button } from '@jeiltodo/ui';
 import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
-
-interface GroupProps {
-  id: number;
-  title: string;
-}
+import { GroupProps } from '../model/type';
 
 interface SidebarGroupNavProps {
   icon: ForwardRefExoticComponent<
     Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
   >;
-  title: string;
-  group: GroupProps[];
+  group: GroupProps[] | undefined;
 }
 
 export const SidebarGroupNav = ({
   icon: Icon,
-  title,
   group,
 }: SidebarGroupNavProps) => {
   return (
-    <div>
-      <div className='px-6 py-[18px] flex items-center justify-start border-t-[1px] border-slate-200'>
-        <Icon className='w-6 h-6' />
-        <div className='block text-lg font-pretendard-medium text-slate-800'>
-          {title}
-        </div>
-      </div>
-      {group.map((item) => (
+    <div className='border-t-[1px] border-slate-200 flex flex-col gap-4 py-4 max-h-[178px] overflow-y-scroll scrollbar-hide'>
+      {group?.map((item) => (
         <div
           key={item.id}
-          className='block pl-8 py-2 text-sm font-pretendard-medium text-slate-700'
+          className='px-5 flex items-center justify-start gap-2 relative w-full h-9'
         >
-          · {item.title}
+          <div className='flex items-center justify-start gap-2 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
+            <Icon className='w-6 h-6' />
+            <div className='block text-lg font-pretendard-medium text-slate-800'>
+              {item.title}
+            </div>
+          </div>
         </div>
       ))}
     </div>

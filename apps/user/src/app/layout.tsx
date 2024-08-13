@@ -3,6 +3,7 @@ import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 import { QueryProvider } from '../shared/model/query/query-provider';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -20,6 +21,7 @@ export default function RootLayout({
         <QueryProvider>
           <ToastContainer />
           {children}
+          <ReactQueryDevtools initialIsOpen={true} />
         </QueryProvider>
       </body>
     </html>

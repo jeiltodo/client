@@ -1,9 +1,10 @@
 import { client } from '../../../shared';
+import { Response } from '../../session';
 import { GoalWithoutTodos } from '../model/type';
 
 export const getIndividualSingleGoal = async (
   goalId: number
-): Promise<GoalWithoutTodos> => {
+): Promise<Response<GoalWithoutTodos>> => {
   try {
     const response = await client.get(`/individual/goals/single/${goalId}`);
     return response.data;
