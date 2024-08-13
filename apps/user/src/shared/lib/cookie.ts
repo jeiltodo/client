@@ -25,6 +25,7 @@ export const setCookie = (
 
 // 쿠키 가져오기
 export const getCookie = (key: string) => {
+  if (typeof document === 'undefined') return undefined;
   // 쿠키 이름과 일치하는 부분을 찾기 위한 정규식 생성
   const regex = new RegExp(
     `(?:^|; )${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}=([^;]*)`

@@ -9,13 +9,12 @@ export const loginApi = async (credentials: LoginCredentials) => {
     );
 
     const accessToken = response.data.data?.access_token;
-
-    if (accessToken) {
-      client.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+    const refreshToken = response.data.data?.refresh_token;
+    if (accessToken && refreshToken) {
 
       setCookie('accessToken', accessToken);
+      setCookie('refreshToken', refreshToken);
     }
-    return response.data;
   } catch (error) {
     console.error('Login API error:', error);
     throw error;

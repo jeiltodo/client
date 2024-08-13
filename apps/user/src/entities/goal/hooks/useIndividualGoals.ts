@@ -1,11 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
+import { queryOptions, useQuery } from '@tanstack/react-query';
 import { goalQueryKeys } from '../queryKeys';
 import { getIndividualGoals } from '../api/getIndividualGoals';
 
 export const useIndividualGoals = () => {
-
   const {
-    data: individualGoals,
+    data: individualGoalsData,
     error,
     isLoading,
   } = useQuery({
@@ -14,8 +13,9 @@ export const useIndividualGoals = () => {
   });
 
   return {
-    individualGoals,
+    individualGoalsData,
     error,
     isLoading,
   };
 };
+
