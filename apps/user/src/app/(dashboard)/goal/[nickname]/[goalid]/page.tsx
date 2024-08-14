@@ -1,5 +1,5 @@
-import { DetailPage } from '../../../../../page/goal';
+import { IndivDetailPage } from '../../../../../page/goal';
 
-export default function Page({ params }: { params: { goalid: string } }) {
-  return <DetailPage params={params} />;
+export default function Page({ params }: { params: { goalid: number } }) {
+  return <IndivDetailPage params={params} />;
 }

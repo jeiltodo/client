@@ -4,5 +4,7 @@ module.exports = {
     'react/function-component-definition': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'eslint-disable tsdoc/syntax': 'off',
+    '@typescript-eslint/naming-convention': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
   },
 };

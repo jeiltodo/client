@@ -1,52 +1,37 @@
 import { Button } from '@jeiltodo/ui/shared';
-import { useEffect, useState } from 'react';
-import { todoApi, SingleGoalTodo, TodoModal } from '../../../entities/todo';
-import { TodoList } from '../../../features/todo';
+import { useState } from 'react';
 import { Plus } from '@jeiltodo/icons';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { individualGoalsOptions } from '../../../entities/goal';
-import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
+import type { SingleGoalTodoResponse } from '../../../entities/todo';
+import { TodoModal } from '../../../entities/todo';
+import { TodoList } from '../../../features/todo';
+import { SingleGoalResponse } from '../../../entities/goal';
 
-export const TodoDoneBoard = ({ goalId }: { goalId: number }) => {
-  const [todos, setTodos] = useState<SingleGoalTodo[]>([]);
+export const TodoDoneBoard = ({
+  todos,
+  goal,
+}: {
+  todos: SingleGoalTodoResponse;
+  goal: SingleGoalResponse;
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const queryClient = useQueryClient();
-  const { data: individualGoalsData } = useQuery(individualGoalsOptions());
-  const initialGoal =
-    individualGoalsData &&
-    individualGoalsData.data.individualGoals.find((goal) => goal.id === goalId);
 
-  useEffect(() => {
-    const fetchTodos = async () => {
-      try {
-        const response = await todoApi.getSingleGoalTodo(goalId);
-        console.log('response: ', response);
-        setTodos(response.data);
-      } catch (error) {
-        console.error('Failed to fetch todos:', error);
-      }
+  const todosForList = todos.data.map((todo) => {
+    return {
+      id: todo.id,
+      title: todo.title,
+      isDone: todo.isDone,
+      noteId: todo.noteId ?? undefined,
+      goal: goal.data,
     };
+  });
 
-    fetchTodos();
-  }, [goalId]);
-
-  const done = todos
-    .filter((todo) => todo.is_done === true)
-    .map((todo) => ({
-      ...todo,
-      done: todo.is_done,
-    }));
-
-  const notDone = todos
-    .filter((todo) => todo.is_done === false)
-    .map((todo) => ({
-      ...todo,
-      done: todo.is_done,
-    }));
+  const done = todosForList.filter((todo) => todo.isDone);
+  const notDone = todosForList.filter((todo) => !todo.isDone);
 
   const handleAddModal = () => {
     setModalOpen(true);
   };
+
   return (
     <div className='desktop:grid-rows-2 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
       <div className='bg-white rounded-xl px-6 py-4'>
@@ -63,23 +48,7 @@ export const TodoDoneBoard = ({ goalId }: { goalId: number }) => {
                 할일 추가
               </Button>
             </div>
-            <TodoList
-              todos={notDone}
-              variant='user'
-              onCheckSuccess={() => {
-                queryClient.invalidateQueries({
-                  queryKey: goalQueryKeys.individual.single(),
-                });
-                queryClient.invalidateQueries({
-                  queryKey: goalQueryKeys.individual.progress(),
-                });
-              }}
-              onDeleteSuccess={() => {
-                queryClient.invalidateQueries({
-                  queryKey: goalQueryKeys.individual.single(),
-                });
-              }}
-            />
+            <TodoList todos={done} variant='user' />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -104,23 +73,7 @@ export const TodoDoneBoard = ({ goalId }: { goalId: number }) => {
         {done.length !== 0 ? (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <TodoList
-              todos={done}
-              variant='user'
-              onCheckSuccess={() => {
-                queryClient.invalidateQueries({
-                  queryKey: goalQueryKeys.individual.single(),
-                });
-                queryClient.invalidateQueries({
-                  queryKey: goalQueryKeys.individual.progress(),
-                });
-              }}
-              onDeleteSuccess={() => {
-                queryClient.invalidateQueries({
-                  queryKey: goalQueryKeys.individual.single(),
-                });
-              }}
-            />
+            <TodoList todos={notDone} variant='user' />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -131,8 +84,8 @@ export const TodoDoneBoard = ({ goalId }: { goalId: number }) => {
           </div>
         )}
       </div>
-      {modalOpen && individualGoalsData && (
-        <TodoModal setTodoToggle={setModalOpen} initialGoal={initialGoal} />
+      {modalOpen && (
+        <TodoModal setTodoToggle={setModalOpen} initialGoal={goal.data} />
       )}
     </div>
   );

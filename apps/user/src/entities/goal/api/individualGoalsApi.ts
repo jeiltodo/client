@@ -1,5 +1,11 @@
 import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
-import { Goal, GoalWithTodos, IndividualGoalsResponse, UserProgress } from '../model/type';
+import {
+  Goal,
+  GoalWithTodos,
+  IndividualGoalsResponse,
+  SingleGoalResponse,
+  UserProgress,
+} from '../model/type';
 
 export const individualGoalsApi = {
   getAllProgress: async () => {
@@ -27,6 +33,18 @@ export const individualGoalsApi = {
       throw error;
     }
   },
+  getSingleGoal: async (goalId: number) => {
+    try {
+      const response = await client.get<SingleGoalResponse>(
+        `/individual/goals/single/${goalId}`
+      );
+      return response.data;
+    } catch (error) {
+      // 오류가 발생한 경우 적절히 처리
+      console.error('Fail fetch individual goal:', error);
+      throw error;
+    }
+  },
 
   getGoals: async () => {
     try {
@@ -43,9 +61,7 @@ export const individualGoalsApi = {
   },
 
   // POST 요청: 새로운 개인 목표 생성
-  createGoal: async (
-    title: string
-  ): Promise<IndividualGoalsResponse> => {
+  createGoal: async (title: string): Promise<IndividualGoalsResponse> => {
     try {
       const response = await client.post('/individual/goals', { title });
       return response.data;

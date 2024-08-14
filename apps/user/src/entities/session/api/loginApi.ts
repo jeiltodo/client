@@ -9,8 +9,8 @@ export const loginApi = async (credentials: AuthBody) => {
       credentials
     );
 
-    const accessToken = response.data.data?.access_token;
-    const refreshToken = response.data.data?.refresh_token;
+    const accessToken = response.data.data?.accessToken;
+    const refreshToken = response.data.data?.refreshToken;
 
     if (accessToken && refreshToken) {
       setCookie('accessToken', accessToken);

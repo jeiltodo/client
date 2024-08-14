@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { individualGoalsApi } from '../api/individualGoalsApi';
 import { goalQueryKeys } from './queryKey';
-import { getIndividualSingleGoal } from '../api/getIndividualSignleGoal';
 
 export const useIndividualGoals = () => {
   return useQuery({
@@ -12,7 +11,7 @@ export const useIndividualGoals = () => {
 };
 export const useIndividualSingleGoal = (goalId: number) => {
   return useQuery({
-    queryKey: goalQueryKeys.individual.single(),
-    queryFn: () => getIndividualSingleGoal(goalId),
+    queryKey: goalQueryKeys.individual.single(goalId),
+    queryFn: () => individualGoalsApi.getSingleGoal(goalId),
   });
 };

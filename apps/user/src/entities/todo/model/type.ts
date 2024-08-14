@@ -1,6 +1,6 @@
 export type Todo = {
   id: number;
-  done: boolean;
+  isDone: boolean;
   title: string;
   noteId?: number;
 };
@@ -12,7 +12,7 @@ export type Asignee = {
 };
 
 export type TodoCreateBody = {
-  goal_id: number;
+  goalId: number;
   title: string;
 };
 
@@ -27,7 +27,8 @@ export type SingleGoalTodoResponse = {
 export interface SingleGoalTodo {
   id: number;
   title: string;
-  is_done: boolean;
-  created_at: string;
-  updated_at: string;
+  isDone: boolean;
+  createdAt: string;
+  updatedAt: string;
+  noteId: number | null;
 }

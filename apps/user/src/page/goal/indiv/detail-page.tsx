@@ -4,24 +4,32 @@ import { TitleProgressBarCard } from '../../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { useIndividualSingleGoal } from '../../../entities/goal/hooks/useIndividualGoals';
 import { TodoDoneBoard } from '../../../widgets/todo';
+import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 
-export const DetailPage = ({ params }: { params: { goalid: string } }) => {
+export const IndivDetailPage = ({
+  params,
+}: {
+  params: { goalid: number; nickname: string };
+}) => {
   const goalId = Number(params.goalid);
   const {
-    data: singleGoalTodo,
+    data: singleGoal,
     error,
     isLoading,
   } = useIndividualSingleGoal(goalId);
+  const { data: singleGoalTodo } = useSingleGoalTodo(goalId);
+  console.log('detail-page singleGoal: ', singleGoal);
+  console.log('detail-page singleGoalTodo: ', singleGoalTodo);
 
   return (
     <div>
-      {!isLoading && singleGoalTodo && (
+      {!isLoading && singleGoal && singleGoalTodo && (
         <>
-          <LayoutTitle title={'목표'} />
+          <LayoutTitle title={`${params.nickname}의 목표`} />
           <div className='flex flex-col gap-y-6'>
-            <TitleProgressBarCard goalData={singleGoalTodo.data} />
+            <TitleProgressBarCard goalData={singleGoal.data} />
             <NotesPushButton goalId={goalId} />
-            <TodoDoneBoard goalId={goalId} />
+            <TodoDoneBoard todos={singleGoalTodo} goal={singleGoal.data} />
           </div>
         </>
       )}
