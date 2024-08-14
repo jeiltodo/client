@@ -16,7 +16,7 @@ import { useQuery } from '@tanstack/react-query';
 export const UserDashboardPage = () => {
   const { data: progress } = useQuery(progressAllOptions());
   const { data, hasNextPage, fetchNextPage } = useGoalsWithTodos({
-    limit: 3,
+    limit: 2,
   });
   const { ref, inView } = useInView();
 
@@ -30,7 +30,7 @@ export const UserDashboardPage = () => {
     <div className='flex flex-col items-start gap-4 w-full'>
       <div className='flex flex-col desktop:!flex-row items-center gap-6 w-full'>
         <div className='flex flex-col items-start gap-4 h-[250px] min-w-[280px] bg-white w-full desktop:max-w-[588px] rounded-[12px] p-base'>
-          <div className='flex items-center justify-between w-full'>
+          <div className='flex items-center justify-between w-full h-10'>
             <BoardTitle icon='BlueMarker' title='최근 등록한 할 일' />
             <Link href='/todo' className='flex items-center text-slate-600'>
               <div className='text-sm font-medium py-[2px]'>모두보기</div>
@@ -41,9 +41,9 @@ export const UserDashboardPage = () => {
         </div>
         <ProgressBoard completedPercent={progress?.progress ?? 0} />
       </div>
-      <div className='desktop:max-w-[1200px] w-full first-letter:min-w-[280px] h-[800px] bg-white rounded-xl p-base'>
+      <div className='desktop:max-w-[1200px] w-full first-letter:min-w-[280px] min-h-[50vh] flex-1 bg-white rounded-xl p-base'>
         <BoardTitle icon='flag' title='개인 목표' />
-        <div className='flex flex-wrap gap-4 mt-6 h-[700px] overflow-y-scroll scrollbar-hide'>
+        <div className='flex flex-wrap gap-4 mt-6 overflow-y-scroll scrollbar-hide'>
           {data?.pages.map((group, i) => (
             <React.Fragment key={i}>
               {group.data.goals.map((goal) => (

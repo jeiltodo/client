@@ -3,6 +3,7 @@ export const todoQueryKeys = {
 
   // 개인 모든 목표 조회
   individual: {
-    all: () => [...todoQueryKeys.todo, 'individual'] as const,
+    all: (params?: { limit?: number; goalIds?: string; isDone?: boolean | null }) => 
+      [...todoQueryKeys.todo, 'individual', 'all', params] as const,
   },
 };

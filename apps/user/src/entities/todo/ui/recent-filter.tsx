@@ -48,7 +48,7 @@ export const RecentFilter = ({ goals, onClickFilter }: Props) => {
     <>
       <div className='flex items-start justify-start gap-3 max-h-[132px] pb-3 border-b-[1px] border-slate-200'>
         <div className='min-w-[40px] text-sm font-medium pt-[2px]'>목표</div>
-        <div className='w-full overflow-y-scroll scrollbar-hide h-full'>
+        <div className='w-full overflow-y-scroll scrollbar-hide max-h-[132px]'>
           <ButtonGroup gap={3}>
             {goals.map((goal) => (
               <Button

@@ -12,10 +12,10 @@ export interface Todos {
     id: number;
     title: string;
   };
-  is_done: boolean | null | undefined;
+  isDone: boolean | null | undefined;
   created_at: string;
   updated_at: string;
-  note_id: number;
+  noteId: number;
 }
 
 export type Asignee = {
@@ -25,7 +25,7 @@ export type Asignee = {
 };
 
 export type TodoCreateBody = {
-  goal_id: number;
+  goalId: number;
   title: string;
 };
 

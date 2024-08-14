@@ -10,8 +10,9 @@ export const useCreateTodo = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: goalQueryKeys.individual.todos(),
-      });
+        predicate: (query) =>
+          query.queryKey.includes('todos')
+      })
     },
   });
 };

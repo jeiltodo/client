@@ -52,9 +52,12 @@ export const todoApi = {
     }
   },
 
-  getRecentTodo: async (
-    params: { page: number; limit: number; goal_ids: number[]; is_done: boolean | null | undefined }
-  ) => {
+  getRecentTodo: async (params: {
+    page: number;
+    limit: number;
+    goalIds: string;
+    isDone: boolean | null | undefined;
+  }) => {
     try {
       const response = await client.get<ResponsePageListRecentTodo<Todos>>(
         '/todo/individual/all',

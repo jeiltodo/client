@@ -4,8 +4,8 @@ import { todoApi } from '../api/todoApi';
 
 interface PageLimit {
   limit: number;
-  goal_ids: number[];
-  is_done: boolean | null | undefined;
+  goalIds: string;
+  isDone: boolean | null | undefined;
 }
 
 interface GoalWithTodosResponse {
@@ -13,18 +13,23 @@ interface GoalWithTodosResponse {
   currPage: number;
 }
 
-export const useRecentTodo = ({ limit, goal_ids, is_done }: PageLimit) => {
+export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
   return useInfiniteQuery({
-    queryKey: todoQueryKeys.individual.all(),
+    queryKey: todoQueryKeys.individual.all({ limit, goalIds, isDone }),
     queryFn: ({ pageParam }) =>
-      todoApi.getRecentTodo({ page: pageParam || 1, limit, goal_ids, is_done }),
+      todoApi.getRecentTodo({
+        page: pageParam || 1,
+        limit,
+        goalIds: goalIds,
+        isDone: isDone,
+      }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       const { totalCount, currPage } = lastPage.data as GoalWithTodosResponse;
       const totalPages = calculateTotalPages(totalCount, limit);
       return currPage < totalPages ? currPage + 1 : undefined;
     },
-    enabled: is_done !== undefined,
+    enabled: isDone !== undefined,
     select: (data) => ({
       ...data,
       pages: data.pages.map((page) => ({
@@ -33,18 +38,16 @@ export const useRecentTodo = ({ limit, goal_ids, is_done }: PageLimit) => {
           ...page.data,
           todos: page.data.todos.map((todo) => ({
             id: todo.id,
-            done: todo.is_done,
+            done: todo.isDone ?? false, // null 또는 undefined일 경우 false로 설정
             title: todo.title,
-            noteId: todo.note_id,
-            createdAt: todo.created_at,
-            updatedAt: todo.updated_at,
+            noteId: todo.noteId,
             goal: {
               id: todo.goal.id,
               title: todo.goal.title,
-              memberId: null, // 필요한 경우 기본값 설정
-              createdAt: null,
-              updatedAt: null,
-              progress: null,
+              memberId: 0, // 기본값 설정
+              createdAt: '', // 기본값 설정
+              updatedAt: '', // 기본값 설정
+              progress: 0, // 기본값 설정
             },
           })),
         },
