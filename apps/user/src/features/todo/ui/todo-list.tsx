@@ -72,12 +72,12 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   };
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos?.map(({ id, title, done, goal }) => (
+      {todos?.map(({ id, title, isDone, goal }) => (
         <li key={id} className='list-none w-full h-6 flex justify-between group '>
           <span className='inline-flex gap-2 items-center min-w-[80%]'>
             <TodoContent
               key={id}
-              todo={{ id, title, done }}
+              todo={{ id, title, isDone }}
               onCheck={handleCheck}
             />
             {variant === 'group' && <TodoAsignee />}
@@ -90,7 +90,7 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
           {editModalOpen && (
             <TodoModal
               setTodoToggle={setEditModalOpen}
-              initialTodo={{ id, title, done }}
+              initialTodo={{ id, title, isDone }}
               initialGoal={goal}
             />
           )}

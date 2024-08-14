@@ -33,7 +33,7 @@ export const UserDashboardPage = () => {
           <div className='flex items-center justify-between w-full h-10'>
             <BoardTitle icon='BlueMarker' title='최근 등록한 할 일' />
             <Link href='/todo' className='flex items-center text-slate-600'>
-              <div className='text-sm font-medium py-[2px]'>모두보기</div>
+              <div className='text-sm font-medium pt-[2px]'>모두보기</div>
               <ArrowRightGray width={24} height={24} className='text-slate-600' />
             </Link>
           </div>

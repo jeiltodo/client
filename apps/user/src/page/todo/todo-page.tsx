@@ -26,7 +26,7 @@ export const TodoPage = () => {
 
   const goalIdsString = query.goalIds.join(',');
   const { data, hasNextPage, fetchNextPage } = useRecentTodo({
-    limit: 10,
+    limit: 15,
     goalIds: goalIdsString,
     isDone: query.status,
   });
@@ -41,13 +41,10 @@ export const TodoPage = () => {
   };
 
   const { ref, inView } = useInView();
-  console.log(inView);
+  // console.log(inView);
   useEffect(() => {
     if (inView) {
-      if (hasNextPage) {
-        console.log('hasNextPage: ', hasNextPage);
-        fetchNextPage();
-      }
+      hasNextPage && fetchNextPage();
     }
   }, [inView]);
 
@@ -67,11 +64,11 @@ export const TodoPage = () => {
           할일 추가
         </Button>
       </div>
-      <div className='desktop:max-w-[1200px] w-full min-h-[40vh]  bg-white rounded-xl p-base flex flex-col'>
+      <div className='desktop:max-w-[1200px] w-full bg-white rounded-xl p-base flex flex-col'>
         <RecentFilter goals={filteredData} onClickFilter={handleClick} />
-        <div className='mt-6 flex flex-wrap overflow-y-scroll h-[200px] bg-gray-500'>
+        <div className='mt-6 flex flex-wrap overflow-y-scroll scrollbar-hide h-[400px]'>
           <TodoList todos={allTodos} variant='user' />
-          <div ref={ref} className='h-12 w-full bg-red-700' />
+          <div ref={ref} className='h-6' />
         </div>
       </div>
     </div>
