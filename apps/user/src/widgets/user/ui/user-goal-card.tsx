@@ -4,7 +4,7 @@ import { Button, ProgressBar } from '@jeiltodo/ui/shared';
 import { GoalWithTodos } from '../../../entities/goal';
 import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
-import { ArrowRight, Plus } from '@jeiltodo/icons';
+import { ArrowRight, PlusBlue } from '@jeiltodo/icons';
 import { useState } from 'react';
 
 export const UserGoalCard = (goal: GoalWithTodos) => {
@@ -38,7 +38,7 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
           className='flex gap-1 items-center text-sm'
           onClick={handleAddModal}
         >
-          <Plus width={16} height={16} />
+          <PlusBlue width={16} height={16} />
           할일 추가
         </Button>
       </div>

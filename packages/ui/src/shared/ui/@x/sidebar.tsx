@@ -36,7 +36,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   };
 
   return (
-    <div className='min-w-[60px] desktop:min-w-[280px]'>
+    <div className='min-w-[60px] desktop:min-w-[280px] relative z-50'>
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10

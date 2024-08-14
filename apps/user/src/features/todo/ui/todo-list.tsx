@@ -1,16 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
-import type { Todo } from '../../../entities/todo';
 import { TodoAsignee, TodoButtons, TodoModal } from '../../../entities/todo';
+import type { Todo } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import type { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
-import { useParams } from 'next/navigation';
 
 interface Props {
   todos: (Todo & { goal?: Goal })[];
@@ -25,7 +25,7 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const { mutate: deleteTodo } = useDeleteTodo();
 
   const params = useParams();
-  const goalId = Number(params?.goalid);
+  const goalId = Number(params.goalid);
 
   const queryClient = useQueryClient();
 
@@ -57,6 +57,9 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
         queryClient.invalidateQueries({
           predicate: (query) => query.queryKey.includes('todos'),
         });
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.includes('todos'),
+        });
       },
     });
   };
@@ -66,6 +69,9 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: goalQueryKeys.individual.todos(),
+        });
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.includes('todos'),
         });
         queryClient.invalidateQueries({
           queryKey: goalQueryKeys.individual.lists(),
@@ -81,8 +87,11 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   return (
     <ul className='w-full flex flex-wrap gap-2'>
       {todos.map(({ id, title, isDone, goal }) => (
-        <li key={id} className='list-none w-full flex justify-between group '>
-          <span className='inline-flex gap-4 items-center min-w-[280px]'>
+        <li
+          key={id}
+          className='list-none w-full h-6 flex justify-between group '
+        >
+          <span className='inline-flex gap-2 items-center min-w-[80%]'>
             <TodoContent
               key={id}
               todo={{ id, title, isDone }}

@@ -1,11 +1,7 @@
-import {
-  queryOptions,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
+import { goalQueryKeys } from './queryKey';
 import { individualGoalsApi } from '../api/individualGoalsApi';
 import { AxiosError } from 'axios';
-import { goalQueryKeys } from './queryKey';
 
 export const individualGoalsOptions = () =>
   queryOptions({
