@@ -12,13 +12,13 @@ export const GroupGoalCard = (goal: Goal) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const done = goal.todos
-    .filter((todo) => todo.done === true)
+    .filter((todo) => todo.isDone === true)
     .map((todo) => ({
       ...todo,
       goal: { id: goal.id, title: goal.title },
     }));
   const notDone = goal.todos
-    .filter((todo) => todo.done === false)
+    .filter((todo) => todo.isDone === false)
     .map((todo) => ({
       ...todo,
       goal: { id: goal.id, title: goal.title },

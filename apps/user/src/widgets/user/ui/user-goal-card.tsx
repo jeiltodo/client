@@ -11,13 +11,13 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const done = goal.todos
-    .filter((todo) => todo.done === true)
+    .filter((todo) => todo.isDone === true)
     .map((todo) => ({
       ...todo,
       goal,
     }));
   const notDone = goal.todos
-    .filter((todo) => todo.done === false)
+    .filter((todo) => todo.isDone === false)
     .map((todo) => ({
       ...todo,
       goal,

@@ -1,6 +1,6 @@
 export type Todo = {
   id: number;
-  done: boolean;
+  isDone: boolean;
   title: string;
   noteId?: number;
 };
@@ -48,7 +48,7 @@ export interface ResponsePageListRecentTodo<T> {
   code: number;
   data: {
     todos: T[];
-    currPage: number;
+    currentPage: number;
     totalCount: number;
   };
 }

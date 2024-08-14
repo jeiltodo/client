@@ -10,7 +10,7 @@ interface PageLimit {
 
 interface GoalWithTodosResponse {
   totalCount: number;
-  currPage: number;
+  currentPage: number;
 }
 
 export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
@@ -25,9 +25,9 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const { totalCount, currPage } = lastPage.data as GoalWithTodosResponse;
+      const { totalCount, currentPage } = lastPage.data as GoalWithTodosResponse;
       const totalPages = calculateTotalPages(totalCount, limit);
-      return currPage < totalPages ? currPage + 1 : undefined;
+      return currentPage < totalPages ? currentPage + 1 : undefined;
     },
     enabled: isDone !== undefined,
     select: (data) => ({
@@ -38,7 +38,7 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
           ...page.data,
           todos: page.data.todos.map((todo) => ({
             id: todo.id,
-            done: todo.isDone ?? false, // null 또는 undefined일 경우 false로 설정
+            isDone: todo.isDone ?? false, // null 또는 undefined일 경우 false로 설정
             title: todo.title,
             noteId: todo.noteId,
             goal: {
