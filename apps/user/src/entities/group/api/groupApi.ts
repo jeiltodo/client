@@ -1,6 +1,10 @@
 import { GroupResponse, GroupPostResponse } from '../model/type';
 import { client, ResponseWith } from '../../../shared';
-import { GroupWithMembers } from '@jeiltodo/ui/entities';
+import {
+  GroupCode,
+  GroupTitleOrCode,
+  GroupWithMembers,
+} from '@jeiltodo/ui/entities';
 
 export const groupApi = {
   // GET 요청: 개인 그룹 조회
@@ -40,6 +44,31 @@ export const groupApi = {
     try {
       const response = await client.get<ResponseWith<GroupWithMembers>>(
         `/groups/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+
+  reissueGroupoCode: async (id: number) => {
+    try {
+      const response = await client.get<ResponseWith<GroupCode>>(
+        `/groups/code/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+
+  updateGroupoCode: async (id: number, secretCode: string) => {
+    try {
+      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
+        `/groups/code/${id}`,
+        { secretCode }
       );
       return response.data;
     } catch (error) {
