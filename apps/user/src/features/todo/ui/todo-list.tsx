@@ -1,36 +1,33 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Todo,
-  TodoAsignee,
-  TodoButtons,
-  TodoModal,
-} from '../../../entities/todo';
+import { useQueryClient } from '@tanstack/react-query';
+import type { Todo } from '../../../entities/todo';
+import { TodoAsignee, TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import { Goal } from '../../../entities/goal';
+import type { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
+import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
+import { useParams } from 'next/navigation';
 
 interface Props {
   todos: (Todo & { goal?: Goal })[];
   variant?: 'user' | 'group';
-  onCheckSuccess: () => void;
-  onDeleteSuccess: () => void;
 }
 
-export const TodoList = ({
-  todos,
-  variant = 'user',
-  onCheckSuccess,
-  onDeleteSuccess,
-}: Props) => {
+export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
+
+  const params = useParams();
+  const goalId = Number(params?.goalid);
+
+  const queryClient = useQueryClient();
 
   const handleClickEdit = () => {
     setEditModalOpen(true);
@@ -44,40 +41,54 @@ export const TodoList = ({
 
   const handleCheck = (todoId: number) => {
     checkTodo(todoId, {
-      onSuccess: onCheckSuccess,
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.todos(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.lists(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.single(goalId),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.progress(),
+        });
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.includes('todos'),
+        });
+      },
     });
   };
-  // {
-  //   onSuccess: () => {
-  //     queryClinet.invalidateQueries({
-  //       queryKey: goalQueryKeys.individual.todos(),
-  //     });
-  //     queryClinet.invalidateQueries({
-  //       queryKey: goalQueryKeys.individual.progress(),
-  //     });
-  //   },
-  // }
 
   const handleRemove = (id: number) => {
-    deleteTodo(id, { onSuccess: onDeleteSuccess });
+    deleteTodo(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.todos(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.lists(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.single(goalId),
+        });
+      },
+    });
     setRemoveModalOpen(false);
   };
-  // {
-  //   onSuccess: () => {
-  //     queryClinet.invalidateQueries({
-  //       queryKey: goalQueryKeys.individual.todos(),
-  //     });
-  //   },
-  // }
+
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos.map(({ id, title, done, goal }) => (
+      {todos.map(({ id, title, isDone, goal }) => (
         <li key={id} className='list-none w-full flex justify-between group '>
           <span className='inline-flex gap-4 items-center min-w-[280px]'>
             <TodoContent
               key={id}
-              todo={{ id, title, done }}
-              onCheck={handleCheck}
+              todo={{ id, title, isDone }}
+              onCheck={() => {
+                handleCheck(id);
+              }}
             />
             {variant === 'group' && <TodoAsignee />}
           </span>
@@ -89,7 +100,7 @@ export const TodoList = ({
           {editModalOpen && (
             <TodoModal
               setTodoToggle={setEditModalOpen}
-              initialTodo={{ id, title, done }}
+              initialTodo={{ id, title, isDone }}
               initialGoal={goal}
             />
           )}
