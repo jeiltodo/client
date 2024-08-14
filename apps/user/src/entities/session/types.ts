@@ -20,8 +20,8 @@ export interface AuthBody {
 //   data?: T;
 // }
 export interface Token {
-  access_token: string;
-  refresh_token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 // export interface User {

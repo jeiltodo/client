@@ -1,8 +1,8 @@
-import { UserDashboardPage } from '../../pages/user/ui/user-dashboard-page';
+import { UserDashboardPage } from '../../page/user';
 
-export default function Page() {
+export default async function Page() {
   return (
-    <main className='p-4 '>
+    <main className='pt-4'>
       <UserDashboardPage />
     </main>
   );

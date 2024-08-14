@@ -6,6 +6,7 @@ import {
   TodoAsignee,
   TodoButtons,
   TodoModal,
+  todoQueryKeys,
 } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { Goal } from '../../../entities/goal';
@@ -47,6 +48,10 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
         queryClinet.invalidateQueries({
           queryKey: goalQueryKeys.individual.progress(),
         });
+        queryClinet.invalidateQueries({
+          predicate: (query) =>
+            query.queryKey.includes('todos')
+        })
       },
     });
   };
@@ -57,15 +62,19 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
         queryClinet.invalidateQueries({
           queryKey: goalQueryKeys.individual.todos(),
         });
+        queryClinet.invalidateQueries({
+          predicate: (query) =>
+            query.queryKey.includes('todos')
+        })
       },
     });
     setRemoveModalOpen(false);
   };
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos.map(({ id, title, done, goal }) => (
-        <li key={id} className='list-none w-full flex justify-between group '>
-          <span className='inline-flex gap-4 items-center min-w-[280px]'>
+      {todos?.map(({ id, title, done, goal }) => (
+        <li key={id} className='list-none w-full h-6 flex justify-between group '>
+          <span className='inline-flex gap-2 items-center min-w-[80%]'>
             <TodoContent
               key={id}
               todo={{ id, title, done }}

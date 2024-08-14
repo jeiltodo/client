@@ -1,5 +1,10 @@
 import { client } from '../../../shared';
-import { Todo, TodoCreateBody, TodoUpdateBody } from '../model/type';
+import {
+  ResponsePageListRecentTodo,
+  TodoCreateBody,
+  Todos,
+  TodoUpdateBody,
+} from '../model/type';
 
 export const todoApi = {
   createTodo: async (todoCreateBody: TodoCreateBody) => {
@@ -43,6 +48,26 @@ export const todoApi = {
     } catch (error) {
       // 오류가 발생한 경우 적절히 처리
       console.error('Fail fetch individual goals:', error);
+      throw error;
+    }
+  },
+
+  getRecentTodo: async (params: {
+    page: number;
+    limit: number;
+    goalIds: string;
+    isDone: boolean | null | undefined;
+  }) => {
+    try {
+      const response = await client.get<ResponsePageListRecentTodo<Todos>>(
+        '/todo/individual/all',
+        {
+          params,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('goal API - getRecentTodo error:', error);
       throw error;
     }
   },

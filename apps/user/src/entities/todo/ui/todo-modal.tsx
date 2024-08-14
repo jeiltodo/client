@@ -35,7 +35,7 @@ export const TodoModal = ({
   const handleSubmit = () => {
     initialTodo
       ? updateTodo({ id: initialTodo.id, title })
-      : createTodo({ goal_id: goalId as number, title });
+      : createTodo({ goalId: goalId as number, title });
     toggleModal(false);
   };
 
