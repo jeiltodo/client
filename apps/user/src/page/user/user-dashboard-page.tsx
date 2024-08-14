@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useGoalsWithTodos, useProgressAll } from '../../entities/goal';
+import { useGoalsWithTodos, progressAllOptions } from '../../entities/goal';
 import {
   ProgressBoard,
   RecentTodoCard,
@@ -11,9 +11,10 @@ import { useInView } from 'react-intersection-observer';
 import { BoardTitle } from '@jeiltodo/ui/shared';
 import Link from 'next/link';
 import { ArrowRight, ArrowRightGray } from '@jeiltodo/icons';
+import { useQuery } from '@tanstack/react-query';
 
 export const UserDashboardPage = () => {
-  const { data: progress } = useProgressAll();
+  const { data: progress } = useQuery(progressAllOptions());
   const { data, hasNextPage, fetchNextPage } = useGoalsWithTodos({
     limit: 3,
   });
