@@ -1,8 +1,9 @@
-import { UserDashboardPage } from '../../pages/user/ui/user-dashboard-page';
+import { UserDashboardPage } from "../../page/user";
 
 export default function Page() {
   return (
-    <main className='p-4 '>
+    <main className='pt-4'>
+      {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
       <UserDashboardPage />
     </main>
   );

@@ -1,0 +1,1 @@
+export type todoQuery = { goalIds: number[] | []; status?: boolean | null };

@@ -2,9 +2,8 @@ import { TodoPage } from '../../../page/todo';
 
 export default function Page() {
   return (
-    <>
-      <div>dd</div>
+    <main className='pt-4'>
       <TodoPage />
-    </>
+    </main>
   );
 }

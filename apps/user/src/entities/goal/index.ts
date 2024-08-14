@@ -7,3 +7,4 @@ export * from './hooks/individualOptions';
 export * from './hooks/useGoalsWithTodos';
 export * from './hooks/useIndividualGoals';
 export * from './hooks/progressAllOptions';
+export * from './hooks/queryKey';
