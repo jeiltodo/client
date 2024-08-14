@@ -48,7 +48,7 @@ export interface ResponsePageListRecentTodo<T> {
   code: number;
   data: {
     todos: T[];
-    currPage: number;
+    currentPage: number;
     totalCount: number;
   };
 }
