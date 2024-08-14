@@ -2,6 +2,15 @@ import { client } from '../../../shared';
 import { Todo, TodoCreateBody, TodoUpdateBody } from '../model/type';
 
 export const todoApi = {
+  getSingleGoalTodo: async (goalId: number) => {
+    try {
+      const response = await client.get(`/todo/list?goal_id=${goalId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch todo:', error);
+      throw error;
+    }
+  },
   createTodo: async (todoCreateBody: TodoCreateBody) => {
     try {
       const response = await client.post('/todo/create', todoCreateBody);

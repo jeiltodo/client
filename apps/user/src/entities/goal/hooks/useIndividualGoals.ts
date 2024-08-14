@@ -11,18 +11,8 @@ export const useIndividualGoals = () => {
   });
 };
 export const useIndividualSingleGoal = (goalId: number) => {
-  const {
-    data: individualSingleGoal,
-    error,
-    isLoading,
-  } = useQuery({
+  return useQuery({
     queryKey: goalQueryKeys.individual.single(),
     queryFn: () => getIndividualSingleGoal(goalId),
   });
-
-  return {
-    individualSingleGoal,
-    error,
-    isLoading,
-  };
 };

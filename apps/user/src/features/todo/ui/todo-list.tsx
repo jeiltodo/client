@@ -10,23 +10,27 @@ import {
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
-import { useQueryClient } from '@tanstack/react-query';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
-import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 
 interface Props {
-  todos: (Todo & { goal: Goal })[];
+  todos: (Todo & { goal?: Goal })[];
   variant?: 'user' | 'group';
+  onCheckSuccess: () => void;
+  onDeleteSuccess: () => void;
 }
 
-export const TodoList = ({ todos, variant = 'user' }: Props) => {
+export const TodoList = ({
+  todos,
+  variant = 'user',
+  onCheckSuccess,
+  onDeleteSuccess,
+}: Props) => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
-  const queryClinet = useQueryClient();
 
   const handleClickEdit = () => {
     setEditModalOpen(true);
@@ -40,27 +44,31 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
 
   const handleCheck = (todoId: number) => {
     checkTodo(todoId, {
-      onSuccess: () => {
-        queryClinet.invalidateQueries({
-          queryKey: goalQueryKeys.individual.todos(),
-        });
-        queryClinet.invalidateQueries({
-          queryKey: goalQueryKeys.individual.progress(),
-        });
-      },
+      onSuccess: onCheckSuccess,
     });
   };
+  // {
+  //   onSuccess: () => {
+  //     queryClinet.invalidateQueries({
+  //       queryKey: goalQueryKeys.individual.todos(),
+  //     });
+  //     queryClinet.invalidateQueries({
+  //       queryKey: goalQueryKeys.individual.progress(),
+  //     });
+  //   },
+  // }
 
   const handleRemove = (id: number) => {
-    deleteTodo(id, {
-      onSuccess: () => {
-        queryClinet.invalidateQueries({
-          queryKey: goalQueryKeys.individual.todos(),
-        });
-      },
-    });
+    deleteTodo(id, { onSuccess: onDeleteSuccess });
     setRemoveModalOpen(false);
   };
+  // {
+  //   onSuccess: () => {
+  //     queryClinet.invalidateQueries({
+  //       queryKey: goalQueryKeys.individual.todos(),
+  //     });
+  //   },
+  // }
   return (
     <ul className='w-full flex flex-wrap gap-2'>
       {todos.map(({ id, title, done, goal }) => (

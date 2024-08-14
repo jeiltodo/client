@@ -7,6 +7,9 @@ import { ConfirmationModal } from '../../shared';
 import { deleteIndividualGoals } from '../../entities/goal/api/deleteIndividualGoals';
 import { patchIndividualGoals } from '../../entities/goal/api/patchIndividualGoals';
 import { Goal } from '../../entities/goal';
+import { useQuery } from '@tanstack/react-query';
+import { userOptions } from '../../entities/user';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   goalData: Goal;
@@ -15,7 +18,10 @@ interface Props {
 export const TitleProgressBarCard = ({ goalData }: Props) => {
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
   const [isGoalToggleOpen, setIsGoalToggleOpen] = useState(false);
-  const [isComfirmOpen, setIsComfirmOpen] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const router = useRouter();
+
+  const { data: user } = useQuery(userOptions());
 
   const handleKebab = () => {
     setIsFlyoutOpen((prev) => !prev);
@@ -35,8 +41,8 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
   const handleDelete = async () => {
     const response = await deleteIndividualGoals({ goalId: goalData.id });
     if (response.code === 204) {
-      setIsComfirmOpen(false);
-      console.log('//이전화면으로 돌아가기: ');
+      setIsConfirmOpen(false);
+      router.back();
     }
   };
 
@@ -59,7 +65,7 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
                 setIsFlyoutOpen(false);
               }}
               onDelete={() => {
-                setIsComfirmOpen(true);
+                setIsConfirmOpen(true);
                 setIsFlyoutOpen(false);
               }}
             />
@@ -67,16 +73,16 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
           {/* TODO:: onblur 일 떄 Flyout닫히도록.*/}
           {isGoalToggleOpen && (
             <GoalModal
-              nickname={`체다치이즈`}
+              nickname={user?.data.nickname}
               initialValue={goalData.title}
               type='edit'
               setGoalToggle={setIsGoalToggleOpen}
               onClick={handleEdit}
             />
           )}
-          {isComfirmOpen && (
+          {isConfirmOpen && (
             <ConfirmationModal
-              setModalToggle={setIsComfirmOpen}
+              setModalToggle={setIsConfirmOpen}
               submitButtonText={'삭제'}
               onSubmit={handleDelete}
             >

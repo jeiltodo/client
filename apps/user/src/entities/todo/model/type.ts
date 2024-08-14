@@ -17,3 +17,17 @@ export type TodoCreateBody = {
 };
 
 export type TodoUpdateBody = Pick<Todo, 'id' | 'title'>;
+
+export type SingleGoalTodoResponse = {
+  msg: string;
+  code: number;
+  data: SingleGoalTodo[];
+};
+
+export interface SingleGoalTodo {
+  id: number;
+  title: string;
+  is_done: boolean;
+  created_at: string;
+  updated_at: string;
+}

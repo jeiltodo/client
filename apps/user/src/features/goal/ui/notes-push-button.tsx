@@ -2,7 +2,6 @@ import { ArrowRight, Note } from '@jeiltodo/icons';
 import { useRouter } from 'next/navigation';
 
 export const NotesPushButton = ({ goalId }: { goalId: number }) => {
-  console.log('goalId: ', goalId);
   const router = useRouter();
 
   return (
