@@ -76,4 +76,30 @@ export const groupApi = {
       throw error;
     }
   },
+
+  removeMember: async (id: number, memberId: number) => {
+    try {
+      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
+        `/groups/members/${id}`,
+        { memberId }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+
+  changeLeader: async (id: number, memberId: number) => {
+    try {
+      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
+        `/groups/members/${id}`,
+        { memberId }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
 };
