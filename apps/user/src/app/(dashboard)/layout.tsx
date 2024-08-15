@@ -24,7 +24,7 @@ export default async function DashboardLayout({
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SidebarUser />
-        <main className='common-layout bg-gray-100'>{children}</main>
+        <main className='common-layout bg-slate-100'>{children}</main>
       </HydrationBoundary>
     </>
   );

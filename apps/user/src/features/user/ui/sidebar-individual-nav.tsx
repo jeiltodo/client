@@ -8,6 +8,9 @@ import {
   useState,
 } from 'react';
 import { TodoModal } from '../../../entities/todo/ui/todo-modal';
+import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { userOptions } from '../../../entities/user';
 
 interface IndividualGoalsProps {
   id: number;
@@ -31,11 +34,13 @@ export const SidebarIndividualNav = ({
   individualGoals,
 }: SidebarIndividualNavProps) => {
   const [todoToggle, setTodoToggle] = useState<boolean>(false);
+  const router = useRouter();
+
+  const { data: user } = useQuery(userOptions());
+
   return (
     <div className='border-t-[1px] border-slate-200 py-4 flex flex-col items-center'>
-      {todoToggle && (
-        <TodoModal taskOwner='체다치즈' setTodoToggle={setTodoToggle} />
-      )}
+      {todoToggle && <TodoModal setTodoToggle={setTodoToggle} />}
       <div className='px-5 mb-4 flex items-center justify-start gap-2 w-full h-9'>
         <div className='flex items-center gap-2 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
           <Icon className='w-6 h-6' />
@@ -48,7 +53,10 @@ export const SidebarIndividualNav = ({
         {individualGoals?.map((goal) => (
           <div
             key={goal.id}
-            className='flex items-center text-sm font-pretendard-medium text-slate-700 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'
+            onClick={() =>
+              router.push(`/goal/${user?.data.nickname}/${goal.id}`)
+            }
+            className='flex items-center text-sm font-pretendard-medium text-slate-700 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg cursor-pointer'
           >
             · {goal.title}
           </div>

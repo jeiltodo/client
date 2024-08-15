@@ -1,12 +1,25 @@
 import { client } from '../../../shared';
-import {
+import type {
   ResponsePageListRecentTodo,
+  SingleGoalTodoResponse,
   TodoCreateBody,
-  Todos,
   TodoUpdateBody,
+  Todos,
 } from '../model/type';
 
 export const todoApi = {
+  getSingleGoalTodo: async (goalId: number) => {
+    try {
+      const response = await client.get<Promise<SingleGoalTodoResponse>>(
+        `/todo/list?goalId=${goalId}`
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch todo:', error);
+      throw error;
+    }
+  },
   createTodo: async (todoCreateBody: TodoCreateBody) => {
     try {
       const response = await client.post('/todo/create', todoCreateBody);

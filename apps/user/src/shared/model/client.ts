@@ -101,11 +101,11 @@ client.interceptors.response.use(
       try {
         const response = await newAccessToken();
 
-        setCookie(ACCESS_TOKEN_COOKIE_NAME, response.data.access_token, {
+        setCookie(ACCESS_TOKEN_COOKIE_NAME, response.data.accessToken, {
           maxAge: ACCESS_TOKEN_EXPIRY_TIME,
         });
 
-        originalRequest.headers.Authorization = `Bearer ${response.data.access_token}`;
+        originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
 
         return client(originalRequest);
       } catch (refreshError) {
@@ -126,7 +126,7 @@ client.interceptors.response.use(
  */
 const newAccessToken = async () => {
   try {
-    const response = await client.get<{ access_token: string }>(
+    const response = await client.get<{ accessToken: string }>(
       '/member/token/refresh'
     );
     return response;

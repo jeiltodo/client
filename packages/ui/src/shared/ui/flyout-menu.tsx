@@ -6,8 +6,8 @@ interface Props {
 export const Flyout = ({ onEdit, onDelete }: Props) => {
   return (
     <div
-      className='absolute top-full right-0 z-10 mt-[8px] flex w-[81px]  transition-opactiy 
-       opacity-100 translate-y-1 duration-200 ease-out'
+      className='absolute top-full right-0 z-10 -mt-[2px] flex w-[81px]  transition-opactiy 
+       opacity-100 duration-200 ease-out'
     >
       <div className='w-full flex-auto overflow-hidden text-center font-pretendard-light text-sm text-gray-900 rounded-xl shadow-sm'>
         <button

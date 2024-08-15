@@ -1,23 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Todo,
-  TodoAsignee,
-  TodoButtons,
-  TodoModal,
-  todoQueryKeys,
-} from '../../../entities/todo';
-import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import { Goal } from '../../../entities/goal';
-import { ConfirmationModal } from '../../../shared';
+import { useParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
+import { TodoAsignee, TodoButtons, TodoModal } from '../../../entities/todo';
+import type { Todo } from '../../../entities/todo';
+import { TodoContent } from '../../../entities/todo/ui/todo-item';
+import type { Goal } from '../../../entities/goal';
+import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
-import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
+import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
 
 interface Props {
-  todos: (Todo & { goal: Goal })[];
+  todos: (Todo & { goal?: Goal })[];
   variant?: 'user' | 'group';
 }
 
@@ -27,7 +23,11 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
-  const queryClinet = useQueryClient();
+
+  const params = useParams();
+  const goalId = Number(params.goalid);
+
+  const queryClient = useQueryClient();
 
   const handleClickEdit = () => {
     setEditModalOpen(true);
@@ -42,16 +42,24 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const handleCheck = (todoId: number) => {
     checkTodo(todoId, {
       onSuccess: () => {
-        queryClinet.invalidateQueries({
+        queryClient.invalidateQueries({
           queryKey: goalQueryKeys.individual.todos(),
         });
-        queryClinet.invalidateQueries({
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.lists(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.single(goalId),
+        });
+        queryClient.invalidateQueries({
           queryKey: goalQueryKeys.individual.progress(),
         });
-        queryClinet.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey.includes('todos')
-        })
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.includes('todos'),
+        });
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.includes('todos'),
+        });
       },
     });
   };
@@ -59,26 +67,37 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const handleRemove = (id: number) => {
     deleteTodo(id, {
       onSuccess: () => {
-        queryClinet.invalidateQueries({
+        queryClient.invalidateQueries({
           queryKey: goalQueryKeys.individual.todos(),
         });
-        queryClinet.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey.includes('todos')
-        })
+        queryClient.invalidateQueries({
+          predicate: (query) => query.queryKey.includes('todos'),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.lists(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: goalQueryKeys.individual.single(goalId),
+        });
       },
     });
     setRemoveModalOpen(false);
   };
+
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos?.map(({ id, title, isDone, goal }) => (
-        <li key={id} className='list-none w-full h-6 flex justify-between group '>
+      {todos.map(({ id, title, isDone, goal }) => (
+        <li
+          key={id}
+          className='list-none w-full h-6 flex justify-between group '
+        >
           <span className='inline-flex gap-2 items-center min-w-[80%]'>
             <TodoContent
               key={id}
               todo={{ id, title, isDone }}
-              onCheck={handleCheck}
+              onCheck={() => {
+                handleCheck(id);
+              }}
             />
             {variant === 'group' && <TodoAsignee />}
           </span>

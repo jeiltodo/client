@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { goalQueryKeys } from './queryKeys';
-import { grouplGoalsApi } from '../api/groupGoalsApi';
+import { goalQueryKeys } from './queryKey';
+import { groupGoalsApi } from '../api/groupGoalsApi';
 
 export const useGroupGoals = (groupId: null | number) => {
   const {
@@ -9,7 +9,7 @@ export const useGroupGoals = (groupId: null | number) => {
     isLoading,
   } = useQuery({
     queryKey: goalQueryKeys.group.detail(groupId ?? 'unknown'),
-    queryFn: () => grouplGoalsApi.getGroupGoals(groupId),
+    queryFn: () => groupGoalsApi.getGroupGoals(groupId),
     enabled: groupId !== null,
   });
 
@@ -18,4 +18,11 @@ export const useGroupGoals = (groupId: null | number) => {
     error,
     isLoading,
   };
+};
+
+export const useGroupSingleGoal = (goalId: number) => {
+  return useQuery({
+    queryKey: goalQueryKeys.group.single(goalId),
+    queryFn: () => groupGoalsApi.getSingleGroupGoal(goalId),
+  });
 };

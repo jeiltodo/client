@@ -1,5 +1,6 @@
 import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
 import { GroupProps } from '../model/type';
+import Link from 'next/link';
 
 interface SidebarGroupNavProps {
   icon: ForwardRefExoticComponent<
@@ -27,6 +28,11 @@ export const SidebarGroupNav = ({
           </div>
         </div>
       ))}
+      {group ? (
+        <Link className='border border-blue-400' href={`/goal/group/2/6`}>
+          {`groupId:2 & goalId:6의 그룹 목표 상세 페이지`}
+        </Link>
+      ) : null}
     </div>
   );
 };

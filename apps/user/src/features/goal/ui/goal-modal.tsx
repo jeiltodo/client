@@ -1,26 +1,32 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
-interface Props {
+interface GoalModalProps {
+  nickname: string;
+  initialValue: string;
+  type?: 'edit' | 'create';
   setGoalToggle: Dispatch<SetStateAction<boolean>>;
-  handleCreateIndividualGoal: (title: string) => void;
+  onClick: (value: string) => void;
 }
-export const GoalModal = ({ setGoalToggle, handleCreateIndividualGoal }: Props) => {
-  const [title, setTitle] = useState<string>('');
+export const GoalModal = ({
+  nickname,
+  initialValue,
+  type = 'create',
+  setGoalToggle,
+  onClick,
+}: GoalModalProps) => {
+  const [title, setTitle] = useState<string>(initialValue);
 
-  const handleSubmit = () => {
-    if (title) {
-      handleCreateIndividualGoal(title);
-      setGoalToggle(false); // 모달 닫기
-    }
-  };
+  useEffect(() => {
+    setTitle(initialValue);
+  }, [initialValue]);
 
   return (
     <BaseModal
-      title='체다치즈의 목표 생성'
+      title={`${nickname}의 목표 ${type === 'edit' ? '수정' : '생성'}`}
       setToggle={setGoalToggle}
       width='modal_sm:w-[520px]'
     >
@@ -30,12 +36,19 @@ export const GoalModal = ({ setGoalToggle, handleCreateIndividualGoal }: Props) 
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          value={title}
           type='text'
           placeholder='목표의 제목을 적어주세요'
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!title} className='w-full mt-10 h-12' onClick={handleSubmit}>
+      <Button
+        isDisabled={!title}
+        className='w-full mt-10 h-12'
+        onClick={() => {
+          onClick(title);
+        }}
+      >
         확인
       </Button>
     </BaseModal>
