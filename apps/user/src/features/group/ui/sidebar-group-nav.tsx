@@ -30,6 +30,11 @@ export const SidebarGroupNav = ({
           </Link>
         </div>
       ))}
+      {group ? (
+        <Link className='border border-blue-400' href={`/goal/group/2/6`}>
+          {`groupId:2 & goalId:6의 그룹 목표 상세 페이지`}
+        </Link>
+      ) : null}
     </div>
   );
 };

@@ -1,8 +1,15 @@
 import { client } from '../../../shared';
-import { Response } from '../types';
+
+interface Props {
+  msg: string;
+  code: number;
+  data: {
+    is_duplicated: boolean;
+  };
+}
 
 export const EmailDuplicateApi = async (email: string) => {
-  const response = await client.get<Response<{ is_duplicated: boolean }>>(
+  const response = await client.get<Props>(
     `/member/email/duplicate?email=${email}`
   );
   return response.data;

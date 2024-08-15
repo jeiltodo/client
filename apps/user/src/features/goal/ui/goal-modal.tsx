@@ -1,5 +1,5 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
@@ -8,7 +8,10 @@ import { useCreateGoal } from '../../../entities/goal/hooks/useCreateGoal';
 import { useParams } from 'next/navigation';
 import { useGroupDetail } from '../../../entities/group';
 
-interface Props {
+interface GoalModalProps {
+  nickname: string;
+  initialValue: string;
+  type?: 'edit' | 'create';
   setGoalToggle: Dispatch<SetStateAction<boolean>>;
   initialGoal?: { id: number; title: string };
 }
@@ -41,6 +44,7 @@ export const GoalModal = ({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          value={title}
           type='text'
           placeholder='목표를 적어주세요'
           className='w-full text-base font-normal'

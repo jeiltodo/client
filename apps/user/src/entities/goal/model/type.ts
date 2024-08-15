@@ -13,6 +13,11 @@ export type Goal = {
 
 export type UserProgress = { progress: number };
 
+export interface SingleGoalResponse {
+  msg: string;
+  code: number;
+  data: Goal;
+}
 export interface IndividualGoalsResponse {
   msg: string;
   code: number;

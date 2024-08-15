@@ -36,7 +36,7 @@ export const PercentDisplay: React.FC<PercentDisplayProps> = ({ value }) => {
 
 
   return (
-    <div className='relative inline-flex items-center desktop:flex-row mobile:flex-col z-20'>
+    <div className='relative inline-flex items-center flex-col z-20'>
       <div className='text-3xl font-pretendard-semibold not-italic flex items-center justify-start gap-1'>
         <h1>{displayValue.toFixed(1)}</h1>
         <h3 className='text-base font-semibold'>&#37;</h3>

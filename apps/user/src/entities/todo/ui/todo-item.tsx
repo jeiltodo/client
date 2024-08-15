@@ -22,6 +22,7 @@ export const TodoContent = ({ todo, onCheck, disabled }: Props) => {
         }}
       />
       <label className={`text-sm text-slate-800 ${isDone && 'line-through'}`}>
+      <label className={`text-sm text-slate-800 ${isDone && 'line-through'}`}>
         {title}
       </label>
     </span>

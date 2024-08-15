@@ -1,7 +1,23 @@
-import { GroupGoalsResponse, GroupGoalWithTodos } from '../model/type';
+import {
+  GroupGoalsResponse,
+  GroupGoalWithTodos,
+  SingleGoalResponse,
+} from '../model/type';
 import { client, ResponsePageListWith } from '../../../shared';
 
-export const grouplGoalsApi = {
+export const groupGoalsApi = {
+  getSingleGroupGoal: async (goalId: number) => {
+    try {
+      const response = await client.get<SingleGoalResponse>(
+        `/group/goals/single/${goalId}`
+      );
+      return response.data;
+    } catch (error) {
+      // 오류가 발생한 경우 적절히 처리
+      console.error('Fail fetch single group goal:', error);
+      throw error;
+    }
+  },
   // GET 요청: 그룹의 목표 목록 조회
   getGroupGoals: async (
     groupId: null | number

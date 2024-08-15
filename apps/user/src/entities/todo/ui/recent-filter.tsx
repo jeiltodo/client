@@ -2,13 +2,13 @@
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
 import { Goal } from '../../goal';
-import { Query } from '../../../app/page';
 import { getUniqueNumbers } from '../../../shared';
-import { statusMap } from '../model/status-filter-map';
+import { statusMap } from '../../user/model/status-filter-map';
+import { todoQuery } from '../hooks/todoQuery';
 
 interface Props {
   goals: Pick<Goal, 'id' | 'title'>[];
-  onClickFilter: (query: Query) => void;
+  onClickFilter: (query: todoQuery) => void;
 }
 
 export const RecentFilter = ({ goals, onClickFilter }: Props) => {
@@ -46,16 +46,16 @@ export const RecentFilter = ({ goals, onClickFilter }: Props) => {
 
   return (
     <>
-      <div className='flex items-start justify-start gap-3 h-[132px] py-3 border-b-[1px] border-slate-200'>
-        <div className='min-w-[40px] text-sm font-medium'>목표</div>
-        <div className='w-full overflow-y-scroll scrollbar-hide h-full'>
+      <div className='flex items-start justify-start gap-3 max-h-[132px] pb-3 border-b-[1px] border-slate-200'>
+        <div className='min-w-[40px] text-sm font-medium pt-[2px]'>목표</div>
+        <div className='w-full overflow-y-scroll scrollbar-hide max-h-[120px]'>
           <ButtonGroup gap={3}>
             {goals.map((goal) => (
               <Button
                 key={goal.id}
                 isSelectDuplicated={selectedGoals.includes(goal.id)}
                 variant='outline-goal'
-                className='py-1 px-3 text-sm font-medium h-[26px] leading-5'
+                className='px-3 text-sm font-medium h-[26px] leading-5'
                 onClick={() => handleGoalClick(goal.id)}
               >
                 {goal.title}
@@ -84,14 +84,14 @@ export const RecentFilter = ({ goals, onClickFilter }: Props) => {
         <ButtonGroup gap={2}>
           <Button
             variant='outline-date'
-            className='py-1 px-3 text-sm font-medium'
+            className='px-3 text-sm font-medium h-[28px]'
             onClick={handleSelectAllGoals}
           >
             전체 선택
           </Button>
           <Button
             variant='outline-date'
-            className='py-1 px-3 text-sm font-medium'
+            className='px-3 text-sm font-medium h-[28px]'
             onClick={handleDeselectAllGoals}
           >
             전체 해제

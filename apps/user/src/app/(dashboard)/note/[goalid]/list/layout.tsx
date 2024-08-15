@@ -10,5 +10,5 @@ export default function NoteListLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  return <main className='common-layout bg-slate-100'>{children}</main>;
+  return <>{children}</>;
 }

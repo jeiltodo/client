@@ -3,9 +3,10 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import { individualGoalsApi } from '../../goal/api/individualGoalsApi';
+
 import { AxiosError } from 'axios';
 import { goalQueryKeys } from '../../goal/hooks/queryKey';
+import { individualGoalsApi } from '../../goal';
 
 export const individualGoalsOptions = () =>
   queryOptions({

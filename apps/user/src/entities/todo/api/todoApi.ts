@@ -1,7 +1,26 @@
 import { client } from '../../../shared';
-import { TodoCreateBody, TodoUpdateBody } from '../model/type';
+import {
+  ResponsePageListRecentTodo,
+  SingleGoalTodoResponse,
+  Todo,
+  TodoCreateBody,
+  Todos,
+  TodoUpdateBody,
+} from '../model/type';
 
 export const todoApi = {
+  getSingleGoalTodo: async (goalId: number) => {
+    try {
+      const response = await client.get<Promise<SingleGoalTodoResponse>>(
+        `/todo/list?goalId=${goalId}`
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch todo:', error);
+      throw error;
+    }
+  },
   createTodo: async (todoCreateBody: TodoCreateBody) => {
     try {
       const response = await client.post('/todo/create', todoCreateBody);
@@ -54,6 +73,26 @@ export const todoApi = {
     } catch (error) {
       // 오류가 발생한 경우 적절히 처리
       console.error('Fail  assignTodo:', error);
+      throw error;
+    }
+  },
+
+  getRecentTodo: async (params: {
+    page: number;
+    limit: number;
+    goalIds: string;
+    isDone: boolean | null | undefined;
+  }) => {
+    try {
+      const response = await client.get<ResponsePageListRecentTodo<Todos>>(
+        '/todo/individual/all',
+        {
+          params,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('goal API - getRecentTodo error:', error);
       throw error;
     }
   },

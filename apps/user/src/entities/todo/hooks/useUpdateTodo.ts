@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Todo, todoApi } from '../../../entities/todo';
-import { goalQueryKeys } from '../../goal/hooks/queryKey';
 
 export const useUpdateTodo = () => {
   const queryClient = useQueryClient();

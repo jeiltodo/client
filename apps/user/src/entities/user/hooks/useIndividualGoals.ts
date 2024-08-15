@@ -9,3 +9,9 @@ export const useIndividualGoals = () => {
     select: (data) => data.data,
   });
 };
+export const useIndividualSingleGoal = (goalId: number) => {
+  return useQuery({
+    queryKey: goalQueryKeys.individual.single(goalId),
+    queryFn: () => individualGoalsApi.getSingleGoal(goalId),
+  });
+};

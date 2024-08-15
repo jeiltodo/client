@@ -76,13 +76,9 @@ client.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // 로그인/회원가입 에러 메시지를 위한 분기 처리
-    // if (
-    //   error.response?.status === 400 ||
-    //   (error.response?.status === 404 &&
-    //     ((error.config && error.config.url === '/member/signin') ||
-    //       (error.config && error.config.url === '/member/signup')))
-    // ) {
+    //에러 메시지를 return 하기 위한 분기 처리
+    // if (axios.isAxiosError(error) && error.response) {
+    //   // 모든 에러 코드의 response를 반환
     //   return Promise.resolve(error.response);
     // }
 
@@ -105,11 +101,11 @@ client.interceptors.response.use(
       try {
         const response = await newAccessToken();
 
-        setCookie(ACCESS_TOKEN_COOKIE_NAME, response.data.access_token, {
+        setCookie(ACCESS_TOKEN_COOKIE_NAME, response.data.accessToken, {
           maxAge: ACCESS_TOKEN_EXPIRY_TIME,
         });
 
-        originalRequest.headers.Authorization = `Bearer ${response.data.access_token}`;
+        originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
 
         return client(originalRequest);
       } catch (refreshError) {
@@ -130,7 +126,7 @@ client.interceptors.response.use(
  */
 const newAccessToken = async () => {
   try {
-    const response = await client.get<{ access_token: string }>(
+    const response = await client.get<{ accessToken: string }>(
       '/member/token/refresh'
     );
     return response;
