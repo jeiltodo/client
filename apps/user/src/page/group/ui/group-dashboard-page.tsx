@@ -20,6 +20,7 @@ import { GroupGoalCard } from '../../../widgets/group/ui/grouop-goal-card';
 import { GoalModal } from '../../../features/goal';
 import { useChangeLeader } from '../../../entities/group/hooks/useChangeLeader';
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
+import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroupGoal';
 
 export const GroupDashboardPage = () => {
   const params: { id: string } = useParams();
@@ -38,6 +39,7 @@ export const GroupDashboardPage = () => {
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
   const { mutate: removeMember } = useRemoveMember(groupId);
+  const { mutate: createGroupGoal } = useCreateGroupGoal(groupId);
 
   const handleSave = (groupBody: GroupTitleOrCode) => {
     updateTitleOrCode(groupBody);
@@ -48,6 +50,10 @@ export const GroupDashboardPage = () => {
   };
   const handleRemoveMember = (memberId: number) => {
     removeMember(memberId);
+  };
+
+  const handleCreateGoal = ({ title }: { title: string }) => {
+    createGroupGoal(title);
   };
 
   useEffect(() => {
@@ -61,12 +67,12 @@ export const GroupDashboardPage = () => {
   }
 
   return (
-    <div className='pt-6 max-w-[1180px] mx-auto'>
+    <div className='pt-6 max-w-[1180px] mx-auto '>
       <p className='mb-4 text-slate-900 font-semibold text-lg'>{group.title}</p>
-      <div className='w-full flex gap-4'>
+      <div className='w-full flex flex-nowrap  gap-4'>
         <GroupOverviewBoard
           group={group}
-          userId={user?.data.id!}
+          userId={user?.id!}
           spareCode={newCode ?? ''}
           onSave={handleSave}
         />
@@ -74,7 +80,7 @@ export const GroupDashboardPage = () => {
         <MembersBoardProvider>
           <MembersBorad
             group={group}
-            userId={user?.data.id!}
+            userId={user?.id!}
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}
           />
@@ -99,8 +105,14 @@ export const GroupDashboardPage = () => {
           </React.Fragment>
         ))}
       </div>
-      {/* <div ref={ref} className='h-4'></div> */}
-      {openModal && <GoalModal setGoalToggle={setOpenModal} />}
+      <div ref={ref} className='h-4'></div>
+      {openModal && (
+        <GoalModal
+          setGoalModalToggle={setOpenModal}
+          goalCreator={group.title}
+          onCreateGoal={handleCreateGoal}
+        />
+      )}
     </div>
   );
 };

@@ -6,8 +6,10 @@ import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { ArrowRight, PlusBlue } from '@jeiltodo/icons';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export const UserGoalCard = (goal: GoalWithTodos) => {
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
 
   const done = goal.todos
@@ -27,7 +29,9 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
     setModalOpen(true);
   };
 
-  const handleMore = () => {};
+  const handleMore = () => {
+    router.push(`/goal/${goal.id}`);
+  };
 
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>

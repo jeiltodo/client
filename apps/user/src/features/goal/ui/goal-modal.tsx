@@ -1,40 +1,33 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
-import { useUpdateGoal } from '../../../entities/goal/hooks/useUpdateGoal';
-import { useCreateGoal } from '../../../entities/goal/hooks/useCreateGoal';
-import { useParams } from 'next/navigation';
-import { useGroupDetail } from '../../../entities/group';
 
-interface GoalModalProps {
-  nickname: string;
-  initialValue: string;
-  type?: 'edit' | 'create';
-  setGoalToggle: Dispatch<SetStateAction<boolean>>;
+interface Props {
+  goalCreator: string;
+  onMutateGoal: (
+    goal: { id: number; title: string } | { title: string }
+  ) => void;
+  setGoalModalToggle: Dispatch<SetStateAction<boolean>>;
   initialGoal?: { id: number; title: string };
 }
 export const GoalModal = ({
-  setGoalToggle: toggleModal,
+  goalCreator,
+  onMutateGoal,
+  setGoalModalToggle: toggleModal,
   initialGoal,
 }: Props) => {
-  const { id }: { id: string } = useParams();
-  const groupId = Number(id);
-  const { data: group } = useGroupDetail(groupId);
-
   const [title, setTitle] = useState<string>(initialGoal?.title ?? '');
-  const { mutate: createGoal } = useCreateGoal(groupId);
-  const { mutate: updateGoal } = useUpdateGoal(groupId);
 
   const handleSubmit = () => {
-    initialGoal ? updateGoal({ id: initialGoal.id, title }) : createGoal(title);
+    onMutateGoal(initialGoal ? { id: initialGoal.id, title } : { title });
     toggleModal(false);
   };
 
   return (
     <BaseModal
-      title={`${group?.title}의 목표 생성`}
+      title={`${goalCreator}의 목표 생성`}
       setToggle={toggleModal}
       width='modal_sm:w-[520px]'
     >
@@ -48,7 +41,6 @@ export const GoalModal = ({
           type='text'
           placeholder='목표를 적어주세요'
           className='w-full text-base font-normal'
-          value={title}
         />
       </div>
       <Button

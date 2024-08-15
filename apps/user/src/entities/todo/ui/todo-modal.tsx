@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 import { Todo } from '../model/type';
-import { GoalDropdown, GoalIdAndTitle } from '../../goal';
+import { GoalDropdown, GoalIdAndTitle, useIndividualGoals } from '../../goal';
 import { useCreateTodo } from '../hooks/useCreateTodo';
 import { useUpdateTodo } from '../hooks/useUpdateTodo';
 import { userOptions } from '../../user';
@@ -29,6 +29,11 @@ export const TodoModal = ({
   );
 
   const { data: user } = useQuery(userOptions());
+  const { data } = useIndividualGoals();
+  // const formattedGoals = data?.individualGoals.map((goal) => ({
+  //   id: goal.id,
+  //   title: goal.title,
+  // }));
 
   const { mutate: createTodo } = useCreateTodo();
   const { mutate: updateTodo } = useUpdateTodo();
@@ -42,7 +47,7 @@ export const TodoModal = ({
 
   return (
     <BaseModal
-      title={`${user?.data.nickname}의 할 일 ${initialTodo ? '수정' : '생성'}`}
+      title={`${user?.nickname}의 할 일 ${initialTodo ? '수정' : '생성'}`}
       setToggle={toggleModal}
       width='modal_sm:w-[520px]'
     >

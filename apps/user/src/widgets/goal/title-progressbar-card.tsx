@@ -5,7 +5,7 @@ import { Kebab } from '@jeiltodo/icons';
 import { GoalModal } from '../../features/goal';
 import { ConfirmationModal } from '../../shared';
 
-import { Goal, individualGoalsApi } from '../../entities/goal';
+import { Goal } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../entities/user';
 import { useRouter } from 'next/navigation';
@@ -26,25 +26,25 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
     setIsFlyoutOpen((prev) => !prev);
   };
 
-  const handleEdit = async (newGoalTitle: string) => {
-    const response = await individualGoalsApi.patchIndividualGoals({
-      goalId: goalData.id,
-      title: newGoalTitle,
-    });
-    if (response.code === 200) {
-      setIsGoalToggleOpen(false);
-      console.log('//이전화면으로 돌아가기: ');
-    }
+  const handleEdit = async ({ title }: { title: string }) => {
+    // const response = await individualGoalsApi.patchIndividualGoal({
+    //   goalId: goalData.id,
+    //   title: newGoalTitle,
+    // });
+    // if (response.code === 200) {
+    //   setIsGoalToggleOpen(false);
+    //   console.log('//이전화면으로 돌아가기: ');
+    // }
   };
 
   const handleDelete = async () => {
-    const response = await individualGoalsApi.deleteIndividualGoals({
-      goalId: goalData.id,
-    });
-    if (response.code === 204) {
-      setIsConfirmOpen(false);
-      router.back();
-    }
+    // const response = await individualGoalsApi.deleteIndividualGoal({
+    //   goalId: goalData.id,
+    // });
+    // if (response.code === 204) {
+    //   setIsConfirmOpen(false);
+    //   router.back();
+    // }
   };
 
   return (
@@ -74,11 +74,10 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
           {/* TODO:: onblur 일 떄 Flyout닫히도록.*/}
           {isGoalToggleOpen && (
             <GoalModal
-              nickname={user?.data.nickname}
-              initialValue={goalData.title}
-              type='edit'
-              setGoalToggle={setIsGoalToggleOpen}
-              onClick={handleEdit}
+              goalCreator={user?.nickname ?? ''}
+              initialGoal={{ id: goalData.id, title: goalData.title }}
+              setGoalModalToggle={setIsGoalToggleOpen}
+              onMutateGoal={handleEdit}
             />
           )}
           {isConfirmOpen && (

@@ -2,7 +2,11 @@
 
 import React, { useEffect } from 'react';
 import { progressAllOptions, useGoalsWithTodos } from '../../../entities/goal';
-import { ProgressBoard, UserGoalCard } from '../../../widgets/user';
+import {
+  ProgressBoard,
+  RecentTodoCard,
+  UserGoalCard,
+} from '../../../widgets/user';
 import { useInView } from 'react-intersection-observer';
 import { BoardTitle } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
@@ -24,7 +28,7 @@ export const UserDashboardPage = () => {
     <div>
       <ProgressBoard completedPercent={progress?.progress ?? 0} />
       <div className='flex flex-wrap gap-4 bg-white px-5 rounded-xl py-5 mt-5'>
-        <BoardTitle title='개인 목표' />
+        <BoardTitle title='나의 목표' />
         {data?.pages.map((group, i) => (
           <React.Fragment key={i}>
             {group.data.goals.map((goal) => (

@@ -8,8 +8,8 @@ import { useState } from 'react';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';
-import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { useParams } from 'next/navigation';
+import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 
 export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const params: { id: string } = useParams();
@@ -17,7 +17,7 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
 
   const { data: groupGoals } = useGroupGoals(groupId);
-  const goalIdAndTitles = groupGoals?.data.groupGoals.map((goal) => ({
+  const goalIdAndTitles = groupGoals?.map((goal) => ({
     id: goal.id,
     title: goal.title,
   })) as GoalIdAndTitle[];
@@ -75,9 +75,9 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
       </div>
       {isOpenAddTodoModal && (
         <TodoModal
+          goals={goalIdAndTitles}
           setTodoToggle={setIsOpenAddTodoModal}
           initialGoal={goal}
-          goals={goalIdAndTitles}
         />
       )}
     </div>

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { individualGoalsApi } from '../api/individualGoalsApi';
-import { goalQueryKeys } from './queryKey';
+import { individualGoalsApi } from '../../goal/api/individualGoalsApi';
+import { goalQueryKeys } from '../../goal/hooks/queryKey';
 
 export const useIndividualGoals = () => {
   return useQuery({

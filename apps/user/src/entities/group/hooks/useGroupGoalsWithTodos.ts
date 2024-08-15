@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { individualGoalsApi } from '../../goal/api/individualGoalsApi';
 import { goalQueryKeys } from '../../goal/hooks/queryKey';
-import { grouplGoalsApi } from '../../goal/api/groupGoalsApi';
+import { groupGoalsApi } from '../../goal/api/groupGoalsApi';
 
 interface Props {
   groupId: number;
@@ -17,7 +16,7 @@ export const useGroupGoalsWithTodos = ({ groupId, limit }: Props) => {
   return useInfiniteQuery({
     queryKey: goalQueryKeys.group.todos(),
     queryFn: ({ pageParam }) =>
-      grouplGoalsApi.getGroupGoalsWithTodos(groupId, {
+      groupGoalsApi.getGroupGoalsWithTodos(groupId, {
         page: pageParam,
         limit,
       }),

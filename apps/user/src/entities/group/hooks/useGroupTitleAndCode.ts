@@ -17,8 +17,9 @@ export const useGroupTitleAndCode = (id: number) => {
     mutationFn: (groupBody: GroupTitleOrCode) =>
       groupApi.updateGrouppTitleOrCode(id, groupBody),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: groupQueryKeys.detail(id) });
-      queryClient.invalidateQueries({ queryKey: groupQueryKeys.code(id) });
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey.includes('groups'),
+      });
     },
   });
 };

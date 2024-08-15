@@ -12,6 +12,7 @@ export const individualGoalsOptions = () =>
   queryOptions({
     queryKey: goalQueryKeys.individual.lists(),
     queryFn: individualGoalsApi.getGoals,
+    select: (data) => data.data.individualGoals,
   });
 
 export const useIndividualGoalMutation = () => {
