@@ -1,5 +1,5 @@
 import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
-import {
+import type {
   Goal,
   GoalWithTodos,
   IndividualGoalsResponse,
@@ -67,6 +67,44 @@ export const individualGoalsApi = {
       return response.data;
     } catch (error) {
       console.error('Failed to create individual goal:', error);
+      throw error;
+    }
+  },
+
+  patchIndividualGoals: async ({
+    goalId,
+    title,
+  }: {
+    goalId: number;
+    title: string;
+  }) => {
+    try {
+      const response = await client.patch<IndividualGoalsResponse>(
+        `/individual/goals/${goalId}`,
+        {
+          title,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail to patch individual goals:', error);
+      throw error;
+    }
+  },
+
+  deleteIndividualGoals: async ({ goalId }: { goalId: number }) => {
+    try {
+      const response = await client.delete<Promise<void>>(
+        `/individual/goals/${goalId}`
+      );
+
+      console.log('delete goal response: ', response);
+      if (response.status === 204) {
+        console.log('Goal successfully deleted');
+      }
+      return response;
+    } catch (error) {
+      console.error('Fail to delete individual goals:', error);
       throw error;
     }
   },

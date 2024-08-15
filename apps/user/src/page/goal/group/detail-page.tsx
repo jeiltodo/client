@@ -4,6 +4,7 @@ import { TitleProgressBarCard } from '../../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { TodoDoneBoard } from '../../../widgets/todo';
 import { useGroupSingleGoal } from '../../../entities/goal/hooks/useGroupGoals';
+import { useIndividualSingleGoal } from '../../../entities/goal';
 
 export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {
   console.log('params: ', params);
@@ -14,19 +15,22 @@ export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {
     isLoading,
   } = useGroupSingleGoal(goalId);
   console.log('groupGoalsData: ', singleGroupGoal);
-
+  const { data: singleGoalTodo } = useIndividualSingleGoal(goalId);
   return (
-    <div>
-      {!isLoading && singleGroupGoal ? (
+    <>
+      {!isLoading && singleGroupGoal && singleGoalTodo ? (
         <>
           <LayoutTitle title='그룹 목표' />
           <div className='flex flex-col gap-y-6'>
             <TitleProgressBarCard goalData={singleGroupGoal.data} />
             <NotesPushButton goalId={goalId} />
-            <TodoDoneBoard goalId={goalId} />
+            <TodoDoneBoard
+              todos={singleGoalTodo.data}
+              goal={singleGroupGoal.data}
+            />
           </div>
         </>
       ) : null}
-    </div>
+    </>
   );
 };

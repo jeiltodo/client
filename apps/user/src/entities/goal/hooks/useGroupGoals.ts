@@ -21,9 +21,8 @@ export const useGroupGoals = (groupId: null | number) => {
 };
 
 export const useGroupSingleGoal = (goalId: number) => {
-  console.log('goalId: ', goalId);
   return useQuery({
-    queryKey: goalQueryKeys.group.single(),
+    queryKey: goalQueryKeys.group.single(goalId),
     queryFn: () => groupGoalsApi.getSingleGroupGoal(goalId),
   });
 };

@@ -18,8 +18,6 @@ export const IndivDetailPage = ({
     isLoading,
   } = useIndividualSingleGoal(goalId);
   const { data: singleGoalTodo } = useSingleGoalTodo(goalId);
-  console.log('detail-page singleGoal: ', singleGoal);
-  console.log('detail-page singleGoalTodo: ', singleGoalTodo);
 
   return (
     <div>

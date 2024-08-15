@@ -4,9 +4,8 @@ import { useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
 import { GoalModal } from '../../features/goal';
 import { ConfirmationModal } from '../../shared';
-import { deleteIndividualGoals } from '../../entities/goal/api/deleteIndividualGoals';
-import { patchIndividualGoals } from '../../entities/goal/api/patchIndividualGoals';
-import { Goal } from '../../entities/goal';
+
+import { Goal, individualGoalsApi } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../entities/user';
 import { useRouter } from 'next/navigation';
@@ -28,8 +27,8 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
   };
 
   const handleEdit = async (newGoalTitle: string) => {
-    const response = await patchIndividualGoals({
-      goalid: goalData.id,
+    const response = await individualGoalsApi.patchIndividualGoals({
+      goalId: goalData.id,
       title: newGoalTitle,
     });
     if (response.code === 200) {
@@ -39,7 +38,9 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
   };
 
   const handleDelete = async () => {
-    const response = await deleteIndividualGoals({ goalId: goalData.id });
+    const response = await individualGoalsApi.deleteIndividualGoals({
+      goalId: goalData.id,
+    });
     if (response.code === 204) {
       setIsConfirmOpen(false);
       router.back();

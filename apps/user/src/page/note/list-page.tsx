@@ -8,7 +8,6 @@ export const ListPage = () => {
   const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
 
   const handleSlideOpen = (id: number) => {
-    console.log(id);
     if (id) {
       setIsSlideOpen((prev) => !prev);
     }

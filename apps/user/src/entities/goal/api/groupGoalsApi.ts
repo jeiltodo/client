@@ -10,7 +10,7 @@ export const groupGoalsApi = {
       return response.data;
     } catch (error) {
       // 오류가 발생한 경우 적절히 처리
-      console.error('Fail fetch group goal:', error);
+      console.error('Fail fetch single group goal:', error);
       throw error;
     }
   },

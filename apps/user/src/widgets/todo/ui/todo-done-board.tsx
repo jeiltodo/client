@@ -4,14 +4,14 @@ import { Plus } from '@jeiltodo/icons';
 import type { SingleGoalTodoResponse } from '../../../entities/todo';
 import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
-import { SingleGoalResponse } from '../../../entities/goal';
+import { Goal } from '../../../entities/goal';
 
 export const TodoDoneBoard = ({
   todos,
   goal,
 }: {
   todos: SingleGoalTodoResponse;
-  goal: SingleGoalResponse;
+  goal: Goal;
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -21,12 +21,12 @@ export const TodoDoneBoard = ({
       title: todo.title,
       isDone: todo.isDone,
       noteId: todo.noteId ?? undefined,
-      goal: goal.data,
+      goal: goal,
     };
   });
 
-  const done = todosForList.filter((todo) => todo.isDone);
-  const notDone = todosForList.filter((todo) => !todo.isDone);
+  const done = todosForList.filter((todo) => todo.isDone === true);
+  const notDone = todosForList.filter((todo) => todo.isDone === false);
 
   const handleAddModal = () => {
     setModalOpen(true);
@@ -48,7 +48,7 @@ export const TodoDoneBoard = ({
                 할일 추가
               </Button>
             </div>
-            <TodoList todos={done} variant='user' />
+            <TodoList todos={notDone} variant='user' />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -73,7 +73,7 @@ export const TodoDoneBoard = ({
         {done.length !== 0 ? (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <TodoList todos={notDone} variant='user' />
+            <TodoList todos={done} variant='user' />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -83,10 +83,10 @@ export const TodoDoneBoard = ({
             </div>
           </div>
         )}
+        {modalOpen && (
+          <TodoModal setTodoToggle={setModalOpen} initialGoal={goal} />
+        )}
       </div>
-      {modalOpen && (
-        <TodoModal setTodoToggle={setModalOpen} initialGoal={goal.data} />
-      )}
     </div>
   );
 };

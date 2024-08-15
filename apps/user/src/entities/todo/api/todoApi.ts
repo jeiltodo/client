@@ -10,10 +10,10 @@ import type {
 export const todoApi = {
   getSingleGoalTodo: async (goalId: number) => {
     try {
-      const response = await client.get<SingleGoalTodoResponse>(
+      const response = await client.get<Promise<SingleGoalTodoResponse>>(
         `/todo/list?goalId=${goalId}`
       );
-      console.log('new getSingleGoalTodo', response.data);
+
       return response.data;
     } catch (error) {
       console.error('Fail fetch todo:', error);
