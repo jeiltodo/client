@@ -36,7 +36,12 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
 
   const handleDelete = () => {
     const noteId = data.id;
-    const response = deleteNote({ noteId });
+    onDeleteNote(noteId);
+  };
+
+  const onDeleteNote = async (noteId: number) => {
+    const response = await deleteNote({ noteId });
+    console.log('response: ', response);
   };
 
   const { noteDetail, error, isLoading } = useNoteDetail(Number(data.id));

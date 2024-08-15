@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getNoteDetail } from '../api/getNoteDetail';
 import { noteQueryKeys } from '../queryKeys';
+import { getNoteDetail } from '../api/noteApi';
 
 export const useNoteDetail = (noteId: number) => {
   const { data, error, isLoading } = useQuery({

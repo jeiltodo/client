@@ -50,17 +50,20 @@ export const EditorForm = ({
         />
         <Counter data={title} limitNumber={30} />
       </div>
-      <div className='flex flex-row text-right text-sm font-pretendard-medium py-[12px]'>
-        <span>{`공백포함 : 총 `}</span>
-        <span className='inline-block min-w-[20px] pl-[5px] pr-[1px]'>
-          {content.length}
-        </span>
-        <span className='pr-[2px]'>{`자 |`}</span>
-        <span>{`공백포함 : 총 `}</span>
-        <span className='inline-block min-w-[20px] pl-[5px] pr-[1px]'>
-          {lengthWithoutSpaces}
-        </span>
-        <span>{'자'}</span>
+      <div className='flex flex-row items-center justify-between'>
+        <div className='flex flex-row text-right text-sm font-pretendard-medium py-[12px]'>
+          <span>{`공백포함 : 총 `}</span>
+          <span className='inline-block min-w-[20px] pl-[5px] pr-[1px]'>
+            {content.length}
+          </span>
+          <span className='pr-[2px]'>{`자 |`}</span>
+          <span>{`공백포함 : 총 `}</span>
+          <span className='inline-block min-w-[20px] pl-[5px] pr-[1px]'>
+            {lengthWithoutSpaces}
+          </span>
+          <span>{'자'}</span>
+        </div>
+        <Counter data={content} limitNumber={10000} />
       </div>
       <textarea
         name='content'

@@ -12,13 +12,18 @@ import {
 import { EditorForm } from '../../features/note';
 import { useParams } from 'next/navigation';
 import { DeleteCircle } from '@jeiltodo/icons';
-import { MINUTES_WITH_MS } from '../../shared';
+import { BaseModal, MINUTES_WITH_MS } from '../../shared';
+import { createNote, patchNote } from '../../entities/note';
+import { useRouter } from 'next/navigation';
+import { useNoteDetail } from '../../entities/note/hooks/useNoteDetail';
 
 export const EditorPage = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [linkUrl, setLinkUrl] = useState<string>('');
   const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
   const [isButtonView, setIsButtonView] = useState<boolean>(false);
+  const [isAlert, setIsAlert] = useState<boolean>(false);
   const { goalid, todoid, noteid } = useParams<{
     goalid: string;
     todoid: string;
@@ -26,13 +31,17 @@ export const EditorPage = () => {
   }>();
   //TODO:: 브라우저가 뒤로 가기가 되었을 때 작성중인 어쩌구 팝업 뜨게 하기
   const showToast = useToast();
+  const router = useRouter();
+
+  const { noteDetail, isLoading } = useNoteDetail(Number(noteid));
+
   const handleLocalSave = () => {
     const localData = {
       noteid: noteid as string,
       title: title.trim(),
       content: content.trim(),
     };
-    if (noteid) {
+    if (noteid && title && content) {
       try {
         window.localStorage.setItem(`note${noteid}`, JSON.stringify(localData));
         showToast({
@@ -42,12 +51,9 @@ export const EditorPage = () => {
         });
         setIsLocalSaved(true);
         setIsButtonView(true);
-        console.log('savedData: ', JSON.parse(savedData));
       } catch (error) {
         console.log(error);
       }
-    } else {
-      alert('페이지의 정보가 없습니다.');
     }
   };
 
@@ -58,16 +64,54 @@ export const EditorPage = () => {
   };
 
   const handleSave = () => {
-    console.log('노트 저장api 요청', title, content);
+    if (!noteid) {
+      onCreateNote();
+    } else {
+      onPatchNote();
+    }
   };
+  const onCreateNote = async () => {
+    try {
+      const response = await createNote({
+        todoId: todoid,
+        title,
+        content,
+        linkUrl,
+      });
+      console.log('노트가 성공적으로 생성되었습니다:', response);
+      // 필요한 추가 작업을 여기에 작성하세요 (예: 상태 업데이트, UI 변경 등)
+    } catch (error) {
+      console.error('노트 생성 중 오류가 발생했습니다:', error);
+      // 오류 처리 로직을 여기에 추가하세요 (예: 사용자 알림 등)
+    }
+  };
+  const onPatchNote = async () => {
+    try {
+      const response = await patchNote({
+        noteId: noteid,
+        title,
+        content,
+        linkUrl,
+      });
+      if (response.code === 200) setIsAlert(true);
+    } catch (error) {
+      console.error('노트 수정 중 오류가 발생했습니다:', error);
+      // 오류 처리 로직을 여기에 추가하세요 (예: 사용자 알림 등)
+    }
+  };
+  useEffect(() => {
+    if (!isLoading && noteDetail?.data) {
+      setTitle(noteDetail.data.title);
+      setContent(noteDetail.data.content);
+    }
+  }, []);
 
   useEffect(() => {
-    const showToast = setInterval(() => {
-      if (title.trim().length !== 0 && content.trim().length !== 0)
-        handleLocalSave();
+    const showSaveToast = setInterval(() => {
+      handleLocalSave();
     }, MINUTES_WITH_MS * 5);
 
-    return () => clearInterval(showToast);
+    return () => clearInterval(showSaveToast);
   }, []);
 
   useEffect(() => {
@@ -128,19 +172,39 @@ export const EditorPage = () => {
           </Button>
         </div>
       )}
-      <BoardTitle
-        className='mb-[12px]'
-        icon='flag'
-        iconSize={24}
-        title='자바스크립트로 웹 서비스 만들기'
-      />
-      <TodoTitle className='mb-[24px]' title='자바스크립트 기초 챕터1 듣기' />
+      {!isLoading && noteDetail && (
+        <>
+          <BoardTitle
+            className='mb-[12px]'
+            icon='flag'
+            iconSize={24}
+            title={noteDetail.data.todo.title}
+          />
+          <TodoTitle className='mb-[24px]' title={noteDetail.data.todo.title} />
+        </>
+      )}
       <EditorForm
         content={content}
         setContent={setContent}
         setTitle={setTitle}
         title={title}
       />
+      {isAlert && (
+        <div className='w-[300px]'>
+          <BaseModal setToggle={setIsAlert}>
+            <div className='flex flex-col gap-3 items-center'>
+              <p>저장 되었습니다!</p>
+              <Button
+                isDisabled={!title}
+                className='w-[120px] mt-10 h-12'
+                onClick={() => router.back()}
+              >
+                확인
+              </Button>
+            </div>
+          </BaseModal>
+        </div>
+      )}
     </div>
   );
 };

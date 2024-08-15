@@ -19,3 +19,8 @@ export interface NoteResponse {
   };
   msg: string;
 }
+export interface NoteGetResponse {
+  code: number;
+  data: Note;
+  msg: string;
+}

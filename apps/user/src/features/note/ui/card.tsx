@@ -28,12 +28,16 @@ export const Card = ({ data }: CardProps) => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleRoute = () => {
+  const handleRoute = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     route.push(`/note/${goalid}/${data.todo.id}/${data.id}`);
   };
-  const handleDelete = () => {
-    const noteId = data.id;
-    const response = deleteNote({ noteId });
+  const handleDelete = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    console.log('삭제 요청');
+    // const noteId = data.id;
+    // const response = deleteNote({ noteId });
+    //TODO :: 삭제 에러 확인중
   };
   return (
     <div
