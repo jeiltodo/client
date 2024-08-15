@@ -5,7 +5,7 @@ export default function todoLayout({
 }) {
   return (
     <>
-      <main className='common-layout bg-slate-100'>{children}</main>
+      <main className=''>{children}</main>
     </>
   );
 }

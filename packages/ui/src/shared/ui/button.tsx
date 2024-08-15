@@ -8,6 +8,7 @@ type Variant =
   | 'outline-date'
   | 'outline-status'
   | 'outline-goal'
+  | 'outline-dark'
   | 'rounded-white'
   | 'rounded-outline-blue'
   | 'text-gray'
@@ -71,6 +72,8 @@ export function Button({
       'bg-transparent text-slate-800 border border-slate-200 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'outline-goal':
       'bg-transparent text-slate-800 border border-slate-200 rounded-[99px] hover:border-blue-500 active:border-blue-100',
+    'outline-dark':
+      'bg-transparent text-slate-800 border border-slate-800 rounded-[12px] hover:border-slate-900 active:border-slate-900',
     'rounded-white':
       'text-slate-700 rounded-full bg-white hover:text-slate-800',
     'rounded-outline-blue':

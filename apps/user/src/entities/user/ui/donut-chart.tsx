@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react';
 
 interface DonutChartProps {
@@ -53,8 +54,8 @@ export const DonutChart: React.FC<DonutChartProps> = ({
     circumference - (previousPercent / 100) * circumference;
 
   return (
-    <div className='absolute top-1/2 -translate-y-1/2 desktop:right-[92px] mobile:right-[24px] z-20'>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <div className='absolute top-1/2 -translate-y-1/2 right-[24px] z-20'>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className='w-[166px] h-[166px] max-tablet:w-[133px] max-tablet:h-[133px]'>
         {/* 배경 원 */}
         <circle
           className='text-gray-200'

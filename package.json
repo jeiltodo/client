@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "@tanstack/react-query": "^5.51.23",
+    "@tanstack/react-query-devtools": "^5.51.23",
     "@types/react-query": "^1.2.9",
     "react-toastify": "^10.0.5"
   }

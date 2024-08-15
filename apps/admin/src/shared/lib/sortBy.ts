@@ -12,7 +12,7 @@ interface ObjectWithOptionalFields {
   email?: string;
   todo?: string;
   goal?: string;
-  done?: boolean;
+  isDone?: boolean;
   createdAt?: Date | string;
   updatedAt?: Date | string;
   groupCount?: number;
@@ -30,7 +30,7 @@ function determineType(
   if (key === 'id' || key === 'groupCount' || key === 'progress')
     return 'number';
   if (key === 'createdAt' || key === 'updatedAt') return 'date';
-  if (key === 'done') return 'boolean';
+  if (key === 'isDone') return 'boolean';
   if (typeof value === 'string') {
     const firstChar = value.trim()[0];
     if (firstChar >= 'a' && firstChar <= 'z') return 'localeEN';

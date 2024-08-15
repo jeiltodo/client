@@ -1,4 +1,4 @@
-import { Checkbox } from '@jeiltodo/ui';
+import { Checkbox } from '@jeiltodo/ui/shared';
 
 import { ChangeEvent } from 'react';
 import { TableHead } from './head';

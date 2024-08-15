@@ -10,5 +10,5 @@ export default function NoteEditorLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  return <main className='common-layout bg-white'>{children}</main>;
+  return <div className='bg-white'>{children}</div>;
 }

@@ -36,10 +36,10 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   };
 
   return (
-    <div className='min-w-[60px] desktop:min-w-[280px]'>
+    <div className='min-w-[60px] desktop:min-w-[280px] relative z-50'>
       {/* 데스크톱 버전 */}
       <div
-        className={`desktop:flex mobile:hidden h-full fixed top-0 left-0 z-10
+        className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
            transition-all duration-300 ease-in-out ${
              isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}
@@ -76,16 +76,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {isDesktopOpen && (
-          <>
-            {children}
-          </>
-        )}
+        {isDesktopOpen && <>{children}</>}
       </div>
 
       {/* 태블릿 버전 */}
       <div
-        className={`desktop:hidden tablet:flex mobile:hidden h-full fixed top-0 left-0 z-10
+        className={`desktop:hidden tablet:flex hidden h-full fixed top-0 left-0 z-10
            transition-all duration-300 ease-in-out ${
              isTabletOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}
@@ -122,11 +118,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         </div>
 
-        {isTabletOpen && (
-          <>
-            {children}
-          </>
-        )}
+        {isTabletOpen && <>{children}</>}
       </div>
 
       {isTabletOpen && (
@@ -142,7 +134,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
 
       {/* 모바일 버전 */}
       <div
-        className={`tablet:hidden mobile:flex top-0 left-0 w-full transition-all duration-300 ease-in-out ${
+        className={`tablet:hidden flex top-0 left-0 w-full transition-all duration-300 ease-in-out ${
           isMobileSidebarOpen ? 'h-full' : 'h-[48px]'
         } bg-white flex-col fixed overflow-hidden`}
       >
@@ -165,11 +157,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
         )}
 
-        {isMobileSidebarOpen && (
-          <>
-            {children}
-          </>
-        )}
+        {isMobileSidebarOpen && <>{children}</>}
       </div>
     </div>
   );

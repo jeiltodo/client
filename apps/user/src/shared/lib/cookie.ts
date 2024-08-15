@@ -3,6 +3,8 @@ interface CookieOptions {
   expires?: number;
 }
 
+const isBrowser = typeof window !== 'undefined';
+
 /**
  * 쿠키를 저장하는 함수
  * @example
@@ -13,6 +15,7 @@ export const setCookie = (
   value: string,
   options?: CookieOptions
 ) => {
+  if (!isBrowser) return;
   const cookie = [
     `${key}=${value}`,
     options?.maxAge ? `max-age=${options.maxAge}` : undefined,
@@ -25,6 +28,7 @@ export const setCookie = (
 
 // 쿠키 가져오기
 export const getCookie = (key: string) => {
+  if (typeof document === 'undefined') return undefined;
   // 쿠키 이름과 일치하는 부분을 찾기 위한 정규식 생성
   const regex = new RegExp(
     `(?:^|; )${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}=([^;]*)`
@@ -38,5 +42,6 @@ export const getCookie = (key: string) => {
 };
 
 export const deleteCookie = (key: string) => {
+  if (!isBrowser) return;
   setCookie(key, '', { maxAge: -1 });
 };

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { type ChangeEvent, type FocusEvent, useEffect, useState } from 'react';
 import { useDebounce, Button, Input } from '@jeiltodo/ui/shared';
-import type { SignUpData, ValidationErrors } from '../../../entities/session';
+import type { SignUpBody, ValidationErrors } from '../../../entities/session';
 import {
   validateSiginupConfirmPassword,
   validateSiginupEmail,
@@ -10,7 +10,7 @@ import {
 } from '../model/validation';
 
 interface SignUpFormProps {
-  onSubmit: (credentials: SignUpData) => void;
+  onSubmit: (credentials: SignUpBody) => void;
 }
 
 export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {

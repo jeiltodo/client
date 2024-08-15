@@ -1,3 +1,4 @@
+'use client';
 import type { PropsWithChildren } from 'react';
 import { createContext, useEffect, useState } from 'react';
 import { TableQuery } from './type';

@@ -8,11 +8,14 @@ import {
   useState,
 } from 'react';
 import { TodoModal } from '../../../entities/todo/ui/todo-modal';
+import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { userOptions } from '../../../entities/user';
 
 interface IndividualGoalsProps {
   id: number;
   title: string;
-  userId: number;
+  memberId: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -22,7 +25,7 @@ interface SidebarIndividualNavProps {
     Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
   >;
   title: string;
-  individualGoals: IndividualGoalsProps[];
+  individualGoals: IndividualGoalsProps[] | undefined;
 }
 
 export const SidebarIndividualNav = ({
@@ -31,36 +34,34 @@ export const SidebarIndividualNav = ({
   individualGoals,
 }: SidebarIndividualNavProps) => {
   const [todoToggle, setTodoToggle] = useState<boolean>(false);
+  const router = useRouter();
+
+  const { data: user } = useQuery(userOptions());
+
   return (
-    <div>
-      {todoToggle && (
-        <TodoModal taskOwner='체다치즈' setTodoToggle={setTodoToggle} />
-      )}
-      <div className='px-6 py-[18px] flex items-center justify-between gap-2 border-t-[1px] border-slate-200'>
-        <div className='flex items-center gap-2'>
+    <div className='border-t-[1px] border-slate-200 py-4 flex flex-col items-center'>
+      {todoToggle && <TodoModal setTodoToggle={setTodoToggle} />}
+      <div className='px-5 mb-4 flex items-center justify-start gap-2 w-full h-9'>
+        <div className='flex items-center gap-2 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
           <Icon className='w-6 h-6' />
           <div className='block text-lg font-pretendard-medium text-slate-800'>
             {title}
           </div>
         </div>
-        <button
-          className='flex items-center gap-1'
-          onClick={() => setTodoToggle(true)}
-        >
-          <Plus className='w-4 h-4' />
-          <div className='text-blue-500 text-sm font-pretendard-semibold'>
-            할 일 추가
-          </div>
-        </button>
       </div>
-      {individualGoals.map((goal) => (
-        <div
-          key={goal.id}
-          className='block pl-8 py-2 text-sm font-pretendard-medium text-slate-700'
-        >
-          · {goal.title}
-        </div>
-      ))}
+      <div className='px-5 max-h-36 overflow-y-scroll scrollbar-hide w-full'>
+        {individualGoals?.map((goal) => (
+          <div
+            key={goal.id}
+            onClick={() =>
+              router.push(`/goal/${user?.data.nickname}/${goal.id}`)
+            }
+            className='flex items-center text-sm font-pretendard-medium text-slate-700 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg cursor-pointer'
+          >
+            · {goal.title}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

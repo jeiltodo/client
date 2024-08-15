@@ -1,46 +1,34 @@
 'use client';
 
 import { Button, ProgressBar } from '@jeiltodo/ui/shared';
-import { Goal } from '../../../entities/goal';
-import { Todo, TodoModal } from '../../../entities/todo';
+import { GoalWithTodos } from '../../../entities/goal';
+import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
-import { ArrowRight, Plus } from '@jeiltodo/icons';
+import { ArrowRight, PlusBlue } from '@jeiltodo/icons';
 import { useState } from 'react';
 
-const Todos: Todo[] = [
-  {
-    id: 1,
-    done: false,
-    title: '자바스크립트 비동기 처리',
-  },
-  {
-    id: 2,
-    done: true,
-    title: '타입스크립트 처리',
-  },
-];
-
-export const UserGoalCard = (goal: Goal) => {
+export const UserGoalCard = (goal: GoalWithTodos) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const done = goal.todos
-    .filter((todo) => todo.done === true)
+    .filter((todo) => todo.isDone === true)
     .map((todo) => ({
       ...todo,
-      goal: { id: goal.id, title: goal.title },
+      goal,
     }));
   const notDone = goal.todos
-    .filter((todo) => todo.done === false)
+    .filter((todo) => todo.isDone === false)
     .map((todo) => ({
       ...todo,
-      goal: { id: goal.id, title: goal.title },
+      goal,
     }));
 
-  const handleAdd = () => {
+  const handleAddModal = () => {
     setModalOpen(true);
   };
 
   const handleMore = () => {};
+
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>
       <div className='flex justify-between'>
@@ -48,15 +36,15 @@ export const UserGoalCard = (goal: Goal) => {
         <Button
           variant='text-blue'
           className='flex gap-1 items-center text-sm'
-          onClick={handleAdd}
+          onClick={handleAddModal}
         >
-          <Plus width={16} height={16} />
+          <PlusBlue width={16} height={16} />
           할일 추가
         </Button>
       </div>
 
       <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>
-        <ProgressBar progress={64} />
+        <ProgressBar progress={goal.progress} />
       </div>
       <div className='w-full tablet:grid tablet:grid-cols-2 tablet:divide-x tablet:divide-gray-200 mt-4 mb-5'>
         {notDone.length !== 0 && (
@@ -85,11 +73,7 @@ export const UserGoalCard = (goal: Goal) => {
         </Button>
       </div>
       {modalOpen && (
-        <TodoModal
-          taskOwner='User'
-          setTodoToggle={setModalOpen}
-          initialGoal={goal}
-        />
+        <TodoModal setTodoToggle={setModalOpen} initialGoal={goal} />
       )}
     </div>
   );

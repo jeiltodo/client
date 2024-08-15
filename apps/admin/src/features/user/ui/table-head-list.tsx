@@ -1,5 +1,5 @@
 import { useTableSort } from '../../../shared';
-import { Table } from '../../../shared/ui';
+import { Table } from '../../../shared';
 import { TableHeadMap } from '../../../shared/ui/table/type';
 
 interface Props<T> {
