@@ -14,7 +14,7 @@ export const CardListBoard = () => {
   });
 
   return (
-    <div className='flex flex-col h-full'>
+    <div className='flex flex-col flex-grow h-full'>
       <GoalTitleCard title={goalTitle} />
       <div className='flex-1 flex flex-col'>
         {!isLoading &&

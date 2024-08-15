@@ -8,9 +8,7 @@ export const ListPage = () => {
       style={{ minHeight: 'calc(100vh - 24px)' }}
     >
       <LayoutTitle title='노트 모아보기' />
-      <div className='flex-1 overflow-hidden'>
-        <CardListBoard />
-      </div>
+      <CardListBoard />
     </div>
   );
 };
