@@ -10,7 +10,7 @@ export const noteQueryKeys = {
     oneOfTodo: (todoId: string | number) =>
       [...noteQueryKeys.one, 'todo', todoId] as const,
     // 특정 목표의 모든 노트
-    allOfGoal: (goalid: string | number, page?: number, limit?: number) => {
+    allOfGoal: (goalid: string | number, page: number, limit: number) => {
       const queryParams = [
         ,
         page ? `page=${page}` : '',

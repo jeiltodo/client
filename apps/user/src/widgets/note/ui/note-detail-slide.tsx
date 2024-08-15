@@ -37,7 +37,6 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
   const handleDelete = () => {
     const noteId = data.id;
     const response = deleteNote({ noteId });
-    console.log('deleteNote response: ', response);
   };
 
   const { noteDetail, error, isLoading } = useNoteDetail(Number(data.id));
@@ -45,7 +44,6 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
   useEffect(() => {
     if (!isLoading && noteDetail?.data && !error) {
       const queryData = noteDetail.data;
-      console.log('queryData: ', queryData);
       setNoteData(queryData);
     }
   }, [noteDetail, isLoading, error]);
@@ -111,7 +109,7 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
           <div className='flex felx-row items-center justify-between mb-6'>
             <TodoTitle title={noteData?.todo.title || ''} />
             <span className='text-slate-500 text-xs'>
-              {noteData?.created_at}
+              {noteData?.createdAt}
             </span>
           </div>
           <div className='text-lg font-pretendard-medium text-slate-800 border-y border-slate-200 py-3 mb-4'>

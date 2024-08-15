@@ -18,7 +18,6 @@ export const Card = ({ data }: CardProps) => {
   const goalid = params?.goalid as string;
 
   const handleSlideOpen = () => {
-    console.log();
     if (data.id) {
       setIsSlideOpen((prev) => !prev);
     }
@@ -34,7 +33,6 @@ export const Card = ({ data }: CardProps) => {
   const handleDelete = () => {
     const noteId = data.id;
     const response = deleteNote({ noteId });
-    console.log('deleteNote response: ', response);
   };
   return (
     <div

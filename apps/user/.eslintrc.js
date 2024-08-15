@@ -7,5 +7,6 @@ module.exports = {
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
   },
 };

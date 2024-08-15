@@ -1,19 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getGoalNotes, GetGoalNotesParam } from '../api/getGoalNotes';
 import { noteQueryKeys } from '../queryKeys';
+import { getGoalNotes, GetGoalNotesParam } from '../api/individualNotesApi';
 
-export const useGoalNotes = ({
-  goalid,
-  page = 1,
-  limit,
-}: GetGoalNotesParam) => {
-  const { data, error, isLoading } = useQuery({
-    queryKey: noteQueryKeys.note.allOfGoal(goalid, page, limit),
-    queryFn: () => getGoalNotes({ goalid, page, limit }),
+export const useGoalNotes = ({ goalId, page, limit }: GetGoalNotesParam) => {
+  return useQuery({
+    queryKey: noteQueryKeys.note.allOfGoal(goalId, page, limit),
+    queryFn: () => getGoalNotes({ goalId, page, limit }),
   });
-  return {
-    goalNotes: data,
-    error,
-    isLoading,
-  };
 };

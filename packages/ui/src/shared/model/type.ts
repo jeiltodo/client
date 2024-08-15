@@ -7,9 +7,9 @@ export type Goal = {
 
 export type Todo = {
   id: number;
-  is_done: boolean;
+  isDone: boolean;
   title: string;
-  note_id?: number;
+  noteId?: number;
   updatedAt: string;
   createdAt: string;
   goal: Goal;
@@ -19,14 +19,14 @@ export type Note = {
   id: number;
   title: string;
   content: string;
-  created_at: string;
-  updated_at: string;
-  link_url: string | null;
-  todo: Todo;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  linkUrl?: string;
+  todo: Todo | Pick<Todo, 'id' | 'title' | 'isDone'>;
 };
 
 export type NoteResponse = {
-  current_page: number;
+  currentPage: number;
   notes: Note[] | [];
-  total_count: number;
+  totalCount: number;
 };
