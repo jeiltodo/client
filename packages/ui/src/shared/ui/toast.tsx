@@ -7,13 +7,14 @@ interface Toast {
   type: 'alert' | 'confirm';
   onClose?: () => void;
   button?: JSX.Element;
+  autoClose?: number;
 }
 export const useToast = () => {
-  return ({ message, type, onClose, button }: Toast) => {
+  return ({ message, type, onClose, button, autoClose = 4000 }: Toast) => {
     const alertConfig: ToastOptions = {
       //커스터마이징 옵션
       position: 'top-center',
-      autoClose: 4000,
+      autoClose: autoClose,
       hideProgressBar: true,
       closeOnClick: false,
       rtl: false, //알림 좌우 반전 안 함
@@ -25,7 +26,7 @@ export const useToast = () => {
     const confirmConfig: ToastOptions = {
       //커스터마이징 옵션
       position: 'top-center',
-      autoClose: 4000,
+      autoClose: autoClose,
       hideProgressBar: true,
       closeOnClick: false,
       rtl: false, //알림 좌우 반전 안 함
@@ -62,23 +63,3 @@ const checkIcon = () => {
 const deleteCircleIcon = () => {
   return <DeleteCircle />;
 };
-
-// 임시 저장 토스트 예시
-// showToast({
-//   message: '임시저장된 노트가 있어요.',
-//   type: 'confirm',
-//   onClose: () => {
-//     console.log('close!');
-//   },
-//   button: (
-//     <Button
-//       variant='rounded-outline-blue'
-//       className='block px-3 !text-sm !h-[36px] leading-5'
-//       onClick={() => {
-//         console.log('토스트 onClick함수 click');
-//       }}
-//     >
-//       불러오기
-//     </Button>
-//   ),
-// });

@@ -7,23 +7,25 @@ import {
   ButtonGroup,
   LayoutTitle,
   TodoTitle,
+  useToast,
 } from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
 import { useParams } from 'next/navigation';
+import { DeleteCircle } from '@jeiltodo/icons';
+import { MINUTES_WITH_MS } from '../../shared';
 
 export const EditorPage = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
+  const [isButtonView, setIsButtonView] = useState<boolean>(false);
   const { goalid, todoid, noteid } = useParams<{
     goalid: string;
     todoid: string;
     noteid: string;
   }>();
-  //TODO:: 각 버튼기능 / data가 있으면 저장 완료 disabled=false
-  //TODO:: 5분마다 임시저장 & 임시저장 완료 토스트
   //TODO:: 브라우저가 뒤로 가기가 되었을 때 작성중인 어쩌구 팝업 뜨게 하기
-  //임시저장된 내용이 있습니다. 뜨게하기
+  const showToast = useToast();
   const handleLocalSave = () => {
     const localData = {
       noteid: noteid as string,
@@ -33,7 +35,14 @@ export const EditorPage = () => {
     if (noteid) {
       try {
         window.localStorage.setItem(`note${noteid}`, JSON.stringify(localData));
-        console.log('JSON.stringify(localData): ', JSON.stringify(localData));
+        showToast({
+          message: '임시 저장이 완료되었습니다.',
+          type: 'alert',
+          autoClose: 2000,
+        });
+        setIsLocalSaved(true);
+        setIsButtonView(true);
+        console.log('savedData: ', JSON.parse(savedData));
       } catch (error) {
         console.log(error);
       }
@@ -42,30 +51,49 @@ export const EditorPage = () => {
     }
   };
 
+  const getLocalSave = () => {
+    const savedData = localStorage.getItem(`note${noteid}`);
+    setTitle(JSON.parse(savedData).title);
+    setContent(JSON.parse(savedData).content);
+  };
+
   const handleSave = () => {
     console.log('노트 저장api 요청', title, content);
   };
 
   useEffect(() => {
     const showToast = setInterval(() => {
-      handleLocalSave();
-    }, 60000 * 5);
+      if (title.trim().length !== 0 && content.trim().length !== 0)
+        handleLocalSave();
+    }, MINUTES_WITH_MS * 5);
 
     return () => clearInterval(showToast);
   }, []);
 
   useEffect(() => {
-    localStorage.getItem(`note${noteid}`);
-  }, []);
+    if (localStorage.getItem(`note${noteid}`)) {
+      setIsLocalSaved(true);
+      setIsButtonView(true);
+    } else {
+      setIsLocalSaved(false);
+      setIsButtonView(true);
+    }
+  }, [noteid]);
 
   return (
-    <div className='max-w-[792px]'>
+    <div
+      className='flex flex-col max-w-[792px]'
+      style={{ minHeight: 'calc(100vh - 48px)' }}
+    >
       <LayoutTitle title={`노트 ${noteid === 'new' ? '작성' : '수정'}`}>
         <ButtonGroup>
           <Button
             className='w-[96px] h-[44px]'
             onClick={handleLocalSave}
             variant='text-blue'
+            isDisabled={
+              title.trim().length === 0 || content.trim().length === 0
+            }
           >
             임시저장
           </Button>
@@ -80,16 +108,26 @@ export const EditorPage = () => {
           </Button>
         </ButtonGroup>
       </LayoutTitle>
-      {/* localstorage에 있으면 노출 */}
-      <Button
-        variant='rounded-outline-blue'
-        className='block px-3 !text-sm !h-[36px] leading-5'
-        onClick={() => {
-          console.log('토스트 onClick함수 click');
-        }}
-      >
-        불러오기
-      </Button>
+      {isLocalSaved && isButtonView && (
+        <div className='flex flex-row items-center justify-between bg-[#eff6ff] text-[#3b82f6] rounded-[28px] text-[14px] font-pretendard-medium px-3 pl-6 py-0 shadow-none min-h-[56px] h-[56px] mb-6'>
+          <div className='flex flex-row items-center gap-4'>
+            <span
+              onClick={() => setIsButtonView(false)}
+              className='cursor-pointer'
+            >
+              <DeleteCircle width={24} height={24} />
+            </span>
+            <p>임시 저장된 노트가 있어요. 저장된 노트를 불러오시겠어요?</p>
+          </div>
+          <Button
+            variant='rounded-outline-blue'
+            className='block px-3 !text-sm !h-[36px] leading-5'
+            onClick={getLocalSave}
+          >
+            불러오기
+          </Button>
+        </div>
+      )}
       <BoardTitle
         className='mb-[12px]'
         icon='flag'

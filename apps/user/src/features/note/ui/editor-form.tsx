@@ -38,7 +38,7 @@ export const EditorForm = ({
     return changedText;
   };
   return (
-    <div>
+    <div className='flex flex-col flex-grow h-full'>
       <div className='flex flex-row gap-2 items-center justify-between border-y-[1px] border-slate-200'>
         <Input
           type='text'
@@ -67,7 +67,7 @@ export const EditorForm = ({
         value={content}
         placeholder='이 곳을 클릭해 노트 작성을 시작해주세요'
         onChange={handleContentChange}
-        className='py-1 w-full h-screen resize-none placeholder:text-base placeholder:font-pretendard-medium rounded-xl focus:border-blue-500 focus:outline-none'
+        className='flex-grow py-1 w-full h-full resize-none placeholder:text-base placeholder:font-pretendard-medium rounded-xl focus:border-blue-500 focus:outline-none'
       />
     </div>
   );
