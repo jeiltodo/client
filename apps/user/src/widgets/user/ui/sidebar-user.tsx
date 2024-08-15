@@ -23,7 +23,7 @@ import {
 import {
   individualGoalsOptions,
   useIndividualGoalMutation,
-} from '../../../entities/goal/hooks/individualOptions';
+} from '../../../entities/user/hooks/individualGoalOptions';
 import { AxiosError } from 'axios';
 import { userOptions } from '../../../entities/user';
 

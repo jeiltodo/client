@@ -3,7 +3,7 @@ export * from './ui/goal-dropdown';
 
 export * from './api/individualGoalsApi';
 
-export * from './hooks/individualOptions';
-export * from './hooks/useGoalsWithTodos';
-export * from './hooks/useIndividualGoals';
-export * from './hooks/progressAllOptions';
+export * from '../user/hooks/individualGoalOptions';
+export * from '../user/hooks/useGoalsWithTodos';
+export * from '../user/hooks/useIndividualGoals';
+export * from '../user/hooks/progressAllOptions';

@@ -9,7 +9,7 @@ export const useUpdateTodo = () => {
       todoApi.updateTodo(newTodo),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: goalQueryKeys.individual.todos(),
+        predicate: (query) => query.queryKey.includes('todos'),
       });
     },
   });

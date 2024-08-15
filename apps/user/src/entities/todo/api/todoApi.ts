@@ -1,5 +1,5 @@
 import { client } from '../../../shared';
-import { Todo, TodoCreateBody, TodoUpdateBody } from '../model/type';
+import { TodoCreateBody, TodoUpdateBody } from '../model/type';
 
 export const todoApi = {
   createTodo: async (todoCreateBody: TodoCreateBody) => {
@@ -8,7 +8,7 @@ export const todoApi = {
       return response.data;
     } catch (error) {
       // 오류가 발생한 경우 적절히 처리
-      console.error('Fail fetch individual goals:', error);
+      console.error('Fail createTodo:', error);
       throw error;
     }
   },
@@ -19,7 +19,7 @@ export const todoApi = {
       return response.data;
     } catch (error) {
       // 오류가 발생한 경우 적절히 처리
-      console.error('Fail fetch individual goals:', error);
+      console.error('Fail  checkTodo:', error);
       throw error;
     }
   },
@@ -42,7 +42,18 @@ export const todoApi = {
       return response.data;
     } catch (error) {
       // 오류가 발생한 경우 적절히 처리
-      console.error('Fail fetch individual goals:', error);
+      console.error('Fail deleteTodo:', error);
+      throw error;
+    }
+  },
+
+  assignTodo: async (todoId: number) => {
+    try {
+      const response = await client.patch(`/todo/group/charge/${todoId}`);
+      return response.data;
+    } catch (error) {
+      // 오류가 발생한 경우 적절히 처리
+      console.error('Fail  assignTodo:', error);
       throw error;
     }
   },

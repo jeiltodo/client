@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 import { Todo } from '../model/type';
-import { Goal, GoalDropdown, useIndividualGoals } from '../../goal';
+import { GoalDropdown, GoalIdAndTitle } from '../../goal';
 import { useCreateTodo } from '../hooks/useCreateTodo';
 import { useUpdateTodo } from '../hooks/useUpdateTodo';
 import { userOptions } from '../../user';
@@ -12,12 +12,14 @@ import { useQuery } from '@tanstack/react-query';
 
 interface Props {
   setTodoToggle: Dispatch<SetStateAction<boolean>>;
+  goals: GoalIdAndTitle[];
   initialTodo?: Todo;
-  initialGoal?: Goal;
+  initialGoal?: GoalIdAndTitle;
 }
 
 export const TodoModal = ({
   setTodoToggle: toggleModal,
+  goals,
   initialTodo,
   initialGoal,
 }: Props) => {
@@ -27,7 +29,6 @@ export const TodoModal = ({
   );
 
   const { data: user } = useQuery(userOptions());
-  const { data: goals } = useIndividualGoals();
 
   const { mutate: createTodo } = useCreateTodo();
   const { mutate: updateTodo } = useUpdateTodo();
@@ -35,7 +36,7 @@ export const TodoModal = ({
   const handleSubmit = () => {
     initialTodo
       ? updateTodo({ id: initialTodo.id, title })
-      : createTodo({ goal_id: goalId as number, title });
+      : createTodo({ goalId: goalId as number, title });
     toggleModal(false);
   };
 
@@ -62,7 +63,7 @@ export const TodoModal = ({
 
         {goals && (
           <GoalDropdown
-            goals={goals?.individualGoals}
+            goals={goals}
             onSelect={setGoalId}
             defaultGoal={initialGoal}
           />

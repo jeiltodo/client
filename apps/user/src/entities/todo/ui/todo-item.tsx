@@ -6,20 +6,22 @@ import { Todo } from '..';
 interface Props {
   todo: Todo;
   onCheck: (id: number) => void;
+  disabled?: boolean;
 }
 
-export const TodoContent = ({ todo, onCheck }: Props) => {
-  const { id, title, done, noteId } = todo;
+export const TodoContent = ({ todo, onCheck, disabled }: Props) => {
+  const { id, title, isDone, noteId } = todo;
 
   return (
     <span className='inline-flex gap-2 items-center '>
       <Checkbox
-        isChecked={done}
+        disabled={disabled}
+        isChecked={isDone}
         onChange={() => {
           onCheck(id);
         }}
       />
-      <label className={`text-sm text-slate-800 ${done && 'line-through'}`}>
+      <label className={`text-sm text-slate-800 ${isDone && 'line-through'}`}>
         {title}
       </label>
     </span>

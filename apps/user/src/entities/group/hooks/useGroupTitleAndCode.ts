@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { groupQueryKeys } from './queryKeys';
 import { groupApi } from '../api/groupApi';
+import { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 
 export const useGroupCode = (id: number) => {
   return useQuery({
@@ -10,11 +11,11 @@ export const useGroupCode = (id: number) => {
   });
 };
 
-export const useGroupCodeUpdate = (id: number) => {
+export const useGroupTitleAndCode = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (secretCode: string) =>
-      groupApi.updateGroupoCode(id, secretCode),
+    mutationFn: (groupBody: GroupTitleOrCode) =>
+      groupApi.updateGrouppTitleOrCode(id, groupBody),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: groupQueryKeys.detail(id) });
       queryClient.invalidateQueries({ queryKey: groupQueryKeys.code(id) });

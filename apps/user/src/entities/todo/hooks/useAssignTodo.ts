@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { todoApi, TodoCreateBody } from '../../../entities/todo';
+import { todoApi } from '../../../entities/todo';
 
-export const useCreateTodo = () => {
+export const useAssignTodo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (todoCreateBody: TodoCreateBody) =>
-      todoApi.createTodo(todoCreateBody),
+    mutationFn: (todoId: number) => todoApi.assignTodo(todoId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('todos'),

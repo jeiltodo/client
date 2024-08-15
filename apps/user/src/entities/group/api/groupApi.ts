@@ -64,11 +64,11 @@ export const groupApi = {
     }
   },
 
-  updateGroupoCode: async (id: number, secretCode: string) => {
+  updateGrouppTitleOrCode: async (id: number, groupBody: GroupTitleOrCode) => {
     try {
       const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
-        `/groups/code/${id}`,
-        { secretCode }
+        `/groups/${id}`,
+        groupBody
       );
       return response.data;
     } catch (error) {
@@ -77,28 +77,36 @@ export const groupApi = {
     }
   },
 
-  removeMember: async (id: number, memberId: number) => {
+  removeMember: async (groupId: number, memberId: number) => {
     try {
-      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
-        `/groups/members/${id}`,
-        { memberId }
+      const response = await client.delete(
+        `/groups/members/${groupId}/${memberId}`
       );
       return response.data;
     } catch (error) {
-      console.error('Fail fetch getGroupDetail:', error);
+      console.error('Fail removeMember:', error);
       throw error;
     }
   },
 
-  changeLeader: async (id: number, memberId: number) => {
+  changeLeader: async (groupId: number, memberId: number) => {
     try {
-      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
-        `/groups/members/${id}`,
-        { memberId }
+      const response = await client.patch(
+        `/groups/${groupId}/leader/${memberId}`
       );
       return response.data;
     } catch (error) {
-      console.error('Fail fetch getGroupDetail:', error);
+      console.error('Fail changeLeader:', error);
+      throw error;
+    }
+  },
+
+  leaveGroup: async (groupId: number) => {
+    try {
+      const response = await client.delete(`/groups/members/${groupId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Fail leaveGroup:', error);
       throw error;
     }
   },

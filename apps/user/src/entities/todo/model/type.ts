@@ -1,6 +1,6 @@
 export type Todo = {
   id: number;
-  done: boolean;
+  isDone: boolean;
   title: string;
   noteId?: number;
 };
@@ -12,7 +12,7 @@ export type Asignee = {
 };
 
 export type TodoCreateBody = {
-  goal_id: number;
+  goalId: number;
   title: string;
 };
 

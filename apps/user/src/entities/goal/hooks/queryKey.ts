@@ -12,6 +12,7 @@ export const goalQueryKeys = {
   group: {
     default: () => [...goalQueryKeys.goals, 'group'] as const,
     lists: () => [...goalQueryKeys.group.default(), 'list'] as const,
+    todos: () => [...goalQueryKeys.group.default(), 'todos'] as const,
     detail: (groupId: number | string) =>
       [...goalQueryKeys.group.default(), groupId] as const,
   },
