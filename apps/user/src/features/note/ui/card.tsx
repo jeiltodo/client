@@ -1,4 +1,4 @@
-import { NoteList, Meatball } from '@jeiltodo/icons';
+import { NoteList, Kebab } from '@jeiltodo/icons';
 import { Flyout, Note, TodoTitle } from '@jeiltodo/ui/shared';
 import { useRouter, useParams } from 'next/navigation';
 import { useState } from 'react';
@@ -23,7 +23,8 @@ export const Card = ({ data }: CardProps) => {
     }
   };
 
-  const handleMeatball = () => {
+  const handleKebab = (e: React.MouseEvent<SVGSVGElement>) => {
+    e.stopPropagation();
     setIsOpen((prev) => !prev);
   };
 
@@ -49,12 +50,12 @@ export const Card = ({ data }: CardProps) => {
       <div className='flex flex-row items-start justify-between'>
         <NoteList width={28} height={28} />
         <span className='inline-flex items-center gap-2 relative'>
-          <span className='flex items-center ju w-[24px] h-[24px] rounded-full bg-slate-50'>
-            <Meatball
-              width={14}
-              height={14}
-              onClick={handleMeatball}
-              fill={'red'}
+          <span className='flex items-center justify-center w-[24px] h-[24px] rounded-full bg-slate-50'>
+            <Kebab
+              width={18}
+              height={18}
+              onClick={handleKebab}
+              fill='red'
               className='cursor-pointer '
             />
           </span>

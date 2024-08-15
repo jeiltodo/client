@@ -12,7 +12,6 @@ export const CardListBoard = () => {
     page: 1,
     limit: 10,
   });
-  console.log('cardListData: ', cardListData);
 
   return (
     <>
