@@ -14,19 +14,23 @@ export const CardListBoard = () => {
   });
 
   return (
-    <>
+    <div className='flex flex-col h-full'>
       <GoalTitleCard title={goalTitle} />
-      {!isLoading &&
-      cardListData?.data &&
-      cardListData.data.notes.length > 0 ? (
-        cardListData.data.notes.map((note) => (
-          <Card key={note.id} data={note} />
-        ))
-      ) : (
-        <div className='w-full h-screen flex justify-center items-center'>
-          <p className='text-sm text-slate-500'>아직 등록된 노트가 없어요</p>
-        </div>
-      )}
-    </>
+      <div className='flex-1 flex flex-col'>
+        {!isLoading &&
+        cardListData?.data &&
+        cardListData.data.notes.length > 0 ? (
+          <div className='flex-1 overflow-auto'>
+            {cardListData.data.notes.map((note) => (
+              <Card key={note.id} data={note} />
+            ))}
+          </div>
+        ) : (
+          <div className='flex-1 flex justify-center items-center'>
+            <p className='text-sm text-slate-500'>아직 등록된 노트가 없어요</p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
