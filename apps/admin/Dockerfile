@@ -1,9 +1,15 @@
 # Stage 1: Install dependencies
 FROM node:20-alpine AS deps
 WORKDIR /app
-COPY . .
+
+# Install dependencies required for yarn
+RUN apk add --no-cache bash curl
+
+# Install npm and yarn globally
 RUN npm i -g npm
-RUN npm i -g yarn
+RUN corepack enable && corepack prepare yarn@stable --activate
+
+COPY . .
 RUN yarn install --frozen-lockfile
 
 # Stage 2: Build the project
