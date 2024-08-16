@@ -23,10 +23,14 @@ export const BaseModal = ({
 
   return ReactDOM.createPortal(
     <div
+      role='dialog'
+      aria-labelledby='modal-title'
+      aria-modal='true'
       onClick={() => setToggle(false)}
       className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'
     >
       <div
+        role='document'
         onClick={handleModalClick}
         className={`bg-white ${width} mobile:w-3/4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl p-6`}
       >

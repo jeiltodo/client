@@ -8,7 +8,7 @@ import { GroupTitleOrCode, GroupWithMembers } from '../model/type';
 
 interface Props {
   group: GroupWithMembers;
-  userId: number;
+  userId?: number;
   spareCode: string;
   onSave: (info: GroupTitleOrCode) => void;
 }

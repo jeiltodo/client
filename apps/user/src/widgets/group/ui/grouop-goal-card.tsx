@@ -2,7 +2,6 @@
 
 import { Button } from '@jeiltodo/ui/shared';
 import { GoalIdAndTitle, GroupGoalWithTodos } from '../../../entities/goal';
-import { TodoModal } from '../../../entities/todo';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
@@ -24,7 +23,7 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
 
   const done = formatGroupTodos(goal, true);
   const notDone = formatGroupTodos(goal, false);
-
+  console.log(goalIdAndTitles)
   const handleAddTodo = () => {
     setIsOpenAddTodoModal(true);
   };
@@ -74,11 +73,12 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
         </Button>
       </div>
       {isOpenAddTodoModal && (
-        <TodoModal
-          goals={goalIdAndTitles}
-          setTodoToggle={setIsOpenAddTodoModal}
-          initialGoal={goal}
-        />
+        <>모달에러</>
+        // <TodoModal
+        //   goals={goalIdAndTitles}
+        //   setTodoToggle={setIsOpenAddTodoModal}
+        //   initialGoal={goal}
+        // />
       )}
     </div>
   );

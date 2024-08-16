@@ -1,8 +1,4 @@
-import { Button } from '@jeiltodo/ui/shared';
-import { useState } from 'react';
-import { Plus } from '@jeiltodo/icons';
 import type { SingleGoalTodoResponse } from '../../../entities/todo';
-import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { Goal } from '../../../entities/goal';
 
@@ -23,8 +19,8 @@ export const TodoDoneBoard = ({
     };
   });
 
-  const done = todosForList.filter((todo) => todo.isDone === true);
-  const notDone = todosForList.filter((todo) => todo.isDone === false);
+  const done = todosForList.filter((todo) => todo.isDone);
+  const notDone = todosForList.filter((todo) => !todo.isDone);
 
   return (
     <div className='desktop:grid-rows-2 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>

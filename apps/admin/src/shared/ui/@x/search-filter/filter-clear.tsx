@@ -1,17 +1,17 @@
-import { Button } from '@jeiltodo/ui/shared';
-import { useTableContext } from '../../../hooks/table/useTableContext';
+// import { Button } from '@jeiltodo/ui/shared';
+// import { useTableContext } from '../../../hooks/table/useTableContext';
 
-export const FilterClear = () => {
-  const { setTableFilters } = useTableContext();
-  return (
-    <Button
-      variant='outline'
-      className='w-[84px] h-[36px]'
-      onClick={() => {
-        setTableFilters({});
-      }}
-    >
-      초기화
-    </Button>
-  );
-};
+// export const FilterClear = () => {
+//   const { setTableFilters } = useTableContext();
+//   return (
+//     <Button
+//       variant='outline'
+//       className='w-[84px] h-[36px]'
+//       onClick={() => {
+//         setTableFilters({});
+//       }}
+//     >
+//       초기화
+//     </Button>
+//   );
+// };

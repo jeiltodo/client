@@ -42,7 +42,11 @@ export const SidebarUser = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({
           predicate: (query) =>
-            query.queryKey.includes('goals' && 'individual'),
+            query.queryKey.includes('individual'),
+        });
+        queryClient.invalidateQueries({
+          predicate: (query) =>
+            query.queryKey.includes('todos'),
         });
       },
     });

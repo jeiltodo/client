@@ -1,6 +1,6 @@
 'use client';
 import { LayoutTitle } from '@jeiltodo/ui/shared';
-import { TitleProgressBarCard } from '../../../widgets/goal';
+// import { TitleProgressBarCard } from '../../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { TodoDoneBoard } from '../../../widgets/todo';
 import { useGroupSingleGoal } from '../../../entities/group/hooks/useGroupGoals';
@@ -10,7 +10,6 @@ export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {
   const goalId = Number(params.goalid);
   const {
     data: singleGroupGoal,
-    error,
     isLoading,
   } = useGroupSingleGoal(goalId);
   const { data: singleGoalTodo } = useIndividualSingleGoal(goalId);
@@ -20,7 +19,7 @@ export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {
         <>
           <LayoutTitle title='그룹 목표' />
           <div className='flex flex-col gap-y-6'>
-            <TitleProgressBarCard goalData={singleGroupGoal} />
+            {/* <TitleProgressBarCard goalData={singleGroupGoal} /> */}
             <NotesPushButton goalId={goalId} />
             <TodoDoneBoard
               todos={singleGoalTodo}

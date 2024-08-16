@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import { RecentFilter } from '../../entities/user';
-import { TodoModal, todoQuery, useRecentTodo } from '../../entities/todo';
+import { todoQuery, useRecentTodo } from '../../entities/todo';
 import { useInView } from 'react-intersection-observer';
 import { Goal, individualGoalsOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
@@ -18,8 +18,7 @@ export const TodoPage = () => {
       title,
     })) || [];
   const [query, setQuery] = useState<todoQuery>({
-    goalIds:
-      individualGoalsData?.map((goal) => goal.id) || [],
+    goalIds: individualGoalsData?.map((goal) => goal.id) || [],
     status: null,
   });
   const [modalOpen, setModalOpen] = useState(false);
@@ -33,7 +32,7 @@ export const TodoPage = () => {
 
   const handleClick = useCallback((query: todoQuery) => {
     setQuery(query);
-  }, []);
+  }, [query]);
   const allTodos = data?.pages.flatMap((page) => page.data.todos) ?? [];
 
   const handleAddModal = () => {
@@ -50,7 +49,10 @@ export const TodoPage = () => {
 
   return (
     <div>
-      {modalOpen && <TodoModal setTodoToggle={setModalOpen} goals={filteredData}/>}
+      {modalOpen && (
+        // <TodoModal setTodoToggle={setModalOpen} goals={filteredData} />
+        <>모달</>
+      )}
       <div className='flex items-center justify-between mb-6 '>
         <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
           최근 등록한 할일 ({allTodos?.length})

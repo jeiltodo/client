@@ -72,7 +72,7 @@ export const GroupDashboardPage = () => {
       <div className='w-full flex flex-nowrap  gap-4'>
         <GroupOverviewBoard
           group={group}
-          userId={user?.id!}
+          userId={user?.id}
           spareCode={newCode ?? ''}
           onSave={handleSave}
         />
@@ -80,7 +80,7 @@ export const GroupDashboardPage = () => {
         <MembersBoardProvider>
           <MembersBorad
             group={group}
-            userId={user?.id!}
+            userId={user?.id}
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}
           />
@@ -97,9 +97,9 @@ export const GroupDashboardPage = () => {
             <div className='text-base font-pretendard-semibold'>새 목표</div>
           </Button>
         </div>
-        {data?.pages.map((group, i) => (
+        {data?.pages.map((item, i) => (
           <React.Fragment key={i}>
-            {group.data.goals.map((goal) => (
+            {item.data.goals.map((goal) => (
               <GroupGoalCard key={goal.id} {...goal} />
             ))}
           </React.Fragment>

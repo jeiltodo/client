@@ -1,10 +1,10 @@
-interface Props {
+interface SearchSummaryProps {
   totalCount: number;
   searchedCount: number;
   className?: string;
 }
 
-export function SearchSummary({ totalCount, searchedCount, className }: Props) {
+export function SearchSummary({ totalCount, searchedCount, className }: SearchSummaryProps) {
   return (
     <div className={className}>
       {searchedCount === 0 ? (

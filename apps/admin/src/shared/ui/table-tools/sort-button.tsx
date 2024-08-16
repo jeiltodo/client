@@ -1,6 +1,5 @@
 'use client';
 import type { ImageProps } from 'next/image';
-import Image from 'next/image';
 import { useState } from 'react';
 import IconSort from '../../../../public/assets/icons/sort.svg';
 

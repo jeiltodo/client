@@ -1,44 +1,44 @@
-'use client';
-import type { PropsWithChildren } from 'react';
-import { createContext, useEffect, useState } from 'react';
-import { TableQuery } from './type';
+// 'use client';
+// import type { PropsWithChildren } from 'react';
+// import { createContext, useEffect, useState } from 'react';
+// import { TableQuery } from './type';
 
-export interface TableContextProps<T> {
-  tableRows: T[];
-  tableFilters: Partial<Record<TableQuery, string>>;
-  setTableRows: React.Dispatch<React.SetStateAction<T[]>>;
-  setTableFilters: React.Dispatch<
-    React.SetStateAction<Partial<Record<TableQuery, string>> | undefined>
-  >;
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const TableContext = createContext<TableContextProps<any> | null>(null);
+// export interface TableContextProps<T> {
+//   tableRows: T[];
+//   tableFilters: Partial<Record<TableQuery, string>>;
+//   setTableRows: React.Dispatch<React.SetStateAction<T[]>>;
+//   setTableFilters: React.Dispatch<
+//     React.SetStateAction<Partial<Record<TableQuery, string>> | undefined>
+//   >;
+// }
 
-interface TableProviderProps<T> extends PropsWithChildren {
-  initialData?: T[];
-}
+// export const TableContext = createContext<TableContextProps<any> | null>(null);
 
-export function TableProvider<T>({
-  children,
-  initialData,
-}: TableProviderProps<T>) {
-  const [tableRows, setTableRows] = useState<T[]>(initialData || []);
-  const [tableFilters, setTableFilters] =
-    useState<Partial<Record<TableQuery, string>>>();
-  const contextValue = {
-    tableRows,
-    setTableRows,
-    tableFilters,
-    setTableFilters,
-  } as TableContextProps<T>;
+// interface TableProviderProps<T> extends PropsWithChildren {
+//   initialData?: T[];
+// }
 
-  useEffect(() => {
-    console.log('😀😀😀😀😀😀😀', tableFilters);
-  }, [tableFilters]);
+// export function TableProvider<T>({
+//   children,
+//   initialData,
+// }: TableProviderProps<T>) {
+//   const [tableRows, setTableRows] = useState<T[]>(initialData || []);
+//   const [tableFilters, setTableFilters] =
+//     useState<Partial<Record<TableQuery, string>>>();
+//   const contextValue = {
+//     tableRows,
+//     setTableRows,
+//     tableFilters,
+//     setTableFilters,
+//   } as TableContextProps<T>;
 
-  return (
-    <TableContext.Provider value={contextValue}>
-      {children}
-    </TableContext.Provider>
-  );
-}
+//   useEffect(() => {
+//     console.log('😀😀😀😀😀😀😀', tableFilters);
+//   }, [tableFilters]);
+
+//   return (
+//     <TableContext.Provider value={contextValue}>
+//       {children}
+//     </TableContext.Provider>
+//   );
+// }

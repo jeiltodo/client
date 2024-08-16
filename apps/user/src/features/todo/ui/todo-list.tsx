@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Todo, TodoButtons, TodoModal } from '../../../entities/todo';
+import { Todo, TodoButtons } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import type { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export const TodoList = ({ todos, variant = 'user' }: Props) => {
-  const [editModalOpen, setEditModalOpen] = useState(false);
+  // const [editModalOpen, setEditModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
 
   const { mutate: checkTodo } = useCheckTodo();
@@ -27,16 +27,16 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const goalId = Number(params?.goalid);
 
   const queryClient = useQueryClient();
+  console.log(variant)
+  // const handleClickEdit = () => {
+  //   setEditModalOpen(true);
+  // };
 
-  const handleClickEdit = () => {
-    setEditModalOpen(true);
-  };
+  // const handleClickRemove = () => {
+  //   setRemoveModalOpen(true);
+  // };
 
-  const handleClickRemove = () => {
-    setRemoveModalOpen(true);
-  };
-
-  const handleClickNote = () => {};
+  // const handleClickNote = () => {};
 
   const handleCheck = (todoId: number) => {
     checkTodo(todoId, {
@@ -52,9 +52,6 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
         });
         queryClient.invalidateQueries({
           queryKey: goalQueryKeys.individual.progress(),
-        });
-        queryClient.invalidateQueries({
-          predicate: (query) => query.queryKey.includes('todos'),
         });
         queryClient.invalidateQueries({
           predicate: (query) => query.queryKey.includes('todos'),
@@ -85,7 +82,7 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
 
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos.map(({ id, title, isDone, goal }) => (
+      {todos.map(({ id, title, isDone }) => (
         <li
           key={id}
           className='list-none w-full h-6 flex justify-between group '
@@ -97,11 +94,11 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
               onCheck={handleCheck}
             />
           </span>
-          <TodoButtons
+          {/* <TodoButtons
             onClickEdit={handleClickEdit}
             onClickRemove={handleClickRemove}
             onClickNote={handleClickNote}
-          />
+          /> */}
           {/* {editModalOpen && (
             <TodoModal
               setTodoToggle={setEditModalOpen}

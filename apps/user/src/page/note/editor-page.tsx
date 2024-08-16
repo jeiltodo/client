@@ -20,12 +20,11 @@ import { useNoteDetail } from '../../entities/note/hooks/useNoteDetail';
 export const EditorPage = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [linkUrl, setLinkUrl] = useState<string>('');
+  const [linkUrl] = useState<string>('');
   const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
   const [isButtonView, setIsButtonView] = useState<boolean>(false);
   const [isAlert, setIsAlert] = useState<boolean>(false);
-  const { goalid, todoid, noteid } = useParams<{
-    goalid: string;
+  const { todoid, noteid } = useParams<{
     todoid: string;
     noteid: string;
   }>();
@@ -37,7 +36,7 @@ export const EditorPage = () => {
 
   const handleLocalSave = () => {
     const localData = {
-      noteid: noteid as string,
+      noteid: noteid,
       title: title.trim(),
       content: content.trim(),
     };
@@ -59,8 +58,9 @@ export const EditorPage = () => {
 
   const getLocalSave = () => {
     const savedData = localStorage.getItem(`note${noteid}`);
-    setTitle(JSON.parse(savedData).title);
-    setContent(JSON.parse(savedData).content);
+    const parsedData = savedData ? JSON.parse(savedData) : { title: '', content: '' };
+    setTitle(parsedData.title);
+    setContent(parsedData.content);
   };
 
   const handleSave = () => {

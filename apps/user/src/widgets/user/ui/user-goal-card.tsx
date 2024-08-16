@@ -20,16 +20,16 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
 
   const { data: goals } = useIndividualGoals();
   const formatted =
-    goals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
+    goals?.map((item) => ({ id: item.id, title: item.title })) ?? [];
 
   const done = goal.todos
-    .filter((todo) => todo.isDone === true)
+    .filter((todo) => todo.isDone)
     .map((todo) => ({
       ...todo,
       goal,
     }));
   const notDone = goal.todos
-    .filter((todo) => todo.isDone === false)
+    .filter((todo) => !todo.isDone)
     .map((todo) => ({
       ...todo,
       goal,

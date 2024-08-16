@@ -8,7 +8,7 @@ export const CardListBoard = () => {
   const params = useParams();
 
   const { data: cardListData, isLoading } = useGoalNotes({
-    goalId: Number(params.goalid),
+    goalId: params.goalid,
     page: 1,
     limit: 10,
   });

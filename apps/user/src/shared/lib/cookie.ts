@@ -7,7 +7,6 @@ const isBrowser = typeof window !== 'undefined';
 
 /**
  * 쿠키를 저장하는 함수
- * @example
  * setCookie(ACCESS_TOKEN_COOKIE_NAME, accessToken, { maxAge: ACCESS_TOKEN_EXPIRY_TIME });
  */
 export const setCookie = (

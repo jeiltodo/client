@@ -17,7 +17,7 @@ import { API_URL } from '../config/api';
 // 에러 응답 데이터 타입 정의
 interface ErrorResponseData {
   path?: string;
-  [key: string]: any; // 다른 임의의 속성을 허용
+  [key: string]: string | undefined; // 다른 임의의 속성을 허용
 }
 
 // Axios 인스턴스 생성
@@ -110,11 +110,12 @@ client.interceptors.response.use(
         return client(originalRequest);
       } catch (refreshError) {
         // 리프레시 토큰 요청 실패 시 쿠키 삭제 및 로그인 페이지로 이동
+        const errorToThrow = refreshError instanceof Error ? refreshError : new Error('An unknown error occurred during token refresh.');
         deleteCookie(REFRESH_TOKEN_COOKIE_NAME);
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
         }
-        return Promise.reject(refreshError);
+        return Promise.reject(errorToThrow);
       }
     }
     return Promise.reject(error);

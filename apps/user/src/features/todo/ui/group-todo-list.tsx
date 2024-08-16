@@ -5,7 +5,6 @@ import {
   Todo,
   TodoAssignee,
   TodoButtons,
-  TodoModal,
 } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { GoalIdAndTitle } from '../../../entities/goal';
@@ -22,21 +21,21 @@ interface Props {
 
 export const GroupTodoList = ({ todos }: Props) => {
   // const useParams
-  const [editModalOpen, setEditModalOpen] = useState(false);
+  // const [editModalOpen, setEditModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
 
-  const handleClickEdit = () => {
-    setEditModalOpen(true);
-  };
+  // const handleClickEdit = () => {
+  //   setEditModalOpen(true);
+  // };
 
-  const handleClickRemove = () => {
-    setRemoveModalOpen(true);
-  };
+  // const handleClickRemove = () => {
+  //   setRemoveModalOpen(true);
+  // };
 
-  const handleClickNote = () => {};
+  // const handleClickNote = () => {};
 
   const handleCheck = (todoId: number) => {
     checkTodo(todoId);
@@ -48,7 +47,7 @@ export const GroupTodoList = ({ todos }: Props) => {
   };
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos.map(({ id, title, isDone, goal, memberInCharge }) => (
+      {todos.map(({ id, title, isDone, memberInCharge }) => (
         <li key={id} className='list-none w-full flex justify-between group '>
           <span className='inline-flex gap-4 items-center min-w-[280px]'>
             <TodoContent
@@ -59,11 +58,11 @@ export const GroupTodoList = ({ todos }: Props) => {
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
           </span>
-          <TodoButtons
+          {/* <TodoButtons
             onClickEdit={handleClickEdit}
             onClickRemove={handleClickRemove}
             onClickNote={handleClickNote}
-          />
+          /> */}
           {/* {editModalOpen && (
             <TodoModal
               setTodoToggle={setEditModalOpen}

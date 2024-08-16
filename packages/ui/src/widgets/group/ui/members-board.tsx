@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 interface Props {
   group: GroupWithMembers;
-  userId: number;
+  userId?: number;
   onChangeLeader: (id: number) => void;
   onRemoveMember: (id: number) => void;
 }

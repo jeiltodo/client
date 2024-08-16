@@ -2,7 +2,6 @@
 import ReactDOM from 'react-dom';
 import { DeleteMenu } from '@jeiltodo/icons';
 import {
-  BoardTitle,
   Button,
   ButtonGroup,
   TodoTitle,
@@ -89,11 +88,11 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
             <DeleteMenu className='w-6 h-6' />
           </button>
           <div className='flex felx-row items-center justify-between mb-3'>
-            <BoardTitle
+            {/* <BoardTitle
               title={noteData?.todo.goal?.title || ''}
               icon='flag'
               iconSize={24}
-            />
+            /> */}
             <ButtonGroup gap={2}>
               <Button
                 className='w-[84px] h-[36px]'
@@ -113,9 +112,9 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
           </div>
           <div className='flex felx-row items-center justify-between mb-6'>
             <TodoTitle title={noteData?.todo.title || ''} />
-            <span className='text-slate-500 text-xs'>
+            {/* <span className='text-slate-500 text-xs'>
               {noteData?.createdAt}
-            </span>
+            </span> */}
           </div>
           <div className='text-lg font-pretendard-medium text-slate-800 border-y border-slate-200 py-3 mb-4'>
             {noteData?.title}

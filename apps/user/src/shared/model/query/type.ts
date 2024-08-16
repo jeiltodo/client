@@ -1,15 +1,15 @@
-export type PageList = {
+export interface PageList {
   currPage: number;
   totalCount: number;
 };
 
-export type ResponseWith<T> = {
+export interface ResponseWith<T> {
   msg: string;
   code: number;
   data: T;
 };
 
-export type ResponsePageListWith<T> = {
+export interface ResponsePageListWith<T> {
   msg: string;
   code: number;
   data: PageList & T;
