@@ -1,7 +1,7 @@
 FROM node:18-alpine AS deps
 WORKDIR /app 
 COPY . .
-RUN yarn version
+RUN npm i -g yarn
 RUN yarn install --frozen-lockfile
 
 FROM node:18-alpine AS builder
