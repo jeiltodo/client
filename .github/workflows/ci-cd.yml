@@ -24,8 +24,8 @@ jobs:
 
     - name: Build applications
       run: |
-        yarn build --filter=apps/user
-        yarn build --filter=apps/admin
+        yarn build --filter=user
+        yarn build --filter=admin
 
     - name: Build and push Docker images
       env:
