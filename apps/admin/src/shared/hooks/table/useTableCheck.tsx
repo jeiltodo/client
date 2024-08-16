@@ -25,9 +25,11 @@ export function useTableCheck<T extends WithId>(tableData: T[]) {
     });
   };
 
-  const getIsChecked = (id: number) => {
-    return checkList.find((checkItem) => checkItem.id === id)!.isChecked;
+  const getIsChecked = (id: number): boolean => {
+    const checkItem = checkList.find((checkItem) => checkItem.id === id);
+    return checkItem?.isChecked ?? false; 
   };
+  
 
   const handleCheck = (id: number) => {
     setCheckList((prev) => {

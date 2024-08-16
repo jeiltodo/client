@@ -2,7 +2,7 @@
 
 import { Button, ButtonGroup, Input } from '@jeiltodo/ui/shared';
 import React, { useState } from 'react';
-import { useTableContext } from '../../..';
+import { useTableContext } from '../../../hooks/table/useTableContext';
 import { TableFilter, TableQuery } from '../../../model/table/type';
 
 interface FilterFormProps {
@@ -139,9 +139,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
                 type={field.type || 'text'}
                 name={field.query}
                 value={
-                  tableFilters && field.query in tableFilters
-                    ? tableFilters[field.query as TableQuery]
-                    : ''
+                  tableFilters[field.query as TableQuery] || ''
                 }
                 placeholder={field.placeholder}
                 onChange={(e) => {

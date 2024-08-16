@@ -10,16 +10,16 @@ export const UserOverviewBoard = () => {
         <ImgProfile width={120} height={120} className='min-w-[120px]' />
 
         <div className='flex flex-wrap gap-4'>
-          <InputSwapMode
-            labelText='이름'
+          {/* <InputSwapMode
+            label='이름'
             inputName='name'
             defaultValue='홍길동'
           />
           <InputSwapMode
-            labelText='이메일'
+            label='이메일'
             inputName='email'
             defaultValue='hi@todo.com'
-          />
+          /> */}
           <Field label='가입일'>2024. 10. 10</Field>
         </div>
       </div>

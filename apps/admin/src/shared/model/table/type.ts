@@ -1,6 +1,6 @@
 export type TableQuery = 'name' | 'keyword' | 'period' | 'email';
 
-export type TableFilter = {
+export interface TableFilter {
   label: string;
   query: string;
   type?: 'email' | 'date';

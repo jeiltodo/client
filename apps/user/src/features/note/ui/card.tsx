@@ -64,7 +64,7 @@ export const Card = ({ data }: CardProps) => {
             />
           </span>
 
-          {isOpen && <Flyout onEdit={handleRoute} onDelete={handleDelete} />}
+          {/* {isOpen && <Flyout onEdit={handleRoute} onDelete={handleDelete} />} */}
         </span>
       </div>
       <h2 className='text-lg font-pretendard-medium'>{data.title}</h2>

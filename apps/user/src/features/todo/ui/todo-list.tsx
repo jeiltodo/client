@@ -102,13 +102,13 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
             onClickRemove={handleClickRemove}
             onClickNote={handleClickNote}
           />
-          {editModalOpen && (
+          {/* {editModalOpen && (
             <TodoModal
               setTodoToggle={setEditModalOpen}
               initialTodo={{ id, title, isDone }}
               initialGoal={goal}
             />
-          )}
+          )} */}
           {removeModalOpen && (
             <ConfirmationModal
               setModalToggle={setRemoveModalOpen}

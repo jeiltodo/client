@@ -2,12 +2,12 @@ import { Dropdown } from '@jeiltodo/ui/shared';
 import { DeleteButton } from '../../table-tools/delete-button';
 import { SearchSummary } from '../../table-tools/search-summary';
 
-interface Props {
+interface TableToolBarProps {
   onSelectDropdown: () => void;
   onClickDelete: () => void;
 }
 
-export function TableToolBar({ onClickDelete, onSelectDropdown }: Props) {
+export function TableToolBar({ onClickDelete, onSelectDropdown }: TableToolBarProps) {
   return (
     <div className='w-full justify-between items-center flex pl-2 py-3'>
       <div className='flex gap-4 items-center'>

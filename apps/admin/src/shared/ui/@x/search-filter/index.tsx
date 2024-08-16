@@ -6,11 +6,11 @@ import { FilterForm } from './filter-form';
 import { FilterClear } from './filter-clear';
 import { FilterSearch } from './filter-search';
 
-interface Props {
+interface SearchFilterProps {
   filters: TableFilter[];
 }
 
-export const SearchFilter: React.FC<Props> = ({ filters }) => {
+export const SearchFilter: React.FC<SearchFilterProps> = ({ filters }) => {
   return (
     <div className='flex flex-col gap-3 w-[930px] py-[16px] px-[20px] bg-white rounded-xl'>
       <div>

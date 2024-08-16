@@ -1,5 +1,5 @@
 import { Button } from '@jeiltodo/ui/shared';
-import { useTableContext } from '../../..';
+import { useTableContext } from '../../../hooks/table/useTableContext';
 
 export const FilterClear = () => {
   const { setTableFilters } = useTableContext();
@@ -7,7 +7,9 @@ export const FilterClear = () => {
     <Button
       variant='outline'
       className='w-[84px] h-[36px]'
-      onClick={() => setTableFilters({})}
+      onClick={() => {
+        setTableFilters({});
+      }}
     >
       초기화
     </Button>

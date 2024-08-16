@@ -1,5 +1,4 @@
 type SortType = 'number' | 'date' | 'boolean' | 'localeEN' | 'localeKO';
-
 type SortableValue = string | number | Date | boolean;
 
 export interface SortOptions<T> {
@@ -25,7 +24,7 @@ interface ObjectWithOptionalFields {
 
 function determineType(
   key: keyof ObjectWithOptionalFields,
-  value: any
+  value: SortableValue
 ): SortType {
   if (key === 'id' || key === 'groupCount' || key === 'progress')
     return 'number';
@@ -39,11 +38,10 @@ function determineType(
   return 'localeEN'; // 기본값
 }
 
-function isValidDate(date: any): boolean {
-  return (
-    (date instanceof Date && !isNaN(date.getTime())) ||
-    (typeof date === 'string' && !isNaN(Date.parse(date)))
-  );
+function isValidDate(date: Date | string): boolean {
+  return date instanceof Date
+    ? !isNaN(date.getTime())
+    : !isNaN(Date.parse(date));
 }
 
 export function sortBy<T extends ObjectWithOptionalFields>(
@@ -56,15 +54,11 @@ export function sortBy<T extends ObjectWithOptionalFields>(
     const aValue = a[criteria] as SortableValue;
     const bValue = b[criteria] as SortableValue;
 
-    // Handle undefined values
     if (aValue === undefined && bValue === undefined) return 0;
     if (aValue === undefined) return isAscending ? 1 : -1;
     if (bValue === undefined) return isAscending ? -1 : 1;
 
-    const type = determineType(
-      criteria as keyof ObjectWithOptionalFields,
-      aValue
-    );
+    const type = determineType(criteria as keyof ObjectWithOptionalFields, aValue);
     let result: number;
 
     switch (type) {
@@ -72,18 +66,16 @@ export function sortBy<T extends ObjectWithOptionalFields>(
         result = (aValue as number) - (bValue as number);
         break;
       case 'date':
-        if (isValidDate(aValue) && isValidDate(bValue)) {
-          const aDate =
-            aValue instanceof Date ? aValue : new Date(aValue as string);
-          const bDate =
-            bValue instanceof Date ? bValue : new Date(bValue as string);
+        if (isValidDate(aValue as Date | string) && isValidDate(bValue as Date | string)) {
+          const aDate = aValue instanceof Date ? aValue : new Date(aValue as string);
+          const bDate = bValue instanceof Date ? bValue : new Date(bValue as string);
           result = aDate.getTime() - bDate.getTime();
         } else {
           result = 0;
         }
         break;
       case 'boolean':
-        result = aValue === bValue ? 0 : aValue ? -1 : 1;
+        result = (aValue === bValue) ? 0 : (aValue ? -1 : 1);
         break;
       case 'localeEN':
         result = String(aValue).localeCompare(String(bValue), 'en');

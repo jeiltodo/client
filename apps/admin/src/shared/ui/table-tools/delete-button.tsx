@@ -1,10 +1,10 @@
 import { Trash } from '@jeiltodo/icons';
 
-interface Props {
+interface DeleteButtonProps {
   onDelete: () => void;
 }
 
-export function DeleteButton({ onDelete }: Props) {
+export function DeleteButton({ onDelete }: DeleteButtonProps) {
   return (
     <Trash
       onClick={onDelete}

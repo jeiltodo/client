@@ -10,8 +10,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@jeiltodo/icons": "*",
     "@jeiltodo/lib": "*",
     "@jeiltodo/ui": "*",
+    "@tanstack/react-query": "^5.51.23",
     "next": "^14.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -43,7 +43,6 @@ export const TodoButtons = ({
         <Flyout
           onEdit={handleEdit}
           onDelete={handleRemove}
-          onLeave={() => setFlyoutOpen(false)}
         />
       )}
     </div>

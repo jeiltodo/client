@@ -20,11 +20,11 @@ export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {
         <>
           <LayoutTitle title='그룹 목표' />
           <div className='flex flex-col gap-y-6'>
-            <TitleProgressBarCard goalData={singleGroupGoal.data} />
+            <TitleProgressBarCard goalData={singleGroupGoal} />
             <NotesPushButton goalId={goalId} />
             <TodoDoneBoard
-              todos={singleGoalTodo.data}
-              goal={singleGroupGoal.data}
+              todos={singleGoalTodo}
+              goal={singleGroupGoal}
             />
           </div>
         </>

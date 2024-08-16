@@ -1,4 +1,5 @@
 import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
+import { SingleGoalTodoResponse } from '../../todo';
 import type {
   Goal,
   GoalWithTodos,
@@ -35,7 +36,7 @@ export const individualGoalsApi = {
   },
   getSingleGoal: async (goalId: number) => {
     try {
-      const response = await client.get<SingleGoalResponse>(
+      const response = await client.get<SingleGoalTodoResponse>(
         `/individual/goals/single/${goalId}`
       );
       return response.data;
