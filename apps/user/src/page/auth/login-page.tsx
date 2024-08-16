@@ -5,7 +5,7 @@ import { LoginForm } from '../../features/session';
 
 export const LoginPage: React.FC = () => {
   return (
-    <div className='flex flex-col items-center py-[120px]'>
+    <div className='flex flex-col items-center desktop:py-[120px] tablet:py-16 tablet:px-[52px] py-12 px-4'>
       <h1 className='mb-[60px]'>slid to-do</h1>
       <LoginForm />
       <p className='text-center text-[15px]'>

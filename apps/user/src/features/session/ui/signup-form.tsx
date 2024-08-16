@@ -8,6 +8,7 @@ import {
   validateSiginupPassword,
   validateSignupNickname,
 } from '../model/validation';
+import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
 
 interface SignUpFormProps {
   onSubmit: (credentials: SignUpBody) => void;
@@ -20,6 +21,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState<boolean>(false);
 
   const debouncedName = useDebounce(nickname, 1000);
   const debouncedEmail = useDebounce(email, 1000);
@@ -78,6 +82,13 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
     }, 1000);
   };
 
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible((prevState) => !prevState);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setIsConfirmPasswordVisible((prevState) => !prevState);
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({ nickname, email, password });
@@ -120,16 +131,17 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   }, [errors, isValid]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className='w-[640px] flex flex-col gap-y-[24px] mb-[48px]'>
-        <div className='h-[102px] flex flex-col gap-y-[12px]'>
-          <label
-            htmlFor='nickname'
-            className='font-pretendard-semibold text-base'
-          >
-            이름
-          </label>
+    <form onSubmit={handleSubmit} className='w-full flex flex-col items-center'>
+      <div className='w-full tablet:max-w-[640px] desktop:w-[640px] flex flex-col gap-y-3 mb-[48px]'>
+        <label
+          htmlFor='nickname'
+          className='font-pretendard-semibold text-base'
+        >
+          이름
+        </label>
+        <div className='relative h-20'>
           <Input
+            className='absolute left-0 top-0 w-full'
             type='text'
             name='nickname'
             value={nickname}
@@ -139,16 +151,17 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             placeholder='이름을 입력해주세요'
           />
           {errors.nickname && (
-            <p className='text-error pl-[24px] text-xs -mt-[10px]'>
+            <p className='absolute bottom-2 left-6 text-error text-xs'>
               {errors.nickname}
             </p>
           )}
         </div>
-        <div className='h-[102px] flex flex-col gap-y-[12px]'>
-          <label htmlFor='name' className='font-pretendard-semibold text-base'>
-            이메일
-          </label>
+        <label htmlFor='name' className='font-pretendard-semibold text-base'>
+          이메일
+        </label>
+        <div className='relative h-20'>
           <Input
+            className='absolute left-0 top-0 w-full'
             type='email'
             name='email'
             value={email}
@@ -158,20 +171,21 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             placeholder='이메일을 입력해주세요'
           />
           {errors.email && (
-            <p className='text-error pl-[24px] text-xs -mt-[10px]'>
+            <p className='absolute bottom-2 left-6 text-error text-xs'>
               {errors.email}
             </p>
           )}
         </div>
-        <div className='h-[102px] flex flex-col gap-y-[12px]'>
-          <label
-            htmlFor='password'
-            className='font-pretendard-semibold text-base'
-          >
-            비밀번호
-          </label>
+        <label
+          htmlFor='password'
+          className='font-pretendard-semibold text-base'
+        >
+          비밀번호
+        </label>
+        <div className='relative h-20'>
           <Input
-            type='password'
+            className='absolute left-0 top-0 w-full'
+            type={isPasswordVisible ? 'text' : 'password'}
             name='password'
             value={password}
             onChange={handleChange}
@@ -179,21 +193,43 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             onFocus={handleFocus}
             placeholder='비밀번호를 입력해주세요'
           />
+          <div className='absolute w-[24px] h-[24px] right-[24px] top-4'>
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                isPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOn className='w-[20px] h-[20px]' />
+            </button>
+
+            <button
+              type='button'
+              onClick={togglePasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                !isPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOff className='w-[20px] h-[20px]' />
+            </button>
+          </div>
           {errors.password && (
-            <p className='text-error pl-[24px] text-xs -mt-[10px] mb-4'>
+            <p className='absolute bottom-2 left-6 text-error text-xs'>
               {errors.password}
             </p>
           )}
         </div>
-        <div className='h-[102px] flex flex-col gap-y-[12px]'>
-          <label
-            htmlFor='password'
-            className='font-pretendard-semibold text-base'
-          >
-            비밀번호 확인
-          </label>
+        <label
+          htmlFor='password'
+          className='font-pretendard-semibold text-base'
+        >
+          비밀번호 확인
+        </label>
+        <div className='relative h-20'>
           <Input
-            type='password'
+            className='absolute left-0 top-0 w-full'
+            type={isConfirmPasswordVisible ? 'text' : 'password'}
             name='confirmPassword'
             value={confirmPassword}
             onChange={handleChange}
@@ -201,8 +237,29 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             onFocus={handleFocus}
             placeholder='비밀번호를 다시 한 번 입력해주세요'
           />
+          <div className='absolute w-[24px] h-[24px] right-[24px] top-4'>
+            <button
+              type='button'
+              onClick={toggleConfirmPasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                isConfirmPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOn className='w-[20px] h-[20px]' />
+            </button>
+
+            <button
+              type='button'
+              onClick={toggleConfirmPasswordVisibility}
+              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+                !isConfirmPasswordVisible ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <VisibilityOff className='w-[20px] h-[20px]' />
+            </button>
+          </div>
           {errors.confirmPassword && (
-            <p className='text-error pl-[24px] text-xs -mt-[10px] mb-4'>
+            <p className='absolute bottom-2 left-6 text-error text-xs'>
               {errors.confirmPassword}
             </p>
           )}
@@ -211,7 +268,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
       <Button
         variant='primary'
         isDisabled={isDisabled}
-        className='w-full mb-[40px]'
+        className='w-full max-w-[640px] mb-[40px]'
       >
         회원가입하기
       </Button>
