@@ -13,8 +13,8 @@ export interface Todos {
     title: string;
   };
   isDone: boolean | null | undefined;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
   noteId: number;
 }
 

@@ -101,11 +101,6 @@ export const individualGoalsApi = {
       const response = await client.delete<ResponseWith<{}>>(
         `/individual/goals/${goalId}`
       );
-
-      console.log('delete goal response: ', response);
-      if (response.status === 204) {
-        console.log('Goal successfully deleted');
-      }
       return response;
     } catch (error) {
       console.error('Fail to delete individual goals:', error);

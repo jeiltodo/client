@@ -11,7 +11,7 @@ export const LayoutTitle = ({
 }: LayoutTitleProps) => {
   return (
     <div
-      className={`flex flex-row items-center justify-between tablet:flex tablet:pt-[24px] mobile:hidden  mb-[16px] ${className}`}
+      className={`flex flex-row items-center justify-between mb-[16px] ${className}`}
     >
       <h2 className='font-pretendard-semibold text-lg'>{title}</h2>
       <div>{children}</div>

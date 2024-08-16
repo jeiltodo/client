@@ -7,14 +7,12 @@ import { useGroupSingleGoal } from '../../../entities/group/hooks/useGroupGoals'
 import { useIndividualSingleGoal } from '../../../entities/goal';
 
 export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {
-  console.log('params: ', params);
   const goalId = Number(params.goalid);
   const {
     data: singleGroupGoal,
     error,
     isLoading,
   } = useGroupSingleGoal(goalId);
-  console.log('groupGoalsData: ', singleGroupGoal);
   const { data: singleGoalTodo } = useIndividualSingleGoal(goalId);
   return (
     <>

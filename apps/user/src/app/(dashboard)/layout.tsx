@@ -1,12 +1,10 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import {
-  individualGoalsOptions,
-  progressAllOptions,
-} from '../../entities/goal';
 import { getQueryClient } from '../../entities/goal/get-query-client';
 import { SidebarUser } from '../../widgets/user';
 import { groupOptions } from '../../entities/group/index';
 import { userOptions } from '../../entities/user';
+import { individualGoalsOptions } from '../../entities/goal/hooks/individualOptions';
+import { progressAllOptions } from '../../entities/goal/hooks/progressAllOptions';
 
 export default async function DashboardLayout({
   children,

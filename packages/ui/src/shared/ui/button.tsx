@@ -56,7 +56,7 @@ export function Button({
   ...props
 }: ButtonProps): React.ReactElement {
   const baseClasses =
-    'font-pretendard-medium text-base transition-all duration-300 ease-in-out';
+    'font-pretendard-medium text-base transition-all duration-300 ease-in-out cursor';
 
   const variantClasses = {
     default:
@@ -94,6 +94,7 @@ export function Button({
   ${variantClasses[variant]}
   ${isDisabled && variant !== 'outline' && variant !== 'rounded-outline-blue' ? 'disabled:bg-slate-400 cursor' : ''}
   ${isDisabled && (variant === 'outline' || variant === 'rounded-outline-blue') ? 'disabled:text-slate-400 disabled:border-slate-400' : ''}
+  ${isDisabled && variant === 'text-blue' ? 'disabled:text-slate-400 disabled:bg-transparent' : ''}
   ${isSelected && (variant === 'outline-date' || variant === 'outline-status') ? '!bg-blue-500  text-white hover:text-white active:border-blue-800 active:bg-blue-800 active:text-white' : ''}
   ${isSelectDuplicated && variant === 'outline-goal' ? '!bg-blue-100 border !border-blue-500 active:border-blue-800 active:bg-blue-800' : ''}
   ${className ? addClass(className) : ''}
