@@ -24,7 +24,7 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
   const { mutate: deleteTodo } = useDeleteTodo();
 
   const params = useParams();
-  const goalId = Number(params.goalid);
+  const goalId = Number(params?.goalid);
 
   const queryClient = useQueryClient();
 
