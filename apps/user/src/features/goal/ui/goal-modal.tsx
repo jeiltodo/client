@@ -6,9 +6,7 @@ import { BaseModal } from '../../../shared/ui/base-modal';
 
 interface Props {
   goalCreator: string;
-  onMutateGoal: (
-    goal: { id: number; title: string } | { title: string }
-  ) => void;
+  onMutateGoal: (goal: { id?: number; title: string }) => void;
   setGoalModalToggle: Dispatch<SetStateAction<boolean>>;
   initialGoal?: { id: number; title: string };
 }
@@ -27,7 +25,7 @@ export const GoalModal = ({
 
   return (
     <BaseModal
-      title={`${goalCreator}의 목표 생성`}
+      title={`${goalCreator}의 목표 ${initialGoal ? '수정' : '생성'}`}
       setToggle={toggleModal}
       width='modal_sm:w-[520px]'
     >

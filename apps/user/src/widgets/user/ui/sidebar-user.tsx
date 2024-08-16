@@ -74,7 +74,7 @@ export const SidebarUser = () => {
         <GoalModal
           goalCreator={userInfo?.nickname ?? ''}
           setGoalModalToggle={setGoalToggle}
-          onCreateGoal={handleCreateIndividualGoal}
+          onMutateGoal={handleCreateIndividualGoal}
         />
       )}
       {groupCreateToggle && (

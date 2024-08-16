@@ -8,10 +8,11 @@ import {
 } from 'react';
 import { TodoModal } from '../../../entities/todo/ui/todo-modal';
 import { useRouter } from 'next/navigation';
-import { Goal, useIndividualGoals } from '../../../entities/goal';
+import { Goal, useIndividualGoals, userOptions } from '../../../entities/goal';
 import Link from 'next/link';
 import { Button } from '@jeiltodo/ui/shared';
 import { Plus } from '@jeiltodo/icons';
+import { useQuery } from '@tanstack/react-query';
 
 interface SidebarIndividualNavProps {
   icon: ForwardRefExoticComponent<
@@ -29,6 +30,7 @@ export const SidebarIndividualNav = ({
   const [todoToggle, setTodoToggle] = useState<boolean>(false);
   const router = useRouter();
   const { data: goals } = useIndividualGoals();
+  const { data: userInfo } = useQuery(userOptions());
 
   const fomatted = goals
     ? goals.map((goal) => ({ id: goal.id, title: goal.title }))
@@ -36,7 +38,11 @@ export const SidebarIndividualNav = ({
   return (
     <div className='border-t-[1px] border-slate-200 py-4 flex flex-col items-center'>
       {todoToggle && (
-        <TodoModal setTodoToggle={setTodoToggle} goals={fomatted} />
+        <TodoModal
+          todoCreator={userInfo?.nickname ?? '개인'}
+          setTodoModalToggle={setTodoToggle}
+          goals={fomatted}
+        />
       )}
       <div className='px-5 mb-4 flex items-center justify-start gap-2 w-full h-9'>
         <Link

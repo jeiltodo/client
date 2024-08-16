@@ -13,8 +13,6 @@ export const TodoDoneBoard = ({
   todos: SingleGoalTodoResponse;
   goal: Goal;
 }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-
   const todosForList = todos.data.map((todo) => {
     return {
       id: todo.id,
@@ -28,10 +26,6 @@ export const TodoDoneBoard = ({
   const done = todosForList.filter((todo) => todo.isDone === true);
   const notDone = todosForList.filter((todo) => todo.isDone === false);
 
-  const handleAddModal = () => {
-    setModalOpen(true);
-  };
-
   return (
     <div className='desktop:grid-rows-2 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
       <div className='bg-white rounded-xl px-6 py-4'>
@@ -39,14 +33,6 @@ export const TodoDoneBoard = ({
           <div className=''>
             <div className='flex items-start justify-between'>
               <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-              <Button
-                variant='text-blue'
-                className='flex gap-1 items-center text-sm h-[20px]'
-                onClick={handleAddModal}
-              >
-                <Plus width={16} height={16} />
-                할일 추가
-              </Button>
             </div>
             <TodoList todos={notDone} variant='user' />
           </div>
@@ -54,14 +40,6 @@ export const TodoDoneBoard = ({
           <div className='min-h-[228px] flex flex-col'>
             <div className='flex items-start justify-between'>
               <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-              <Button
-                variant='text-blue'
-                className='flex gap-1 items-center text-sm h-[20px]'
-                onClick={handleAddModal}
-              >
-                <Plus width={16} height={16} />
-                할일 추가
-              </Button>
             </div>
             <div className='flex-grow flex items-center justify-center'>
               <p className='text-sm text-gray-500'>할 일 없음</p>
@@ -82,9 +60,6 @@ export const TodoDoneBoard = ({
               <p className='text-sm text-gray-500'>할 일 없음</p>
             </div>
           </div>
-        )}
-        {modalOpen && (
-          <TodoModal setTodoToggle={setModalOpen} initialGoal={goal} />
         )}
       </div>
     </div>

@@ -4,21 +4,21 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 import { Todo } from '../model/type';
-import { GoalDropdown, GoalIdAndTitle, useIndividualGoals } from '../../goal';
+import { GoalDropdown, GoalIdAndTitle } from '../../goal';
 import { useCreateTodo } from '../hooks/useCreateTodo';
 import { useUpdateTodo } from '../hooks/useUpdateTodo';
-import { userOptions } from '../../user';
-import { useQuery } from '@tanstack/react-query';
 
 interface Props {
-  setTodoToggle: Dispatch<SetStateAction<boolean>>;
-  goals: GoalIdAndTitle[];
+  todoCreator: string;
+  setTodoModalToggle: Dispatch<SetStateAction<boolean>>;
+  goals: { id: number; title: string }[];
   initialTodo?: Todo;
   initialGoal?: GoalIdAndTitle;
 }
 
 export const TodoModal = ({
-  setTodoToggle: toggleModal,
+  todoCreator,
+  setTodoModalToggle,
   goals,
   initialTodo,
   initialGoal,
@@ -28,13 +28,6 @@ export const TodoModal = ({
     initialGoal?.id
   );
 
-  const { data: user } = useQuery(userOptions());
-  const { data } = useIndividualGoals();
-  // const formattedGoals = data?.individualGoals.map((goal) => ({
-  //   id: goal.id,
-  //   title: goal.title,
-  // }));
-
   const { mutate: createTodo } = useCreateTodo();
   const { mutate: updateTodo } = useUpdateTodo();
 
@@ -42,13 +35,13 @@ export const TodoModal = ({
     initialTodo
       ? updateTodo({ id: initialTodo.id, title })
       : createTodo({ goalId: goalId as number, title });
-    toggleModal(false);
+    setTodoModalToggle(false);
   };
 
   return (
     <BaseModal
-      title={`${user?.nickname}의 할 일 ${initialTodo ? '수정' : '생성'}`}
-      setToggle={toggleModal}
+      title={`${todoCreator}의 할 일 ${initialTodo ? '수정' : '생성'}`}
+      setToggle={setTodoModalToggle}
       width='modal_sm:w-[520px]'
     >
       <div className='flex flex-col gap-3'>

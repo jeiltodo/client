@@ -110,7 +110,7 @@ export const GroupDashboardPage = () => {
         <GoalModal
           setGoalModalToggle={setOpenModal}
           goalCreator={group.title}
-          onCreateGoal={handleCreateGoal}
+          onMutateGoal={handleCreateGoal}
         />
       )}
     </div>

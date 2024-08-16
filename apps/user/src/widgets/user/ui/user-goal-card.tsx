@@ -1,16 +1,26 @@
 'use client';
 
 import { Button, ProgressBar } from '@jeiltodo/ui/shared';
-import { GoalWithTodos } from '../../../entities/goal';
+import {
+  GoalWithTodos,
+  useIndividualGoals,
+  userOptions,
+} from '../../../entities/goal';
 import { TodoModal } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { ArrowRight, PlusBlue } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 
 export const UserGoalCard = (goal: GoalWithTodos) => {
   const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const { data: user } = useQuery(userOptions());
+
+  const { data: goals } = useIndividualGoals();
+  const formatted =
+    goals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
 
   const done = goal.todos
     .filter((todo) => todo.isDone === true)
@@ -77,7 +87,12 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
         </Button>
       </div>
       {modalOpen && (
-        <TodoModal setTodoToggle={setModalOpen} initialGoal={goal} />
+        <TodoModal
+          todoCreator={user?.nickname ?? '개인'}
+          setTodoModalToggle={setModalOpen}
+          initialGoal={goal}
+          goals={formatted}
+        />
       )}
     </div>
   );

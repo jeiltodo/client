@@ -2,49 +2,24 @@ import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
 
 import { useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
-import { GoalModal } from '../../features/goal';
-import { ConfirmationModal } from '../../shared';
 
-import { Goal, individualGoalsApi } from '../../entities/goal';
-import { useQuery } from '@tanstack/react-query';
-import { userOptions } from '../../entities/user';
-import { useRouter } from 'next/navigation';
+import { Goal } from '../../entities/goal';
 
 interface Props {
   goalData: Goal;
+  onDeleteGoal: () => void;
+  onEditGoal: () => void;
 }
 
-export const TitleProgressBarCard = ({ goalData }: Props) => {
+export const TitleProgressBarCard = ({
+  goalData,
+  onDeleteGoal,
+  onEditGoal,
+}: Props) => {
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
-  const [isGoalToggleOpen, setIsGoalToggleOpen] = useState(false);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const router = useRouter();
-
-  const { data: user } = useQuery(userOptions());
 
   const handleKebab = () => {
     setIsFlyoutOpen((prev) => !prev);
-  };
-
-  const handleEdit = async ({ title }: { title: string }) => {
-    const response = await individualGoalsApi.patchIndividualGoal({
-      goalId: goalData.id,
-      title: title,
-    });
-    if (response.code === 200) {
-      setIsGoalToggleOpen(false);
-    }
-  };
-
-  const handleDelete = async () => {
-    const response = await individualGoalsApi.deleteIndividualGoal({
-      goalId: goalData.id,
-    });
-    console.log('response: ', response);
-    if (response.code === 204) {
-      setIsConfirmOpen(false);
-      router.back();
-    }
   };
 
   return (
@@ -58,36 +33,15 @@ export const TitleProgressBarCard = ({ goalData }: Props) => {
             onClick={handleKebab}
             className='cursor-pointer '
           />
-
           {isFlyoutOpen && (
             <Flyout
               onEdit={() => {
-                setIsGoalToggleOpen(true);
-                setIsFlyoutOpen(false);
+                onEditGoal();
               }}
               onDelete={() => {
-                setIsConfirmOpen(true);
-                setIsFlyoutOpen(false);
+                onDeleteGoal();
               }}
             />
-          )}
-          {/* TODO:: onblur 일 떄 Flyout닫히도록.*/}
-          {isGoalToggleOpen && (
-            <GoalModal
-              goalCreator={user?.nickname ?? ''}
-              initialGoal={{ id: goalData.id, title: goalData.title }}
-              setGoalModalToggle={setIsGoalToggleOpen}
-              onMutateGoal={()=>handleEdit({title:goalData.title})}
-            />
-          )}
-          {isConfirmOpen && (
-            <ConfirmationModal
-              setModalToggle={setIsConfirmOpen}
-              submitButtonText={'삭제'}
-              onSubmit={handleDelete}
-            >
-              정말 삭제 하시겠어요?
-            </ConfirmationModal>
           )}
         </span>
       </div>
