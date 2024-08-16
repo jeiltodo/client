@@ -1,0 +1,63 @@
+import type { SingleGoalTodoResponse } from '../../../entities/todo';
+import { TodoList } from '../../../features/todo';
+import { Goal } from '../../../entities/goal';
+
+export const TodoDoneBoard = ({
+  todos,
+  goal,
+}: {
+  todos: SingleGoalTodoResponse;
+  goal: Goal;
+}) => {
+  const todosForList = todos.data.map((todo) => {
+    return {
+      id: todo.id,
+      title: todo.title,
+      isDone: todo.isDone,
+      noteId: todo.noteId ?? undefined,
+      goal: goal,
+    };
+  });
+
+  const done = todosForList.filter((todo) => todo.isDone);
+  const notDone = todosForList.filter((todo) => !todo.isDone);
+
+  return (
+    <div className='desktop:grid-rows-2 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
+      <div className='bg-white rounded-xl px-6 py-4'>
+        {notDone.length !== 0 ? (
+          <div className=''>
+            <div className='flex items-start justify-between'>
+              <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
+            </div>
+            <TodoList todos={notDone} variant='user' />
+          </div>
+        ) : (
+          <div className='min-h-[228px] flex flex-col'>
+            <div className='flex items-start justify-between'>
+              <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
+            </div>
+            <div className='flex-grow flex items-center justify-center'>
+              <p className='text-sm text-gray-500'>할 일 없음</p>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className='bg-slate-200 rounded-xl px-6 py-4'>
+        {done.length !== 0 ? (
+          <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
+            <TodoList todos={done} variant='user' />
+          </div>
+        ) : (
+          <div className='min-h-[228px] flex flex-col'>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
+            <div className='flex-grow flex items-center justify-center'>
+              <p className='text-sm text-gray-500'>할 일 없음</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

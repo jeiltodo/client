@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Toast style custom */
+.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--success {
+  background: #eff6ff;
+  color: #3b82f6;
+  border-radius: 28px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0px 24px;
+  box-shadow: none;
+  min-height: 44px;
+  height: 44px;
+}
+.Toastify__toast.Toastify__toast-theme--light.Toastify__toast--info {
+  background: #eff6ff;
+  color: #3b82f6;
+  border-radius: 28px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0px 12px 0px 24px;
+  box-shadow: none;
+  min-height: 56px;
+  height: 56px;
+}
+.Toastify__toast-container {
+  width: 700px !important;
+}
+
+.Toastify__toast-body {
+  height: inherit;
+  margin: none;
+}
+.Toastify__close-button {
+  display: none;
+}

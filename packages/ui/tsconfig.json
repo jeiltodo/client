@@ -1,5 +1,15 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
-  "include": ["."],
-  "exclude": ["dist", "build", "node_modules"]
+  "extends": "@jeiltodo/typescript-config/react-library.json",
+  "include": [
+    "src",
+    "../../apps/user/src/entities/todo",
+    "../../apps/user/src/entities/todo/ui/todo-item.tsx",
+    "../../apps/user/src/widgets/note/ui/note-detail-slide.tsx"
+  ],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx"
+  }
 }

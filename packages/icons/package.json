@@ -1,0 +1,29 @@
+{
+  "name": "@jeiltodo/icons",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/index.ts"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "npx @svgr/cli --out-dir dist --ignore-existing --typescript --ref --no-dimensions -- src/assets",
+    "prebuild": "npx rimraf dist",
+    "lint": "eslint src/"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@svgr/cli": "8.1.0",
+    "@jeiltodo/eslint-config": "*",
+    "@jeiltodo/typescript-config": "*",
+    "@types/react": "^18.2.61",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+}
