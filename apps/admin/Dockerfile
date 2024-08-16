@@ -19,5 +19,6 @@ COPY --from=builder /app/apps/admin/public ./public
 COPY --from=builder /app/apps/admin/package.json ./package.json
 COPY --from=builder /app/packages ./packages
 
-EXPOSE 3000
+EXPOSE 3001
+
 CMD ["yarn", "start"]
