@@ -13,13 +13,13 @@ export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
 
   const filteredData: Pick<Goal, 'id' | 'title'>[] =
-    individualGoalsData?.data.individualGoals.map(({ id, title }) => ({
+    individualGoalsData?.map(({ id, title }) => ({
       id,
       title,
     })) || [];
   const [query, setQuery] = useState<todoQuery>({
     goalIds:
-      individualGoalsData?.data.individualGoals.map((goal) => goal.id) || [],
+      individualGoalsData?.map((goal) => goal.id) || [],
     status: null,
   });
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,7 +50,7 @@ export const TodoPage = () => {
 
   return (
     <div>
-      {modalOpen && <TodoModal setTodoToggle={setModalOpen} />}
+      {modalOpen && <TodoModal setTodoToggle={setModalOpen} goals={filteredData}/>}
       <div className='flex items-center justify-between mb-6 '>
         <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
           최근 등록한 할일 ({allTodos?.length})
