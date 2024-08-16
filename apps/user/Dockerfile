@@ -24,7 +24,6 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 COPY --from=builder /app/apps/user/.next ./.next
-COPY --from=builder /app/apps/user/public ./public
 COPY --from=builder /app/apps/user/package.json ./package.json
 COPY --from=builder /app/packages ./packages
 
