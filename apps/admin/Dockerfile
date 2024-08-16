@@ -1,8 +1,7 @@
 FROM node:18-alpine AS deps
 WORKDIR /app 
-COPY package.json yarn.lock ./
-COPY apps/admin/package.json ./apps/admin/
-COPY packages/*/package.json ./packages/*/
+COPY . .
+RUN yarn version
 RUN yarn install --frozen-lockfile
 
 FROM node:18-alpine AS builder
