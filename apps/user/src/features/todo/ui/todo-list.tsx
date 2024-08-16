@@ -1,16 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
-import { TodoAsignee, TodoButtons, TodoModal } from '../../../entities/todo';
-import type { Todo } from '../../../entities/todo';
+import { Todo, TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import type { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
+import { useParams } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   todos: (Todo & { goal?: Goal })[];
@@ -95,11 +94,8 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
             <TodoContent
               key={id}
               todo={{ id, title, isDone }}
-              onCheck={() => {
-                handleCheck(id);
-              }}
+              onCheck={handleCheck}
             />
-            {variant === 'group' && <TodoAsignee />}
           </span>
           <TodoButtons
             onClickEdit={handleClickEdit}

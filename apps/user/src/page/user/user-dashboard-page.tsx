@@ -10,7 +10,7 @@ import {
 import { useInView } from 'react-intersection-observer';
 import { BoardTitle } from '@jeiltodo/ui/shared';
 import Link from 'next/link';
-import { ArrowRight, ArrowRightGray } from '@jeiltodo/icons';
+import { ArrowRightGray } from '@jeiltodo/icons';
 import { useQuery } from '@tanstack/react-query';
 
 export const UserDashboardPage = () => {
@@ -34,7 +34,11 @@ export const UserDashboardPage = () => {
             <BoardTitle icon='BlueMarker' title='최근 등록한 할 일' />
             <Link href='/todo' className='flex items-center text-slate-600'>
               <div className='text-sm font-medium pt-[2px]'>모두보기</div>
-              <ArrowRightGray width={24} height={24} className='text-slate-600' />
+              <ArrowRightGray
+                width={24}
+                height={24}
+                className='text-slate-600'
+              />
             </Link>
           </div>
           <RecentTodoCard />

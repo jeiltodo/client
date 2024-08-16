@@ -1,37 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 interface Props {
-  labelText: string;
-  inputName: string;
+  label: string;
+  value: string;
   defaultValue: string;
-
+  isEditMode: boolean;
+  onChange: (value: string) => void;
+  onSwap: Dispatch<SetStateAction<boolean>>;
   className?: string;
 }
 
 export const InputSwapMode = ({
-  labelText,
-  inputName,
+  label,
+  value,
   defaultValue,
+  isEditMode,
+  onChange,
+  onSwap,
   className,
 }: Props) => {
-  const [isEditMode, swapMode] = useState<boolean>(false);
-
   const handleToggle = () => {
-    swapMode((prev) => !prev);
+    if (isEditMode === true) {
+      onChange(defaultValue);
+    }
+    onSwap((prev) => !prev);
   };
+
   return (
     <div className={`w-full h-fit ${className}`}>
       <label className='inline-block w-full text-sm text-slate-800 font-semibold opacity-50'>
-        {labelText}
+        {label}
       </label>
 
       <div className='flex w-full gap-4'>
         <input
-          name={inputName}
+          value={value}
           readOnly={isEditMode === false}
           defaultValue={defaultValue}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
           className={`inline-block w-full text-lg text-slate-800 font-semibold pt-1 border-b ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
         />
         <button

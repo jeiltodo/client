@@ -1,33 +1,34 @@
 'use client';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
-interface GoalModalProps {
-  nickname: string;
-  initialValue: string;
-  type?: 'edit' | 'create';
-  setGoalToggle: Dispatch<SetStateAction<boolean>>;
-  onClick: (value: string) => void;
+interface Props {
+  goalCreator: string;
+  onMutateGoal: (
+    goal: { id: number; title: string } | { title: string }
+  ) => void;
+  setGoalModalToggle: Dispatch<SetStateAction<boolean>>;
+  initialGoal?: { id: number; title: string };
 }
 export const GoalModal = ({
-  nickname,
-  initialValue,
-  type = 'create',
-  setGoalToggle,
-  onClick,
-}: GoalModalProps) => {
-  const [title, setTitle] = useState<string>(initialValue);
+  goalCreator,
+  onMutateGoal,
+  setGoalModalToggle: toggleModal,
+  initialGoal,
+}: Props) => {
+  const [title, setTitle] = useState<string>(initialGoal?.title ?? '');
 
-  useEffect(() => {
-    setTitle(initialValue);
-  }, [initialValue]);
+  const handleSubmit = () => {
+    onMutateGoal(initialGoal ? { id: initialGoal.id, title } : { title });
+    toggleModal(false);
+  };
 
   return (
     <BaseModal
-      title={`${nickname}의 목표 ${type === 'edit' ? '수정' : '생성'}`}
-      setToggle={setGoalToggle}
+      title={`${goalCreator}의 목표 생성`}
+      setToggle={toggleModal}
       width='modal_sm:w-[520px]'
     >
       <div className='flex flex-col gap-3'>
@@ -38,16 +39,14 @@ export const GoalModal = ({
           }}
           value={title}
           type='text'
-          placeholder='목표의 제목을 적어주세요'
+          placeholder='목표를 적어주세요'
           className='w-full text-base font-normal'
         />
       </div>
       <Button
         isDisabled={!title}
         className='w-full mt-10 h-12'
-        onClick={() => {
-          onClick(title);
-        }}
+        onClick={handleSubmit}
       >
         확인
       </Button>

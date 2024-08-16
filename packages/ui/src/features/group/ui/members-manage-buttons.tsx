@@ -2,7 +2,11 @@ import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { BoardMode } from '@jeiltodo/ui/shared';
 
-export const MembersManageButtons = () => {
+interface Props {
+  onSave: () => void;
+}
+
+export const MembersManageButtons = ({ onSave }: Props) => {
   const { mode, changeMode } = useBoardContext();
 
   const handleChangeMode = (mode: BoardMode) => {
@@ -14,8 +18,7 @@ export const MembersManageButtons = () => {
   };
 
   const handleSave = () => {
-    // POST call and revalidate
-    // toast
+    onSave();
     changeMode('default');
   };
   return (

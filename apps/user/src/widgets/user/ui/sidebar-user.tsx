@@ -2,8 +2,7 @@
 import { useState } from 'react';
 
 import { Button, Sidebar } from '@jeiltodo/ui/shared';
-import { SidebarNav } from '../../../shared/ui/sidebar/sidebar-nav';
-import { Home, Individual, Group, Plus, Search } from '@jeiltodo/icons';
+import { Individual, Group, Plus, Search } from '@jeiltodo/icons';
 import { SidebarIndividualNav } from '../../../features/user/ui/sidebar-individual-nav';
 import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
 import { GoalModal } from '../../../features/goal/ui/goal-modal';
@@ -15,16 +14,11 @@ import {
   useGroupMutation,
   useGroupAttendMutation,
 } from '../../../entities/group';
-import {
-  useQuery,
-  useQueryClient,
-  useSuspenseQuery,
-} from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   individualGoalsOptions,
   useIndividualGoalMutation,
-} from '../../../entities/goal/hooks/individualOptions';
-import { AxiosError } from 'axios';
+} from '../../../entities/user/hooks/individualGoalOptions';
 import { userOptions } from '../../../entities/user';
 
 export const SidebarUser = () => {
@@ -34,20 +28,21 @@ export const SidebarUser = () => {
 
   const queryClient = useQueryClient();
 
-  const { data: individualGoalsData } = useQuery(individualGoalsOptions());
-  const createIndividualGoalMutation = useIndividualGoalMutation();
+  const { data: individualGoals } = useQuery(individualGoalsOptions());
+  const { mutate: createGoal } = useIndividualGoalMutation();
 
-  const { data: groupData } = useQuery(groupOptions());
+  const { data: group } = useQuery(groupOptions());
   const createGroupMutation = useGroupMutation();
-  const AttendGroupMutation = useGroupAttendMutation();
+  const { mutate: attendGroup } = useGroupAttendMutation();
 
-  const { data: userInfoData } = useQuery(userOptions());
+  const { data: userInfo } = useQuery(userOptions());
 
-  const handleCreateIndividualGoal = (title: string) => {
-    createIndividualGoalMutation.mutate(title, {
+  const handleCreateIndividualGoal = (title: { title: string }) => {
+    createGoal(title, {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: individualGoalsOptions().queryKey,
+          predicate: (query) =>
+            query.queryKey.includes('goals' && 'individual'),
         });
       },
     });
@@ -64,7 +59,7 @@ export const SidebarUser = () => {
   };
 
   const handleAttendGroup = (secretCode: string) => {
-    AttendGroupMutation.mutate(secretCode, {
+    attendGroup(secretCode, {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: individualGoalsOptions().queryKey,
@@ -77,8 +72,9 @@ export const SidebarUser = () => {
     <>
       {goalToggle && (
         <GoalModal
-          setGoalToggle={setGoalToggle}
-          onClick={handleCreateIndividualGoal}
+          goalCreator={userInfo?.nickname ?? ''}
+          setGoalModalToggle={setGoalToggle}
+          onCreateGoal={handleCreateIndividualGoal}
         />
       )}
       {groupCreateToggle && (
@@ -94,11 +90,11 @@ export const SidebarUser = () => {
         />
       )}
       <Sidebar>
-        <SidebarUserInfo userInfo={userInfoData?.data} />
+        <SidebarUserInfo userInfo={userInfo} />
         <SidebarIndividualNav
           icon={Individual}
           title='개인'
-          individualGoals={individualGoalsData?.data.individualGoals}
+          individualGoals={individualGoals}
         />
         <div className='px-5 mb-[18px]'>
           <Button
@@ -110,7 +106,7 @@ export const SidebarUser = () => {
             <div className='text-base font-pretendard-semibold'>새 목표</div>
           </Button>
         </div>
-        <SidebarGroupNav icon={Group} group={groupData?.data} />
+        <SidebarGroupNav icon={Group} group={group?.data} />
         <div className='px-5 mb-3'>
           <Button
             variant='outline-dark'
