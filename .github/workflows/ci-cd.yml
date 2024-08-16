@@ -1,0 +1,55 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Build packages
+      run: yarn build --filter=./packages
+
+    - name: Build applications
+      run: |
+        yarn build --filter=apps/user
+        yarn build --filter=apps/admin
+
+    - name: Build and push Docker images
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        
+        docker build -f apps/user/Dockerfile -t $DOCKER_USERNAME/user-app .
+        docker push $DOCKER_USERNAME/user-app
+        
+        docker build -f apps/admin/Dockerfile -t $DOCKER_USERNAME/admin-app .
+        docker push $DOCKER_USERNAME/admin-app
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.HOST_DOMAIN }}
+        username: ${{ secrets.HOST_USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: |
+          docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+          docker pull ${{ secrets.DOCKER_USERNAME }}/user-app
+          docker pull ${{ secrets.DOCKER_USERNAME }}/admin-app
+          docker-compose down
+          docker-compose up -d
+          docker image prune -a -f
