@@ -6,14 +6,16 @@ import { Todo } from '..';
 interface Props {
   todo: Todo;
   onCheck: (id: number) => void;
+  disabled?: boolean;
 }
 
-export const TodoContent = ({ todo, onCheck }: Props) => {
+export const TodoContent = ({ todo, onCheck, disabled }: Props) => {
   const { id, title, isDone, noteId } = todo;
 
   return (
     <span className='inline-flex gap-2 items-center '>
       <Checkbox
+        disabled={disabled}
         isChecked={isDone}
         onChange={() => {
           onCheck(id);

@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Member } from '..';
+import { GroupMember } from '../../goal';
 
 interface Props {
-  progress: { completedPercent: number; members: Member[] };
+  progress: { completedPercent: number; members: GroupMember[] };
   className?: string;
 }
 
@@ -30,12 +30,12 @@ export const GroupProgressBar = ({ progress, className }: Props) => {
                 width: `${member.contributionPercent}%`,
                 backgroundColor: member.color,
               }}
-              onMouseEnter={() => setHoveredMember(member.name)}
+              onMouseEnter={() => setHoveredMember(member.nickname)}
               onMouseLeave={() => setHoveredMember(null)}
             >
-              {hoveredMember === member.name && (
+              {hoveredMember === member.nickname && (
                 <div className='absolute left-1/2 top-2 transform -translate-x-1/2 text-slate-600 bg-white border border-slate-100 text-sm font-noraml rounded-[5px] px-3 py-2'>
-                  {member.name}
+                  {member.nickname}
                 </div>
               )}
             </div>

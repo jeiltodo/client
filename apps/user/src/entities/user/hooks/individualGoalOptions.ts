@@ -1,12 +1,18 @@
-import { queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
-import { goalQueryKeys } from './queryKey';
-import { individualGoalsApi } from '../api/individualGoalsApi';
+import {
+  queryOptions,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
+
 import { AxiosError } from 'axios';
+import { goalQueryKeys } from '../../goal/hooks/queryKey';
+import { individualGoalsApi } from '../../goal';
 
 export const individualGoalsOptions = () =>
   queryOptions({
     queryKey: goalQueryKeys.individual.lists(),
     queryFn: individualGoalsApi.getGoals,
+    select: (data) => data.data.individualGoals,
   });
 
 export const useIndividualGoalMutation = () => {

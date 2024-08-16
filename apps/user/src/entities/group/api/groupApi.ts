@@ -1,5 +1,10 @@
 import { GroupResponse, GroupPostResponse } from '../model/type';
-import { client } from '../../../shared';
+import { client, ResponseWith } from '../../../shared';
+import {
+  GroupCode,
+  GroupTitleOrCode,
+  GroupWithMembers,
+} from '@jeiltodo/ui/entities';
 
 export const groupApi = {
   // GET 요청: 개인 그룹 조회
@@ -31,6 +36,77 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Failed to attend groups:', error);
+      throw error;
+    }
+  },
+
+  getGroupDetail: async (id: Number) => {
+    try {
+      const response = await client.get<ResponseWith<GroupWithMembers>>(
+        `/groups/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+
+  reissueGroupoCode: async (id: number) => {
+    try {
+      const response = await client.get<ResponseWith<GroupCode>>(
+        `/groups/code/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+
+  updateGrouppTitleOrCode: async (id: number, groupBody: GroupTitleOrCode) => {
+    try {
+      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
+        `/groups/${id}`,
+        groupBody
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+
+  removeMember: async (groupId: number, memberId: number) => {
+    try {
+      const response = await client.delete(
+        `/groups/members/${groupId}/${memberId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail removeMember:', error);
+      throw error;
+    }
+  },
+
+  changeLeader: async (groupId: number, memberId: number) => {
+    try {
+      const response = await client.patch(
+        `/groups/${groupId}/leader/${memberId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail changeLeader:', error);
+      throw error;
+    }
+  },
+
+  leaveGroup: async (groupId: number) => {
+    try {
+      const response = await client.delete(`/groups/members/${groupId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Fail leaveGroup:', error);
       throw error;
     }
   },

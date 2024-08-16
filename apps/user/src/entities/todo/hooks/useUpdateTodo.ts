@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Todo, todoApi } from '../../../entities/todo';
-import { goalQueryKeys } from '../../goal/hooks/queryKey';
 
 export const useUpdateTodo = () => {
   const queryClient = useQueryClient();
@@ -9,9 +8,8 @@ export const useUpdateTodo = () => {
       todoApi.updateTodo(newTodo),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        predicate: (query) =>
-          query.queryKey.includes('todos')
-      })
+        predicate: (query) => query.queryKey.includes('todos'),
+      });
     },
   });
 };

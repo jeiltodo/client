@@ -61,7 +61,11 @@ export const individualGoalsApi = {
   },
 
   // POST 요청: 새로운 개인 목표 생성
-  createGoal: async (title: string): Promise<IndividualGoalsResponse> => {
+  createGoal: async ({
+    title,
+  }: {
+    title: string;
+  }): Promise<IndividualGoalsResponse> => {
     try {
       const response = await client.post('/individual/goals', { title });
       return response.data;
@@ -71,7 +75,7 @@ export const individualGoalsApi = {
     }
   },
 
-  patchIndividualGoals: async ({
+  patchIndividualGoal: async ({
     goalId,
     title,
   }: {
@@ -92,9 +96,9 @@ export const individualGoalsApi = {
     }
   },
 
-  deleteIndividualGoals: async ({ goalId }: { goalId: number }) => {
+  deleteIndividualGoal: async ({ goalId }: { goalId: number }) => {
     try {
-      const response = await client.delete<Promise<void>>(
+      const response = await client.delete<ResponseWith<{}>>(
         `/individual/goals/${goalId}`
       );
       return response;

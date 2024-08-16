@@ -3,7 +3,7 @@ import { LayoutTitle } from '@jeiltodo/ui/shared';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { TodoDoneBoard } from '../../../widgets/todo';
-import { useGroupSingleGoal } from '../../../entities/goal/hooks/useGroupGoals';
+import { useGroupSingleGoal } from '../../../entities/group/hooks/useGroupGoals';
 import { useIndividualSingleGoal } from '../../../entities/goal';
 
 export const GroupDetailPage = ({ params }: { params: { goalid: number } }) => {

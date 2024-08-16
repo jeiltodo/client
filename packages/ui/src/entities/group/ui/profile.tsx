@@ -6,14 +6,8 @@ import {
 } from '@jeiltodo/icons';
 import { Radio } from '../../../shared';
 import { BoardMode } from '../../../shared/model/type';
-
-type Member = {
-  id: number;
-  colorCode: number;
-  name: string;
-  isLeader?: boolean;
-  contributionRank?: number;
-};
+import { Member } from '../model/type';
+import { RANK_HIGHST, RANK_LOWEST } from '../constants/contributionRank';
 
 interface Props {
   member: Member;
@@ -23,15 +17,11 @@ interface Props {
 }
 
 export const Profile = ({
-  member: { id, colorCode, name, contributionRank, isLeader = false },
+  member: { id, color, nickname, contributionRank, isLeader = false },
   mode,
   onChangeRadio,
   onClickRemove,
 }: Props) => {
-  const colorClass = `text-group-${colorCode}`;
-  const CONTRIBUTION_LOW = 0;
-  const CONTRIBUTION_HIHG = 1;
-
   return (
     <div className={`relative w-fit pt-6`}>
       {isLeader === true && mode !== 'change-leader' && (
@@ -59,11 +49,11 @@ export const Profile = ({
             }}
           />
         )}
-        <Avatar width={64} height={64} className={colorClass} />
-        {contributionRank === CONTRIBUTION_LOW && (
+        <Avatar width={64} height={64} style={{ color }} />
+        {contributionRank === RANK_LOWEST && (
           <AvatarRags width={64} height={64} className='absolute inset-0' />
         )}
-        {contributionRank === CONTRIBUTION_HIHG && (
+        {contributionRank === RANK_HIGHST && (
           <AvatarSunglasses
             width={64}
             height={64}
@@ -72,7 +62,7 @@ export const Profile = ({
         )}
       </div>
       <span className='inline-block w-full  text-center font-semibold text-sm text-white mt-2'>
-        {name}
+        {nickname}
       </span>
     </div>
   );

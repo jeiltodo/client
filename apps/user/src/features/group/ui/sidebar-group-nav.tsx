@@ -14,25 +14,22 @@ export const SidebarGroupNav = ({
   group,
 }: SidebarGroupNavProps) => {
   return (
-    <div className='border-t-[1px] border-slate-200 flex flex-col gap-4 py-4 max-h-[178px] overflow-y-scroll scrollbar-hide'>
+    <div className='border-t-[1px] border-slate-200 flex flex-col gap-4 py-4 max-h-[178px] overflow-y-scroll scrollbar-thin'>
       {group?.map((item) => (
         <div
           key={item.id}
           className='px-5 flex items-center justify-start gap-2 relative w-full h-9'
         >
-          <div className='flex items-center justify-start gap-2 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
-            <Icon className='w-6 h-6' />
-            <div className='block text-lg font-pretendard-medium text-slate-800'>
-              {item.title}
+          <Link href={`/group/${item.id}`} className='w-full'>
+            <div className='flex items-center justify-start gap-2 tablet:w-[240px] w-full h-9 hover:bg-slate-50 active:bg-slate-100 rounded-lg'>
+              <Icon className='w-6 h-6' />
+              <div className='block text-lg font-pretendard-medium text-slate-800'>
+                {item.title}
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       ))}
-      {group ? (
-        <Link className='border border-blue-400' href={`/goal/group/10/37`}>
-          {`groupId:10 & goalId:37의 그룹 목표 상세 페이지`}
-        </Link>
-      ) : null}
     </div>
   );
 };

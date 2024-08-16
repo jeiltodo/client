@@ -1,10 +1,10 @@
 import { Dropdown } from '@jeiltodo/ui/shared';
-import { Goal } from '../model/type';
+import { Goal, GoalIdAndTitle } from '../model/type';
 import { Dispatch, SetStateAction } from 'react';
 
 interface Props {
-  goals: Goal[];
-  defaultGoal?: Goal;
+  goals: GoalIdAndTitle[];
+  defaultGoal?: GoalIdAndTitle;
   onSelect: Dispatch<SetStateAction<string | number | undefined>>;
 }
 

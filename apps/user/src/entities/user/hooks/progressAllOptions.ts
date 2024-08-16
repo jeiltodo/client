@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
-import { individualGoalsApi } from '../api/individualGoalsApi';
+import { individualGoalsApi } from '../../goal/api/individualGoalsApi';
 import { ResponseWith } from '../../../shared';
-import { UserProgress } from '..';
-import { goalQueryKeys } from './queryKey';
+import { UserProgress } from '../../goal';
+import { goalQueryKeys } from '../../goal/hooks/queryKey';
 
 export const progressAllOptions = () =>
   queryOptions({

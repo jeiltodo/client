@@ -5,7 +5,7 @@ export * from './hooks/table/useTableSort';
 export * from './model/table/table-provider';
 export * from './model/table/type';
 
-export * from './ui/@x/pagination';
+export * from '../../../../packages/ui/src/shared/ui/pagination';
 export * from './ui/@x/search-filter';
 export * from './ui/@x/table-toolbar';
 
