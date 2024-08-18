@@ -1,73 +1,69 @@
 'use client';
 
 import { useState } from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import type { Todo } from '../../../entities/todo';
-import { TodoButtons, TodoModal } from '../../../entities/todo';
+import { Todo, TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import {
-	individualGoalsOptions,
-	userOptions,
-	type Goal,
-} from '../../../entities/goal';
+import type { Goal } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
-import { NoteDetailSlide } from '../../../widgets/note';
+import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
+import { useParams } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface Props {
-	todos: (Todo & { goal: Goal })[];
+	todos: (Todo & { goal?: Goal })[];
+	variant?: 'user' | 'group';
 }
 
-export const TodoList = ({ todos }: Props) => {
-	const [editModalId, setEditModalId] = useState<number | null>(null);
-	const [isNoteSlideModalOpen, setIsNoteSlideModalOpen] =
-		useState<boolean>(false);
+export const TodoList = ({ todos, variant = 'user' }: Props) => {
+	console.log('todos: ', todos);
+	const [editModalOpen, setEditModalOpen] = useState(false);
 	const [removeModalOpen, setRemoveModalOpen] = useState(false);
-	const [todoToRemove, setTodoToRemove] = useState<number | null>(null);
 	const [noteCreateModalOpen, setNoteCreateModalOpen] = useState(false);
 
 	const { mutate: checkTodo } = useCheckTodo();
 	const { mutate: deleteTodo } = useDeleteTodo();
-	const { data: userInfo } = useQuery(userOptions());
-	const { data: individualGoals } = useQuery(individualGoalsOptions());
-	const goalsList = individualGoals?.map((item) => ({
-		id: item.id,
-		title: item.title,
-	}));
 
 	const queryClient = useQueryClient();
-
-	const handleClickEdit = (id: number) => {
-		setEditModalId(id);
+	console.log(variant);
+	const handleClickEdit = () => {
+		setEditModalOpen(true);
 	};
 
-	const handleClickRemove = (id: number) => {
-		setTodoToRemove(id);
+	const handleClickRemove = () => {
 		setRemoveModalOpen(true);
-	};
-
-	const handleUrl = (
-		todoId: number,
-		goalId: number,
-		noteId: number | undefined
-	) => {
-		const url = `/note/${noteId || 'new'}?todoId=${todoId}`;
-		window.location.href = url;
 	};
 
 	const handleClickNote = (noteId: number | undefined) => {
 		if (noteId) {
-			setEditModalId(noteId);
-			setIsNoteSlideModalOpen(true);
+			setEditModalOpen(true);
 		} else {
 			setNoteCreateModalOpen(true);
 		}
 	};
 
+	const handleUrl = (todoId: number, noteId: number | undefined) => {
+		const url = noteId
+			? `/note/creat?todoId=${todoId}&noteId=${noteId}`
+			: `/note/creat?todoId=${todoId}&noteId=new`;
+		window.location.href = url;
+	};
 	const handleCheck = (todoId: number) => {
 		checkTodo(todoId, {
 			onSuccess: () => {
+				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.todos(),
+				});
+				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.lists(),
+				});
+				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.single(goalId),
+				});
+				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.progress(),
+				});
 				queryClient.invalidateQueries({
 					predicate: (query) => query.queryKey.includes('todos'),
 				});
@@ -79,17 +75,25 @@ export const TodoList = ({ todos }: Props) => {
 		deleteTodo(id, {
 			onSuccess: () => {
 				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.todos(),
+				});
+				queryClient.invalidateQueries({
 					predicate: (query) => query.queryKey.includes('todos'),
+				});
+				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.lists(),
+				});
+				queryClient.invalidateQueries({
+					queryKey: goalQueryKeys.individual.single(goalId),
 				});
 			},
 		});
 		setRemoveModalOpen(false);
-		setTodoToRemove(null);
 	};
 
 	return (
 		<ul className='w-full flex flex-wrap gap-2'>
-			{todos.map(({ id, title, isDone, goal, noteId }) => (
+			{todos.map(({ id, title, isDone, noteId, goal }) => (
 				<li
 					key={id}
 					className='list-none w-full h-6 flex justify-between group '
@@ -102,29 +106,23 @@ export const TodoList = ({ todos }: Props) => {
 						/>
 					</span>
 					<TodoButtons
-						onClickEdit={() => handleClickEdit(id)}
-						onClickRemove={() => handleClickRemove(id)}
-						onClickNote={() => handleClickNote(noteId)}
+						onClickEdit={handleClickEdit}
+						onClickRemove={handleClickRemove}
+						onClickNote={() => handleClickNote(noteId || undefined)}
 					/>
-					{editModalId === id && (
+					{editModalOpen && (
 						<TodoModal
-							todoCreator={userInfo?.nickname || ''}
-							setTodoModalToggle={() => setEditModalId(null)}
-							goals={goalsList || []}
+							setTodoToggle={setEditModalOpen}
 							initialTodo={{ id, title, isDone }}
 							initialGoal={goal}
 						/>
 					)}
-					{isNoteSlideModalOpen && (
-						<NoteDetailSlide
-							data={noteId}
-							setToggle={setIsNoteSlideModalOpen}
-						/>
-					)}
-					{removeModalOpen && todoToRemove === id && (
+					{removeModalOpen && (
 						<ConfirmationModal
 							setModalToggle={setRemoveModalOpen}
-							onSubmit={() => handleRemove(id)}
+							onSubmit={() => {
+								handleRemove(id);
+							}}
 							submitButtonText='삭제'
 						>
 							정말 삭제하시겠습니까?
