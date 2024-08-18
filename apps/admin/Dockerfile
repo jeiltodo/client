@@ -25,5 +25,4 @@ COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3001
-
-CMD ["yarn", "start"]
+CMD ["yarn", "start", "--port", "3001"]
