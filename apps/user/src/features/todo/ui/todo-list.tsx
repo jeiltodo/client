@@ -1,58 +1,54 @@
 'use client';
 
 import { useState } from 'react';
-import { Todo, TodoButtons } from '../../../entities/todo';
+import { Todo, TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import type { Goal } from '../../../entities/goal';
+import {
+  GoalIdAndTitle,
+  individualGoalsOptions,
+  userOptions,
+  type Goal,
+} from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
-import { goalQueryKeys } from '../../../entities/goal/hooks/queryKey';
-import { useParams } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
+
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 interface Props {
   todos: (Todo & { goal?: Goal })[];
-  variant?: 'user' | 'group';
 }
 
-export const TodoList = ({ todos, variant = 'user' }: Props) => {
-  // const [editModalOpen, setEditModalOpen] = useState(false);
+export const TodoList = ({ todos }: Props) => {
+  const [editModalId, setEditModalId] = useState<number | null>(null);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
+  const [todoToRemove, setTodoToRemove] = useState<number | null>(null);
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
-
-  const params = useParams();
-  const goalId = Number(params?.goalid);
+  const { data: userInfo } = useQuery(userOptions());
+  const { data: individualGoals } = useQuery(individualGoalsOptions());
+  const goalsList = individualGoals?.map((item) => ({
+    id: item.id,
+    title: item.title,
+  }));
 
   const queryClient = useQueryClient();
-  console.log(variant)
-  // const handleClickEdit = () => {
-  //   setEditModalOpen(true);
-  // };
 
-  // const handleClickRemove = () => {
-  //   setRemoveModalOpen(true);
-  // };
+  const handleClickEdit = (id: number) => {
+    setEditModalId(id);
+  };
 
-  // const handleClickNote = () => {};
+  const handleClickRemove = (id: number) => {
+    setTodoToRemove(id);
+    setRemoveModalOpen(true);
+  };
+
+  const handleClickNote = () => {};
 
   const handleCheck = (todoId: number) => {
     checkTodo(todoId, {
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.todos(),
-        });
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.lists(),
-        });
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.single(goalId),
-        });
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.progress(),
-        });
         queryClient.invalidateQueries({
           predicate: (query) => query.queryKey.includes('todos'),
         });
@@ -64,25 +60,17 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
     deleteTodo(id, {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.todos(),
-        });
-        queryClient.invalidateQueries({
           predicate: (query) => query.queryKey.includes('todos'),
-        });
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.lists(),
-        });
-        queryClient.invalidateQueries({
-          queryKey: goalQueryKeys.individual.single(goalId),
         });
       },
     });
     setRemoveModalOpen(false);
+    setTodoToRemove(null);
   };
 
   return (
     <ul className='w-full flex flex-wrap gap-2'>
-      {todos.map(({ id, title, isDone }) => (
+      {todos.map(({ id, title, isDone, goal }) => (
         <li
           key={id}
           className='list-none w-full h-6 flex justify-between group '
@@ -94,24 +82,24 @@ export const TodoList = ({ todos, variant = 'user' }: Props) => {
               onCheck={handleCheck}
             />
           </span>
-          {/* <TodoButtons
-            onClickEdit={handleClickEdit}
-            onClickRemove={handleClickRemove}
+          <TodoButtons
+            onClickEdit={() => handleClickEdit(id)}
+            onClickRemove={() => handleClickRemove(id)}
             onClickNote={handleClickNote}
-          /> */}
-          {/* {editModalOpen && (
+          />
+          {editModalId === id && (
             <TodoModal
-              setTodoToggle={setEditModalOpen}
+              todoCreator={userInfo?.nickname || ''}
+              setTodoModalToggle={() => setEditModalId(null)}
+              goals={goalsList || []}
               initialTodo={{ id, title, isDone }}
               initialGoal={goal}
             />
-          )} */}
-          {removeModalOpen && (
+          )}
+          {removeModalOpen && todoToRemove === id && (
             <ConfirmationModal
               setModalToggle={setRemoveModalOpen}
-              onSubmit={() => {
-                handleRemove(id);
-              }}
+              onSubmit={() => handleRemove(id)}
               submitButtonText='삭제'
             >
               정말 삭제하시겠습니까?

@@ -6,9 +6,9 @@ export const goalQueryKeys = {
     progress: () =>
       [...goalQueryKeys.individual.default(), 'progress', 'todos'] as const,
     todos: () => [...goalQueryKeys.individual.default(), 'todos'] as const,
-    lists: () => [...goalQueryKeys.individual.default(), 'list'] as const,
+    lists: () => [...goalQueryKeys.individual.default(), 'list', 'todos'] as const,
     single: (goalId: number) =>
-      [...goalQueryKeys.individual.todos(), 'single', goalId] as const,
+      [...goalQueryKeys.individual.todos(), 'single', goalId, 'todos'] as const,
   },
 
   group: {
