@@ -37,9 +37,11 @@ export const TitleProgressBarCard = ({
             <Flyout
               onEdit={() => {
                 onEditGoal();
+                setIsFlyoutOpen(false);
               }}
               onDelete={() => {
                 onDeleteGoal();
+                setIsFlyoutOpen(false);
               }}
             />
           )}

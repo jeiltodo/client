@@ -30,9 +30,12 @@ export const TodoPage = () => {
     isDone: query.status,
   });
 
-  const handleClick = useCallback((query: todoQuery) => {
-    setQuery(query);
-  }, [query]);
+  const handleClick = useCallback(
+    (query: todoQuery) => {
+      setQuery(query);
+    },
+    [query]
+  );
   const allTodos = data?.pages.flatMap((page) => page.data.todos) ?? [];
 
   const handleAddModal = () => {
@@ -40,7 +43,6 @@ export const TodoPage = () => {
   };
 
   const { ref, inView } = useInView();
-  // console.log(inView);
   useEffect(() => {
     if (inView) {
       hasNextPage && fetchNextPage();

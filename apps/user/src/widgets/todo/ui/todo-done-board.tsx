@@ -1,4 +1,4 @@
-import type { SingleGoalTodoResponse } from '../../../entities/todo';
+import type { SingleGoalTodo } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
 import { Goal } from '../../../entities/goal';
 
@@ -6,10 +6,10 @@ export const TodoDoneBoard = ({
   todos,
   goal,
 }: {
-  todos: SingleGoalTodoResponse;
+  todos: SingleGoalTodo[];
   goal: Goal;
 }) => {
-  const todosForList = todos.data.map((todo) => {
+  const todosForList = todos.map((todo) => {
     return {
       id: todo.id,
       title: todo.title,

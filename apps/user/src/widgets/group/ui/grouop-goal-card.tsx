@@ -9,6 +9,8 @@ import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';
 import { useParams } from 'next/navigation';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
+import { TodoModal } from '../../../entities/todo';
+import { useGroupDetail } from '../../../entities/group';
 
 export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const params: { id: string } = useParams();
@@ -16,14 +18,16 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
 
   const { data: groupGoals } = useGroupGoals(groupId);
-  const goalIdAndTitles = groupGoals?.map((goal) => ({
-    id: goal.id,
-    title: goal.title,
-  })) as GoalIdAndTitle[];
+  const { data: group } = useGroupDetail(groupId);
+  const goalIdAndTitles =
+    groupGoals?.map((goal) => ({
+      id: goal.id,
+      title: goal.title,
+    })) ?? [];
 
   const done = formatGroupTodos(goal, true);
   const notDone = formatGroupTodos(goal, false);
-  console.log(goalIdAndTitles)
+
   const handleAddTodo = () => {
     setIsOpenAddTodoModal(true);
   };
@@ -47,16 +51,16 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
         <GroupProgressBar progress={goal.progress} />
       </div>
       <div className='w-full tablet:grid tablet:grid-cols-2 tablet:divide-x tablet:divide-gray-200 mt-4 mb-5'>
-        {notDone.length !== 0 && (
+        {notDone.todos.length !== 0 && (
           <div className='w-full tablet:pr-6'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-            <GroupTodoList todos={notDone} />
+            <GroupTodoList goalWithTodos={notDone} />
           </div>
         )}
-        {done.length !== 0 && (
+        {done.todos.length !== 0 && (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <GroupTodoList todos={done} />
+            <GroupTodoList goalWithTodos={done} />
           </div>
         )}
       </div>
@@ -73,12 +77,12 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
         </Button>
       </div>
       {isOpenAddTodoModal && (
-        <>모달에러</>
-        // <TodoModal
-        //   goals={goalIdAndTitles}
-        //   setTodoToggle={setIsOpenAddTodoModal}
-        //   initialGoal={goal}
-        // />
+        <TodoModal
+          todoCreator={group?.title ?? '그룹'}
+          goals={goalIdAndTitles}
+          setTodoModalToggle={setIsOpenAddTodoModal}
+          initialGoal={goal}
+        />
       )}
     </div>
   );
