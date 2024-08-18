@@ -69,6 +69,7 @@ export const GroupOverviewBoard = ({
             </Field>
             {isUserALeader && (
               <button
+                disabled={isRequested === false || updatedTitle === title}
                 onClick={handleReissue}
                 className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? 'border-blue-500 text-blue-500 ' : 'bg-slate-900 text-white '}`}
               >

@@ -1,7 +1,7 @@
 import { client } from '../../../shared';
 import {
   ResponsePageListRecentTodo,
-  SingleGoalTodoResponse,
+  SingleGoalTodosResponse,
   Todo,
   TodoCreateBody,
   Todos,
@@ -11,7 +11,7 @@ import {
 export const todoApi = {
   getSingleGoalTodo: async (goalId: number) => {
     try {
-      const response = await client.get<Promise<SingleGoalTodoResponse>>(
+      const response = await client.get<SingleGoalTodosResponse>(
         `/todo/list?goalId=${goalId}`
       );
 

@@ -6,5 +6,6 @@ export const useSingleGoalTodo = (goalId: number) => {
   return useQuery({
     queryKey: [todoQueryKeys.individual.single(goalId), goalId],
     queryFn: () => todoApi.getSingleGoalTodo(goalId),
+    select: (data) => data.data,
   });
 };

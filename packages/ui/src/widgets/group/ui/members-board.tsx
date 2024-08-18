@@ -75,7 +75,9 @@ export const MembersBorad = ({
             </div>
           </div>
 
-          {isUserALeader && <MembersManageButtons onSave={handleSave} />}
+          {isUserALeader && formattedMembers.length !== 1 && (
+            <MembersManageButtons onSave={handleSave} />
+          )}
         </div>
         <MemberList
           members={formattedMembers}
