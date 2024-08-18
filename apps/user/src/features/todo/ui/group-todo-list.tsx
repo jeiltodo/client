@@ -2,40 +2,45 @@
 
 import { useState } from 'react';
 import {
-  Todo,
+  FormattedGoalWithTodos,
   TodoAssignee,
   TodoButtons,
+  TodoModal,
 } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import { GoalIdAndTitle } from '../../../entities/goal';
 import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
+import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
+import { useParams } from 'next/navigation';
+import { useGroupDetail } from '../../../entities/group';
 
 interface Props {
-  todos: (Todo & {
-    goal: GoalIdAndTitle;
-    memberInCharge: { nickname: string; color: string } | null;
-  })[];
+  goalWithTodos: FormattedGoalWithTodos;
 }
 
-export const GroupTodoList = ({ todos }: Props) => {
-  // const useParams
-  // const [editModalOpen, setEditModalOpen] = useState(false);
+export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
+  const params: { id: string } = useParams();
+  const groupId = Number(params.id);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
+  const { data: group } = useGroupDetail(groupId);
+  const { data: groupGoals } = useGroupGoals(groupId);
+  const goalsForTodoModal =
+    groupGoals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
 
-  // const handleClickEdit = () => {
-  //   setEditModalOpen(true);
-  // };
+  const handleClickEdit = () => {
+    setEditModalOpen(true);
+  };
 
-  // const handleClickRemove = () => {
-  //   setRemoveModalOpen(true);
-  // };
+  const handleClickRemove = () => {
+    setRemoveModalOpen(true);
+  };
 
-  // const handleClickNote = () => {};
+  const handleClickNote = () => {};
 
   const handleCheck = (todoId: number) => {
     checkTodo(todoId);
@@ -58,18 +63,20 @@ export const GroupTodoList = ({ todos }: Props) => {
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
           </span>
-          {/* <TodoButtons
+          <TodoButtons
             onClickEdit={handleClickEdit}
             onClickRemove={handleClickRemove}
             onClickNote={handleClickNote}
-          /> */}
-          {/* {editModalOpen && (
+          />
+          {editModalOpen && (
             <TodoModal
-              setTodoToggle={setEditModalOpen}
+              todoCreator={group?.title ?? '그룹'}
+              setTodoModalToggle={setEditModalOpen}
               initialTodo={{ id, title, isDone }}
               initialGoal={goal}
+              goals={goalsForTodoModal}
             />
-          )} */}
+          )}
           {removeModalOpen && (
             <ConfirmationModal
               setModalToggle={setRemoveModalOpen}

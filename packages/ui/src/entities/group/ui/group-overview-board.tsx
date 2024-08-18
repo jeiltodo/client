@@ -46,7 +46,7 @@ export const GroupOverviewBoard = ({
   };
 
   return (
-    <BoardLayout title='그룹 정보' className='min-w-[500px] max-h-[298px]'>
+    <BoardLayout title='그룹 정보' className='min-w-[400px] max-h-[298px]'>
       <div
         className={`pt-4 flex gap-9 ${isUserALeader && 'border-b border-slate-200 pb-4'}`}
       >
@@ -81,8 +81,9 @@ export const GroupOverviewBoard = ({
       {isUserALeader && (
         <div className='w-full mt-4 flex justify-end'>
           <button
+            disabled={isRequested !== true && isEditMode !== true}
             onClick={handleSave}
-            className='inline-block w-[84px] h-9 border bg-blue-500 text-white rounded-xl'
+            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${isRequested === true || isEditMode === true ? ' bg-blue-500' : 'bg-slate-200'}`}
           >
             저장
           </button>

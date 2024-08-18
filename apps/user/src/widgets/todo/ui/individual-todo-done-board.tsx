@@ -1,15 +1,15 @@
-import type { SingleGoalTodoResponse } from '../../../entities/todo';
-import { TodoList } from '../../../features/todo';
+import type { SingleGoalTodo } from '../../../entities/todo';
 import { Goal } from '../../../entities/goal';
+import { IndividualTodoList } from '../../../features/todo';
 
-export const TodoDoneBoard = ({
+export const IndividualTodoDoneBoard = ({
   todos,
   goal,
 }: {
-  todos: SingleGoalTodoResponse;
+  todos: SingleGoalTodo[];
   goal: Goal;
 }) => {
-  const todosForList = todos.data.map((todo) => {
+  const todosForList = todos.map((todo) => {
     return {
       id: todo.id,
       title: todo.title,
@@ -30,7 +30,7 @@ export const TodoDoneBoard = ({
             <div className='flex items-start justify-between'>
               <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
             </div>
-            <TodoList todos={notDone} variant='user' />
+            <IndividualTodoList todos={notDone} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -47,7 +47,7 @@ export const TodoDoneBoard = ({
         {done.length !== 0 ? (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <TodoList todos={done} variant='user' />
+            <IndividualTodoList todos={done} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>

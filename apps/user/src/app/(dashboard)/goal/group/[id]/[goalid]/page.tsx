@@ -1,5 +1,9 @@
-import { GroupDetailPage } from '../../../../../../page/goal';
+import { GroupGoalDetailPage } from '../../../../../../page/goal';
 
-export default function Page({ params }: { params: { goalid: number } }) {
-  return <GroupDetailPage params={params} />;
+export default function Page({
+  params,
+}: {
+  params: { id: string; goalid: string };
+}) {
+  return <GroupGoalDetailPage params={params} />;
 }

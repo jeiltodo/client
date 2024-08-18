@@ -1,3 +1,4 @@
+'use client'
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { BoardMode } from '@jeiltodo/ui/shared';

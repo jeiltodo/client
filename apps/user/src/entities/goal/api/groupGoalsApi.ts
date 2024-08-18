@@ -3,7 +3,8 @@ import {
   GroupGoalWithTodos,
   SingleGoalResponse,
 } from '../model/type';
-import { client, ResponsePageListWith } from '../../../shared';
+import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
+import { GoalProps, GroupProps } from '../../../features/group';
 
 export const groupGoalsApi = {
   getSingleGroupGoal: async (goalId: number) => {
@@ -19,11 +20,11 @@ export const groupGoalsApi = {
     }
   },
   // GET 요청: 그룹의 목표 목록 조회
-  getGroupGoals: async (
-    groupId: null | number
-  ): Promise<GroupGoalsResponse> => {
+  getGroupGoals: async (groupId: null | number) => {
     try {
-      const response = await client.get(`/group/goals/${groupId}`);
+      const response = await client.get<
+        ResponseWith<{ groupGoals: GoalProps[] }>
+      >(`/group/goals/${groupId}`);
       return response.data;
     } catch (error) {
       console.error('Fail fetch group goals:', error);
@@ -53,6 +54,16 @@ export const groupGoalsApi = {
       const response = await client.patch(`/group/goals/${groupId}/${goalId}`, {
         title,
       });
+      return response.data;
+    } catch (error) {
+      console.error('goal API - updateGroupGoal error:', error);
+      throw error;
+    }
+  },
+
+  deleteGroupGoal: async (groupId: number, goalId: number) => {
+    try {
+      const response = await client.delete(`/group/goals/${groupId}/${goalId}`);
       return response.data;
     } catch (error) {
       console.error('goal API - updateGroupGoal error:', error);

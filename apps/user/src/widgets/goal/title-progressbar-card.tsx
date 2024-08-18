@@ -1,3 +1,4 @@
+'use client'
 import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
 
 import { useState } from 'react';
@@ -37,9 +38,11 @@ export const TitleProgressBarCard = ({
             <Flyout
               onEdit={() => {
                 onEditGoal();
+                setIsFlyoutOpen(false);
               }}
               onDelete={() => {
                 onDeleteGoal();
+                setIsFlyoutOpen(false);
               }}
             />
           )}

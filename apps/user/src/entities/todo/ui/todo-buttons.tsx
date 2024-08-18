@@ -13,7 +13,6 @@ export const TodoButtons = ({
   onClickNote,
 }: Props) => {
   const [isFlyoutOpen, setFlyoutOpen] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const handleKebab = () => {
     setFlyoutOpen((prev) => !prev);

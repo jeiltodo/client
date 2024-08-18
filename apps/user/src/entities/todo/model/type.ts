@@ -57,7 +57,7 @@ export interface ResponsePageListRecentTodo<T> {
 ================================================
 */
 
-export type SingleGoalTodoResponse = {
+export type SingleGoalTodosResponse = {
   msg: string;
   code: number;
   data: SingleGoalTodo[];
@@ -71,3 +71,39 @@ export interface SingleGoalTodo {
   updatedAt: string;
   noteId: number | null;
 }
+
+export type SingleGroupGoalTodo = SingleGoalTodo & {
+  memberInCharge: MemgberInCharge;
+};
+
+export type SingleGoal = {
+  id: number;
+  title: string;
+  memberId: number;
+  createdAt: string;
+  updatedAt: string;
+  progress: number;
+};
+
+export type FormattedGoalWithTodos = {
+  goal: {
+    id: number;
+    title: string;
+  };
+  todos: {
+    memberInCharge: {
+      nickname: string;
+      color: string;
+    } | null;
+    id: number;
+    isDone: boolean;
+    title: string;
+    noteId?: number;
+  }[];
+};
+
+export type MemgberInCharge = {
+  nickname: string;
+  color: string;
+  id: number;
+} | null;

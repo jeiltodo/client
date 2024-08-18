@@ -1,2 +1,2 @@
-export { IndivDetailPage } from './indiv/detail-page';
-export { GroupDetailPage } from './group/detail-page';
+export { IndividualGoalDetailPage } from './individual/individual-goal-detail-page';
+export { GroupGoalDetailPage } from './group/group-goal-detail-page';
