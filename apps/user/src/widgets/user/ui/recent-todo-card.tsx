@@ -16,7 +16,7 @@ export const RecentTodoCard = () => {
 
   return (
     <section className='h-[152px]'>
-      <TodoList todos={allTodos} variant='user' />
+      <TodoList todos={allTodos} />
     </section>
   );
 };
