@@ -7,4 +7,4 @@ export const userOptions = () =>
     queryKey: userQueryKeys.all,
     queryFn: userApi.getUserInfo,
     select: (data) => data.data,
-  });
+  }); 
