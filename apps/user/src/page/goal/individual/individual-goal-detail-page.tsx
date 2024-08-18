@@ -1,7 +1,6 @@
 'use client';
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
-import { TodoDoneBoard } from '../../../widgets/todo';
 import { useIndividualSingleGoal } from '../../../entities/user/hooks/useSingleIndivGoals';
 import { userOptions } from '../../../entities/user';
 import { useQuery } from '@tanstack/react-query';
@@ -18,8 +17,13 @@ import { useRouter } from 'next/navigation';
 import { TodoModal } from '../../../entities/todo';
 import { Plus } from '@jeiltodo/icons';
 import { useIndividualGoals } from '../../../entities/goal';
+import { IndividualTodoDoneBoard } from '../../../widgets/todo';
 
-export const IndivDetailPage = ({ params }: { params: { id: number } }) => {
+export const IndividualGoalDetailPage = ({
+  params,
+}: {
+  params: { id: number };
+}) => {
   const router = useRouter();
   const goalId = Number(params.id);
   const { data: singleGoal, isLoading } = useIndividualSingleGoal(goalId);
@@ -85,7 +89,7 @@ export const IndivDetailPage = ({ params }: { params: { id: number } }) => {
               <Plus width={16} height={16} />
               할일 추가
             </Button>
-            <TodoDoneBoard todos={singleGoalTodo} goal={singleGoal} />
+            <IndividualTodoDoneBoard todos={singleGoalTodo} goal={singleGoal} />
 
             {isGoalToggleOpen && (
               <GoalModal

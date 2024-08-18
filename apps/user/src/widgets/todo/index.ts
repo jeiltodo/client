@@ -1,1 +1,1 @@
-export * from './ui/todo-done-board';
+export * from './ui/individual-todo-done-board';

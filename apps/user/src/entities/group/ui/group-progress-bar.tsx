@@ -28,7 +28,7 @@ export const GroupProgressBar = ({ progress, className }: Props) => {
               } ${index === members.length - 1 ? 'rounded-r-md' : ''}`}
               style={{
                 width: `${member.contributionPercent}%`,
-                backgroundColor: member.color,
+                backgroundColor: `${member.color}`,
               }}
               onMouseEnter={() => setHoveredMember(member.nickname)}
               onMouseLeave={() => setHoveredMember(null)}

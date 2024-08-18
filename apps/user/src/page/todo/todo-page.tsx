@@ -5,7 +5,7 @@ import { todoQuery, useRecentTodo } from '../../entities/todo';
 import { useInView } from 'react-intersection-observer';
 import { Goal, individualGoalsOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
-import { TodoList } from '../../features/todo';
+import { IndividualTodoList } from '../../features/todo';
 import { Button } from '@jeiltodo/ui/shared';
 import { PlusBlue } from '@jeiltodo/icons';
 
@@ -71,7 +71,7 @@ export const TodoPage = () => {
       <div className='desktop:max-w-[1200px] w-full bg-white rounded-xl p-base flex flex-col'>
         <RecentFilter goals={filteredData} onClickFilter={handleClick} />
         <div className='mt-6 flex flex-wrap overflow-y-scroll scrollbar-hide h-[400px]'>
-          <TodoList todos={allTodos} />
+          <IndividualTodoList todos={allTodos} />
           <div ref={ref} className='h-6' />
         </div>
       </div>

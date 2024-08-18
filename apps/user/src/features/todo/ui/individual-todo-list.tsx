@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Todo, TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import {
-  GoalIdAndTitle,
   individualGoalsOptions,
   userOptions,
   type Goal,
@@ -19,7 +18,7 @@ interface Props {
   todos: (Todo & { goal?: Goal })[];
 }
 
-export const TodoList = ({ todos }: Props) => {
+export const IndividualTodoList = ({ todos }: Props) => {
   const [editModalId, setEditModalId] = useState<number | null>(null);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
   const [todoToRemove, setTodoToRemove] = useState<number | null>(null);
