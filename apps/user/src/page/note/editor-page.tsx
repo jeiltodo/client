@@ -1,34 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-	BoardTitle,
-	Button,
-	ButtonGroup,
-	LayoutTitle,
-	TodoTitle,
-	useToast,
-} from '@jeiltodo/ui/shared';
 import { useParams, useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
 import { DeleteCircle } from '@jeiltodo/icons';
+import { useToast } from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
 import { BaseModal, MINUTES_WITH_MS } from '../../shared';
 import { createNote, patchNote } from '../../entities/note';
 import { useNoteDetail } from '../../entities/note/hooks/useNoteDetail';
+import { Button, ButtonGroup, LayoutTitle } from '@jeiltodo/ui/shared';
 
 export const EditorPage = () => {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
-	const [linkUrl] = useState<string>('');
+	const [linkUrl, setLinkUrl] = useState<string>('');
 	const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
 	const [isButtonView, setIsButtonView] = useState<boolean>(false);
 	const [isAlert, setIsAlert] = useState<boolean>(false);
 
-	const searchParams = useSearchParams();
 	const params = useParams();
 	const todoId = params.todoId;
-	const noteId = searchParams.get('noteId');
+	const noteId = params.noteId;
 
 	//TODO:: 브라우저가 뒤로 가기가 되었을 때 작성중인 어쩌구 팝업 뜨게 하기
 	const showToast = useToast();
@@ -41,13 +33,13 @@ export const EditorPage = () => {
 
 	const handleLocalSave = () => {
 		const localData = {
-			noteid: noteId,
+			noteid: Number(noteId),
 			title: title.trim(),
 			content: content.trim(),
 		};
 		if (noteId && title && content) {
 			try {
-				window.localStorage.setItem(`note${noteId}`, JSON.stringify(localData));
+				window.localStorage.setItem(`todo${todoId}`, JSON.stringify(localData));
 				showToast({
 					message: '임시 저장이 완료되었습니다.',
 					type: 'alert',
@@ -62,7 +54,7 @@ export const EditorPage = () => {
 	};
 
 	const getLocalSave = () => {
-		const savedData = localStorage.getItem(`note${noteId}`);
+		const savedData = localStorage.getItem(`todo${noteId}`);
 		const parsedData = savedData
 			? JSON.parse(savedData)
 			: { title: '', content: '' };
@@ -80,7 +72,7 @@ export const EditorPage = () => {
 	const onCreateNote = async () => {
 		try {
 			const response = await createNote({
-				todoId: todoId,
+				todoId: Number(todoId),
 				title,
 				content,
 				linkUrl,
@@ -94,7 +86,7 @@ export const EditorPage = () => {
 	const onPatchNote = async () => {
 		try {
 			const response = await patchNote({
-				noteId: noteId,
+				noteId: Number(noteId),
 				title,
 				content,
 				linkUrl,
@@ -121,7 +113,7 @@ export const EditorPage = () => {
 	}, []);
 
 	useEffect(() => {
-		if (localStorage.getItem(`note${noteId}`)) {
+		if (localStorage.getItem(`todo${todoId}`)) {
 			setIsLocalSaved(true);
 			setIsButtonView(true);
 		} else {
@@ -161,12 +153,13 @@ export const EditorPage = () => {
 			{isLocalSaved && isButtonView && (
 				<div className='flex flex-row items-center justify-between bg-[#eff6ff] text-[#3b82f6] rounded-[28px] text-[14px] font-pretendard-medium px-3 pl-6 py-0 shadow-none min-h-[56px] h-[56px] mb-6'>
 					<div className='flex flex-row items-center gap-4'>
-						<span
+						<button
+							type='button'
 							onClick={() => setIsButtonView(false)}
 							className='cursor-pointer'
 						>
 							<DeleteCircle width={24} height={24} />
-						</span>
+						</button>
 						<p>임시 저장된 노트가 있어요. 저장된 노트를 불러오시겠어요?</p>
 					</div>
 					<Button
@@ -178,17 +171,15 @@ export const EditorPage = () => {
 					</Button>
 				</div>
 			)}
-			{/* {!isLoading &&
-				noteDetail(
-      
-			{
-				true && (
+			{/* {noteId !== 'new' ? (
+				noteId !== 'new' &&
+				!isLoading && (
 					<>
 						<BoardTitle
 							className='mb-[12px]'
 							icon='flag'
 							iconSize={24}
-							title={noteDetail.data.todo.title ||'목표 '}
+							title={noteDetail.data.todo.title || '목표'}
 						/>
 						<TodoTitle
 							className='mb-[24px]'
@@ -196,10 +187,9 @@ export const EditorPage = () => {
 						/>
 					</>
 				)
-				// )
-				
-			}
-				*/}
+			) : (
+				<div>새로 작성중인 노트입니다.</div>
+			)}  */}
 			<EditorForm
 				content={content}
 				setContent={setContent}

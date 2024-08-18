@@ -1,21 +1,22 @@
 'use client';
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
+import { Plus } from '@jeiltodo/icons';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { useIndividualSingleGoal } from '../../../entities/user/hooks/useSingleIndivGoals';
 import { userOptions } from '../../../entities/user';
-import { useQuery } from '@tanstack/react-query';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { GoalModal } from '../../../features/goal';
 import { ConfirmationModal } from '../../../shared';
-import { useState } from 'react';
 import {
 	useDeleteSingleGoal,
 	useEditSingleGoal,
 } from '../../../entities/user/hooks/useSingleGoalMuate';
-import { useRouter } from 'next/navigation';
-import { SingleGoalTodo, TodoModal } from '../../../entities/todo';
-import { Plus } from '@jeiltodo/icons';
+import type { SingleGoalTodo } from '../../../entities/todo';
+import { TodoModal } from '../../../entities/todo';
 import { useIndividualGoals } from '../../../entities/goal';
 import { IndividualTodoDoneBoard } from '../../../widgets/todo';
 
@@ -42,12 +43,12 @@ export const IndividualGoalDetailPage = ({
 	const { mutate: deleteGoal } = useDeleteSingleGoal();
 
 	const handleEdit = ({ title }: { title: string }) => {
-		editGoal({ goalId: singleGoal!.id, title });
+		editGoal({ goalId, title });
 	};
 
 	const handleDelete = () => {
 		deleteGoal(
-			{ goalId: singleGoal!.id },
+			{ goalId },
 			{
 				onSettled: () => {
 					router.back();
@@ -80,7 +81,7 @@ export const IndividualGoalDetailPage = ({
 							onEditGoal={openEditModal}
 							onDeleteGoal={openDeleteModal}
 						/>
-						<NotesPushButton goalId={goalId} />
+						<NotesPushButton goalData={singleGoal} />
 						<Button
 							variant='text-blue'
 							className='flex gap-1 items-center text-sm h-[20px]'

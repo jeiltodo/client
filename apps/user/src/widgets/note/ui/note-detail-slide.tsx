@@ -1,13 +1,13 @@
 'use client';
 import ReactDOM from 'react-dom';
 import { DeleteMenu } from '@jeiltodo/icons';
+import { formatDateString } from '@jeiltodo/lib';
 import {
 	BoardTitle,
 	Button,
 	ButtonGroup,
 	TodoTitle,
 } from '@jeiltodo/ui/shared';
-import { formatDateString } from '@jeiltodo/lib';
 import { useNoteDetail } from '../../../entities/note/hooks/useNoteDetail';
 import { deleteNote } from '../../../entities/note';
 
@@ -32,16 +32,20 @@ export const NoteDetailSlide = ({
 	};
 
 	const handleRoute = () => {
-		const url = `/note/${todoId}?noteId=${noteDetail?.data.id || 'new'}`;
+		const url = noteDetail?.data.id
+			? `/note/${todoId}/${noteDetail.data.id}`
+			: `/note/${todoId}/new`;
 		window.location.href = url;
 	};
 
 	const handleDelete = () => {
 		onDeleteNote(noteId);
+		//삭제하시겠습니까 빠졌어요..
+		setToggle(false);
 	};
 
 	const onDeleteNote = async (id: number) => {
-		const response = await deleteNote({ noteId: id });
+		const response = await deleteNote(id);
 		console.log('response: ', response);
 	};
 

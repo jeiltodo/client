@@ -8,7 +8,7 @@ export const CardListBoard = () => {
 	const goalId = searchParams.get('goalId');
 	const goalTitle = searchParams.get('goalTitle');
 	const { data: cardListData, isLoading } = useGoalNotes({
-		goalId: goalId,
+		goalId: Number(goalId),
 		page: 1,
 		limit: 10,
 	});

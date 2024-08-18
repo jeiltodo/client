@@ -90,19 +90,19 @@ export const deleteNote = async (noteId: number) => {
 */
 
 export interface GetGoalNotesParam {
-	goalId: string | string[];
+	goalId: number;
 	page: number;
 	limit: number;
 }
 
 export interface NotePostParam {
-	todoId: string;
+	todoId: number;
 	title: string;
 	content: string;
 	linkUrl?: string;
 }
 export interface NotePatchParam {
-	noteId: string;
+	noteId: number;
 	title: string;
 	content: string;
 	linkUrl?: string;

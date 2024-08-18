@@ -1,3 +1,4 @@
+'use client';
 import { NoteList, Kebab } from '@jeiltodo/icons';
 import type { Note } from '@jeiltodo/ui/shared';
 import { CardFlyout, TodoTitle } from '@jeiltodo/ui/shared';

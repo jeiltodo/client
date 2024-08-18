@@ -52,7 +52,8 @@ export const IndividualTodoList = ({ todos }: Props) => {
 		goalId: number,
 		noteId: number | undefined
 	) => {
-		const url = `/note/${todoId}?noteId=${noteId || 'new'}`;
+		console.log('todoId: ', todoId);
+		const url = noteId ? `/note/${todoId}/${noteId}` : `/note/${todoId}/new`;
 		window.location.href = url;
 	};
 

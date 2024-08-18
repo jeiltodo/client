@@ -1,3 +1,5 @@
+'use client';
+
 import { LayoutTitle } from '@jeiltodo/ui/shared';
 import { CardListBoard } from '../../widgets/note/ui/card-list-board';
 
