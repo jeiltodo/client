@@ -1,22 +1,24 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import { RecentFilter } from '../../entities/user';
-import { todoQuery, useRecentTodo } from '../../entities/todo';
+import { TodoModal, todoQuery, useRecentTodo } from '../../entities/todo';
 import { useInView } from 'react-intersection-observer';
-import { Goal, individualGoalsOptions } from '../../entities/goal';
+import { Goal, individualGoalsOptions, userOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
-import { TodoList } from '../../features/todo';
+import { IndividualTodoList } from '../../features/todo';
 import { Button } from '@jeiltodo/ui/shared';
 import { PlusBlue } from '@jeiltodo/icons';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
+  const { data: userInfo } = useQuery(userOptions());
 
   const filteredData: Pick<Goal, 'id' | 'title'>[] =
     individualGoalsData?.map(({ id, title }) => ({
       id,
       title,
     })) || [];
+
   const [query, setQuery] = useState<todoQuery>({
     goalIds: individualGoalsData?.map((goal) => goal.id) || [],
     status: null,
@@ -52,8 +54,7 @@ export const TodoPage = () => {
   return (
     <div>
       {modalOpen && (
-        // <TodoModal setTodoToggle={setModalOpen} goals={filteredData} />
-        <>모달</>
+        <TodoModal todoCreator={userInfo?.nickname || ''} setTodoModalToggle={setModalOpen} goals={filteredData} />
       )}
       <div className='flex items-center justify-between mb-6 '>
         <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
@@ -70,8 +71,8 @@ export const TodoPage = () => {
       </div>
       <div className='desktop:max-w-[1200px] w-full bg-white rounded-xl p-base flex flex-col'>
         <RecentFilter goals={filteredData} onClickFilter={handleClick} />
-        <div className='mt-6 flex flex-wrap overflow-y-scroll scrollbar-hide h-[400px]'>
-          <TodoList todos={allTodos} />
+        <div className='mt-6 flex flex-col items-center overflow-y-scroll scrollbar-hide h-[400px]'>
+          <IndividualTodoList todos={allTodos} />
           <div ref={ref} className='h-6' />
         </div>
       </div>

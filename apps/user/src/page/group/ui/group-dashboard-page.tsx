@@ -27,7 +27,11 @@ export const GroupDashboardPage = () => {
   const groupId = Number(params.id);
   const [openModal, setOpenModal] = useState(false);
 
-  const { data, hasNextPage, fetchNextPage } = useGroupGoalsWithTodos({
+  const {
+    data: goalWithTodos,
+    hasNextPage,
+    fetchNextPage,
+  } = useGroupGoalsWithTodos({
     groupId,
     limit: 3,
   });
@@ -97,7 +101,7 @@ export const GroupDashboardPage = () => {
             <div className='text-base font-pretendard-semibold'>새 목표</div>
           </Button>
         </div>
-        {data?.pages.map((item, i) => (
+        {goalWithTodos?.pages.map((item, i) => (
           <React.Fragment key={i}>
             {item.data.goals.map((goal) => (
               <GroupGoalCard key={goal.id} {...goal} />

@@ -10,7 +10,7 @@ interface Toast {
   autoClose?: number;
 }
 export const useToast = () => {
-  return ({ message, type, onClose, button, autoClose = 4000 }: Toast) => {
+  return ({ message, type, onClose, button, autoClose = 3000 }: Toast) => {
     const alertConfig: ToastOptions = {
       //커스터마이징 옵션
       position: 'top-center',

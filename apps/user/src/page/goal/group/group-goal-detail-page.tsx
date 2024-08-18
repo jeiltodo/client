@@ -2,7 +2,7 @@
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
 // import { TitleProgressBarCard } from '../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
-import { TodoDoneBoard } from '../../../widgets/todo';
+
 import {
   useGroupGoals,
   useGroupSingleGoal,
@@ -19,10 +19,13 @@ import { useState } from 'react';
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';
 import { GoalModal } from '../../../features/goal';
 import { ConfirmationModal } from '../../../shared';
-import { TodoModal } from '../../../entities/todo';
+import { SingleGroupGoalTodo, TodoModal } from '../../../entities/todo';
+import { GroupTodoDoneBoard } from '../../../features/todo';
+import { useQuery } from '@tanstack/react-query';
+import { userOptions } from '../../../entities/goal';
 // import { useGroupDetail } from '../../entities/group';
 
-export const GroupDetailPage = ({
+export const GroupGoalDetailPage = ({
   params,
 }: {
   params: { id: string; goalid: string };
@@ -35,10 +38,13 @@ export const GroupDetailPage = ({
   const [isGoalToggleOpen, setIsGoalToggleOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  const { data: singleGroupGoal, isLoading } = useGroupSingleGoal(goalId);
-  const { data: singleGoalTodo } = useSingleGoalTodo(goalId);
-  const { data: groupGoals } = useGroupGoals(groupId);
+  const { data: user } = useQuery(userOptions());
   const { data: group } = useGroupDetail(groupId);
+  const { data: groupGoals } = useGroupGoals(groupId);
+
+  const { data: singleGroupGoal, isLoading } = useGroupSingleGoal(goalId);
+  const { data: singleGroupGoalTodo } =
+    useSingleGoalTodo<SingleGroupGoalTodo[]>(goalId);
   const { mutate: editGroupGoal } = useUpdateGroupGoal(groupId);
   const { mutate: deleteGroupGoal } = useDeleteGroupGoal(groupId);
 
@@ -73,7 +79,7 @@ export const GroupDetailPage = ({
   };
   return (
     <>
-      {!isLoading && singleGroupGoal && singleGoalTodo ? (
+      {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
         <>
           <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
           <div className='flex flex-col gap-y-6'>
@@ -91,7 +97,13 @@ export const GroupDetailPage = ({
               <Plus width={16} height={16} />
               할일 추가
             </Button>
-            <TodoDoneBoard todos={singleGoalTodo} goal={singleGroupGoal} />
+            {user?.id && (
+              <GroupTodoDoneBoard
+                todos={singleGroupGoalTodo}
+                goal={singleGroupGoal}
+                userName={user.nickname}
+              />
+            )}
             {isGoalToggleOpen && (
               <GoalModal
                 goalCreator={group?.title ?? '그룹'}

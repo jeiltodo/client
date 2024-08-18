@@ -19,7 +19,7 @@ interface Props {
 	todos: (Todo & { goal: Goal })[];
 }
 
-export const TodoList = ({ todos }: Props) => {
+export const IndividualTodoList = ({ todos }: Props) => {
 	const [editModalId, setEditModalId] = useState<number | null>(null);
 	const [isNoteSlideModalOpen, setIsNoteSlideModalOpen] =
 		useState<boolean>(false);

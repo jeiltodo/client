@@ -72,6 +72,10 @@ export interface SingleGoalTodo {
   noteId: number | null;
 }
 
+export type SingleGroupGoalTodo = SingleGoalTodo & {
+  memberInCharge: MemgberInCharge;
+};
+
 export type SingleGoal = {
   id: number;
   title: string;
@@ -81,18 +85,25 @@ export type SingleGoal = {
   progress: number;
 };
 
-
-export type FormattedGoalWithTodos = {goal: {
-  id: number;
-  title: string;
-};
-todos: {
-  memberInCharge: {
+export type FormattedGoalWithTodos = {
+  goal: {
+    id: number;
+    title: string;
+  };
+  todos: {
+    memberInCharge: {
       nickname: string;
       color: string;
-  } | null;
+    } | null;
+    id: number;
+    isDone: boolean;
+    title: string;
+    noteId?: number;
+  }[];
+};
+
+export type MemgberInCharge = {
+  nickname: string;
+  color: string;
   id: number;
-  isDone: boolean;
-  title: string;
-  noteId?: number;
-}[];}
+} | null;
