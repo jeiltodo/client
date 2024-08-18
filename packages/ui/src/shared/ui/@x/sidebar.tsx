@@ -36,7 +36,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   };
 
   return (
-    <div className='min-w-[60px] desktop:min-w-[280px] relative z-50'>
+    <div className='min-w-[60px] desktop:min-w-[280px] relative z-30'>
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
@@ -124,7 +124,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {isTabletOpen && (
         <div
           onClick={toggleTabletSidebar}
-          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-black z-20 transition-opacity transition-width duration-300 ease-in-out`}
+          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-opacity transition-width duration-300 ease-in-out`}
           style={{
             width: `calc(100% - ${isTabletOpen ? '280px' : '60px'})`,
             height: '100%',
