@@ -10,8 +10,6 @@ import {
 import { useRouter } from 'next/navigation';
 import { Goal } from '../../../entities/goal';
 import Link from 'next/link';
-import { Button } from '@jeiltodo/ui/shared';
-import { Plus } from '@jeiltodo/icons';
 // import { useQuery } from '@tanstack/react-query';
 
 interface SidebarIndividualNavProps {
@@ -54,14 +52,6 @@ export const SidebarIndividualNav = ({
             {title}
           </div>
         </Link>
-        <Button
-          variant='text-blue'
-          className='min-w-fit flex gap-1 items-center text-sm'
-          // onClick={() => setTodoToggle(true)}
-        >
-          <Plus width={16} height={16} color='#3B82F6' />
-          <span>할일 추가</span>
-        </Button>
       </div>
       <div className='px-5 max-h-36 overflow-y-scroll scrollbar-thin w-full'>
         {individualGoals?.map((goal) => (
