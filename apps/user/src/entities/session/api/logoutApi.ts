@@ -7,7 +7,9 @@ export const logoutApi = async () => {
     deleteCookie(ACCESS_TOKEN_COOKIE_NAME);
 
     delete client.defaults.headers.common['Authorization'];
-    window.location.href = '/login';
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
 
     return true;
   } else {

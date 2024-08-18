@@ -1,3 +1,4 @@
+'use client'
 import { Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import {

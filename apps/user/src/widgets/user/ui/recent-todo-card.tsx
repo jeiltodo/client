@@ -1,3 +1,4 @@
+'use client'
 import { useQuery } from '@tanstack/react-query';
 import { individualGoalsOptions } from '../../../entities/goal';
 import { useRecentTodo } from '../../../entities/todo/hooks/useRecentTodo';

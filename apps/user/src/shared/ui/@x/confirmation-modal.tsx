@@ -1,3 +1,4 @@
+'use client'
 import { Dispatch, PropsWithChildren, SetStateAction } from 'react';
 
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
