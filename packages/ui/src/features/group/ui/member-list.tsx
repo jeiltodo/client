@@ -1,3 +1,4 @@
+'use client'
 import { Member, Profile } from '@jeiltodo/ui/entities';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 

@@ -1,7 +1,7 @@
 import { Sidebar } from '@jeiltodo/ui/shared';
 import { SidebarNav } from '../../../shared/ui/sidebar/sidebar-nav';
 import { Home, Group, Post } from '@jeiltodo/icons';
-import { SidebarUserInfo } from '@jeiltodo/ui/entities';
+import { SidebarUserInfo } from '@jeiltodo/ui/features';
 
 const userData = {
   id: 6,

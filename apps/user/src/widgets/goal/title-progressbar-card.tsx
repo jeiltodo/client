@@ -1,3 +1,4 @@
+'use client'
 import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
 
 import { useState } from 'react';
