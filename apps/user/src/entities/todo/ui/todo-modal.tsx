@@ -30,7 +30,7 @@ export const TodoModal = ({
 
   const { mutate: createTodo } = useCreateTodo();
   const { mutate: updateTodo } = useUpdateTodo();
-  console.log('initialTodo: ', initialTodo);
+
   const handleSubmit = () => {
     initialTodo
       ? updateTodo({ id: initialTodo.id, title })

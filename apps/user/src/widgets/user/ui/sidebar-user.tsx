@@ -8,7 +8,7 @@ import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
 import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
-import { SidebarUserInfo } from '@jeiltodo/ui/entities';
+import { SidebarUserInfo } from '@jeiltodo/ui/features';
 import {
   groupOptions,
   useGroupMutation,

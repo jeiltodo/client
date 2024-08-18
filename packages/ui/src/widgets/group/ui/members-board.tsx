@@ -5,7 +5,7 @@ import {
   Pagination,
   useBoardContext,
 } from '@jeiltodo/ui/shared';
-import { MemberList } from '../../../features/group';
+import { MemberList } from '../../../features';
 import { GroupWithMembers, Member } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
 import { useState } from 'react';
