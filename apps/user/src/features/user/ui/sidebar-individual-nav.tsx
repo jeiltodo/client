@@ -4,13 +4,11 @@ import {
   SVGProps,
   ForwardRefExoticComponent,
   RefAttributes,
-  // useState,
 } from 'react';
-// import { TodoModal } from '../../../entities/todo/ui/todo-modal';
+
 import { useRouter } from 'next/navigation';
 import { Goal } from '../../../entities/goal';
 import Link from 'next/link';
-// import { useQuery } from '@tanstack/react-query';
 
 interface SidebarIndividualNavProps {
   icon: ForwardRefExoticComponent<
@@ -25,23 +23,10 @@ export const SidebarIndividualNav = ({
   title,
   individualGoals,
 }: SidebarIndividualNavProps) => {
-  // const [todoToggle, setTodoToggle] = useState<boolean>(false);
   const router = useRouter();
-  // const { data: goals } = useIndividualGoals();
-  // const { data: userInfo } = useQuery(userOptions());
 
-  // const fomatted = goals
-  //   ? goals.map((goal) => ({ id: goal.id, title: goal.title }))
-  //   : [];
   return (
     <div className='border-t-[1px] border-slate-200 py-4 flex flex-col items-center'>
-      {/* {todoToggle && (
-        <TodoModal
-          todoCreator={userInfo?.nickname ?? '개인'}
-          setTodoModalToggle={setTodoToggle}
-          goals={fomatted}
-        />
-      )} */}
       <div className='px-5 mb-4 flex items-center justify-start gap-2 w-full h-9'>
         <Link
           href='/'
@@ -53,7 +38,8 @@ export const SidebarIndividualNav = ({
           </div>
         </Link>
       </div>
-      <div className='px-5 max-h-36 overflow-y-scroll scrollbar-thin w-full'>
+      {individualGoals?.length !== 0 ? (
+        <div className='px-5 max-h-36 overflow-y-scroll scrollbar-thin w-full'>
         {individualGoals?.map((goal) => (
           <div
             key={goal.id}
@@ -64,6 +50,13 @@ export const SidebarIndividualNav = ({
           </div>
         ))}
       </div>
+      ) : (
+        <div className='px-5 flex items-center text-sm font-pretendard-medium text-gray-500 tablet:w-[240px] w-full h-9'>
+          Tip. 여러 개의 할 일을 한 목표에서 관리해 보세요
+        </div> 
+      )
+
+      }
     </div>
   );
 };
