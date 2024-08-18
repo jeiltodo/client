@@ -1,127 +1,120 @@
 'use client';
 import ReactDOM from 'react-dom';
 import { DeleteMenu } from '@jeiltodo/icons';
-import { Button, ButtonGroup, TodoTitle, type Note } from '@jeiltodo/ui/shared';
-import { useEffect } from 'react';
+import {
+  BoardTitle,
+  Button,
+  ButtonGroup,
+  TodoTitle,
+} from '@jeiltodo/ui/shared';
 import { useNoteDetail } from '../../../entities/note/hooks/useNoteDetail';
-import { useRouter } from 'next/navigation';
 import { deleteNote } from '../../../entities/note';
 
 interface NoteDetailSlideProps {
-	noteId: number;
-	setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  noteId: number;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const NoteDetailSlide = ({
-	noteId,
-	setToggle,
+  noteId,
+  setToggle,
 }: NoteDetailSlideProps) => {
-	const route = useRouter();
+  const { noteDetail } = useNoteDetail(noteId);
+  console.log('data: ', noteDetail);
 
-	// const { noteDetail, isLoading } = useNoteDetail(noteId);
-	// console.log('data: ', noteDetail);
+  const handleSlideClick = (
+    e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>
+  ) => {
+    e.stopPropagation();
+  };
 
-	const handleSlideClick = (
-		e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>
-	) => {
-		e.stopPropagation();
-	};
+  const handleRoute = () => {
+    const url = `/note/${noteDetail?.data.todo.id}?noteId=${noteId || 'new'}`;
+    window.location.href = url;
+  };
 
-	const handleRoute = () => {
-		route.push(`/note/${goalid}/${data.todo.id}/${data.id}`);
-	};
+  const handleDelete = () => {
+    onDeleteNote(noteId);
+  };
 
-	const handleDelete = () => {
-		onDeleteNote(noteId);
-	};
+  const onDeleteNote = async (id: number) => {
+    const response = await deleteNote({ noteId: id });
+    console.log('response: ', response);
+  };
 
-	const onDeleteNote = async (noteId: number) => {
-		const response = await deleteNote({ noteId });
-		console.log('response: ', response);
-	};
-
-	const { noteDetail, error, isLoading } = useNoteDetail(Number(data.id));
-
-	useEffect(() => {
-		if (!isLoading && noteDetail?.data && !error) {
-			const queryData = noteDetail.data;
-			setNoteData(queryData);
-		}
-	}, [noteDetail, isLoading, error]);
-
-	return ReactDOM.createPortal(
-		//modal
-		<div
-			className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'
-			onClick={() => {
-				setToggle(false);
-			}}
-			onKeyDown={(e) => {
-				if (e.key === 'Enter' || e.key === ' ') {
-					setToggle(false);
-				}
-			}}
-			role='button'
-			tabIndex={0}
-		>
-			{/* slide */}
-			<div
-				className='p-6 pb-8 h-screen bg-white desktop:w-[800px] tablet:w-[512px] mobile:w-full fixed top-[0px] right-[0px]'
-				onClick={handleSlideClick}
-				onKeyDown={(e) => {
-					if (e.key === 'Enter' || e.key === ' ') {
-						handleSlideClick(e);
-					}
-				}}
-				role='button'
-				tabIndex={0}
-			>
-				<div className=''>
-					<button
-						type='button'
-						onClick={() => setToggle(false)}
-						className='cursor-pointer mb-4'
-					>
-						<DeleteMenu className='w-6 h-6' />
-					</button>
-					<div className='flex felx-row items-center justify-between mb-3'>
-						{/* <BoardTitle
-              title={noteData?.todo.goal?.title || ''}
+  return ReactDOM.createPortal(
+    //modal
+    <div
+      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'
+      onClick={() => {
+        setToggle(false);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          setToggle(false);
+        }
+      }}
+      role='button'
+      tabIndex={0}
+    >
+      {/* slide */}
+      <div
+        className='p-6 pb-8 h-screen bg-white desktop:w-[800px] tablet:w-[512px] mobile:w-full fixed top-[0px] right-[0px]'
+        onClick={handleSlideClick}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleSlideClick(e);
+          }
+        }}
+        role='button'
+        tabIndex={0}
+      >
+        <div className=''>
+          <button
+            type='button'
+            onClick={() => setToggle(false)}
+            className='cursor-pointer mb-4'
+          >
+            <DeleteMenu className='w-6 h-6' />
+          </button>
+          <div className='flex felx-row items-center justify-between mb-3'>
+            <BoardTitle
+              title={noteDetail?.data.todo.goal.title || ''}
               icon='flag'
               iconSize={24}
-            /> */}
-						<ButtonGroup gap={2}>
-							<Button
-								className='w-[84px] h-[36px]'
-								variant='outline'
-								onClick={handleRoute}
-							>
-								수정하기
-							</Button>
-							<Button
-								className='w-[84px] h-[36px]'
-								variant='primary'
-								onClick={handleDelete}
-							>
-								삭제하기
-							</Button>
-						</ButtonGroup>
-					</div>
-					<div className='flex felx-row items-center justify-between mb-6'>
-						<TodoTitle title={noteData?.todo.title || ''} />
-						{/* <span className='text-slate-500 text-xs'>
-              {noteData?.createdAt}
+            />
+            <ButtonGroup gap={2}>
+              <Button
+                className='w-[84px] h-[36px]'
+                variant='outline'
+                onClick={handleRoute}
+              >
+                수정하기
+              </Button>
+              <Button
+                className='w-[84px] h-[36px]'
+                variant='primary'
+                onClick={handleDelete}
+              >
+                삭제하기
+              </Button>
+            </ButtonGroup>
+          </div>
+          <div className='flex felx-row items-center justify-between mb-6'>
+            <TodoTitle title={noteDetail?.data.todo.title || ''} />
+            {/* <span className='text-slate-500 text-xs'>
+              {noteDetail?.createdAt}
             </span> */}
-					</div>
-					<div className='text-lg font-pretendard-medium text-slate-800 border-y border-slate-200 py-3 mb-4'>
-						{noteData?.title}
-					</div>
-				</div>
-				<div className='text-base font-pretendard-regular'>
-					{noteData?.content}
-				</div>
-			</div>
-		</div>,
-		document.body
-	);
+          </div>
+          <div className='text-lg font-pretendard-medium text-slate-800 border-y border-slate-200 py-3 mb-4'>
+            {noteDetail?.data.title}
+          </div>
+        </div>
+        <div className='text-base font-pretendard-regular'>
+          {noteDetail?.data.content}
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
 };

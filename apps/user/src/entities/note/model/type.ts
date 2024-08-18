@@ -7,7 +7,12 @@ export interface Note {
   createdAt: Date;
   updatedAt: Date;
   linkUrl?: string;
-  todo: Todo;
+  todo: Todo & {
+    goal: {
+      id: number;
+      title: string;
+    };
+  };
 }
 
 export interface NoteResponse {
