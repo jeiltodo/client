@@ -4,7 +4,7 @@ export const goalQueryKeys = {
   individual: {
     default: () => [...goalQueryKeys.goals, 'individual'] as const,
     progress: () =>
-      [...goalQueryKeys.individual.default(), 'progress'] as const,
+      [...goalQueryKeys.individual.default(), 'progress', 'todos'] as const,
     todos: () => [...goalQueryKeys.individual.default(), 'todos'] as const,
     lists: () => [...goalQueryKeys.individual.default(), 'list'] as const,
     single: (goalId: number) =>

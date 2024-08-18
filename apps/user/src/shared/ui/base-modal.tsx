@@ -27,7 +27,7 @@ export const BaseModal = ({
       aria-labelledby='modal-title'
       aria-modal='true'
       onClick={() => setToggle(false)}
-      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'
+      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000]/30'
     >
       <div
         role='document'
