@@ -48,8 +48,8 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
           docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker pull ${{ secrets.DOCKER_USERNAME }}/user-app
-          docker pull ${{ secrets.DOCKER_USERNAME }}/admin-app
-          docker-compose down
-          docker-compose up -d
+          docker pull "${{ secrets.DOCKER_USERNAME }}"/user-app
+          docker pull "${{ secrets.DOCKER_USERNAME }}"/admin-app
+          docker compose down
+          docker compose up -d
           docker image prune -a -f
