@@ -11,7 +11,7 @@ interface SidebarUserInfoProps {
 // UserDataprops를 사용하는 컴포넌트
 export const SidebarUserInfo = ({ userInfo }: SidebarUserInfoProps) => {
   const [infoToggle, setInfoToggle] = useState<boolean>(false);
-  console.log('infoToggle: ', infoToggle);
+
   return (
     <>
       {infoToggle && (
