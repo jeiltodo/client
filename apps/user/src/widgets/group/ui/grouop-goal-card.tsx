@@ -1,13 +1,13 @@
 'use client';
 
 import { Button } from '@jeiltodo/ui/shared';
-import { GoalIdAndTitle, GroupGoalWithTodos } from '../../../entities/goal';
+import { GroupGoalWithTodos } from '../../../entities/goal';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { TodoModal } from '../../../entities/todo';
 import { useGroupDetail } from '../../../entities/group';
@@ -15,6 +15,7 @@ import { useGroupDetail } from '../../../entities/group';
 export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const params: { id: string } = useParams();
   const groupId = Number(params.id);
+  const router = useRouter();
   const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
 
   const { data: groupGoals } = useGroupGoals(groupId);
@@ -25,14 +26,17 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
       title: goal.title,
     })) ?? [];
 
-  const done = formatGroupTodos(goal, true);
   const notDone = formatGroupTodos(goal, false);
+  const done = formatGroupTodos(goal, true);
 
   const handleAddTodo = () => {
     setIsOpenAddTodoModal(true);
   };
 
-  const handleMore = () => {};
+  const handleMore = () => {
+    router.push(`/goal/group/${groupId}/${goal.id}`);
+  };
+  console.log(goal);
 
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>

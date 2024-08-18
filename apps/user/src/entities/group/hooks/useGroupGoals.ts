@@ -6,7 +6,7 @@ export const useGroupGoals = (groupId: null | number) => {
   return useQuery({
     queryKey: goalQueryKeys.group.detail(groupId ?? 'unknown'),
     queryFn: () => groupGoalsApi.getGroupGoals(groupId),
-    select: (data) => data.data,
+    select: (data) => data.data.groupGoals,
     enabled: groupId !== null,
   });
 };

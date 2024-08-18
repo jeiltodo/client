@@ -4,7 +4,7 @@ import {
   SingleGoalResponse,
 } from '../model/type';
 import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
-import { GroupProps } from '../../../features/group';
+import { GoalProps, GroupProps } from '../../../features/group';
 
 export const groupGoalsApi = {
   getSingleGroupGoal: async (goalId: number) => {
@@ -22,9 +22,9 @@ export const groupGoalsApi = {
   // GET 요청: 그룹의 목표 목록 조회
   getGroupGoals: async (groupId: null | number) => {
     try {
-      const response = await client.get<ResponseWith<GroupProps[]>>(
-        `/group/goals/${groupId}`
-      );
+      const response = await client.get<
+        ResponseWith<{ groupGoals: GoalProps[] }>
+      >(`/group/goals/${groupId}`);
       return response.data;
     } catch (error) {
       console.error('Fail fetch group goals:', error);

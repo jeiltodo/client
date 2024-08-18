@@ -7,7 +7,7 @@ import {
   userOptions,
 } from '../../../entities/goal';
 import { TodoModal } from '../../../entities/todo';
-import { TodoList } from '../../../features/todo';
+import { IndividualTodoList } from '../../../features/todo';
 import { ArrowRight, PlusBlue } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -64,13 +64,13 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
         {notDone.length !== 0 && (
           <div className='w-full tablet:pr-6'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-            <TodoList todos={notDone} />
+            <IndividualTodoList todos={notDone} />
           </div>
         )}
         {done.length !== 0 && (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <TodoList todos={done} />
+            <IndividualTodoList todos={done} />
           </div>
         )}
       </div>
