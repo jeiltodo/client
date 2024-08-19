@@ -48,19 +48,18 @@ export const EditorForm = ({
     }
   };
 
-
   useEffect(() => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(content, 'text/html');
     const plainText = doc.body.textContent || '';
-  
+
     // 전체 글자 수 (공백 포함)
     const totalLength = plainText.length;
-  
+
     // 공백을 제거하고 글자 수 계산
     const contentWithoutSpaces = plainText.replace(/\s+/g, '');
     setLengthWithoutSpaces(contentWithoutSpaces.length);
-  
+
     // 여기에 전체 글자 수를 저장하는 상태 변수를 추가하세요
     setTotalLength(totalLength);
   }, [content]);
@@ -95,6 +94,7 @@ export const EditorForm = ({
             type='text'
             name='title'
             value={title}
+            autoFocus={true}
             placeholder='노트의 제목을 입력해주세요'
             onChange={handleTitleChange}
             className='!px-0 w-full h-[52px] placeholder:text-lg placeholder:font-pretendard-medium bg-white'
@@ -122,7 +122,10 @@ export const EditorForm = ({
               <LinkEmbed className='h-[18px] w-[18px]' />
               <div className='text-base font-normal text-slate-800'>{link}</div>
             </div>
-            <LinkDelete className='h-[18px] w-[18px] cursor-pointer' onClick={()=>setLink('')} />
+            <LinkDelete
+              className='h-[18px] w-[18px] cursor-pointer'
+              onClick={() => setLink('')}
+            />
           </div>
         )}
         {/* 에디터 */}
@@ -132,7 +135,8 @@ export const EditorForm = ({
           formats={formats}
           value={content}
           onChange={setContent}
-          className='max-h-[768px] bg-white'
+          placeholder='내용을 입력해주세요'
+          className=' max-h-[768px] bg-white'
         />
         <style jsx global>{`
           .ql-toolbar {
@@ -151,6 +155,7 @@ export const EditorForm = ({
             border: none !important;
           }
           .ql-editor {
+            min-height: 50vh;
             max-height: 70vh;
             font-size: 16px;
             line-height: 1.5;

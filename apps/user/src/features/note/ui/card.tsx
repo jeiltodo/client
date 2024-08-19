@@ -57,27 +57,31 @@ export const Card = ({ noteData, goal }: CardProps) => {
       }}
     >
       <div className='flex flex-row items-start justify-between'>
-        <NoteList width={28} height={28} />
-        <span className='inline-flex items-center gap-2 relative'>
-          <span className='flex items-center justify-center w-[24px] h-[24px] rounded-full bg-slate-50'>
-            <Kebab
-              width={18}
-              height={18}
-              onClick={handleKebab}
-              fill='red'
-              className='cursor-pointer '
-            />
-          </span>
+        <div className='w-full flex justify-between'>
+          <div className='flex gap-4'>
+            <NoteList width={28} height={28} />
+            <h2 className='text-lg font-pretendard-medium'>{noteData.title}</h2>
+          </div>
+          <span className='inline-flex items-center gap-2 relative'>
+            <span className='flex items-center justify-center w-[24px] h-[24px] rounded-full bg-slate-50'>
+              <Kebab
+                width={18}
+                height={18}
+                onClick={handleKebab}
+                fill='red'
+                className='cursor-pointer '
+              />
+            </span>
 
-          {isOpen && (
-            <CardFlyout
-              onEdit={(e) => handleRoute(e)}
-              onDelete={(e) => handleDelete(e)}
-            />
-          )}
-        </span>
+            {isOpen && (
+              <CardFlyout
+                onEdit={(e) => handleRoute(e)}
+                onDelete={(e) => handleDelete(e)}
+              />
+            )}
+          </span>
+        </div>
       </div>
-      <h2 className='text-lg font-pretendard-medium'>{noteData.title}</h2>
       <span className='w-full h-[1px] bg-slate-200' />
       <TodoTitle title={noteData.todo.title} />
 

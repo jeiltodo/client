@@ -23,7 +23,7 @@ export const NoteListBoard = () => {
           <React.Fragment key={i}>
             {item.data.notes.length !== 0 ? (
               item.data.notes.map((note) => (
-                <div key={note.id} className='flex-1 overflow-auto'>
+                <div key={note.id} className='overflow-auto'>
                   <Card
                     noteData={note}
                     key={note.id}

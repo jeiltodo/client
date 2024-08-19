@@ -28,14 +28,12 @@ export const EditorPage = () => {
   const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
   const [isButtonView, setIsButtonView] = useState<boolean>(false);
   const [isAlert, setIsAlert] = useState<boolean>(false);
+
   const { mutate: updateNote } = useUpdateNote(Number(noteId));
   const { mutate: createNote } = useCreateNote(todoId);
 
-  //TODO:: 브라우저가 뒤로 가기가 되었을 때 작성중인 어쩌구 팝업 뜨게 하기
   const showToast = useToast();
   const router = useRouter();
-
-  //TODO:: noteID가 없을 때 목표, 할일 제목 가져오기
 
   const handleLocalSave = () => {
     const localData = {
@@ -60,7 +58,7 @@ export const EditorPage = () => {
   };
 
   const getLocalSave = () => {
-    const savedData = localStorage.getItem(`todo${noteId}`);
+    const savedData = localStorage.getItem(`todo${todoId}`);
     const parsedData = savedData
       ? JSON.parse(savedData)
       : { title: '', content: '' };

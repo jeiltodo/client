@@ -31,6 +31,8 @@ export const NoteDetailSlide = ({
   const { noteDetail } = useNoteDetail(String(noteId));
   const { mutate: deleteNote } = useDeleteNote(noteId);
 
+  const markDownText = `${noteDetail?.content}`;
+
   const handleSlideClick = (
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>
   ) => {
@@ -46,13 +48,12 @@ export const NoteDetailSlide = ({
 
   const handleDelete = () => {
     deleteNote();
-    //삭제하시겠습니까 빠졌어요..
     setToggle(false);
   };
 
   return ReactDOM.createPortal(
     <div
-      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'
+      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full  bg-[#00000030] '
       onClick={() => {
         setToggle(false);
       }}
@@ -120,7 +121,7 @@ export const NoteDetailSlide = ({
           </div>
         </div>
         <div className='text-base font-pretendard-regular'>
-          {noteDetail?.content}
+          <div dangerouslySetInnerHTML={{ __html: markDownText }} />
         </div>
       </div>
     </div>,

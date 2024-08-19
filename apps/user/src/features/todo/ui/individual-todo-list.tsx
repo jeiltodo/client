@@ -60,7 +60,6 @@ export const IndividualTodoList = ({ todos }: Props) => {
 
   const handleClickNote = (todoId: number, noteId?: number) => {
     if (noteId) {
-      setEditModalId(noteId);
       setNoteSlideModalId(noteId);
     } else {
       setNoteCreateModalId(todoId);

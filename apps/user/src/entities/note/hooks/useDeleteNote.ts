@@ -9,6 +9,9 @@ export const useDeleteNote = (noteId: number) => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('notes'),
       });
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey.includes('todos'),
+      });
     },
   });
 };
