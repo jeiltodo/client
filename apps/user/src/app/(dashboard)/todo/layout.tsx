@@ -3,9 +3,5 @@ export default function todoLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <main className=''>{children}</main>
-    </>
-  );
+  return <main className=''>{children}</main>;
 }

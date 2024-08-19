@@ -1,8 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { goalQueryKeys } from '../../goal/hooks/queryKey';
 import { groupGoalsApi } from '../../goal/api/groupGoalsApi';
-import { ResponsePageListWith } from '../../todo';
-import { GroupGoalWithTodos } from '../../goal';
+import { calculateTotalPages } from '../../../shared';
 
 interface Props {
   groupId: number;
@@ -31,12 +30,3 @@ export const useGroupGoalsWithTodos = ({ groupId, limit }: Props) => {
     },
   });
 };
-
-/*
-////////////////////////////////////////////////////////////////////////////////
-*/
-function calculateTotalPages(totalCount: number, itemsPerPage: number): number {
-  const fullPages = Math.floor(totalCount / itemsPerPage);
-  const hasPartialPage = totalCount % itemsPerPage !== 0;
-  return fullPages + (hasPartialPage ? 1 : 0);
-}
