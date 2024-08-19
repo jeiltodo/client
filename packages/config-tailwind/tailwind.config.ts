@@ -64,6 +64,16 @@ const config: Omit<Config, 'content'> = {
           900: '#0F172A',
           950: '#020617',
         },
+        groupColor: {
+          //pumpkin
+          50: '#FFF7ED',
+          100: '#FFEDD4',
+          200: '#FFD8A8',
+          400: '#FF9237',
+          500: '#FF700A',
+          900: '#7F2D0F', //구성원 관리
+          950: '#451305', //탈퇴하기
+        },
         black: {
           500: '#3A4354',
         },
