@@ -31,7 +31,6 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
     null
   );
   const [todoToRemove, setTodoToRemove] = useState<number | null>(null);
-
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
   const { data: group } = useGroupDetail(groupId);
   const { data: groupGoals } = useGroupGoals(groupId);
