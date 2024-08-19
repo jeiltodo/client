@@ -1,4 +1,4 @@
-import { BlueMarker, Flag } from '@jeiltodo/icons';
+import { BlueMarker, Flag, OrangeMarker } from '@jeiltodo/icons';
 
 interface Props {
   icon?: string;
@@ -18,6 +18,9 @@ export const BoardTitle = ({
   return (
     <div className={`flex gap-2 items-center ${className}`}>
       <span className='rounded-[15px] overflow-hidden'>
+        {icon === 'OrangeMarker' && (
+          <OrangeMarker width={iconSize} height={iconSize} />
+        )}
         {icon === 'BlueMarker' && (
           <BlueMarker width={iconSize} height={iconSize} />
         )}

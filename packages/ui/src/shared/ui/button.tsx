@@ -5,6 +5,7 @@ type Variant =
   | 'primary'
   | 'dark'
   | 'outline'
+  | 'group-outline'
   | 'outline-date'
   | 'outline-status'
   | 'outline-goal'
@@ -66,6 +67,8 @@ export function Button({
     dark: 'bg-slate-900 py-2 px-[10px] text-white rounded-xl hover:bg-slate-600 active:bg-slate-800',
     outline:
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+    'group-outline':
+      'bg-transparent text-groupColor-500 border border-groupColor-500 rounded-xl hover:border-groupColor-600 hover:text-groupColor-600 active:border-groupColor-800 active:text-groupColor-800',
     'outline-date':
       'bg-transparent text-blue-500 border border-blue-500 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'outline-status':

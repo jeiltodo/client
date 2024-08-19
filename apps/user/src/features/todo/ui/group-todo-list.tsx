@@ -21,6 +21,7 @@ interface Props {
 }
 
 export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
+  console.log('goal: ', goal);
   const params: { id: string } = useParams();
   const groupId = Number(params.id);
   const router = useRouter();
