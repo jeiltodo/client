@@ -57,6 +57,7 @@ export const GroupOverviewBoard = ({
               value={updatedTitle}
               defaultValue={title}
               isEditMode={isEditMode}
+              isGroup={true}
               onChange={setUpdatedValue}
               onSwap={setIsEditMode}
             />
@@ -70,7 +71,7 @@ export const GroupOverviewBoard = ({
             {isUserALeader && (
               <button
                 onClick={handleReissue}
-                className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? 'border-blue-500 text-blue-500 ' : 'bg-slate-900 text-white '}`}
+                className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? 'border-groupColor-500 text-groupColor-500 ' : 'bg-slate-900 text-white '}`}
               >
                 {isRequested === false ? '재발행' : '취소'}
               </button>
@@ -83,7 +84,7 @@ export const GroupOverviewBoard = ({
           <button
             disabled={isRequested !== true && isEditMode !== true}
             onClick={handleSave}
-            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${isRequested === true || isEditMode === true ? ' bg-blue-500' : 'bg-slate-200'}`}
+            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${isRequested === true || isEditMode === true ? ' bg-groupColor-500' : 'bg-slate-200'}`}
           >
             저장
           </button>

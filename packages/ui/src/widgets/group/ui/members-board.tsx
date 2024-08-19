@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import {
@@ -62,7 +62,7 @@ export const MembersBorad = ({
   };
 
   return (
-    <div className='w-full px-6 py-4 rounded-lg bg-blue-500'>
+    <div className='w-full px-6 py-4 rounded-lg bg-groupColor-500'>
       <div className='w-full h-full bg-avatar-background'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex gap-4 items-center'>
@@ -72,13 +72,11 @@ export const MembersBorad = ({
             </div>
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-[0.5]'>
               <span className='text-slate-800'>{group.members.length}</span>
-              <span className='text-blue-500'>/10</span>
+              <span className='text-groupColor-500'>/10</span>
             </div>
           </div>
 
-          {isUserALeader && formattedMembers.length !== 1 && (
-            <MembersManageButtons onSave={handleSave} />
-          )}
+          {isUserALeader && <MembersManageButtons onSave={handleSave} />}
         </div>
         <MemberList
           members={formattedMembers}
@@ -91,6 +89,7 @@ export const MembersBorad = ({
           currentPage={1}
           variant='secondary'
           className='mt-10'
+          isGroup={true}
         />
       </div>
     </div>

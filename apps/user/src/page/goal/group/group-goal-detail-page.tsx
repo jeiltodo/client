@@ -8,7 +8,7 @@ import {
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 
-import { Plus } from '@jeiltodo/icons';
+import { PlusOrange } from '@jeiltodo/icons';
 import { useGroupDetail } from '../../../entities/group';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
@@ -86,15 +86,16 @@ export const GroupGoalDetailPage = ({
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
-            <NotesPushButton goalData={singleGroupGoal} />
-            <Button
-              variant='text-blue'
-              className='flex gap-1 items-center text-sm h-[20px]'
-              onClick={openAddTodoModal}
-            >
-              <Plus width={16} height={16} />
-              할 일 추가
-            </Button>
+            <NotesPushButton goalData={singleGroupGoal} isGroup={true} />
+            <div className='flex items-center justify-end'>
+              <Button
+                variant='text-group-color'
+                className='flex gap-1 items-center text-sm h-[20px]'
+                onClick={openAddTodoModal}
+              >
+                <PlusOrange width={16} height={16} />할 일 추가
+              </Button>
+            </div>
             {user?.id && (
               <GroupTodoDoneBoard
                 todos={singleGroupGoalTodo}
