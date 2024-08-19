@@ -104,7 +104,7 @@ export const EditorForm = ({
             onChange={handleTitleChange}
             className='!px-0 w-full h-[52px] placeholder:text-lg placeholder:font-pretendard-medium bg-white'
           />
-          <Counter data={title} limitNumber={30} />
+          <Counter data={title.length} limitNumber={30} />
         </div>
         {/* 글자 수  */}
         <div className='flex flex-row items-center justify-between'>
@@ -118,7 +118,7 @@ export const EditorForm = ({
             </span>
             <span>{'자'}</span>
           </div>
-          <Counter data={content} limitNumber={10000} />
+          <Counter data={totalLength} limitNumber={10000} />
         </div>
         {/* 파일url이 있으면 여기에 올라감 */}
         {link && (
