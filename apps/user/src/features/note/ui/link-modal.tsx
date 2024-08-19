@@ -5,30 +5,45 @@ import { Button, Input } from '@jeiltodo/ui/shared';
 import { BaseModal } from '../../../shared/ui/base-modal';
 
 interface LinkModalProps {
-  setLinkToggle: Dispatch<SetStateAction<boolean>>;
-  id: number;
+  setLinkModalToggle: Dispatch<SetStateAction<boolean>>;
+  link: string;
+  setLink: Dispatch<SetStateAction<string>>;
 }
-export const LinkModal = ({ setLinkToggle, id }: LinkModalProps) => {
-  const [link, setLink] = useState<string>('');
+export const LinkModal = ({
+  setLinkModalToggle,
+  link,
+  setLink,
+}: LinkModalProps) => {
+  const [input, setInput] = useState<string>(link || '');
+
+  const handleLink = () => {
+    setLink(input);
+    setLinkModalToggle(false);
+  };
 
   return (
     <BaseModal
       title='링크 업로드'
-      setToggle={setLinkToggle}
+      setToggle={setLinkModalToggle}
       width='modal_sm:w-[520px]'
     >
       <div className='flex flex-col gap-3'>
         <p className='text-base font-pretendard-semibold'>링크</p>
         <Input
           onChange={(e) => {
-            setLink(e.target.value);
+            setInput(e.target.value);
           }}
+          value={input}
           type='text'
           placeholder='링크 주소를 입력해주세요'
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!link} className='w-full h-12 mt-10'>
+      <Button
+        isDisabled={!input}
+        className='w-full h-12 mt-10'
+        onClick={handleLink}
+      >
         확인
       </Button>
     </BaseModal>

@@ -3,5 +3,5 @@ export default function NoteRootLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  return <>{children}</>;
+  return <main>{children}</main>;
 }

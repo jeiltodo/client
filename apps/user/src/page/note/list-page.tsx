@@ -1,5 +1,3 @@
-'use client';
-
 import { LayoutTitle } from '@jeiltodo/ui/shared';
 import { NoteListBoard } from '../../widgets/note/ui/note-list-board';
 

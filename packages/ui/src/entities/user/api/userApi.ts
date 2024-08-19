@@ -30,7 +30,7 @@ export const userApi = {
   //회원 탈퇴
   withdrawUserInfo: async () => {
     try {
-      const response = await client.get('/member/withdraw');
+      const response = await client.delete('/member/withdraw');
       return response.data;
     } catch (error) {
       throw error;
