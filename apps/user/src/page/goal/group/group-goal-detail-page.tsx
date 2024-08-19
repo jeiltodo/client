@@ -76,7 +76,7 @@ export const GroupGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <>
+    <div className='max-w-[1200px]'>
       {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
         <>
           <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
@@ -93,7 +93,7 @@ export const GroupGoalDetailPage = ({
               onClick={openAddTodoModal}
             >
               <Plus width={16} height={16} />
-              할일 추가
+              할 일 추가
             </Button>
             {user?.id && (
               <GroupTodoDoneBoard
@@ -133,6 +133,6 @@ export const GroupGoalDetailPage = ({
           </div>
         </>
       ) : null}
-    </>
+    </div>
   );
 };

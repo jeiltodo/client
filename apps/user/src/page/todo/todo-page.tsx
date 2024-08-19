@@ -52,13 +52,13 @@ export const TodoPage = () => {
   }, [inView]);
 
   return (
-    <div>
+    <div className='max-w-[1200px]'>
       {modalOpen && (
         <TodoModal todoCreator={userInfo?.nickname || ''} setTodoModalToggle={setModalOpen} goals={filteredData} />
       )}
       <div className='flex items-center justify-between mb-6 '>
         <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
-          최근 등록한 할일 ({allTodos?.length})
+          최근 등록한 할 일 ({allTodos?.length})
         </div>
         <Button
           variant='text-blue'
@@ -66,7 +66,7 @@ export const TodoPage = () => {
           onClick={handleAddModal}
         >
           <PlusBlue width={16} height={16} />
-          할일 추가
+          할 일 추가
         </Button>
       </div>
       <div className='desktop:max-w-[1200px] w-full bg-white rounded-xl p-base flex flex-col'>

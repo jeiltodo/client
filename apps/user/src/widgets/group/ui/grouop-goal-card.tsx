@@ -48,7 +48,7 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
           onClick={handleAddTodo}
         >
           <Plus width={16} height={16} />
-          할일 추가
+          할 일 추가
         </Button>
       </div>
       <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>
