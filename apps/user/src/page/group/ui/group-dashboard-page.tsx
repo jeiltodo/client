@@ -71,7 +71,7 @@ export const GroupDashboardPage = () => {
   }
 
   return (
-    <div className='pt-6 max-w-[1200px]'>
+    <div className='max-w-[1200px]'>
       <p className='mb-4 text-slate-900 font-semibold text-lg'>{group.title}</p>
       <div className='w-full flex flex-nowrap  gap-4'>
         <GroupOverviewBoard
