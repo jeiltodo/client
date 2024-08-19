@@ -11,7 +11,7 @@ interface CheckBoxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isChecked: boolean;
-  isGroup: boolean | undefined;
+  isGroup?: boolean;
   className?: string;
 }
 

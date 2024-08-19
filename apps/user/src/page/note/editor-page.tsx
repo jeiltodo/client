@@ -13,12 +13,12 @@ import { Button, ButtonGroup, LayoutTitle } from '@jeiltodo/ui/shared';
 export const EditorPage = () => {
   const params = useParams();
   const searchParams = useSearchParams();
-  const goalTitle = searchParams.get('title');
-  const todoTitle = searchParams.get('todo');
+  const goalTitle = searchParams!.get('title');
+  const todoTitle = searchParams!.get('todo');
 
-  const goalId = Number(params.goalId);
-  const todoId = Number(params.todoId);
-  const noteId = params.noteId as string;
+  const goalId = Number(params!.goalId);
+  const todoId = Number(params!.todoId);
+  const noteId = params!.noteId as string;
 
   const { noteDetail } = useNoteDetail(noteId);
 
