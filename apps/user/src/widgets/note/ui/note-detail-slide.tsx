@@ -1,27 +1,37 @@
 'use client';
 import ReactDOM from 'react-dom';
 import { DeleteMenu } from '@jeiltodo/icons';
+import { formatDateString } from '@jeiltodo/lib';
 import {
+  BoardTitle,
   Button,
   ButtonGroup,
   TodoTitle,
-  type Note,
 } from '@jeiltodo/ui/shared';
-import { useEffect, useState } from 'react';
 import { useNoteDetail } from '../../../entities/note/hooks/useNoteDetail';
-import { useParams, useRouter } from 'next/navigation';
-import { deleteNote } from '../../../entities/note';
+import { useDeleteNote } from '../../../entities/note';
+import { useRouter } from 'next/navigation';
 
 interface NoteDetailSlideProps {
-  data: Note;
+  goalId: number;
+  goalTitle: string;
+  noteId: number;
+  todoId: number;
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
-  const [noteData, setNoteData] = useState<Note>();
-  const route = useRouter();
-  const params = useParams();
-  const goalid = params?.goalid as string;
+export const NoteDetailSlide = ({
+  goalId,
+  goalTitle,
+  noteId,
+  todoId,
+  setToggle,
+}: NoteDetailSlideProps) => {
+  const router = useRouter();
+  const { noteDetail } = useNoteDetail(String(noteId));
+  const { mutate: deleteNote } = useDeleteNote(noteId);
+
+  const markDownText = `${noteDetail?.content}`;
 
   const handleSlideClick = (
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>
@@ -29,33 +39,21 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
     e.stopPropagation();
   };
 
-  const handleRoute = () => {
-    route.push(`/note/${goalid}/${data.todo.id}/${data.id}`);
+  const handleEdit = () => {
+    const url = noteDetail?.id
+      ? `/note/${goalId}/${todoId}/${noteDetail.id}?title=${goalTitle}`
+      : `/note/${goalId}/${todoId}/new?title=${goalTitle}`;
+    router.push(url);
   };
 
   const handleDelete = () => {
-    const noteId = data.id;
-    onDeleteNote(noteId);
+    deleteNote();
+    setToggle(false);
   };
-
-  const onDeleteNote = async (noteId: number) => {
-    const response = await deleteNote({ noteId });
-    console.log('response: ', response);
-  };
-
-  const { noteDetail, error, isLoading } = useNoteDetail(Number(data.id));
-
-  useEffect(() => {
-    if (!isLoading && noteDetail?.data && !error) {
-      const queryData = noteDetail.data;
-      setNoteData(queryData);
-    }
-  }, [noteDetail, isLoading, error]);
 
   return ReactDOM.createPortal(
-    //modal
     <div
-      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full bg-[#000000] bg-opacity-30'
+      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full  bg-[#00000030] '
       onClick={() => {
         setToggle(false);
       }}
@@ -88,16 +86,16 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
             <DeleteMenu className='w-6 h-6' />
           </button>
           <div className='flex felx-row items-center justify-between mb-3'>
-            {/* <BoardTitle
-              title={noteData?.todo.goal?.title || ''}
+            <BoardTitle
+              title={noteDetail?.todo.goal.title || ''}
               icon='flag'
               iconSize={24}
-            /> */}
+            />
             <ButtonGroup gap={2}>
               <Button
                 className='w-[84px] h-[36px]'
                 variant='outline'
-                onClick={handleRoute}
+                onClick={handleEdit}
               >
                 수정하기
               </Button>
@@ -111,17 +109,19 @@ export const NoteDetailSlide = ({ data, setToggle }: NoteDetailSlideProps) => {
             </ButtonGroup>
           </div>
           <div className='flex felx-row items-center justify-between mb-6'>
-            <TodoTitle title={noteData?.todo.title || ''} />
-            {/* <span className='text-slate-500 text-xs'>
-              {noteData?.createdAt}
-            </span> */}
+            <TodoTitle title={noteDetail?.todo.title || ''} />
+            {noteDetail?.createdAt && (
+              <span className='text-slate-500 text-xs'>
+                {formatDateString(noteDetail.createdAt)}
+              </span>
+            )}
           </div>
           <div className='text-lg font-pretendard-medium text-slate-800 border-y border-slate-200 py-3 mb-4'>
-            {noteData?.title}
+            {noteDetail?.title}
           </div>
         </div>
         <div className='text-base font-pretendard-regular'>
-          {noteData?.content}
+          <div dangerouslySetInnerHTML={{ __html: markDownText }} />
         </div>
       </div>
     </div>,

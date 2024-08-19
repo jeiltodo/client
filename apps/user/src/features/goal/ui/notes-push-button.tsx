@@ -1,13 +1,17 @@
+'use client';
+
 import { ArrowRight, Note } from '@jeiltodo/icons';
+import type { Goal } from '@jeiltodo/ui/shared';
 import { useRouter } from 'next/navigation';
 
-export const NotesPushButton = ({ goalId }: { goalId: number }) => {
+export const NotesPushButton = ({ goalData }: { goalData: Goal }) => {
   const router = useRouter();
-
   return (
     <div
       className='flex justify-between px-6 py-4 rounded-lg bg-blue-100 hover:transform group cursor-pointer'
-      onClick={() => router.push(`/note/${goalId}/list`)}
+      onClick={() => {
+        router.push(`/note/list/${goalData.id}?title=${goalData.title}`);
+      }}
     >
       <div className='flex gap-x-2 items-center justify-between'>
         <Note width={24} height={24} />

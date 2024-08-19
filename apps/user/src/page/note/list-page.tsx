@@ -1,5 +1,5 @@
 import { LayoutTitle } from '@jeiltodo/ui/shared';
-import { CardListBoard } from '../../widgets/note/ui/card-list-board';
+import { NoteListBoard } from '../../widgets/note/ui/note-list-board';
 
 export const ListPage = () => {
   return (
@@ -8,7 +8,7 @@ export const ListPage = () => {
       style={{ minHeight: 'calc(100vh - 24px)' }}
     >
       <LayoutTitle title='노트 모아보기' />
-      <CardListBoard />
+      <NoteListBoard />
     </div>
   );
 };

@@ -1,23 +1,18 @@
-import { client } from '../../../shared';
+import { Note } from '@jeiltodo/ui/shared';
+import { client, ResponseWith } from '../../../shared';
 import type { NoteGetResponse, NoteResponse } from '../model/type';
 
 // GET 요청 : 목표에 따른 노트 리스트 조회
-export const getGoalNotes = async ({
-  goalId,
-  page = 1,
-  limit = 0,
-}: GetGoalNotesParam) => {
-  const queryParams = [
-    page ? `page=${page}` : '',
-    limit ? `limit=${limit}` : '',
-  ]
-    .filter(Boolean)
-    .join('&');
-
-  const url = `/note/list/goal/${goalId}${queryParams ? `?${queryParams}` : ''}`;
-
+export const getGoalNotes = async (
+  goalId: number,
+  params: { page: number; limit: number }
+) => {
   try {
-    const response = await client.get<NoteResponse>(url);
+    const response = await client.get<
+      ResponseWith<{ totalCount: number; currentPage: number; notes: Note[] }>
+    >(`/note/list/goal/${goalId}`, {
+      params,
+    });
     return response.data;
   } catch (error) {
     console.error('Failed to fetch notes:', error);
@@ -33,13 +28,10 @@ export const getNoteDetail = async (noteId: number) => {
   return response.data;
 };
 
-//CREATE 요청 : 노트 생성
-export const createNote = async ({
-  todoId,
-  title,
-  content,
-  linkUrl,
-}: NotePostParam) => {
+export const createNote = async (
+  todoId: number,
+  { title, content, linkUrl }: Omit<NotePostParam, 'todoId'>
+) => {
   try {
     const response = await client.post('note/create', {
       todoId,
@@ -54,13 +46,10 @@ export const createNote = async ({
   }
 };
 
-//PATCH 요청 : 노트 수정
-export const patchNote = async ({
-  noteId,
-  title,
-  content,
-  linkUrl,
-}: NotePatchParam) => {
+export const patchNote = async (
+  noteId: number,
+  { title, content, linkUrl }: Omit<NotePatchParam, 'noteId'>
+) => {
   try {
     const response = await client.patch(`note/update/${noteId}`, {
       title,
@@ -74,8 +63,7 @@ export const patchNote = async ({
   }
 };
 
-// DELETE 요청 : 노트 삭제
-export const deleteNote = async ({ noteId }: DeleteNoteParam) => {
+export const deleteNote = async (noteId: number) => {
   try {
     const response = await client.delete(`/note/delete/${noteId}`);
     return response.data;
@@ -90,24 +78,19 @@ export const deleteNote = async ({ noteId }: DeleteNoteParam) => {
 */
 
 export interface GetGoalNotesParam {
-  goalId: string | string[];
-  page: number;
+  goalId: number;
   limit: number;
 }
 
 export interface NotePostParam {
-  todoId: string;
+  todoId: number;
   title: string;
   content: string;
   linkUrl?: string;
 }
 export interface NotePatchParam {
-  noteId: string;
+  noteId: number;
   title: string;
   content: string;
   linkUrl?: string;
-}
-
-interface DeleteNoteParam {
-  noteId: number;
 }

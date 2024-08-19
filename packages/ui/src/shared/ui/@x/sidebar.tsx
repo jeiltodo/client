@@ -40,7 +40,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
-           transition-all duration-300 ease-in-out ${
+           transition-all duration-200 ease-in-out ${
              isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}
       >
@@ -53,7 +53,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             <ImgLogo className='w-[106px] h-[35px]' />
             {type && (
               <p
-                className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-300 whitespace-nowrap overflow-hidden ${
+                className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
                   isDesktopOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
                 }`}
               >
@@ -82,7 +82,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {/* 태블릿 버전 */}
       <div
         className={`desktop:hidden tablet:flex hidden h-full fixed top-0 left-0 z-10
-           transition-all duration-300 ease-in-out ${
+           transition-all duration-200 ease-in-out ${
              isTabletOpen ? 'w-[280px]' : 'w-[60px]'
            } bg-white flex-col overflow-hidden`}
       >
@@ -95,7 +95,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             <ImgLogo className='w-[106px] h-[35px]' />
             {type && (
               <p
-                className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-300 whitespace-nowrap overflow-hidden ${
+                className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
                   isTabletOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
                 }`}
               >
@@ -124,7 +124,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {isTabletOpen && (
         <div
           onClick={toggleTabletSidebar}
-          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-opacity transition-width duration-300 ease-in-out`}
+          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-opacity transition-width duration-200 ease-in-out`}
           style={{
             width: `calc(100% - ${isTabletOpen ? '280px' : '60px'})`,
             height: '100%',
@@ -134,7 +134,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
 
       {/* 모바일 버전 */}
       <div
-        className={`tablet:hidden flex top-0 left-0 w-full transition-all duration-300 ease-in-out ${
+        className={`tablet:hidden flex top-0 left-0 w-full transition-all duration-200 ease-in-out ${
           isMobileSidebarOpen ? 'h-full' : 'h-[48px]'
         } bg-white flex-col fixed overflow-hidden`}
       >

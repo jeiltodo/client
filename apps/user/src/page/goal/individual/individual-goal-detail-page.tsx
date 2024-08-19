@@ -1,21 +1,22 @@
 'use client';
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
+import { PlusBlue } from '@jeiltodo/icons';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { useIndividualSingleGoal } from '../../../entities/user/hooks/useSingleIndivGoals';
 import { userOptions } from '../../../entities/user';
-import { useQuery } from '@tanstack/react-query';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { GoalModal } from '../../../features/goal';
 import { ConfirmationModal } from '../../../shared';
-import { useState } from 'react';
 import {
   useDeleteSingleGoal,
   useEditSingleGoal,
 } from '../../../entities/user/hooks/useSingleGoalMuate';
-import { useRouter } from 'next/navigation';
-import { SingleGoalTodo, TodoModal } from '../../../entities/todo';
-import { Plus } from '@jeiltodo/icons';
+import type { SingleGoalTodo } from '../../../entities/todo';
+import { TodoModal } from '../../../entities/todo';
 import { useIndividualGoals } from '../../../entities/goal';
 import { IndividualTodoDoneBoard } from '../../../widgets/todo';
 
@@ -42,12 +43,12 @@ export const IndividualGoalDetailPage = ({
   const { mutate: deleteGoal } = useDeleteSingleGoal();
 
   const handleEdit = ({ title }: { title: string }) => {
-    editGoal({ goalId: singleGoal!.id, title });
+    editGoal({ goalId, title });
   };
 
   const handleDelete = () => {
     deleteGoal(
-      { goalId: singleGoal!.id },
+      { goalId },
       {
         onSettled: () => {
           router.back();
@@ -68,7 +69,7 @@ export const IndividualGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <div>
+    <div className='max-w-[1200px]'>
       {!isLoading && singleGoal && singleGoalTodo && (
         <>
           <LayoutTitle
@@ -80,15 +81,16 @@ export const IndividualGoalDetailPage = ({
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
-            <NotesPushButton goalId={goalId} />
-            <Button
-              variant='text-blue'
-              className='flex gap-1 items-center text-sm h-[20px]'
-              onClick={openAddTodoModal}
-            >
-              <Plus width={16} height={16} />
-              할일 추가
-            </Button>
+            <NotesPushButton goalData={singleGoal} />
+            <div className='flex items-center justify-end'>
+              <Button
+                variant='text-blue'
+                className='flex gap-1 items-center text-sm h-[20px]'
+                onClick={openAddTodoModal}
+              >
+                <PlusBlue width={16} height={16} />할 일 추가
+              </Button>
+            </div>
             <IndividualTodoDoneBoard todos={singleGoalTodo} goal={singleGoal} />
 
             {isGoalToggleOpen && (

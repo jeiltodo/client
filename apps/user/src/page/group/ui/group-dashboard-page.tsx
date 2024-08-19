@@ -23,7 +23,7 @@ import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroupGoal';
 
 export const GroupDashboardPage = () => {
-  const params: { id: string } = useParams();
+  const params = useParams();
   const groupId = Number(params.id);
   const [openModal, setOpenModal] = useState(false);
 
@@ -71,7 +71,7 @@ export const GroupDashboardPage = () => {
   }
 
   return (
-    <div className='pt-6 max-w-[1180px] mx-auto '>
+    <div className='pt-6 max-w-[1200px]'>
       <p className='mb-4 text-slate-900 font-semibold text-lg'>{group.title}</p>
       <div className='w-full flex flex-nowrap  gap-4'>
         <GroupOverviewBoard
@@ -90,15 +90,17 @@ export const GroupDashboardPage = () => {
           />
         </MembersBoardProvider>
       </div>
-      <div className='flex flex-wrap gap-4 bg-white px-5 rounded-xl py-5 mt-5'>
+      <div className='flex flex-wrap gap-4 px-5 rounded-xl py-5 mt-5 bg-groupColor-50'>
         <div className='w-full flex justify-between'>
-          <BoardTitle title='우리의 목표' />
+          <BoardTitle title='우리의 목표' icon='OrangeMarker' />
           <Button
-            variant='outline'
-            className='flex items-center justify-center gap-1 w-[150px] h-12'
+            variant='group-outline'
+            className='flex items-center justify-center gap-1 w-[150px] h-12 border-groupColor-500'
             onClick={() => setOpenModal(true)}
           >
-            <div className='text-base font-pretendard-semibold'>새 목표</div>
+            <div className='text-base font-pretendard-semibold text-groupColor-500'>
+              새 목표
+            </div>
           </Button>
         </div>
         {goalWithTodos?.pages.map((item, i) => (

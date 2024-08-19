@@ -22,7 +22,7 @@ export type Note = {
   createdAt: Date | string;
   updatedAt: Date | string;
   linkUrl?: string;
-  todo: Todo | Pick<Todo, 'id' | 'title' | 'isDone'>;
+  todo: Todo;
 };
 
 export type NoteResponse = {

@@ -1,5 +1,6 @@
 export * from './lib/cookie';
 export * from './lib/getUniqueNumbers';
+export * from './lib/calculateTotalPages';
 
 export * from './model/client';
 export * from './model/query/type';

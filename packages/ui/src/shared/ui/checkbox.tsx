@@ -1,12 +1,17 @@
 'use client';
 
-import { CheckboxActiveBlue, CheckboxEmpty } from '@jeiltodo/icons';
+import {
+  CheckboxActiveBlue,
+  CheckboxActiveOrange,
+  CheckboxEmpty,
+} from '@jeiltodo/icons';
 import { ChangeEvent, InputHTMLAttributes } from 'react';
 
 interface CheckBoxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isChecked: boolean;
+  isGroup?: boolean;
   className?: string;
 }
 
@@ -14,6 +19,7 @@ export const Checkbox = ({
   onChange,
   isChecked,
   className,
+  isGroup = false,
   disabled = false,
   readOnly = false,
   required = false,
@@ -36,7 +42,11 @@ export const Checkbox = ({
       />
       <div className={`absolute inset-0`}>
         {!disabled && isChecked ? (
-          <CheckboxActiveBlue width={24} height={24} aria-hidden='true' />
+          isGroup ? (
+            <CheckboxActiveOrange width={24} height={24} aria-hidden='true' />
+          ) : (
+            <CheckboxActiveBlue width={24} height={24} aria-hidden='true' />
+          )
         ) : (
           <CheckboxEmpty
             width={24}

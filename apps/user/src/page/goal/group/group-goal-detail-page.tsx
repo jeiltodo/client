@@ -1,6 +1,5 @@
 'use client';
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
-// import { TitleProgressBarCard } from '../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 
 import {
@@ -8,8 +7,7 @@ import {
   useGroupSingleGoal,
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
-// import { useState } from 'react';
-// import { TodoModal } from '../../entities/todo';
+
 import { Plus } from '@jeiltodo/icons';
 import { useGroupDetail } from '../../../entities/group';
 import { TitleProgressBarCard } from '../../../widgets/goal';
@@ -78,7 +76,7 @@ export const GroupGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <>
+    <div className='max-w-[1200px]'>
       {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
         <>
           <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
@@ -88,14 +86,14 @@ export const GroupGoalDetailPage = ({
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
-            <NotesPushButton goalId={goalId} />
+            <NotesPushButton goalData={singleGroupGoal} />
             <Button
               variant='text-blue'
               className='flex gap-1 items-center text-sm h-[20px]'
               onClick={openAddTodoModal}
             >
               <Plus width={16} height={16} />
-              할일 추가
+              할 일 추가
             </Button>
             {user?.id && (
               <GroupTodoDoneBoard
@@ -135,6 +133,6 @@ export const GroupGoalDetailPage = ({
           </div>
         </>
       ) : null}
-    </>
+    </div>
   );
 };

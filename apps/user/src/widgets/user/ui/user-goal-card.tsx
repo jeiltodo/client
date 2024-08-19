@@ -53,7 +53,7 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
           onClick={handleAddModal}
         >
           <PlusBlue width={16} height={16} />
-          할일 추가
+          할 일 추가
         </Button>
       </div>
 
