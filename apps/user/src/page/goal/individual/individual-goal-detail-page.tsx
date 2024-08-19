@@ -1,6 +1,6 @@
 'use client';
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
-import { Plus } from '@jeiltodo/icons';
+import { PlusBlue } from '@jeiltodo/icons';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -87,7 +87,7 @@ export const IndividualGoalDetailPage = ({
 							className='flex gap-1 items-center text-sm h-[20px]'
 							onClick={openAddTodoModal}
 						>
-							<Plus width={16} height={16} />
+							<PlusBlue width={16} height={16} />
 							할일 추가
 						</Button>
 						<IndividualTodoDoneBoard todos={singleGoalTodo} goal={singleGoal} />
