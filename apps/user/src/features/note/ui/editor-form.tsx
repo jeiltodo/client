@@ -48,11 +48,6 @@ export const EditorForm = ({
     }
   };
 
-  const changeTextWithoutSpace = (text: string) => {
-    let changedText = text;
-    changedText = changedText.replace(/\s+/g, '').trim();
-    return changedText;
-  };
 
   useEffect(() => {
     const parser = new DOMParser();
