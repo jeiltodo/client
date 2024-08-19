@@ -88,7 +88,7 @@ export const GroupGoalDetailPage = ({
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
-            <NotesPushButton goalId={goalId} />
+            <NotesPushButton goalData={singleGroupGoal} />
             <Button
               variant='text-blue'
               className='flex gap-1 items-center text-sm h-[20px]'
