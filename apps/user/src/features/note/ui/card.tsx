@@ -18,7 +18,7 @@ export const Card = ({ noteData, goal }: CardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  const route = useRouter();
+  const router = useRouter();
 
   const handleSlideOpen = () => {
     if (noteData.id) {
@@ -33,8 +33,11 @@ export const Card = ({ noteData, goal }: CardProps) => {
 
   const handleRoute = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    route.push(`/note/${noteData.todo.id}?noteId=${noteData.id || 'new'}`);
+    const url = `/note/${noteData.todo.goal.id}/${noteData.todo.id}/${noteData.id}?title=${noteData.todo.goal.title}`;
+
+    router.push(url);
   };
+
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsConfirmOpen(true);
