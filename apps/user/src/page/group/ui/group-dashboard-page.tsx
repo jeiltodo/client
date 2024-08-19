@@ -23,7 +23,7 @@ import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroupGoal';
 
 export const GroupDashboardPage = () => {
-  const params: { id: string } = useParams();
+  const params = useParams();
   const groupId = Number(params.id);
   const [openModal, setOpenModal] = useState(false);
 

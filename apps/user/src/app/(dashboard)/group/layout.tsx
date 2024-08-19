@@ -1,4 +1,4 @@
-export default function GoalRootLayout({
+export default function GroupRootLayout({
   children,
 }: {
   children: React.ReactNode;

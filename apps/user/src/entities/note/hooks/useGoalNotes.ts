@@ -1,10 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { noteQueryKeys } from '../queryKeys';
 import { getGoalNotes, GetGoalNotesParam } from '../api/noteApi';
+import { calculateTotalPages } from '../../../shared';
 
-export const useGoalNotes = ({ goalId, page, limit }: GetGoalNotesParam) => {
-  return useQuery({
-    queryKey: noteQueryKeys.note.allOfGoal(goalId, page, limit),
-    queryFn: () => getGoalNotes({ goalId, page, limit }),
+interface PageInfo {
+  totalCount: number;
+  currentPage: number;
+}
+
+export const useGoalNotes = ({ goalId, limit }: GetGoalNotesParam) => {
+  return useInfiniteQuery({
+    queryKey: noteQueryKeys.note.allOfGoal(goalId),
+    queryFn: ({ pageParam }) =>
+      getGoalNotes(goalId, { page: pageParam, limit }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      const { totalCount, currentPage } = lastPage.data as PageInfo;
+
+      const totalPages = calculateTotalPages(totalCount, limit);
+      return currentPage < totalPages ? currentPage + 1 : undefined;
+    },
   });
 };

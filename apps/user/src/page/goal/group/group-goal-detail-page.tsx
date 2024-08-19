@@ -1,6 +1,5 @@
 'use client';
 import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
-// import { TitleProgressBarCard } from '../../widgets/goal';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 
 import {
@@ -8,8 +7,7 @@ import {
   useGroupSingleGoal,
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
-// import { useState } from 'react';
-// import { TodoModal } from '../../entities/todo';
+
 import { Plus } from '@jeiltodo/icons';
 import { useGroupDetail } from '../../../entities/group';
 import { TitleProgressBarCard } from '../../../widgets/goal';

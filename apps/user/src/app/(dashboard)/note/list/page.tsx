@@ -1,5 +1,5 @@
-import { ListPage } from '../../../../page/note';
+import { ListPage } from "../../../../page/note";
 
-export default function NoteList() {
+export default function Page() {
 	return <ListPage />;
 }
