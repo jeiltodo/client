@@ -4,6 +4,8 @@ import { Counter, Input } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
 
 interface EditorFormProps {
+  link: string;
+  setLink: React.Dispatch<React.SetStateAction<string>>;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
@@ -11,6 +13,8 @@ interface EditorFormProps {
 }
 
 export const EditorForm = ({
+  link,
+  setLink,
   title,
   setTitle,
   content,

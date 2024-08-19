@@ -28,13 +28,10 @@ export const getNoteDetail = async (noteId: number) => {
   return response.data;
 };
 
-//CREATE 요청 : 노트 생성
-export const createNote = async ({
-  todoId,
-  title,
-  content,
-  linkUrl,
-}: NotePostParam) => {
+export const createNote = async (
+  todoId: number,
+  { title, content, linkUrl }: Omit<NotePostParam, 'todoId'>
+) => {
   try {
     const response = await client.post('note/create', {
       todoId,
@@ -49,13 +46,10 @@ export const createNote = async ({
   }
 };
 
-//PATCH 요청 : 노트 수정
-export const patchNote = async ({
-  noteId,
-  title,
-  content,
-  linkUrl,
-}: NotePatchParam) => {
+export const patchNote = async (
+  noteId: number,
+  { title, content, linkUrl }: Omit<NotePatchParam, 'noteId'>
+) => {
   try {
     const response = await client.patch(`note/update/${noteId}`, {
       title,
@@ -69,7 +63,6 @@ export const patchNote = async ({
   }
 };
 
-// DELETE 요청 : 노트 삭제
 export const deleteNote = async (noteId: number) => {
   try {
     const response = await client.delete(`/note/delete/${noteId}`);

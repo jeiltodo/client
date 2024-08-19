@@ -4,7 +4,7 @@ import { Card, GoalTitleCard } from '../../../features/note';
 import { useGoalNotes } from '../../../entities/note/hooks/useGoalNotes';
 import React from 'react';
 
-export const CardListBoard = () => {
+export const NoteListBoard = () => {
   const params: { goalId: string } = useParams();
   const goalId = Number(params.goalId);
 
@@ -24,7 +24,11 @@ export const CardListBoard = () => {
             {item.data.notes.length !== 0 ? (
               item.data.notes.map((note) => (
                 <div key={note.id} className='flex-1 overflow-auto'>
-                  <Card noteData={note} key={note.id} />
+                  <Card
+                    noteData={note}
+                    key={note.id}
+                    goal={{ id: goalId, title: goalTitle ?? '목표' }}
+                  />
                 </div>
               ))
             ) : (

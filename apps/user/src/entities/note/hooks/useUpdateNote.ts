@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteNote } from '../api/noteApi';
+import { NotePatchParam, patchNote } from '../api/noteApi';
 
-export const useDeleteNote = (noteId: number) => {
+export const useUpdateNote = (noteId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => deleteNote(noteId),
+    mutationFn: (note: Omit< NotePatchParam, 'noteId'>) => patchNote(noteId,note),
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('notes'),
