@@ -91,12 +91,12 @@ export const MembersBorad = ({
           className='mt-10'
           isGroup={true}
         />
-        <BgGroupAvatar
-          width={180}
-          height={180}
-          className='absolute -bottom-6 right-0'
-        />
       </div>
+      <BgGroupAvatar
+        width={215}
+        height={215}
+        className='absolute -bottom-9 right-0'
+      />
     </div>
   );
 };
