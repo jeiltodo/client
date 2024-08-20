@@ -24,7 +24,7 @@ import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroup
 
 export const GroupDashboardPage = () => {
   const params = useParams();
-  const groupId = Number(params.id);
+  const groupId = Number(params?.id);
   const [openModal, setOpenModal] = useState(false);
 
   const {
