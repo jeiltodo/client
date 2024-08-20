@@ -17,7 +17,6 @@ export const TodoContent = ({
   isGroup = false,
 }: Props) => {
   const { id, title, isDone, noteId } = todo;
-  console.log('todoContent isGroup: ', isGroup);
 
   return (
     <span className='inline-flex gap-2 items-center '>
