@@ -12,7 +12,7 @@ export const useDeleteGroupGoal = (groupId: number) => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('goals'),
       });
-      showToast({ message: '목표 삭제 성공!', type: 'alert' });
+      showToast({ message: '목표 삭제 성공!', type: 'alert', isGroup: true });
     },
   });
 };

@@ -12,7 +12,7 @@ export const useRemoveMember = (groupId: number) => {
       queryClient.invalidateQueries({
         queryKey: groupQueryKeys.detail(groupId),
       });
-      showToast({ message: '삭제 성공!', type: 'alert' });
+      showToast({ message: '삭제 성공!', type: 'alert', isGroup: true });
     },
   });
 };
