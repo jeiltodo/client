@@ -18,9 +18,10 @@ import { useRouter } from 'next/navigation';
 
 interface Props {
   todos: (Todo & { goal: Goal })[];
+  isGroup?: boolean;
 }
 
-export const IndividualTodoList = ({ todos }: Props) => {
+export const TodoList = ({ todos, isGroup = false }: Props) => {
   const router = useRouter();
   const [editModalId, setEditModalId] = useState<number | null>(null);
   const [noteSlideModalId, setNoteSlideModalId] = useState<number | null>(null);
@@ -81,13 +82,14 @@ export const IndividualTodoList = ({ todos }: Props) => {
       {todos.map(({ id, title, isDone, goal, noteId }) => (
         <li
           key={id}
-          className='list-none w-full h-6 flex justify-between group '
+          className='list-none w-full h-6 flex justify-between group relative'
         >
           <span className='inline-flex gap-2 items-center min-w-[80%]'>
             <TodoContent
               key={id}
               todo={{ id, title, isDone }}
               onCheck={handleCheck}
+              isGroup={isGroup}
             />
           </span>
           <TodoButtons

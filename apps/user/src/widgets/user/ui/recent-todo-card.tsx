@@ -1,8 +1,8 @@
-'use client'
+'use client';
 import { useQuery } from '@tanstack/react-query';
 import { individualGoalsOptions } from '../../../entities/goal';
 import { useRecentTodo } from '../../../entities/todo/hooks/useRecentTodo';
-import { IndividualTodoList } from '../../../features/todo';
+import { TodoList } from '../../../features/todo';
 
 export const RecentTodoCard = () => {
   const { data: individualGoals } = useQuery(individualGoalsOptions());
@@ -17,7 +17,7 @@ export const RecentTodoCard = () => {
 
   return (
     <section className='h-[152px]'>
-      <IndividualTodoList todos={allTodos} />
+      <TodoList todos={allTodos} />
     </section>
   );
 };

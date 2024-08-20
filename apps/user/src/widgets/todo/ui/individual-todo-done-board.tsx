@@ -1,6 +1,6 @@
 import type { SingleGoalTodo } from '../../../entities/todo';
 import { Goal } from '../../../entities/goal';
-import { IndividualTodoList } from '../../../features/todo';
+import { TodoList } from '../../../features/todo';
 
 export const IndividualTodoDoneBoard = ({
   todos,
@@ -30,7 +30,7 @@ export const IndividualTodoDoneBoard = ({
             <div className='flex items-start justify-between'>
               <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
             </div>
-            <IndividualTodoList todos={notDone} />
+            <TodoList todos={notDone} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -47,7 +47,7 @@ export const IndividualTodoDoneBoard = ({
         {done.length !== 0 ? (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <IndividualTodoList todos={done} />
+            <TodoList todos={done} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>

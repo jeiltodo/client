@@ -7,8 +7,8 @@ import {
   userOptions,
 } from '../../../entities/goal';
 import { TodoModal } from '../../../entities/todo';
-import { IndividualTodoList } from '../../../features/todo';
-import { ArrowRight, PlusBlue } from '@jeiltodo/icons';
+import { TodoList } from '../../../features/todo';
+import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
@@ -52,25 +52,24 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
           className='flex gap-1 items-center text-sm'
           onClick={handleAddModal}
         >
-          <PlusBlue width={16} height={16} />
-          할 일 추가
+          <Plus width={16} height={16} />할 일 추가
         </Button>
       </div>
 
-      <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>
+      <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2 '>
         <ProgressBar progress={goal.progress} />
       </div>
-      <div className='w-full tablet:grid tablet:grid-cols-2 tablet:divide-x tablet:divide-gray-200 mt-4 mb-5'>
+      <div className='w-full flex flex-wrap gap-6 desktop:!flex-nowrap mt-4 mb-5 pt-4'>
         {notDone.length !== 0 && (
-          <div className='w-full tablet:pr-6'>
+          <div className='w-full'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-            <IndividualTodoList todos={notDone} />
+            <TodoList todos={notDone} />
           </div>
         )}
         {done.length !== 0 && (
-          <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
+          <div className='w-full '>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <IndividualTodoList todos={done} />
+            <TodoList todos={done} />
           </div>
         )}
       </div>

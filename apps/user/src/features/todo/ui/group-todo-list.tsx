@@ -76,7 +76,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   };
 
   return (
-    <ul className='w-full flex flex-wrap gap-2'>
+    <ul className='w-full flex flex-wrap gap-1'>
       {todos.map(({ id, title, isDone, memberInCharge, noteId }) => (
         <li key={id} className='list-none w-full flex justify-between group '>
           <span className='inline-flex gap-4 items-center min-w-[280px]'>
@@ -84,6 +84,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
               key={id}
               todo={{ id, title, isDone }}
               disabled={memberInCharge === null}
+              isGroup={true}
               onCheck={handleCheck}
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
