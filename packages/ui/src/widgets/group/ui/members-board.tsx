@@ -1,5 +1,5 @@
 'use client';
-import { Group as GroupIcon } from '@jeiltodo/icons';
+import { BgGroupAvatar, Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import {
   MembersBoardProvider,
@@ -62,8 +62,8 @@ export const MembersBorad = ({
   };
 
   return (
-    <div className='w-full px-6 py-4 rounded-lg bg-groupColor-500'>
-      <div className='w-full h-full bg-avatar-background'>
+    <div className='w-full px-6 py-4 rounded-lg bg-groupColor-500 relative'>
+      <div className='w-full h-full bg-avatar-background relative'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex gap-4 items-center'>
             <div className='flex gap-2 items-center'>
@@ -90,6 +90,11 @@ export const MembersBorad = ({
           variant='secondary'
           className='mt-10'
           isGroup={true}
+        />
+        <BgGroupAvatar
+          width={180}
+          height={180}
+          className='absolute -bottom-6 right-0'
         />
       </div>
     </div>
