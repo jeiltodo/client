@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button, Sidebar } from '@jeiltodo/ui/shared';
 import { Individual, Group, Plus, Search } from '@jeiltodo/icons';
@@ -20,20 +20,43 @@ import {
   useIndividualGoalMutation,
 } from '../../../entities/user/hooks/individualGoalOptions';
 import { userOptions } from '../../../entities/user';
+import { AxiosError } from 'axios';
+import { useToast } from '@jeiltodo/ui/shared';
 
 export const SidebarUser = () => {
   const [goalToggle, setGoalToggle] = useState<boolean>(false);
   const [groupCreateToggle, setGroupCreateToggle] = useState<boolean>(false);
   const [groupAttendToggle, setGroupAttendToggle] = useState<boolean>(false);
+  const [isOnErrorAttendGroup, setIsOnErrorAttendGroup] =
+    useState<boolean>(true);
+  const [isOnErrorCreateGroup, setIsOnErrorCreateGroup] =
+    useState<boolean>(true);
 
   const queryClient = useQueryClient();
+  const showToast = useToast();
 
   const { data: individualGoals } = useQuery(individualGoalsOptions());
   const { mutate: createGoal } = useIndividualGoalMutation();
 
   const { data: group } = useQuery(groupOptions());
-  const createGroupMutation = useGroupMutation();
-  const { mutate: attendGroup } = useGroupAttendMutation();
+  const createGroupMutation = useGroupMutation((error: AxiosError) => {
+    if (error.response?.status === 409) {
+      showToast({ message: '이미 사용 중인 이름입니다.', type: 'confirm' });
+      setIsOnErrorCreateGroup(true);
+    }
+  });
+  const { mutate: attendGroup } = useGroupAttendMutation(
+    (error: AxiosError) => {
+      if (error.response?.status === 404) {
+        showToast({ message: '존재하지 않는 그룹입니다.', type: 'confirm' });
+        setIsOnErrorAttendGroup(true);
+      }
+      if (error.response?.status === 409) {
+        showToast({ message: '이미 참여한 그룹입니다.', type: 'confirm' });
+        setIsOnErrorAttendGroup(true);
+      }
+    }
+  );
 
   const { data: userInfo } = useQuery(userOptions());
 
@@ -41,36 +64,48 @@ export const SidebarUser = () => {
     createGoal(title, {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey.includes('individual'),
+          predicate: (query) => query.queryKey.includes('individual'),
         });
         queryClient.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey.includes('todos'),
+          predicate: (query) => query.queryKey.includes('todos'),
         });
       },
     });
   };
 
   const handleCreateGroup = (title: string) => {
+    setIsOnErrorCreateGroup(true);
     createGroupMutation.mutate(title, {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: individualGoalsOptions().queryKey,
         });
+        setIsOnErrorCreateGroup(false);
       },
     });
   };
 
   const handleAttendGroup = (secretCode: string) => {
+    setIsOnErrorAttendGroup(true);
     attendGroup(secretCode, {
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: individualGoalsOptions().queryKey,
         });
+        setIsOnErrorAttendGroup(false);
       },
     });
   };
+  useEffect(() => {
+    if (!isOnErrorAttendGroup) {
+      setGroupAttendToggle(false);
+    }
+  }, [isOnErrorAttendGroup]);
+  useEffect(() => {
+    if (!isOnErrorCreateGroup) {
+      setGroupCreateToggle(false);
+    }
+  }, [isOnErrorCreateGroup]);
 
   return (
     <>
@@ -85,12 +120,14 @@ export const SidebarUser = () => {
         <GroupCreateModal
           setGroupCreateToggle={setGroupCreateToggle}
           handleCreateGroup={handleCreateGroup}
+          isOnError={isOnErrorCreateGroup}
         />
       )}
       {groupAttendToggle && (
         <GroupAttendModal
           setGroupAttendToggle={setGroupAttendToggle}
           handleAttendGroup={handleAttendGroup}
+          isOnError={isOnErrorAttendGroup}
         />
       )}
       <Sidebar>
