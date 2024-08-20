@@ -2,7 +2,7 @@
 
 import { Button } from '@jeiltodo/ui/shared';
 import { GroupGoalWithTodos } from '../../../entities/goal';
-import { ArrowRight, Plus } from '@jeiltodo/icons';
+import { ArrowRight, PlusOrange } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
@@ -36,7 +36,6 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const handleMore = () => {
     router.push(`/goal/group/${groupId}/${goal.id}`);
   };
-  console.log(goal);
 
   return (
     <div className='min-w-[280px] w-full p-6 rounded-3xl bg-groupColor-50 tablet:min-w-[560px] '>
@@ -47,8 +46,7 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
           className='flex gap-1 items-center text-sm text-groupColor-500'
           onClick={handleAddTodo}
         >
-          <Plus width={16} height={16} />
-          할 일 추가
+          <PlusOrange width={16} height={16} />할 일 추가
         </Button>
       </div>
       <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>

@@ -5,6 +5,8 @@ type Variant =
   | 'primary'
   | 'dark'
   | 'outline'
+  | 'outline-no-border'
+  | 'group-dark'
   | 'group-outline'
   | 'outline-date'
   | 'outline-status'
@@ -14,6 +16,7 @@ type Variant =
   | 'rounded-outline-blue'
   | 'text-gray'
   | 'text-blue'
+  | 'text-group-color'
   | 'success'
   | 'warning'
   | 'error';
@@ -67,8 +70,12 @@ export function Button({
     dark: 'bg-slate-900 py-2 px-[10px] text-white rounded-xl hover:bg-slate-600 active:bg-slate-800',
     outline:
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
+    'outline-no-border':
+      'bg-transparent rounded-xl hover:text-groupColor-600 active:border-groupColor-800 active:text-groupColor-800',
     'group-outline':
       'bg-transparent text-groupColor-500 border border-groupColor-500 rounded-xl hover:border-groupColor-600 hover:text-groupColor-600 active:border-groupColor-800 active:text-groupColor-800',
+    'group-dark':
+      'text-white rounded-xl bg-groupColor-900 hover:bg-groupColor-950 active:bg-groupColor-950',
     'outline-date':
       'bg-transparent text-blue-500 border border-blue-500 rounded-[8px] hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'outline-status':
@@ -82,6 +89,8 @@ export function Button({
     'rounded-outline-blue':
       'border border-[1px] border-blue-500 rounded-full text-blue-500 bg-white hover:border-blue-600 hover:text-blue-600 active:border-blue-800 active:text-blue-800',
     'text-gray': 'text-slate-600 hover:text-slate-700 active:text-slate-800',
+    'text-group-color':
+      'text-groupColor-600 hover:text-groupColor-800 active:text-groupColor-900',
     'text-blue':
       'text-blue-500 hover:text-blue-600 active:text-blue-800 active:border-none',
     success:

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { BoardMode } from '@jeiltodo/ui/shared';
@@ -27,8 +27,8 @@ export const MembersManageButtons = ({ onSave }: Props) => {
       {mode === 'default' && (
         <ButtonGroup>
           <Button
-            variant='outline'
-            className='bg-white py-2 px-[10px]'
+            variant='outline-no-border'
+            className='bg-white px-[10px] text-groupColor-500 min-w-[84px] h-[36px]'
             onClick={() => {
               handleChangeMode('change-leader');
             }}
@@ -36,7 +36,8 @@ export const MembersManageButtons = ({ onSave }: Props) => {
             그룹장 변경
           </Button>
           <Button
-            variant='dark'
+            variant='group-dark'
+            className='px-[10px] h-[36px]'
             onClick={() => {
               handleChangeMode('manage-members');
             }}
