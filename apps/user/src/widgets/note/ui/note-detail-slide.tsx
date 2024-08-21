@@ -35,8 +35,8 @@ export const NoteDetailSlide = ({
   const markDownText = `${noteDetail?.content}`;
 
   const handleEdit = () => {
-    const url = noteDetail?.id
-      ? `/note/${goalId}/${todoId}/${noteDetail.id}?title=${goalTitle}`
+    const url = noteId
+      ? `/note/${goalId}/${todoId}/${noteId}?title=${goalTitle}`
       : `/note/${goalId}/${todoId}/new?title=${goalTitle}`;
     router.push(url);
   };

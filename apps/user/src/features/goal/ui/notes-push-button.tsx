@@ -31,7 +31,7 @@ export const NotesPushButton = ({
       <ArrowRight
         width={24}
         height={24}
-        // className='group-hover:transform group-hover:translate-x-1 transition-transform duration-500'
+        className='group-hover:transform group-hover:translate-x-1 transition-transform duration-500'
       />
     </button>
   );

@@ -1,6 +1,6 @@
 import type { SingleGroupGoalTodo } from '../../../entities/todo';
-import { IndividualTodoList } from '../../../features/todo';
-import { Goal } from '../../../entities/goal';
+import { TodoList } from '../../../features/todo';
+import type { Goal } from '../../../entities/goal';
 
 export const GroupTodoDoneBoard = ({
   todos,
@@ -55,7 +55,7 @@ export const GroupTodoDoneBoard = ({
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 To do
             </p>
-            <IndividualTodoList todos={userNotDone} isGroup={true} />
+            <TodoList todos={userNotDone} isGroup={true} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -74,7 +74,7 @@ export const GroupTodoDoneBoard = ({
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 Done
             </p>
-            <IndividualTodoList todos={userDone} isGroup={true} />
+            <TodoList todos={userDone} isGroup={true} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>

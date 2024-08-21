@@ -88,7 +88,8 @@ export const IndividualGoalDetailPage = ({
                 className='flex gap-1 items-center text-sm h-[20px]'
                 onClick={openAddTodoModal}
               >
-                <PlusBlue width={16} height={16} />할 일 추가
+                <PlusBlue width={16} height={16} />
+                할일 추가
               </Button>
             </div>
             <IndividualTodoDoneBoard todos={singleGoalTodo} goal={singleGoal} />

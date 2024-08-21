@@ -1,6 +1,8 @@
 export type Group = {
   id: number;
   title: string;
+  createdAt: string;
+  updatedAT: string;
   secretCode: string;
   createUser: string;
 };

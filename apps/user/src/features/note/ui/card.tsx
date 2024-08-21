@@ -3,7 +3,7 @@ import { NoteList, Kebab } from '@jeiltodo/icons';
 import type { Note } from '@jeiltodo/ui/shared';
 import { CardFlyout, TodoTitle } from '@jeiltodo/ui/shared';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NoteDetailSlide } from '../../../widgets/note/ui/note-detail-slide';
 import { ConfirmationModal } from '../../../shared';
 import { useDeleteNote } from '../../../entities/note/hooks/useDeleteNote';
@@ -14,16 +14,15 @@ interface CardProps {
 }
 
 export const Card = ({ noteData, goal }: CardProps) => {
-  const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
+  const [noteSlideModalId, setNoteSlideModalId] = useState<number | null>(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const router = useRouter();
 
   const handleSlideOpen = () => {
-    if (noteData.id) {
-      setIsSlideOpen((prev) => !prev);
-    }
+    setNoteSlideModalId(noteData.id);
   };
 
   const handleKebab = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -47,6 +46,11 @@ export const Card = ({ noteData, goal }: CardProps) => {
     deleteNote();
     setIsConfirmOpen(false);
   };
+
+  useEffect(() => {
+    console.log(noteSlideModalId, 'chage');
+  }, [noteSlideModalId]);
+
   return (
     <div
       className='flex flex-col gap-y-[12px] bg-white rounded-[12px] p-[24px] mb-[12px]'
@@ -81,13 +85,13 @@ export const Card = ({ noteData, goal }: CardProps) => {
       <span className='w-full h-[1px] bg-slate-200' />
       <TodoTitle title={noteData.todo.title} />
 
-      {isSlideOpen && (
+      {noteSlideModalId !== null && noteSlideModalId === noteData.id && (
         <NoteDetailSlide
           goalId={goal.id}
           goalTitle={goal.title}
           noteId={noteData.id}
           todoId={noteData.todo.id}
-          setToggle={setIsSlideOpen}
+          setToggle={() => setNoteSlideModalId(null)}
         />
       )}
       {isConfirmOpen && (
