@@ -147,12 +147,12 @@ export const EditorForm = ({
               <div className='flex items-center justify-between bg-slate-200 h-[38px] py-[7px] px-[6px] rounded-[20px]'>
                 <div className='flex items-center justify-start gap-2'>
                   <LinkEmbed className='h-[18px] w-[18px]' />
-                  <div className='text-base font-normal text-slate-800 truncate max-w-[724px] pt-[2px]'>
+                  <div className='text-base font-normal text-slate-800 truncate max-w-[722px] pt-[2px]'>
                     {link}
                   </div>
                 </div>
                 <LinkDelete
-                  className='h-[18px] w-[18px] cursor-pointer'
+                  className='h-[20px] w-[20px] cursor-pointer'
                   onClick={() => setLink('')}
                 />
               </div>
@@ -172,33 +172,34 @@ export const EditorForm = ({
                 display: block;
                 margin: 12px 0px;
                 width: 100%;
-                // background-color: #ffffff;
-                border-color: #e2e8f0;
+                z-index: 10;
+                border: 1px solid #e2e8f0;
                 border-radius: 21.5px;
               }
-              .ql-container{
+              .ql-container {
                 min-height: 55vh;
-                border-color: #e2e8f0;
+                width: 100%;
+                border: 1px solid #e2e8f0 !important;
                 border-radius: 21.5px;
+                z-index: 5;
               }
               .ql-editor {
-              padding: 0;
                 min-height: 55vh;
-                max-height: 50vh;
+                width: 100%;
                 font-size: 16px;
                 line-height: 1.5;
                 -ms-overflow-style: none;
                 scrollbar-width: none;
               }
               .ql-editor::-webkit-scrollbar {
-                display: none; 
+                display: none;
               }
               .ql-toolbar.ql-snow .ql-formats {
                 margin-right: 8px;
               }
             `}</style>
             <div
-              className='py-[1px] px-[3px] absolute top-[117px] right-4'
+              className={`py-[1px] px-[3px] absolute ${link ? ' top-[155px]' : ' top-[117px]'} right-4`}
               onClick={() => setLinkModal(true)}
             >
               <Link className='w-[22px] h-[22px] cursor-pointer ' />
