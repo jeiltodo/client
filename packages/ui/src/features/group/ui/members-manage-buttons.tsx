@@ -1,4 +1,5 @@
 'use client';
+'use client';
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { BoardMode } from '@jeiltodo/ui/shared';
@@ -47,8 +48,8 @@ export const MembersManageButtons = ({ onSave }: Props) => {
       {mode !== 'default' && (
         <ButtonGroup>
           <Button
-            variant='outline'
-            className='bg-white py-2 px-[10px] min-w-[84px]'
+            variant='outline-no-border'
+            className='bg-white px-[10px] min-w-[84px] h-[36px]'
             onClick={() => {
               handleCancle();
             }}
@@ -56,8 +57,8 @@ export const MembersManageButtons = ({ onSave }: Props) => {
             취소
           </Button>
           <Button
-            variant='dark'
-            className='min-w-[84px]'
+            variant='group-dark'
+            className='min-w-[84px] h-[36px]'
             onClick={() => {
               handleSave();
             }}

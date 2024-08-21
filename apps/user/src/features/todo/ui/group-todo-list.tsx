@@ -86,6 +86,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
               disabled={memberInCharge === null}
               isGroup={true}
               onCheck={handleCheck}
+              isGroup={true}
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
           </span>
@@ -93,6 +94,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
             onClickEdit={() => handleClickEdit(id)}
             onClickRemove={() => handleClickRemove(id)}
             onClickNote={() => handleClickNote(id, noteId)}
+            isGroup={true}
           />
           {editModalId === id && (
             <TodoModal

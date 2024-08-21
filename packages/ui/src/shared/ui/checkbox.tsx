@@ -52,7 +52,7 @@ export const Checkbox = ({
             width={24}
             height={24}
             aria-hidden='true'
-            className='text-blue-600'
+            className={`${isGroup ? 'text-groupColor-500' : 'text-blue-600'}`}
           />
         )}
       </div>

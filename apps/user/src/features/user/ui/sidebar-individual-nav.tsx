@@ -30,7 +30,7 @@ export const SidebarIndividualNav = ({
         </Link>
       </div>
       {individualGoals?.length !== 0 ? (
-        <div className='px-5 max-h-36 overflow-y-scroll scrollbar-thin w-full'>
+        <div className='px-5 max-h-[126px] overflow-y-scroll scrollbar-hide w-full'>
           {individualGoals?.map((goal) => (
             <div
               key={goal.id}

@@ -2,7 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { BoardTitle, Button, MembersBoardProvider } from '@jeiltodo/ui/shared';
+import {
+  BoardTitle,
+  Button,
+  LoadingSpinner,
+  MembersBoardProvider,
+} from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
 import { GroupOverviewBoard, GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { MembersBorad } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
@@ -41,7 +46,7 @@ export const GroupDashboardPage = () => {
   const { ref, inView } = useInView();
 
   const { data: user } = useQuery(userOptions());
-  const { data: group } = useGroupDetail(groupId);
+  const { data: group, isLoading } = useGroupDetail(groupId);
   const { data: newCode } = useGroupCode(groupId);
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
@@ -78,7 +83,7 @@ export const GroupDashboardPage = () => {
   }, [inView]);
 
   if (!group) {
-    return <div></div>;
+    return <LoadingSpinner />;
   }
 
   const isUserALeader =

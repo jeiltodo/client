@@ -3,7 +3,7 @@ import { BgGroupAvatar, GroupFill, Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import { Pagination, useBoardContext } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features';
-import { GroupWithMembers, Member } from '../../../entities';
+import { GroupWithMembers } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
 import { useState } from 'react';
 
@@ -68,13 +68,11 @@ export const MembersBorad = ({
             </div>
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
               <span className='text-slate-800'>{group.members.length}</span>
-              <span className='text-blue-500'>/10</span>
+              <span className='text-groupColor-500'>/10</span>
             </div>
           </div>
 
-          {isUserALeader && formattedMembers.length !== 1 && (
-            <MembersManageButtons onSave={handleSave} />
-          )}
+          {isUserALeader && <MembersManageButtons onSave={handleSave} />}
         </div>
         <MemberList
           members={formattedMembers}
@@ -94,6 +92,11 @@ export const MembersBorad = ({
           className='block w-[184px] h-[184px] absolute z-10 right-[-32px] bottom-[-24px]'
         />
       </div>
+      <BgGroupAvatar
+        width={215}
+        height={215}
+        className='absolute -bottom-9 right-0'
+      />
     </div>
   );
 };

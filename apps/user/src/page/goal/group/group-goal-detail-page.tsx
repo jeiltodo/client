@@ -1,5 +1,5 @@
 'use client';
-import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
+import { Button, LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 
 import {
@@ -8,7 +8,7 @@ import {
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 
-import { Plus, PlusOrange } from '@jeiltodo/icons';
+import { PlusOrange } from '@jeiltodo/icons';
 import { useGroupDetail } from '../../../entities/group';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
@@ -75,25 +75,25 @@ export const GroupGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <div className='max-w-[1200px]'>
-      {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
-        <>
-          <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
-          <div className='flex flex-col gap-y-6'>
+    <div className='max-w-[1200px] mobile:pt-4 tablet:pt-0'>
+      <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
+      <div className='flex flex-col gap-y-6 relative'>
+        {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
+          <>
             <TitleProgressBarCard
               goalData={singleGroupGoal}
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
             <NotesPushButton goalData={singleGroupGoal} isGroup={true} />
-            <div className='w-full flex justify-end'>
-              <button
-                className={`flex gap-1 items-center text-sm h-[20px] text-orange-500 font-semibold`}
+            <div className='flex items-center justify-end'>
+              <Button
+                variant='text-group-color'
+                className='flex gap-1 items-center text-sm h-[20px]'
                 onClick={openAddTodoModal}
               >
-                <PlusOrange width={16} height={16} />
-                할일 추가
-              </button>
+                <PlusOrange width={16} height={16} />할 일 추가
+              </Button>
             </div>
             {user?.id && (
               <GroupTodoDoneBoard
@@ -130,9 +130,11 @@ export const GroupGoalDetailPage = ({
                 goals={groupGoalsForModal}
               />
             )}
-          </div>
-        </>
-      ) : null}
+          </>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
     </div>
   );
 };

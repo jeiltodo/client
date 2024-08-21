@@ -27,6 +27,7 @@ export const TodoContent = ({
         onChange={() => {
           onCheck(id);
         }}
+        isGroup={isGroup}
       />
       <label className={`text-sm text-slate-800 ${isDone && 'line-through'}`}>
         {title}

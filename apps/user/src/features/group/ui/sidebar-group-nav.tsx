@@ -9,7 +9,7 @@ interface SidebarGroupNavProps {
 
 export const SidebarGroupNav = ({ group }: SidebarGroupNavProps) => {
   return (
-    <div className='border-t-[1px] border-slate-200 flex flex-col gap-2 py-4 max-h-[180px] mb-6 overflow-y-scroll scrollbar-hide'>
+    <div className=' flex flex-col gap-4 my-4 max-h-[176px] overflow-y-scroll scrollbar-hide'>
       {group?.length !== 0 ? (
         <>
           {group?.map((item) => (

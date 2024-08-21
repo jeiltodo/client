@@ -72,7 +72,7 @@ export const EditorPage = () => {
         { title, content, linkUrl },
         {
           onSuccess: () => {
-            router.push(`/note/list/${goalId}?title=${goalTitle}`);
+            router.replace(`/note/list/${goalId}?title=${goalTitle}`);
           },
         }
       );
@@ -81,7 +81,7 @@ export const EditorPage = () => {
         { title, content, linkUrl },
         {
           onSuccess: () => {
-            router.push(`/note/list/${goalId}?title=${goalTitle}`);
+            router.replace(`/note/list/${goalId}?title=${goalTitle}`);
           },
         }
       );

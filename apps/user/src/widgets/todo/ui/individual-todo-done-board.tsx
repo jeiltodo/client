@@ -23,7 +23,7 @@ export const IndividualTodoDoneBoard = ({
   const notDone = todosForList.filter((todo) => !todo.isDone);
 
   return (
-    <div className='desktop:grid-rows-2 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
+    <div className='desktop:grid-rows-1  tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
       <div className='bg-white rounded-xl px-6 py-4'>
         {notDone.length !== 0 ? (
           <div className=''>

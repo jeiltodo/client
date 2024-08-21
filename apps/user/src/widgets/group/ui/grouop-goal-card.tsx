@@ -2,7 +2,7 @@
 
 import { Button } from '@jeiltodo/ui/shared';
 import { GroupGoalWithTodos } from '../../../entities/goal';
-import { ArrowRight, Plus, PlusOrange } from '@jeiltodo/icons';
+import { ArrowRight, PlusOrange } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
@@ -42,11 +42,11 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
       <div className='flex justify-between'>
         <p className='text-lg font-bold text-slate-800'>{goal.title}</p>
         <Button
-          variant='text-blue'
-          className='flex gap-1 items-center text-sm text-groupColor-500'
+          variant='text-group-color'
+          className='flex gap-1 items-center text-sm h-[20px]'
           onClick={handleAddTodo}
         >
-          <PlusOrange width={16} height={16} className='w-4 h-4' />
+          <PlusOrange width={16} height={16} />
           할일 추가
         </Button>
       </div>

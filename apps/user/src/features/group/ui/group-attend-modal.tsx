@@ -7,17 +7,19 @@ import { BaseModal } from '../../../shared/ui/base-modal';
 interface GroupAttendModalProps {
   setGroupAttendToggle: Dispatch<SetStateAction<boolean>>;
   handleAttendGroup: (secretCode: string) => void;
+  isOnError?: boolean;
 }
 export const GroupAttendModal = ({
   setGroupAttendToggle,
-  handleAttendGroup
+  handleAttendGroup,
+  isOnError = false,
 }: GroupAttendModalProps) => {
   const [secretCode, setSecretCode] = useState<string>('');
 
   const handleSubmit = () => {
     if (secretCode) {
       handleAttendGroup(secretCode);
-      setGroupAttendToggle(false); // 모달 닫기
+      !isOnError && setGroupAttendToggle(false); // 모달 닫기
     }
   };
 
@@ -38,7 +40,11 @@ export const GroupAttendModal = ({
           className='w-full text-base font-normal'
         />
       </div>
-      <Button isDisabled={!secretCode} className='w-full mt-10 h-12' onClick={handleSubmit}>
+      <Button
+        isDisabled={!secretCode}
+        className='w-full mt-10 h-12'
+        onClick={handleSubmit}
+      >
         확인
       </Button>
     </BaseModal>

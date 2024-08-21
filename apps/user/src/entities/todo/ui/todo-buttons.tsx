@@ -1,4 +1,4 @@
-import { Kebab, NoteView } from '@jeiltodo/icons';
+import { Kebab, NoteView, NoteViewGroup } from '@jeiltodo/icons';
 import { Flyout } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
 
@@ -6,11 +6,13 @@ interface Props {
   onClickNote: () => void;
   onClickEdit: () => void;
   onClickRemove: () => void;
+  isGroup?: boolean;
 }
 export const TodoButtons = ({
   onClickEdit,
   onClickRemove,
   onClickNote,
+  isGroup = false,
 }: Props) => {
   const [isFlyoutOpen, setFlyoutOpen] = useState(false);
 
@@ -28,14 +30,23 @@ export const TodoButtons = ({
     setFlyoutOpen(false);
   };
   return (
-    <div onMouseLeave={() => setFlyoutOpen(false)}>
+    <div className='relative' onMouseLeave={() => setFlyoutOpen(false)}>
       <span className='inline-flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100'>
-        <NoteView
-          width={24}
-          height={24}
-          onClick={onClickNote}
-          className='cursor-pointer'
-        />
+        {isGroup ? (
+          <NoteViewGroup
+            width={24}
+            height={24}
+            onClick={onClickNote}
+            className='cursor-pointer'
+          />
+        ) : (
+          <NoteView
+            width={24}
+            height={24}
+            onClick={onClickNote}
+            className='cursor-pointer'
+          />
+        )}
         <Kebab
           width={24}
           height={24}
