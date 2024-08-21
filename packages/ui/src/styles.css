@@ -4,29 +4,33 @@
 
 /* Toast style custom */
 .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--success {
-  background: #eff6ff;
-  color: #3b82f6;
-  border-radius: 28px;
+  background: transparent;
+  right: 0;
+  top: 0;
   font-size: 14px;
   font-weight: 400;
-  padding: 0px 24px;
+  padding: 0;
+  margin: 0;
   box-shadow: none;
   min-height: 44px;
   height: 44px;
 }
 .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--info {
-  background: #eff6ff;
-  color: #3b82f6;
-  border-radius: 28px;
+  background: #ffcccc;
+  right: 0;
+  top: 0;
   font-size: 14px;
   font-weight: 400;
   padding: 0px 12px 0px 24px;
   box-shadow: none;
   min-height: 56px;
   height: 56px;
+  border-radius: 28px;
 }
 .Toastify__toast-container {
-  width: 700px !important;
+  width: 400px !important;
+  border: none;
+  background-color: transparent;
 }
 
 .Toastify__toast-body {
@@ -35,4 +39,23 @@
 }
 .Toastify__close-button {
   display: none;
+}
+
+:root {
+  --sidebar-width: 60px; /* 기본값 설정 */
+}
+.Toastify__toast-container {
+  margin-left: 16px;
+}
+
+@media (min-width: 480px) {
+  .Toastify__toast-container {
+    margin-left: 84px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .Toastify__toast-container {
+    margin-left: 360px;
+  }
 }

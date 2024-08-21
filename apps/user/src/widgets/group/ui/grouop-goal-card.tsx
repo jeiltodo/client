@@ -42,8 +42,8 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
       <div className='flex justify-between'>
         <p className='text-lg font-bold text-slate-800'>{goal.title}</p>
         <Button
-          variant='text-blue'
-          className='flex gap-1 items-center text-sm text-groupColor-500'
+          variant='text-group-color'
+          className='flex gap-1 items-center text-sm h-[20px]'
           onClick={handleAddTodo}
         >
           <PlusOrange width={16} height={16} />할 일 추가

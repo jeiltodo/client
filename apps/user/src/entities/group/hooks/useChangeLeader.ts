@@ -12,7 +12,7 @@ export const useChangeLeader = (groupId: number) => {
       queryClient.invalidateQueries({
         queryKey: groupQueryKeys.detail(groupId),
       });
-      showToast({ message: '그룹장 변경 성공!', type: 'alert' });
+      showToast({ message: '그룹장 변경 성공!', type: 'alert', isGroup: true });
     },
   });
 };
