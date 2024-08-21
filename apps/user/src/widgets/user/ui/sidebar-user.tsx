@@ -137,7 +137,7 @@ export const SidebarUser = () => {
           title='개인'
           individualGoals={individualGoals}
         />
-        <div className='px-5 mb-[18px]'>
+        <div className='px-5 pb-[18px] border-b-[1px] border-slate-200'>
           <Button
             variant='outline-dark'
             className='flex items-center justify-center gap-1 w-full h-12'

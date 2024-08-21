@@ -4,14 +4,14 @@ import React, { useEffect } from 'react';
 import { useGoalsWithTodos, progressAllOptions } from '../../entities/goal';
 import { ProgressBoard, RecentTodoCard, UserGoalCard } from '../../widgets/user';
 import { useInView } from 'react-intersection-observer';
-import { BoardTitle } from '@jeiltodo/ui/shared';
+import { BoardTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import Link from 'next/link';
 import { ArrowRightGray } from '@jeiltodo/icons';
 import { useQuery } from '@tanstack/react-query';
 
 export const UserDashboardPage = () => {
   const { data: progress } = useQuery(progressAllOptions());
-  const { data, hasNextPage, fetchNextPage } = useGoalsWithTodos({
+  const { data, hasNextPage, fetchNextPage, isLoading } = useGoalsWithTodos({
     limit: 2,
   });
   const { ref, inView } = useInView();
@@ -37,18 +37,24 @@ export const UserDashboardPage = () => {
         </div>
         <ProgressBoard completedPercent={progress?.progress ?? 0} />
       </div>
-      <div className="desktop:max-w-[1200px] w-full first-letter:min-w-[280px] min-h-[50vh] flex-1 bg-white rounded-xl p-base">
+      <div className="desktop:max-w-[1200px] w-full first-letter:min-w-[280px] min-h-[50vh] flex-1 bg-white rounded-xl p-base relative">
         <BoardTitle icon="flag" title="개인 목표" />
-        <div className="flex flex-wrap gap-4 mt-6 overflow-y-scroll scrollbar-hide">
-          {data?.pages.map((group, i) => (
-            <React.Fragment key={i}>
-              {group.data.goals.map(goal => (
-                <UserGoalCard key={goal.id} {...goal} />
-              ))}
-            </React.Fragment>
-          ))}
-          <div ref={ref} className="h-6"></div>
-        </div>
+        {isLoading ? (
+          <div className="flex justify-center items-center h-full">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-4 mt-6 overflow-y-scroll scrollbar-hide">
+            {data?.pages.map((group, i) => (
+              <React.Fragment key={i}>
+                {group.data.goals.map(goal => (
+                  <UserGoalCard key={goal.id} {...goal} />
+                ))}
+              </React.Fragment>
+            ))}
+            <div ref={ref} className="h-6"></div>
+          </div>
+        )}
       </div>
     </div>
   );

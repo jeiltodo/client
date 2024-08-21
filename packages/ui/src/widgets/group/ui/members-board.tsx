@@ -2,12 +2,11 @@
 import { BgGroupAvatar, Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import {
-  MembersBoardProvider,
   Pagination,
   useBoardContext,
 } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features';
-import { GroupWithMembers, Member } from '../../../entities';
+import { GroupWithMembers } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
 import { useState } from 'react';
 
