@@ -73,7 +73,7 @@ export const IndividualGoalDetailPage = ({
       <LayoutTitle
         title={`${decodeURIComponent(user?.nickname ?? '개인')}의 목표`}
       />
-      <div className='flex flex-col gap-y-6 w-full relative'>
+      <div className='flex flex-col gap-y-6 w-full min-h-[50vh] relative'>
         {!isLoading && singleGoal && singleGoalTodo ? (
           <>
             <TitleProgressBarCard

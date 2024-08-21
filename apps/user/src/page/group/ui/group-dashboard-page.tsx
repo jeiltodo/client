@@ -72,7 +72,7 @@ export const GroupDashboardPage = () => {
   }, [inView]);
 
   return (
-    <div className='max-w-[1200px] min-h-[70vh] relative mobile:pt-4 tablet:pt-0'>
+    <div className='max-w-[1200px] min-h-[70vh] relative'>
       {!isLoading && group ? (
         <>
           <p className='mb-4 text-slate-900 font-semibold text-lg'>
