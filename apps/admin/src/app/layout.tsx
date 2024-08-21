@@ -16,6 +16,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang='ko'>
+      <head>
+        <link rel='icon' href='/favicon.ico' />
+      </head>
       <body>
         <QueryProvider>
           <div className=''>
