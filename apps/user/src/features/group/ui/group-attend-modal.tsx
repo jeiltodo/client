@@ -22,6 +22,11 @@ export const GroupAttendModal = ({
       !isOnError && setGroupAttendToggle(false); // 모달 닫기
     }
   };
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
 
   return (
     <BaseModal
@@ -35,9 +40,11 @@ export const GroupAttendModal = ({
           onChange={(e) => {
             setSecretCode(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           type='text'
           placeholder='그룹의 초대코드를 적어주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
       </div>
       <Button

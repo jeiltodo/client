@@ -21,6 +21,12 @@ export const LinkModal = ({
     setLinkModalToggle(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLink();
+    }
+  };
+
   return (
     <BaseModal
       title='링크 업로드'
@@ -33,10 +39,12 @@ export const LinkModal = ({
           onChange={(e) => {
             setInput(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           value={input}
           type='text'
           placeholder='링크 주소를 입력해주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
       </div>
       <Button
