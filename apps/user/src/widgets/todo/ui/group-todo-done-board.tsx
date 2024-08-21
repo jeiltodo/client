@@ -55,7 +55,7 @@ export const GroupTodoDoneBoard = ({
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 To do
             </p>
-            <IndividualTodoList todos={userNotDone} />
+            <IndividualTodoList todos={userNotDone} isGroup={true} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
@@ -68,13 +68,13 @@ export const GroupTodoDoneBoard = ({
           </div>
         )}
       </div>
-      <div className='bg-slate-200 min-h-[228px]  rounded-xl px-6 py-4'>
+      <div className='bg-groupColor-100 min-h-[228px]  rounded-xl px-6 py-4'>
         {userDone.length !== 0 ? (
           <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 Done
             </p>
-            <IndividualTodoList todos={userDone} />
+            <IndividualTodoList todos={userDone} isGroup={true} />
           </div>
         ) : (
           <div className='min-h-[228px] flex flex-col'>
