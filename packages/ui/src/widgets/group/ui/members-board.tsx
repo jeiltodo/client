@@ -87,16 +87,11 @@ export const MembersBorad = ({
           className='mt-10 '
         />
         <BgGroupAvatar
-          width={184}
-          height={184}
+          width={164}
+          height={164}
           className='block w-[184px] h-[184px] absolute z-10 right-[-32px] bottom-[-24px]'
         />
       </div>
-      <BgGroupAvatar
-        width={215}
-        height={215}
-        className='absolute -bottom-9 right-0'
-      />
     </div>
   );
 };
