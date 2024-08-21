@@ -21,7 +21,6 @@ import { SingleGroupGoalTodo, TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
 import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../../entities/goal';
-// import { useGroupDetail } from '../../entities/group';
 
 export const GroupGoalDetailPage = ({
   params,

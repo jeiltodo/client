@@ -1,10 +1,9 @@
-'use client'
+'use client';
 import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
 
 import { useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
-
-import { Goal } from '../../entities/goal';
+import { Goal } from '../../../entities/goal';
 
 interface Props {
   goalData: Goal;

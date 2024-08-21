@@ -29,14 +29,17 @@ export const SidebarUserInfo = ({ userInfo }: SidebarUserInfoProps) => {
                 {userInfo?.email}
               </h2>
             </div>
-            <span className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer' onClick={() => setInfoToggle(true)}>
+            <span
+              className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
+              onClick={() => setInfoToggle(true)}
+            >
               사용자 설정
             </span>
           </div>
         </div>
         <div className='tablet:hidden mobile:flex tablet:px-5 mobile:px-4 items-end justify-between'>
           <div className='flex items-center justify-start gap-2'>
-            <ImgProfile className='w-8 h-8' />
+            <ImgProfile width={32} height={32} className='w-8 h-8' />
             <div>
               <div>
                 <h2 className='text-xs font-pretendard-semibold text-slate-800'>
@@ -48,7 +51,10 @@ export const SidebarUserInfo = ({ userInfo }: SidebarUserInfoProps) => {
               </div>
             </div>
           </div>
-          <div className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer' onClick={() => setInfoToggle(true)}>
+          <div
+            className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
+            onClick={() => setInfoToggle(true)}
+          >
             사용자 설정
           </div>
         </div>

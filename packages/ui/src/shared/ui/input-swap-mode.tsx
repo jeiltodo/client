@@ -11,6 +11,7 @@ interface Props {
   onChange: (value: string) => void;
   onSwap: Dispatch<SetStateAction<boolean>>;
   className?: string;
+  colorVariant?: 'blue' | 'orange';
 }
 
 export const InputSwapMode = ({
@@ -22,6 +23,7 @@ export const InputSwapMode = ({
   onChange,
   onSwap,
   className,
+  colorVariant = 'blue',
 }: Props) => {
   const handleToggle = () => {
     if (isEditMode === true) {
@@ -32,11 +34,11 @@ export const InputSwapMode = ({
 
   return (
     <div className={`w-full h-fit ${className}`}>
-      <label className='inline-block w-full text-sm text-slate-800 font-semibold opacity-50'>
+      <label className='inline-block w-full text-sm text-slate-800 font-light opacity-50'>
         {label}
       </label>
 
-      <div className='flex w-full gap-4'>
+      <div className='flex w-full gap-0.5'>
         <input
           value={value}
           readOnly={isEditMode === false}
@@ -44,7 +46,7 @@ export const InputSwapMode = ({
           onChange={(e) => {
             onChange(e.target.value);
           }}
-          className={`inline-block w-full text-lg text-slate-800 font-semibold pt-1 border-b ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
+          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
         />
         <button
           onClick={handleToggle}

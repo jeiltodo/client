@@ -21,12 +21,12 @@ export const TodoContent = ({
   return (
     <span className='inline-flex gap-2 items-center '>
       <Checkbox
+        isGroup={isGroup}
         disabled={disabled}
         isChecked={isDone}
         onChange={() => {
           onCheck(id);
         }}
-        isGroup={isGroup}
       />
       <label className={`text-sm text-slate-800 ${isDone && 'line-through'}`}>
         {title}

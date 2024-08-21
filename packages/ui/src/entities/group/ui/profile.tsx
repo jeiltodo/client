@@ -1,8 +1,10 @@
-'use client'
+'use client';
 import {
   Avatar,
+  AvatarDefault,
   AvatarRags,
   AvatarSunglasses,
+  MemberHat,
   XWhiteCircle,
 } from '@jeiltodo/icons';
 import { Radio } from '../../../shared';
@@ -50,7 +52,10 @@ export const Profile = ({
             }}
           />
         )}
-        <Avatar width={64} height={64} style={{ color }} />
+        <div style={{ color }} className='relative'>
+          <AvatarDefault width={64} height={64} />
+          <MemberHat width={38} className='absolute top-[12px] left-[14px]' />
+        </div>
         {contributionRank === RANK_LOWEST && (
           <AvatarRags width={64} height={64} className='absolute inset-0' />
         )}

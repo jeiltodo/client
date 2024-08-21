@@ -5,6 +5,7 @@ import { InputSwapMode } from '../../../shared/ui/input-swap-mode';
 import { Field } from '../../../shared/ui/field';
 import { useState } from 'react';
 import { GroupTitleOrCode, GroupWithMembers } from '../model/type';
+import { formatDateString } from '../../../../../lib/format/formatDateString';
 
 interface Props {
   group: GroupWithMembers;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export const GroupOverviewBoard = ({
-  group: { id, title, secretCode, members },
+  group: { id, title, secretCode, members, createUser, createdAt },
   userId,
   spareCode,
   onSave,
@@ -46,11 +47,11 @@ export const GroupOverviewBoard = ({
   };
 
   return (
-    <BoardLayout title='그룹 정보' className='min-w-[400px] max-h-[298px]'>
+    <BoardLayout title='그룹 정보' className='tablet:min-w-[400px]'>
       <div
         className={`pt-4 flex gap-9 ${isUserALeader && 'border-b border-slate-200 pb-4'}`}
       >
-        <div className='w-full flex flex-wrap gap-4'>
+        <div className='w-full flex flex-wrap gap-2'>
           {isUserALeader ? (
             <InputSwapMode
               label='그룹 이름'
@@ -60,6 +61,7 @@ export const GroupOverviewBoard = ({
               isGroup={true}
               onChange={setUpdatedValue}
               onSwap={setIsEditMode}
+              colorVariant='orange'
             />
           ) : (
             <Field label='그룹 이름'>{title}</Field>
@@ -76,6 +78,10 @@ export const GroupOverviewBoard = ({
                 {isRequested === false ? '재발행' : '취소'}
               </button>
             )}
+          </div>
+          <div className='flex w-50%'>
+            <Field label='만든 사람'>{createUser}</Field>
+            <Field label='만든 날'>{formatDateString(createdAt)}</Field>
           </div>
         </div>
       </div>

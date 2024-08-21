@@ -35,8 +35,8 @@ export const NoteDetailSlide = ({
   const markDownText = `${noteDetail?.content}`;
 
   const handleEdit = () => {
-    const url = noteDetail?.id
-      ? `/note/${goalId}/${todoId}/${noteDetail.id}?title=${goalTitle}`
+    const url = noteId
+      ? `/note/${goalId}/${todoId}/${noteId}?title=${goalTitle}`
       : `/note/${goalId}/${todoId}/new?title=${goalTitle}`;
     router.push(url);
   };
@@ -50,6 +50,7 @@ export const NoteDetailSlide = ({
     <div
       className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full  bg-[#00000030] '
       onClick={() => {
+        console.log('modal', setToggle);
         setToggle(false);
       }}
     >

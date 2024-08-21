@@ -110,4 +110,14 @@ export const groupApi = {
       throw error;
     }
   },
+
+  disbandGroup: async (groupId: number) => {
+    try {
+      const response = await client.delete(`/groups/${groupId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Fail disbandGroup:', error);
+      throw error;
+    }
+  },
 };
