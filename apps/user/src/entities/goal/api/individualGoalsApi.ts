@@ -99,7 +99,7 @@ export const individualGoalsApi = {
 
   deleteIndividualGoal: async ({ goalId }: { goalId: number }) => {
     try {
-      const response = await client.delete<ResponseWith<{}>>(
+      const response = await client.delete<ResponseWith<object>>(
         `/individual/goals/${goalId}`
       );
       return response;

@@ -29,7 +29,6 @@ export const Checkbox = ({
   'aria-label': ariaLabel,
   ...rest
 }: CheckBoxProps) => {
-  console.log('checkbox isGroup: ', isGroup);
   return (
     <label className='relative inline-flex w-6 h-6 items-center justify-center cursor-pointer'>
       <input
