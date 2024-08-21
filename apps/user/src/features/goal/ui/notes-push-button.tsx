@@ -26,7 +26,7 @@ export const NotesPushButton = ({
         ) : (
           <Note width={24} height={24} />
         )}
-        <p>노트 모아보기</p>
+        <p className='font-semibold'>노트 모아보기</p>
       </div>
       <ArrowRight
         width={24}

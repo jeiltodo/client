@@ -108,7 +108,7 @@ export const GroupDashboardPage = () => {
           </button>
         )}
       </div>
-      <div className='w-full grid grid-rows-[auto_220px] desktop:flex desktop:flex-nowrap  gap-4 '>
+      <div className='w-full grid grid-rows-[auto_280px] desktop:flex desktop:flex-nowrap  gap-4 '>
         <GroupOverviewBoard
           group={group}
           userId={user?.id}
