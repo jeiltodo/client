@@ -95,7 +95,7 @@ export const GroupDashboardPage = () => {
               />
             </MembersBoardProvider>
           </div>
-          <div className='flex flex-wrap gap-4 px-5 rounded-xl py-5 mt-5 bg-groupColor-50'>
+          <div className='flex flex-wrap gap-4 px-5 rounded-xl py-5 mt-5 bg-white'>
             <div className='w-full flex justify-between'>
               <BoardTitle title='우리의 목표' icon='OrangeMarker' />
               <Button

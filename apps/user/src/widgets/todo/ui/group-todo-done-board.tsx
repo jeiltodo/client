@@ -48,8 +48,8 @@ export const GroupTodoDoneBoard = ({
   });
 
   return (
-    <div className='desktop:grid-rows-1 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
-      <div className='bg-white rounded-xl px-6 py-4'>
+    <div className='grid grid-cols-1 gap-y-4 tablet:grid-cols-1 tablet:gap-y-6 desktop:grid-cols-2 desktop:gap-x-4'>
+      <div className='bg-white rounded-xl px-6 py-4 '>
         {userNotDone.length !== 0 ? (
           <div className='w-full min-h-[228px]   mt-6 tablet:pl-6 tablet:mt-0'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
