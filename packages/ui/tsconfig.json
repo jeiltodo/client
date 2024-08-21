@@ -4,7 +4,8 @@
     "src",
     "../../apps/user/src/entities/todo",
     "../../apps/user/src/entities/todo/ui/todo-item.tsx",
-    "../../apps/user/src/widgets/note/ui/note-detail-slide.tsx"
+    "../../apps/user/src/widgets/note/ui/note-detail-slide.tsx",
+    "../../apps/user/src/shared/model/client.ts"
   ],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
