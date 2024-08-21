@@ -42,6 +42,7 @@ client.interceptors.request.use(
       '/member/signin',
       '/member/signup',
       '/member/email/duplicate?email=',
+      '/member/nickname/duplicate?nickname=',
     ];
     if (noSessionRequired.some((path) => url.startsWith(path))) {
       return config;
@@ -110,7 +111,10 @@ client.interceptors.response.use(
         return client(originalRequest);
       } catch (refreshError) {
         // 리프레시 토큰 요청 실패 시 쿠키 삭제 및 로그인 페이지로 이동
-        const errorToThrow = refreshError instanceof Error ? refreshError : new Error('An unknown error occurred during token refresh.');
+        const errorToThrow =
+          refreshError instanceof Error
+            ? refreshError
+            : new Error('An unknown error occurred during token refresh.');
         deleteCookie(REFRESH_TOKEN_COOKIE_NAME);
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
