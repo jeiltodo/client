@@ -49,15 +49,8 @@ export const Card = ({ noteData, goal }: CardProps) => {
   };
   return (
     <div
-      role='button'
-      tabIndex={0}
       className='flex flex-col gap-y-[12px] bg-white rounded-[12px] p-[24px] mb-[12px]'
       onClick={handleSlideOpen}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleSlideOpen();
-        }
-      }}
     >
       <div className='flex flex-row items-start justify-between'>
         <div className='w-full flex justify-between'>

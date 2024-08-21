@@ -49,7 +49,8 @@ export const NoteDetailSlide = ({
   return ReactDOM.createPortal(
     <div
       className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full  bg-[#00000030] '
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         setToggle(false);
       }}
     >
@@ -62,7 +63,10 @@ export const NoteDetailSlide = ({
             <div>
               <button
                 type='button'
-                onClick={() => setToggle(false)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setToggle(false);
+                }}
                 className='cursor-pointer mb-4'
               >
                 <DeleteMenu className='w-6 h-6' />
