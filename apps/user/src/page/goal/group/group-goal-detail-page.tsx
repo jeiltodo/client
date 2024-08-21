@@ -1,5 +1,5 @@
 'use client';
-import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
+import { Button, LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 
 import {
@@ -76,11 +76,11 @@ export const GroupGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <div className='max-w-[1200px]'>
-      {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
-        <>
-          <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
-          <div className='flex flex-col gap-y-6'>
+    <div className='max-w-[1200px] mobile:pt-4 tablet:pt-0'>
+      <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
+      <div className='flex flex-col gap-y-6 relative'>
+        {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
+          <>
             <TitleProgressBarCard
               goalData={singleGroupGoal}
               onEditGoal={openEditModal}
@@ -131,9 +131,11 @@ export const GroupGoalDetailPage = ({
                 goals={groupGoalsForModal}
               />
             )}
-          </div>
-        </>
-      ) : null}
+          </>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
     </div>
   );
 };

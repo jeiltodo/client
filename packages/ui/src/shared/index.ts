@@ -11,6 +11,7 @@ export * from './ui/todo-title';
 export * from './ui/board-title';
 export * from './ui/layout-title';
 export * from './ui/pagination';
+export * from './ui/loading-spinner';
 
 export * from './ui/@x/sidebar';
 export * from './ui/toast';

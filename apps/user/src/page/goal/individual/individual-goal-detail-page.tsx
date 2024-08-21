@@ -1,5 +1,5 @@
 'use client';
-import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
+import { Button, LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { PlusBlue } from '@jeiltodo/icons';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -69,13 +69,13 @@ export const IndividualGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <div className='max-w-[1200px]'>
-      {!isLoading && singleGoal && singleGoalTodo && (
-        <>
-          <LayoutTitle
-            title={`${decodeURIComponent(user?.nickname ?? '개인')}의 목표`}
-          />
-          <div className='flex flex-col gap-y-6'>
+    <div className='max-w-[1200px] '>
+      <LayoutTitle
+        title={`${decodeURIComponent(user?.nickname ?? '개인')}의 목표`}
+      />
+      <div className='flex flex-col gap-y-6 w-full relative'>
+        {!isLoading && singleGoal && singleGoalTodo ? (
+          <>
             <TitleProgressBarCard
               goalData={singleGoal}
               onEditGoal={openEditModal}
@@ -118,9 +118,11 @@ export const IndividualGoalDetailPage = ({
                 goals={goalsForModal}
               />
             )}
-          </div>
-        </>
-      )}
+          </>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
     </div>
   );
 };
