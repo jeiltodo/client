@@ -8,7 +8,7 @@ interface Props extends PropsWithChildren {
 
 export const BoardLayout = ({ title, children, className }: Props) => {
   return (
-    <div className={`h-[364px] bg-white p-6 rounded-lg ${className}`}>
+    <div className={`bg-white p-6 rounded-lg ${className}`}>
       <BoardTitle
         title={title}
         icon={title.includes('그룹') ? 'OrangeMarker' : 'BlueMarker'}
