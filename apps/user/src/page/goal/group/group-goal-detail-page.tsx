@@ -75,7 +75,7 @@ export const GroupGoalDetailPage = ({
     setIsAddTodoModalOpen(true);
   };
   return (
-    <div className='max-w-[1200px] mobile:pt-4 tablet:pt-0'>
+    <div className='max-w-[1200px]'>
       <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
       <div className='flex flex-col gap-y-6 relative'>
         {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
