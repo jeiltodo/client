@@ -1,27 +1,26 @@
 'use client';
 import { useEffect, useState } from 'react';
-
 import { Button, Sidebar } from '@jeiltodo/ui/shared';
-import { Individual, Group, Plus, Search, PlusBlack } from '@jeiltodo/icons';
+import { Search, PlusBlack } from '@jeiltodo/icons';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { SidebarUserInfo } from '@jeiltodo/ui/features';
+import { AxiosError } from 'axios';
+import { useToast } from '@jeiltodo/ui/shared';
 import { SidebarIndividualNav } from '../../../features/user/ui/sidebar-individual-nav';
 import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
 import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
-import { SidebarUserInfo } from '@jeiltodo/ui/features';
 import {
   groupOptions,
   useGroupMutation,
   useGroupAttendMutation,
 } from '../../../entities/group';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   individualGoalsOptions,
   useIndividualGoalMutation,
 } from '../../../entities/user/hooks/individualGoalOptions';
 import { userOptions } from '../../../entities/user';
-import { AxiosError } from 'axios';
-import { useToast } from '@jeiltodo/ui/shared';
 
 export const SidebarUser = () => {
   const [goalToggle, setGoalToggle] = useState<boolean>(false);

@@ -128,6 +128,7 @@ export const GroupGoalDetailPage = ({
                 setTodoModalToggle={setIsAddTodoModalOpen}
                 initialGoal={singleGroupGoal}
                 goals={groupGoalsForModal}
+                shouldCharge={true}
               />
             )}
           </>

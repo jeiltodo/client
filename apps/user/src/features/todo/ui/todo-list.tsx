@@ -96,6 +96,7 @@ export const TodoList = ({ todos, isGroup = false }: Props) => {
             onClickEdit={() => handleClickEdit(id)}
             onClickRemove={() => handleClickRemove(id)}
             onClickNote={() => handleClickNote(id, noteId)}
+            isGroup={isGroup}
           />
           {editModalId === id && (
             <TodoModal
