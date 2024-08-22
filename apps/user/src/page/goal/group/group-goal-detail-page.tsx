@@ -21,7 +21,6 @@ import { SingleGroupGoalTodo, TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
 import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../../entities/goal';
-// import { useGroupDetail } from '../../entities/group';
 
 export const GroupGoalDetailPage = ({
   params,
@@ -93,7 +92,8 @@ export const GroupGoalDetailPage = ({
                 className='flex gap-1 items-center text-sm h-[20px]'
                 onClick={openAddTodoModal}
               >
-                <PlusOrange width={16} height={16} />할 일 추가
+                <PlusOrange width={16} height={16} />
+                할일 추가
               </Button>
             </div>
             {user?.id && (
@@ -129,6 +129,7 @@ export const GroupGoalDetailPage = ({
                 setTodoModalToggle={setIsAddTodoModalOpen}
                 initialGoal={singleGroupGoal}
                 goals={groupGoalsForModal}
+                shouldCharge={true}
               />
             )}
           </>

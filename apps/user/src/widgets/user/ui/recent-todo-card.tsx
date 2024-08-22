@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { individualGoalsOptions } from '../../../entities/goal';
 import { useRecentTodo } from '../../../entities/todo/hooks/useRecentTodo';
-import { IndividualTodoList } from '../../../features/todo';
+import { TodoList } from '../../../features/todo';
 import { LoadingSpinner } from '@jeiltodo/ui/shared';
 
 export const RecentTodoCard = () => {
@@ -23,7 +23,7 @@ export const RecentTodoCard = () => {
           <LoadingSpinner />
         </div>
       ) : (
-        <IndividualTodoList todos={allTodos} />
+        <TodoList todos={allTodos} />
       )}
     </section>
   );

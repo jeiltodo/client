@@ -1,5 +1,4 @@
-import { formatDateString } from '@jeiltodo/lib';
-import { Button } from '@jeiltodo/ui/shared';
+import { Button, formatDateString } from '@jeiltodo/ui/shared';
 
 interface GroupCardProps {
   name: string;

@@ -1,1 +1,1 @@
-export * from './title-progressbar-card';
+export * from './ui/title-progressbar-card';

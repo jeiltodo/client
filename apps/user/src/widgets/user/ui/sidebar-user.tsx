@@ -1,27 +1,26 @@
 'use client';
 import { useEffect, useState } from 'react';
-
 import { Button, Sidebar } from '@jeiltodo/ui/shared';
-import { Individual, Group, Plus, Search } from '@jeiltodo/icons';
+import { Search, PlusBlack } from '@jeiltodo/icons';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { SidebarUserInfo } from '@jeiltodo/ui/features';
+import { AxiosError } from 'axios';
+import { useToast } from '@jeiltodo/ui/shared';
 import { SidebarIndividualNav } from '../../../features/user/ui/sidebar-individual-nav';
 import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
 import { GoalModal } from '../../../features/goal/ui/goal-modal';
 import { GroupCreateModal } from '../../../features/group/ui/group-create-modal';
 import { GroupAttendModal } from '../../../features/group/ui/group-attend-modal';
-import { SidebarUserInfo } from '@jeiltodo/ui/features';
 import {
   groupOptions,
   useGroupMutation,
   useGroupAttendMutation,
 } from '../../../entities/group';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   individualGoalsOptions,
   useIndividualGoalMutation,
 } from '../../../entities/user/hooks/individualGoalOptions';
 import { userOptions } from '../../../entities/user';
-import { AxiosError } from 'axios';
-import { useToast } from '@jeiltodo/ui/shared';
 
 export const SidebarUser = () => {
   const [goalToggle, setGoalToggle] = useState<boolean>(false);
@@ -132,29 +131,25 @@ export const SidebarUser = () => {
       )}
       <Sidebar>
         <SidebarUserInfo userInfo={userInfo} />
-        <SidebarIndividualNav
-          icon={Individual}
-          title='개인'
-          individualGoals={individualGoals}
-        />
-        <div className='px-5 pb-[18px] border-b-[1px] border-slate-200'>
+        <SidebarIndividualNav title='개인' individualGoals={individualGoals} />
+        <div className='px-5 mb-[18px]'>
           <Button
             variant='outline-dark'
             className='flex items-center justify-center gap-1 w-full h-12'
             onClick={() => setGoalToggle(true)}
           >
-            <Plus className='w-6 h-6' />
+            <PlusBlack className='w-6 h-6' />
             <div className='text-base font-pretendard-semibold'>새 목표</div>
           </Button>
         </div>
-        <SidebarGroupNav icon={Group} group={group?.data} />
+        <SidebarGroupNav group={group?.data} />
         <div className='px-5 mb-3'>
           <Button
             variant='outline-dark'
             className='flex items-center justify-center gap-1 w-full h-12'
             onClick={() => setGroupCreateToggle(true)}
           >
-            <Plus className='w-6 h-6' />
+            <PlusBlack className='w-6 h-6' />
             <div className='text-base font-pretendard-semibold'>
               그룹 생성하기
             </div>

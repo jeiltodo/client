@@ -6,13 +6,17 @@ import type {
 import axios from 'axios';
 import { isServer } from '@tanstack/react-query';
 import { getServerToken } from './getServerToken';
-import { deleteCookie, getCookie, setCookie } from '../lib/cookie';
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from '../../../../../packages/ui/src/shared/lib/cookie';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   ACCESS_TOKEN_EXPIRY_TIME,
   REFRESH_TOKEN_COOKIE_NAME,
-} from '../config/token';
-import { API_URL } from '../config/api';
+} from '../../../../../packages/ui/src/shared/config/token';
+import { API_URL } from '../../../../../packages/ui/src/shared/config/api';
 
 // 에러 응답 데이터 타입 정의
 interface ErrorResponseData {
@@ -42,6 +46,7 @@ client.interceptors.request.use(
       '/member/signin',
       '/member/signup',
       '/member/email/duplicate?email=',
+      '/member/nickname/duplicate?nickname=',
     ];
     if (noSessionRequired.some((path) => url.startsWith(path))) {
       return config;
@@ -110,7 +115,10 @@ client.interceptors.response.use(
         return client(originalRequest);
       } catch (refreshError) {
         // 리프레시 토큰 요청 실패 시 쿠키 삭제 및 로그인 페이지로 이동
-        const errorToThrow = refreshError instanceof Error ? refreshError : new Error('An unknown error occurred during token refresh.');
+        const errorToThrow =
+          refreshError instanceof Error
+            ? refreshError
+            : new Error('An unknown error occurred during token refresh.');
         deleteCookie(REFRESH_TOKEN_COOKIE_NAME);
         if (typeof window !== 'undefined') {
           window.location.href = '/login';

@@ -14,7 +14,7 @@ import {
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
-} from '../../../../../../apps/user/src/shared/config/token';
+} from '../../../shared/config/token';
 
 interface Props {
   userInfo: UserDataprops | undefined;
@@ -91,7 +91,7 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
       setToggle={setInfoToggle}
       width='modal_sm:w-[390px]'
     >
-      <div className='flex items-end gap-[38px]'>
+      <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px]'>
         <div className='flex flex-col gap-3'>
           <p className='text-sm font-pretendard-semibold text-slate-500'>
             이름
@@ -103,7 +103,7 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
             value={nickname}
             type='text'
             placeholder='이름을 적어주세요.'
-            className='w-[220px] h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
+            className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
           />
         </div>
         <Button
@@ -116,7 +116,7 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
         </Button>
       </div>
       <p className='text-sm font-normal text-error mt-3'>{nicknameMessage}</p>
-      <div className='flex items-end gap-[38px] mt-3'>
+      <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px] mt-3'>
         <div className='flex flex-col gap-3'>
           <p className='text-sm font-pretendard-semibold text-slate-500'>
             이메일
@@ -128,7 +128,7 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
             value={email}
             type='email'
             placeholder='이메일을 적어주세요.'
-            className='w-[220px] h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
+            className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
           />
         </div>
         <Button
@@ -142,7 +142,7 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
       </div>
       <p className='text-sm font-normal text-error mt-3'>{emailMessage}</p>
 
-      <div className='flex items-center justify-between pt-4 mt-4 border-t-[1px] border-slate-200'>
+      <div className='flex items-center justify-between gap-1 pt-4 mt-4 border-t-[1px] border-slate-200'>
         <Button
           className='w-[150px] h-[44px]'
           variant='outline'

@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 interface Props {
   label: string;
@@ -11,6 +11,7 @@ interface Props {
   onChange: (value: string) => void;
   onSwap: Dispatch<SetStateAction<boolean>>;
   className?: string;
+  colorVariant?: 'blue' | 'orange';
 }
 
 export const InputSwapMode = ({
@@ -22,7 +23,10 @@ export const InputSwapMode = ({
   onChange,
   onSwap,
   className,
+  colorVariant = 'blue',
 }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleToggle = () => {
     if (isEditMode === true) {
       onChange(defaultValue);
@@ -30,21 +34,28 @@ export const InputSwapMode = ({
     onSwap((prev) => !prev);
   };
 
+  useEffect(() => {
+    if (isEditMode && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditMode]);
+
   return (
     <div className={`w-full h-fit ${className}`}>
-      <label className='inline-block w-full text-sm text-slate-800 font-semibold opacity-50'>
+      <label className='inline-block w-full text-sm text-slate-800 font-light opacity-50'>
         {label}
       </label>
 
-      <div className='flex w-full gap-4'>
+      <div className='flex w-full gap-0.5'>
         <input
+          ref={inputRef}
           value={value}
           readOnly={isEditMode === false}
           defaultValue={defaultValue}
           onChange={(e) => {
             onChange(e.target.value);
           }}
-          className={`inline-block w-full text-lg text-slate-800 font-semibold pt-1 border-b ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
+          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b  focus:outline-none ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
         />
         <button
           onClick={handleToggle}

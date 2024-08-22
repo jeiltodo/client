@@ -1,10 +1,7 @@
 'use client';
-import { BgGroupAvatar, Group as GroupIcon } from '@jeiltodo/icons';
+import { BgGroupAvatar, GroupFill, Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
-import {
-  Pagination,
-  useBoardContext,
-} from '@jeiltodo/ui/shared';
+import { Pagination, useBoardContext } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features';
 import { GroupWithMembers } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
@@ -61,15 +58,15 @@ export const MembersBorad = ({
   };
 
   return (
-    <div className='w-full px-6 py-4 rounded-lg bg-groupColor-500 relative'>
-      <div className='w-full h-full bg-avatar-background relative'>
+    <div className='w-full px-6 py-4 rounded-lg bg-orange-500 h-[280px] desktop:h-[364px] overflow-hidden'>
+      <div className='w-full h-full relative '>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex gap-4 items-center'>
-            <div className='flex gap-2 items-center'>
-              <GroupIcon width={40} height={40} />
+            <div className='hidden tablet:flex gap-2 items-center'>
+              <GroupFill width={40} height={40} />
               <span className='font-semibold text-lg text-white'>구성원</span>
             </div>
-            <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-[0.5]'>
+            <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
               <span className='text-slate-800'>{group.members.length}</span>
               <span className='text-groupColor-500'>/10</span>
             </div>
@@ -87,15 +84,14 @@ export const MembersBorad = ({
           limit={8}
           currentPage={1}
           variant='secondary'
-          className='mt-10'
-          isGroup={true}
+          className='mt-10 '
+        />
+        <BgGroupAvatar
+          // width={164}
+          // height={164}
+          className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-10 desktop:right-[-32px] desktop:bottom-[-24px]'
         />
       </div>
-      <BgGroupAvatar
-        width={215}
-        height={215}
-        className='absolute -bottom-9 right-0'
-      />
     </div>
   );
 };

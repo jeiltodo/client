@@ -23,6 +23,12 @@ export const GroupCreateModal = ({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <BaseModal
       title='그룹 생성'
@@ -35,9 +41,11 @@ export const GroupCreateModal = ({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           type='text'
           placeholder='그룹 이름을 적어주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
       </div>
       <Button

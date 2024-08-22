@@ -5,9 +5,10 @@ import { TodoModal, todoQuery, useRecentTodo } from '../../entities/todo';
 import { useInView } from 'react-intersection-observer';
 import { Goal, individualGoalsOptions, userOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
-import { IndividualTodoList } from '../../features/todo';
+import { TodoList } from '../../features/todo';
 import { Button, LoadingSpinner } from '@jeiltodo/ui/shared';
-import { PlusBlue } from '@jeiltodo/icons';
+import { Back, PlusBlue } from '@jeiltodo/icons';
+import BackButton from '../../../../../packages/ui/src/shared/ui/back-button';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
@@ -60,17 +61,22 @@ export const TodoPage = () => {
           goals={filteredData}
         />
       )}
-      <div className='flex items-center justify-between mb-6 '>
-        <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
-          최근 등록한 할 일 ({allTodos?.length})
+      <div className='flex items-center justify-between mb-4'>
+        <div className='w-full flex items-center justify-between'>
+          <div className='flex'>
+            <BackButton />
+            <div className='text-lg font-semibold text-slate-900 pl-2 min-w-[166px]'>
+              최근 등록한 할 일 ({allTodos?.length})
+            </div>
+          </div>
+          <Button
+            variant='text-blue'
+            className='flex gap-1 items-center text-sm min-w-[78px]'
+            onClick={handleAddModal}
+          >
+            <PlusBlue width={16} height={16} />할 일 추가
+          </Button>
         </div>
-        <Button
-          variant='text-blue'
-          className='flex gap-1 items-center text-sm'
-          onClick={handleAddModal}
-        >
-          <PlusBlue width={16} height={16} />할 일 추가
-        </Button>
       </div>
       <div className='desktop:max-w-[1200px] w-full bg-white rounded-xl p-base flex flex-col'>
         <RecentFilter goals={filteredData} onClickFilter={handleClick} />
@@ -81,7 +87,7 @@ export const TodoPage = () => {
             </div>
           ) : (
             <>
-              <IndividualTodoList todos={allTodos} />
+              <TodoList todos={allTodos} />
               <div ref={ref} className='h-6' />
             </>
           )}

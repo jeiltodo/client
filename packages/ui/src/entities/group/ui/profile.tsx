@@ -1,8 +1,10 @@
-'use client'
+'use client';
 import {
   Avatar,
+  AvatarDefault,
   AvatarRags,
   AvatarSunglasses,
+  MemberHat,
   XWhiteCircle,
 } from '@jeiltodo/icons';
 import { Radio } from '../../../shared';
@@ -10,7 +12,7 @@ import { BoardMode } from '../../../shared/model/type';
 import { Member } from '../model/type';
 import { RANK_HIGHST, RANK_LOWEST } from '../constants/contributionRank';
 
-interface Props {
+interface ProfileProps {
   member: Member;
   mode: BoardMode;
   onChangeRadio?: (id: number) => void;
@@ -22,7 +24,7 @@ export const Profile = ({
   mode,
   onChangeRadio,
   onClickRemove,
-}: Props) => {
+}: ProfileProps) => {
   return (
     <div className={`relative w-fit pt-6`}>
       {isLeader === true && mode !== 'change-leader' && (
@@ -50,7 +52,10 @@ export const Profile = ({
             }}
           />
         )}
-        <Avatar width={64} height={64} style={{ color }} />
+        <div style={{ color }} className='relative'>
+          <AvatarDefault width={64} height={64} />
+          <MemberHat width={38} className='absolute top-[12px] left-[14px]' />
+        </div>
         {contributionRank === RANK_LOWEST && (
           <AvatarRags width={64} height={64} className='absolute inset-0' />
         )}

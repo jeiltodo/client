@@ -1,6 +1,6 @@
 import { TodoRecently } from '@jeiltodo/icons';
 import { GroupsInterface } from '../model/type';
-import { GroupCard } from '../../../entities/user/ui/group-card';
+import { GroupCard } from '../../../entities/member/ui/group-card';
 
 interface GroupBoardProps {
   groups: GroupsInterface[];

@@ -100,6 +100,10 @@ export const EditorForm = ({
     []
   );
 
+  const positionClassName = link
+    ? 'top-[179px] tablet:top-[159px]'
+    : 'top-[137px] tablet:top-[117px]';
+
   return (
     <>
       {linkModal && (
@@ -116,7 +120,7 @@ export const EditorForm = ({
           <LoadingSpinner />
         ) : (
           <>
-            <div className='flex flex-row gap-2 items-center justify-between border-y-[1px] border-slate-200'>
+            <div className='flex flex-row gap-2 items-center justify-between border-y-[1px] border-slate-200 min-w-[248px]'>
               <Input
                 type='text'
                 name='title'
@@ -124,12 +128,12 @@ export const EditorForm = ({
                 autoFocus={true}
                 placeholder='노트의 제목을 입력해주세요'
                 onChange={handleTitleChange}
-                className='!px-0 w-full h-[52px] placeholder:text-lg placeholder:font-pretendard-medium bg-white'
+                className='!px-0 w-full h-[46px] my-1 indent-2 placeholder:text-base placeholder:font-pretendard-medium bg-white'
               />
               <Counter data={title.length} limitNumber={30} />
             </div>
             {/* 글자 수  */}
-            <div className='flex flex-row items-center justify-between'>
+            <div className='flex tablet:flex-row flex-col tablet:items-center items-end justify-between min-w-[248px]'>
               <div className='flex flex-row text-right text-xs font-pretendard-medium text-slate-800 py-[12px]'>
                 <span>{`공백포함 : 총 `}</span>
                 <span className='inline-block min-w-[20px]'>{totalLength}</span>
@@ -144,19 +148,20 @@ export const EditorForm = ({
             </div>
             {/* 파일url이 있으면 여기에 올라감 */}
             {link && (
-              <div className='flex items-center justify-between bg-slate-200 h-[38px] py-[7px] px-[6px] rounded-[20px]'>
-                <div className='flex items-center justify-start gap-2'>
-                  <LinkEmbed className='h-[18px] w-[18px]' />
-                  <div className='text-base font-normal text-slate-800'>
+              <div className='flex items-center justify-between bg-slate-200 h-[38px] py-[7px] px-[6px] rounded-[20px] w-full mt-1'>
+                <div className='flex items-center justify-start gap-2 flex-grow min-w-0'>
+                  <LinkEmbed className='h-[18px] w-[18px] flex-shrink-0' />
+                  <div className='text-base font-normal text-slate-800 truncate pt-[2px] flex-grow min-w-0'>
                     {link}
                   </div>
                 </div>
                 <LinkDelete
-                  className='h-[18px] w-[18px] cursor-pointer'
+                  className='h-[20px] w-[20px] cursor-pointer flex-shrink-0 ml-2'
                   onClick={() => setLink('')}
                 />
               </div>
             )}
+
             {/* 에디터 */}
             <ReactQuill
               theme='snow'
@@ -164,37 +169,46 @@ export const EditorForm = ({
               formats={formats}
               value={content}
               onChange={setContent}
-              placeholder='내용을 입력해주세요'
+              placeholder='이 곳을 클릭해 노트 작성을 시작해주세요'
               className=' max-h-[768px] bg-white'
             />
             <style jsx global>{`
               .ql-toolbar {
                 display: block;
-                position: absolute;
-                bottom: 0px;
-                left: 0px;
-                z-index: 5;
+                margin: 12px 0px;
                 width: 100%;
-                background-color: #ffffff;
-                border-color: #e2e8f0;
+                z-index: 10;
+                border: 1px solid #e2e8f0;
                 border-radius: 21.5px;
               }
               .ql-container {
-                min-height: 50vh;
-                border: none !important;
+                min-height: 55vh;
+                width: 100%;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 21.5px;
+                z-index: 5;
               }
               .ql-editor {
-                min-height: 50vh;
-                max-height: 70vh;
+                min-height: 55vh;
+                width: 100%;
                 font-size: 16px;
                 line-height: 1.5;
-                border: none;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+              }
+              .ql-editor::-webkit-scrollbar {
+                display: none;
+              }
+              .ql-toolbar.ql-snow .ql-formats {
+                margin-right: 3px;
               }
             `}</style>
-            <Link
-              className='w-6 h-6 absolute bottom-[10px] right-4 z-20 cursor-pointer'
+            <div
+              className={`py-[1px] px-[3px] absolute ${positionClassName} tablet:right-4 right-[6px]`}
               onClick={() => setLinkModal(true)}
-            />
+            >
+              <Link className='w-[22px] h-[22px] cursor-pointer ' />
+            </div>
           </>
         )}
       </div>

@@ -1,10 +1,10 @@
-
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { userApi } from '../api/userApi';
 import { useToast } from '../../../shared';
 import { userQueryKeys } from './queryKeys';
 import { LogoutData, UserData } from '../model/type';
 import { deleteCookie } from '../../../../../../apps/user/src/shared';
+import { useRouter } from 'next/navigation';
 
 export const useUpdateUserInfoMutation = () => {
   const queryClient = useQueryClient();
@@ -28,12 +28,16 @@ export const useUpdateUserInfoMutation = () => {
 export const useLogoutMutation = () => {
   const queryClient = useQueryClient();
   const showToast = useToast();
+  const router = useRouter();
+
   return useMutation({
     mutationFn: (data: LogoutData) => userApi.logoutUserInfo(data),
     onSuccess: () => {
       queryClient.clear(); // 모든 쿼리 캐시를 지웁니다.
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
+
+      window.location.reload();
     },
     onError: (error: Error) => {
       showToast({ message: '로그아웃에 실패했습니다.', type: 'confirm' });

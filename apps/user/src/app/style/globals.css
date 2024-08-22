@@ -6,6 +6,7 @@
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 64px;
+  padding-bottom: 16px;
   min-height: 100vh;
 }
 
@@ -14,11 +15,13 @@
     padding-left: 84px;
     padding-right: 24px;
     padding-top: 24px;
+    padding-bottom: 24px;
   }
 }
 
 @media (min-width: 1024px) {
   .common-layout {
     padding-left: 360px;
+    padding-bottom: 24px;
   }
 }

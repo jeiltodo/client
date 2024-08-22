@@ -1,11 +1,12 @@
 'use client';
 import ReactDOM from 'react-dom';
 import { DeleteMenu } from '@jeiltodo/icons';
-import { formatDateString } from '@jeiltodo/lib';
+
 import {
   BoardTitle,
   Button,
   ButtonGroup,
+  formatDateString,
   LoadingSpinner,
   TodoTitle,
 } from '@jeiltodo/ui/shared';
@@ -35,8 +36,8 @@ export const NoteDetailSlide = ({
   const markDownText = `${noteDetail?.content}`;
 
   const handleEdit = () => {
-    const url = noteDetail?.id
-      ? `/note/${goalId}/${todoId}/${noteDetail.id}?title=${goalTitle}`
+    const url = noteId
+      ? `/note/${goalId}/${todoId}/${noteId}?title=${goalTitle}`
       : `/note/${goalId}/${todoId}/new?title=${goalTitle}`;
     router.push(url);
   };
@@ -49,7 +50,8 @@ export const NoteDetailSlide = ({
   return ReactDOM.createPortal(
     <div
       className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full  bg-[#00000030] '
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         setToggle(false);
       }}
     >
@@ -62,7 +64,10 @@ export const NoteDetailSlide = ({
             <div>
               <button
                 type='button'
-                onClick={() => setToggle(false)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setToggle(false);
+                }}
                 className='cursor-pointer mb-4'
               >
                 <DeleteMenu className='w-6 h-6' />
@@ -75,14 +80,14 @@ export const NoteDetailSlide = ({
                 />
                 <ButtonGroup gap={2}>
                   <Button
-                    className='w-[84px] h-[36px]'
+                    className='w-[74px] tablet:w-[84px] h-[36px]'
                     variant='outline'
                     onClick={handleEdit}
                   >
                     수정하기
                   </Button>
                   <Button
-                    className='w-[84px] h-[36px]'
+                    className='w-[74px] tablet:w-[84px] h-[36px]'
                     variant='primary'
                     onClick={handleDelete}
                   >
