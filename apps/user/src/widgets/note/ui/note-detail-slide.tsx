@@ -48,19 +48,20 @@ export const NoteDetailSlide = ({
   };
 
   return ReactDOM.createPortal(
-    <div
-      className='z-30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full y-full min-h-full  bg-[#00000030] '
-      onClick={(e) => {
-        e.stopPropagation();
-        setToggle(false);
-      }}
-    >
+    <div className='z-30 left-0 top-0 fixed flex w-full h-screen'>
+      <div
+        className='w-full y-full bg-[#000000] opacity-50 mobile:hidden tablet:block'
+        onClick={(e) => {
+          e.stopPropagation();
+          setToggle(false);
+        }}
+      ></div>
       {/* slide */}
-      <div className='p-6 pb-8 h-screen bg-white desktop:w-[800px] tablet:w-[512px] mobile:w-full fixed top-[0px] right-[0px]'>
+      <div className='p-6 pb-8 h-screen bg-white desktop:!w-[800px] tablet:!w-[512px] w-full fixed top-[0px] right-[0px]'>
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <>
+          <div className='flex flex-col'>
             <div>
               <button
                 type='button'
@@ -80,14 +81,14 @@ export const NoteDetailSlide = ({
                 />
                 <ButtonGroup gap={2}>
                   <Button
-                    className='w-[74px] tablet:w-[84px] h-[36px]'
+                    className='w-[64px] text-sm tablet:w-[74px] tablet:text-lg desktop:w-[74px] desktop:text-lg h-[36px]'
                     variant='outline'
                     onClick={handleEdit}
                   >
                     수정하기
                   </Button>
                   <Button
-                    className='w-[74px] tablet:w-[84px] h-[36px]'
+                    className='w-[64px] text-sm tablet:w-[74px] tablet:text-lg desktop:w-[74px] desktop:text-lg h-[36px]'
                     variant='primary'
                     onClick={handleDelete}
                   >
@@ -110,7 +111,7 @@ export const NoteDetailSlide = ({
             <div className='text-base font-pretendard-regular'>
               <div dangerouslySetInnerHTML={{ __html: markDownText }} />
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>,
