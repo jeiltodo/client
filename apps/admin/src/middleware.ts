@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('accessToken')?.value;
-  
+
   console.log('Middleware running');
   console.log('Request URL:', request.nextUrl.pathname);
   console.log('Token:', token);
@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/') {
     if (!token) {
       console.log('Redirecting to /login');
-      return NextResponse.redirect(new URL('/login', request.url));
+      return NextResponse.redirect(new URL('/admin/login', request.url));
     }
   }
 
@@ -20,10 +20,9 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === '/login') {
     if (token) {
       console.log('Redirecting to /');
-      return NextResponse.redirect(new URL('/', request.url));
+      return NextResponse.redirect(new URL('/admin', request.url));
     }
   }
-
 }
 
 //특정 path로만 해당 미들웨어가 동작
