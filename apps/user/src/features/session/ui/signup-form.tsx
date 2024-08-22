@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { type ChangeEvent, type FocusEvent, useEffect, useState } from 'react';
 import { useDebounce, Button, Input } from '@jeiltodo/ui/shared';
+import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
 import type { SignUpBody, ValidationErrors } from '../../../entities/session';
 import {
   validateSiginupConfirmPassword,
@@ -8,7 +9,6 @@ import {
   validateSiginupPassword,
   validateSignupNickname,
 } from '../model/validation';
-import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
 
 interface SignUpFormProps {
   onSubmit: (credentials: SignUpBody) => void;
@@ -54,7 +54,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
 
     switch (inputName) {
       case 'nickname':
-        error = validateSignupNickname(value);
+        error = await validateSignupNickname(value);
         break;
       case 'email':
         error = await validateSiginupEmail(value);
@@ -89,7 +89,7 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const toggleConfirmPasswordVisibility = () => {
     setIsConfirmPasswordVisible((prevState) => !prevState);
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({ nickname, email, password });
   };

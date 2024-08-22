@@ -142,11 +142,20 @@ export const GroupDashboardPage = () => {
             </div>
           </Button>
         </div>
+
         {goalWithTodos?.pages.map((item, i) => (
           <React.Fragment key={i}>
-            {item.data.goals.map((goal) => (
-              <GroupGoalCard key={goal.id} {...goal} />
-            ))}
+            {item.data.goals.length !== 0 ? (
+              item.data.goals.map((goal) => (
+                <GroupGoalCard key={goal.id} {...goal} />
+              ))
+            ) : (
+              <div className='flex items-center justify-center w-full min-h-[176px]'>
+                <p className='text-sm font-normal text-slate-400'>
+                  등록한 목표가 없어요
+                </p>
+              </div>
+            )}
           </React.Fragment>
         ))}
       </div>

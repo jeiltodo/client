@@ -63,12 +63,12 @@ export const GroupTodoDoneBoard = ({
               {userName}의 To do
             </p>
             <div className='flex-grow flex items-center justify-center'>
-              <p className='text-sm text-gray-500'>할 일 없음</p>
+              <p className='text-sm text-slate-400'>아직 해야할 일이 없어요</p>
             </div>
           </div>
         )}
       </div>
-      <div className='bg-groupColor-100 min-h-[228px]  rounded-xl px-6 py-4'>
+      <div className='bg-groupColor-100 rounded-xl px-6 py-4'>
         {userDone.length !== 0 ? (
           <div className='w-full mt-2'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
@@ -82,7 +82,7 @@ export const GroupTodoDoneBoard = ({
               {userName}의 Done
             </p>
             <div className='flex-grow flex items-center justify-center'>
-              <p className='text-sm text-gray-500'>할 일 없음</p>
+              <p className='text-sm text-slate-400'>아직 다 한 일이 없어요</p>
             </div>
           </div>
         )}

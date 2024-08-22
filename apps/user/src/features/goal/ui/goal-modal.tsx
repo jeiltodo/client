@@ -23,6 +23,12 @@ export const GoalModal = ({
     toggleModal(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <BaseModal
       title={`${goalCreator}의 목표 ${initialGoal ? '수정' : '생성'}`}
@@ -35,10 +41,12 @@ export const GoalModal = ({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           value={title}
           type='text'
           placeholder='목표를 적어주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
       </div>
       <Button

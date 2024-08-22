@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 interface Props {
   label: string;
@@ -25,12 +25,20 @@ export const InputSwapMode = ({
   className,
   colorVariant = 'blue',
 }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleToggle = () => {
     if (isEditMode === true) {
       onChange(defaultValue);
     }
     onSwap((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (isEditMode && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isEditMode]);
 
   return (
     <div className={`w-full h-fit ${className}`}>
@@ -40,13 +48,14 @@ export const InputSwapMode = ({
 
       <div className='flex w-full gap-0.5'>
         <input
+          ref={inputRef}
           value={value}
           readOnly={isEditMode === false}
           defaultValue={defaultValue}
           onChange={(e) => {
             onChange(e.target.value);
           }}
-          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
+          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b  focus:outline-none ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
         />
         <button
           onClick={handleToggle}

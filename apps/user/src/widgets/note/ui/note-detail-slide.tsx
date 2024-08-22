@@ -1,11 +1,12 @@
 'use client';
 import ReactDOM from 'react-dom';
 import { DeleteMenu } from '@jeiltodo/icons';
-import { formatDateString } from '@jeiltodo/lib';
+
 import {
   BoardTitle,
   Button,
   ButtonGroup,
+  formatDateString,
   LoadingSpinner,
   TodoTitle,
 } from '@jeiltodo/ui/shared';

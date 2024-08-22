@@ -41,6 +41,12 @@ export const TodoModal = ({
     setTodoModalToggle(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <BaseModal
       title={`${todoCreator}의 할 일 ${initialTodo ? '수정' : '생성'}`}
@@ -53,10 +59,12 @@ export const TodoModal = ({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           type='text'
           defaultValue={initialTodo?.title}
           placeholder={initialTodo ? undefined : '할 일을 적어주세요'}
           className='text-base font-normal w-full'
+          autoFocus
         />
       </div>
       <div className='flex flex-col gap-3 mt-6'>

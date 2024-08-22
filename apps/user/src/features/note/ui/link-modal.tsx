@@ -21,11 +21,11 @@ export const LinkModal = ({
   const isValidUrl = (url: string) => {
     const urlPattern = new RegExp(
       '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$',
       'i'
     );
     return !!urlPattern.test(url);
@@ -45,6 +45,12 @@ export const LinkModal = ({
     setError(''); // 입력할 때마다 에러 메시지 초기화
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleLink();
+    }
+  };
+
   return (
     <BaseModal
       title='링크 업로드'
@@ -55,10 +61,12 @@ export const LinkModal = ({
         <p className='text-base font-pretendard-semibold'>링크</p>
         <Input
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           value={input}
           type='text'
           placeholder='링크 주소를 입력해주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
         {error && <p className='text-sm font-normal text-red-500'>{error}</p>}
       </div>

@@ -5,7 +5,7 @@ export const ListPage = () => {
   return (
     <div
       className='max-w-[792px] flex flex-col'
-      style={{ minHeight: 'calc(100vh - 24px)' }}
+      style={{ minHeight: 'calc(100vh - 48px)' }}
     >
       <LayoutTitle title='노트 모아보기' />
       <NoteListBoard />

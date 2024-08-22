@@ -46,6 +46,7 @@ client.interceptors.request.use(
       '/member/signin',
       '/member/signup',
       '/member/email/duplicate?email=',
+      '/member/nickname/duplicate?nickname=',
     ];
     if (noSessionRequired.some((path) => url.startsWith(path))) {
       return config;
