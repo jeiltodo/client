@@ -22,6 +22,7 @@ COPY --from=builder /app/apps/admin/.next ./.next
 COPY --from=builder /app/apps/admin/public ./public
 COPY --from=builder /app/apps/admin/package.json ./package.json
 COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/apps/admin/next.config.js ./next.config.js
 COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3001
