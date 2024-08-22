@@ -58,7 +58,7 @@ export const MembersBorad = ({
   };
 
   return (
-    <div className='w-full px-6 py-4 rounded-lg bg-orange-500 h-[220px] desktop:h-[364px] overflow-hidden'>
+    <div className='w-full px-6 py-4 rounded-lg bg-orange-500 h-[280px] desktop:h-[364px] overflow-hidden'>
       <div className='w-full h-full relative '>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex gap-4 items-center'>
@@ -87,9 +87,9 @@ export const MembersBorad = ({
           className='mt-10 '
         />
         <BgGroupAvatar
-          width={164}
-          height={164}
-          className='block w-[184px] h-[184px] absolute z-10 right-[-32px] bottom-[-24px]'
+          // width={164}
+          // height={164}
+          className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-10 desktop:right-[-32px] desktop:bottom-[-24px]'
         />
       </div>
     </div>

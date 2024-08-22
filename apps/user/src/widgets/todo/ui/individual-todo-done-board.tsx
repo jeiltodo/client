@@ -33,7 +33,7 @@ export const IndividualTodoDoneBoard = ({
             <TodoList todos={notDone} />
           </div>
         ) : (
-          <div className='min-h-[228px] flex flex-col'>
+          <div className='min-h-[96px] desktop:min-h-[228px] flex flex-col'>
             <div className='flex items-start justify-between'>
               <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
             </div>
@@ -44,13 +44,13 @@ export const IndividualTodoDoneBoard = ({
         )}
       </div>
       <div className='bg-slate-200 rounded-xl px-6 py-4'>
-        {done.length !== 0 ? (
-          <div className='w-full mt-6  tablet:mt-0'>
+        {done.length !== 0 ? 
+          <div className='w-full'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
             <TodoList todos={done} />
           </div>
         ) : (
-          <div className='min-h-[228px] flex flex-col'>
+          <div className='min-h-[96px] desktop:min-h-[228px] flex flex-col'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
             <div className='flex-grow flex items-center justify-center'>
               <p className='text-sm text-gray-500'>할 일 없음</p>

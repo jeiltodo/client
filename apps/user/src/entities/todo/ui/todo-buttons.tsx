@@ -1,6 +1,7 @@
 import { Kebab, NoteView, NoteViewGroup } from '@jeiltodo/icons';
 import { Flyout } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
+import { MemgberInCharge } from '../model/type';
 
 interface Props {
   onClickNote: () => void;
@@ -29,6 +30,7 @@ export const TodoButtons = ({
     onClickRemove();
     setFlyoutOpen(false);
   };
+
   return (
     <div className='relative flex items-center' onMouseLeave={() => setFlyoutOpen(false)}>
       <span className='inline-flex items-center  gap-2 opacity-0 transition-opacity group-hover:opacity-100'>

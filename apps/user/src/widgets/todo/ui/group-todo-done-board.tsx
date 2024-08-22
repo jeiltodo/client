@@ -51,14 +51,14 @@ export const GroupTodoDoneBoard = ({
     <div className='grid grid-cols-1 gap-y-4 tablet:grid-cols-1 tablet:gap-y-6 desktop:grid-cols-2 desktop:gap-x-4'>
       <div className='bg-white rounded-xl px-6 py-4 '>
         {userNotDone.length !== 0 ? (
-          <div className='w-full min-h-[228px]   mt-6 tablet:pl-6 tablet:mt-0'>
+          <div className='w-full min-h-[228px] mt-2 '>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 To do
             </p>
             <TodoList todos={userNotDone} isGroup={true} />
           </div>
         ) : (
-          <div className='min-h-[228px] flex flex-col'>
+          <div className='min-h-[96px] desktop:min-h-[228px] flex flex-col'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 To do
             </p>
@@ -70,14 +70,14 @@ export const GroupTodoDoneBoard = ({
       </div>
       <div className='bg-groupColor-100 min-h-[228px]  rounded-xl px-6 py-4'>
         {userDone.length !== 0 ? (
-          <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
+          <div className='w-full mt-2'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 Done
             </p>
             <TodoList todos={userDone} isGroup={true} />
           </div>
         ) : (
-          <div className='min-h-[228px] flex flex-col'>
+          <div className='min-h-[96px] desktop:min-h-[228px] flex flex-col'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 Done
             </p>
