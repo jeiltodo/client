@@ -9,7 +9,7 @@ import { formatDateString } from '../../../shared';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopyUser } from '@jeiltodo/icons';
 
-interface Props {
+interface GroupOverviewBoardProps {
   group: GroupWithMembers;
   userId?: number;
   spareCode: string;
@@ -21,7 +21,7 @@ export const GroupOverviewBoard = ({
   userId,
   spareCode,
   onSave,
-}: Props) => {
+}: GroupOverviewBoardProps) => {
   const [isRequested, setIsRequested] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
