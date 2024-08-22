@@ -5,7 +5,7 @@
 /* Toast style custom */
 .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--success {
   background: transparent;
-  right: 0;
+  left: 0 !important;
   top: 0;
   font-size: 14px;
   font-weight: 400;
@@ -17,7 +17,7 @@
 }
 .Toastify__toast.Toastify__toast-theme--light.Toastify__toast--info {
   background: #ffcccc;
-  right: 0;
+  left: 0;
   top: 0;
   font-size: 14px;
   font-weight: 400;
@@ -28,9 +28,10 @@
   border-radius: 28px;
 }
 .Toastify__toast-container {
-  width: 400px !important;
+  width: 360px !important;
   border: none;
   background-color: transparent;
+  margin-left: 100px;
 }
 
 .Toastify__toast-body {
@@ -39,23 +40,4 @@
 }
 .Toastify__close-button {
   display: none;
-}
-
-:root {
-  --sidebar-width: 60px; /* 기본값 설정 */
-}
-.Toastify__toast-container {
-  margin-left: 16px;
-}
-
-@media (min-width: 480px) {
-  .Toastify__toast-container {
-    margin-left: 84px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .Toastify__toast-container {
-    margin-left: 360px;
-  }
 }

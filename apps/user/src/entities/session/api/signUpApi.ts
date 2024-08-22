@@ -1,5 +1,5 @@
 import { client, ResponseWith } from '../../../shared';
-import type { AuthBody, Token } from '../types';
+import type { AuthBody, Token } from '@jeiltodo/ui/entities'
 
 export const signUpApi = async (
   signUpData: AuthBody

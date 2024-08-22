@@ -8,7 +8,7 @@ import {
   validateSiginupEmail,
   validateSiginupPassword,
   validateSignupNickname,
-} from '../model/validation';
+} from '../model/validation-signup';
 
 interface SignUpFormProps {
   onSubmit: (credentials: SignUpBody) => void;

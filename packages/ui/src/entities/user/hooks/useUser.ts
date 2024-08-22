@@ -4,7 +4,6 @@ import { useToast } from '../../../shared';
 import { userQueryKeys } from './queryKeys';
 import { LogoutData, UserData } from '../model/type';
 import { deleteCookie } from '../../../../../../apps/user/src/shared';
-import { useRouter } from 'next/navigation';
 
 export const useUpdateUserInfoMutation = () => {
   const queryClient = useQueryClient();
@@ -28,7 +27,6 @@ export const useUpdateUserInfoMutation = () => {
 export const useLogoutMutation = () => {
   const queryClient = useQueryClient();
   const showToast = useToast();
-  const router = useRouter();
 
   return useMutation({
     mutationFn: (data: LogoutData) => userApi.logoutUserInfo(data),
