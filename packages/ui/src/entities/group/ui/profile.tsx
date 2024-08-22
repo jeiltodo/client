@@ -12,7 +12,7 @@ import { BoardMode } from '../../../shared/model/type';
 import { Member } from '../model/type';
 import { RANK_HIGHST, RANK_LOWEST } from '../constants/contributionRank';
 
-interface Props {
+interface ProfileProps {
   member: Member;
   mode: BoardMode;
   onChangeRadio?: (id: number) => void;
@@ -24,7 +24,7 @@ export const Profile = ({
   mode,
   onChangeRadio,
   onClickRemove,
-}: Props) => {
+}: ProfileProps) => {
   return (
     <div className={`relative w-fit pt-6`}>
       {isLeader === true && mode !== 'change-leader' && (
