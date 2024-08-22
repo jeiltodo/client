@@ -69,8 +69,7 @@ export const TodoPage = () => {
           className='flex gap-1 items-center text-sm'
           onClick={handleAddModal}
         >
-          <PlusBlue width={16} height={16} />
-          할일 추가
+          <PlusBlue width={16} height={16} />할 일 추가
         </Button>
       </div>
       <div className='desktop:max-w-[1200px] w-full bg-white rounded-xl p-base flex flex-col'>
