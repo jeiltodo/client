@@ -6,6 +6,9 @@ import { Field } from '../../../shared/ui/field';
 import { useState } from 'react';
 import { GroupTitleOrCode, GroupWithMembers } from '../model/type';
 import { formatDateString } from '../../../shared/lib/formatDateString';
+import { formatDateString } from '../../../../../lib/format/formatDateString';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyUser } from '@jeiltodo/icons';
 
 interface Props {
   group: GroupWithMembers;
@@ -25,6 +28,12 @@ export const GroupOverviewBoard = ({
 
   const [updatedCode, setUpdatedCode] = useState<string>(spareCode);
   const [updatedTitle, setUpdatedValue] = useState(title);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const isUserALeader =
     members.find((member) => member.isLeader)?.id === userId;
@@ -68,7 +77,17 @@ export const GroupOverviewBoard = ({
           )}
           <div className='w-full flex justify-between items-end'>
             <Field label='초대코드'>
-              {isRequested ? updatedCode : secretCode}
+              <div className='flex items-end gap-2'>
+                <div>{isRequested ? updatedCode : secretCode}</div>
+                <CopyToClipboard text={secretCode} onCopy={handleCopy}>
+                  <button className='cursor-pointer'>
+                    <CopyUser className='w-6 h-6' />
+                  </button>
+                </CopyToClipboard>
+                {copied && (
+                  <span className='text-sm text-orange-500 ml-2'>Copied!</span>
+                )}
+              </div>
             </Field>
             {isUserALeader && (
               <button

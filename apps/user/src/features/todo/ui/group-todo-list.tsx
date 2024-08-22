@@ -103,7 +103,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   return (
     <ul className='w-full flex flex-wrap gap-1'>
       {todos.map(({ id, title, isDone, memberInCharge, noteId }) => (
-        <li key={id} className='list-none w-full flex justify-between group '>
+        <li key={id} className='list-none w-full flex items-center justify-between group hover:bg-white active:bg-white p-[2px] rounded-lg'>
           <span className='inline-flex gap-4 items-center '>
             <TodoContent
               key={id}

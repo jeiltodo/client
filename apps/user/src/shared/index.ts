@@ -9,6 +9,7 @@ export * from './model/query/getQueryClient';
 
 export * from './ui/base-modal';
 export * from './ui/sidebar/sidebar-nav';
+export * from './ui/custom-toolbar';
 export * from './ui/@x/confirmation-modal';
 
 export * from '../../../../packages/ui/src/shared/constants/time';

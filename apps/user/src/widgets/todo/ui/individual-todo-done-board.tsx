@@ -44,7 +44,7 @@ export const IndividualTodoDoneBoard = ({
         )}
       </div>
       <div className='bg-slate-200 rounded-xl px-6 py-4'>
-        {done.length !== 0 ? (
+        {done.length !== 0 ? 
           <div className='w-full'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
             <TodoList todos={done} />

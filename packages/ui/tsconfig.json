@@ -6,6 +6,7 @@
     "../../apps/user/src/entities/todo/ui/todo-item.tsx",
     "../../apps/user/src/widgets/note/ui/note-detail-slide.tsx",
     "../../apps/user/src/shared/model/client.ts"
+    "src/@types/react-copy-to-clipboard/index.d.ts"
   ],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
