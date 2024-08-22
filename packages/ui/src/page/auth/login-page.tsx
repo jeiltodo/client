@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { LoginForm } from '../../features/session';
+import { LoginForm } from '../../features';
 
 export const LoginPage: React.FC = () => {
   return (

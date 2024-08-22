@@ -8,3 +8,5 @@ export * from './user/model/type';
 
 export * from './user/hooks/queryKeys';
 export * from './user/hooks/useUser';
+
+export * from './user/api/loginApi';

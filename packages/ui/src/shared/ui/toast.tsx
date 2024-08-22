@@ -3,7 +3,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import {
   Check,
   CheckGroup,
-  DeleteCircle,
   DeleteCircleError,
 } from '@jeiltodo/icons';
 

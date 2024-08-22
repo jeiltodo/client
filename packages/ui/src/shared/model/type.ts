@@ -30,3 +30,9 @@ export type NoteResponse = {
   notes: Note[] | [];
   totalCount: number;
 };
+
+export interface ResponseWith<T> {
+  msg: string;
+  code: number;
+  data: T;
+}
