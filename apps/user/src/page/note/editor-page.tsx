@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { DeleteCircle } from '@jeiltodo/icons';
+import { Back, DeleteCircle } from '@jeiltodo/icons';
 import { BoardTitle, TodoTitle, useToast } from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
-import { BaseModal, MINUTES_WITH_MS } from '../../shared';
+import { BaseModal, ConfirmationModal, MINUTES_WITH_MS } from '../../shared';
 import { Note, useCreateNote, useUpdateNote } from '../../entities/note';
 import { Button, ButtonGroup, LayoutTitle } from '@jeiltodo/ui/shared';
 
@@ -28,6 +28,7 @@ export const EditorPage = ({ note }: Props) => {
   const [linkUrl, setLinkUrl] = useState<string>(note?.linkUrl ?? '');
   const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
   const [isButtonView, setIsButtonView] = useState<boolean>(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isAlert, setIsAlert] = useState<boolean>(false);
 
   const { mutate: updateNote } = useUpdateNote(Number(noteId));
@@ -35,6 +36,10 @@ export const EditorPage = ({ note }: Props) => {
 
   const showToast = useToast();
   const router = useRouter();
+
+  const handleBackClick = () => {
+    router.back();
+  };
 
   const handleLocalSave = () => {
     const localData = {
@@ -107,38 +112,46 @@ export const EditorPage = ({ note }: Props) => {
     }
   }, [noteId]);
 
-  console.log('note content', content);
   return (
     <div
       className='flex flex-col max-w-[792px] min-w-[280px]'
       style={{ minHeight: 'calc(100vh - 48px)' }}
     >
-      <LayoutTitle title={`노트 ${noteId === 'new' ? '작성' : '수정'}`}>
-        <ButtonGroup>
-          <Button
-            className='w-[96px] h-[44px]'
-            onClick={handleLocalSave}
-            variant='text-blue'
-            isDisabled={
-              title.trim().length === 0 || content.trim().length === 0
-            }
-          >
-            임시저장
-          </Button>
-          <Button
-            className='w-[96px] h-[44px]'
-            isDisabled={
-              title.trim().length === 0 || content.trim().length === 0
-            }
-            onClick={handleSave}
-          >
-            저장 완료
-          </Button>
-        </ButtonGroup>
-      </LayoutTitle>
+      <div className={`flex flex-row items-center justify-between mb-[16px]`}>
+        <div className='flex items-center justify-start gap-2'>
+          <Back
+            className='w-6 h-6 cursor-pointer'
+            onClick={() => setIsConfirmOpen(true)}
+          />
+          <h2 className='font-pretendard-semibold text-lg'>{`노트 ${noteId === 'new' ? '작성' : '수정'}`}</h2>
+        </div>
+        <div>
+          <ButtonGroup>
+            <Button
+              className='w-[96px] h-[44px]'
+              onClick={handleLocalSave}
+              variant='text-blue'
+              isDisabled={
+                title.trim().length === 0 || content.trim().length === 0
+              }
+            >
+              임시저장
+            </Button>
+            <Button
+              className='w-[96px] h-[44px]'
+              isDisabled={
+                title.trim().length === 0 || content.trim().length === 0
+              }
+              onClick={handleSave}
+            >
+              저장 완료
+            </Button>
+          </ButtonGroup>
+        </div>
+      </div>
       {isLocalSaved && isButtonView && (
         <div className='flex flex-row items-center justify-between bg-[#eff6ff] text-[#3b82f6] rounded-[28px] text-[14px] font-pretendard-medium px-3 pl-6 py-0 shadow-none min-h-[56px] h-[56px] mb-6'>
-          <div className='flex flex-row items-center gap-4'>
+          <div className='flex flex-row items-center gap-2 mb:gap-4'>
             <button
               type='button'
               onClick={() => setIsButtonView(false)}
@@ -150,14 +163,13 @@ export const EditorPage = ({ note }: Props) => {
           </div>
           <Button
             variant='rounded-outline-blue'
-            className='block px-3 !text-sm !h-[36px] leading-5'
+            className='block px-3 !text-sm !h-[36px] leading-5 min-w-[74px] ml-2'
             onClick={getLocalSave}
           >
             불러오기
           </Button>
         </div>
       )}
-
       <BoardTitle
         className='mb-[12px]'
         icon='flag'
@@ -168,7 +180,6 @@ export const EditorPage = ({ note }: Props) => {
         className='mb-[24px]'
         title={note?.todo.title || todoTitle || '할 일'}
       />
-
       <EditorForm
         link={linkUrl}
         setLink={setLinkUrl}
@@ -192,6 +203,16 @@ export const EditorPage = ({ note }: Props) => {
             </div>
           </BaseModal>
         </div>
+      )}
+      {isConfirmOpen && (
+        <ConfirmationModal
+          setModalToggle={setIsConfirmOpen}
+          submitButtonText={'확인'}
+          onSubmit={handleBackClick}
+        >
+          정말 나가시겠어요? <br />
+          작성된 내용이 모두 삭제됩니다.
+        </ConfirmationModal>
       )}
     </div>
   );
