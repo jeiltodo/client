@@ -33,7 +33,7 @@ import BackButton from '../../../../../../packages/ui/src/shared/ui/back-button'
 
 export const GroupDashboardPage = () => {
   const params = useParams();
-  const groupId = Number(params.id);
+  const groupId = Number(params?.id);
   const [goalModalOpen, setGoalModalOpen] = useState(false);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const {
