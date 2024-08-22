@@ -92,7 +92,8 @@ export const GroupGoalDetailPage = ({
                 className='flex gap-1 items-center text-sm h-[20px]'
                 onClick={openAddTodoModal}
               >
-                <PlusOrange width={16} height={16} />할 일 추가
+                <PlusOrange width={16} height={16} />
+                할일 추가
               </Button>
             </div>
             {user?.id && (

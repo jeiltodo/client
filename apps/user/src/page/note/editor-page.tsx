@@ -110,7 +110,7 @@ export const EditorPage = ({ note }: Props) => {
   console.log('note content', content);
   return (
     <div
-      className='flex flex-col max-w-[792px]'
+      className='flex flex-col max-w-[792px] min-w-[280px]'
       style={{ minHeight: 'calc(100vh - 48px)' }}
     >
       <LayoutTitle title={`노트 ${noteId === 'new' ? '작성' : '수정'}`}>

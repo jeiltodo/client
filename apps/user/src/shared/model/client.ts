@@ -6,13 +6,17 @@ import type {
 import axios from 'axios';
 import { isServer } from '@tanstack/react-query';
 import { getServerToken } from './getServerToken';
-import { deleteCookie, getCookie, setCookie } from '../lib/cookie';
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from '../../../../../packages/ui/src/shared/lib/cookie';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   ACCESS_TOKEN_EXPIRY_TIME,
   REFRESH_TOKEN_COOKIE_NAME,
-} from '../config/token';
-import { API_URL } from '../config/api';
+} from '../../../../../packages/ui/src/shared/config/token';
+import { API_URL } from '../../../../../packages/ui/src/shared/config/api';
 
 // 에러 응답 데이터 타입 정의
 interface ErrorResponseData {

@@ -44,7 +44,7 @@ export const UserGoalCard = (goal: GoalWithTodos) => {
   };
 
   return (
-    <div className='min-w-[280px] w-full p-6 rounded-3xl bg-blue-50 tablet:min-w-[560px] '>
+    <div className='w-full p-6 rounded-3xl bg-blue-50  '>
       <div className='flex justify-between'>
         <p className='text-lg font-bold text-slate-800'>{goal.title}</p>
         <Button

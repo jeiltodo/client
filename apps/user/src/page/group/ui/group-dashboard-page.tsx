@@ -29,6 +29,7 @@ import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroup
 import { useDisbandGroup } from '../../../entities/group/hooks/useDisbandGroup';
 import { useLeaveGroup } from '../../../entities/group/hooks/useLeaveGroup';
 import { ConfirmationModal } from '../../../shared';
+import BackButton from '../../../../../../packages/ui/src/shared/ui/back-button';
 
 export const GroupDashboardPage = () => {
   const params = useParams();
@@ -91,7 +92,10 @@ export const GroupDashboardPage = () => {
   return (
     <div className='max-w-[1200px]'>
       <div className='flex justify-between items-center mb-4'>
-        <p className=' text-slate-900 font-semibold text-lg'>{group.title}</p>
+        <div className='flex items-center justify-start gap-2'>
+          <BackButton />
+          <p className=' text-slate-900 font-semibold text-lg'>{group.title}</p>
+        </div>
         {isUserALeader ? (
           <button
             onClick={handleModalOpen}
@@ -108,7 +112,7 @@ export const GroupDashboardPage = () => {
           </button>
         )}
       </div>
-      <div className='w-full grid grid-rows-[auto_220px] desktop:flex desktop:flex-nowrap  gap-4 '>
+      <div className='w-full grid grid-rows-[auto_280px] desktop:flex desktop:flex-nowrap  gap-4 '>
         <GroupOverviewBoard
           group={group}
           userId={user?.id}
