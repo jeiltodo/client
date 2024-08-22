@@ -1,7 +1,7 @@
 'use client';
 import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
 import { Goal } from '../../../entities/goal';
 
@@ -17,16 +17,31 @@ export const TitleProgressBarCard = ({
   onEditGoal,
 }: Props) => {
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
+  const kebabRef = useRef<HTMLDivElement>(null);
 
   const handleKebab = () => {
     setIsFlyoutOpen((prev) => !prev);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (kebabRef.current && !kebabRef.current.contains(event.target as Node)) {
+        setIsFlyoutOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className='bg-white p-6 rounded-xl'>
       <div className='flex flex-row items-center justify-between mb-[24px]'>
         <BoardTitle icon='flag' title={goalData.title} />
-        <span className='inline-flex items-center gap-2 relative'>
+        <span className='inline-flex items-center gap-2 relative' ref={kebabRef}>
           <Kebab
             width={24}
             height={24}
