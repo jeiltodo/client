@@ -7,7 +7,8 @@ import { Goal, individualGoalsOptions, userOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
 import { TodoList } from '../../features/todo';
 import { Button, LoadingSpinner } from '@jeiltodo/ui/shared';
-import { PlusBlue } from '@jeiltodo/icons';
+import { Back, PlusBlue } from '@jeiltodo/icons';
+import BackButton from '../../../../../packages/ui/src/shared/ui/back-button';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
@@ -61,8 +62,11 @@ export const TodoPage = () => {
         />
       )}
       <div className='flex items-center justify-between mb-6 '>
-        <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
-          최근 등록한 할 일 ({allTodos?.length})
+        <div className='flex items-center justify-start gap-2'>
+          <BackButton />
+          <div className='text-lg font-semibold text-slate-900 min-w-[280px]'>
+            최근 등록한 할 일 ({allTodos?.length})
+          </div>
         </div>
         <Button
           variant='text-blue'

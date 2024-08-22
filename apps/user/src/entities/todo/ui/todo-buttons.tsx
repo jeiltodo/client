@@ -32,8 +32,8 @@ export const TodoButtons = ({
   };
 
   return (
-    <div className='relative' onMouseLeave={() => setFlyoutOpen(false)}>
-      <span className='inline-flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100'>
+    <div className='relative flex items-center' onMouseLeave={() => setFlyoutOpen(false)}>
+      <span className='inline-flex items-center  gap-2 opacity-0 transition-opacity group-hover:opacity-100'>
         {isGroup ? (
           <NoteViewGroup
             width={24}
