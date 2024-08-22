@@ -6,6 +6,7 @@ interface Props {
   currentPage: number;
   variant?: 'primary' | 'secondary';
   className?: string;
+  isGroup?: boolean;
 }
 
 export function Pagination({
@@ -14,6 +15,7 @@ export function Pagination({
   currentPage,
   variant = 'primary',
   className,
+  isGroup = false,
 }: Props) {
   const pageCount = totalCount / limit;
   const restCount = totalCount % limit;
@@ -21,6 +23,19 @@ export function Pagination({
   const handleClickPrev = () => {};
 
   const handleClickNext = () => {};
+
+  const getClassNames = (variant: string, isGroup: boolean): string => {
+    if (variant === 'primary') {
+      return isGroup
+        ? 'bg-groupColor-500 text-white'
+        : 'bg-blue-500 text-white';
+    } else {
+      return isGroup
+        ? 'bg-white text-groupColor-500'
+        : 'bg-white text-blue-500';
+    }
+  };
+
   return (
     <div
       className={`flex w-full justify-center items-center gap-2 my-4 ${className}`}
@@ -33,7 +48,8 @@ export function Pagination({
       />
       {Array.from({ length: pageCount < 1 ? 1 : pageCount }).map((_, idx) => (
         <span
-          className={`cursor-pointer inline-flex justify-center items-center w-5 h-5 text-sm font-medium rounded-md ${currentPage === idx + 1 ? (variant === 'primary' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500') : variant === 'primary' ? 'text-slate-400 ' : 'text-slate-950'} `}
+          key={idx}
+          className={`cursor-pointer inline-flex justify-center items-center w-5 h-5 text-sm font-medium rounded-md ${currentPage === idx + 1 ? getClassNames(variant, isGroup) : variant === 'primary' ? 'text-slate-400 ' : 'text-slate-950'} `}
         >
           {idx + 1}
         </span>

@@ -3,5 +3,5 @@ export default function GroupRootLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  return <main className='common-layout bg-slate-100'>{children}</main>
+  return <main className='common-layout bg-[#f5f5f5]'>{children}</main>;
 }

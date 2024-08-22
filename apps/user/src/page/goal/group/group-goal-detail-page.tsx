@@ -1,5 +1,5 @@
 'use client';
-import { Button, LayoutTitle } from '@jeiltodo/ui/shared';
+import { Button, LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 
 import {
@@ -8,7 +8,7 @@ import {
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 
-import { Plus } from '@jeiltodo/icons';
+import { PlusOrange } from '@jeiltodo/icons';
 import { useGroupDetail } from '../../../entities/group';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
@@ -21,7 +21,6 @@ import { SingleGroupGoalTodo, TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
 import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../../entities/goal';
-// import { useGroupDetail } from '../../entities/group';
 
 export const GroupGoalDetailPage = ({
   params,
@@ -77,24 +76,26 @@ export const GroupGoalDetailPage = ({
   };
   return (
     <div className='max-w-[1200px]'>
-      {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
-        <>
-          <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
-          <div className='flex flex-col gap-y-6'>
+      <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
+      <div className='flex flex-col gap-y-6 relative'>
+        {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
+          <>
             <TitleProgressBarCard
               goalData={singleGroupGoal}
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
-            <NotesPushButton goalData={singleGroupGoal} />
-            <Button
-              variant='text-blue'
-              className='flex gap-1 items-center text-sm h-[20px]'
-              onClick={openAddTodoModal}
-            >
-              <Plus width={16} height={16} />
-              할 일 추가
-            </Button>
+            <NotesPushButton goalData={singleGroupGoal} isGroup={true} />
+            <div className='flex items-center justify-end'>
+              <Button
+                variant='text-group-color'
+                className='flex gap-1 items-center text-sm h-[20px]'
+                onClick={openAddTodoModal}
+              >
+                <PlusOrange width={16} height={16} />
+                할일 추가
+              </Button>
+            </div>
             {user?.id && (
               <GroupTodoDoneBoard
                 todos={singleGroupGoalTodo}
@@ -128,11 +129,14 @@ export const GroupGoalDetailPage = ({
                 setTodoModalToggle={setIsAddTodoModalOpen}
                 initialGoal={singleGroupGoal}
                 goals={groupGoalsForModal}
+                shouldCharge={true}
               />
             )}
-          </div>
-        </>
-      ) : null}
+          </>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </div>
     </div>
   );
 };

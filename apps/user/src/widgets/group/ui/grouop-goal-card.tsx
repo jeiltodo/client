@@ -2,7 +2,7 @@
 
 import { Button } from '@jeiltodo/ui/shared';
 import { GroupGoalWithTodos } from '../../../entities/goal';
-import { ArrowRight, Plus } from '@jeiltodo/icons';
+import { ArrowRight, PlusOrange } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
@@ -36,35 +36,51 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const handleMore = () => {
     router.push(`/goal/group/${groupId}/${goal.id}`);
   };
-  console.log(goal);
 
   return (
-    <div className='min-w-[280px] w-full p-6 rounded-3xl bg-groupColor-50 tablet:min-w-[560px] '>
+    <div className='w-full p-6 rounded-3xl bg-groupColor-50  '>
       <div className='flex justify-between'>
         <p className='text-lg font-bold text-slate-800'>{goal.title}</p>
         <Button
-          variant='text-blue'
-          className='flex gap-1 items-center text-sm text-groupColor-500'
+          variant='text-group-color'
+          className='flex gap-1 items-center text-sm h-[20px]'
           onClick={handleAddTodo}
         >
-          <Plus width={16} height={16} />
-          할 일 추가
+          <PlusOrange width={16} height={16} />할 일 추가
         </Button>
       </div>
       <div className='w-full rounded-3xl py-[2px] px-2 bg-white mt-2'>
         <GroupProgressBar progress={goal.progress} />
       </div>
-      <div className='w-full tablet:grid tablet:grid-cols-2 tablet:divide-x tablet:divide-gray-200 mt-4 mb-5'>
-        {notDone.todos.length !== 0 && (
-          <div className='w-full tablet:pr-6'>
+      <div className='w-full flex flex-wrap gap-6 desktop:!flex-nowrap mt-4 mb-5 pt-4'>
+        {notDone.todos.length !== 0 ? (
+          <div className='w-full min-h-[152px]'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
             <GroupTodoList goalWithTodos={notDone} />
           </div>
+        ) : (
+          <div className='w-full '>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
+            <div className='flex items-center justify-center w-full min-h-[152px]'>
+              <p className='text-sm font-normal text-slate-400'>
+                아직 해야할 일이 없어요
+              </p>
+            </div>
+          </div>
         )}
-        {done.todos.length !== 0 && (
-          <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
+        {done.todos.length !== 0 ? (
+          <div className='w-full min-h-[152px]'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
             <GroupTodoList goalWithTodos={done} />
+          </div>
+        ) : (
+          <div className='w-full '>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
+            <div className='flex items-center justify-center w-full min-h-[152px]'>
+              <p className='text-sm font-normal text-slate-400'>
+                아직 다 한 일이 없어요
+              </p>
+            </div>
           </div>
         )}
       </div>

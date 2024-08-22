@@ -7,17 +7,24 @@ import { BaseModal } from '../../../shared/ui/base-modal';
 interface GroupAttendModalProps {
   setGroupAttendToggle: Dispatch<SetStateAction<boolean>>;
   handleAttendGroup: (secretCode: string) => void;
+  isOnError?: boolean;
 }
 export const GroupAttendModal = ({
   setGroupAttendToggle,
-  handleAttendGroup
+  handleAttendGroup,
+  isOnError = false,
 }: GroupAttendModalProps) => {
   const [secretCode, setSecretCode] = useState<string>('');
 
   const handleSubmit = () => {
     if (secretCode) {
       handleAttendGroup(secretCode);
-      setGroupAttendToggle(false); // 모달 닫기
+      !isOnError && setGroupAttendToggle(false); // 모달 닫기
+    }
+  };
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
     }
   };
 
@@ -33,12 +40,18 @@ export const GroupAttendModal = ({
           onChange={(e) => {
             setSecretCode(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           type='text'
           placeholder='그룹의 초대코드를 적어주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
       </div>
-      <Button isDisabled={!secretCode} className='w-full mt-10 h-12' onClick={handleSubmit}>
+      <Button
+        isDisabled={!secretCode}
+        className='w-full mt-10 h-12'
+        onClick={handleSubmit}
+      >
         확인
       </Button>
     </BaseModal>

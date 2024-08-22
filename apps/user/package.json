@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@jeiltodo/icons": "*",
-    "@jeiltodo/lib": "*",
     "@jeiltodo/ui": "*",
     "@tanstack/react-query": "^5.51.23",
     "axios": "^1.7.3",

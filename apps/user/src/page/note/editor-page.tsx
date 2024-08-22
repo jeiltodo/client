@@ -6,25 +6,26 @@ import { DeleteCircle } from '@jeiltodo/icons';
 import { BoardTitle, TodoTitle, useToast } from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
 import { BaseModal, MINUTES_WITH_MS } from '../../shared';
-import { useCreateNote, useUpdateNote } from '../../entities/note';
-import { useNoteDetail } from '../../entities/note/hooks/useNoteDetail';
+import { Note, useCreateNote, useUpdateNote } from '../../entities/note';
 import { Button, ButtonGroup, LayoutTitle } from '@jeiltodo/ui/shared';
 
-export const EditorPage = () => {
-  const params = useParams();
+interface Props {
+  note?: Note;
+}
+
+export const EditorPage = ({ note }: Props) => {
   const searchParams = useSearchParams();
   const goalTitle = searchParams!.get('title');
   const todoTitle = searchParams!.get('todo');
 
+  const params = useParams();
+  const noteId = params.noteId as string;
   const goalId = Number(params!.goalId);
   const todoId = Number(params!.todoId);
-  const noteId = params!.noteId as string;
 
-  const { noteDetail } = useNoteDetail(noteId);
-
-  const [title, setTitle] = useState<string>(noteDetail?.title ?? '');
-  const [content, setContent] = useState<string>(noteDetail?.content ?? '');
-  const [linkUrl, setLinkUrl] = useState<string>(noteDetail?.linkUrl ?? '');
+  const [title, setTitle] = useState<string>(note?.title ?? '');
+  const [content, setContent] = useState<string>(note?.content ?? '');
+  const [linkUrl, setLinkUrl] = useState<string>(note?.linkUrl ?? '');
   const [isLocalSaved, setIsLocalSaved] = useState<boolean>(false);
   const [isButtonView, setIsButtonView] = useState<boolean>(false);
   const [isAlert, setIsAlert] = useState<boolean>(false);
@@ -72,7 +73,7 @@ export const EditorPage = () => {
         { title, content, linkUrl },
         {
           onSuccess: () => {
-            router.push(`/note/list/${goalId}?title=${goalTitle}`);
+            router.replace(`/note/list/${goalId}?title=${goalTitle}`);
           },
         }
       );
@@ -81,7 +82,7 @@ export const EditorPage = () => {
         { title, content, linkUrl },
         {
           onSuccess: () => {
-            router.push(`/note/list/${goalId}?title=${goalTitle}`);
+            router.replace(`/note/list/${goalId}?title=${goalTitle}`);
           },
         }
       );
@@ -106,9 +107,10 @@ export const EditorPage = () => {
     }
   }, [noteId]);
 
+  console.log('note content', content);
   return (
     <div
-      className='flex flex-col max-w-[792px]'
+      className='flex flex-col max-w-[792px] min-w-[280px]'
       style={{ minHeight: 'calc(100vh - 48px)' }}
     >
       <LayoutTitle title={`노트 ${noteId === 'new' ? '작성' : '수정'}`}>
@@ -160,11 +162,11 @@ export const EditorPage = () => {
         className='mb-[12px]'
         icon='flag'
         iconSize={24}
-        title={noteDetail?.todo.title || goalTitle || '목표'}
+        title={note?.todo.title || goalTitle || '목표'}
       />
       <TodoTitle
         className='mb-[24px]'
-        title={noteDetail?.todo.title || todoTitle || '할 일'}
+        title={note?.todo.title || todoTitle || '할 일'}
       />
 
       <EditorForm

@@ -1,6 +1,6 @@
 import type { SingleGoalTodo } from '../../../entities/todo';
 import { Goal } from '../../../entities/goal';
-import { IndividualTodoList } from '../../../features/todo';
+import { TodoList } from '../../../features/todo';
 
 export const IndividualTodoDoneBoard = ({
   todos,
@@ -23,37 +23,34 @@ export const IndividualTodoDoneBoard = ({
   const notDone = todosForList.filter((todo) => !todo.isDone);
 
   return (
-    <div className='desktop:grid-rows-2 tablet:grid-cols-2 tablet:gap-6 mobile:grid mobile:grid-cols-2 mobile:gap-4'>
+    <div className='grid grid-cols-1 gap-y-4 tablet:grid-cols-1 tablet:gap-y-6 desktop:grid-cols-2 desktop:gap-x-4'>
       <div className='bg-white rounded-xl px-6 py-4'>
         {notDone.length !== 0 ? (
-          <div className=''>
-            <div className='flex items-start justify-between'>
-              <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-            </div>
-            <IndividualTodoList todos={notDone} />
+          <div className='w-full min-h-[228px] h-full flex flex-col'>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
+            <TodoList todos={notDone} />
           </div>
         ) : (
-          <div className='min-h-[228px] flex flex-col'>
-            <div className='flex items-start justify-between'>
-              <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
-            </div>
+          <div className='w-full min-h-[228px] h-full flex flex-col'>
+            <p className='text-sm font-semibold text-slate-800 mb-3'>To do</p>
+
             <div className='flex-grow flex items-center justify-center'>
-              <p className='text-sm text-gray-500'>할 일 없음</p>
+              <p className='text-sm text-slate-400'>아직 해야할 일이 없어요</p>
             </div>
           </div>
         )}
       </div>
       <div className='bg-slate-200 rounded-xl px-6 py-4'>
         {done.length !== 0 ? (
-          <div className='w-full mt-6 tablet:pl-6 tablet:mt-0'>
+          <div className='w-full min-h-[228px] h-full flex flex-col'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
-            <IndividualTodoList todos={done} />
+            <TodoList todos={done} />
           </div>
         ) : (
-          <div className='min-h-[228px] flex flex-col'>
+          <div className='w-full min-h-[228px] h-full flex flex-col'>
             <p className='text-sm font-semibold text-slate-800 mb-3'>Done</p>
             <div className='flex-grow flex items-center justify-center'>
-              <p className='text-sm text-gray-500'>할 일 없음</p>
+              <p className='text-sm text-slate-400'>아직 다 한 일이 없어요</p>
             </div>
           </div>
         )}

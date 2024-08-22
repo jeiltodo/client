@@ -7,17 +7,25 @@ import { BaseModal } from '../../../shared/ui/base-modal';
 interface GroupCreateModalProps {
   setGroupCreateToggle: Dispatch<SetStateAction<boolean>>;
   handleCreateGroup: (title: string) => void;
+  isOnError?: boolean;
 }
 export const GroupCreateModal = ({
   setGroupCreateToggle,
-  handleCreateGroup
+  handleCreateGroup,
+  isOnError = false,
 }: GroupCreateModalProps) => {
   const [title, setTitle] = useState<string>('');
 
   const handleSubmit = () => {
     if (title) {
       handleCreateGroup(title);
-      setGroupCreateToggle(false); // 모달 닫기
+      !isOnError && setGroupCreateToggle(false); // 모달 닫기
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
     }
   };
 
@@ -33,12 +41,18 @@ export const GroupCreateModal = ({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
           type='text'
           placeholder='그룹 이름을 적어주세요'
           className='w-full text-base font-normal'
+          autoFocus
         />
       </div>
-      <Button isDisabled={!title} className='w-full mt-10 h-12' onClick={handleSubmit}>
+      <Button
+        isDisabled={!title}
+        className='w-full mt-10 h-12'
+        onClick={handleSubmit}
+      >
         확인
       </Button>
     </BaseModal>

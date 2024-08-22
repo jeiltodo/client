@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import {
   FormattedGoalWithTodos,
+  MemgberInCharge,
   TodoAssignee,
   TodoButtons,
   TodoModal,
@@ -15,6 +16,9 @@ import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { useParams, useRouter } from 'next/navigation';
 import { useGroupDetail } from '../../../entities/group';
 import { NoteDetailSlide } from '../../../widgets/note';
+import { useToast } from '@jeiltodo/ui/shared';
+import { useQuery } from '@tanstack/react-query';
+import { userOptions } from '../../../entities/goal';
 
 interface Props {
   goalWithTodos: FormattedGoalWithTodos;
@@ -32,6 +36,10 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   );
   const [todoToRemove, setTodoToRemove] = useState<number | null>(null);
   const [removeModalOpen, setRemoveModalOpen] = useState(false);
+
+  const toast = useToast();
+
+  const { data: user } = useQuery(userOptions());
   const { data: group } = useGroupDetail(groupId);
   const { data: groupGoals } = useGroupGoals(groupId);
   const goalsForTodoModal =
@@ -47,11 +55,28 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
     setTodoToRemove(id);
     setRemoveModalOpen(true);
   };
-  const handleClickNote = (todoId: number, noteId?: number) => {
+  const handleClickNote = (
+    todoId: number,
+    memberInCharge: Omit<MemgberInCharge, 'id'> | null,
+    noteId?: number
+  ) => {
     if (noteId) {
       setNoteSlideModalId(noteId);
-    } else {
+      return;
+    }
+
+    if (
+      memberInCharge &&
+      'nickname' in memberInCharge &&
+      memberInCharge.nickname === user?.nickname
+    ) {
       setNoteCreateModalId(todoId);
+    } else {
+      toast({
+        message: '담당자만 작성할 수 있습니다',
+        type: 'alert',
+        isGroup: true,
+      });
     }
   };
 
@@ -76,14 +101,15 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   };
 
   return (
-    <ul className='w-full flex flex-wrap gap-2'>
+    <ul className='w-full flex flex-wrap gap-1'>
       {todos.map(({ id, title, isDone, memberInCharge, noteId }) => (
-        <li key={id} className='list-none w-full flex justify-between group '>
-          <span className='inline-flex gap-4 items-center min-w-[280px]'>
+        <li key={id} className='list-none w-full flex items-center justify-between group hover:bg-white active:bg-white p-[2px] rounded-lg'>
+          <span className='inline-flex gap-4 items-center '>
             <TodoContent
               key={id}
               todo={{ id, title, isDone }}
               disabled={memberInCharge === null}
+              isGroup={true}
               onCheck={handleCheck}
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
@@ -91,7 +117,8 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
           <TodoButtons
             onClickEdit={() => handleClickEdit(id)}
             onClickRemove={() => handleClickRemove(id)}
-            onClickNote={() => handleClickNote(id, noteId)}
+            onClickNote={() => handleClickNote(id, memberInCharge, noteId)}
+            isGroup={true}
           />
           {editModalId === id && (
             <TodoModal

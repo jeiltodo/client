@@ -1,5 +1,5 @@
 import { client, deleteCookie } from '../../../shared';
-import { ACCESS_TOKEN_COOKIE_NAME } from '../../../shared/config/token';
+import { ACCESS_TOKEN_COOKIE_NAME } from '@jeiltodo/ui/shared';
 
 export const logoutApi = async () => {
   const response = await client.post('/member/logout');

@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import {
@@ -34,6 +34,10 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   const toggleMobileSidebar = () => {
     setIsMobileSidebarOpen(!isMobileSidebarOpen);
   };
+
+  useEffect(() => {
+    setIsMobileSidebarOpen(false);
+  }, [pathname]);
 
   return (
     <div className='min-w-[60px] desktop:min-w-[280px] relative z-30'>
@@ -124,7 +128,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {isTabletOpen && (
         <div
           onClick={toggleTabletSidebar}
-          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-opacity transition-width duration-200 ease-in-out`}
+          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-all duration-200 ease-in-out`}
           style={{
             width: `calc(100% - ${isTabletOpen ? '280px' : '60px'})`,
             height: '100%',

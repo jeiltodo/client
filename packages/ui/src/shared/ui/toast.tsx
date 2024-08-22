@@ -1,6 +1,11 @@
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Check, DeleteCircle } from '@jeiltodo/icons';
+import {
+  Check,
+  CheckGroup,
+  DeleteCircle,
+  DeleteCircleError,
+} from '@jeiltodo/icons';
 
 interface Toast {
   message: string;
@@ -8,33 +13,53 @@ interface Toast {
   onClose?: () => void;
   button?: JSX.Element;
   autoClose?: number;
+  isGroup?: boolean;
 }
+const getClassName = (isGroup: boolean): string => {
+  return `${
+    isGroup
+      ? 'bg-groupColor-200 text-groupColor-800 border-groupColor-400'
+      : 'bg-[#eff6ff] text-slate[800] border-blue-200'
+  } w-full border rounded-[28px]`;
+};
+
 export const useToast = () => {
-  return ({ message, type, onClose, button, autoClose = 3000 }: Toast) => {
+  return ({
+    message,
+    type,
+    onClose,
+    button,
+    isGroup = false,
+    autoClose = 3000,
+  }: Toast) => {
+    const backgroundColor = getClassName(isGroup);
+
     const alertConfig: ToastOptions = {
       //커스터마이징 옵션
-      position: 'top-center',
+      position: 'top-right',
       autoClose: autoClose,
       hideProgressBar: true,
-      closeOnClick: false,
+      closeOnClick: true,
       rtl: false, //알림 좌우 반전 안 함
       pauseOnFocusLoss: false, //화면 벗어나도 알람 정지 안함
       draggable: false,
       pauseOnHover: false, //마우스 올리면 알람 정지하지 않음
-      icon: checkIcon,
+      icon: isGroup ? groupCheckIcon : checkIcon,
+      bodyClassName: getClassName(isGroup),
     };
     const confirmConfig: ToastOptions = {
       //커스터마이징 옵션
-      position: 'top-center',
+      position: 'top-right',
       autoClose: autoClose,
       hideProgressBar: true,
-      closeOnClick: false,
+      closeOnClick: true,
       rtl: false, //알림 좌우 반전 안 함
       pauseOnFocusLoss: false, //화면 벗어나도 알람 정지 안함
       draggable: false,
       pauseOnHover: false, //마우스 올리면 알람 정지하지 않음
       icon: deleteCircleIcon,
       onClose: onClose as (() => void) | undefined,
+      bodyClassName: 'bg-[#FFCCCC] border-error',
     };
     const content = (
       <div
@@ -60,6 +85,9 @@ export const useToast = () => {
 const checkIcon = () => {
   return <Check />;
 };
+const groupCheckIcon = () => {
+  return <CheckGroup />;
+};
 const deleteCircleIcon = () => {
-  return <DeleteCircle />;
+  return <DeleteCircleError />;
 };

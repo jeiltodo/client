@@ -12,7 +12,7 @@ export const useCreateGroupGoal = (groupId: number) => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('goals'),
       });
-      showToast({ message: '목표 작성 성공!', type: 'alert' });
+      showToast({ message: '목표 작성 성공!', type: 'alert', isGroup: true });
     },
   });
 };

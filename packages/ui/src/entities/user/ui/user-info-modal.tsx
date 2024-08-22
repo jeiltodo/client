@@ -14,7 +14,7 @@ import {
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
-} from '../../../../../../apps/user/src/shared/config/token';
+} from '../../../shared/config/token';
 
 interface Props {
   userInfo: UserDataprops | undefined;

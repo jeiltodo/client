@@ -1,7 +1,7 @@
-import type { User } from '../../../entities/user/model/type';
+import { Member } from '../../../entities/member';
 import type { TableHeadMap } from '../../../shared/ui/table/type';
 
-export const USER_TABLE_HEAD_MAP: TableHeadMap<User>[] = [
+export const USER_TABLE_HEAD_MAP: TableHeadMap<Member>[] = [
   {
     criteria: 'id',
     title: 'id',

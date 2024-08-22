@@ -22,7 +22,7 @@ export const useGroupTitleAndCode = (id: number) => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('groups'),
       });
-      showToast({ message: '수정 성공!', type: 'alert' });
+      showToast({ message: '수정 성공!', type: 'alert', isGroup: true });
     },
   });
 };

@@ -17,6 +17,9 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang='en'>
+      <head>
+        <link rel='icon' href='/favicon.ico' />
+      </head>
       <body className='font-pretendard-regular'>
         <QueryProvider>
           <ToastContainer />

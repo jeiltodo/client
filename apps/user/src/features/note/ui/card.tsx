@@ -3,7 +3,7 @@ import { NoteList, Kebab } from '@jeiltodo/icons';
 import type { Note } from '@jeiltodo/ui/shared';
 import { CardFlyout, TodoTitle } from '@jeiltodo/ui/shared';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NoteDetailSlide } from '../../../widgets/note/ui/note-detail-slide';
 import { ConfirmationModal } from '../../../shared';
 import { useDeleteNote } from '../../../entities/note/hooks/useDeleteNote';
@@ -14,16 +14,16 @@ interface CardProps {
 }
 
 export const Card = ({ noteData, goal }: CardProps) => {
-  const [isSlideOpen, setIsSlideOpen] = useState<boolean>(false);
+  const [noteSlideModalId, setNoteSlideModalId] = useState<number | null>(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const router = useRouter();
+  const kebabRef = useRef<HTMLDivElement>(null);
 
   const handleSlideOpen = () => {
-    if (noteData.id) {
-      setIsSlideOpen((prev) => !prev);
-    }
+    setNoteSlideModalId(noteData.id);
   };
 
   const handleKebab = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -34,7 +34,6 @@ export const Card = ({ noteData, goal }: CardProps) => {
   const handleRoute = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     const url = `/note/${noteData.todo.goal.id}/${noteData.todo.id}/${noteData.id}?title=${noteData.todo.goal.title}`;
-
     router.push(url);
   };
 
@@ -47,17 +46,28 @@ export const Card = ({ noteData, goal }: CardProps) => {
     deleteNote();
     setIsConfirmOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        kebabRef.current &&
+        !kebabRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
-      role='button'
-      tabIndex={0}
       className='flex flex-col gap-y-[12px] bg-white rounded-[12px] p-[24px] mb-[12px]'
       onClick={handleSlideOpen}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          handleSlideOpen();
-        }
-      }}
     >
       <div className='flex flex-row items-start justify-between'>
         <div className='w-full flex justify-between'>
@@ -65,7 +75,10 @@ export const Card = ({ noteData, goal }: CardProps) => {
             <NoteList width={28} height={28} />
             <h2 className='text-lg font-pretendard-medium'>{noteData.title}</h2>
           </div>
-          <span className='inline-flex items-center gap-2 relative'>
+          <span
+            className='inline-flex items-center gap-2 relative'
+            ref={kebabRef}
+          >
             <span className='flex items-center justify-center w-[24px] h-[24px] rounded-full bg-slate-50'>
               <Kebab
                 width={18}
@@ -88,13 +101,13 @@ export const Card = ({ noteData, goal }: CardProps) => {
       <span className='w-full h-[1px] bg-slate-200' />
       <TodoTitle title={noteData.todo.title} />
 
-      {isSlideOpen && (
+      {noteSlideModalId !== null && noteSlideModalId === noteData.id && (
         <NoteDetailSlide
           goalId={goal.id}
           goalTitle={goal.title}
           noteId={noteData.id}
           todoId={noteData.todo.id}
-          setToggle={setIsSlideOpen}
+          setToggle={() => setNoteSlideModalId(null)}
         />
       )}
       {isConfirmOpen && (

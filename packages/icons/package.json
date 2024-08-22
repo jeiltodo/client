@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "npx @svgr/cli --out-dir dist --ignore-existing --typescript --ref --no-dimensions -- src/assets",
+    "build": "npx @svgr/cli --out-dir dist --typescript --ignore-existing --ref --no-dimensions -- src/assets",
     "prebuild": "npx rimraf dist",
     "lint": "eslint src/"
   },
