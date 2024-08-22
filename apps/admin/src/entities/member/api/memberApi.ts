@@ -1,4 +1,4 @@
-import { client } from '../../../shared/model/client';
+import { client } from "@jeiltodo/ui/shared";
 import { MemberQueryParams } from './type';
 
 export const memberApi = {
