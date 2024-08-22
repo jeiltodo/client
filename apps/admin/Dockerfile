@@ -18,7 +18,7 @@ RUN yarn build --filter=admin
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-COPY --from=builder /app/apps/admin/.next/standalone ./
+COPY --from=builder /app/apps/admin/.next/standalone/apps/admin ./
 COPY --from=builder /app/apps/admin/.next/static ./.next/static
 COPY --from=builder /app/apps/admin/public ./public
 COPY --from=builder /app/apps/admin/next.config.js ./next.config.js
