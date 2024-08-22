@@ -22,6 +22,7 @@ COPY --from=builder /app/apps/admin/.next/standalone/apps/admin ./
 COPY --from=builder /app/apps/admin/.next/static ./.next/static
 COPY --from=builder /app/apps/admin/public ./public
 COPY --from=builder /app/apps/admin/next.config.js ./next.config.js
+COPY --from=builder /app/node_modules ./node_modules
 
 ENV PORT=3001
 
