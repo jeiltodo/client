@@ -20,12 +20,13 @@ export const LinkModal = ({
 
   const isValidUrl = (url: string) => {
     const urlPattern = new RegExp(
-      '^(https?:\\/\\/)?' + // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-z\\d_]*)?$',
+      '^(https?:\\/\\/)?' + // 프로토콜 (http 또는 https)
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z\\d]{2,}|' + // 도메인 이름 또는 IP 주소 (IPv4)
+        '\\[?[a-f\\d:]+\\]?)' + // IPv6
+        '(\\:\\d+)?' + // 포트 번호
+        '(\\/[-a-z\\d%_.~+&:@\\u0021-\\uFFFF]*)*' + // 경로 (확장된 유니코드 포함)
+        '(\\?[;&a-z\\d%_.~+=:@\\u0021-\\uFFFF]*)?' + // 쿼리 스트링 (확장된 유니코드 포함)
+        '(\\#[-a-z\\d_\\/\\u0021-\\uFFFF]*)?$', // 프래그먼트 (확장된 유니코드 포함)
       'i'
     );
     return !!urlPattern.test(url);

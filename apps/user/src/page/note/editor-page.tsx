@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Back, DeleteCircle } from '@jeiltodo/icons';
 import { BoardTitle, TodoTitle, useToast } from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
 import { BaseModal, ConfirmationModal, MINUTES_WITH_MS } from '../../shared';
 import { Note, useCreateNote, useUpdateNote } from '../../entities/note';
-import { Button, ButtonGroup, LayoutTitle } from '@jeiltodo/ui/shared';
+import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 
 interface Props {
   note?: Note;
@@ -19,7 +19,7 @@ export const EditorPage = ({ note }: Props) => {
   const todoTitle = searchParams!.get('todo');
 
   const params = useParams();
-  const noteId = params.noteId as string;
+  const noteId = params?.noteId as string;
   const goalId = Number(params!.goalId);
   const todoId = Number(params!.todoId);
 
@@ -114,7 +114,7 @@ export const EditorPage = ({ note }: Props) => {
 
   return (
     <div
-      className='flex flex-col max-w-[792px] min-w-[280px]'
+      className='flex flex-col max-w-[792px] min-w-[248px]'
       style={{ minHeight: 'calc(100vh - 48px)' }}
     >
       <div className={`flex flex-row items-center justify-between mb-[16px]`}>
