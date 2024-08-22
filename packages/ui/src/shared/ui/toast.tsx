@@ -36,7 +36,7 @@ export const useToast = () => {
 
     const alertConfig: ToastOptions = {
       //커스터마이징 옵션
-      position: 'top-right',
+      position: 'top-center',
       autoClose: autoClose,
       hideProgressBar: true,
       closeOnClick: true,
@@ -49,7 +49,7 @@ export const useToast = () => {
     };
     const confirmConfig: ToastOptions = {
       //커스터마이징 옵션
-      position: 'top-right',
+      position: 'top-center',
       autoClose: autoClose,
       hideProgressBar: true,
       closeOnClick: true,

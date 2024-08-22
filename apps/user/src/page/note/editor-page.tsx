@@ -148,7 +148,7 @@ export const EditorPage = () => {
           </div>
           <Button
             variant='rounded-outline-blue'
-            className='block px-3 !text-sm !h-[36px] leading-5'
+            className='block px-3 !text-sm !h-[36px] leading-5 min-w-[84px]'
             onClick={getLocalSave}
           >
             불러오기
