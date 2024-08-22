@@ -22,7 +22,6 @@ WORKDIR /app
 COPY --from=builder /app/apps/user/.next/standalone/apps/user ./
 COPY --from=builder /app/apps/user/.next/static ./.next/static
 COPY --from=builder /app/apps/user/public ./public
-COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
 CMD ["node", "server.js"]
