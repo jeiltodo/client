@@ -1,8 +1,9 @@
-import './globals.css';
+import './style/globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
-import { SidebarAdmin } from '../widgets/sidebar/ui/sidebar-admin';
 import { QueryProvider } from '../shared';
+import { ToastContainer } from 'react-toastify';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
   title: 'ADMIN | jeiltodo',
@@ -21,12 +22,9 @@ export default function RootLayout({
       </head>
       <body>
         <QueryProvider>
-          <div className=''>
-            <SidebarAdmin />
-            <main className='desktop:pl-[280px] tablet:pl-[60px] tablet:pt-0 mobile:pl-0 mobile:pt-[48px] bg-gray-100 min-h-screen'>
-              {children}
-            </main>
-          </div>
+          <ToastContainer />
+          {children}
+          <ReactQueryDevtools initialIsOpen={true} />
         </QueryProvider>
       </body>
     </html>

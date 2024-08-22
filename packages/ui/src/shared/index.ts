@@ -22,6 +22,8 @@ export * from './hooks/useDebounce';
 
 export * from './model/members-board-provider';
 export * from './model/type';
+export * from './model/client';
+export * from './model/getServerToken';
 
 export * from './ui/@x/board-layout';
 export * from './ui/@x/sidebar';

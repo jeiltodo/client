@@ -25,6 +25,16 @@ export interface DuplicateResponse {
   code: number;
   data: DuplicateData;
 }
+
+export interface AuthBody {
+  email: string;
+  password: string;
+}
+
+export interface Token {
+  accessToken: string;
+  refreshToken: string;
+}
 /*
 ================================================
 */

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { client, ResponseWith, setCookie } from '../../../shared';
-import { AuthBody, Token } from '../types';
+import { AuthBody, Token } from '../model/type';
 
 export const loginApi = async (credentials: AuthBody) => {
   try {

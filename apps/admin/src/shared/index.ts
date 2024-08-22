@@ -13,5 +13,3 @@ export * from './ui/sidebar/sidebar-nav';
 
 export * from './ui/table';
 export * from './model/query/query-provider';
-
-export * from './config/baseUrl';
