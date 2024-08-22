@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Dispatch, PropsWithChildren, SetStateAction } from 'react';
 
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
@@ -18,7 +18,7 @@ export const ConfirmationModal = ({
   return (
     <BaseModal setToggle={setModalToggle} width='modal_sm:w-[450px]'>
       <div className='flex flex-col gap-6 items-center justify-center'>
-        <p className='text-base font-meduim'>{children}</p>
+        <p className='text-base font-meduim text-center'>{children}</p>
         <ButtonGroup gap={2}>
           <Button
             variant='outline'

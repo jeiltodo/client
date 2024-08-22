@@ -80,14 +80,14 @@ export const NoteDetailSlide = ({
                 />
                 <ButtonGroup gap={2}>
                   <Button
-                    className='w-[84px] h-[36px]'
+                    className='w-[74px] tablet:w-[84px] h-[36px]'
                     variant='outline'
                     onClick={handleEdit}
                   >
                     수정하기
                   </Button>
                   <Button
-                    className='w-[84px] h-[36px]'
+                    className='w-[74px] tablet:w-[84px] h-[36px]'
                     variant='primary'
                     onClick={handleDelete}
                   >
