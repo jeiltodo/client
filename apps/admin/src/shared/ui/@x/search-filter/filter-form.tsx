@@ -138,7 +138,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
               <Input
                 type={field.type || 'text'}
                 name={field.query}
-                value={tableFilters[field.query as TableQuery] || ''}
+                value={tableFilters?.[field.query as TableQuery] || ''}
                 placeholder={field.placeholder}
                 onChange={(e) => {
                   setTableFilters((prev) => ({

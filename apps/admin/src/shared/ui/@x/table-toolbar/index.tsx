@@ -5,14 +5,24 @@ import { SearchSummary } from '../../table-tools/search-summary';
 interface TableToolBarProps {
   onSelectDropdown: () => void;
   onClickDelete: () => void;
+  searchedCount?: number;
+  totalCount?: number;
 }
 
-export function TableToolBar({ onClickDelete, onSelectDropdown }: TableToolBarProps) {
+export function TableToolBar({
+  onClickDelete,
+  onSelectDropdown,
+  searchedCount,
+  totalCount,
+}: TableToolBarProps) {
   return (
     <div className='w-full justify-between items-center flex pl-2 py-3'>
       <div className='flex gap-4 items-center'>
         <DeleteButton onDelete={onClickDelete} />
-        <SearchSummary totalCount={12} searchedCount={0} />
+        <SearchSummary
+          totalCount={totalCount || 0}
+          searchedCount={searchedCount || 0}
+        />
       </div>
       <Dropdown
         hasInitialValue={true}
