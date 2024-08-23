@@ -29,4 +29,4 @@ COPY --from=builder /app/node_modules/next ./node_modules/next
 ENV PORT=3001
 
 EXPOSE 3001
-CMD ["node", "server.js"]
+CMD ["node", "apps/admin/server.js"]
