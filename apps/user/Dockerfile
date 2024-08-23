@@ -19,7 +19,7 @@ RUN yarn build --filter=user
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-COPY --from=builder /app/apps/user/.next/standalone ./
+COPY --from=builder /app/apps/user/.next/standalone/apps/user ./
 COPY --from=builder /app/apps/user/.next/static ./.next/static
 COPY --from=builder /app/apps/user/public ./public
 
