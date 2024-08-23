@@ -3,10 +3,9 @@ WORKDIR /app
 
 RUN apk add --no-cache bash curl
 
-RUN npm i -g npm
 RUN corepack enable && corepack prepare yarn@stable --activate
 
-COPY package.json yarn.lock ./
+COPY . .
 RUN yarn install --frozen-lockfile
 
 FROM node:20-alpine AS builder
@@ -19,9 +18,12 @@ RUN yarn build --filter=user
 FROM node:20-alpine AS runner
 WORKDIR /app
 
-COPY --from=builder /app/apps/user/.next/standalone/apps/user ./
+COPY --from=builder /app/apps/user/.next/standalone ./
 COPY --from=builder /app/apps/user/.next/static ./.next/static
 COPY --from=builder /app/apps/user/public ./public
+COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/apps/user/next.config.js ./next.config.js
+COPY --from=builder /app/apps/user/package.json ./packages
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["node", "apps/user/server.js"]
