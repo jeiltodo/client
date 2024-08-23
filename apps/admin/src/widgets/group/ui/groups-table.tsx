@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  Table,
-  TableToolBar,
-  useTableCheck,
-  useTableContext,
-} from '../../../shared';
+import { Table, useTableCheck, useTableContext } from '../../../shared';
 import { TableHeadList } from '../../../features/user/ui/table-head-list';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { useRouter } from 'next/navigation';
@@ -24,61 +19,48 @@ export const GroupsTable = () => {
   };
 
   return (
-    <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5'>
-      <TableToolBar
-        onSelectDropdown={() => {
-          console.log('드롭다운 선택');
-        }}
-        onClickDelete={() => {
-          console.log('삭제 요청');
-        }}
-        totalCount={10}
-        searchedCount={4}
-      />
-
-      <Table>
-        <Table.Header>
-          <Table.Row className='border-slate-400'>
-            <Table.HeadWithCheck
-              isChecked={isAllChecked}
-              onChange={handleAllCheck}
-            />
-            <TableHeadList headMap={GROUP_TABLE_HEAD_MAP} />
-            <Table.Head>관리 설정</Table.Head>
+    <Table>
+      <Table.Header>
+        <Table.Row className='border-slate-400'>
+          <Table.HeadWithCheck
+            isChecked={isAllChecked}
+            onChange={handleAllCheck}
+          />
+          <TableHeadList headMap={GROUP_TABLE_HEAD_MAP} />
+          <Table.Head>관리 설정</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {groupRows.map((group, id) => (
+          <Table.Row key={group.id + id}>
+            <Table.Cell>
+              <Checkbox
+                isChecked={getIsChecked(group.id)}
+                onChange={() => {
+                  handleCheck(group.id);
+                }}
+              />
+            </Table.Cell>
+            <Table.Cell>{group.id}</Table.Cell>
+            <Table.Cell>{group.title}</Table.Cell>
+            {/* 리더 찾는 로직 생성 <Table.Cell>{leader}</Table.Cell> */}
+            <Table.Cell>{formatDateString(group.createdAt)}</Table.Cell>
+            <Table.Cell>{formatDateString(group.updatedAt)}</Table.Cell>
+            {/* 전체 그룹 수  <Table.Cell>{group.groupCount}개</Table.Cell> */}
+            <Table.Cell>
+              <Button
+                className='text-sm px-7 py-2'
+                onClick={() => {
+                  handleClick(`path/${group.id}`);
+                }}
+                variant='outline'
+              >
+                관리
+              </Button>
+            </Table.Cell>
           </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {groupRows.map((group, id) => (
-            <Table.Row key={group.id + id}>
-              <Table.Cell>
-                <Checkbox
-                  isChecked={getIsChecked(group.id)}
-                  onChange={() => {
-                    handleCheck(group.id);
-                  }}
-                />
-              </Table.Cell>
-              <Table.Cell>{group.id}</Table.Cell>
-              <Table.Cell>{group.title}</Table.Cell>
-              {/* 리더 찾는 로직 생성 <Table.Cell>{leader}</Table.Cell> */}
-              <Table.Cell>{formatDateString(group.createdAt)}</Table.Cell>
-              <Table.Cell>{formatDateString(group.updatedAt)}</Table.Cell>
-              {/* 전체 그룹 수  <Table.Cell>{group.groupCount}개</Table.Cell> */}
-              <Table.Cell>
-                <Button
-                  className='text-sm px-7 py-2'
-                  onClick={() => {
-                    handleClick(`path/${group.id}`);
-                  }}
-                  variant='outline'
-                >
-                  관리
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </div>
+        ))}
+      </Table.Body>
+    </Table>
   );
 };

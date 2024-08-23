@@ -3,7 +3,9 @@ import { DeleteButton } from '../../table-tools/delete-button';
 import { SearchSummary } from '../../table-tools/search-summary';
 
 interface TableToolBarProps {
-  onSelectDropdown: () => void;
+  onSelectDropdown: React.Dispatch<
+    React.SetStateAction<string | number | undefined>
+  >;
   onClickDelete: () => void;
   searchedCount?: number;
   totalCount?: number;

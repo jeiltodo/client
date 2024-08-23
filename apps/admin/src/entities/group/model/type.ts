@@ -20,7 +20,7 @@ export interface Groups {
 
 export type GroupQueryParams = {
   page: number;
-  limit: number;
+  limit: string | number | undefined;
   nickname?: string;
   group?: string;
 };
