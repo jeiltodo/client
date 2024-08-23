@@ -13,7 +13,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ type }) => {
   return (
     <div className='flex flex-col items-center desktop:py-[120px] tablet:py-16 tablet:px-[52px] py-12 px-4'>
       <h1 className='mb-[60px]'>slid to-do</h1>
-      <LoginForm />
+      <LoginForm isAdmin={type === 'admin'} />
       {showSignUpLink && (
         <p className='text-center text-[15px]'>
           슬리드 투 두가 처음이신가요?

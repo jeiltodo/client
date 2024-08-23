@@ -11,6 +11,8 @@ import {
   ACCESS_TOKEN_COOKIE_NAME,
   ACCESS_TOKEN_EXPIRY_TIME,
   REFRESH_TOKEN_COOKIE_NAME,
+  ACCESS_ADMIN_TOKEN_COOKIE_NAME,
+  REFRESH_ADMIN_TOKEN_COOKIE_NAME
 } from '../config/token';
 import { API_URL } from '../config/api';
 
@@ -40,6 +42,7 @@ client.interceptors.request.use(
 
     const noSessionRequired = [
       '/member/signin',
+      '/admin/member/signin',
       '/member/signup',
       '/member/email/duplicate?email=',
       '/member/nickname/duplicate?nickname=',
@@ -49,10 +52,14 @@ client.interceptors.request.use(
     }
 
     let accessToken: string | null | undefined;
+    const isAdminPath = url.includes('/admin');
     if (isServer) {
-      accessToken = await getServerToken();
+      
+      accessToken = await getServerToken({ isAdmin: isAdminPath });
     } else {
-      accessToken = getCookie(ACCESS_TOKEN_COOKIE_NAME);
+      accessToken = isAdminPath
+        ? getCookie(ACCESS_ADMIN_TOKEN_COOKIE_NAME)
+        : getCookie(ACCESS_TOKEN_COOKIE_NAME);
     }
 
     if (!accessToken) {
@@ -88,8 +95,12 @@ client.interceptors.response.use(
       // originalRequest._retry 플래그를 사용하여 이미 리프레시 토큰 요청을 시도했는지 확인 -> 무한 루프 방지
       originalRequest._retry = true;
 
+      const isAdminPath = originalRequest.url?.includes('/admin');
       // 쿠키에서 리프레시 토큰 가져오기
-      const refreshToken = getCookie(REFRESH_TOKEN_COOKIE_NAME);
+      const refreshToken = isAdminPath
+        ? getCookie(REFRESH_ADMIN_TOKEN_COOKIE_NAME) // admin 경로에 따라 다른 리프레시 토큰 사용
+        : getCookie(REFRESH_TOKEN_COOKIE_NAME);
+
       if (!refreshToken) {
         // 리프레시 토큰이 없으면 로그인 페이지로 이동
         if (typeof window !== 'undefined') {
@@ -100,28 +111,27 @@ client.interceptors.response.use(
 
       // 리프레시 토큰이 있으면 새로운 access token 발급받아서 다시 요청
       try {
-        const response = await newAccessToken();
+        const response = await newAccessToken(isAdminPath); // admin 경로에 따라 적절한 엔드포인트 호출
 
-        setCookie(ACCESS_TOKEN_COOKIE_NAME, response.data.accessToken, {
-          maxAge: ACCESS_TOKEN_EXPIRY_TIME,
-        });
+        setCookie(
+          isAdminPath ? ACCESS_ADMIN_TOKEN_COOKIE_NAME : ACCESS_TOKEN_COOKIE_NAME,
+          response.data.accessToken,
+          {
+            maxAge: ACCESS_TOKEN_EXPIRY_TIME,
+          }
+        );
 
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
-
         return client(originalRequest);
       } catch (refreshError) {
-        // 리프레시 토큰 요청 실패 시 쿠키 삭제 및 로그인 페이지로 이동
-        const errorToThrow =
-          refreshError instanceof Error
-            ? refreshError
-            : new Error('An unknown error occurred during token refresh.');
-        deleteCookie(REFRESH_TOKEN_COOKIE_NAME);
+        deleteCookie(isAdminPath ? REFRESH_ADMIN_TOKEN_COOKIE_NAME : REFRESH_TOKEN_COOKIE_NAME);
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
         }
-        return Promise.reject(errorToThrow);
+        return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   }
 );
@@ -129,11 +139,10 @@ client.interceptors.response.use(
 /*
  * ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  */
-const newAccessToken = async () => {
+const newAccessToken = async (isAdmin: boolean | undefined) => {
   try {
-    const response = await client.get<{ accessToken: string }>(
-      '/member/token/refresh'
-    );
+    const url = isAdmin ? '/admin/token/refresh' : '/member/token/refresh'; // admin 경로에 따라 다른 리프레시 토큰 엔드포인트
+    const response = await client.get<{ accessToken: string }>(url);
     return response;
   } catch (error) {
     console.error('Token refresh error:', error);

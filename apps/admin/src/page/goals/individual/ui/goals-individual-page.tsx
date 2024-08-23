@@ -14,7 +14,7 @@ import {
 import { GoalsIndividualTable } from '../../../../widgets/goals/individual';
 
 export const PostsIndividualPage = () => {
-  const [limit, setLimit] = useState<string | number | undefined>(20)
+  const [limit, setLimit] = useState<string | number | undefined>(10)
   console.log('limit: ', limit);
   const { data, isLoading } = useGetAllIndividualGoals({
     page: 1,
@@ -28,9 +28,9 @@ export const PostsIndividualPage = () => {
   const onHandleDelete = () => {};
 
   return (
-    <div>fsdffdsfwefewfewfew
+    <div>
       <TableProvider<IndividualGoals> initialData={data?.data.goals}>
-        <SearchFilter filters={GOALS_INDIVIDUAL_FIILTERS} />fdsfsdfwefewfwefewfwe
+        <SearchFilter filters={GOALS_INDIVIDUAL_FIILTERS} />
         <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5'>
           <TableToolBar
             onSelectDropdown={setLimit}

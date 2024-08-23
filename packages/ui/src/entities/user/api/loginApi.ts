@@ -2,19 +2,28 @@ import axios from 'axios';
 import { client, ResponseWith, setCookie } from '../../../shared';
 import { AuthBody, Token } from '../model/type';
 
-export const loginApi = async (credentials: AuthBody) => {
+export const loginApi = async (
+  credentials: AuthBody,
+  isAdmin: boolean // 어드민 여부를 판단하는 파라미터 추가
+) => {
   try {
+    // 어드민 여부에 따라 요청 URL을 다르게 설정
+    const url = isAdmin ? '/admin/member/signin' : '/member/signin';
+  
     const response = await client.post<ResponseWith<Token | null>>(
-      '/member/signin',
+      url,
       credentials
     );
 
     const accessToken = response.data.data?.accessToken;
     const refreshToken = response.data.data?.refreshToken;
 
+    const accessTokenName = isAdmin ? 'accessAdminToken' : 'accessToken';
+    const refreshTokenName = isAdmin ? 'refreshAdminToken' : 'refreshToken';
+
     if (accessToken && refreshToken) {
-      setCookie('accessToken', accessToken);
-      setCookie('refreshToken', refreshToken);
+      setCookie(accessTokenName, accessToken);
+      setCookie(refreshTokenName, refreshToken);
     }
     return Promise.resolve(response.data);
   } catch (error) {
