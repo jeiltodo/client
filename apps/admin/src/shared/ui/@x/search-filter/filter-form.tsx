@@ -13,8 +13,8 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
   const { tableFilters, setTableFilters } = useTableContext();
 
   const [activeBtn, setActiveBtn] = useState<string>('');
-  const [startDate, setStartDate] = useState<string>('');
-  const [endDate, setEndDate] = useState<string>('');
+  const [createdAfter, setCreatedAfter] = useState<string>('');
+  const [createdBefore, setCreatedBefore] = useState<string>('');
 
   const handleButtonClick = (label: string) => {
     setActiveBtn(label);
@@ -50,14 +50,15 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
         end = '';
     }
 
-    setStartDate(start);
-    setEndDate(end);
+    setCreatedAfter(start);
+    setCreatedBefore(end);
 
     filters.forEach((field) => {
       if (field.label === '기간') {
         setTableFilters((prev) => ({
           ...prev,
-          [field.query]: `${start}&${end}`,
+          createdAfter: start,
+          createdBefore: end,
         }));
       }
     });
@@ -65,18 +66,19 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
 
   const handleDateChange = (value: string, isStart: boolean) => {
     if (isStart) {
-      setStartDate(value);
+      setCreatedAfter(value);
     } else {
-      setEndDate(value);
+      setCreatedBefore(value);
     }
 
     filters.forEach((filter) => {
       if (filter.label === '기간') {
-        const newStart = isStart ? value : startDate;
-        const newEnd = isStart ? endDate : value;
+        const newStart = isStart ? value : createdAfter;
+        const newEnd = isStart ? createdBefore : value;
         setTableFilters((prev) => ({
           ...prev,
-          [filter.query]: `${newStart}&${newEnd}`,
+          createdAfter: newStart,
+          createdBefore: newEnd,
         }));
       }
     });
@@ -111,7 +113,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
                   <input
                     type='date'
                     name={`${field.query}Start`}
-                    value={startDate}
+                    value={createdAfter}
                     onChange={(e) => {
                       handleDateChange(e.target.value, true);
                     }}
@@ -121,7 +123,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
                   <input
                     type='date'
                     name={`${field.query}End`}
-                    value={endDate}
+                    value={createdBefore}
                     onChange={(e) => {
                       handleDateChange(e.target.value, false);
                     }}
@@ -138,7 +140,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
               <Input
                 type={field.type || 'text'}
                 name={field.query}
-                value={tableFilters[field.query as TableQuery] || ''}
+                value={tableFilters?.[field.query as TableQuery] || ''}
                 placeholder={field.placeholder}
                 onChange={(e) => {
                   setTableFilters((prev) => ({

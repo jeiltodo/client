@@ -1,0 +1,1 @@
+export * from './ui/goals-individual-page';

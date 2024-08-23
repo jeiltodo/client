@@ -19,8 +19,8 @@ export const SidebarAdmin = () => {
         icon={Post}
         title='게시글 관리'
         subItems={[
-          { title: '개인 게시물 관리', href: '/posts/personal' },
-          { title: '그룹 게시물 관리', href: '/posts/group' },
+          { title: '개인 게시물 관리', href: '/goals/individual' },
+          { title: '그룹 게시물 관리', href: '/goals/group' },
         ]}
       />
     </Sidebar>
