@@ -1,21 +1,17 @@
-export interface GroupResponse {
+import { Member } from '@jeiltodo/ui/entities';
+import { Goal } from '@jeiltodo/ui/shared';
+
+// 그룹 리스트
+export interface GroupsResponse {
   msg: string;
   code: number;
-  data: GroupDetailResponse;
+  data: GroupPageResponse;
 }
 
-export interface GroupDetailResponse {
+export interface GroupPageResponse {
   totalCount: number;
   currentPage: number;
   groups: Groups[];
-}
-export interface Groups {
-  id: number;
-  title: string;
-  createUser: string;
-  createdAt: string;
-  updatedAt: string;
-  members: GroupMembers[];
 }
 
 export interface GroupQueryParams {
@@ -31,6 +27,25 @@ export interface GroupMembers {
   nickname: string;
   color: string;
   contributionRank: number;
+}
+
+//그룹 상세
+
+export interface GroupDetailResponse {
+  id: number;
+  title: string;
+  secretCode: string;
+  createUser: string;
+  members: Member[];
+  goals: Goal[];
+}
+export interface Groups {
+  id: number;
+  title: string;
+  createUser: string;
+  createdAt: string;
+  updatedAt: string;
+  members: GroupMembers[];
 }
 
 export interface GroupErrorResponse {

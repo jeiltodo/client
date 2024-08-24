@@ -1,15 +1,17 @@
 import { client } from '@jeiltodo/ui/shared';
-import { GroupResponse, GroupQueryParams } from '../model/type';
+import {
+  GroupDetailResponse,
+  GroupQueryParams,
+  GroupsResponse,
+} from '../model/type';
 
 export const groupApi = {
-  getGroup: async (groupId: number): Promise<void> => {
+  getGroup: async (groupId: number): Promise<GroupDetailResponse> => {
     try {
-      const response = await client.delete(`/admin/groups/`, {
-        data: { groupId },
-      });
+      const response = await client.get(`/admin/groups/${groupId}`);
       return response.data;
     } catch (error) {
-      console.error('Fail delete group:', error);
+      console.error('Fail fetch group:', error);
       throw error;
     }
   },
@@ -19,7 +21,7 @@ export const groupApi = {
     limit,
     nickname,
     group,
-  }: GroupQueryParams): Promise<GroupResponse> => {
+  }: GroupQueryParams): Promise<GroupsResponse> => {
     try {
       let queries = [
         `/admin/groups?page=${page}&limit=${limit}`,
@@ -30,7 +32,7 @@ export const groupApi = {
         .join('&')
         .trim();
       const response = await client.get(queries);
-      return response.data as GroupResponse;
+      return response.data as GroupsResponse;
     } catch (error) {
       console.error('Fail fetch group:', error);
       throw error;
