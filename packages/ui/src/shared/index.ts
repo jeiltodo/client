@@ -13,6 +13,7 @@ export * from './ui/layout-title';
 export * from './ui/pagination';
 export * from './ui/loading-spinner';
 export * from './ui/back-button';
+export * from './ui/members-board';
 
 export * from './ui/@x/sidebar';
 export * from './ui/toast';

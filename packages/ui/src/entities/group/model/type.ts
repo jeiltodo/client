@@ -1,3 +1,5 @@
+import { Goal } from '../../../shared';
+
 export type Group = {
   id: number;
   title: string;
@@ -12,11 +14,11 @@ export type Member = {
   isLeader: boolean;
   nickname: string;
   color: string;
-  contributionRank: number;
 };
 
 export type GroupWithMembers = Group & {
   members: Member[];
+  goals?: Goal[];
 };
 
 export type GroupCode = Pick<Group, 'secretCode'>;

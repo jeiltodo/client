@@ -3,6 +3,7 @@ export type BoardMode = 'default' | 'change-leader' | 'manage-members';
 export type Goal = {
   id: number;
   title: string;
+  progress?: number;
 };
 
 export type Todo = {

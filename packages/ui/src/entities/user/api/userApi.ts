@@ -3,10 +3,22 @@ import {
   DuplicateResponse,
   LogoutData,
   UserData,
+  UserInfoResponse,
   UserPatchResponse,
 } from '../model/type';
 
 export const userApi = {
+  //회원 정보
+  getUserInfo: async (): Promise<UserInfoResponse> => {
+    try {
+      const response = await client.get(`/member/info`);
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch userInfo:', error);
+      throw error;
+    }
+  },
+
   //회원 정보 수정
   updateUserInfo: async (data: UserData): Promise<UserPatchResponse> => {
     try {
