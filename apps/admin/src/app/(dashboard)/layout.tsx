@@ -8,7 +8,7 @@ export default async function DashboardLayout({
   return (
     <>
       <SidebarAdmin />
-      <main className='common-layout'>{children}</main>
+      <main className='common-layout font-pretendard-regular'>{children}</main>
     </>
   );
 }

@@ -7,7 +7,10 @@ export interface TableHeadProps
 
 export const TableHead: React.FC<TableHeadProps> = ({ children, ...props }) => {
   return (
-    <th className='p-3 text-center text-black font-medium text-lg' {...props}>
+    <th
+      className='p-3 text-center text-black font-pretendard-regular text-base'
+      {...props}
+    >
       {children}
     </th>
   );

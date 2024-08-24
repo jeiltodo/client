@@ -1,7 +1,7 @@
 export interface GroupResponse {
   msg: string;
   code: number;
-  data: Groups[];
+  data: GroupDetailResponse;
 }
 
 export interface GroupDetailResponse {
@@ -15,17 +15,17 @@ export interface Groups {
   createUser: string;
   createdAt: string;
   updatedAt: string;
-  members: Member[];
+  members: GroupMembers[];
 }
 
-export type GroupQueryParams = {
+export interface GroupQueryParams {
   page: number;
   limit: string | number | undefined;
   nickname?: string;
   group?: string;
-};
+}
 
-interface Member {
+export interface GroupMembers {
   id: number;
   isLeader: boolean;
   nickname: string;

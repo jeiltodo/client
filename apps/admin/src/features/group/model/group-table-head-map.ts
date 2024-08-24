@@ -13,7 +13,7 @@ export const GROUP_TABLE_HEAD_MAP: TableHeadMap<any>[] = [
     withSort: true,
   },
   {
-    criteria: 'createUser', //확인필요
+    criteria: 'createUser',
     title: '그룹장',
     withSort: true,
   },
@@ -25,11 +25,6 @@ export const GROUP_TABLE_HEAD_MAP: TableHeadMap<any>[] = [
   {
     criteria: 'updatedAt',
     title: '수정일자',
-    withSort: true,
-  },
-  {
-    criteria: 'groupCount', //확인필요
-    title: '그룹수',
     withSort: true,
   },
 ];
