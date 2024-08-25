@@ -7,6 +7,8 @@ export * from './group/model/type';
 export * from './user/model/type';
 
 export * from './group/hooks/useGroupTitleAndCode';
+export * from './group/hooks/useChangeLeader';
+export * from './group/hooks/useRemoveMember';
 export * from './user/hooks/queryKeys';
 export * from './user/hooks/useUser';
 
