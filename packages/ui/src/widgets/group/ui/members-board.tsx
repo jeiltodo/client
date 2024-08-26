@@ -80,7 +80,9 @@ export const MembersBoard = ({
             </div>
           </div>
 
-          {isUserALeader && <MembersManageButtons onSave={handleSave} />}
+          {(isUserALeader || isAdmin) && (
+            <MembersManageButtons onSave={handleSave} isAdmin={true} />
+          )}
         </div>
         <MemberList
           members={formattedMembers}
@@ -90,7 +92,7 @@ export const MembersBoard = ({
         <BgGroupAvatar
           width={164}
           height={164}
-          className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-10 desktop:right-[-32px] desktop:bottom-[-24px]'
+          className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-1 desktop:right-[-32px] desktop:bottom-[-24px]'
         />
       </div>
     </div>

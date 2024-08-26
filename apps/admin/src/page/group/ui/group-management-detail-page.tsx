@@ -20,17 +20,24 @@ import { useGroupDetail } from '../../../entities/group';
 import { userOptions } from '../../../entities/member/hooks/userOptions';
 import { GroupManagemantDetailTable } from '../../../widgets/group';
 import { TableProvider, TableToolBar } from '../../../shared';
+import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 
 // eslint-disable-next-line react/function-component-definition
 export const GroupManagementDetailPage = () => {
+  const [limit, setLimit] = useState<string | number | undefined>(10);
   const params = useParams();
   const groupId = Number(params?.id);
   const { data: user } = useQuery(userOptions());
   const { data: group, isLoading } = useGroupDetail(groupId);
+  const { data: groupGoalsData } = useGroupGoals({
+    page: 1,
+    limit: limit as number,
+    groupId: groupId,
+  });
+
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
   const { mutate: removeMember } = useRemoveMember(groupId);
-  const [limit, setLimit] = useState<string | number | undefined>(10);
 
   const handleSave = (groupBody: GroupTitleOrCode) => {
     updateTitleOrCode(groupBody);
@@ -142,11 +149,12 @@ export const GroupManagementDetailPage = () => {
           />
         </MembersBoardProvider>
       </div>
-      {/* Table Data Api수정 예정 */}
-      <TableProvider initialData={group.goals}>
-        <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5'>
+
+      <TableProvider initialData={groupGoalsData.data.goals}>
+        <div className='w-[920px] pb-[16px] px-5 bg-white rounded-xl mt-5'>
           <TableToolBar
             onSelectDropdown={setLimit}
+            onClickDelete={() => {}}
             isDelete={false}
             isSearch={false}
             totalCount={10}

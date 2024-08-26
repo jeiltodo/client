@@ -1,78 +1,25 @@
 'use client';
 import { Member, Profile } from '../../../entities';
 import { useBoardContext } from '@jeiltodo/ui/shared';
-import { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination } from 'swiper/modules';
 
-interface Props {
+interface MemberListProps {
   members: Member[];
   onClientChangeLeader: (id: number) => void;
   onClientRemoveMember: (id: number) => void;
 }
-
-const debounce = (func: (...args: any[]) => void, wait: number) => {
-  let timeout: NodeJS.Timeout;
-  return (...args: any[]) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-};
 
 // eslint-disable-next-line react/function-component-definition
 export const MemberList = ({
   members,
   onClientChangeLeader: onChangeLeader,
   onClientRemoveMember: onRemoveMember,
-}: Props) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [profilesPerPage, setProfilesPerPage] = useState(10);
-
-  const totalProfiles = members.length;
-
+}: MemberListProps) => {
   const { mode } = useBoardContext();
-
-  useEffect(() => {
-    const itemWidth = 64;
-    const itemGap = 24;
-    const totalItemWidth = itemWidth + itemGap;
-
-    const handleResize = debounce(() => {
-      const width = window.innerWidth;
-      const itemsPerPage =
-        Math.floor(width / totalItemWidth) <= 10
-          ? Math.floor(width / totalItemWidth)
-          : 10;
-      const newProfilesPerPage = itemsPerPage > 0 ? itemsPerPage : 1;
-
-      setProfilesPerPage(newProfilesPerPage);
-
-      // 현재 인덱스를 새로운 profilesPerPage에 맞게 조정
-      setCurrentIndex((prevIndex) => {
-        const maxIndex = Math.max(0, totalProfiles - newProfilesPerPage);
-        return Math.min(prevIndex, maxIndex);
-      });
-    }, 300);
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // 초기 실행
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [totalProfiles]);
-
-  const handleRightSlide = () => {
-    const maxIndex = totalProfiles - profilesPerPage;
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, maxIndex));
-  };
-
-  const handleLeftSlide = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const visibleProfiles = members.slice(
-    currentIndex,
-    currentIndex + profilesPerPage
-  );
 
   const handleChangeLeader = (id: number) => {
     onChangeLeader(id);
@@ -82,44 +29,75 @@ export const MemberList = ({
     onRemoveMember(id);
   };
 
-  const translateX = -currentIndex * (64 + 24); // itemWidth + itemGap
-
   return (
-    <div className='relative h-fit flex gap-6 items-center overflow-hidden'>
-      {currentIndex !== 0 && (
-        <button
-          onClick={handleLeftSlide}
-          className='absolute left-0 top-[50%] -translate-y-[50%] z-20 w-6 bg-slate-50 h-[118px] text-groupColor-500 cursor-pointer'
-        >
-          {`<`}
-        </button>
-      )}
-      <div
-        className='h-fit flex gap-6 items-center justify-around transition-all duration-500 ease'
-        style={{ transform: `translateX(${translateX}px)` }}
+    <div className='relative h-fit flex gap-6 items-center'>
+      <Swiper
+        modules={[Navigation, Pagination]}
+        slidesPerView={2}
+        slidesPerGroup={2}
+        spaceBetween={24}
+        scrollbar={{ draggable: true }}
+        navigation
+        pagination={{ clickable: true }}
+        breakpoints={{
+          370: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+          },
+          420: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+          },
+          500: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+          },
+          640: {
+            slidesPerView: 5,
+            slidesPerGroup: 5,
+          },
+          720: {
+            slidesPerView: 6,
+            slidesPerGroup: 6,
+          },
+          800: {
+            slidesPerView: 7,
+            slidesPerGroup: 7,
+          },
+          840: {
+            slidesPerView: 8,
+            slidesPerGroup: 8,
+          },
+          1010: {
+            slidesPerView: 9,
+            slidesPerGroup: 9,
+          },
+          1024: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+          },
+          1080: { slidesPerView: 3, slidesPerGroup: 3 },
+          1220: { slidesPerView: 4, slidesPerGroup: 4 },
+          1280: { slidesPerView: 5, slidesPerGroup: 5 },
+        }}
       >
-        {visibleProfiles.map((member) =>
+        {members.map((member) =>
           member.isLeader ? (
-            <Profile key={member.id} member={member} mode={mode} />
+            <SwiperSlide key={member.id}>
+              <Profile member={member} mode={mode} />
+            </SwiperSlide>
           ) : (
-            <Profile
-              key={member.id}
-              member={member}
-              mode={mode}
-              onChangeRadio={handleChangeLeader}
-              onClickRemove={handleManageMembers}
-            />
+            <SwiperSlide key={member.id}>
+              <Profile
+                member={member}
+                mode={mode}
+                onChangeRadio={handleChangeLeader}
+                onClickRemove={handleManageMembers}
+              />
+            </SwiperSlide>
           )
         )}
-      </div>
-      {currentIndex < totalProfiles - profilesPerPage && (
-        <button
-          onClick={handleRightSlide}
-          className='absolute right-0 top-[50%] z-20 -translate-y-[50%] w-6 bg-slate-50 h-[118px] text-groupColor-500 cursor-pointer'
-        >
-          {`>`}
-        </button>
-      )}
+      </Swiper>
     </div>
   );
 };

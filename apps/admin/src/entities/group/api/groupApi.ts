@@ -1,5 +1,10 @@
 import { client } from '@jeiltodo/ui/shared';
-import { GroupQueryParams, GroupResponse, GroupsResponse } from '../model/type';
+import {
+  GroupGoalsResponse,
+  GroupQueryParams,
+  GroupResponse,
+  GroupsResponse,
+} from '../model/type';
 
 export const groupApi = {
   getGroup: async (groupId: number): Promise<GroupResponse> => {
@@ -43,6 +48,31 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Fail delete group:', error);
+      throw error;
+    }
+  },
+  //임시사용
+  getGroupGoals: async ({
+    page,
+    limit,
+    groupId,
+  }: {
+    page: number;
+    limit: number;
+    groupId: number;
+  }): Promise<GroupGoalsResponse> => {
+    try {
+      let queries = [
+        `/admin/goals/group?page=${page}&limit=${limit}`,
+        groupId ? `groupId=${groupId}` : '',
+      ]
+        .filter(Boolean)
+        .join('&')
+        .trim();
+      const response = await client.get(queries);
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch group goals:', error);
       throw error;
     }
   },

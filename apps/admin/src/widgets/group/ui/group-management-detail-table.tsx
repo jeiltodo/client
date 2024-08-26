@@ -3,10 +3,11 @@
 import { Table, useTableContext } from '../../../shared';
 import { TableHeadList } from '../../../features/user/ui/table-head-list';
 import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../features/group';
-import type { Goal } from '@jeiltodo/ui/shared';
+import { ProgressBar } from '@jeiltodo/ui/shared';
+import { GroupGoalsList } from '../../../entities/group';
 
 export const GroupManagemantDetailTable = () => {
-  const { tableRows: groupRows } = useTableContext<Goal>();
+  const { tableRows: groupGoalsRow } = useTableContext<GroupGoalsList>();
 
   return (
     <Table>
@@ -16,11 +17,13 @@ export const GroupManagemantDetailTable = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {groupRows.map((group, id) => (
-          <Table.Row key={group.id + id} className='hover:bg-slate-50'>
+        {groupGoalsRow.map((group, id) => (
+          <Table.Row key={group.title + id} className='hover:bg-slate-50'>
             <Table.Cell>{group.id}</Table.Cell>
             <Table.Cell>{group.title}</Table.Cell>
-            <Table.Cell>{group.progressRate}</Table.Cell>
+            <Table.Cell>
+              <ProgressBar progress={group.progressRate || 0} />
+            </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

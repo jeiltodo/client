@@ -29,6 +29,7 @@
     "@types/react-query": "^1.2.9",
     "react-copy-to-clipboard": "^5.1.0",
     "react-quill": "^2.0.0",
-    "react-toastify": "^10.0.5"
+    "react-toastify": "^10.0.5",
+    "swiper": "^11.1.10"
   }
 }

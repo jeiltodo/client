@@ -57,3 +57,25 @@ export interface GroupErrorResponse {
   msg: string;
   code: number;
 }
+
+//임시 그룹 목표
+export interface GroupGoalsResponse {
+  msg: string;
+  code: number;
+  data: GroupGoalsPageResponse;
+}
+export interface GroupGoalsPageResponse {
+  totalCount: number;
+  searchedCount: number;
+  currentPage: number;
+  goals: GroupGoalsList[];
+}
+
+export interface GroupGoalsList {
+  createdAt: string;
+  group: { id: number; title: string }[];
+  id: number;
+  member: { id: number; nickname: string }[];
+  progressRate: number;
+  title: string;
+}
