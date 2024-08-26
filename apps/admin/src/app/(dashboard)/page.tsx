@@ -2,7 +2,7 @@
 
 export default function Page() {
   return (
-    <main className="common-layout bg-slate-100">
+    <main>
       간다ㅏ
     </main>
   );

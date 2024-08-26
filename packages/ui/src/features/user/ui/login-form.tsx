@@ -1,11 +1,15 @@
-'use client'
+'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Input, useToast } from '@jeiltodo/ui/shared';
 import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
 import { validateLogIn } from '../model/validation';
 
-export const LoginForm = () => {
+interface LoginFormProps {
+  isAdmin: boolean;
+}
+
+export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -22,11 +26,12 @@ export const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const errorMsg = await validateLogIn({ email, password });
+      const errorMsg = await validateLogIn({ email, password }, isAdmin);
       if (errorMsg) {
         handleValidationErrors(errorMsg);
       } else {
         router.push('/');
+
         showToast({ message: '로그인 성공!', type: 'alert' });
       }
     } catch (error) {

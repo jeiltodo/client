@@ -1,20 +1,23 @@
 'use client';
 
 import { Button, ButtonGroup, Input } from '@jeiltodo/ui/shared';
-import React, { useState } from 'react';
-import { useTableContext } from '../../../hooks/table/useTableContext';
-import { TableFilter, TableQuery } from '../../../model/table/type';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { TableFilter, TableQueryName } from '../../../model/table/type';
 
 interface FilterFormProps {
   filters: TableFilter[];
+  filtersState: Record<string, string>;
+  updatefiltersState: Dispatch<SetStateAction<Record<string, string>>>;
 }
 
-export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
-  const { tableFilters, setTableFilters } = useTableContext();
-
+export const FilterForm: React.FC<FilterFormProps> = ({
+  filters,
+  filtersState,
+  updatefiltersState,
+}) => {
   const [activeBtn, setActiveBtn] = useState<string>('');
-  const [startDate, setStartDate] = useState<string>('');
-  const [endDate, setEndDate] = useState<string>('');
+  const [createdAfter, setCreatedAfter] = useState<string>('');
+  const [createdBefore, setCreatedBefore] = useState<string>('');
 
   const handleButtonClick = (label: string) => {
     setActiveBtn(label);
@@ -50,14 +53,15 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
         end = '';
     }
 
-    setStartDate(start);
-    setEndDate(end);
+    setCreatedAfter(start);
+    setCreatedBefore(end);
 
     filters.forEach((field) => {
       if (field.label === '기간') {
-        setTableFilters((prev) => ({
+        updatefiltersState((prev) => ({
           ...prev,
-          [field.query]: `${start}&${end}`,
+          createdAfter: start,
+          createdBefore: end,
         }));
       }
     });
@@ -65,18 +69,19 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
 
   const handleDateChange = (value: string, isStart: boolean) => {
     if (isStart) {
-      setStartDate(value);
+      setCreatedAfter(value);
     } else {
-      setEndDate(value);
+      setCreatedBefore(value);
     }
 
     filters.forEach((filter) => {
       if (filter.label === '기간') {
-        const newStart = isStart ? value : startDate;
-        const newEnd = isStart ? endDate : value;
-        setTableFilters((prev) => ({
+        const newStart = isStart ? value : createdAfter;
+        const newEnd = isStart ? createdBefore : value;
+        updatefiltersState((prev) => ({
           ...prev,
-          [filter.query]: `${newStart}&${newEnd}`,
+          createdAfter: newStart,
+          createdBefore: newEnd,
         }));
       }
     });
@@ -111,7 +116,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
                   <input
                     type='date'
                     name={`${field.query}Start`}
-                    value={startDate}
+                    value={createdAfter}
                     onChange={(e) => {
                       handleDateChange(e.target.value, true);
                     }}
@@ -121,7 +126,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
                   <input
                     type='date'
                     name={`${field.query}End`}
-                    value={endDate}
+                    value={createdBefore}
                     onChange={(e) => {
                       handleDateChange(e.target.value, false);
                     }}
@@ -138,14 +143,14 @@ export const FilterForm: React.FC<FilterFormProps> = ({ filters }) => {
               <Input
                 type={field.type || 'text'}
                 name={field.query}
-                value={tableFilters?.[field.query as TableQuery] || ''}
-                placeholder={field.placeholder}
+                value={filtersState?.[field.query as TableQueryName]}
                 onChange={(e) => {
-                  setTableFilters((prev) => ({
+                  updatefiltersState((prev) => ({
                     ...prev,
                     [field.query]: e.target.value,
                   }));
                 }}
+                placeholder={field.placeholder}
                 className='block w-[810px] h-[48px] rounded-md'
               />
             </div>

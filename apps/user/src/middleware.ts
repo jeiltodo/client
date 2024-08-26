@@ -28,5 +28,5 @@ export function middleware(request: NextRequest) {
 
 //특정 path로만 해당 미들웨어가 동작
 export const config = {
-  matcher: ['/', '/login'],
+  matcher: ['/:path*']
 };

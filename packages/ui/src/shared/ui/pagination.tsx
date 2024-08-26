@@ -1,9 +1,13 @@
 import { ArrowLeft, ArrowRight } from '@jeiltodo/icons';
+import { calculateTotalPages } from '../lib/calculateTotalPages';
 
 interface Props {
   totalCount: number;
   limit: number;
   currentPage: number;
+  onNext: () => void;
+  onPrev: () => void;
+  onClickPage: (nextPage: number) => void;
   variant?: 'primary' | 'secondary';
   className?: string;
   isGroup?: boolean;
@@ -13,16 +17,14 @@ export function Pagination({
   totalCount,
   limit,
   currentPage,
+  onPrev,
+  onNext,
+  onClickPage,
   variant = 'primary',
   className,
   isGroup = false,
 }: Props) {
-  const pageCount = totalCount / limit;
-  const restCount = totalCount % limit;
-
-  const handleClickPrev = () => {};
-
-  const handleClickNext = () => {};
+  const pageCount = calculateTotalPages(totalCount, limit);
 
   const getClassNames = (variant: string, isGroup: boolean): string => {
     if (variant === 'primary') {
@@ -44,12 +46,15 @@ export function Pagination({
         width={24}
         height={24}
         className='mr-1 cursor-pointer'
-        onClick={handleClickPrev}
+        onClick={onPrev}
       />
       {Array.from({ length: pageCount < 1 ? 1 : pageCount }).map((_, idx) => (
         <span
           key={idx}
           className={`cursor-pointer inline-flex justify-center items-center w-5 h-5 text-sm font-medium rounded-md ${currentPage === idx + 1 ? getClassNames(variant, isGroup) : variant === 'primary' ? 'text-slate-400 ' : 'text-slate-950'} `}
+          onClick={() => {
+            onClickPage(idx + 1);
+          }}
         >
           {idx + 1}
         </span>
@@ -58,7 +63,7 @@ export function Pagination({
         width={24}
         height={24}
         className='ml-1 cursor-pointer'
-        onClick={handleClickNext}
+        onClick={onNext}
       />
     </div>
   );
