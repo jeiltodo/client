@@ -54,5 +54,6 @@ export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
  interface ResponseGetAllIndividualGoalsData {
   totalCount: number;
   currentPage: number;
+  searchedCount: number;
   goals: IndividualGoals[]
  }

@@ -20,6 +20,7 @@ export function GoalsIndividualTable() {
   };
 
   const { tableRows: goalIndividualRows } = useTableContext<IndividualGoals>();
+  console.log('goalIndividualRows: ', goalIndividualRows);
 
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
     useTableCheck(goalIndividualRows);

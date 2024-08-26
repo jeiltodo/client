@@ -1,19 +1,35 @@
-'use client'
+'use client';
 import { Dropdown } from '@jeiltodo/ui/shared';
 import { DeleteButton } from '../../table-tools/delete-button';
 import { SearchSummary } from '../../table-tools/search-summary';
 
 interface TableToolBarProps {
-  onSelectDropdown: React.Dispatch<React.SetStateAction<string | number | undefined>>;
+  isDelete?: boolean;
+  isSearch?: boolean;
+  onSelectDropdown: React.Dispatch<
+    React.SetStateAction<string | number | undefined>
+  >;
   onClickDelete: () => void;
+  searchedCount?: number;
+  totalCount?: number;
 }
 
-export function TableToolBar({ onClickDelete, onSelectDropdown }: TableToolBarProps) {
+export function TableToolBar({
+  isDelete = true,
+  isSearch = false,
+  onClickDelete,
+  onSelectDropdown,
+  searchedCount,
+  totalCount,
+}: TableToolBarProps) {
   return (
     <div className='w-full justify-between items-center flex pl-2 py-3'>
       <div className='flex gap-4 items-center'>
-        <DeleteButton onDelete={onClickDelete} />
-        <SearchSummary totalCount={12} searchedCount={0} />
+        {isDelete && <DeleteButton onDelete={onClickDelete} />}
+        <SearchSummary
+          totalCount={totalCount || 0}
+          searchedCount={isSearch && searchedCount ? searchedCount : 0}
+        />
       </div>
       <Dropdown
         hasInitialValue={true}

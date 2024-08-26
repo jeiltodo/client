@@ -1,4 +1,4 @@
-import BackButton from './back-button';
+import { BackButton } from "./back-button";
 
 interface LayoutTitleProps {
   title: string;
