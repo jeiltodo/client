@@ -9,6 +9,15 @@ export interface IndividualGoals {
   updatedAt: string;
 }
 
+export interface IndividualGoalTodos {
+  id: number;
+  title: string;
+  isDone: boolean;
+  noteId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type IndividualGoalsQueryParams = {
   page: number;
   limit: number;
@@ -22,6 +31,12 @@ export interface ResponseGetAllIndividualGoals {
   msg: string;
   code: number;
   data: ResponseGetAllIndividualGoalsData
+}
+
+export interface ResponseGetAllIndividualGoalTodos {
+  msg: string;
+  code: number;
+  data: ResponseGetAllIndividualGoalTodosData
 }
 
 export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
@@ -56,4 +71,10 @@ export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
   currentPage: number;
   searchedCount: number;
   goals: IndividualGoals[]
+ }
+
+ interface ResponseGetAllIndividualGoalTodosData {
+  totalCount: number;
+  currentPage: number;
+  todos: IndividualGoalTodos[]
  }
