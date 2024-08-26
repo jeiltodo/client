@@ -1,15 +1,12 @@
 import { calculateTotalPages, Pagination } from '@jeiltodo/ui/shared';
-import { useTableContext } from '../../../../shared';
+import { useTableContext } from '../../..';
 
 interface Props {
   totalCount: number;
   currentPage: number;
 }
 
-export const GoalIndividualPagination = ({
-  totalCount,
-  currentPage,
-}: Props) => {
+export const TablePagination = ({ totalCount, currentPage }: Props) => {
   const { tableFilters, setTableFilters } = useTableContext();
   const handleNextPage = () => {
     const totalPages = calculateTotalPages(

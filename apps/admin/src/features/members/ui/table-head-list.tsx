@@ -1,8 +1,5 @@
-import { useTableSort } from '../../../shared';
 import { Table } from '../../../shared';
-import { TableHeadMap } from '../../../shared/ui/table/type';
 
-// TableHeadMap 타입을 간단한 예로 가정
 type SimpleTableHeadMap<T> = {
   criteria: keyof T;
   title: string;
@@ -14,17 +11,13 @@ interface TableHeadListProps<T> {
 }
 
 export function TableHeadList<T>({ headMap }: TableHeadListProps<T>) {
-  const handleSort = useTableSort<T>();
-  
   return (
     <>
       {headMap.map(({ criteria, title, withSort }) => {
         return withSort ? (
           <Table.HeadWithSort
             key={criteria as string}
-            onSort={(isAscending) => {
-              handleSort({ isAscending, criteria });
-            }}
+            criteria={criteria as string}
           >
             {title}
           </Table.HeadWithSort>

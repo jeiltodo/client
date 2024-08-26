@@ -7,23 +7,24 @@ import { useRouter } from 'next/navigation';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 
 import { Table } from '../../../shared/ui/table';
-import { useTableContext, useTableCheck } from '../../../shared';
+import { useTableCheck } from '../../../shared';
 
-import { TableHeadList } from '../../../features/user/ui/table-head-list';
-import { USER_TABLE_HEAD_MAP } from '../../../features/user';
 import { Member } from '../../../entities/member';
+import { TableHeadList } from '../../../features/members/ui/table-head-list';
+import { MEMBER_TABLE_HEAD_MAP } from '../../../features/members/model/member-table-head-map';
 
-export function UsersTable() {
+interface Props {
+  members: Member[];
+}
+
+export function MembersTable({ members }: Props) {
   const router = useRouter();
   const handleClick = (path: string) => {
     router.push(path);
   };
 
-  const { tableRows: userRows } = useTableContext<Member>();
-
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(userRows);
-
+    useTableCheck(members);
   return (
     <Table>
       <Table.Header>
@@ -32,32 +33,32 @@ export function UsersTable() {
             isChecked={isAllChecked}
             onChange={handleAllCheck}
           />
-          <TableHeadList headMap={USER_TABLE_HEAD_MAP} />
+          <TableHeadList headMap={MEMBER_TABLE_HEAD_MAP} />
           <Table.Head>관리 설정</Table.Head>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {userRows.map((user, id) => (
+        {members.map((member, id) => (
           <Table.Row key={id}>
             <Table.Cell>
               <Checkbox
-                isChecked={getIsChecked(user.id)}
+                isChecked={getIsChecked(member.id)}
                 onChange={() => {
-                  handleCheck(user.id);
+                  handleCheck(member.id);
                 }}
               />
             </Table.Cell>
-            <Table.Cell>{user.id}</Table.Cell>
-            <Table.Cell>{user.name}</Table.Cell>
-            <Table.Cell>{user.email}</Table.Cell>
-            <Table.Cell>{formatDateString(user.createdAt)}</Table.Cell>
-            <Table.Cell>{formatDateString(user.updatedAt)}</Table.Cell>
-            <Table.Cell>{user.groupCount}개</Table.Cell>
+            <Table.Cell>{member.id}</Table.Cell>
+            <Table.Cell>{member.nickname}</Table.Cell>
+            <Table.Cell>{member.email}</Table.Cell>
+            <Table.Cell>{formatDateString(member.createdAt)}</Table.Cell>
+            <Table.Cell>{formatDateString(member.updatedAt)}</Table.Cell>
+            <Table.Cell>{member.groupCount}개</Table.Cell>
             <Table.Cell>
               <Button
                 className='text-sm px-7 py-2'
                 onClick={() => {
-                  handleClick(`path/${user.id}`);
+                  handleClick(`/${member.id}`);
                 }}
                 variant='outline'
               >

@@ -1,14 +1,14 @@
 import { Member } from '../../../entities/member';
 import type { TableHeadMap } from '../../../shared/ui/table/type';
 
-export const USER_TABLE_HEAD_MAP: TableHeadMap<Member>[] = [
+export const MEMBER_TABLE_HEAD_MAP: TableHeadMap<Member>[] = [
   {
     criteria: 'id',
     title: 'id',
     withSort: false,
   },
   {
-    criteria: 'name',
+    criteria: 'nickname',
     title: '이름',
     withSort: true,
   },

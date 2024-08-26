@@ -1,7 +1,8 @@
 'use client';
-import { GOALS_INDIVIDUAL_FIILTERS } from '../../../../entities/goals/individual';
+
+import { GOALS_INDIVIDUAL_FIILTERS } from '../../../../entities/goals/individual/constants/goals-individual-filters';
 import { useGetAllIndividualGoals } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
-import { GoalIndividualPagination } from '../../../../features/goals/individual';
+import { TablePagination } from '../../../../features/goals/individual';
 import {
   SearchFilter,
   TableToolBar,
@@ -9,13 +10,22 @@ import {
 } from '../../../../shared';
 import { GoalsIndividualTable } from '../../../../widgets/goals/individual';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
+import { IndividualGoals } from '../../../../entities/goals/individual';
+import { useMemo } from 'react';
 
 export const PostsIndividualPage = () => {
-  const { tableFilters } = useTableContext();
+  const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetAllIndividualGoals(tableFilters);
 
-  if (isLoading || !data) return <LoadingSpinner />;
+  const sortedGoals = useMemo(() => {
+    return sortBy<IndividualGoals>(
+      data?.goals || [],
+      tableSort as SortOptions<IndividualGoals>
+    );
+  }, [data?.goals, tableSort]);
 
+  if (isLoading || !data) return <LoadingSpinner />;
   const onHandleDelete = () => {};
 
   return (
@@ -32,13 +42,13 @@ export const PostsIndividualPage = () => {
           totalCount={data?.totalCount}
           searchedCount={data?.searchedCount}
         />
-        {data?.goals ? (
-          <GoalsIndividualTable goals={data?.goals} />
+        {sortedGoals ? (
+          <GoalsIndividualTable goals={sortedGoals} />
         ) : (
           <LoadingSpinner />
         )}
-        <GoalIndividualPagination
-          totalCount={data.totalCount}
+        <TablePagination
+          totalCount={data.searchedCount}
           currentPage={data.currentPage}
         />
       </div>
