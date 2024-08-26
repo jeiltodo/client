@@ -6,33 +6,35 @@ import { useToast } from '@jeiltodo/ui/shared';
 
 export const useGetAllIndividualGoals = (params: {
   page: number;
-  limit: number;
+  limit: string | number;
   nickname?: string;
   title?: string;
   createdAfter?: string;
   createdBefore?: string;
 }) => {
-  const query = useQuery({
-    queryKey: individualGoalsQueryKeys.all,
+  return useQuery({
+    queryKey: individualGoalsQueryKeys.filters(params),
     queryFn: () => individualGoalsApi.getAllIndividualGoals(params),
+    select: (data) => data.data,
   });
-
-  // 원하는 값들을 선택적으로 반환
-  return {
-    data: query.data,
-    isLoading: query.isLoading
-  };
 };
 
-export const useDeleteIndividualGoal = (onError: (_error: AxiosError) => void) => {
+export const useDeleteIndividualGoal = (
+  onError: (_error: AxiosError) => void
+) => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
   return useMutation({
-    mutationFn: (goalIds: number[]) => individualGoalsApi.deleteIndividualGoal({ goalIds }),
+    mutationFn: (goalIds: number[]) =>
+      individualGoalsApi.deleteIndividualGoal({ goalIds }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: individualGoalsQueryKeys.all });
-      showToast({ message: '개별 목표 삭제 성공!', type: 'alert', isGroup: false });
+      showToast({
+        message: '개별 목표 삭제 성공!',
+        type: 'alert',
+        isGroup: false,
+      });
     },
     onError: () => {
       showToast({ message: '개별 목표 삭제 실패!', type: 'confirm' });

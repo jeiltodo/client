@@ -3,7 +3,6 @@
 import React from 'react';
 
 import { useRouter } from 'next/navigation';
-
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 
 import { Table } from '../../../../shared';
@@ -13,15 +12,15 @@ import { TableHeadList } from '../../../../features/user/ui/table-head-list';
 import { IndividualGoals } from '../../../../entities/goals/individual';
 import { GOAL_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 
-export function GoalsIndividualTable() {
+interface Props {
+  goals: IndividualGoals[];
+}
+
+export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
   const router = useRouter();
   const handleClick = (path: string) => {
     router.push(path);
   };
-
-  const { tableRows: goalIndividualRows } = useTableContext<IndividualGoals>();
-  console.log('goalIndividualRows: ', goalIndividualRows);
-
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
     useTableCheck(goalIndividualRows);
 

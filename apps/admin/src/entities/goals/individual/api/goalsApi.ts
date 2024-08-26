@@ -4,7 +4,7 @@ import { ResponseGetAllIndividualGoals } from '../model/type';
 export const individualGoalsApi = {
   getAllIndividualGoals: async (params: {
     page: number;
-    limit: number;
+    limit: string | number;
     nickname?: string;
     title?: string;
     createdAfter?: string;

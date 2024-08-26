@@ -1,4 +1,4 @@
-import { TableFilter } from "../../../../shared";
+import { TableFilter } from '../../../../shared';
 
 export interface IndividualGoals {
   id: number;
@@ -21,18 +21,18 @@ export type IndividualGoalsQueryParams = {
 export interface ResponseGetAllIndividualGoals {
   msg: string;
   code: number;
-  data: ResponseGetAllIndividualGoalsData
+  data: ResponseGetAllIndividualGoalsData;
 }
 
 export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
   {
     label: '키워드',
-    query: 'keyword',
+    query: 'title',
     placeholder: '키워드를 입력해주세요',
   },
   {
     label: '이름',
-    query: 'name',
+    query: 'nickname',
     placeholder: '이름을 입력해주세요',
   },
   {
@@ -43,17 +43,17 @@ export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
 ];
 
 /*
- *================================================================= 
+ *=================================================================
  */
 
- interface IndividualGoalsMember {
+interface IndividualGoalsMember {
   id: number;
   nickname: string;
- }
+}
 
- interface ResponseGetAllIndividualGoalsData {
+interface ResponseGetAllIndividualGoalsData {
   totalCount: number;
   currentPage: number;
   searchedCount: number;
-  goals: IndividualGoals[]
- }
+  goals: IndividualGoals[];
+}
