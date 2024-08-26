@@ -64,7 +64,7 @@ client.interceptors.request.use(
 
     if (!accessToken) {
       if (typeof window !== 'undefined') {
-        window.location.href = '/login';
+        window.location.href = isAdminPath ? '/admin/login' : '/login';
       }
       return Promise.reject(new Error('No access token found'));
     }

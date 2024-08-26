@@ -41,3 +41,39 @@ export const useDeleteIndividualGoal = (
     },
   });
 };
+
+export const useGetAllIndividualGoalTodos = (
+  params: { page: number; limit: number },
+  goalId: number
+) => {
+  const query = useQuery({
+    queryKey: individualGoalsQueryKeys.detail(goalId),
+    queryFn: () => individualGoalsApi.getAllIndividualGoalTodos(params, goalId),
+  });
+
+  return {
+    data: query.data,
+    isLoading: query.isLoading,
+  };
+};
+
+export const useDeleteIndividualGoalTodos = (
+  onError: (_error: AxiosError) => void
+) => {
+  const queryClient = useQueryClient();
+  const showToast = useToast();
+
+  return useMutation({
+    mutationFn: (todoIds: number[]) =>
+      individualGoalsApi.deleteIndividualGoalTodos({ todoIds }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey.includes('todo'),
+      });
+      showToast({ message: '할 일 삭제 성공!', type: 'alert', isGroup: false });
+    },
+    onError: () => {
+      showToast({ message: '할 일 삭제 실패!', type: 'confirm' });
+    },
+  });
+};

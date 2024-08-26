@@ -56,7 +56,7 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
               <Button
                 className='text-sm px-7 py-2'
                 onClick={() => {
-                  handleClick(`path/${goal.id}`);
+                  handleClick(`/goals/individual/${goal.id}`);
                 }}
                 variant='outline'
               >
