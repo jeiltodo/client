@@ -20,6 +20,7 @@ export const MemberList = ({
   onClientRemoveMember: onRemoveMember,
 }: MemberListProps) => {
   const { mode } = useBoardContext();
+  const slidesCount = members.length;
 
   const handleChangeLeader = (id: number) => {
     onChangeLeader(id);
@@ -33,52 +34,78 @@ export const MemberList = ({
     <div className='relative h-fit flex gap-6 items-center'>
       <Swiper
         modules={[Navigation, Pagination]}
-        slidesPerView={2}
-        slidesPerGroup={2}
+        slidesPerView={slidesCount < 2 ? 1 : 2}
+        slidesPerGroup={slidesCount < 2 ? 1 : 2}
         spaceBetween={24}
         scrollbar={{ draggable: true }}
         navigation
         pagination={{ clickable: true }}
+        centeredSlides={false}
         breakpoints={{
           370: {
-            slidesPerView: 3,
-            slidesPerGroup: 3,
+            slidesPerView: slidesCount < 3 ? slidesCount : 3,
+            slidesPerGroup: slidesCount < 3 ? slidesCount : 3,
           },
           420: {
-            slidesPerView: 4,
-            slidesPerGroup: 4,
+            slidesPerView: slidesCount < 4 ? slidesCount : 4,
+            slidesPerGroup: slidesCount < 4 ? slidesCount : 4,
           },
           500: {
-            slidesPerView: 4,
-            slidesPerGroup: 4,
+            slidesPerView: slidesCount < 4 ? slidesCount : 4,
+            slidesPerGroup: slidesCount < 4 ? slidesCount : 4,
           },
           640: {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
+            slidesPerView: slidesCount < 5 ? slidesCount : 5,
+            slidesPerGroup: slidesCount < 5 ? slidesCount : 5,
           },
           720: {
-            slidesPerView: 6,
-            slidesPerGroup: 6,
+            slidesPerView: slidesCount < 6 ? slidesCount : 6,
+            slidesPerGroup: slidesCount < 6 ? slidesCount : 6,
           },
           800: {
-            slidesPerView: 7,
-            slidesPerGroup: 7,
+            slidesPerView: slidesCount < 7 ? slidesCount : 7,
+            slidesPerGroup: slidesCount < 7 ? slidesCount : 7,
           },
           840: {
-            slidesPerView: 8,
-            slidesPerGroup: 8,
+            slidesPerView: slidesCount < 8 ? slidesCount : 8,
+            slidesPerGroup: slidesCount < 8 ? slidesCount : 8,
           },
           1010: {
-            slidesPerView: 9,
-            slidesPerGroup: 9,
+            slidesPerView: slidesCount < 9 ? slidesCount : 9,
+            slidesPerGroup: slidesCount < 9 ? slidesCount : 9,
           },
           1024: {
-            slidesPerView: 2,
-            slidesPerGroup: 2,
+            slidesPerView: slidesCount < 2 ? slidesCount : 2,
+            slidesPerGroup: slidesCount < 2 ? slidesCount : 2,
           },
-          1080: { slidesPerView: 3, slidesPerGroup: 3 },
-          1220: { slidesPerView: 4, slidesPerGroup: 4 },
-          1280: { slidesPerView: 5, slidesPerGroup: 5 },
+          1080: {
+            slidesPerView: slidesCount < 3 ? slidesCount : 3,
+            slidesPerGroup: slidesCount < 3 ? slidesCount : 3,
+          },
+          1220: {
+            slidesPerView: slidesCount < 4 ? slidesCount : 4,
+            slidesPerGroup: slidesCount < 4 ? slidesCount : 4,
+          },
+          1320: {
+            slidesPerView: slidesCount < 5 ? slidesCount : 5,
+            slidesPerGroup: slidesCount < 5 ? slidesCount : 5,
+          },
+          1400: {
+            slidesPerView: slidesCount < 6 ? slidesCount : 6,
+            slidesPerGroup: slidesCount < 6 ? slidesCount : 6,
+          },
+          1520: {
+            slidesPerView: slidesCount < 7 ? slidesCount : 7,
+            slidesPerGroup: slidesCount < 7 ? slidesCount : 7,
+          },
+          1600: {
+            slidesPerView: slidesCount < 8 ? slidesCount : 8,
+            slidesPerGroup: slidesCount < 8 ? slidesCount : 8,
+          },
+          1800: {
+            slidesPerView: slidesCount < 9 ? slidesCount : 9,
+            slidesPerGroup: slidesCount < 9 ? slidesCount : 9,
+          },
         }}
       >
         {members.map((member) =>

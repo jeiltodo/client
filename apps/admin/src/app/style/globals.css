@@ -27,6 +27,16 @@
   }
 }
 
+.swiper-slide {
+  flex-shrink: 0;
+  width: auto !important;
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: flex-start !important;
+  overflow: visible;
+}
 .swiper-button-prev,
 .swiper-button-prev {
   position: absolute;

@@ -25,3 +25,29 @@
     padding-bottom: 24px;
   }
 }
+
+.swiper {
+  margin-left: 0 !important;
+}
+.swiper-slide {
+  flex-shrink: 0;
+  width: auto !important;
+  margin-right: 0;
+}
+
+.swiper-container {
+  display: flex;
+  justify-content: flex-start !important;
+  overflow: visible;
+}
+.swiper-button-prev,
+.swiper-button-prev {
+  position: absolute;
+  z-index: 50;
+}
+.swiper-button-prev {
+  left: -12px !important;
+}
+.swiper-button-next {
+  right: -12px !important;
+}
