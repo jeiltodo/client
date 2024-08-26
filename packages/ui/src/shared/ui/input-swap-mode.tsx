@@ -8,6 +8,7 @@ interface Props {
   defaultValue: string;
   isEditMode: boolean;
   isGroup?: boolean;
+  isAdmin?: boolean;
   onChange: (value: string) => void;
   onSwap: Dispatch<SetStateAction<boolean>>;
   className?: string;
@@ -20,6 +21,7 @@ export const InputSwapMode = ({
   defaultValue,
   isEditMode,
   isGroup = false,
+  isAdmin = false,
   onChange,
   onSwap,
   className,
@@ -59,7 +61,7 @@ export const InputSwapMode = ({
         />
         <button
           onClick={handleToggle}
-          className={`inline-block min-w-[84px] h-9 border rounded-xl ${isEditMode === false ? (isGroup ? 'border-groupColor-500 text-groupColor-500 ' : 'border-blue-500 text-blue-500 ') : 'bg-slate-900 text-white '}`}
+          className={`inline-block min-w-[84px] h-9 border rounded-xl ${isEditMode === false ? (isGroup ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'border-blue-500 text-blue-500 ') : 'bg-slate-900 text-white '}`}
         >
           {isEditMode === false ? '수정' : '취소'}
         </button>

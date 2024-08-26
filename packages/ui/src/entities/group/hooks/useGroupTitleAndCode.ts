@@ -17,7 +17,7 @@ export const useGroupTitleAndCode = (id: number) => {
   const showToast = useToast();
   return useMutation({
     mutationFn: (groupBody: GroupTitleOrCode) =>
-      groupApi.updateGrouppTitleOrCode(id, groupBody),
+      groupApi.updateGroupTitleOrCode(id, groupBody),
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('groups'),

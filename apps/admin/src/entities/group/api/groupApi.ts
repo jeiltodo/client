@@ -1,12 +1,8 @@
 import { client } from '@jeiltodo/ui/shared';
-import {
-  GroupDetailResponse,
-  GroupQueryParams,
-  GroupsResponse,
-} from '../model/type';
+import { GroupQueryParams, GroupResponse, GroupsResponse } from '../model/type';
 
 export const groupApi = {
-  getGroup: async (groupId: number): Promise<GroupDetailResponse> => {
+  getGroup: async (groupId: number): Promise<GroupResponse> => {
     try {
       const response = await client.get(`/admin/groups/${groupId}`);
       return response.data;
