@@ -3,11 +3,13 @@
 import { DoughnutGraph } from '@jeiltodo/icons';
 import { DonutChart, PercentDisplay } from '../../../entities/user';
 
-interface Props {
+interface ProgressBoardProps {
   completedPercent: number;
 }
 
-export const ProgressBoard: React.FC<Props> = ({ completedPercent }) => {
+export const ProgressBoard: React.FC<ProgressBoardProps> = ({
+  completedPercent,
+}) => {
   return (
     <section className='relative h-[250px] flex flex-row min-w-[280px] bg-blue-500 w-full desktop:max-w-[588px] rounded-[12px] p-base overflow-hidden'>
       <div className='flex flex-col gap-y-1 text-white text-lg'>

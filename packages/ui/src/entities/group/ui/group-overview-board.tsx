@@ -59,7 +59,7 @@ export const GroupOverviewBoard = ({
   return (
     <BoardLayout
       title='그룹 정보'
-      className='tablet:min-w-[400px]'
+      className={isAdmin ? 'w-[400px]' : 'tablet:min-w-[400px]'}
       isAdmin={isAdmin}
     >
       <div

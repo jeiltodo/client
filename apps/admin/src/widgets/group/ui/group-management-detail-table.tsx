@@ -1,14 +1,18 @@
 'use client';
 
-import { Table, useTableContext } from '../../../shared';
-import { TableHeadList } from '../../../features/user/ui/table-head-list';
-import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../features/group';
 import { ProgressBar } from '@jeiltodo/ui/shared';
-import { GroupGoalsList } from '../../../entities/group';
+import { Table } from '../../../shared';
+import { TableHeadList } from '../../../features/members';
+import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
+import type { GroupGoals } from '../../../entities/goals/group';
 
-export const GroupManagemantDetailTable = () => {
-  const { tableRows: groupGoalsRow } = useTableContext<GroupGoalsList>();
+interface GroupsManagementDetailTableProps {
+  goals: GroupGoals[];
+}
 
+export const GroupManagemantDetailTable = ({
+  goals: groupGoalsRow,
+}: GroupsManagementDetailTableProps) => {
   return (
     <Table>
       <Table.Header>

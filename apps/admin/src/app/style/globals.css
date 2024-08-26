@@ -27,6 +27,10 @@
   }
 }
 
+.swiper {
+  margin-left: 0 !important;
+}
+
 .swiper-slide {
   flex-shrink: 0;
   width: auto !important;

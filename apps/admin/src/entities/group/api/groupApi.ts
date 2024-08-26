@@ -1,15 +1,17 @@
 import { client } from '@jeiltodo/ui/shared';
-import {
+import type {
   GroupGoalsResponse,
-  GroupQueryParams,
   GroupResponse,
   GroupsResponse,
 } from '../model/type';
+import type { TableQueries } from '../../../shared';
 
 export const groupApi = {
   getGroup: async (groupId: number): Promise<GroupResponse> => {
     try {
-      const response = await client.get(`/admin/groups/${groupId}`);
+      const response = await client.get<GroupResponse>(
+        `/admin/groups/${groupId}`
+      );
       return response.data;
     } catch (error) {
       console.error('Fail fetch group:', error);
@@ -22,9 +24,9 @@ export const groupApi = {
     limit,
     nickname,
     group,
-  }: GroupQueryParams): Promise<GroupsResponse> => {
+  }: TableQueries): Promise<GroupsResponse | undefined> => {
     try {
-      let queries = [
+      const queries = [
         `/admin/groups?page=${page}&limit=${limit}`,
         nickname ? `nickname=${nickname}` : '',
         group ? `group=${group}` : '',
@@ -48,31 +50,6 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Fail delete group:', error);
-      throw error;
-    }
-  },
-  //임시사용
-  getGroupGoals: async ({
-    page,
-    limit,
-    groupId,
-  }: {
-    page: number;
-    limit: number;
-    groupId: number;
-  }): Promise<GroupGoalsResponse> => {
-    try {
-      let queries = [
-        `/admin/goals/group?page=${page}&limit=${limit}`,
-        groupId ? `groupId=${groupId}` : '',
-      ]
-        .filter(Boolean)
-        .join('&')
-        .trim();
-      const response = await client.get(queries);
-      return response.data;
-    } catch (error) {
-      console.error('Fail fetch group goals:', error);
       throw error;
     }
   },

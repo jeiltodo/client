@@ -32,7 +32,6 @@
 .swiper-slide {
   flex-shrink: 0;
   width: auto !important;
-  margin-right: 0;
 }
 
 .swiper-container {

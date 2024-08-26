@@ -29,6 +29,7 @@ export const MembersBoard = ({
   const [newLeaderId, setNewLeaderId] = useState<number>(leaderId);
   const [deletedId, setDeletedId] = useState<number | null>(null);
 
+  console.log('group.members contributionRank확인: ', group.members);
   const sortedMembers = group.members
     .map((member) => ({ id: member.id, rank: member.contributionRank }))
     .sort((a, b) => a.rank - b.rank);
@@ -61,7 +62,7 @@ export const MembersBoard = ({
 
   return (
     <div
-      className={`w-full px-6 py-4 rounded-lg ${isAdmin ? 'bg-blue-500' : 'bg-orange-500'}  overflow-hidden`}
+      className={`px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'w-full bg-orange-500'}  overflow-hidden`}
     >
       <div className='w-full h-full relative'>
         <div className='flex justify-between items-center mb-6'>
@@ -73,7 +74,7 @@ export const MembersBoard = ({
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
               <span className='text-slate-800'>{group.members.length}</span>
               <span
-                className={`${isAdmin ? 'text-blue-500' : 'text-groupColor-500'}`}
+                className={isAdmin ? 'text-blue-500' : 'text-groupColor-500'}
               >
                 /10
               </span>
@@ -81,7 +82,7 @@ export const MembersBoard = ({
           </div>
 
           {(isUserALeader || isAdmin) && (
-            <MembersManageButtons onSave={handleSave} isAdmin={true} />
+            <MembersManageButtons onSave={handleSave} isAdmin={isAdmin} />
           )}
         </div>
         <MemberList

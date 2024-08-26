@@ -1,5 +1,10 @@
 import { GroupManagementPage } from '../../../page/group';
+import { TableProvider } from '../../../shared';
 
 export default function Page() {
-  return <GroupManagementPage />;
+  return (
+    <TableProvider>
+      <GroupManagementPage />;
+    </TableProvider>
+  );
 }

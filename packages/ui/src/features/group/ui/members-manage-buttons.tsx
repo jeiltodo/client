@@ -49,7 +49,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
       {mode !== 'default' && (
         <ButtonGroup>
           <Button
-            variant='outline-no-border'
+            variant={isAdmin ? 'outline' : 'outline-no-border'}
             className='bg-white px-[10px] min-w-[84px] h-[36px]'
             onClick={() => {
               handleCancle();
@@ -58,7 +58,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
             취소
           </Button>
           <Button
-            variant='group-dark'
+            variant={isAdmin ? 'dark' : 'group-dark'}
             className='min-w-[84px] h-[36px]'
             onClick={() => {
               handleSave();

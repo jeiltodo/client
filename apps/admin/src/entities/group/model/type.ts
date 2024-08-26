@@ -14,13 +14,6 @@ export interface GroupPageResponse {
   groups: Groups[];
 }
 
-export interface GroupQueryParams {
-  page: number;
-  limit: string | number | undefined;
-  nickname?: string;
-  group?: string;
-}
-
 export interface GroupMembers {
   id: number;
   isLeader: boolean;

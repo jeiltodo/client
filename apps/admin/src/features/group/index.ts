@@ -1,1 +1,2 @@
-export * from './model/group-table-head-map';
+export { GroupManagementPagination } from './ui/group-management-pagination';
+export { GroupManagementDetailPagination } from './ui/group-management-detail-pagination';

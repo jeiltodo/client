@@ -1,11 +1,10 @@
-import { GroupQueryParams } from '../model/type';
+import { TableQueries } from '../../../shared';
 
 export const groupQueryKeys = {
-	all: ['group'] as const,
-	list: (params: GroupQueryParams) =>
-		[...groupQueryKeys.all, 'list', params] as const,
-	detail: (groupId: number) =>
-		[...groupQueryKeys.all, 'detail', groupId] as const,
-	goals: (groupId: number) =>
-		[...groupQueryKeys.all, 'goals', groupId] as const,
+  all: ['group'] as const,
+  filters: (params: TableQueries) => [...groupQueryKeys.all, params],
+  detail: (groupId: number) =>
+    [...groupQueryKeys.all, 'detail', groupId] as const,
+  goals: (groupId: number) =>
+    [...groupQueryKeys.all, 'goals', groupId] as const,
 };

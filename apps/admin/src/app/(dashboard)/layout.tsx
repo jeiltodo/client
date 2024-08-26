@@ -1,6 +1,6 @@
 import { SidebarAdmin } from '../../widgets/sidebar/ui/sidebar-admin';
 
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -8,9 +8,7 @@ export default async function DashboardLayout({
   return (
     <>
       <SidebarAdmin />
-      <main className='common-layout font-pretendard-regular bg-slate-100'>
-        {children}
-      </main>
+      <main className='common-layout font-pretendard-regular'>{children}</main>
     </>
   );
 }
