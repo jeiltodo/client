@@ -3,29 +3,24 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('accessAdminToken')?.value;
-
-  console.log('Middleware running');
+  console.log('관리자 Middleware running');
+  console.log('관리자 Middleware running');
   console.log('Request URL:', request.nextUrl.pathname);
   console.log('Token:', token);
-
-  // 로그인을 하지 않아 토큰이 없으면 login페이지로 리다이렉트
   if (request?.nextUrl.pathname === '/') {
+    console.log('토큰있나요? ', token);
     if (!token) {
       console.log('Redirecting to /login');
-      return NextResponse.redirect(new URL('/admin/login', request.url));
+      return NextResponse.redirect(new URL('/login', origin));
     }
   }
-
-  //로그인을 해서 토큰이 있으면 login페이지로 못가도록 홈페이지로 리다이렉트
-  if (request?.nextUrl.pathname === '/admin/login') {
+  if (request?.nextUrl.pathname === '/login') {
     if (token) {
       console.log('Redirecting to /');
-      return NextResponse.redirect(new URL('/admin', request.url));
+      return NextResponse.redirect(new URL('/', origin));
     }
   }
 }
-
-//특정 path로만 해당 미들웨어가 동작
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/:path*'],
 };

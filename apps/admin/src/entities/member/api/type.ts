@@ -1,6 +1,6 @@
 export interface Member {
   id: number;
-  name: string;
+  nickname: string;
   email: string;
   createdAt: string;
   updatedAt: string;
@@ -8,8 +8,8 @@ export interface Member {
 }
 
 export type MemberQueryParams = {
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number | string;
   nickname?: string;
   email?: string;
   createdAfter?: string;

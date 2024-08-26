@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 
 import { Table } from '../../../../shared';
-import { useTableContext, useTableCheck } from '../../../../shared';
+import { useTableCheck } from '../../../../shared';
 
-import { TableHeadList } from '../../../../features/user/ui/table-head-list';
 import { IndividualGoals } from '../../../../entities/goals/individual';
 import { GOAL_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
+import { TableHeadList } from '../../../../features/members';
 
 interface Props {
   goals: IndividualGoals[];

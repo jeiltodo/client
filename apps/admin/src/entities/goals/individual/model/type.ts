@@ -1,4 +1,3 @@
-import { TableFilter } from '../../../../shared';
 
 export interface IndividualGoals {
   id: number;
@@ -39,24 +38,6 @@ export interface ResponseGetAllIndividualGoalTodos {
   data: ResponseGetAllIndividualGoalTodosData;
 }
 
-export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
-  {
-    label: '키워드',
-    query: 'title',
-    placeholder: '키워드를 입력해주세요',
-  },
-  {
-    label: '이름',
-    query: 'nickname',
-    placeholder: '이름을 입력해주세요',
-  },
-  {
-    label: '기간',
-    query: 'period',
-    type: 'date',
-  },
-];
-
 /*
  *=================================================================
  */
@@ -66,7 +47,7 @@ interface IndividualGoalsMember {
   nickname: string;
 }
 
-interface ResponseGetAllIndividualGoalsData {
+export interface ResponseGetAllIndividualGoalsData {
   totalCount: number;
   currentPage: number;
   searchedCount: number;

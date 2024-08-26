@@ -5,16 +5,12 @@ import { SearchSummary } from '../../table-tools/search-summary';
 import { useTableContext } from '../../../hooks/table/useTableContext';
 
 interface TableToolBarProps {
-  isDelete?: boolean;
-  isSearch?: boolean;
   onClickDelete: () => void;
-  searchedCount?: number;
-  totalCount?: number;
+  searchedCount: number;
+  totalCount: number;
 }
 
 export function TableToolBar({
-  isDelete = true,
-  isSearch = false,
   onClickDelete,
   searchedCount,
   totalCount,
@@ -25,13 +21,10 @@ export function TableToolBar({
     setTableFilters((prev) => ({ ...prev, limit: value }));
   };
   return (
-    <div className='w-full justify-between items-center flex pl-2 py-3'>
+    <div className='w-full justify-between items-center flex pl-4 py-3'>
       <div className='flex gap-4 items-center'>
-        {isDelete && <DeleteButton onDelete={onClickDelete} />}
-        <SearchSummary
-          totalCount={totalCount || 0}
-          searchedCount={isSearch && searchedCount ? searchedCount : 0}
-        />
+        <DeleteButton onDelete={onClickDelete} />
+        <SearchSummary totalCount={totalCount} searchedCount={searchedCount} />
       </div>
       <Dropdown
         hasInitialValue={true}
