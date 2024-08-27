@@ -9,6 +9,7 @@ import {
   useRemoveMember,
 } from '@jeiltodo/ui/entities';
 import {
+  BoardTitle,
   Goal,
   LayoutTitle,
   LoadingSpinner,
@@ -23,6 +24,7 @@ import { TableToolBar, useTableContext } from '../../../shared';
 import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
 import { useMemo } from 'react';
 import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
+import { GroupManagementDetailPagination } from '../../../features/group';
 
 // eslint-disable-next-line react/function-component-definition
 export const GroupManagementDetailPage = () => {
@@ -91,13 +93,18 @@ export const GroupManagementDetailPage = () => {
         </MembersBoardProvider>
       </div>
 
-      <div className='w-[920px] pb-[16px] px-5 bg-white rounded-xl mt-5'>
+      <div className='w-[920px] pb-[16px] py-4 px-5 bg-white rounded-xl mt-5'>
+        <BoardTitle title='그룹 목표' icon='flag' />
         <TableToolBar
           onClickDelete={onHandleDelete}
-          totalCount={groupGoals.data.totalCount}
+          totalCount={groupGoals.data.searchedCount}
           searchedCount={groupGoals.data.searchedCount}
         />
         <GroupManagementDetailTable goals={sortedGoals} />
+        <GroupManagementDetailPagination
+          totalCount={groupGoals.data.searchedCount}
+          currentPage={groupGoals.data.currentPage}
+        />
       </div>
     </div>
   );
