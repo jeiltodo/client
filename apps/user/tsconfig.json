@@ -14,7 +14,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "type.d.ts",
-    "../../packages/ui/src/@types/react-copy-to-clipboard/index.d.ts"
+    "../../packages/ui/src/@types/react-copy-to-clipboard/index.d.ts",
+    "../../packages/ui/src/entities/get-query-client.ts"
   ],
   "exclude": ["node_modules"]
 }

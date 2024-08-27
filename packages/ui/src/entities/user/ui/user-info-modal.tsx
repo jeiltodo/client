@@ -1,8 +1,13 @@
 'use client';
 
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
-import { Button, Input, useDebounce } from '@jeiltodo/ui/shared';
-import { BaseModal, getCookie } from '../../../../../../apps/user/src/shared';
+import {
+  BaseModal,
+  Button,
+  getCookie,
+  Input,
+  useDebounce,
+} from '@jeiltodo/ui/shared';
 import { UserDataprops } from '../../../features';
 import {
   useUpdateUserInfoMutation,
@@ -19,9 +24,14 @@ import {
 interface Props {
   userInfo: UserDataprops | undefined;
   setInfoToggle: Dispatch<SetStateAction<boolean>>;
+  isAdmin?: boolean; // 관리자 여부를 판단하는 플래그 추가
 }
 
-export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
+export const UserInfoModal = ({
+  userInfo,
+  setInfoToggle,
+  isAdmin = false,
+}: Props) => {
   const [nickname, setNickname] = useState(userInfo?.nickname || '');
   const [email, setEmail] = useState(userInfo?.email || '');
   const [nicknameMessage, setNicknameMessage] = useState('');
@@ -35,22 +45,26 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
     refreshToken: getCookie(REFRESH_TOKEN_COOKIE_NAME),
   };
 
-  const updateUserMutation = useUpdateUserInfoMutation();
-  const logoutMutation = useLogoutMutation();
-  const withdrawMutation = useWithdrawMutation();
+  const updateUserMutation = useUpdateUserInfoMutation(isAdmin);
+  const logoutMutation = useLogoutMutation(isAdmin);
+  const withdrawMutation = useWithdrawMutation(isAdmin);
 
-  const { data: nicknameData } = useNicknameDuplicateQuery(debouncedNickname);
-  const { data: emailData } = useEmailDuplicateQuery(debouncedEmail);
+  const { data: nicknameData } = useNicknameDuplicateQuery(
+    debouncedNickname,
+    isAdmin
+  );
+  const { data: emailData } = useEmailDuplicateQuery(debouncedEmail, isAdmin);
 
   useEffect(() => {
     if (
-      nickname !== userInfo?.nickname &&
+      debouncedNickname !== userInfo?.nickname &&
       nicknameData?.data.duplicated === true
     ) {
       setNicknameMessage('존재하는 이름입니다');
     } else if (
-      nickname !== userInfo?.nickname &&
-      nicknameData?.data.duplicated === false
+      debouncedNickname !== userInfo?.nickname &&
+      nicknameData?.data.duplicated === false &&
+      debouncedNickname.length !== 0
     ) {
       setNicknameMessage('저장 버튼을 눌러야 변경사항이 저장됩니다');
     } else {
@@ -59,11 +73,15 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
   }, [nicknameData, debouncedNickname]);
 
   useEffect(() => {
-    if (email !== userInfo?.email && emailData?.data.duplicated === true) {
+    if (
+      debouncedEmail !== userInfo?.email &&
+      emailData?.data.duplicated === true
+    ) {
       setEmailMessage('존재하는 이메일입니다');
     } else if (
-      email !== userInfo?.email &&
-      emailData?.data.duplicated === false
+      debouncedEmail !== userInfo?.email &&
+      emailData?.data.duplicated === false &&
+      debouncedEmail.length !== 0
     ) {
       setEmailMessage('저장 버튼을 눌러야 변경사항이 저장됩니다');
     } else {
@@ -72,9 +90,9 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
   }, [emailData, debouncedEmail]);
 
   const handleSave = () => {
-    if (!nicknameData && !emailData) {
-      updateUserMutation.mutate({ nickname, email });
-    }
+    updateUserMutation.mutate({ nickname, email });
+    setNicknameMessage('');
+    setEmailMessage('');
   };
 
   const handleLogout = () => {
@@ -84,6 +102,11 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
   const handleWithdraw = () => {
     withdrawMutation.mutate();
   };
+
+  useEffect(() => {
+    setNickname(userInfo?.nickname || '');
+    setEmail(userInfo?.email || '');
+  }, [userInfo])
 
   return (
     <BaseModal
@@ -104,13 +127,18 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
             type='text'
             placeholder='이름을 적어주세요.'
             className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
+            autoFocus={true}
           />
         </div>
         <Button
           variant='primary'
           className='w-[84px] h-[36px]'
           onClick={handleSave}
-          disabled={!!nicknameData || nickname === userInfo?.nickname}
+          isDisabled={
+            nickname === userInfo?.nickname ||
+            !!nicknameData?.data.duplicated ||
+            nickname.length === 0
+          }
         >
           저장
         </Button>
@@ -135,7 +163,11 @@ export const UserInfoModal = ({ userInfo, setInfoToggle }: Props) => {
           variant='primary'
           className='w-[84px] h-[36px]'
           onClick={handleSave}
-          disabled={!!emailData || email === userInfo?.email}
+          isDisabled={
+            email === userInfo?.email ||
+            !!emailData?.data.duplicated ||
+            email.length === 0
+          }
         >
           저장
         </Button>

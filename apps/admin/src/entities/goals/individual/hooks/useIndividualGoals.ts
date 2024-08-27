@@ -43,14 +43,19 @@ export const useDeleteIndividualGoal = (
 };
 
 export const useGetAllIndividualGoalTodos = (
-  params: { page: number; limit: string | number },
-  goalId: number
+  params: { page: number; limit: number | string; },
+  goalId: string
 ) => {
   return useQuery({
     queryKey: individualGoalsQueryKeys.detail(goalId),
     queryFn: () => individualGoalsApi.getAllIndividualGoalTodos(params, goalId),
     select: (data) => data.data,
   });
+
+  return {
+    data: query.data?.data,
+    isLoading: query.isLoading,
+  };
 };
 
 export const useDeleteIndividualGoalTodos = (

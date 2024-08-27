@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Back, DeleteCircle } from '@jeiltodo/icons';
-import { BoardTitle, TodoTitle, useToast } from '@jeiltodo/ui/shared';
+import { BaseModal, BoardTitle, TodoTitle, useToast } from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
-import { BaseModal, ConfirmationModal, MINUTES_WITH_MS } from '../../shared';
+import { ConfirmationModal, MINUTES_WITH_MS } from '../../shared';
 import { Note, useCreateNote, useUpdateNote } from '../../entities/note';
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 

@@ -14,15 +14,11 @@ export const useGetAllGroupGoals = (params: {
   createdAfter?: string;
   createdBefore?: string;
 }) => {
-  const query = useQuery({
-    queryKey: groupGoalsQueryKeys.all,
+  return useQuery({
+    queryKey: groupGoalsQueryKeys.filters(params),
     queryFn: () => groupGoalsApi.getAllGroupGoals(params),
+    select: (data) => data.data,
   });
-
-  return {
-    data: query.data,
-    isLoading: query.isLoading,
-  };
 };
 
 export const useDeleteGroupGoal = (onError: (_error: AxiosError) => void) => {
@@ -47,8 +43,8 @@ export const useDeleteGroupGoal = (onError: (_error: AxiosError) => void) => {
 };
 
 export const useGetAllGroupGoalTodos = (
-  params: { page: number; limit: number },
-  goalId: number
+  params: { page: number; limit: number | string },
+  goalId: string
 ) => {
   const query = useQuery({
     queryKey: groupGoalsQueryKeys.detail(goalId),
@@ -56,7 +52,7 @@ export const useGetAllGroupGoalTodos = (
   });
 
   return {
-    data: query.data,
+    data: query.data?.data,
     isLoading: query.isLoading,
   };
 };

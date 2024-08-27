@@ -6,16 +6,17 @@ import { UserInfoModal } from '../../../entities';
 
 interface SidebarUserInfoProps {
   userInfo: UserDataprops | undefined; // userInfo를 직접 받는 형태로 수정
+  isAdmin?: boolean;
 }
 
 // UserDataprops를 사용하는 컴포넌트
-export const SidebarUserInfo = ({ userInfo }: SidebarUserInfoProps) => {
+export const SidebarUserInfo = ({ userInfo, isAdmin = false }: SidebarUserInfoProps) => {
   const [infoToggle, setInfoToggle] = useState<boolean>(false);
 
   return (
     <>
       {infoToggle && (
-        <UserInfoModal userInfo={userInfo} setInfoToggle={setInfoToggle} />
+        <UserInfoModal userInfo={userInfo} setInfoToggle={setInfoToggle} isAdmin={isAdmin} />
       )}
       <div className='mt-3 mb-[18px] py-3'>
         <div className='tablet:flex mobile:hidden tablet:px-5 mobile:px-4 items-start gap-3'>

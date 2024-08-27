@@ -46,7 +46,7 @@ export const individualGoalsApi = {
       page: number;
       limit: number | string;
     },
-    goalId: number
+    goalId: string
   ) => {
     try {
       const response = await client.get<ResponseGetAllIndividualGoalTodos>(

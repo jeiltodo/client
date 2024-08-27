@@ -1,6 +1,6 @@
 'use client';
 import ReactDOM from 'react-dom';
-import { DeleteMenu } from '@jeiltodo/icons';
+import { DeleteMenu, LinkEmbed } from '@jeiltodo/icons';
 
 import {
   BoardTitle,
@@ -108,7 +108,15 @@ export const NoteDetailSlide = ({
                 {noteDetail?.title}
               </div>
             </div>
-            <div className='text-base font-pretendard-regular'>
+            <div className='text-base font-pretendard-regular flex flex-col gap-4'>
+              {noteDetail?.linkUrl && (
+                <div className='flex items-center justify-start gap-2 bg-slate-200 h-[38px] py-[7px] px-[6px] rounded-[20px] w-full mt-1'>
+                  <LinkEmbed className='h-[18px] w-[18px]' />
+                  <div className='text-base font-normal text-slate-800 truncate pt-[2px]'>
+                    {noteDetail?.linkUrl}
+                  </div>
+                </div>
+              )}
               <div dangerouslySetInnerHTML={{ __html: markDownText }} />
             </div>
           </div>

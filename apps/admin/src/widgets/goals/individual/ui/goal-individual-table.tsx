@@ -18,9 +18,11 @@ interface Props {
 
 export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
   const router = useRouter();
-  const handleClick = (path: string) => {
-    router.push(path);
+  const handleClick = (id: number, title: string) => {
+    const queryString = new URLSearchParams({ title }).toString();
+    router.push(`/goals/individual/${id}?${queryString}`);
   };
+
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
     useTableCheck();
 
@@ -56,7 +58,7 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
               <Button
                 className='text-sm px-7 py-2'
                 onClick={() => {
-                  handleClick(`/goals/individual/${goal.id}`);
+                  handleClick(goal.id, goal.title);
                 }}
                 variant='outline'
               >

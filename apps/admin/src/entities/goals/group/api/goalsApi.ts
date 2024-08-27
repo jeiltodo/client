@@ -46,9 +46,9 @@ export const groupGoalsApi = {
   getAllGroupGoalTodos: async (
     params: {
       page: number;
-      limit: number;
+      limit: number | string;
     },
-    goalId: number
+    goalId: string
   ) => {
     try {
       const response = await client.get<ResponseGetAllGroupGoalTodos>(

@@ -1,5 +1,10 @@
-import { PostsIndividualDetailPage } from "../../../../../page/goals/individual";
+import { PostsIndividualDetailPage } from '../../../../../page/goals/individual';
+import { TableProvider } from '../../../../../shared';
 
 export default function Page() {
-  return <PostsIndividualDetailPage />
+  return (
+    <TableProvider>
+      <PostsIndividualDetailPage />
+    </TableProvider>
+  );
 }
