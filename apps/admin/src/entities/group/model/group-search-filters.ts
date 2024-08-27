@@ -3,7 +3,7 @@ import { TableFilter } from '../../../shared/model/table/type';
 export const GROUP_SEARCH_FILTERS: TableFilter[] = [
   {
     label: '그룹 이름',
-    query: 'group',
+    query: 'title',
     placeholder: '그룹 이름을 입력해주세요',
   },
   {

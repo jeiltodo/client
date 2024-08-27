@@ -1,7 +1,7 @@
 import { calculateTotalPages, Pagination } from '@jeiltodo/ui/shared';
 import { useTableContext } from '../../../shared';
 
-interface Props {
+interface GroupManagementPaginationProps {
   totalCount: number;
   currentPage: number;
 }
@@ -9,7 +9,7 @@ interface Props {
 export const GroupManagementPagination = ({
   totalCount,
   currentPage,
-}: Props) => {
+}: GroupManagementPaginationProps) => {
   const { tableFilters, setTableFilters } = useTableContext();
   const handleNextPage = () => {
     const totalPages = calculateTotalPages(

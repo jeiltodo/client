@@ -4,7 +4,6 @@ export type TableQueryName =
   | 'createdAfter'
   | 'createdBefore'
   | 'email'
-  | 'group'
   | 'nickname';
 type PaginationQuery = { page: number; limit: string | number };
 

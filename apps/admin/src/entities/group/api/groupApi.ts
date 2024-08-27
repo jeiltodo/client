@@ -23,13 +23,13 @@ export const groupApi = {
     page,
     limit,
     nickname,
-    group,
+    title,
   }: TableQueries): Promise<GroupsResponse | undefined> => {
     try {
       const queries = [
         `/admin/groups?page=${page}&limit=${limit}`,
-        nickname ? `nickname=${nickname}` : '',
-        group ? `group=${group}` : '',
+        nickname?.trim() ? `nickname=${nickname}` : '',
+        title?.trim() ? `title=${title}` : '',
       ]
         .filter(Boolean)
         .join('&')
