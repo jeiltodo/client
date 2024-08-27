@@ -36,6 +36,7 @@ export interface GroupDetailResponse {
   createUser: string;
   members: Member[];
   goals: Goal[];
+  contributionRank: number;
 }
 export interface Groups {
   id: number;

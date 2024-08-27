@@ -29,7 +29,6 @@ export const MembersBoard = ({
   const [newLeaderId, setNewLeaderId] = useState<number>(leaderId);
   const [deletedId, setDeletedId] = useState<number | null>(null);
 
-  console.log('group.members contributionRank확인: ', group.members);
   const sortedMembers = group.members
     .map((member) => ({ id: member.id, rank: member.contributionRank }))
     .sort((a, b) => a.rank - b.rank);

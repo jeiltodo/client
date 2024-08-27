@@ -14,6 +14,7 @@ export type Member = {
   isLeader: boolean;
   nickname: string;
   color: string;
+  contributionRank: number;
 };
 
 export type GroupWithMembers = Group & {
