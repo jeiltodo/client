@@ -1,28 +1,26 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { groupQueryKeys } from './queryKeys';
+import { groupQueryKeys } from './querykey';
 import { groupApi } from '../api/groupApi';
+import { groupApi as commonApi } from '../../../../../../packages/ui/src/entities/group/api/groupApi';
 import { GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { useToast } from '@jeiltodo/ui/shared';
 
-export const useGroupCode = (id: number) => {
+export const useGroupCode = (groupId: number) => {
   return useQuery({
-    queryKey: groupQueryKeys.code(id),
-    queryFn: () => groupApi.reissueGroupoCode(id),
+    queryKey: groupQueryKeys.code(groupId),
+    queryFn: () => commonApi.reissueGroupCode(groupId),
     select: (data) => data.data.secretCode,
   });
 };
 
-export const useGroupTitleAndCode = (id: number) => {
+export const useGroupTitleAndCode = (groupId: number) => {
   const queryClient = useQueryClient();
-  const showToast = useToast();
   return useMutation({
     mutationFn: (groupBody: GroupTitleOrCode) =>
-      groupApi.updateGroupTitleOrCode(id, groupBody),
+      groupApi.updateGroupTitleOrCode(groupId, groupBody),
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('groups'),
       });
-      showToast({ message: '수정 성공!', type: 'alert', isGroup: true });
     },
   });
 };

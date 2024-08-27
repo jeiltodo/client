@@ -2,12 +2,7 @@
 
 import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import {
-  GroupOverviewBoard,
-  useChangeLeader,
-  useGroupTitleAndCode,
-  useRemoveMember,
-} from '@jeiltodo/ui/entities';
+import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
 import {
   BoardTitle,
   Goal,
@@ -25,6 +20,12 @@ import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
 import { useMemo } from 'react';
 import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
 import { GroupManagementDetailPagination } from '../../../features/group';
+import { useChangeLeader } from '../../../entities/group';
+import {
+  useGroupCode,
+  useGroupTitleAndCode,
+} from '../../../entities/group/hooks/useGroupTitleAndCode';
+import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 
 // eslint-disable-next-line react/function-component-definition
 export const GroupManagementDetailPage = () => {
@@ -33,6 +34,7 @@ export const GroupManagementDetailPage = () => {
 
   const { tableFilters, tableSort } = useTableContext();
   const { data: user } = useQuery(userOptions());
+  const { data: newCode } = useGroupCode(groupId);
   const { data: group, isLoading } = useGroupDetail(groupId);
   const { data: groupGoals, isLoading: isGoalsLoading } = useGetAllGroupGoals({
     page: tableFilters.page,
@@ -77,7 +79,7 @@ export const GroupManagementDetailPage = () => {
         <GroupOverviewBoard
           group={group.data}
           userId={user?.id}
-          spareCode={group.data.secretCode}
+          spareCode={newCode ?? ''}
           onSave={handleSave}
           isAdmin={true}
         />

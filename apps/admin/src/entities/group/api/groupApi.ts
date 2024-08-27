@@ -1,10 +1,7 @@
-import { client } from '@jeiltodo/ui/shared';
-import type {
-  GroupGoalsResponse,
-  GroupResponse,
-  GroupsResponse,
-} from '../model/type';
+import { client, ResponseWith } from '@jeiltodo/ui/shared';
+import type { GroupResponse, GroupsResponse } from '../model/type';
 import type { TableQueries } from '../../../shared';
+import { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 
 export const groupApi = {
   getGroup: async (groupId: number): Promise<GroupResponse> => {
@@ -50,6 +47,43 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Fail delete group:', error);
+      throw error;
+    }
+  },
+
+  changeLeader: async (groupId: number, memberId: number): Promise<void> => {
+    try {
+      const response = await client.patch(
+        `/admin/groups/${groupId}/leader/${memberId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail change leader:', error);
+      throw error;
+    }
+  },
+
+  removeMember: async (groupId: number, memberId: number) => {
+    try {
+      const response = await client.delete(
+        `/admin/groups/${groupId}/members/${memberId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail remove member:', error);
+      throw error;
+    }
+  },
+
+  updateGroupTitleOrCode: async (id: number, groupBody: GroupTitleOrCode) => {
+    try {
+      const response = await client.patch<ResponseWith<GroupTitleOrCode>>(
+        `/admin/groups/${id}`,
+        groupBody
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch getGroupDetail:', error);
       throw error;
     }
   },

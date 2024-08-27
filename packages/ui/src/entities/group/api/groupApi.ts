@@ -2,7 +2,7 @@ import { client, ResponseWith } from '../../../shared';
 import { GroupCode, GroupTitleOrCode } from '../model/type';
 
 export const groupApi = {
-  reissueGroupoCode: async (id: number) => {
+  reissueGroupCode: async (id: number) => {
     try {
       const response = await client.get<ResponseWith<GroupCode>>(
         `/groups/code/${id}`

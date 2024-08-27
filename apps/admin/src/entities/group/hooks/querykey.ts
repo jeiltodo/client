@@ -7,4 +7,5 @@ export const groupQueryKeys = {
     [...groupQueryKeys.all, 'detail', groupId] as const,
   goals: (groupId: number) =>
     [...groupQueryKeys.all, 'goals', groupId] as const,
+  code: (groupId: number) => [...groupQueryKeys.all, groupId, 'code'] as const,
 };
