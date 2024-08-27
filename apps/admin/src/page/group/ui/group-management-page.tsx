@@ -3,12 +3,23 @@
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { GroupsManagementTable } from '../../../widgets/group';
 import { SearchFilter, TableToolBar, useTableContext } from '../../../shared';
-import { GROUP_SEARCH_FILTERS, useSearchGroups } from '../../../entities/group';
+import {
+  GROUP_SEARCH_FILTERS,
+  Groups,
+  useSearchGroups,
+} from '../../../entities/group';
 import { GroupManagementPagination } from '../../../features/group';
+import { useMemo } from 'react';
+import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
 
+// eslint-disable-next-line react/function-component-definition
 export const GroupManagementPage = () => {
-  const { tableFilters } = useTableContext();
+  const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useSearchGroups(tableFilters);
+
+  const sortedGroups = useMemo(() => {
+    return sortBy<Groups>(data?.groups || [], tableSort as SortOptions<Groups>);
+  }, [data?.groups, tableSort]);
 
   if (isLoading || !data) return <LoadingSpinner />;
 
@@ -27,7 +38,8 @@ export const GroupManagementPage = () => {
           totalCount={data.totalCount}
           searchedCount={data.searchCount || 0}
         />
-        <GroupsManagementTable groups={data.groups} />
+
+        <GroupsManagementTable groups={sortedGroups} />
         <GroupManagementPagination
           totalCount={
             tableFilters.title || tableFilters.nickname
