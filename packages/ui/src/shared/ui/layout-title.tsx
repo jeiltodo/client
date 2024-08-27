@@ -1,4 +1,4 @@
-import BackButton from './back-button';
+import { BackButton } from './back-button';
 
 interface LayoutTitleProps {
   title: string;
@@ -15,7 +15,7 @@ export const LayoutTitle = ({
     <div
       className={`flex flex-row items-center justify-between mb-[16px] ${className}`}
     >
-      <div className='flex items-center justify-start gap-2'>
+      <div className='flex items-center justify-start gap-4'>
         <BackButton />
         <h2 className='font-pretendard-semibold text-lg'>{title}</h2>
       </div>

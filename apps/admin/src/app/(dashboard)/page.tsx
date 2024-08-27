@@ -1,9 +1,12 @@
+import { MemberManagementPage } from '../../page/members';
+import { TableProvider } from '../../shared';
 
-
-export default function Page() {
+const Page = () => {
   return (
-    <main className="common-layout bg-slate-100">
-      간다ㅏ
-    </main>
+    <TableProvider>
+      <MemberManagementPage />
+    </TableProvider>
   );
-}
+};
+
+export default Page;

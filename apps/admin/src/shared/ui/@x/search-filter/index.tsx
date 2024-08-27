@@ -5,21 +5,35 @@ import { TableFilter } from '../../../model/table/type';
 import { FilterForm } from './filter-form';
 import { FilterClear } from './filter-clear';
 import { FilterSearch } from './filter-search';
+import { useTableContext } from '../../../hooks/table/useTableContext';
+import { useEffect, useState } from 'react';
 
 interface SearchFilterProps {
   filters: TableFilter[];
 }
 
 export const SearchFilter: React.FC<SearchFilterProps> = ({ filters }) => {
+  const initialFilters = filters.reduce(
+    (acc, cur) => ({ ...acc, [cur.query]: '' }),
+    {}
+  );
+  const [formFilters, setFormFilters] = useState(
+    initialFilters as Record<string, string>
+  );
+
   return (
     <div className='flex flex-col gap-3 w-[930px] py-[16px] px-[20px] bg-white rounded-xl'>
       <div>
-        <FilterForm filters={filters} />
+        <FilterForm
+          filters={filters}
+          filtersState={formFilters}
+          updatefiltersState={setFormFilters}
+        />
       </div>
       <div className='flex items-center justify-end border-t-[1px] border-slate-200 pt-3'>
         <ButtonGroup gap={2}>
           <FilterClear />
-          <FilterSearch<typeof filters> queries={filters} />
+          <FilterSearch filtersState={formFilters} />
         </ButtonGroup>
       </div>
     </div>

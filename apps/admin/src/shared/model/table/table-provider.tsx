@@ -1,39 +1,50 @@
 'use client';
 import type { PropsWithChildren } from 'react';
-import { createContext, useState } from 'react';
-import { TableQuery } from './type';
+import { createContext, useEffect, useState } from 'react';
+import { TableQueries } from './type';
+import { TABLE_DEFAULT_LIMIT, TABLE_DEFAULT_PAGE } from '../../constants/table';
 
-export interface TableContextProps<T> {
-  tableRows: T[];
-  tableFilters: Partial<Record<TableQuery, string>>;
-  setTableRows: React.Dispatch<React.SetStateAction<T[]>>;
-  setTableFilters: React.Dispatch<
-    React.SetStateAction<Partial<Record<TableQuery, string>> | undefined>
+export interface TableContextProps {
+  tableFilters: TableQueries;
+  setTableFilters: React.Dispatch<React.SetStateAction<TableQueries>>;
+  tableSort: {
+    criteria?: string;
+    isAscending: boolean;
+  };
+  setTableSort: React.Dispatch<
+    React.SetStateAction<{
+      criteria?: string;
+      isAscending: boolean;
+    }>
   >;
 }
 
-export const TableContext = createContext<TableContextProps<any> | null>(null);
+export const TableContext = createContext<TableContextProps | null>(null);
 
-interface TableProviderProps<T> extends PropsWithChildren {
-  initialData?: T[];
-}
+export function TableProvider({ children }: PropsWithChildren) {
+  const [tableFilters, setTableFilters] = useState<TableQueries>({
+    page: TABLE_DEFAULT_PAGE,
+    limit: TABLE_DEFAULT_LIMIT,
+  });
 
-export function TableProvider<T>({
-  children,
-  initialData,
-}: TableProviderProps<T>) {
-  const [tableRows, setTableRows] = useState<T[]>(initialData || []);
-  const [tableFilters, setTableFilters] =
-    useState<Partial<Record<TableQuery, string>>>();
-  const contextValue = {
-    tableRows,
-    setTableRows,
-    tableFilters,
-    setTableFilters,
-  } as TableContextProps<T>;
+  const [tableSort, setTableSort] = useState<{
+    criteria?: string;
+    isAscending: boolean;
+  }>({ isAscending: true });
+
+  useEffect(() => {
+    console.log('🐶', tableSort);
+  }, [tableSort]);
 
   return (
-    <TableContext.Provider value={contextValue}>
+    <TableContext.Provider
+      value={{
+        tableFilters,
+        setTableFilters,
+        tableSort,
+        setTableSort,
+      }}
+    >
       {children}
     </TableContext.Provider>
   );

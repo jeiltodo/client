@@ -1,21 +1,28 @@
-import { SortButton } from '../table-tools/sort-button';
+'use client';
+import { Sort } from '@jeiltodo/icons';
 import type { TableHeadProps } from './head';
 import { TableHead } from './head';
+import { useTableContext } from '../../hooks/table/useTableContext';
 
 interface HeadWithSortProps extends TableHeadProps {
-  onSort: (isAscending: boolean) => void;
+  criteria: string;
 }
 
 export const TableHeadWithSort: React.FC<HeadWithSortProps> = ({
   children,
-  onSort,
+  criteria,
   className,
 }) => {
+  const { setTableSort } = useTableContext();
+
+  const handleSort = () => {
+    setTableSort((prev) => ({ criteria, isAscending: !prev.isAscending }));
+  };
   return (
-    <TableHead className={`p-3 text-center ${className}`}>
+    <TableHead className={`p-3 text-center ${className}`} onClick={handleSort}>
       <div className='flex items-center justify-center gap-2'>
         {children}
-        <SortButton onSort={onSort} />
+        <Sort className='cursor-pointer w-6 h-6' />
       </div>
     </TableHead>
   );

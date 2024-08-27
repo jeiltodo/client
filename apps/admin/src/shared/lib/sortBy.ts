@@ -2,7 +2,7 @@ type SortType = 'number' | 'date' | 'boolean' | 'localeEN' | 'localeKO';
 type SortableValue = string | number | Date | boolean;
 
 export interface SortOptions<T> {
-  criteria: keyof T;
+  criteria?: keyof T;
   isAscending?: boolean;
 }
 
@@ -18,7 +18,7 @@ interface ObjectWithOptionalFields {
   groupName?: string;
   groupLeaderName?: string;
   creator?: string;
-  assignee?: string;
+  memberInCharge?: string;
   progress?: number;
 }
 
@@ -44,11 +44,11 @@ function isValidDate(date: Date | string): boolean {
     : !isNaN(Date.parse(date));
 }
 
-export function sortBy<T extends ObjectWithOptionalFields>(
-  array: T[],
-  options: SortOptions<T>
-): T[] {
+export function sortBy<T>(array: T[], options: SortOptions<T>): T[] {
   const { criteria, isAscending = true } = options;
+  if (!criteria) {
+    return array;
+  }
 
   return [...array].sort((a, b) => {
     const aValue = a[criteria] as SortableValue;

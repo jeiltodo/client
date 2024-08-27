@@ -85,6 +85,9 @@ export const MembersBorad = ({
           currentPage={1}
           variant='secondary'
           className='mt-10 '
+          onNext={() => {}}
+          onPrev={() => {}}
+          onClickPage={() => {}}
         />
         <BgGroupAvatar
           // width={164}

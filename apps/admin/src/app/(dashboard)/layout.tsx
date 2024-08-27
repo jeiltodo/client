@@ -8,7 +8,7 @@ export default async function DashboardLayout({
   return (
     <>
       <SidebarAdmin />
-      <main>{children}</main>
+      <main className='common-layout bg-slate-100'>{children}</main>
     </>
   );
 }
