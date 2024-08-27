@@ -1,14 +1,14 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 import {
   DeleteMenu,
   Expand,
   Fold,
   HamburgerMenu,
-  ImgLogo,
+  TempLogo,
   LogoCheck,
 } from '@jeiltodo/icons';
 
@@ -22,6 +22,8 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   const [isDesktopOpen, setIsDesktopOpen] = useState(true);
   const [isTabletOpen, setIsTabletOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  const router = useRouter();
 
   const toggleDesktopSidebar = () => {
     setIsDesktopOpen(!isDesktopOpen);
@@ -44,9 +46,9 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
-           transition-all duration-200 ease-in-out ${
-             isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
-           } bg-white flex-col overflow-hidden`}
+          transition-all duration-200 ease-in-out ${
+            isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
+          } bg-white flex-col overflow-hidden`}
       >
         <div
           className={`sidebar-header flex ${isDesktopOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
@@ -54,7 +56,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           <div
             className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'}`}
           >
-            <ImgLogo className='w-[106px] h-[35px]' />
+            <TempLogo
+              className='w-[106px] h-[35px] cursor-pointer'
+              onClick={() => {
+                router.push('/');
+              }}
+            />
             {type && (
               <p
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
@@ -66,7 +73,10 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <LogoCheck
-            className={`w-[32px] h-[32px] ${isDesktopOpen ? 'hidden' : 'block'} `}
+            className={`w-[26px] h-[26px] cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'} `}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <div
             onClick={toggleDesktopSidebar}
@@ -86,9 +96,9 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {/* 태블릿 버전 */}
       <div
         className={`desktop:hidden tablet:flex hidden h-full fixed top-0 left-0 z-10
-           transition-all duration-200 ease-in-out ${
-             isTabletOpen ? 'w-[280px]' : 'w-[60px]'
-           } bg-white flex-col overflow-hidden`}
+          transition-all duration-200 ease-in-out ${
+            isTabletOpen ? 'w-[280px]' : 'w-[60px]'
+          } bg-white flex-col overflow-hidden`}
       >
         <div
           className={`sidebar-header flex ${isTabletOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
@@ -96,7 +106,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           <div
             className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
           >
-            <ImgLogo className='w-[106px] h-[35px]' />
+            <TempLogo
+              className='w-[106px] h-[35px] cursor-pointer'
+              onClick={() => {
+                router.push('/');
+              }}
+            />
             {type && (
               <p
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
@@ -108,7 +123,10 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <LogoCheck
-            className={`w-[32px] h-[32px] ${isTabletOpen ? 'hidden' : 'block'} `}
+            className={`w-[32px] h-[32px] cursor-pointer ${isTabletOpen ? 'hidden' : 'block'} `}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <div
             onClick={toggleTabletSidebar}
@@ -154,7 +172,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         )}
         {isMobileSidebarOpen && (
           <div className='flex items-center justify-between py-3 px-4'>
-            <ImgLogo className='w-[106px] h-[35px]' />
+            <TempLogo
+              className='w-[106px] h-[35px] cursor-pointer'
+              onClick={() => {
+                router.push('/');
+              }}
+            />
             <button onClick={toggleMobileSidebar} className='cursor-pointer'>
               <DeleteMenu className='w-6 h-6' />
             </button>
