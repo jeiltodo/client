@@ -1,6 +1,6 @@
 interface SearchSummaryProps {
   totalCount: number;
-  searchedCount: number;
+  searchedCount?: number;
   className?: string;
 }
 

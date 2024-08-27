@@ -6,7 +6,7 @@ import { useTableContext } from '../../../hooks/table/useTableContext';
 
 interface TableToolBarProps {
   onClickDelete: () => void;
-  searchedCount: number;
+  searchedCount?: number;
   totalCount: number;
 }
 

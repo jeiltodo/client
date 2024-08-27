@@ -6,9 +6,8 @@ import { useInView } from 'react-intersection-observer';
 import { Goal, individualGoalsOptions, userOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
 import { TodoList } from '../../features/todo';
-import { Button, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { BackButton, Button, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { Back, PlusBlue } from '@jeiltodo/icons';
-import BackButton from '../../../../../packages/ui/src/shared/ui/back-button';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());

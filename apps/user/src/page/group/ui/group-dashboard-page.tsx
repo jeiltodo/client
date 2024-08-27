@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import {
+  BackButton,
   BoardTitle,
   Button,
   LoadingSpinner,
@@ -29,7 +30,6 @@ import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroup
 import { useDisbandGroup } from '../../../entities/group/hooks/useDisbandGroup';
 import { useLeaveGroup } from '../../../entities/group/hooks/useLeaveGroup';
 import { ConfirmationModal } from '../../../shared';
-import BackButton from '../../../../../../packages/ui/src/shared/ui/back-button';
 
 export const GroupDashboardPage = () => {
   const params = useParams();
