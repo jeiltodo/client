@@ -57,7 +57,11 @@ export const Profile = ({
           <MemberHat width={38} className='absolute top-[12px] left-[14px]' />
         </div>
         {contributionRank === RANK_LOWEST && (
-          <AvatarRags width={64} height={64} className='absolute inset-0' />
+          <AvatarRags
+            width={12}
+            height={16}
+            className='absolute w-3 h-4 top-[12px] right-[14px]'
+          />
         )}
         {contributionRank === RANK_HIGHST && (
           <AvatarSunglasses
