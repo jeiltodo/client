@@ -1,13 +1,9 @@
 'use client';
 import { useParams } from 'next/navigation';
 import { useGetAllIndividualGoalTodos } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
-import {
-  Pagination,
-  TableProvider,
-  TableToolBar,
-  useTableContext,
-} from '../../../../shared';
+import { Pagination, TableProvider, useTableContext } from '../../../../shared';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
 
 export const PostsIndividualDetailPage = () => {
   const params = useParams();

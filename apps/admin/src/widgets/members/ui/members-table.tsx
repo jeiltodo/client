@@ -52,14 +52,20 @@ export function MembersTable({ members }: Props) {
             <Table.Cell>{member.id}</Table.Cell>
             <Table.Cell>{member.nickname}</Table.Cell>
             <Table.Cell>{member.email}</Table.Cell>
-            <Table.Cell>{formatDateString(member.createdAt)}</Table.Cell>
-            <Table.Cell>{formatDateString(member.updatedAt)}</Table.Cell>
-            <Table.Cell>{member.groupCount}개</Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(member.createdAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(member.updatedAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {member.groupCount}개
+            </Table.Cell>
             <Table.Cell>
               <Button
                 className='text-sm px-7 py-2'
                 onClick={() => {
-                  handleClick(`/${member.id}`);
+                  handleClick(`/members/${member.id}`);
                 }}
                 variant='outline'
               >

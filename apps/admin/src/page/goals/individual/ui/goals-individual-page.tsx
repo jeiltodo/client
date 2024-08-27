@@ -5,7 +5,7 @@ import { useGetAllIndividualGoals } from '../../../../entities/goals/individual/
 import { TablePagination } from '../../../../features/goals/individual';
 import {
   SearchFilter,
-  TableToolBar,
+  TableToolBarWithCheck,
   useTableContext,
 } from '../../../../shared';
 import { GoalsIndividualTable } from '../../../../widgets/goals/individual';
@@ -13,6 +13,7 @@ import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { IndividualGoals } from '../../../../entities/goals/individual';
 import { useMemo } from 'react';
+import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsIndividualPage = () => {
   const { tableFilters, tableSort } = useTableContext();
@@ -36,15 +37,17 @@ export const PostsIndividualPage = () => {
 
       <SearchFilter filters={GOALS_INDIVIDUAL_FIILTERS} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
-          totalCount={data?.totalCount}
-          searchedCount={data?.searchedCount}
-        />
-        {sortedGoals ? (
-          <GoalsIndividualTable goals={sortedGoals} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        <TableCheckListProvider tableData={data.goals}>
+          <TableToolBarWithCheck
+            totalCount={data?.totalCount}
+            searchedCount={data?.searchedCount}
+          />
+          {sortedGoals ? (
+            <GoalsIndividualTable goals={sortedGoals} />
+          ) : (
+            <LoadingSpinner />
+          )}
+        </TableCheckListProvider>
         <TablePagination
           totalCount={data.searchedCount}
           currentPage={data.currentPage}

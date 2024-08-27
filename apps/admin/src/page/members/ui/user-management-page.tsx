@@ -2,7 +2,11 @@
 
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { MembersTable } from '../../../widgets/members/ui/members-table';
-import { SearchFilter, TableToolBar, useTableContext } from '../../../shared';
+import {
+  SearchFilter,
+  TableToolBarWithCheck,
+  useTableContext,
+} from '../../../shared';
 import { MEMBERS_FIILTERS } from '../../../entities/member/constants/members-filters';
 import { TablePagination } from '../../../features/goals/individual';
 import { useGetMembers } from '../../../entities/member/hooks/useGetMembers';
@@ -35,7 +39,7 @@ export const MemberManagementPage = () => {
 
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableCheckListProvider tableData={data.members}>
-          <TableToolBar
+          <TableToolBarWithCheck
             totalCount={data?.totalCount}
             searchedCount={data?.searchedCount}
           />

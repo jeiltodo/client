@@ -3,9 +3,14 @@ import { Button, formatDateString } from '@jeiltodo/ui/shared';
 interface GroupCardProps {
   name: string;
   registerAt: string;
+  onLeaveGroup: () => void;
 }
 
-export const GroupCard = ({ name, registerAt }: GroupCardProps) => {
+export const GroupCard = ({
+  name,
+  registerAt,
+  onLeaveGroup,
+}: GroupCardProps) => {
   return (
     <div className='w-full bg-blue-50 flex items-end justify-between p-6 rounded-xl'>
       <div className='flex items-center justify-start gap-2'>
@@ -24,7 +29,11 @@ export const GroupCard = ({ name, registerAt }: GroupCardProps) => {
           </div>
         </div>
       </div>
-      <Button variant='outline' className='w-[84px] h-[36px]'>
+      <Button
+        variant='outline'
+        className='w-[84px] h-[36px]'
+        onClick={onLeaveGroup}
+      >
         탈퇴
       </Button>
     </div>

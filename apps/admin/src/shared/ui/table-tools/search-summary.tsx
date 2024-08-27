@@ -11,7 +11,7 @@ export function SearchSummary({
 }: SearchSummaryProps) {
   return (
     <div className={className}>
-      {searchedCount === totalCount ? (
+      {!searchedCount || searchedCount === totalCount ? (
         <span className='text-slate-800 font-medium text-sm'>
           전체 : {totalCount}
         </span>
