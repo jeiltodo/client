@@ -14,4 +14,16 @@ export const memberApi = {
       throw error;
     }
   },
+
+  deleteMembers: async (memberIds: number[]) => {
+    try {
+      const response = await client.delete(`/admin/member/delete`, {
+        data: { memberIds },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch userInfo:', error);
+      throw error;
+    }
+  },
 };

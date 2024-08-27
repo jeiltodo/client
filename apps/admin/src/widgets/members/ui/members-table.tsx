@@ -24,7 +24,8 @@ export function MembersTable({ members }: Props) {
   };
 
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(members);
+    useTableCheck();
+
   return (
     <Table>
       <Table.Header>

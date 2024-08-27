@@ -9,10 +9,12 @@ import { useGetMembers } from '../../../entities/member/hooks/useGetMembers';
 import { useMemo } from 'react';
 import { Member } from '../../../entities/member';
 import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
+import { TableCheckListProvider } from '../../../shared/model/table/table-checklist-provider';
 
 export const MemberManagementPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetMembers(tableFilters);
+
   const sortedMembers = useMemo(() => {
     return sortBy<Member>(
       data?.members || [],
@@ -22,7 +24,6 @@ export const MemberManagementPage = () => {
 
   if (isLoading || !data) return <LoadingSpinner />;
 
-  const onHandleDelete = () => {};
   return (
     <div>
       <h1 className='sr-only'>
@@ -33,16 +34,17 @@ export const MemberManagementPage = () => {
       <SearchFilter filters={MEMBERS_FIILTERS} />
 
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
-          onClickDelete={onHandleDelete}
-          totalCount={data?.totalCount}
-          searchedCount={data?.searchedCount}
-        />
-        {sortedMembers || data.members ? (
-          <MembersTable members={sortedMembers} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        <TableCheckListProvider tableData={data.members}>
+          <TableToolBar
+            totalCount={data?.totalCount}
+            searchedCount={data?.searchedCount}
+          />
+          {sortedMembers || data.members ? (
+            <MembersTable members={sortedMembers} />
+          ) : (
+            <LoadingSpinner />
+          )}
+        </TableCheckListProvider>
         <TablePagination
           totalCount={data.searchedCount}
           currentPage={data.currentPage}
