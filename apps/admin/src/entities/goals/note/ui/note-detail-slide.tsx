@@ -5,45 +5,32 @@ import { DeleteMenu, LinkEmbed } from '@jeiltodo/icons';
 import {
   BoardTitle,
   Button,
-  ButtonGroup,
   formatDateString,
   LoadingSpinner,
   TodoTitle,
 } from '@jeiltodo/ui/shared';
-import { useNoteDetail } from '../../../entities/note/hooks/useNoteDetail';
-import { useDeleteNote } from '../../../entities/note';
-import { useRouter } from 'next/navigation';
+
+import { useDeleteNoteMutation, useNoteDetail } from '../hooks/useNoteDetail';
 
 interface NoteDetailSlideProps {
-  goalId: number;
   goalTitle: string;
   noteId: number;
-  todoId: number;
   setToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const NoteDetailSlide = ({
-  goalId,
   goalTitle,
   noteId,
-  todoId,
   setToggle,
 }: NoteDetailSlideProps) => {
-  const router = useRouter();
-  const { noteDetail, isLoading } = useNoteDetail(String(noteId));
-  const { mutate: deleteNote } = useDeleteNote(noteId);
 
-  const markDownText = `${noteDetail?.content}`;
+  const { data: noteDetail, isLoading } = useNoteDetail(noteId);
+  const { mutate: deleteNote } = useDeleteNoteMutation();
 
-  const handleEdit = () => {
-    const url = noteId
-      ? `/note/${goalId}/${todoId}/${noteId}?title=${goalTitle}`
-      : `/note/${goalId}/${todoId}/new?title=${goalTitle}`;
-    router.push(url);
-  };
+  const markDownText = `${noteDetail?.data.content}`;
 
-  const handleDelete = () => {
-    deleteNote();
+  const handleDelete = (noteId: number) => {
+    deleteNote(noteId);
     setToggle(false);
   };
 
@@ -74,46 +61,44 @@ export const NoteDetailSlide = ({
                 <DeleteMenu className='w-6 h-6' />
               </button>
               <div className='flex felx-row items-center justify-between mb-3'>
-                <BoardTitle
-                  title={noteDetail?.todo.goal.title || ''}
-                  icon='flag'
-                  iconSize={24}
-                />
-                <ButtonGroup gap={2}>
-                  <Button
-                    className='w-[64px] text-sm tablet:w-[74px] tablet:text-lg desktop:w-[74px] desktop:text-lg h-[36px]'
-                    variant='outline'
-                    onClick={handleEdit}
-                  >
-                    수정하기
-                  </Button>
-                  <Button
-                    className='w-[64px] text-sm tablet:w-[74px] tablet:text-lg desktop:w-[74px] desktop:text-lg h-[36px]'
-                    variant='primary'
-                    onClick={handleDelete}
-                  >
-                    삭제하기
-                  </Button>
-                </ButtonGroup>
+                <BoardTitle title={goalTitle} icon='flag' iconSize={24} />
+                <Button
+                  className='w-[64px] text-sm tablet:w-[74px] tablet:text-lg desktop:w-[74px] desktop:text-lg h-[36px]'
+                  variant='primary'
+                  onClick={() => handleDelete(noteId)}
+                >
+                  삭제하기
+                </Button>
               </div>
-              <div className='flex felx-row items-center justify-between mb-6'>
-                <TodoTitle title={noteDetail?.todo.title || ''} />
-                {noteDetail?.createdAt && (
-                  <span className='text-slate-500 text-xs'>
-                    {formatDateString(noteDetail.createdAt)}
-                  </span>
-                )}
+              <div className='flex flex-col items-start gap-1 mb-6'>
+                <TodoTitle title={noteDetail?.data.todoTitle || ''} />
+                <div className='text-slate-400 text-xs font-medium flex items-center justify-start gap-[22px]'>
+                  <div>작성자</div>
+                  {noteDetail?.data.writer.nickname && (
+                    <span className='text-slate-600'>
+                      {noteDetail?.data.writer.nickname}
+                    </span>
+                  )}
+                </div>
+                <div className='text-slate-400 text-xs font-medium flex items-center justify-start gap-2'>
+                  <div>수정 일자</div>
+                  {noteDetail?.data.updatedAt && (
+                    <span className='text-slate-600'>
+                      {formatDateString(noteDetail?.data.updatedAt)}
+                    </span>
+                  )}
+                </div>
               </div>
               <div className='text-lg font-pretendard-medium text-slate-800 border-y border-slate-200 py-3 mb-4'>
-                {noteDetail?.title}
+                {noteDetail?.data.title}
               </div>
             </div>
             <div className='text-base font-pretendard-regular flex flex-col gap-4'>
-              {noteDetail?.linkUrl && (
+              {noteDetail?.data.linkUrl && (
                 <div className='flex items-center justify-start gap-2 bg-slate-200 h-[38px] py-[7px] px-[6px] rounded-[20px] w-full mt-1'>
                   <LinkEmbed className='h-[18px] w-[18px]' />
                   <div className='text-base font-normal text-slate-800 truncate pt-[2px]'>
-                    {noteDetail?.linkUrl}
+                    {noteDetail?.data.linkUrl}
                   </div>
                 </div>
               )}

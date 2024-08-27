@@ -8,23 +8,23 @@ import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { Table } from '../../../../shared';
 import { useTableCheck } from '../../../../shared';
 
-import { IndividualGoals } from '../../../../entities/goals/individual';
-import { GOAL_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
+import { GroupGoals } from '../../../../entities/goals/group';
+import { GOAL_GROUP_TABLE_HEAD_MAP } from '../../../../features/goals/group';
 
 interface Props {
-  goals: IndividualGoals[];
+  goals: GroupGoals[];
 }
 
-export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
+export function GoalsGroupTable({ goals: goalGroupRows }: Props) {
   const router = useRouter();
   const handleClick = (id: number, title: string) => {
     const queryString = new URLSearchParams({ title }).toString();
-    router.push(`/goals/individual/${id}?${queryString}`);
+    router.push(`/goals/group/${id}?${queryString}`);
   };
 
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(goalIndividualRows);
+    useTableCheck(goalGroupRows);
 
   return (
     <Table>
@@ -34,12 +34,12 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
             isChecked={isAllChecked}
             onChange={handleAllCheck}
           />
-          <TableHeadList headMap={GOAL_INDIVIDUAL_TABLE_HEAD_MAP} />
+          <TableHeadList headMap={GOAL_GROUP_TABLE_HEAD_MAP} />
           <Table.Head>관리 설정</Table.Head>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {goalIndividualRows.map((goal) => (
+        {goalGroupRows.map((goal) => (
           <Table.Row key={goal.id}>
             <Table.Cell>
               <Checkbox
@@ -51,8 +51,8 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
             </Table.Cell>
             <Table.Cell>{goal.id}</Table.Cell>
             <Table.Cell>{goal.title}</Table.Cell>
+            <Table.Cell>{goal.group.title}</Table.Cell>
             <Table.Cell>{goal.member.nickname}</Table.Cell>
-            <Table.Cell>{formatDateString(goal.createdAt)}</Table.Cell>
             <Table.Cell>{formatDateString(goal.updatedAt)}</Table.Cell>
             <Table.Cell>
               <Button

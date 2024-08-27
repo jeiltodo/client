@@ -1,9 +1,6 @@
 'use client';
 import { useMemo } from 'react';
-import {
-  IndividualGoalTodos,
-} from '../../../../entities/goals/individual';
-import { useGetAllIndividualGoalTodos } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
+
 import {
   TableToolBar,
   useTableContext,
@@ -13,8 +10,10 @@ import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
+import { GroupGoalTodos, useGetAllGroupGoalTodos } from '../../../../entities/goals/group';
+import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
 
-export const PostsIndividualDetailPage = () => {
+export const PostsGroupDetailPage = () => {
   const searchParams = useSearchParams();
   const params = useParams();
   const goalId = Array.isArray(params.goalId)
@@ -24,15 +23,15 @@ export const PostsIndividualDetailPage = () => {
 
 
   const { tableFilters, tableSort } = useTableContext();
-  const { data, isLoading } = useGetAllIndividualGoalTodos(
+  const { data, isLoading } = useGetAllGroupGoalTodos(
     tableFilters,
     goalId
   );
   
   const sortedTodos = useMemo(() => {
-    return sortBy<IndividualGoalTodos>(
+    return sortBy<GroupGoalTodos>(
       data?.todos || [],
-      tableSort as SortOptions<IndividualGoalTodos>
+      tableSort as SortOptions<GroupGoalTodos>
     );
   }, [data?.todos, tableSort]);
 
@@ -53,7 +52,7 @@ export const PostsIndividualDetailPage = () => {
           searchedCount={data?.totalCount}
         />
         {sortedTodos ? (
-          <GoalTodosIndividualTable goalTitle={goalTitle} todos={sortedTodos} />
+          <GoalTodosGroupTable goalTitle={goalTitle} todos={sortedTodos} />
         ) : (
           <LoadingSpinner />
         )}
