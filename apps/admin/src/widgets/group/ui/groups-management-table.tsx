@@ -16,7 +16,7 @@ export const GroupsManagementTable = ({
 }: GroupsManagementTableProps) => {
   const router = useRouter();
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(groupRows);
+    useTableCheck();
 
   const handleClick = (path: string) => {
     router.push(path);

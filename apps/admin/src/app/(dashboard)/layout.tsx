@@ -10,7 +10,7 @@ export default function DashboardLayout({
 }) {
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery(userOptions());
+  queryClient.prefetchQuery(userOptions());
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>

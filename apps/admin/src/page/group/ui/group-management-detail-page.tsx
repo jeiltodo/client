@@ -15,7 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useGroupDetail } from '../../../entities/group';
 import { userOptions } from '../../../entities/member/hooks/userOptions';
 import { GroupManagementDetailTable } from '../../../widgets/group';
-import { TableToolBar, useTableContext } from '../../../shared';
+import { useTableContext } from '../../../shared';
 import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
 import { useMemo } from 'react';
 import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
@@ -26,8 +26,8 @@ import {
   useGroupTitleAndCode,
 } from '../../../entities/group/hooks/useGroupTitleAndCode';
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
+import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
 
-// eslint-disable-next-line react/function-component-definition
 export const GroupManagementDetailPage = () => {
   const params = useParams();
   const groupId = Number(params?.id);
@@ -43,16 +43,14 @@ export const GroupManagementDetailPage = () => {
   });
   const sortedGoals = useMemo(() => {
     return sortBy<GroupGoals>(
-      groupGoals?.data.goals || [],
+      groupGoals?.goals || [],
       tableSort as SortOptions<Goal>
     );
-  }, [groupGoals?.data.goals, tableSort]);
+  }, [groupGoals?.goals, tableSort]);
 
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
   const { mutate: removeMember } = useRemoveMember(groupId);
-
-  const onHandleDelete = () => {};
 
   const handleSave = (groupBody: GroupTitleOrCode) => {
     updateTitleOrCode(groupBody);
@@ -98,14 +96,13 @@ export const GroupManagementDetailPage = () => {
       <div className='w-[920px] pb-[16px] py-4 px-5 bg-white rounded-xl mt-5'>
         <BoardTitle title='그룹 목표' icon='flag' />
         <TableToolBar
-          onClickDelete={onHandleDelete}
-          totalCount={groupGoals.data.searchedCount}
-          searchedCount={groupGoals.data.searchedCount}
+          totalCount={groupGoals.searchedCount}
+          searchedCount={groupGoals.searchedCount}
         />
         <GroupManagementDetailTable goals={sortedGoals} />
         <GroupManagementDetailPagination
-          totalCount={groupGoals.data.searchedCount}
-          currentPage={groupGoals.data.currentPage}
+          totalCount={groupGoals.searchedCount}
+          currentPage={groupGoals.currentPage}
         />
       </div>
     </div>

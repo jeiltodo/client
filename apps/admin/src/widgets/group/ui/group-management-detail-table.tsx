@@ -11,7 +11,7 @@ interface GroupsManagementDetailTableProps {
 }
 
 export const GroupManagementDetailTable = ({
-  goals: groupGoalsRow,
+  goals,
 }: GroupsManagementDetailTableProps) => {
   return (
     <Table>
@@ -21,12 +21,12 @@ export const GroupManagementDetailTable = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {groupGoalsRow.map((group, id) => (
-          <Table.Row key={group.title + id} className='hover:bg-slate-50'>
-            <Table.Cell>{group.id}</Table.Cell>
-            <Table.Cell>{group.title}</Table.Cell>
+        {goals.map((goal, id) => (
+          <Table.Row key={goal.title + id} className='hover:bg-slate-50'>
+            <Table.Cell>{goal.id}</Table.Cell>
+            <Table.Cell>{goal.title}</Table.Cell>
             <Table.Cell>
-              <ProgressBar progress={group.progressRate || 0} />
+              <ProgressBar progress={goal.progressRate || 0} />
             </Table.Cell>
           </Table.Row>
         ))}
