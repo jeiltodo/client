@@ -2,7 +2,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { Button, Input } from '@jeiltodo/ui/shared';
-import { BaseModal } from '../../../shared/ui/base-modal';
+import { BaseModal } from '@jeiltodo/ui/shared';
 
 interface GroupCreateModalProps {
   setGroupCreateToggle: Dispatch<SetStateAction<boolean>>;

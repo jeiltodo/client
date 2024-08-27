@@ -1,18 +1,18 @@
+'use client';
 import { Sidebar } from '@jeiltodo/ui/shared';
 import { Home, Group, Post } from '@jeiltodo/icons';
 import { SidebarUserInfo } from '@jeiltodo/ui/features';
 import { SidebarNav } from '../../../shared';
-
-const userData = {
-  id: 6,
-  email: 'ross1222@naver.com',
-  nickname: '닉네임1',
-};
+import { useQuery } from '@tanstack/react-query';
+import { userOptions } from '../../../entities/user';
 
 export const SidebarAdmin = () => {
+
+  const { data: userInfo } = useQuery(userOptions());
+
   return (
     <Sidebar type='관리자 센터'>
-      <SidebarUserInfo userInfo={userData} />
+      <SidebarUserInfo userInfo={userInfo} isAdmin={true} />
       <SidebarNav icon={Home} title='회원관리' href='/' />
       <SidebarNav icon={Group} title='그룹관리' href='/group' />
       <SidebarNav
