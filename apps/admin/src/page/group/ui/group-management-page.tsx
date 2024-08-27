@@ -25,7 +25,7 @@ export const GroupManagementPage = () => {
         <TableToolBar
           onClickDelete={onHandleDelete}
           totalCount={data.totalCount}
-          searchedCount={data.searchedCount}
+          searchedCount={data.searchCount || 0}
         />
         <GroupsManagementTable groups={data.groups} />
 
@@ -33,6 +33,15 @@ export const GroupManagementPage = () => {
           totalCount={data.totalCount}
           currentPage={data.currentPage}
         />
+        {/* API 수정(searchCount 검색결과 총 개수로 변경) 후 아래 코드로 변경
+        <GroupManagementPagination
+          totalCount={
+            tableFilters.group || tableFilters.nickname
+              ? data.searchCount
+              : data.totalCount
+          }
+          currentPage={data.currentPage}
+        /> */}
       </div>
     </div>
   );

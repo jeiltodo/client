@@ -10,7 +10,7 @@ interface GroupsManagementDetailTableProps {
   goals: GroupGoals[];
 }
 
-export const GroupManagemantDetailTable = ({
+export const GroupManagementDetailTable = ({
   goals: groupGoalsRow,
 }: GroupsManagementDetailTableProps) => {
   return (

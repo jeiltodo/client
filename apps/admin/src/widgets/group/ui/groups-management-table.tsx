@@ -36,7 +36,7 @@ export const GroupsManagementTable = ({
       </Table.Header>
       <Table.Body>
         {groupRows.map((group, id) => (
-          <Table.Row key={group.id + id} className='hover:bg-slate-50'>
+          <Table.Row key={group.title + id} className='hover:bg-slate-50'>
             <Table.Cell>
               <Checkbox
                 isChecked={getIsChecked(group.id)}
