@@ -28,10 +28,14 @@
 
 .swiper {
   margin-left: 0 !important;
+  overflow: visible !important;
+  padding: 0 16px;
 }
 .swiper-slide {
+  position: relative;
   flex-shrink: 0;
   width: auto !important;
+  z-index: 5;
 }
 
 .swiper-container {
@@ -40,13 +44,29 @@
   overflow: visible;
 }
 .swiper-button-prev,
-.swiper-button-prev {
+.swiper-button-next {
   position: absolute;
+  top: 50%;
+  width: 40px !important;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 50;
 }
+
 .swiper-button-prev {
-  left: -12px !important;
+  left: -34px !important;
 }
+
 .swiper-button-next {
-  right: -12px !important;
+  right: -34px !important;
+}
+.swiper-button-disabled {
+  color: #e5e7eb !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 24px !important;
 }

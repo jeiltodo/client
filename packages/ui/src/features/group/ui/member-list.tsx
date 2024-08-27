@@ -31,7 +31,7 @@ export const MemberList = ({
   };
 
   return (
-    <div className='relative h-fit flex gap-6 items-center'>
+    <div className='relative px-3'>
       <Swiper
         modules={[Navigation, Pagination]}
         slidesPerView={slidesCount < 2 ? 1 : 2}
