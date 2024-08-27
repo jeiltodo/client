@@ -6,7 +6,8 @@ import { useToast } from '@jeiltodo/ui/shared';
 
 export const useGetAllGroupGoals = (params: {
   page: number;
-  limit: number;
+  limit: number | string;
+  groupId?: number;
   nickname?: string;
   groupName?: string;
   title?: string;
@@ -20,7 +21,7 @@ export const useGetAllGroupGoals = (params: {
 
   return {
     data: query.data,
-    isLoading: query.isLoading
+    isLoading: query.isLoading,
   };
 };
 
@@ -29,10 +30,15 @@ export const useDeleteGroupGoal = (onError: (_error: AxiosError) => void) => {
   const showToast = useToast();
 
   return useMutation({
-    mutationFn: (goalIds: number[]) => groupGoalsApi.deleteGroupGoal({ goalIds }),
+    mutationFn: (goalIds: number[]) =>
+      groupGoalsApi.deleteGroupGoal({ goalIds }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: groupGoalsQueryKeys.all });
-      showToast({ message: '그룹 목표 삭제 성공!', type: 'alert', isGroup: false });
+      showToast({
+        message: '그룹 목표 삭제 성공!',
+        type: 'alert',
+        isGroup: false,
+      });
     },
     onError: () => {
       showToast({ message: '그룹 목표 삭제 실패!', type: 'confirm' });
@@ -45,8 +51,8 @@ export const useGetAllGroupGoalTodos = (
   goalId: number
 ) => {
   const query = useQuery({
-    queryKey: groupGoalsQueryKeys.detail(goalId), 
-    queryFn: () => groupGoalsApi.getAllGroupGoalTodos(params, goalId), 
+    queryKey: groupGoalsQueryKeys.detail(goalId),
+    queryFn: () => groupGoalsApi.getAllGroupGoalTodos(params, goalId),
   });
 
   return {
@@ -55,13 +61,15 @@ export const useGetAllGroupGoalTodos = (
   };
 };
 
-
-export const useDeleteGroupGoalTodos = (onError: (_error: AxiosError) => void) => {
+export const useDeleteGroupGoalTodos = (
+  onError: (_error: AxiosError) => void
+) => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
   return useMutation({
-    mutationFn: (todoIds: number[]) => groupGoalsApi.deleteGroupGoalTodos({ todoIds }),
+    mutationFn: (todoIds: number[]) =>
+      groupGoalsApi.deleteGroupGoalTodos({ todoIds }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('todo'),

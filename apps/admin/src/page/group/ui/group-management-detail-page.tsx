@@ -9,6 +9,7 @@ import {
   useRemoveMember,
 } from '@jeiltodo/ui/entities';
 import {
+  Goal,
   LayoutTitle,
   LoadingSpinner,
   MembersBoardProvider,
@@ -17,22 +18,31 @@ import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useGroupDetail } from '../../../entities/group';
 import { userOptions } from '../../../entities/member/hooks/userOptions';
-import { GroupManagemantDetailTable } from '../../../widgets/group';
+import { GroupManagementDetailTable } from '../../../widgets/group';
 import { TableToolBar, useTableContext } from '../../../shared';
-import { useGetAllGroupGoals } from '../../../entities/goals/group';
+import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
+import { useMemo } from 'react';
+import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
 
 // eslint-disable-next-line react/function-component-definition
 export const GroupManagementDetailPage = () => {
   const params = useParams();
   const groupId = Number(params?.id);
 
-  const { tableFilters } = useTableContext();
+  const { tableFilters, tableSort } = useTableContext();
   const { data: user } = useQuery(userOptions());
   const { data: group, isLoading } = useGroupDetail(groupId);
   const { data: groupGoals, isLoading: isGoalsLoading } = useGetAllGroupGoals({
     page: tableFilters.page,
     limit: tableFilters.limit as number,
+    groupId: groupId,
   });
+  const sortedGoals = useMemo(() => {
+    return sortBy<GroupGoals>(
+      groupGoals?.data.goals || [],
+      tableSort as SortOptions<Goal>
+    );
+  }, [groupGoals?.data.goals, tableSort]);
 
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
@@ -87,7 +97,7 @@ export const GroupManagementDetailPage = () => {
           totalCount={groupGoals.data.totalCount}
           searchedCount={groupGoals.data.searchedCount}
         />
-        <GroupManagemantDetailTable goals={groupGoals.data.goals} />
+        <GroupManagementDetailTable goals={sortedGoals} />
       </div>
     </div>
   );

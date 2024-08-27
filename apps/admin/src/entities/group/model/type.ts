@@ -9,7 +9,7 @@ export interface GroupsResponse {
 }
 export interface GroupPageResponse {
   totalCount: number;
-  searchedCount: number;
+  searchCount: number;
   currentPage: number;
   groups: Groups[];
 }
