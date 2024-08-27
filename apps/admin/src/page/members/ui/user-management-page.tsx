@@ -23,29 +23,31 @@ export const MemberManagementPage = () => {
   if (isLoading || !data) return <LoadingSpinner />;
 
   const onHandleDelete = () => {};
-  <div>
-    <h1 className='sr-only'>
-      jtodo 서비스의 회원을 조회, 삭제할 수 있는 관리 페이지입니다.
-    </h1>
-    <LayoutTitle title='회원 관리' />
+  return (
+    <div>
+      <h1 className='sr-only'>
+        jtodo 서비스의 회원을 조회, 삭제할 수 있는 관리 페이지입니다.
+      </h1>
+      <LayoutTitle title='회원 관리' />
 
-    <SearchFilter filters={MEMBERS_FIILTERS} />
+      <SearchFilter filters={MEMBERS_FIILTERS} />
 
-    <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-      <TableToolBar
-        onClickDelete={onHandleDelete}
-        totalCount={data?.totalCount}
-        searchedCount={data?.searchedCount}
-      />
-      {sortedMembers ? (
-        <MembersTable members={sortedMembers} />
-      ) : (
-        <LoadingSpinner />
-      )}
-      <TablePagination
-        totalCount={data.searchedCount}
-        currentPage={data.currentPage}
-      />
+      <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
+        <TableToolBar
+          onClickDelete={onHandleDelete}
+          totalCount={data?.totalCount}
+          searchedCount={data?.searchedCount}
+        />
+        {sortedMembers || data.members ? (
+          <MembersTable members={sortedMembers} />
+        ) : (
+          <LoadingSpinner />
+        )}
+        <TablePagination
+          totalCount={data.searchedCount}
+          currentPage={data.currentPage}
+        />
+      </div>
     </div>
-  </div>;
+  );
 };
