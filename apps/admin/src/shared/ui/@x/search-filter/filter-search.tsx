@@ -12,7 +12,7 @@ export const FilterSearch = ({ filtersState }: FilterSearchProps) => {
       variant='primary'
       className='w-[84px] h-[36px]'
       onClick={() => {
-        setTableFilters((prev) => ({ ...prev, ...filtersState }));
+        setTableFilters((prev) => ({ ...prev, page: 1, ...filtersState }));
       }}
     >
       검색
