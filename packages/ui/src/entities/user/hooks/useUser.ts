@@ -5,12 +5,12 @@ import { userQueryKeys } from './queryKeys';
 import { LogoutData, UserData } from '../model/type';
 import { deleteCookie } from '../../../../../../apps/user/src/shared';
 
-export const useUpdateUserInfoMutation = () => {
+export const useUpdateUserInfoMutation = (admin = false) => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
   return useMutation({
-    mutationFn: (data: UserData) => userApi.updateUserInfo(data),
+    mutationFn: (data: UserData) => userApi.updateUserInfo(data, admin),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: userQueryKeys.all,
@@ -24,12 +24,12 @@ export const useUpdateUserInfoMutation = () => {
 };
 
 // 로그아웃
-export const useLogoutMutation = () => {
+export const useLogoutMutation = (admin = false) => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
   return useMutation({
-    mutationFn: (data: LogoutData) => userApi.logoutUserInfo(data),
+    mutationFn: (data: LogoutData) => userApi.logoutUserInfo(data, admin),
     onSuccess: () => {
       queryClient.clear(); // 모든 쿼리 캐시를 지웁니다.
       deleteCookie('accessToken');
@@ -44,12 +44,12 @@ export const useLogoutMutation = () => {
 };
 
 // 회원 탈퇴 (GET 요청이지만 상태를 변경하므로 mutation으로 유지)
-export const useWithdrawMutation = () => {
+export const useWithdrawMutation = (admin = false) => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
   return useMutation({
-    mutationFn: userApi.withdrawUserInfo,
+    mutationFn: () => userApi.withdrawUserInfo(admin),
     onSuccess: () => {
       queryClient.clear(); // 모든 쿼리 캐시를 지웁니다.
       deleteCookie('accessToken');
@@ -62,17 +62,19 @@ export const useWithdrawMutation = () => {
 };
 
 // 닉네임 중복 확인
-export const useNicknameDuplicateQuery = (nickname: string) => {
+export const useNicknameDuplicateQuery = (nickname: string, admin = false) => {
   return useQuery({
     queryKey: userQueryKeys.nicknameDuplicate(nickname),
-    queryFn: () => userApi.nicknameDuplicate(nickname),
+    queryFn: () => userApi.nicknameDuplicate(nickname, admin),
+    enabled: nickname !== null
   });
 };
 
 // 이메일 중복 확인
-export const useEmailDuplicateQuery = (email: string) => {
+export const useEmailDuplicateQuery = (email: string, admin = false) => {
   return useQuery({
     queryKey: userQueryKeys.emailDuplicate(email),
-    queryFn: () => userApi.emailDuplicate(email),
+    queryFn: () => userApi.emailDuplicate(email, admin),
+    enabled: email !== null
   });
 };

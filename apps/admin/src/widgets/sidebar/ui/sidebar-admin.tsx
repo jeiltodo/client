@@ -1,32 +1,18 @@
-import { client, ResponseWith, Sidebar } from '@jeiltodo/ui/shared';
+'use client';
+import { Sidebar } from '@jeiltodo/ui/shared';
 import { Home, Group, Post } from '@jeiltodo/icons';
 import { SidebarUserInfo } from '@jeiltodo/ui/features';
 import { SidebarNav } from '../../../shared';
 import { useQuery } from '@tanstack/react-query';
-
-const userData = {
-  id: 0,
-  email: 'admin@jtodo.site',
-  nickname: '관리자',
-};
+import { userOptions } from '../../../entities/user';
 
 export const SidebarAdmin = () => {
-  // const { data: userInfo } = useQuery({
-  //   queryKey: ['admin', 'info'],
-  //   queryFn: () =>
-  //     client.get<
-  //       ResponseWith<{
-  //         id: number;
-  //         nickname: string;
-  //         email: string;
-  //       }>
-  //     >(`/member/info`),
-  //   select: (data) => data.data.data,
-  // });
+
+  const { data: userInfo } = useQuery(userOptions());
 
   return (
     <Sidebar type='관리자 센터'>
-      <SidebarUserInfo userInfo={userData} />
+      <SidebarUserInfo userInfo={userInfo} isAdmin={true} />
       <SidebarNav icon={Home} title='회원관리' href='/' />
       <SidebarNav icon={Group} title='그룹관리' href='/group' />
       <SidebarNav

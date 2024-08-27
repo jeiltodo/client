@@ -14,6 +14,7 @@ export * from './ui/pagination';
 export * from './ui/loading-spinner';
 export * from './ui/back-button';
 export * from './ui/toast';
+export * from './ui/base-modal'
 
 export * from './hooks/useBoardContext';
 export * from './hooks/useDebounce';

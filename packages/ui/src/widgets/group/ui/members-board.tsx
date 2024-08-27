@@ -1,7 +1,7 @@
 'use client';
 import { BgGroupAvatar, GroupFill, Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
-import { Pagination, useBoardContext } from '@jeiltodo/ui/shared';
+import { useBoardContext } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features';
 import { GroupWithMembers } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
@@ -78,16 +78,6 @@ export const MembersBorad = ({
           members={formattedMembers}
           onClientChangeLeader={handleClientChange}
           onClientRemoveMember={handleClientRemove}
-        />
-        <Pagination
-          totalCount={10}
-          limit={8}
-          currentPage={1}
-          variant='secondary'
-          className='mt-10 '
-          onNext={() => {}}
-          onPrev={() => {}}
-          onClickPage={() => {}}
         />
         <BgGroupAvatar
           // width={164}

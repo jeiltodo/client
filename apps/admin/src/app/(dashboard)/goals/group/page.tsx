@@ -1,8 +1,10 @@
+import { PostsGroupPage } from '../../../../page/goals/group';
+import { TableProvider } from '../../../../shared';
 
 export default function Page() {
   return (
-    <div>
-      게시판 개인 페이지
-    </div>
-  )
+    <TableProvider>
+      <PostsGroupPage />
+    </TableProvider>
+  );
 }

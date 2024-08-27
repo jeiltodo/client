@@ -1,4 +1,5 @@
-import { client } from '../../../shared';
+
+import { client } from '@jeiltodo/ui/shared';
 import { UserInfoResponse } from '../model/type';
 
 export const userApi = {

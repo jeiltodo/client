@@ -5,7 +5,7 @@ export const groupGoalsApi = {
   //목표 관리
   getAllGroupGoals: async (params: {
     page: number;
-    limit: number;
+    limit: number | string;
     nickname?: string;
     groupName?: string;
     title?: string;
@@ -42,9 +42,9 @@ export const groupGoalsApi = {
   getAllGroupGoalTodos: async (
     params: {
       page: number;
-      limit: number;
+      limit: number | string;
     },
-    goalId: number
+    goalId: string
   ) => {
     try {
       const response = await client.get<ResponseGetAllGroupGoalTodos>(

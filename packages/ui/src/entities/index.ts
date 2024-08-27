@@ -1,4 +1,4 @@
-export * from '../../../../apps/admin/src/widgets/members/ui/member-overview-board';
+export * from './user/ui/user-overview-board';
 export * from './user/ui/user-info-modal';
 export * from './group/ui/group-overview-board';
 export * from './group/ui/profile';
@@ -10,3 +10,5 @@ export * from './user/hooks/queryKeys';
 export * from './user/hooks/useUser';
 
 export * from './user/api/loginApi';
+
+export * from './get-query-client';

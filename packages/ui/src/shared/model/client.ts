@@ -12,7 +12,7 @@ import {
   ACCESS_TOKEN_EXPIRY_TIME,
   REFRESH_TOKEN_COOKIE_NAME,
   ACCESS_ADMIN_TOKEN_COOKIE_NAME,
-  REFRESH_ADMIN_TOKEN_COOKIE_NAME
+  REFRESH_ADMIN_TOKEN_COOKIE_NAME,
 } from '../config/token';
 import { API_URL } from '../config/api';
 
@@ -39,6 +39,8 @@ client.interceptors.request.use(
     }
 
     const url = config.url;
+    const isAdminRequest =
+      config.headers['X-Admin-Request'] === 'true' || url.includes('/admin');
 
     const noSessionRequired = [
       '/member/signin',
@@ -52,19 +54,18 @@ client.interceptors.request.use(
     }
 
     let accessToken: string | null | undefined;
-    const isAdminPath = url.includes('/admin');
+
     if (isServer) {
-      
-      accessToken = await getServerToken({ isAdmin: isAdminPath });
+      accessToken = await getServerToken({ isAdmin: isAdminRequest });
     } else {
-      accessToken = isAdminPath
+      accessToken = isAdminRequest
         ? getCookie(ACCESS_ADMIN_TOKEN_COOKIE_NAME)
         : getCookie(ACCESS_TOKEN_COOKIE_NAME);
     }
 
     if (!accessToken) {
       if (typeof window !== 'undefined') {
-        window.location.href = isAdminPath ? '/admin/login' : '/login';
+        // window.location.href = isAdminRequest ? '/admin/login' : '/login';
       }
       return Promise.reject(new Error('No access token found'));
     }
@@ -95,26 +96,31 @@ client.interceptors.response.use(
       // originalRequest._retry 플래그를 사용하여 이미 리프레시 토큰 요청을 시도했는지 확인 -> 무한 루프 방지
       originalRequest._retry = true;
 
-      const isAdminPath = originalRequest.url?.includes('/admin');
+      const isAdminRequest =
+        originalRequest.headers['X-Admin-Request'] === 'true' ||
+        (originalRequest.url && originalRequest.url.includes('/admin')) ===
+          true;
+
       // 쿠키에서 리프레시 토큰 가져오기
-      const refreshToken = isAdminPath
-        ? getCookie(REFRESH_ADMIN_TOKEN_COOKIE_NAME) // admin 경로에 따라 다른 리프레시 토큰 사용
+      const refreshToken = isAdminRequest
+        ? getCookie(REFRESH_ADMIN_TOKEN_COOKIE_NAME)
         : getCookie(REFRESH_TOKEN_COOKIE_NAME);
 
       if (!refreshToken) {
-        // 리프레시 토큰이 없으면 로그인 페이지로 이동
         if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+          window.location.href = isAdminRequest ? '/admin/login' : '/login';
         }
-        return Promise.reject(error);
+        return Promise.reject(new Error('No refresh token found'));
       }
 
       // 리프레시 토큰이 있으면 새로운 access token 발급받아서 다시 요청
       try {
-        const response = await newAccessToken(isAdminPath); // admin 경로에 따라 적절한 엔드포인트 호출
+        const response = await newAccessToken(isAdminRequest); // admin 경로에 따라 적절한 엔드포인트 호출
 
         setCookie(
-          isAdminPath ? ACCESS_ADMIN_TOKEN_COOKIE_NAME : ACCESS_TOKEN_COOKIE_NAME,
+          isAdminRequest
+            ? ACCESS_ADMIN_TOKEN_COOKIE_NAME
+            : ACCESS_TOKEN_COOKIE_NAME,
           response.data.accessToken,
           {
             maxAge: ACCESS_TOKEN_EXPIRY_TIME,
@@ -124,9 +130,13 @@ client.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
         return client(originalRequest);
       } catch (refreshError) {
-        deleteCookie(isAdminPath ? REFRESH_ADMIN_TOKEN_COOKIE_NAME : REFRESH_TOKEN_COOKIE_NAME);
+        deleteCookie(
+          isAdminRequest
+            ? REFRESH_ADMIN_TOKEN_COOKIE_NAME
+            : REFRESH_TOKEN_COOKIE_NAME
+        );
         if (typeof window !== 'undefined') {
-          window.location.href = '/login';
+          window.location.href = isAdminRequest ? '/admin/login' : '/login';
         }
         return Promise.reject(refreshError);
       }
@@ -139,13 +149,9 @@ client.interceptors.response.use(
 /*
  * ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  */
-const newAccessToken = async (isAdmin: boolean | undefined) => {
-  try {
-    const url = isAdmin ? '/admin/token/refresh' : '/member/token/refresh'; // admin 경로에 따라 다른 리프레시 토큰 엔드포인트
-    const response = await client.get<{ accessToken: string }>(url);
-    return response;
-  } catch (error) {
-    console.error('Token refresh error:', error);
-    throw error;
-  }
+const newAccessToken = async (isAdmin: boolean) => {
+  const url = '/member/token/refresh';
+  return client.get<{ accessToken: string }>(url, {
+    headers: { 'X-Admin-Request': isAdmin ? 'true' : 'false' },
+  });
 };
