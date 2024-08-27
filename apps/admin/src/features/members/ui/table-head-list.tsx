@@ -18,11 +18,14 @@ export function TableHeadList<T>({ headMap }: TableHeadListProps<T>) {
           <Table.HeadWithSort
             key={criteria as string}
             criteria={criteria as string}
+            className='text-left'
           >
             {title}
           </Table.HeadWithSort>
         ) : (
-          <Table.Head key={criteria as string}>{title}</Table.Head>
+          <Table.Head key={criteria as string} className='text-left'>
+            {title}
+          </Table.Head>
         );
       })}
     </>

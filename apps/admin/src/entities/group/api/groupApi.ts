@@ -1,7 +1,8 @@
-import { client, ResponseWith } from '@jeiltodo/ui/shared';
+import type { ResponseWith } from '@jeiltodo/ui/shared';
+import { client } from '@jeiltodo/ui/shared';
+import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import type { GroupResponse, GroupsResponse } from '../model/type';
 import type { TableQueries } from '../../../shared';
-import { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 
 export const groupApi = {
   getGroup: async (groupId: number): Promise<GroupResponse> => {
@@ -47,6 +48,17 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Fail delete group:', error);
+      throw error;
+    }
+  },
+  leaveGroup: async (groupId: number, memberId: number) => {
+    try {
+      const response = await client.delete(
+        `/admin/groups/${groupId}/members/${memberId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch userInfo:', error);
       throw error;
     }
   },

@@ -19,7 +19,6 @@ import type { SingleGoalTodo } from '../../../entities/todo';
 import { TodoModal } from '../../../entities/todo';
 import { useIndividualGoals } from '../../../entities/goal';
 import { IndividualTodoDoneBoard } from '../../../widgets/todo';
-import BackButton from '../../../../../../packages/ui/src/shared/ui/back-button';
 
 export const IndividualGoalDetailPage = ({
   params,

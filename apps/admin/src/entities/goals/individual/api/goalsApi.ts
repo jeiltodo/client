@@ -1,5 +1,8 @@
 import { client } from '@jeiltodo/ui/shared';
-import { ResponseGetAllIndividualGoals, ResponseGetAllIndividualGoalTodos } from '../model/type';
+import {
+  ResponseGetAllIndividualGoals,
+  ResponseGetAllIndividualGoalTodos,
+} from '../model/type';
 
 export const individualGoalsApi = {
   //목표 관리
@@ -41,7 +44,7 @@ export const individualGoalsApi = {
   getAllIndividualGoalTodos: async (
     params: {
       page: number;
-      limit: number;
+      limit: number | string;
     },
     goalId: number
   ) => {

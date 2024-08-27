@@ -22,7 +22,7 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
     router.push(path);
   };
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(goalIndividualRows);
+    useTableCheck();
 
   return (
     <Table>
