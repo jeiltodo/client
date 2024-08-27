@@ -26,7 +26,6 @@ export const PostsIndividualPage = () => {
   }, [data?.goals, tableSort]);
 
   if (isLoading || !data) return <LoadingSpinner />;
-  const onHandleDelete = () => {};
 
   return (
     <div>
@@ -38,7 +37,6 @@ export const PostsIndividualPage = () => {
       <SearchFilter filters={GOALS_INDIVIDUAL_FIILTERS} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableToolBar
-          onClickDelete={onHandleDelete}
           totalCount={data?.totalCount}
           searchedCount={data?.searchedCount}
         />

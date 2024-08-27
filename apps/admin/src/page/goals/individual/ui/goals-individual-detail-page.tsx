@@ -19,8 +19,6 @@ export const PostsIndividualDetailPage = () => {
 
   if (isLoading || !data) return <LoadingSpinner />;
 
-  const onHandleDelete = () => {};
-
   return (
     <div>
       <h1 className='sr-only'>
@@ -29,10 +27,7 @@ export const PostsIndividualDetailPage = () => {
       <LayoutTitle title='할 일 관리' />
       <TableProvider>
         <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-          <TableToolBar
-            onClickDelete={onHandleDelete}
-            totalCount={data?.totalCount}
-          />
+          <TableToolBar totalCount={data?.totalCount} />
           {/* <GoalsIndividualTable goals={data.todos} /> */}
           <Pagination
             onNext={() => {}}
