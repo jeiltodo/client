@@ -9,7 +9,6 @@ import { TodoList } from '../../features/todo';
 import { BackButton, Button, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { Back, PlusBlue } from '@jeiltodo/icons';
 
-
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
   const { data: userInfo } = useQuery(userOptions());

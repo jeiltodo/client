@@ -79,7 +79,7 @@ export const GroupOverviewBoard = ({
               <div className='flex items-end gap-2'>
                 <div>{isRequested ? updatedCode : secretCode}</div>
                 <CopyToClipboard text={secretCode} onCopy={handleCopy}>
-                  <button className='cursor-pointer'>
+                  <button className='cursor-pointer inline-block min-h-[28px]'>
                     <CopyUser className='w-6 h-6' />
                   </button>
                 </CopyToClipboard>

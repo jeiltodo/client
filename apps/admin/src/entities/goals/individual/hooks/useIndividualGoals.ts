@@ -46,9 +46,10 @@ export const useGetAllIndividualGoalTodos = (
   params: { page: number; limit: number | string; },
   goalId: string
 ) => {
-  const query = useQuery({
+  return useQuery({
     queryKey: individualGoalsQueryKeys.detail(goalId),
     queryFn: () => individualGoalsApi.getAllIndividualGoalTodos(params, goalId),
+    select: (data) => data.data,
   });
 
   return {
