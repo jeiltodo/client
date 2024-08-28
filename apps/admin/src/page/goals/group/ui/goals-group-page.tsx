@@ -16,7 +16,6 @@ import {
 } from '../../../../entities/goals/group';
 import { GOALS_GROUP_FIILTERS } from '../../../../entities/goals/group/constants/goals-group-filters';
 import { GoalsGroupTable } from '../../../../widgets/goals/group/ui/goal-group-table';
-import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsGroupPage = () => {
@@ -57,7 +56,7 @@ export const PostsGroupPage = () => {
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableCheckListProvider tableData={data.goals}>
           <TableToolBarWithCheck
-          onDelete={handleDelete}
+            onDelete={handleDelete}
             totalCount={data?.totalCount}
             searchedCount={data?.searchedCount}
           />
