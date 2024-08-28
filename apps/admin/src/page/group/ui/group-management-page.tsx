@@ -28,7 +28,7 @@ export const GroupManagementPage = () => {
 
   if (isLoading || !data) return <LoadingSpinner />;
 
-  const onHandleDelete = () => {};
+  const handleDelete = (ids: number[]) => {};
 
   return (
     <div className='w-[920px]'>
@@ -40,6 +40,7 @@ export const GroupManagementPage = () => {
       <div className='w-full pb-[16px] px-5 bg-white rounded-xl mt-5'>
         <TableCheckListProvider tableData={data.groups}>
           <TableToolBarWithCheck
+            onDelete={handleDelete}
             totalCount={data.totalCount}
             searchedCount={data.searchCount || 0}
           />

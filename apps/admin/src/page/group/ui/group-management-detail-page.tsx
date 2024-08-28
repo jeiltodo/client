@@ -13,7 +13,6 @@ import {
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useGroupDetail } from '../../../entities/group';
-import { userOptions } from '../../../entities/member/hooks/userOptions';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
 import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
@@ -27,6 +26,7 @@ import {
 } from '../../../entities/group/hooks/useGroupTitleAndCode';
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
+import { userOptions } from '../../../entities/user';
 
 export const GroupManagementDetailPage = () => {
   const params = useParams();

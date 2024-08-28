@@ -22,7 +22,7 @@ export const groupApi = {
     limit,
     nickname,
     title,
-  }: TableQueries): Promise<GroupsResponse | undefined> => {
+  }: TableQueries): Promise<GroupsResponse> => {
     try {
       const queries = [
         `/admin/groups?page=${page}&limit=${limit}`,
