@@ -87,11 +87,15 @@ export const MembersBoard = ({
             <MembersManageButtons onSave={handleSave} isAdmin={isAdmin} />
           )}
         </div>
-        <MemberList
-          members={formattedMembers}
-          onClientChangeLeader={handleClientChange}
-          onClientRemoveMember={handleClientRemove}
-        />
+        <div className='flex h-4/5 items-center -mt-6 overflow-hidden tablet:pb-6 desktop:pb-0'>
+          <div className='px-4 w-full'>
+            <MemberList
+              members={formattedMembers}
+              onClientChangeLeader={handleClientChange}
+              onClientRemoveMember={handleClientRemove}
+            />
+          </div>
+        </div>
         <BgGroupAvatar
           width={164}
           height={164}
