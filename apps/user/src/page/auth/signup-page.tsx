@@ -4,6 +4,7 @@ import { signUpApi, SignUpBody } from '../../entities/session';
 import { useToast } from '@jeiltodo/ui/shared';
 import { useCallback } from 'react';
 import { SignUpForm } from '../../features/session';
+import Image from 'next/image';
 
 export const SignUpPage: React.FC = () => {
   const router = useRouter();
@@ -29,11 +30,7 @@ export const SignUpPage: React.FC = () => {
   return (
     <div className='flex flex-col items-center desktop:py-[120px] tablet:py-16 tablet:px-[52px] py-12 px-4'>
       <h1 className='mb-[60px]'>
-        <img
-          src='/logo.png'
-          alt='Logo'
-          style={{ width: '200px', height: 'auto' }}
-        />
+        <Image src='/logo.png' alt='Logo' width={180} height={50} />
       </h1>
       <SignUpForm onSubmit={onSignUp} />
     </div>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { LoginForm } from '../../features';
+import Image from 'next/image';
 
 interface LoginPageProps {
   type: string;
@@ -13,10 +14,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ type }) => {
   return (
     <div className='flex flex-col items-center desktop:py-[120px] tablet:py-16 tablet:px-[52px] py-12 px-4'>
       <h1 className='mb-[60px] flex items-center gap-5'>
-        <img
-          src='/logo.png'
+        <Image
+          src={type === 'admin' ? '/admin/logo.png' : '/logo.png'}
           alt='Logo'
-          style={{ width: '200px', height: 'auto' }}
+          width={180}
+          height={50}
         />
         {!showSignUpLink && (
           <p

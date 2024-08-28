@@ -53,7 +53,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}
           >
             <Image
-              src='/logo.png'
+              src={type ? '/admin/logo.png' : '/logo.png'}
               alt='Logo'
               width={100}
               height={30}
@@ -73,7 +73,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <Image
-            src='/s-logo.png'
+            src={type ? '/admin/s-logo.png' : '/s-logo.png'}
             alt='Logo'
             width={24}
             height={24}
@@ -118,7 +118,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
           >
             <Image
-              src='/logo.png'
+              src={type ? '/admin/logo.png' : '/logo.png'}
               alt='Logo'
               width={100}
               height={30}
@@ -138,7 +138,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <Image
-            src='/s-logo.png'
+            src={type ? '/admin/s-logo.png' : '/s-logo.png'}
             alt='Logo'
             width={24}
             height={24}
@@ -199,7 +199,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         {isMobileSidebarOpen && (
           <div className='flex items-center justify-between py-3 px-4'>
             <Image
-              src='/logo.png'
+              src={type ? '/admin/logo.png' : '/logo.png'}
               alt='Logo'
               width={100}
               height={30}
