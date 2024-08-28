@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { GroupsManagementTable } from '../../../widgets/group';
 import {
   SearchFilter,
@@ -10,6 +10,7 @@ import {
 import {
   GROUP_SEARCH_FILTERS,
   Groups,
+  useDeleteGroups,
   useSearchGroups,
 } from '../../../entities/group';
 import { GroupManagementPagination } from '../../../features/group';
@@ -21,14 +22,23 @@ import { TableCheckListProvider } from '../../../shared/model/table/table-checkl
 export const GroupManagementPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useSearchGroups(tableFilters);
-
+  const showToast = useToast();
   const sortedGroups = useMemo(() => {
     return sortBy<Groups>(data?.groups || [], tableSort as SortOptions<Groups>);
   }, [data?.groups, tableSort]);
 
   if (isLoading || !data) return <LoadingSpinner />;
-
-  const handleDelete = (ids: number[]) => {};
+  const deleteGroupMutation = useDeleteGroups();
+  const handleDelete = (ids: number[]) => {
+    if (ids.length === 0) {
+      showToast({
+        message: '체크된 항목이 없습니다.',
+        type: 'confirm',
+      });
+    } else {
+      deleteGroupMutation.mutate(ids);
+    }
+  };
 
   return (
     <div className='w-[920px]'>
