@@ -1,18 +1,21 @@
-import { useTableContext } from './useTableContext';
+'use client';
+
 import type { SortOptions } from '../../lib/sortBy';
 import { sortBy } from '../../lib/sortBy';
+import { useTableContext } from './useTableContext';
 
-export function useTableSort<T>() {
-  const { tableRows, setTableRows } =
-    useTableContext<ObjectWithOptionalFields<T>>();
+interface Props<T> {
+  tableData: T[];
+  options: SortOptions<T>;
+}
 
-  const handleSort = ({ criteria, isAscending }: SortOptions<T>) => {
-    const sorted = sortBy([...tableRows], {
-      criteria,
-      isAscending,
-    });
-    setTableRows(sorted);
-  };
-
-  return handleSort;
+export function useTableSort<T>({
+  tableData,
+  options: { criteria, isAscending },
+}: Props<T>) {
+  const sorted = sortBy([...tableData], {
+    criteria,
+    isAscending,
+  });
+  return sorted;
 }

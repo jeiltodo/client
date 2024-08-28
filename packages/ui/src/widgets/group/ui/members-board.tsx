@@ -1,7 +1,7 @@
 'use client';
 import { BgGroupAvatar, GroupFill, Group as GroupIcon } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
-import { Pagination, useBoardContext } from '@jeiltodo/ui/shared';
+import { useBoardContext } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features';
 import { GroupWithMembers } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
@@ -12,18 +12,20 @@ interface Props {
   userId?: number;
   onChangeLeader: (id: number) => void;
   onRemoveMember: (id: number) => void;
+  isAdmin?: boolean;
 }
-
-export const MembersBorad = ({
+// eslint-disable-next-line react/function-component-definition
+export const MembersBoard = ({
   group,
   userId,
   onChangeLeader,
   onRemoveMember,
+  isAdmin = false,
 }: Props) => {
   const { mode } = useBoardContext();
 
   const leaderId = group.members.find((member) => member.isLeader)!.id;
-  const isUserALeader = leaderId === userId;
+  const isUserALeader = userId ? leaderId === userId : isAdmin;
   const [newLeaderId, setNewLeaderId] = useState<number>(leaderId);
   const [deletedId, setDeletedId] = useState<number | null>(null);
 
@@ -58,8 +60,10 @@ export const MembersBorad = ({
   };
 
   return (
-    <div className='w-full px-6 py-4 rounded-lg bg-orange-500 h-[280px] desktop:h-[364px] overflow-hidden'>
-      <div className='w-full h-full relative '>
+    <div
+      className={`relative px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'w-full bg-orange-500'} overflow-hidden`}
+    >
+      <div className='w-full h-full'>
         <div className='flex justify-between items-center mb-6'>
           <div className='flex gap-4 items-center'>
             <div className='hidden tablet:flex gap-2 items-center'>
@@ -68,28 +72,27 @@ export const MembersBorad = ({
             </div>
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
               <span className='text-slate-800'>{group.members.length}</span>
-              <span className='text-groupColor-500'>/10</span>
+              <span
+                className={isAdmin ? 'text-blue-500' : 'text-groupColor-500'}
+              >
+                /10
+              </span>
             </div>
           </div>
 
-          {isUserALeader && <MembersManageButtons onSave={handleSave} />}
+          {(isUserALeader || isAdmin) && (
+            <MembersManageButtons onSave={handleSave} isAdmin={isAdmin} />
+          )}
         </div>
         <MemberList
           members={formattedMembers}
           onClientChangeLeader={handleClientChange}
           onClientRemoveMember={handleClientRemove}
         />
-        <Pagination
-          totalCount={10}
-          limit={8}
-          currentPage={1}
-          variant='secondary'
-          className='mt-10 '
-        />
         <BgGroupAvatar
-          // width={164}
-          // height={164}
-          className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-10 desktop:right-[-32px] desktop:bottom-[-24px]'
+          width={164}
+          height={164}
+          className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-1 desktop:right-[-32px] desktop:bottom-[-24px]'
         />
       </div>
     </div>

@@ -2,7 +2,7 @@ import './style/globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
-import { QueryProvider } from '../shared/model/query/query-provider';
+import { QueryProvider } from '../shared';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
       </head>
       <body className='font-pretendard-regular'>
         <QueryProvider>
-          <ToastContainer />
+          <ToastContainer limit={5} />
           {children}
           <ReactQueryDevtools initialIsOpen={true} />
         </QueryProvider>

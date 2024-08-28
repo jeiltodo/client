@@ -24,7 +24,7 @@ export const TodoAssignee = ({ todoId, asignee }: Props) => {
     >
       {asignee && (
         <span
-          className={`inline-flex w-full h-full  min-w-6 min-h-6 rounded-full justify-center items-center text-xs text-white leading-3`}
+          className={`inline-flex w-full h-full  min-w-6 min-h-6 rounded-full justify-center items-center text-xs text-white pt-0.5`}
           style={{ backgroundColor: asignee.color }}
         >
           {getInitialLetter(asignee.nickname)}

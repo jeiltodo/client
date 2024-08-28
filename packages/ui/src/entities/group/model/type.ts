@@ -1,8 +1,10 @@
+import { Goal } from '../../../shared';
+
 export type Group = {
   id: number;
   title: string;
-  createdAt: string;
-  updatedAT: string;
+  createdAt?: string;
+  updatedAT?: string;
   secretCode: string;
   createUser: string;
 };
@@ -17,6 +19,7 @@ export type Member = {
 
 export type GroupWithMembers = Group & {
   members: Member[];
+  goals?: Goal[];
 };
 
 export type GroupCode = Pick<Group, 'secretCode'>;

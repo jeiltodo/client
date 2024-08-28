@@ -7,6 +7,16 @@ export interface LogoutData {
   accessToken: string | null | undefined;
   refreshToken: string | null | undefined;
 }
+export interface UserInfoResponse {
+  msg: string;
+  code: number;
+  data: UserInfoProps;
+}
+interface UserInfoProps {
+  id: number;
+  nickname: string;
+  email: string;
+}
 
 export interface UserPatchResponse {
   msg: string;

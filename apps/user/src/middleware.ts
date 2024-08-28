@@ -3,8 +3,8 @@ import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('accessToken')?.value;
-  
-  console.log('Middleware running');
+
+  console.log('유저 Middleware running');
   console.log('Request URL:', request.nextUrl.pathname);
   console.log('Token:', token);
 
@@ -23,10 +23,9 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
-
 }
 
 //특정 path로만 해당 미들웨어가 동작
 export const config = {
-  matcher: ['/', '/login'],
+  matcher: ['/:path*'],
 };

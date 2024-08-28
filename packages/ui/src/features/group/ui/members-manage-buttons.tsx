@@ -6,9 +6,10 @@ import { BoardMode } from '@jeiltodo/ui/shared';
 
 interface Props {
   onSave: () => void;
+  isAdmin?: boolean;
 }
 
-export const MembersManageButtons = ({ onSave }: Props) => {
+export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
   const { mode, changeMode } = useBoardContext();
 
   const handleChangeMode = (mode: BoardMode) => {
@@ -28,7 +29,7 @@ export const MembersManageButtons = ({ onSave }: Props) => {
       {mode === 'default' && (
         <ButtonGroup>
           <button
-            className='rounded-lg bg-white py-[8px] px-[10px] leading-4 text-orange-500'
+            className={`rounded-lg bg-white py-[8px] px-[10px] leading-4 ${isAdmin ? '' : 'text-orange-500'}}`}
             onClick={() => {
               handleChangeMode('change-leader');
             }}
@@ -36,7 +37,7 @@ export const MembersManageButtons = ({ onSave }: Props) => {
             그룹장 변경
           </button>
           <button
-            className='rounded-lg bg-orange-900 py-[8px] px-[10px] leading-4 text-white'
+            className={`rounded-lg ${isAdmin ? 'bg-slate-950' : 'bg-orange-900'} py-[8px] px-[10px] leading-4 text-white`}
             onClick={() => {
               handleChangeMode('manage-members');
             }}
@@ -48,7 +49,7 @@ export const MembersManageButtons = ({ onSave }: Props) => {
       {mode !== 'default' && (
         <ButtonGroup>
           <Button
-            variant='outline-no-border'
+            variant={isAdmin ? 'outline' : 'outline-no-border'}
             className='bg-white px-[10px] min-w-[84px] h-[36px]'
             onClick={() => {
               handleCancle();
@@ -57,7 +58,7 @@ export const MembersManageButtons = ({ onSave }: Props) => {
             취소
           </Button>
           <Button
-            variant='group-dark'
+            variant={isAdmin ? 'dark' : 'group-dark'}
             className='min-w-[84px] h-[36px]'
             onClick={() => {
               handleSave();

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import {
+  BackButton,
   BoardTitle,
   Button,
   LoadingSpinner,
@@ -10,7 +11,7 @@ import {
 } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
 import { GroupOverviewBoard, GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { MembersBorad } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
+import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
@@ -29,7 +30,6 @@ import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroup
 import { useDisbandGroup } from '../../../entities/group/hooks/useDisbandGroup';
 import { useLeaveGroup } from '../../../entities/group/hooks/useLeaveGroup';
 import { ConfirmationModal } from '../../../shared';
-import BackButton from '../../../../../../packages/ui/src/shared/ui/back-button';
 
 export const GroupDashboardPage = () => {
   const params = useParams();
@@ -121,7 +121,7 @@ export const GroupDashboardPage = () => {
         />
 
         <MembersBoardProvider>
-          <MembersBorad
+          <MembersBoard
             group={group}
             userId={user?.id}
             onChangeLeader={handleChangeLeader}

@@ -1,22 +1,19 @@
 'use client';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { TableCheckListContext } from '../../model/table/table-checklist-provider';
 
-interface WithId {
-  id: number;
-}
+export function useTableCheck() {
+  const context = useContext(TableCheckListContext);
+  if (!context) {
+    throw new Error('tabel checklist provider 내부에서 사용해주세요 ');
+  }
 
-export function useTableCheck<T extends WithId>(tableData: T[]) {
-  const tableCheckList = tableData.map((table) => ({
-    id: table.id,
-    isChecked: false,
-  }));
-  const [checkList, setCheckList] = useState(tableCheckList);
-
+  const { checkList, updateCheckList } = context;
   const isAllChecked =
     checkList.findIndex((checkItem) => !checkItem.isChecked) < 0;
 
   const handleAllCheck = () => {
-    setCheckList((prev) => {
+    updateCheckList((prev) => {
       const updated = prev.map((checkItem) => ({
         ...checkItem,
         isChecked: !isAllChecked,
@@ -31,7 +28,7 @@ export function useTableCheck<T extends WithId>(tableData: T[]) {
   };
 
   const handleCheck = (id: number) => {
-    setCheckList((prev) => {
+    updateCheckList((prev) => {
       return prev.map((checkItem) => ({
         ...checkItem,
         isChecked:
@@ -40,5 +37,5 @@ export function useTableCheck<T extends WithId>(tableData: T[]) {
     });
   };
 
-  return { handleAllCheck, handleCheck, isAllChecked, getIsChecked };
+  return { checkList, handleAllCheck, handleCheck, isAllChecked, getIsChecked };
 }
