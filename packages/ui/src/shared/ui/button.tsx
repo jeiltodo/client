@@ -101,7 +101,7 @@ export function Button({
       'bg-transparent text-blue-500 border border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white',
   };
   const buttonClasses = `
-  items-center justify-center
+  items-center justify-center text-nowrap
   ${baseClasses}
   ${variantClasses[variant]}
   ${isDisabled && variant !== 'outline' && variant !== 'rounded-outline-blue' ? 'disabled:bg-slate-400 cursor' : ''}
@@ -129,5 +129,5 @@ export function Button({
 
 export const ButtonGroup = ({ children, gap = 2 }: ButtonGroupProps) => {
   const gapClass = `gap-${gap}`;
-  return <div className={`flex flex-wrap ${gapClass}`}>{children}</div>;
+  return <div className={`flex flex-nowrap ${gapClass}`}>{children}</div>;
 };

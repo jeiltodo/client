@@ -36,7 +36,7 @@ export const MemberList = ({
         modules={[Navigation, Pagination]}
         slidesPerView={slidesCount < 2 ? 1 : 2}
         slidesPerGroup={slidesCount < 2 ? 1 : 2}
-        spaceBetween={24}
+        spaceBetween={8}
         scrollbar={{ draggable: true }}
         navigation
         pagination={{ clickable: true }}
