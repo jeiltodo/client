@@ -45,9 +45,10 @@ export function GoalTodosIndividualTable({
       </Table.Header>
       <Table.Body>
         {todoIndividualRows.map((todo) => (
-          <Table.Row key={todo.id}>
-            <Table.Cell className='text-center'>
+          <Table.Row key={todo.id} className='hover:bg-slate-50 '>
+            <Table.Cell className='text-center '>
               <Checkbox
+                className='text-center'
                 isChecked={getIsChecked(todo.id)}
                 onChange={() => {
                   handleCheck(todo.id);
@@ -55,7 +56,9 @@ export function GoalTodosIndividualTable({
               />
             </Table.Cell>
             <Table.Cell className='text-center'>{todo.id}</Table.Cell>
-            <Table.Cell className='text-center'>{todo.title}</Table.Cell>
+            <Table.Cell className='text-left min-w-[200px]'>
+              {todo.title}
+            </Table.Cell>
             <Table.Cell className='text-center'>
               {todo.isDone ? '완료' : '미완료'}
             </Table.Cell>

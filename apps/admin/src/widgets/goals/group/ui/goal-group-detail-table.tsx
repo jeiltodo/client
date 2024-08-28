@@ -45,9 +45,10 @@ export function GoalTodosGroupTable({
       </Table.Header>
       <Table.Body>
         {todoGroupRows.map((todo) => (
-          <Table.Row key={todo.id}>
+          <Table.Row key={todo.id} className='hover:bg-slate-50 '>
             <Table.Cell>
               <Checkbox
+                className='text-center'
                 isChecked={getIsChecked(todo.id)}
                 onChange={() => {
                   handleCheck(todo.id);
@@ -56,12 +57,18 @@ export function GoalTodosGroupTable({
             </Table.Cell>
             <Table.Cell className='text-center'>{todo.id}</Table.Cell>
             <Table.Cell className='text-center'>{todo.title}</Table.Cell>
-            <Table.Cell className='text-center'>{todo.isDone ? '완료' : '미완료'}</Table.Cell>
-            <Table.Cell className='text-center'>{todo.writer.nickname}</Table.Cell>
+            <Table.Cell className='text-center'>
+              {todo.isDone ? '완료' : '미완료'}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {todo.writer.nickname}
+            </Table.Cell>
             <Table.Cell className='text-center'>
               {todo.memberInCharge && todo.memberInCharge.nickname}
             </Table.Cell>
-            <Table.Cell className='text-center'>{formatDateString(todo.updatedAt)}</Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(todo.updatedAt)}
+            </Table.Cell>
             <Table.Cell className='text-center'>
               {todo.noteId && (
                 <button onClick={() => handleClickNote(todo.id)}>

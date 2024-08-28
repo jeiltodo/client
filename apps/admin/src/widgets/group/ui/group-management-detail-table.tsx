@@ -23,7 +23,7 @@ export const GroupManagementDetailTable = ({
       <Table.Body>
         {goals.map((goal, id) => (
           <Table.Row key={goal.title + id} className='hover:bg-slate-50'>
-            <Table.Cell>{goal.id}</Table.Cell>
+            <Table.Cell className='text-center'>{goal.id}</Table.Cell>
             <Table.Cell>{goal.title}</Table.Cell>
             <Table.Cell>
               <ProgressBar progress={goal.progressRate || 0} />

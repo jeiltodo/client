@@ -34,13 +34,13 @@ export function MemberGoalTable({ memberGoals }: Props) {
         {memberGoals.map((goal) => (
           <Table.Row
             key={goal.id}
-            className='cursor-pointer'
+            className='cursor-pointer hover:bg-slate-50'
             onClick={() => {
               handleClick(goal.id, goal.title);
             }}
           >
             <Table.Cell className='text-center'>{goal.id}</Table.Cell>
-            <Table.Cell className='text-left py-5'>{goal.title}</Table.Cell>
+            <Table.Cell className='text-left'>{goal.title}</Table.Cell>
             <Table.Cell>
               <ProgressBar progress={goal.progressRate} />
             </Table.Cell>

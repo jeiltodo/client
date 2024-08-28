@@ -5,6 +5,8 @@ export const TableCell: React.FC<{
   className?: string;
 }> = ({ children, className }) => {
   return (
-    <td className={`p-2 text-lg font-medium  ${className}`}>{children}</td>
+    <td className={`px-2 py-4 text-lg font-medium  ${className}`}>
+      {children}
+    </td>
   );
 };

@@ -40,9 +40,10 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
       </Table.Header>
       <Table.Body>
         {goalIndividualRows.map((goal) => (
-          <Table.Row key={goal.id}>
+          <Table.Row key={goal.id} className='hover:bg-slate-50 '>
             <Table.Cell>
               <Checkbox
+              className='text-center'
                 isChecked={getIsChecked(goal.id)}
                 onChange={() => {
                   handleCheck(goal.id);
@@ -50,7 +51,7 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
               />
             </Table.Cell>
             <Table.Cell className='text-center'>{goal.id}</Table.Cell>
-            <Table.Cell className='text-center'>{goal.title} </Table.Cell>
+            <Table.Cell className='text-left'>{goal.title} </Table.Cell>
             <Table.Cell className='text-center'>
               {goal.member.nickname}
             </Table.Cell>
@@ -62,7 +63,7 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
             </Table.Cell>
             <Table.Cell>
               <Button
-                className='text-sm px-7 py-2'
+                className='text-sm px-7 py-2 h-9'
                 onClick={() => {
                   handleClick(goal.id, goal.title);
                 }}
