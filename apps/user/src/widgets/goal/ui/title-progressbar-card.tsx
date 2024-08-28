@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
 import { Goal } from '../../../entities/goal';
 
-interface Props {
+interface TitleProgressBarCardProps {
   goalData: Goal;
   onDeleteGoal: () => void;
   onEditGoal: () => void;
@@ -15,7 +15,7 @@ export const TitleProgressBarCard = ({
   goalData,
   onDeleteGoal,
   onEditGoal,
-}: Props) => {
+}: TitleProgressBarCardProps) => {
   const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
   const kebabRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +25,10 @@ export const TitleProgressBarCard = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (kebabRef.current && !kebabRef.current.contains(event.target as Node)) {
+      if (
+        kebabRef.current &&
+        !kebabRef.current.contains(event.target as Node)
+      ) {
         setIsFlyoutOpen(false);
       }
     };
@@ -41,7 +44,10 @@ export const TitleProgressBarCard = ({
     <div className='bg-white p-6 rounded-xl'>
       <div className='flex flex-row items-center justify-between mb-[24px]'>
         <BoardTitle icon='flag' title={goalData.title} />
-        <span className='inline-flex items-center gap-2 relative' ref={kebabRef}>
+        <span
+          className='inline-flex items-center gap-2 relative'
+          ref={kebabRef}
+        >
           <Kebab
             width={24}
             height={24}

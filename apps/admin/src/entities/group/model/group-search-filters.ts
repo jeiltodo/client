@@ -1,19 +1,14 @@
 import { TableFilter } from '../../../shared/model/table/type';
 
-export const GROUP_SEARCH_FIILTERS: TableFilter[] = [
+export const GROUP_SEARCH_FILTERS: TableFilter[] = [
   {
-    label: '이름',
-    query: 'name',
-    placeholder: '이름을 입력해주세요',
+    label: '그룹 이름',
+    query: 'title',
+    placeholder: '그룹 이름을 입력해주세요',
   },
   {
-    label: '키워드',
-    query: 'keyword',
-    placeholder: '이메일을 입력해주세요',
-  },
-  {
-    label: '기간',
-    query: 'period',
-    type: 'date',
+    label: '그룹장',
+    query: 'nickname',
+    placeholder: '그룹장을 입력해주세요',
   },
 ];

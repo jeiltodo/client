@@ -73,7 +73,7 @@ const DropdownToggle = ({ children }: DropdownToggleProps) => {
   return (
     <button
       onClick={toggle}
-      className={`flex items-center justify-between ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-semibold`}
+      className={`flex items-center justify-between ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-medium`}
     >
       <div
         className={`flex items-center ${selectedText ? 'text-black' : 'text-slate-400'}`}

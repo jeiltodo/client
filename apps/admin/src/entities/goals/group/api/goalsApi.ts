@@ -1,11 +1,15 @@
 import { client } from '@jeiltodo/ui/shared';
-import { ResponseGetAllGroupGoals, ResponseGetAllGroupGoalTodos } from '../model/type';
+import {
+  ResponseGetAllGroupGoals,
+  ResponseGetAllGroupGoalTodos,
+} from '../model/type';
 
 export const groupGoalsApi = {
   //목표 관리
   getAllGroupGoals: async (params: {
     page: number;
     limit: number | string;
+    groupId?: number;
     nickname?: string;
     groupName?: string;
     title?: string;

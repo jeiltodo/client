@@ -5,8 +5,7 @@ import { TableFilter } from '../../../model/table/type';
 import { FilterForm } from './filter-form';
 import { FilterClear } from './filter-clear';
 import { FilterSearch } from './filter-search';
-import { useTableContext } from '../../../hooks/table/useTableContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface SearchFilterProps {
   filters: TableFilter[];
@@ -22,7 +21,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({ filters }) => {
   );
 
   return (
-    <div className='flex flex-col gap-3 w-[930px] py-[16px] px-[20px] bg-white rounded-xl'>
+    <div className='flex flex-col gap-3 py-[16px] px-[20px] bg-white rounded-xl'>
       <div>
         <FilterForm
           filters={filters}

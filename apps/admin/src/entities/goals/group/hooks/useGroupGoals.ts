@@ -7,6 +7,7 @@ import { useToast } from '@jeiltodo/ui/shared';
 export const useGetAllGroupGoals = (params: {
   page: number;
   limit: number | string;
+  groupId?: number;
   nickname?: string;
   groupName?: string;
   title?: string;

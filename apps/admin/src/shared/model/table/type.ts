@@ -3,7 +3,8 @@ export type TableQueryName =
   | 'title'
   | 'createdAfter'
   | 'createdBefore'
-  | 'email';
+  | 'email'
+  | 'nickname';
 type PaginationQuery = { page: number; limit: string | number };
 
 export type TableQueries = Partial<Record<TableQueryName, string>> &

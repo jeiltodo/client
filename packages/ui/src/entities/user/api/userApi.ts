@@ -3,6 +3,7 @@ import {
   DuplicateResponse,
   LogoutData,
   UserData,
+  UserInfoResponse,
   UserPatchResponse,
 } from '../model/type';
 

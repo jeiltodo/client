@@ -10,6 +10,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopyUser } from '@jeiltodo/icons';
 
 interface GroupOverviewBoardProps {
+  isAdmin?: boolean;
   group: GroupWithMembers;
   userId?: number;
   spareCode: string;
@@ -21,6 +22,7 @@ export const GroupOverviewBoard = ({
   userId,
   spareCode,
   onSave,
+  isAdmin = false,
 }: GroupOverviewBoardProps) => {
   const [isRequested, setIsRequested] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -55,18 +57,23 @@ export const GroupOverviewBoard = ({
   };
 
   return (
-    <BoardLayout title='그룹 정보' className='tablet:min-w-[400px]'>
+    <BoardLayout
+      title='그룹 정보'
+      className={isAdmin ? 'w-[400px]' : 'tablet:min-w-[400px]'}
+      isAdmin={isAdmin}
+    >
       <div
         className={`pt-4 flex gap-9 ${isUserALeader && 'border-b border-slate-200 pb-4'}`}
       >
         <div className='w-full flex flex-wrap gap-2'>
-          {isUserALeader ? (
+          {isUserALeader || isAdmin ? (
             <InputSwapMode
               label='그룹 이름'
               value={updatedTitle}
               defaultValue={title}
               isEditMode={isEditMode}
               isGroup={true}
+              isAdmin={isAdmin}
               onChange={setUpdatedValue}
               onSwap={setIsEditMode}
               colorVariant='orange'
@@ -84,31 +91,37 @@ export const GroupOverviewBoard = ({
                   </button>
                 </CopyToClipboard>
                 {copied && (
-                  <span className='text-sm text-orange-500 ml-2'>Copied!</span>
+                  <span
+                    className={`text-sm ${isAdmin ? 'text-blue-500' : 'text-orange-500'} ml-2`}
+                  >
+                    Copied!
+                  </span>
                 )}
               </div>
             </Field>
-            {isUserALeader && (
+            {(isUserALeader || isAdmin) && (
               <button
                 onClick={handleReissue}
-                className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? 'border-groupColor-500 text-groupColor-500 ' : 'bg-slate-900 text-white '}`}
+                className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'bg-slate-900 text-white '}`}
               >
                 {isRequested === false ? '재발행' : '취소'}
               </button>
             )}
           </div>
-          <div className='flex w-50%'>
-            <Field label='만든 사람'>{createUser}</Field>
-            <Field label='만든 날'>{formatDateString(createdAt)}</Field>
-          </div>
+          {!isAdmin && createdAt && (
+            <div className='flex w-50%'>
+              <Field label='만든 사람'>{createUser}</Field>
+              <Field label='만든 날'>{formatDateString(createdAt)}</Field>
+            </div>
+          )}
         </div>
       </div>
-      {isUserALeader && (
+      {(isUserALeader || isAdmin) && (
         <div className='w-full mt-4 flex justify-end'>
           <button
             disabled={isRequested !== true && isEditMode !== true}
             onClick={handleSave}
-            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${isRequested === true || isEditMode === true ? ' bg-groupColor-500' : 'bg-slate-200'}`}
+            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${isRequested === true || isEditMode === true ? (isAdmin ? 'bg-blue-500' : 'bg-orange-500') : 'bg-slate-200'}`}
           >
             저장
           </button>

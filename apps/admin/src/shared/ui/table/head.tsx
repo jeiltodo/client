@@ -13,7 +13,7 @@ export const TableHead: React.FC<TableHeadProps> = ({
 }) => {
   return (
     <th
-      className={`p-3 text-black font-medium text-lg text-center ${className}`}
+      className={`p-3 text-black font-pretendard-regular text-base text-center ${className}`}
       {...props}
     >
       {children}

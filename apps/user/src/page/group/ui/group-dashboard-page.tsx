@@ -11,7 +11,7 @@ import {
 } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
 import { GroupOverviewBoard, GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { MembersBorad } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
+import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
@@ -121,7 +121,7 @@ export const GroupDashboardPage = () => {
         />
 
         <MembersBoardProvider>
-          <MembersBorad
+          <MembersBoard
             group={group}
             userId={user?.id}
             onChangeLeader={handleChangeLeader}

@@ -1,8 +1,10 @@
+import { GroupManagementPage } from '../../../page/group';
+import { TableProvider } from '../../../shared';
 
 export default function Page() {
   return (
-    <div>
-      그룹관리자 페이지
-    </div>
-  )
+    <TableProvider>
+      <GroupManagementPage />;
+    </TableProvider>
+  );
 }
