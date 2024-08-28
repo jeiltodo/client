@@ -32,10 +32,9 @@ export const useLogoutMutation = (admin = false) => {
     mutationFn: (data: LogoutData) => userApi.logoutUserInfo(data, admin),
     onSuccess: () => {
       queryClient.clear(); // 모든 쿼리 캐시를 지웁니다.
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
-
-      window.location.reload();
+      deleteCookie(admin ? 'accessAdminToken' : 'accessToken');
+      deleteCookie(admin ? 'refreshAdminToken' : 'refreshToken');
+      console.log(admin)
     },
     onError: (error: Error) => {
       showToast({ message: '로그아웃에 실패했습니다.', type: 'confirm' });
@@ -52,8 +51,8 @@ export const useWithdrawMutation = (admin = false) => {
     mutationFn: () => userApi.withdrawUserInfo(admin),
     onSuccess: () => {
       queryClient.clear(); // 모든 쿼리 캐시를 지웁니다.
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
+      deleteCookie(admin ? 'accessAdminToken' : 'accessToken');
+      deleteCookie(admin ? 'refreshAdminToken' : 'refreshToken');
     },
     onError: (error: Error) => {
       showToast({ message: '회원 탈퇴에 실패했습니다.', type: 'confirm' });
