@@ -71,16 +71,144 @@ npm run dev
 
 ## 🔍 주요 기능 살펴보기
 <br/><br/>
+<table>
+  <tr>
+    <th>기능</th>
+    <th>설명</th>
+    <th>비고</th>
+  </tr>
+  <tr>
+    <td>자체 회원가입 & 로그인</td>
+    <td>자체 서비스 회원 가입 및 로그인</td>
+    <td>이메일, 닉네임 중복 검사.</td>
+  </tr>
+  <tr>
+    <td>서비스 회원 가입 및 로그인</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td> 회원가입 & 로그인</td>
+    <td>할 일 처리 및 할일 수정, 삭제 <br/> 노트 수정, 작성, 임시저장</td>
+    <td></td>
+  </tr>
+  <!-- 추가 행들 ... -->
+</table>
+
+| 기능 | 설명 | 비고 |
+|------|------|------|
+| 회원가입 & 로그인 | 서비스 회원 가입 및 로그인 | 이메일, 닉네임 중복 검사, 유효성 검사 |
+|||
+| 개인 대시 보드 | 할 일 처리 및 할일 수정, 삭제 <br/> 노트 수정, 작성, 임시저장  | - |
+
+| 최근 등록한 할 일 | - | - |
+
+| 진행 상황 그래프 | - | - |
+
+| 그룹 대시보드 | -| -|
+
+| 목표 | - | - |
+
+| 할 일 | - | - |
+
+| 노트 | - | - |
+
+| 그룹 정보 | - | - |
+
+| 그룹 구성원 | - | - |
+
+| 그룹의 할 일 | - | - |
+
+### 유저 서비스
+<br/><br/>
+
 - 개인 대시보드
 - 그룹 대시보드
 - 목표의 할일 추가 및 관리
 - 직관적인 인터페이스
 - 달성률에 따른 프로필 이미지 제공
+<br/><br/><br/><br/>
+### 어드민 서비스
+- 회원 관리, 그룹 관리, 개인 게시글 관리, 그룹 게시글 관리 기능
+<br/><br/>
 
 <br/><br/><br/>
-##프로젝트 수행절차 및 구조
+
+## 기능별 화면 소개
+
+## 프로젝트 수행절차 및 구조
 <br/><br/>
-- 
+- ## ✅ `기술 스택` 선택
+
+- 최신 기술을 사용한 프로젝트를 하고 싶은 마음
+- 주은 강사님과 멘토쌤의 피드백 기반
+
+<aside>
+<img src="/icons/verified_blue.svg" alt="/icons/verified_blue.svg" width="40px" /> 기술 스택
+
+- next.js 14 App Router
+- tanstack query v5
+- typeScript
+- tailwind css
+- FSD 아키텍처 사용
+- 모노레포 도입을 위한 터보레포
+    - ⇒ 어드민 서비스와 우저 서비스를 하나의 레포로 관리해보자.
+- 도커를 이용한 EC2 인스턴스 배포
+</aside>
+
+## ✅ `피그마`로 확장하고 싶은 아이디어 정리
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/10e86d6c-30ed-4fcc-987b-77585a4b6bde/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/c1b13051-dd57-4cad-9362-9ab7f5aeb907/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/9f444719-4c88-4f58-80e3-38396882bc27/image.png)
+
+## ✅슬리드 투두 기획안 기반의 `기획문서 노션` 작성
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/ca03ec40-68a2-4ddd-8a25-b69f0e471ee5/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/607988e1-2553-4b28-82ae-078ebeda6df4/image.png)
+
+## ✅ 디자이너님과 백엔드 두 분과의 활발한 `디스코드 회의와 코멘트`
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/97286409-e264-43b6-b99b-aac1e8890226/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/b60564f1-c971-45eb-9464-a4d6726f6c3b/image.png)
+
+## ✅ 그 외
+
+### prettierrc 공유
+
+```jsx
+{
+  "singleQuote": true,
+  "semi": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 120,
+  "parser": "babel",
+  "bracketSpacing": true,
+  "arrowParens": "avoid"
+}
+```
+
+- Git Wiki에 컨벤션 정리
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/d6063130-786f-4138-a07a-17a7fd9ef907/image.png)
+    
+
+## 작업을 시작며
+
+### PR과 ISSUE 활발한 사용
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/d51ceec8-f743-4c7e-aff0-5d5884d50a1a/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/175a7c55-911d-4162-b85b-f934fc1a5c42/image.png)
+
+### wiki에 컨벤션 정리
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/9cdcfd2f-934a-4424-90f0-540df3efb98e/image.png)
 <br/><br/><br/>
 
 ## 🚀 기술 스택
@@ -89,35 +217,9 @@ npm run dev
 - **백엔드**: Node.js, Express, MongoDB
 - **백엔드 통신**: Axios
 - **상태 관리**: TanStack Query v5
-- **테스팅**: Jest, React Testing Library
 - **CI/CD**: GitHub Actions, Docker
  **모노레포 관리**: Yarn Workspaces, Turborepo
   
-### **프론트엔드**
-- **[Next.js 14](https://nextjs.org/)**: 서버 사이드 렌더링과 정적 사이트 생성을 지원하는 React 프레임워크로, App Router를 사용하여 페이지와 라우팅을 효율적으로 관리.
-- **[@tanstack/react-query](https://tanstack.com/query/latest)**: 데이터 페칭, 캐싱, 동기화 및 서버 상태 관리를 위한 솔루션.
-- **[React Quill](https://github.com/zenoamaro/react-quill)**: WYSIWYG 에디터를 제공하여 텍스트 편집 기능을 구현.
-- **[React Toastify](https://fkhadra.github.io/react-toastify/introduction)**: 사용자가 인터페이스에서 피드백을 쉽게 확인할 수 있도록 알림을 추가.
-- **[Swiper](https://swiperjs.com/)**: 슬라이더 및 캐러셀 컴포넌트 제작을 위한 라이브러리.
-- **[React Copy to Clipboard](https://github.com/nkbt/react-copy-to-clipboard)**: 간편하게 복사 기능을 구현하기 위한 유틸리티.
-
-### **백엔드 통신**
-- **[Axios](https://axios-http.com/)**: 비동기 HTTP 요청을 위한 클라이언트로, API와의 통신을 간편하게 처리.
-
-### **모노레포 관리**
-- **[Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/)**: 모노레포 구조에서 여러 패키지의 종속성을 효율적으로 관리하고, 중복 설치를 방지.
-- **[Turborepo](https://turbo.build/repo)**: 모노레포 환경에서 빠르고 효율적인 빌드 시스템을 제공하여, 프로젝트의 빌드 및 개발 워크플로우를 최적화.
-
-### **코드 품질 및 유지보수**
-- **[Prettier](https://prettier.io/)**: 코드 포맷터로, 일관된 코드 스타일을 유지.
-- **[Prettier Plugin TailwindCSS](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)**: Tailwind CSS 클래스의 자동 정렬을 통해 스타일 관리 효율성 향상.
-- **Lint**: 코드 품질 관리를 위한 린팅 도구 (명시적으로 ESLint 등의 사용은 없지만, 일반적으로 포함될 수 있음).
-
-### **개발 환경**
-- **[Node.js](https://nodejs.org/)**: 런타임 환경으로 Node.js 18 이상을 요구하며, 서버 측 코드와 도구 실행을 지원.
-
-### **기타**
-- **TypeScript**: 정적 타입 검사 도구 (Type-check 스크립트가 있으므로 TypeScript 사용 가능성 존재).
 
 <br/><br/><br/>
 
@@ -127,7 +229,7 @@ npm run dev
 - [ ] 현재는 개발 효율성을 위해 클라이언트 측 쿠키로 토큰을 관리하고 있습니다. <br/>
     향후 서비스 규모 확장과 보안 요구사항 증가에 따라 토큰 관리를 서버 측으로 전환할 계획입니다. <br/>
 - [ ] 실시간 알림/채팅 서비스를 추가 할 계획입니다.
-- [ ] 등등
+- [ ] 주요 기능에 대한 기능 업데이트 시 테스트 코드를 추가하려고 합니다.
 
 <br/><br/><br/>
 
