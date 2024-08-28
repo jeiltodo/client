@@ -40,8 +40,8 @@ export function MembersTable({ members }: Props) {
       </Table.Header>
       <Table.Body>
         {members.map((member, id) => (
-          <Table.Row key={id}>
-            <Table.Cell>
+          <Table.Row key={id} className='hover:bg-slate-50'>
+            <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(member.id)}
                 onChange={() => {
@@ -63,7 +63,7 @@ export function MembersTable({ members }: Props) {
             </Table.Cell>
             <Table.Cell>
               <Button
-                className='text-sm px-7 py-2'
+                className='text-sm w-[84px] h-9'
                 onClick={() => {
                   handleClick(`/members/${member.id}`);
                 }}

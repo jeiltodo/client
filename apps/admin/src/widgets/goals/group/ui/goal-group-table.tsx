@@ -40,9 +40,10 @@ export function GoalsGroupTable({ goals: goalGroupRows }: Props) {
       </Table.Header>
       <Table.Body>
         {goalGroupRows.map((goal) => (
-          <Table.Row key={goal.id}>
+          <Table.Row key={goal.id} className='hover:bg-slate-50'>
             <Table.Cell>
               <Checkbox
+                className='text-center'
                 isChecked={getIsChecked(goal.id)}
                 onChange={() => {
                   handleCheck(goal.id);
@@ -51,12 +52,16 @@ export function GoalsGroupTable({ goals: goalGroupRows }: Props) {
             </Table.Cell>
             <Table.Cell>{goal.id}</Table.Cell>
             <Table.Cell>{goal.title}</Table.Cell>
-            <Table.Cell>{goal.group.title}</Table.Cell>
-            <Table.Cell>{goal.member.nickname}</Table.Cell>
-            <Table.Cell>{formatDateString(goal.updatedAt)}</Table.Cell>
-            <Table.Cell>
+            <Table.Cell className='text-center'>{goal.group.title}</Table.Cell>
+            <Table.Cell className='text-center'>
+              {goal.member.nickname}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(goal.updatedAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
               <Button
-                className='text-sm px-7 py-2'
+                className='text-sm px-7 py-2 h-9'
                 onClick={() => {
                   handleClick(goal.id, goal.title);
                 }}
