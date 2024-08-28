@@ -8,6 +8,8 @@ import {
   progressAllOptions,
 } from '../../entities/goal';
 
+export const runtime = 'edge';
+
 export default async function DashboardLayout({
   children,
 }: {
