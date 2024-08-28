@@ -40,7 +40,7 @@ export const GroupManagementPage = () => {
   };
   if (isLoading || !data) return <LoadingSpinner />;
   return (
-    <div className='w-[920px]'>
+    <div className='w-[930px]'>
       <h1 className='sr-only'>
         jtodo 서비스의 그룹 도메인을 조회, 삭제할 수 있는 관리 페이지입니다.
       </h1>

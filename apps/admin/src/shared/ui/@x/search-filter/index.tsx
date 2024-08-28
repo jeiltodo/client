@@ -21,7 +21,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({ filters }) => {
   );
 
   return (
-    <div className='flex flex-col gap-3 py-[16px] px-[20px] bg-white rounded-xl'>
+    <div className='flex flex-col gap-3 py-[16px] px-[20px] bg-white rounded-xl w-[930px]'>
       <div>
         <FilterForm
           filters={filters}

@@ -1,1 +1,1 @@
-export * from './ui/user-management-page';
+export * from './ui/member-management-page';

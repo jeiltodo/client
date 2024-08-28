@@ -65,7 +65,7 @@ export const GroupManagementDetailPage = () => {
   if (isGoalsLoading || !groupGoals) return <LoadingSpinner />;
 
   return (
-    <div className='w-[920px]'>
+    <div className='w-[930px]'>
       <h1 className='sr-only'>
         jtodo 서비스의 그룹 도메인을 수정할 수 있는 관리 페이지입니다.
       </h1>
@@ -88,7 +88,7 @@ export const GroupManagementDetailPage = () => {
         </MembersBoardProvider>
       </div>
 
-      <div className='w-[920px] pb-[16px] py-4 px-5 bg-white rounded-xl mt-5'>
+      <div className='w-[930px] pb-[16px] py-4 px-5 bg-white rounded-xl mt-5'>
         <BoardTitle title='그룹 목표' icon='flag' />
         <TableToolBar
           totalCount={groupGoals.searchedCount}

@@ -22,7 +22,7 @@ export default function RootLayout({
       </head>
       <body className='bg-slate-100'>
         <QueryProvider>
-          <ToastContainer />
+          <ToastContainer limit={5} />
           {children}
           <ReactQueryDevtools initialIsOpen={true} />
         </QueryProvider>

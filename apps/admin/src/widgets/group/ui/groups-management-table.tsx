@@ -36,8 +36,8 @@ export const GroupsManagementTable = ({
       </Table.Header>
       <Table.Body>
         {groupRows.map((group, id) => (
-          <Table.Row key={group.title + id} className='hover:bg-slate-50'>
-            <Table.Cell>
+          <Table.Row key={group.title + id} className='hover:bg-slate-50 '>
+            <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(group.id)}
                 onChange={() => {
@@ -45,12 +45,16 @@ export const GroupsManagementTable = ({
                 }}
               />
             </Table.Cell>
-            <Table.Cell>{group.id}</Table.Cell>
+            <Table.Cell className='text-center'>{group.id}</Table.Cell>
             <Table.Cell>{group.title}</Table.Cell>
-            <Table.Cell>{group.createUser}</Table.Cell>
-            <Table.Cell>{formatDateString(group.createdAt)}</Table.Cell>
-            <Table.Cell>{formatDateString(group.updatedAt)}</Table.Cell>
-            <Table.Cell>
+            <Table.Cell className='text-center'>{group.createUser}</Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(group.createdAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(group.updatedAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
               <Button
                 className='text-sm w-[84px] h-9'
                 onClick={() => {

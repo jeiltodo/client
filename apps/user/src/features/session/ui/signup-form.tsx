@@ -193,25 +193,31 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             onFocus={handleFocus}
             placeholder='비밀번호를 입력해주세요'
           />
-          <div className='absolute w-[24px] h-[24px] right-[24px] top-4'>
+          <div className='absolute h-6 right-0 top-4'>
             <button
               type='button'
               onClick={togglePasswordVisibility}
-              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+              className={`block pr-16 transition-opacity duration-200 ${
                 isPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <VisibilityOn className='w-[20px] h-[20px]' />
+              <VisibilityOn
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
+                aria-label='비밀번호 보기'
+              />
             </button>
 
             <button
               type='button'
               onClick={togglePasswordVisibility}
-              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+              className={`block pr-16 transition-opacity duration-200 ${
                 !isPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <VisibilityOff className='w-[20px] h-[20px]' />
+              <VisibilityOff
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
+                aria-label='비밀번호 가리기'
+              />
             </button>
           </div>
           {errors.password && (
@@ -237,25 +243,31 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
             onFocus={handleFocus}
             placeholder='비밀번호를 다시 한 번 입력해주세요'
           />
-          <div className='absolute w-[24px] h-[24px] right-[24px] top-4'>
+          <div className='absolute h-6 right-0 top-4'>
             <button
               type='button'
               onClick={toggleConfirmPasswordVisibility}
-              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+              className={`block pr-16 transition-opacity duration-200 ${
                 isConfirmPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <VisibilityOn className='w-[20px] h-[20px]' />
+              <VisibilityOn
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
+                aria-label='비밀번호 보기'
+              />
             </button>
 
             <button
               type='button'
               onClick={toggleConfirmPasswordVisibility}
-              className={`absolute left-0 top-0 transition-opacity duration-200 ${
+              className={`block pr-16 transition-opacity duration-200 ${
                 !isConfirmPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <VisibilityOff className='w-[20px] h-[20px]' />
+              <VisibilityOff
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
+                aria-label='비밀번호 가리기'
+              />
             </button>
           </div>
           {errors.confirmPassword && (
