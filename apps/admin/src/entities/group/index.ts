@@ -5,3 +5,5 @@ export * from './hooks/useDeleteGroups';
 export * from './hooks/useGroupTitleAndCode';
 export * from './model/group-search-filters';
 export * from './model/type';
+
+export * from './hooks/querykey';

@@ -22,13 +22,12 @@ import { TableCheckListProvider } from '../../../shared/model/table/table-checkl
 export const GroupManagementPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useSearchGroups(tableFilters);
+  const deleteGroupMutation = useDeleteGroups();
   const showToast = useToast();
   const sortedGroups = useMemo(() => {
     return sortBy<Groups>(data?.groups || [], tableSort as SortOptions<Groups>);
   }, [data?.groups, tableSort]);
 
-  if (isLoading || !data) return <LoadingSpinner />;
-  const deleteGroupMutation = useDeleteGroups();
   const handleDelete = (ids: number[]) => {
     if (ids.length === 0) {
       showToast({
@@ -39,7 +38,7 @@ export const GroupManagementPage = () => {
       deleteGroupMutation.mutate(ids);
     }
   };
-
+  if (isLoading || !data) return <LoadingSpinner />;
   return (
     <div className='w-[920px]'>
       <h1 className='sr-only'>
@@ -54,8 +53,11 @@ export const GroupManagementPage = () => {
             totalCount={data.totalCount}
             searchedCount={data.searchCount || 0}
           />
-
-          <GroupsManagementTable groups={sortedGroups} />
+          {sortedGroups ? (
+            <GroupsManagementTable groups={sortedGroups} />
+          ) : (
+            <LoadingSpinner />
+          )}
         </TableCheckListProvider>
         <GroupManagementPagination
           totalCount={
