@@ -1,7 +1,12 @@
-import React from "react";
+import { LoadingSpinner } from '@jeiltodo/ui/shared';
+import React from 'react';
 
 const Loading = () => {
-  return <div>Loading..!</div>;
+  return (
+    <div className='relative'>
+      <LoadingSpinner />
+    </div>
+  );
 };
 
 export default Loading;
