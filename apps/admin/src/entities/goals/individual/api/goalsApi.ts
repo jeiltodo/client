@@ -13,6 +13,7 @@ export const individualGoalsApi = {
     title?: string;
     createdAfter?: string;
     createdBefore?: string;
+    memberId?: number;
   }) => {
     try {
       const response = await client.get<ResponseGetAllIndividualGoals>(
@@ -46,7 +47,7 @@ export const individualGoalsApi = {
       page: number;
       limit: number | string;
     },
-    goalId: string
+    goalId: number
   ) => {
     try {
       const response = await client.get<ResponseGetAllIndividualGoalTodos>(

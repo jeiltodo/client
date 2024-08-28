@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { individualGoalsApi } from '../api/goalsApi'; // API 모듈 경로에 맞게 수정
-import { individualGoalsQueryKeys } from '../hooks/queryKeys'; // 쿼리 키 모듈 경로에 맞게 수정
+import { individualGoalsApi } from '../api/goalsApi';
+import { individualGoalsQueryKeys } from '../hooks/queryKeys';
 import { AxiosError } from 'axios';
 import { useToast } from '@jeiltodo/ui/shared';
 
@@ -11,6 +11,7 @@ export const useGetAllIndividualGoals = (params: {
   title?: string;
   createdAfter?: string;
   createdBefore?: string;
+  memberId?: number;
 }) => {
   return useQuery({
     queryKey: individualGoalsQueryKeys.filters(params),
@@ -43,19 +44,14 @@ export const useDeleteIndividualGoal = (
 };
 
 export const useGetAllIndividualGoalTodos = (
-  params: { page: number; limit: number | string; },
-  goalId: string
+  params: { page: number; limit: number | string },
+  goalId: number
 ) => {
   return useQuery({
-    queryKey: individualGoalsQueryKeys.detail(goalId),
+    queryKey: individualGoalsQueryKeys['detail-filters'](goalId, params),
     queryFn: () => individualGoalsApi.getAllIndividualGoalTodos(params, goalId),
     select: (data) => data.data,
   });
-
-  return {
-    data: query.data?.data,
-    isLoading: query.isLoading,
-  };
 };
 
 export const useDeleteIndividualGoalTodos = (

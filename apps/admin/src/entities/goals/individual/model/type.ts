@@ -1,5 +1,4 @@
-
-export interface IndividualGoals {
+export interface IndividualGoal {
   id: number;
   title: string;
   progressRate: number;
@@ -51,7 +50,7 @@ export interface ResponseGetAllIndividualGoalsData {
   totalCount: number;
   currentPage: number;
   searchedCount: number;
-  goals: IndividualGoals[];
+  goals: IndividualGoal[];
 }
 
 interface ResponseGetAllIndividualGoalTodosData {

@@ -1,34 +1,30 @@
 'use client';
 import { useMemo } from 'react';
-import {
-  IndividualGoalTodos,
-} from '../../../../entities/goals/individual';
+import { IndividualGoalTodos } from '../../../../entities/goals/individual';
 import { useGetAllIndividualGoalTodos } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
-import {
-  TableToolBar,
-  useTableContext,
-} from '../../../../shared';
+import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
 import { GoalTodosIndividualTable } from '../../../../widgets/goals/individual';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
+import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
+import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsIndividualDetailPage = () => {
   const searchParams = useSearchParams();
   const params = useParams();
-  const goalId = Array.isArray(params.goalId)
-    ? params.goalId[0]
-    : params.goalId;
+  const goalId = Number(
+    Array.isArray(params.goalId) ? params.goalId[0] : params.goalId
+  );
   const goalTitle = searchParams.get('title') || '';
-
 
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetAllIndividualGoalTodos(
     tableFilters,
     goalId
   );
-  
+
   const sortedTodos = useMemo(() => {
     return sortBy<IndividualGoalTodos>(
       data?.todos || [],
@@ -36,9 +32,8 @@ export const PostsIndividualDetailPage = () => {
     );
   }, [data?.todos, tableSort]);
 
+  const handleDelete = (ids: number[]) => {};
   if (isLoading || !data) return <LoadingSpinner />;
-
-  const onHandleDelete = () => {};
 
   return (
     <div>
@@ -47,16 +42,21 @@ export const PostsIndividualDetailPage = () => {
       </h1>
       <LayoutTitle title={`할 일 관리 (${goalTitle})`} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
-          onClickDelete={onHandleDelete}
-          totalCount={data?.totalCount}
-          searchedCount={data?.totalCount}
-        />
-        {sortedTodos ? (
-          <GoalTodosIndividualTable goalTitle={goalTitle} todos={sortedTodos} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        <TableCheckListProvider tableData={data.todos}>
+          <TableToolBarWithCheck
+            onDelete={handleDelete}
+            totalCount={data?.totalCount}
+            searchedCount={data?.totalCount}
+          />
+          {sortedTodos ? (
+            <GoalTodosIndividualTable
+              goalTitle={goalTitle}
+              todos={sortedTodos}
+            />
+          ) : (
+            <LoadingSpinner />
+          )}
+        </TableCheckListProvider>
         <TablePagination
           totalCount={data.totalCount}
           currentPage={data.currentPage}

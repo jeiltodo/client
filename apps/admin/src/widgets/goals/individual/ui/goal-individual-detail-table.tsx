@@ -7,12 +7,10 @@ import { Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { Table } from '../../../../shared';
 import { useTableCheck } from '../../../../shared';
 
-import {
-  IndividualGoalTodos,
-} from '../../../../entities/goals/individual';
+import { IndividualGoalTodos } from '../../../../entities/goals/individual';
 import { TODO_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
-import { AdminNote, Note } from '@jeiltodo/icons';
+import { AdminNote } from '@jeiltodo/icons';
 import { NoteDetailSlide } from '../../../../entities/goals/note';
 
 interface Props {
@@ -24,11 +22,10 @@ export function GoalTodosIndividualTable({
   goalTitle,
   todos: todoIndividualRows,
 }: Props) {
-
   const [noteToggle, setNoteToggle] = useState<boolean>(false);
   const [noteModalId, setNoteModalId] = useState<number | null>(null);
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(todoIndividualRows);
+    useTableCheck();
 
   const handleClickNote = (id: number) => {
     setNoteModalId(id);
@@ -49,7 +46,7 @@ export function GoalTodosIndividualTable({
       <Table.Body>
         {todoIndividualRows.map((todo) => (
           <Table.Row key={todo.id}>
-            <Table.Cell>
+            <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(todo.id)}
                 onChange={() => {
@@ -57,11 +54,15 @@ export function GoalTodosIndividualTable({
                 }}
               />
             </Table.Cell>
-            <Table.Cell>{todo.id}</Table.Cell>
-            <Table.Cell>{todo.title}</Table.Cell>
-            <Table.Cell>{todo.isDone ? '완료' : '미완료'}</Table.Cell>
-            <Table.Cell>{formatDateString(todo.updatedAt)}</Table.Cell>
-            <Table.Cell>
+            <Table.Cell className='text-center'>{todo.id}</Table.Cell>
+            <Table.Cell className='text-center'>{todo.title}</Table.Cell>
+            <Table.Cell className='text-center'>
+              {todo.isDone ? '완료' : '미완료'}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(todo.updatedAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
               {todo.noteId && (
                 <button onClick={() => handleClickNote(todo.id)}>
                   <AdminNote className='w-9 h-9' />

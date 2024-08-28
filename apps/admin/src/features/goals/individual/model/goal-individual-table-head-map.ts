@@ -1,7 +1,7 @@
-import { IndividualGoals } from '../../../../entities/goals/individual';
+import { IndividualGoal } from '../../../../entities/goals/individual';
 import type { TableHeadMap } from '../../../../shared/ui/table/type';
 
-export const GOAL_INDIVIDUAL_TABLE_HEAD_MAP: TableHeadMap<IndividualGoals>[] = [
+export const GOAL_INDIVIDUAL_TABLE_HEAD_MAP: TableHeadMap<IndividualGoal>[] = [
   {
     criteria: 'id',
     title: 'id',
@@ -26,5 +26,5 @@ export const GOAL_INDIVIDUAL_TABLE_HEAD_MAP: TableHeadMap<IndividualGoals>[] = [
     criteria: 'updatedAt',
     title: '수정 일자',
     withSort: true,
-  }
+  },
 ];

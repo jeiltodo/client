@@ -42,10 +42,6 @@ export function TableCheckListProvider<T extends WithId>({
     }[]
   >(tableCheckList);
 
-  useEffect(() => {
-    console.log(checkList);
-  }, [checkList]);
-
   return (
     <TableCheckListContext.Provider
       value={{

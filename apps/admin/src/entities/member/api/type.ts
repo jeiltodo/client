@@ -37,5 +37,4 @@ export type MemberDetail = {
   createdAt: string;
   updatedAt: string;
   groups: GroupsInterface[];
-  goals: MemberGoal[];
 };
