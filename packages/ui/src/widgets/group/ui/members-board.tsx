@@ -25,7 +25,7 @@ export const MembersBoard = ({
   const { mode } = useBoardContext();
 
   const leaderId = group.members.find((member) => member.isLeader)!.id;
-  const isUserALeader = leaderId === userId;
+  const isUserALeader = userId ? leaderId === userId : isAdmin;
   const [newLeaderId, setNewLeaderId] = useState<number>(leaderId);
   const [deletedId, setDeletedId] = useState<number | null>(null);
 
