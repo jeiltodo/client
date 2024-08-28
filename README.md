@@ -1,11 +1,28 @@
 <br /><br/><br /><br/>
-<img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="60" />
+<div align="center">
+  <a href="https://jtodo.site/login">
+    <img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="60" />
+  </a>
+
+  <!--<p align="center">
+    나만의 일정 관리와 그룹 단위의 일정관리를 할 수 있습니다
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a> -->
+  </p>
+</div>
 <br /><br/><br />
 
-> 이 프로젝트는 **개인과 그룹이 할 일을 효율적으로 관리할 수 있도록 돕는 웹 애플리케이션**입니다. <br/>
+> jtodo는 **개인과 그룹이 할 일을 효율적으로 관리할 수 있도록 돕는 웹 애플리케이션**입니다. <br/>
 > 사용자들은 할 일을 쉽게 추가하고 관리하며 완료할 수 있습니다.
 >
-> 특히 협업이 필요한 그룹 작업의 경우, 팀원 간 **원활한 커뮤니케이션**을 위해 아래 기능을 추가 지원합니다. <br/>
+> 특히 협업이 필요한 그룹 작업의 경우, 팀원 간 **원활한 커뮤니케이션**을 위해 아래 기능을 추가로 지원합니다. <br/>
 > 🔹 실시간 업데이트 <br/>
 > 🔹  담당자 라벨링 <br/>
 > 🔹  할 일 달성률에 따른 이미지 제공 <br/>
@@ -24,7 +41,7 @@
 </summary>
   <div align="center">
     <br/>
-    <img src="https://github.com/user-attachments/assets/eb89bb52-3fb4-4579-bf35-e4228a9d7fbe" alt="Jtodo Preview" width="60%">
+    <img src="https://github.com/user-attachments/assets/eb89bb52-3fb4-4579-bf35-e4228a9d7fbe" alt="Jtodo Preview" width="100%">
     <br/><br/>
   </div> 
 </details>
@@ -32,45 +49,58 @@
 <summary> 관리자 서비스 스크린샷 보기<img src="https://github.com/user-attachments/assets/12efbc64-bc50-4d1e-b844-ea71e9ff8d3b" alt="s-logo" width="3%"></summary>
   <div align="center">
     <br/>
-    <img src="https://github.com/user-attachments/assets/c46be127-0210-4827-9128-69a59079b185" width="60%">
+    <img src="https://github.com/user-attachments/assets/c46be127-0210-4827-9128-69a59079b185" width="100%">
     <br/><br/>
   </div> 
 </details>
 <br/><br/><br/>
 
-## Table of Contents
+<details open>
+  <summary><h3>📚 목차</h3></summary>
+  <ul>
+    <!-- <li>
+      <a href="#사용방법">사용방법</a>
+      <ul>
+        <li><a href="#유저-서비스">유저 서비스</a></li>
+        <li><a href="#어드민-서비스">어드민 서비스스</a></li>
+      </ul>
+    </li> -->
+    <li>
+      <a href="#🔍-주요-기능-살펴보기">🔍 주요 기능 살펴보기</a>
+      <ul>
+        <li><a href="#유저-서비스">유저 서비스</a></li>
+        <li><a href="#어드민-서비스">어드민 서비스스</a></li>
+      </ul>
+    </li>
+    <li><a href="#기능별-화면-소개">기능별 화면 소개</a></li>
+    <li><a href="#프로젝트-수행절차-및-구조">프로젝트 수행절차 및 구조</a></li>
+    <li><a href="#🚀-기술-스택">🚀 기술 스택</a></li>
+    <li><a href="#업데이트-예정(v.2.0)">업데이트 예정(v.2.0)</a></li>
+    <li><a href="#👥-팀-소개">👥 팀 소개</a></li>
+    <li><a href="#🎯-트러블-슈팅-기록">🎯 트러블 슈팅 기록</a></li>
+    <li><a href="#🎥-시연-영상">🎥 시연 영상</a></li>
+    <li><a href="#🔗링크">🔗 링크</a></li>
+  </ul>
+</details>
+
 <br/><br/>
 
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
-- [사용 기술 스택](#사용-기술-스택)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
-## 사용조건_Prerequisites
-<br/><br/>
-Before you begin, ensure you have met the following requirements:
-
-* You have installed Node.js version 18
-  * You can check your Node.js version by running `node --version`
-  * If you need to update or install Node.js, visit [the official Node.js website](https://nodejs.org/)
-
-<br/><br/><br/>
-
-## 사용방법_Usage
+<!-- ## 사용방법_Usage
 <br/><br/>
 Explain how to use your project. For example:
 
 ```
 npm run dev
 ```
-<br/><br/><br/>
+<br/><br/><br/> -->
 
 ## 🔍 주요 기능 살펴보기
-<br/><br/>
+<br/>
+
+### 유저 서비스
+<br/>
+
 <table>
   <tr>
     <th>기능</th>
@@ -78,59 +108,68 @@ npm run dev
     <th>비고</th>
   </tr>
   <tr>
-    <td>자체 회원가입 & 로그인</td>
-    <td>자체 서비스 회원 가입 및 로그인</td>
+    <td>회원가입 & 로그인</td>
+    <td>서비스 회원 가입 및 로그인</td>
     <td>이메일, 닉네임 중복 검사.</td>
   </tr>
   <tr>
-    <td>서비스 회원 가입 및 로그인</td>
+    <td>개인 대시보드</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td> 회원가입 & 로그인</td>
+    <td>개인 목표</td>
     <td>할 일 처리 및 할일 수정, 삭제 <br/> 노트 수정, 작성, 임시저장</td>
     <td></td>
   </tr>
-  <!-- 추가 행들 ... -->
+  <tr>
+    <td>그룹 대시보드</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>그룹 목표</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>노트</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
 </table>
-
-| 기능 | 설명 | 비고 |
-|------|------|------|
-| 회원가입 & 로그인 | 서비스 회원 가입 및 로그인 | 이메일, 닉네임 중복 검사, 유효성 검사 |
-|||
-| 개인 대시 보드 | 할 일 처리 및 할일 수정, 삭제 <br/> 노트 수정, 작성, 임시저장  | - |
-
-| 최근 등록한 할 일 | - | - |
-
-| 진행 상황 그래프 | - | - |
-
-| 그룹 대시보드 | -| -|
-
-| 목표 | - | - |
-
-| 할 일 | - | - |
-
-| 노트 | - | - |
-
-| 그룹 정보 | - | - |
-
-| 그룹 구성원 | - | - |
-
-| 그룹의 할 일 | - | - |
-
-### 유저 서비스
 <br/><br/>
 
-- 개인 대시보드
-- 그룹 대시보드
-- 목표의 할일 추가 및 관리
-- 직관적인 인터페이스
-- 달성률에 따른 프로필 이미지 제공
-<br/><br/><br/><br/>
 ### 어드민 서비스
-- 회원 관리, 그룹 관리, 개인 게시글 관리, 그룹 게시글 관리 기능
-<br/><br/>
+<br/>
+
+<table>
+  <tr>
+    <th>기능</th>
+    <th>설명</th>
+    <th>비고</th>
+  </tr>
+  <tr>
+    <td>회원 관리</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>그룹 관리</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td> 개인 게시글 관리</td>
+    <td>-</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>그룹 게시글 관리</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
 
 <br/><br/><br/>
 
@@ -198,7 +237,7 @@ npm run dev
     ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/d6063130-786f-4138-a07a-17a7fd9ef907/image.png)
     
 
-## 작업을 시작며
+## 작업을 시작하며
 
 ### PR과 ISSUE 활발한 사용
 
