@@ -3,21 +3,27 @@
 import { TablePagination } from '../../../../features/goals/individual';
 import {
   SearchFilter,
-  TableToolBar,
+  TableToolBarWithCheck,
   useTableContext,
 } from '../../../../shared';
-import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { useMemo } from 'react';
-import { GroupGoals, useGetAllGroupGoals } from '../../../../entities/goals/group';
+import {
+  GroupGoals,
+  useDeleteGroupGoal,
+  useGetAllGroupGoals,
+} from '../../../../entities/goals/group';
 import { GOALS_GROUP_FIILTERS } from '../../../../entities/goals/group/constants/goals-group-filters';
 import { GoalsGroupTable } from '../../../../widgets/goals/group/ui/goal-group-table';
+import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
+import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsGroupPage = () => {
   const { tableFilters, tableSort } = useTableContext();
-  
-  const { data, isLoading } = useGetAllGroupGoals(tableFilters);
 
+  const { data, isLoading } = useGetAllGroupGoals(tableFilters);
+  const showToast = useToast();
   const sortedGoals = useMemo(() => {
     return sortBy<GroupGoals>(
       data?.goals || [],
@@ -25,8 +31,20 @@ export const PostsGroupPage = () => {
     );
   }, [data?.goals, tableSort]);
 
+  const deleteGroupGoalMutation = useDeleteGroupGoal();
+
+  const handleDelete = (ids: number[]) => {
+    if (ids.length === 0) {
+      showToast({
+        message: '체크된 항목이 없습니다.',
+        type: 'confirm',
+      });
+    } else {
+      deleteGroupGoalMutation.mutate(ids);
+    }
+  };
+
   if (isLoading || !data) return <LoadingSpinner />;
-  const onHandleDelete = () => {};
 
   return (
     <div>
@@ -37,16 +55,18 @@ export const PostsGroupPage = () => {
 
       <SearchFilter filters={GOALS_GROUP_FIILTERS} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
-          onClickDelete={onHandleDelete}
-          totalCount={data?.totalCount}
-          searchedCount={data?.searchedCount}
-        />
-        {sortedGoals ? (
-          <GoalsGroupTable goals={sortedGoals} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        <TableCheckListProvider tableData={data.goals}>
+          <TableToolBarWithCheck
+          onDelete={handleDelete}
+            totalCount={data?.totalCount}
+            searchedCount={data?.searchedCount}
+          />
+          {sortedGoals ? (
+            <GoalsGroupTable goals={sortedGoals} />
+          ) : (
+            <LoadingSpinner />
+          )}
+        </TableCheckListProvider>
         <TablePagination
           totalCount={data.searchedCount}
           currentPage={data.currentPage}

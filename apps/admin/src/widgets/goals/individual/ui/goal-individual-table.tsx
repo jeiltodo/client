@@ -8,12 +8,12 @@ import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { Table } from '../../../../shared';
 import { useTableCheck } from '../../../../shared';
 
-import { IndividualGoals } from '../../../../entities/goals/individual';
+import { IndividualGoal } from '../../../../entities/goals/individual';
 import { GOAL_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
 
 interface Props {
-  goals: IndividualGoals[];
+  goals: IndividualGoal[];
 }
 
 export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
@@ -49,11 +49,17 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
                 }}
               />
             </Table.Cell>
-            <Table.Cell>{goal.id}</Table.Cell>
-            <Table.Cell>{goal.title}</Table.Cell>
-            <Table.Cell>{goal.member.nickname}</Table.Cell>
-            <Table.Cell>{formatDateString(goal.createdAt)}</Table.Cell>
-            <Table.Cell>{formatDateString(goal.updatedAt)}</Table.Cell>
+            <Table.Cell className='text-center'>{goal.id}</Table.Cell>
+            <Table.Cell className='text-center'>{goal.title} </Table.Cell>
+            <Table.Cell className='text-center'>
+              {goal.member.nickname}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(goal.createdAt)}
+            </Table.Cell>
+            <Table.Cell className='text-center'>
+              {formatDateString(goal.updatedAt)}
+            </Table.Cell>
             <Table.Cell>
               <Button
                 className='text-sm px-7 py-2'

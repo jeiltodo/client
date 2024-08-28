@@ -22,11 +22,10 @@ export function GoalTodosGroupTable({
   goalTitle,
   todos: todoGroupRows,
 }: Props) {
-
   const [noteToggle, setNoteToggle] = useState<boolean>(false);
   const [noteModalId, setNoteModalId] = useState<number | null>(null);
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(todoGroupRows);
+    useTableCheck();
 
   const handleClickNote = (id: number) => {
     setNoteModalId(id);
@@ -55,13 +54,15 @@ export function GoalTodosGroupTable({
                 }}
               />
             </Table.Cell>
-            <Table.Cell>{todo.id}</Table.Cell>
-            <Table.Cell>{todo.title}</Table.Cell>
-            <Table.Cell>{todo.isDone ? '완료' : '미완료'}</Table.Cell>
-            <Table.Cell>{todo.writer.nickname}</Table.Cell>
-            <Table.Cell>{todo.memberInCharge && todo.memberInCharge.nickname}</Table.Cell>
-            <Table.Cell>{formatDateString(todo.updatedAt)}</Table.Cell>
-            <Table.Cell>
+            <Table.Cell className='text-center'>{todo.id}</Table.Cell>
+            <Table.Cell className='text-center'>{todo.title}</Table.Cell>
+            <Table.Cell className='text-center'>{todo.isDone ? '완료' : '미완료'}</Table.Cell>
+            <Table.Cell className='text-center'>{todo.writer.nickname}</Table.Cell>
+            <Table.Cell className='text-center'>
+              {todo.memberInCharge && todo.memberInCharge.nickname}
+            </Table.Cell>
+            <Table.Cell className='text-center'>{formatDateString(todo.updatedAt)}</Table.Cell>
+            <Table.Cell className='text-center'>
               {todo.noteId && (
                 <button onClick={() => handleClickNote(todo.id)}>
                   <AdminNote className='w-9 h-9' />
