@@ -34,7 +34,7 @@ export const GroupProgressBar = ({ progress, className }: Props) => {
               onMouseLeave={() => setHoveredMember(null)}
             >
               {hoveredMember === member.nickname && (
-                <div className='absolute left-1/2 top-2 transform -translate-x-1/2 text-slate-600 bg-white border border-slate-100 text-sm font-noraml rounded-[5px] px-3 py-2'>
+                <div className='absolute left-1/2 top-2 transform -translate-x-1/2 text-slate-600 bg-white border border-slate-100 text-sm whitespace-nowrap font-pretendard-regular rounded-[5px] px-3 py-2'>
                   {member.nickname}
                 </div>
               )}
