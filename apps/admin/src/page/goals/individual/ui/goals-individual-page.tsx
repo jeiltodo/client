@@ -65,7 +65,7 @@ export const PostsIndividualPage = () => {
           )}
         </TableCheckListProvider>
         <TablePagination
-          totalCount={data.totalCount}
+          totalCount={data.searchedCount}
           currentPage={data.currentPage}
         />
       </div>

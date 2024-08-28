@@ -61,14 +61,17 @@ export const MembersBoard = ({
 
   return (
     <div
-      className={`relative px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'w-full bg-orange-500'} overflow-hidden`}
+      className={`relative px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'bg-orange-500'} overflow-hidden`}
     >
       <div className='w-full h-full'>
-        <div className='flex justify-between items-center mb-6'>
+        <div className='flex flex-row justify-between items-center mb-6 tablet:flex-row  gap-y-3'>
           <div className='flex gap-4 items-center'>
+            {/* desktop:hidden !xl:flex */}
             <div className='hidden tablet:flex gap-2 items-center'>
               <GroupFill width={40} height={40} />
-              <span className='font-semibold text-lg text-white'>구성원</span>
+              <span className='font-semibold text-lg text-nowrap text-white'>
+                구성원
+              </span>
             </div>
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
               <span className='text-slate-800'>{group.members.length}</span>
@@ -84,11 +87,15 @@ export const MembersBoard = ({
             <MembersManageButtons onSave={handleSave} isAdmin={isAdmin} />
           )}
         </div>
-        <MemberList
-          members={formattedMembers}
-          onClientChangeLeader={handleClientChange}
-          onClientRemoveMember={handleClientRemove}
-        />
+        <div className='flex h-4/5 items-center -mt-6 overflow-hidden tablet:pb-6 desktop:pb-0'>
+          <div className='px-4 w-full'>
+            <MemberList
+              members={formattedMembers}
+              onClientChangeLeader={handleClientChange}
+              onClientRemoveMember={handleClientRemove}
+            />
+          </div>
+        </div>
         <BgGroupAvatar
           width={164}
           height={164}

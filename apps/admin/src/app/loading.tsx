@@ -3,7 +3,7 @@ import React from 'react';
 
 const Loading = () => {
   return (
-    <div className='relative'>
+    <div className='relative w-screen h-screen'>
       <LoadingSpinner />
     </div>
   );

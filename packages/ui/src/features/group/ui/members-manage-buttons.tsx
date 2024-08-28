@@ -29,7 +29,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
       {mode === 'default' && (
         <ButtonGroup>
           <button
-            className={`rounded-lg bg-white py-[8px] px-[10px] leading-4 ${isAdmin ? '' : 'text-orange-500'}}`}
+            className={`rounded-lg bg-white py-[8px] px-[10px] text-nowrap leading-4 ${isAdmin ? '' : 'text-orange-500'}}`}
             onClick={() => {
               handleChangeMode('change-leader');
             }}
@@ -37,7 +37,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
             그룹장 변경
           </button>
           <button
-            className={`rounded-lg ${isAdmin ? 'bg-slate-950' : 'bg-orange-900'} py-[8px] px-[10px] leading-4 text-white`}
+            className={`rounded-lg ${isAdmin ? 'bg-slate-950' : 'bg-orange-900'} py-[8px] px-[10px] text-nowrap leading-4 text-white`}
             onClick={() => {
               handleChangeMode('manage-members');
             }}

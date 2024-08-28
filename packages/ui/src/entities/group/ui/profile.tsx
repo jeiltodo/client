@@ -26,7 +26,7 @@ export const Profile = ({
   onClickRemove,
 }: ProfileProps) => {
   return (
-    <div className={`relative w-fit pt-6`}>
+    <div className={`flex flex-col items-center w-20 pt-6`}>
       {isLeader === true && mode !== 'change-leader' && (
         <span className='absolute top-[-4px] inline-block w-full  text-center font-semibold text-sm text-white'>
           그룹장
@@ -57,11 +57,7 @@ export const Profile = ({
           <MemberHat width={38} className='absolute top-[12px] left-[14px]' />
         </div>
         {contributionRank === RANK_LOWEST && (
-          <AvatarRags
-            width={12}
-            height={16}
-            className='absolute w-3 h-4 top-[12px] right-[14px]'
-          />
+          <AvatarRags width={64} height={64} className='absolute inset-0' />
         )}
         {contributionRank === RANK_HIGHST && (
           <AvatarSunglasses
@@ -71,7 +67,7 @@ export const Profile = ({
           />
         )}
       </div>
-      <span className='inline-block w-full  text-center font-semibold text-sm text-white mt-2'>
+      <span className='inline-block w-full text-clip text-center font-semibold text-sm text-white mt-2'>
         {nickname}
       </span>
     </div>
