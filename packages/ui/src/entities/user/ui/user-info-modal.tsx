@@ -115,7 +115,7 @@ export const UserInfoModal = ({
       width='modal_sm:w-[390px]'
     >
       <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px]'>
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3 w-full'>
           <p className='text-sm font-pretendard-semibold text-slate-500'>
             이름
           </p>
@@ -145,7 +145,7 @@ export const UserInfoModal = ({
       </div>
       <p className='text-sm font-normal text-error mt-3'>{nicknameMessage}</p>
       <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px] mt-3'>
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-3 w-full'>
           <p className='text-sm font-pretendard-semibold text-slate-500'>
             이메일
           </p>

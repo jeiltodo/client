@@ -21,7 +21,7 @@ export const useGetAllGroupGoals = (params: {
   });
 };
 
-export const useDeleteGroupGoal = (onError: (_error: AxiosError) => void) => {
+export const useDeleteGroupGoal = () => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
@@ -57,9 +57,7 @@ export const useGetAllGroupGoalTodos = (
   };
 };
 
-export const useDeleteGroupGoalTodos = (
-  onError: (_error: AxiosError) => void
-) => {
+export const useDeleteGroupGoalTodos = () => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
