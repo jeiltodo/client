@@ -25,7 +25,6 @@ import {
 } from '../../../entities/group/hooks/useGroupTitleAndCode';
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
-import { userOptions } from '../../../entities/user';
 
 export const GroupManagementDetailPage = () => {
   const params = useParams();
