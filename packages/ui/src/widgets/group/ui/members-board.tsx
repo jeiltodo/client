@@ -61,7 +61,7 @@ export const MembersBoard = ({
 
   return (
     <div
-      className={`relative px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'bg-orange-500'} overflow-hidden`}
+      className={`relative px-6 py-4 rounded-lg mobile:w-full desktop:max-w-[734px] ${isAdmin ? 'w-[504px] bg-blue-500' : 'bg-orange-500'} overflow-hidden`}
     >
       <div className='w-full h-full'>
         <div className='flex flex-row justify-between items-center mb-6 tablet:flex-row  gap-y-3'>
