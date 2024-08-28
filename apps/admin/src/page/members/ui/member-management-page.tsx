@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { MembersTable } from '../../../widgets/members/ui/members-table';
 import {
   SearchFilter,
@@ -17,6 +17,7 @@ import { TableCheckListProvider } from '../../../shared/model/table/table-checkl
 import { useDeleteMembers } from '../../../entities/member/hooks/useDeleteMembers';
 
 export const MemberManagementPage = () => {
+  const showToast = useToast();
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetMembers(tableFilters);
   const { mutate: deleteMembers } = useDeleteMembers();
@@ -29,7 +30,14 @@ export const MemberManagementPage = () => {
   }, [data?.members, tableSort]);
 
   const handleDelete = (ids: number[]) => {
-    deleteMembers(ids);
+    if (ids.length === 0) {
+      showToast({
+        message: '체크된 항목이 없습니다.',
+        type: 'confirm',
+      });
+    } else {
+      deleteMembers(ids);
+    }
   };
 
   if (isLoading || !data || !data.members) return <LoadingSpinner />;

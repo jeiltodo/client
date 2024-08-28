@@ -32,7 +32,7 @@ export const BaseModal = ({
       <div
         role='document'
         onClick={handleModalClick}
-        className={`bg-white ${width} mobile:w-3/4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl tablet:p-6 mobile:p-4`}
+        className={`bg-white ${width} w-3/4 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl tablet:p-6 mobile:p-4 modal_sm:w-[390px] mobile:w-3/4 `}
       >
         <div className='flex items-center justify-between mb-6'>
           {title ? (
