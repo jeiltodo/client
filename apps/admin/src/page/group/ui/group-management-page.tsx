@@ -40,6 +40,7 @@ export const GroupManagementPage = () => {
       <div className='w-full pb-[16px] px-5 bg-white rounded-xl mt-5'>
         <TableCheckListProvider tableData={data.groups}>
           <TableToolBarWithCheck
+            onDelete={onHandleDelete}
             totalCount={data.totalCount}
             searchedCount={data.searchCount || 0}
           />

@@ -11,9 +11,7 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useParams } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import { useGroupDetail } from '../../../entities/group';
-import { userOptions } from '../../../entities/member/hooks/userOptions';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
 import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
@@ -33,7 +31,6 @@ export const GroupManagementDetailPage = () => {
   const groupId = Number(params?.id);
 
   const { tableFilters, tableSort } = useTableContext();
-  const { data: user } = useQuery(userOptions());
   const { data: newCode } = useGroupCode(groupId);
   const { data: group, isLoading } = useGroupDetail(groupId);
   const { data: groupGoals, isLoading: isGoalsLoading } = useGetAllGroupGoals({
@@ -76,7 +73,6 @@ export const GroupManagementDetailPage = () => {
       <div className='w-full flex flex-nowrap gap-4 '>
         <GroupOverviewBoard
           group={group.data}
-          userId={user?.id}
           spareCode={newCode ?? ''}
           onSave={handleSave}
           isAdmin={true}
@@ -86,7 +82,6 @@ export const GroupManagementDetailPage = () => {
           <MembersBoard
             isAdmin={true}
             group={group.data}
-            userId={user?.id}
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}
           />
