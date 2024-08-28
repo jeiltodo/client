@@ -70,7 +70,7 @@ export const MemberOverviewBoard = ({ member }: Props) => {
             }}
             onSwap={setIsEditEmailMode}
           />
-          <Field label='가입일'>2024. 10. 10</Field>
+          <Field label='가입일'>{member.createdAt}</Field>
         </div>
       </div>
       <div className='w-full mt-4 flex justify-end'>
