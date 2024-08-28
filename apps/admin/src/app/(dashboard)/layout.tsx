@@ -3,14 +3,14 @@ import { SidebarAdmin } from '../../widgets/sidebar/ui/sidebar-admin';
 import { userOptions } from '../../entities/user';
 import { getQueryClient } from '@jeiltodo/ui/entities';
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const queryClient = getQueryClient();
 
-  queryClient.prefetchQuery(userOptions());
+  await queryClient.prefetchQuery(userOptions());
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
