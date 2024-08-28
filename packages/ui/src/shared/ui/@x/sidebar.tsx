@@ -1,16 +1,10 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import Image from 'next/image';
 
-import {
-  DeleteMenu,
-  Expand,
-  Fold,
-  HamburgerMenu,
-  ImgLogo,
-  LogoCheck,
-} from '@jeiltodo/icons';
+import { DeleteMenu, Expand, Fold, HamburgerMenu } from '@jeiltodo/icons';
 
 interface SidebarProps {
   type?: string;
@@ -22,6 +16,8 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   const [isDesktopOpen, setIsDesktopOpen] = useState(true);
   const [isTabletOpen, setIsTabletOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
+  const router = useRouter();
 
   const toggleDesktopSidebar = () => {
     setIsDesktopOpen(!isDesktopOpen);
@@ -40,21 +36,32 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   }, [pathname]);
 
   return (
-    <div className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}>
+    <div
+      className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}
+    >
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
-           transition-all duration-200 ease-in-out ${
-             isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
-           } bg-white flex-col overflow-hidden`}
+          transition-all duration-200 ease-in-out ${
+            isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
+          } bg-white flex-col overflow-hidden`}
       >
         <div
-          className={`sidebar-header flex ${isDesktopOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
+          className={`sidebar-header flex items-center ${isDesktopOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
             className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}
           >
-            <ImgLogo className='w-[106px] h-[35px]' />
+            <Image
+              src={type ? '/admin/logo.png' : '/logo.png'}
+              alt='Logo'
+              width={100}
+              height={30}
+              className='cursor-pointer'
+              onClick={() => {
+                router.push('/');
+              }}
+            />
             {type && (
               <h1
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
@@ -65,8 +72,15 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               </h1>
             )}
           </div>
-          <LogoCheck
-            className={`w-[32px] h-[32px] ${isDesktopOpen ? 'hidden' : 'block'} `}
+          <Image
+            src={type ? '/admin/s-logo.png' : '/s-logo.png'}
+            alt='Logo'
+            width={24}
+            height={24}
+            className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <div
             onClick={toggleDesktopSidebar}
@@ -93,17 +107,26 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       {/* 태블릿 버전 */}
       <div
         className={`desktop:hidden tablet:flex hidden h-full fixed top-0 left-0 z-10
-           transition-all duration-200 ease-in-out ${
-             isTabletOpen ? 'w-[280px]' : 'w-[60px]'
-           } bg-white flex-col overflow-hidden`}
+          transition-all duration-200 ease-in-out ${
+            isTabletOpen ? 'w-[280px]' : 'w-[60px]'
+          } bg-white flex-col overflow-hidden`}
       >
         <div
-          className={`sidebar-header flex ${isTabletOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
+          className={`sidebar-header flex items-center ${isTabletOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
             className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
           >
-            <ImgLogo className='w-[106px] h-[35px]' />
+            <Image
+              src={type ? '/admin/logo.png' : '/logo.png'}
+              alt='Logo'
+              width={100}
+              height={30}
+              className='cursor-pointer'
+              onClick={() => {
+                router.push('/');
+              }}
+            />
             {type && (
               <p
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
@@ -114,8 +137,15 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               </p>
             )}
           </div>
-          <LogoCheck
-            className={`w-[32px] h-[32px] ${isTabletOpen ? 'hidden' : 'block'} `}
+          <Image
+            src={type ? '/admin/s-logo.png' : '/s-logo.png'}
+            alt='Logo'
+            width={24}
+            height={24}
+            className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
+            onClick={() => {
+              router.push('/');
+            }}
           />
           <div
             onClick={toggleTabletSidebar}
@@ -168,7 +198,16 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         )}
         {isMobileSidebarOpen && (
           <div className='flex items-center justify-between py-3 px-4'>
-            <ImgLogo className='w-[106px] h-[35px]' />
+            <Image
+              src={type ? '/admin/logo.png' : '/logo.png'}
+              alt='Logo'
+              width={100}
+              height={30}
+              className='cursor-pointer'
+              onClick={() => {
+                router.push('/');
+              }}
+            />
             <button onClick={toggleMobileSidebar} className='cursor-pointer'>
               <DeleteMenu className='w-6 h-6' />
             </button>
