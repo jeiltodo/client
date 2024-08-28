@@ -61,12 +61,13 @@ export const MembersBoard = ({
 
   return (
     <div
-      className={`relative px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'w-full bg-orange-500'} overflow-hidden`}
+      className={`relative px-6 py-4 rounded-lg ${isAdmin ? 'w-[504px] bg-blue-500' : 'min-w-[296px] bg-orange-500'} overflow-hidden`}
     >
       <div className='w-full h-full'>
-        <div className='flex flex-row justify-between items-center mb-6 tablet:flex-row desktop:flex-col-reverse desktop-2xl:flex-row  gap-y-3'>
+        <div className='flex flex-row justify-between items-center mb-6 tablet:flex-row  gap-y-3'>
           <div className='flex gap-4 items-center'>
-            <div className='hidden tablet:flex gap-2 desktop:hidden desktop-2xl:flex items-center'>
+            {/* desktop:hidden !xl:flex */}
+            <div className='hidden tablet:flex gap-2 items-center'>
               <GroupFill width={40} height={40} />
               <span className='font-semibold text-lg text-nowrap text-white'>
                 구성원
