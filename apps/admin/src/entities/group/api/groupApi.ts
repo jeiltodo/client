@@ -1,6 +1,6 @@
 import type { ResponseWith } from '@jeiltodo/ui/shared';
 import { client } from '@jeiltodo/ui/shared';
-import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
+import type { GroupCode, GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import type { GroupResponse, GroupsResponse } from '../model/type';
 import type { TableQueries } from '../../../shared';
 
@@ -96,6 +96,20 @@ export const groupApi = {
       return response.data;
     } catch (error) {
       console.error('Fail fetch getGroupDetail:', error);
+      throw error;
+    }
+  },
+  reissueGroupCode: async (groupId: number) => {
+    try {
+      const response = await client.get<ResponseWith<GroupCode>>(
+        `/groups/code/${groupId}`,
+        {
+          headers: { 'X-Admin-Request': 'true' },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Fail fetch get new group code:', error);
       throw error;
     }
   },
