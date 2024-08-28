@@ -4,26 +4,26 @@ import { DeleteButton } from '../../table-tools/delete-button';
 import { SearchSummary } from '../../table-tools/search-summary';
 import { useTableContext } from '../../../hooks/table/useTableContext';
 import { useTableCheck } from '../../../hooks/table/useTableCheck';
-import { useDeleteMembers } from '../../../../entities/member/hooks/useDeleteMembers';
 
 interface TableToolBarProps {
   searchedCount?: number;
   totalCount: number;
+  onDelete: (ids: number[]) => void;
 }
 
 export function TableToolBarWithCheck({
   searchedCount,
   totalCount,
+  onDelete,
 }: TableToolBarProps) {
   const { setTableFilters } = useTableContext();
   const { checkList } = useTableCheck();
-  const { mutate: deleteMembers } = useDeleteMembers();
 
   const handleDelete = () => {
-    const memberIds = checkList.reduce<number[]>((acc, cur) => {
+    const ids = checkList.reduce<number[]>((acc, cur) => {
       return cur.isChecked ? [...acc, cur.id] : acc;
     }, []);
-    deleteMembers(memberIds);
+    onDelete(ids);
   };
 
   const handleSelectDropdown = (value: number | string) => {

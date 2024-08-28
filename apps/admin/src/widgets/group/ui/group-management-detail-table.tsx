@@ -5,6 +5,7 @@ import { Table } from '../../../shared';
 import { TableHeadList } from '../../../features/members';
 import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
 import type { GroupGoals } from '../../../entities/goals/group';
+import { useRouter } from 'next/navigation';
 
 interface GroupsManagementDetailTableProps {
   goals: GroupGoals[];
@@ -13,6 +14,11 @@ interface GroupsManagementDetailTableProps {
 export const GroupManagementDetailTable = ({
   goals,
 }: GroupsManagementDetailTableProps) => {
+  const router = useRouter();
+  const handleClick = (goalId: number, goalTitle: string) => {
+    const url = `/goals/group/${goalId}?title=${goalTitle}`;
+    router.push(url);
+  };
   return (
     <Table>
       <Table.Header>
@@ -22,7 +28,13 @@ export const GroupManagementDetailTable = ({
       </Table.Header>
       <Table.Body>
         {goals.map((goal, id) => (
-          <Table.Row key={goal.title + id} className='hover:bg-slate-50'>
+          <Table.Row
+            key={goal.title + id}
+            className='hover:bg-slate-50'
+            onClick={() => {
+              handleClick(goal.id, goal.title);
+            }}
+          >
             <Table.Cell>{goal.id}</Table.Cell>
             <Table.Cell>{goal.title}</Table.Cell>
             <Table.Cell>

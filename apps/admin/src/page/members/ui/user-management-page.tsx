@@ -14,10 +14,12 @@ import { useMemo } from 'react';
 import { Member } from '../../../entities/member';
 import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
 import { TableCheckListProvider } from '../../../shared/model/table/table-checklist-provider';
+import { useDeleteMembers } from '../../../entities/member/hooks/useDeleteMembers';
 
 export const MemberManagementPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetMembers(tableFilters);
+  const { mutate: deleteMembers } = useDeleteMembers();
 
   const sortedMembers = useMemo(() => {
     return sortBy<Member>(
@@ -26,27 +28,34 @@ export const MemberManagementPage = () => {
     );
   }, [data?.members, tableSort]);
 
-  if (isLoading || !data) return <LoadingSpinner />;
+  const handleDelete = (ids: number[]) => {
+    deleteMembers(ids);
+  };
+
+  if (isLoading || !data || !data.members) return <LoadingSpinner />;
 
   return (
     <div>
       <h1 className='sr-only'>
         jtodo 서비스의 회원을 조회, 삭제할 수 있는 관리 페이지입니다.
       </h1>
-      <LayoutTitle title='회원 관리' />
+      <LayoutTitle title='회원 관리' isFirstPage={true} />
 
       <SearchFilter filters={MEMBERS_FIILTERS} />
 
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableCheckListProvider tableData={data.members}>
           <TableToolBarWithCheck
+            onDelete={handleDelete}
             totalCount={data?.totalCount}
             searchedCount={data?.searchedCount}
           />
-          {sortedMembers || data.members ? (
+          {sortedMembers || data.members.length !== 0 ? (
             <MembersTable members={sortedMembers} />
           ) : (
-            <LoadingSpinner />
+            <div className='min-h-[120px] flex justify-center items-center text-lg text-slate-500 font-semibold'>
+              회원이 없습니다
+            </div>
           )}
         </TableCheckListProvider>
         <TablePagination

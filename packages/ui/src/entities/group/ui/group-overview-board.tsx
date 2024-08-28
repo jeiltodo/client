@@ -36,8 +36,13 @@ export const GroupOverviewBoard = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const isUserALeader =
-    members.find((member) => member.isLeader)?.id === userId;
+  const isUserALeader = () => {
+    if (!userId && isAdmin) {
+      return true;
+    } else {
+      return members.find((member) => member.isLeader)?.id === userId;
+    }
+  };
 
   const handleReissue = () => {
     if (isRequested === true) {
@@ -63,10 +68,10 @@ export const GroupOverviewBoard = ({
       isAdmin={isAdmin}
     >
       <div
-        className={`pt-4 flex gap-9 ${isUserALeader && 'border-b border-slate-200 pb-4'}`}
+        className={`pt-4 flex gap-9 ${isUserALeader() && 'border-b border-slate-200 pb-4'}`}
       >
         <div className='w-full flex flex-wrap gap-2'>
-          {isUserALeader || isAdmin ? (
+          {isUserALeader() || isAdmin ? (
             <InputSwapMode
               label='그룹 이름'
               value={updatedTitle}
@@ -99,7 +104,7 @@ export const GroupOverviewBoard = ({
                 )}
               </div>
             </Field>
-            {(isUserALeader || isAdmin) && (
+            {(isUserALeader() || isAdmin) && (
               <button
                 onClick={handleReissue}
                 className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'bg-slate-900 text-white '}`}
@@ -116,7 +121,7 @@ export const GroupOverviewBoard = ({
           )}
         </div>
       </div>
-      {(isUserALeader || isAdmin) && (
+      {(isUserALeader() || isAdmin) && (
         <div className='w-full mt-4 flex justify-end'>
           <button
             disabled={isRequested !== true && isEditMode !== true}

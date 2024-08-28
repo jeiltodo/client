@@ -24,7 +24,7 @@ export function GoalsGroupTable({ goals: goalGroupRows }: Props) {
   };
 
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
-    useTableCheck(goalGroupRows);
+    useTableCheck();
 
   return (
     <Table>

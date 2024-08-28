@@ -42,7 +42,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   }, [pathname]);
 
   return (
-    <div className='min-w-[60px] desktop:min-w-[280px] relative z-30'>
+    <div className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}>
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
@@ -54,7 +54,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           className={`sidebar-header flex items-center ${isDesktopOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
-            className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'}`}
+            className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}
           >
             <TempLogo
               className='w-[106px] h-[35px] cursor-pointer'
@@ -63,13 +63,13 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               }}
             />
             {type && (
-              <p
+              <h1
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
                   isDesktopOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
                 }`}
               >
                 {type}
-              </p>
+              </h1>
             )}
           </div>
           <LogoCheck
@@ -89,8 +89,15 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
         </div>
-
-        {isDesktopOpen && <>{children}</>}
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            isDesktopOpen
+              ? 'opacity-100 translate-x-0 delay-50'
+              : 'opacity-0 -translate-x-full'
+          }`}
+        >
+          {children}
+        </div>
       </div>
 
       {/* 태블릿 버전 */}
@@ -139,8 +146,15 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
         </div>
-
-        {isTabletOpen && <>{children}</>}
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            isTabletOpen
+              ? 'opacity-100 translate-x-0 delay-50'
+              : 'opacity-0 -translate-x-full'
+          }`}
+        >
+          {children}
+        </div>
       </div>
 
       {isTabletOpen && (
