@@ -10,15 +10,17 @@ import { MemberGoal } from '../../../entities/member';
 import { TableHeadList } from '../../../features/members/ui/table-head-list';
 import { MEMBER_GOAL_TABLE_HEAD_MAP } from '../../../features/members/model/member-goal-table-head-map';
 import { ProgressBar } from '@jeiltodo/ui/shared';
+import { IndividualGoal } from '../../../entities/goals/individual';
 
 interface Props {
-  memberGoals: MemberGoal[];
+  memberGoals: IndividualGoal[];
 }
 
 export function MemberGoalTable({ memberGoals }: Props) {
   const router = useRouter();
-  const handleClick = (path: string) => {
-    router.push(path);
+  const handleClick = (goalId: number, goalTitle: string) => {
+    const url = `/goals/individual/${goalId}?title=${goalTitle}`;
+    router.push(url);
   };
 
   return (
@@ -29,12 +31,18 @@ export function MemberGoalTable({ memberGoals }: Props) {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {memberGoals.map((member, id) => (
-          <Table.Row key={id}>
-            <Table.Cell className='text-center'>{member.id}</Table.Cell>
-            <Table.Cell className='text-left py-5'>{member.title}</Table.Cell>
+        {memberGoals.map((goal) => (
+          <Table.Row
+            key={goal.id}
+            className='cursor-pointer'
+            onClick={() => {
+              handleClick(goal.id, goal.title);
+            }}
+          >
+            <Table.Cell className='text-center'>{goal.id}</Table.Cell>
+            <Table.Cell className='text-left py-5'>{goal.title}</Table.Cell>
             <Table.Cell>
-              <ProgressBar progress={member.progressRate} />
+              <ProgressBar progress={goal.progressRate} />
             </Table.Cell>
           </Table.Row>
         ))}

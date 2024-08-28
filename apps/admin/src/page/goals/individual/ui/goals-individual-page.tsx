@@ -11,7 +11,7 @@ import {
 import { GoalsIndividualTable } from '../../../../widgets/goals/individual';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
-import { IndividualGoals } from '../../../../entities/goals/individual';
+import { IndividualGoal } from '../../../../entities/goals/individual';
 import { useMemo } from 'react';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
@@ -20,12 +20,13 @@ export const PostsIndividualPage = () => {
   const { data, isLoading } = useGetAllIndividualGoals(tableFilters);
 
   const sortedGoals = useMemo(() => {
-    return sortBy<IndividualGoals>(
+    return sortBy<IndividualGoal>(
       data?.goals || [],
-      tableSort as SortOptions<IndividualGoals>
+      tableSort as SortOptions<IndividualGoal>
     );
   }, [data?.goals, tableSort]);
 
+  const handleDelete = (ids: number[]) => {};
   if (isLoading || !data) return <LoadingSpinner />;
 
   return (
@@ -39,6 +40,7 @@ export const PostsIndividualPage = () => {
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableCheckListProvider tableData={data.goals}>
           <TableToolBarWithCheck
+            onDelete={handleDelete}
             totalCount={data?.totalCount}
             searchedCount={data?.searchedCount}
           />
@@ -49,7 +51,7 @@ export const PostsIndividualPage = () => {
           )}
         </TableCheckListProvider>
         <TablePagination
-          totalCount={data.searchedCount}
+          totalCount={data.totalCount}
           currentPage={data.currentPage}
         />
       </div>

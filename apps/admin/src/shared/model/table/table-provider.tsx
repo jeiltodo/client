@@ -32,10 +32,6 @@ export function TableProvider({ children }: PropsWithChildren) {
     isAscending: boolean;
   }>({ isAscending: true });
 
-  useEffect(() => {
-    console.log('🐶', tableSort);
-  }, [tableSort]);
-
   return (
     <TableContext.Provider
       value={{

@@ -1,17 +1,18 @@
 'use client';
 import { useMemo } from 'react';
 
-import {
-  TableToolBar,
-  useTableContext,
-} from '../../../../shared';
+import { useTableContext } from '../../../../shared';
 import { GoalTodosIndividualTable } from '../../../../widgets/goals/individual';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
-import { GroupGoalTodos, useGetAllGroupGoalTodos } from '../../../../entities/goals/group';
+import {
+  GroupGoalTodos,
+  useGetAllGroupGoalTodos,
+} from '../../../../entities/goals/group';
 import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
+import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
 
 export const PostsGroupDetailPage = () => {
   const searchParams = useSearchParams();
@@ -21,13 +22,9 @@ export const PostsGroupDetailPage = () => {
     : params.goalId;
   const goalTitle = searchParams.get('title') || '';
 
-
   const { tableFilters, tableSort } = useTableContext();
-  const { data, isLoading } = useGetAllGroupGoalTodos(
-    tableFilters,
-    goalId
-  );
-  
+  const { data, isLoading } = useGetAllGroupGoalTodos(tableFilters, goalId);
+
   const sortedTodos = useMemo(() => {
     return sortBy<GroupGoalTodos>(
       data?.todos || [],
@@ -37,8 +34,6 @@ export const PostsGroupDetailPage = () => {
 
   if (isLoading || !data) return <LoadingSpinner />;
 
-  const onHandleDelete = () => {};
-
   return (
     <div>
       <h1 className='sr-only'>
@@ -47,7 +42,6 @@ export const PostsGroupDetailPage = () => {
       <LayoutTitle title={`할 일 관리 (${goalTitle})`} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableToolBar
-          onClickDelete={onHandleDelete}
           totalCount={data?.totalCount}
           searchedCount={data?.totalCount}
         />
