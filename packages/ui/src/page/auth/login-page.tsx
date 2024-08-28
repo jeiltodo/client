@@ -13,8 +13,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({ type }) => {
 
   return (
     <div className='flex flex-col items-center desktop:py-[120px] tablet:py-16 tablet:px-[52px] py-12 px-4'>
-      <h1 className='mb-[60px]'>
-        <TempLogo width={210} />
+      <h1 className='mb-[60px] flex items-center gap-5'>
+        <TempLogo width={210} />{' '}
+        {!showSignUpLink && (
+          <p
+            className={`font-pretendard-semibold text-base text-[#3182F6] whitespace-nowrap overflow-hidden -mb-3`}
+          >
+            관리자 센터
+          </p>
+        )}
       </h1>
       <LoginForm isAdmin={type === 'admin'} />
       {showSignUpLink && (
