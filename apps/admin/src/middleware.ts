@@ -37,8 +37,8 @@ export function middleware(request: NextRequest) {
     )
   ) {
     if (token) {
-      console.log('Redirecting to /admin');
-      // return NextResponse.redirect(new URL('/admin', request.url));
+      // console.log('Redirecting to /admin');
+      return NextResponse.redirect(new URL('/admin', request.url));
     }
   }
 
