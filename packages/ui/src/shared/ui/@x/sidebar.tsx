@@ -2,15 +2,9 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import Image from 'next/image';
 
-import {
-  DeleteMenu,
-  Expand,
-  Fold,
-  HamburgerMenu,
-  TempLogo,
-  LogoCheck,
-} from '@jeiltodo/icons';
+import { DeleteMenu, Expand, Fold, HamburgerMenu } from '@jeiltodo/icons';
 
 interface SidebarProps {
   type?: string;
@@ -42,7 +36,9 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   }, [pathname]);
 
   return (
-    <div className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}>
+    <div
+      className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}
+    >
       {/* 데스크톱 버전 */}
       <div
         className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
@@ -56,8 +52,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           <div
             className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}
           >
-            <TempLogo
-              className='w-[106px] h-[35px] cursor-pointer'
+            <Image
+              src='/logo.png'
+              alt='Logo'
+              width={100}
+              height={30}
+              className='cursor-pointer'
               onClick={() => {
                 router.push('/');
               }}
@@ -72,8 +72,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               </h1>
             )}
           </div>
-          <LogoCheck
-            className={`w-[24px] h-[24px] cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'} `}
+          <Image
+            src='/s-logo.png'
+            alt='Logo'
+            width={24}
+            height={24}
+            className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
             onClick={() => {
               router.push('/');
             }}
@@ -113,8 +117,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           <div
             className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
           >
-            <TempLogo
-              className='w-[106px] h-[35px] cursor-pointer'
+            <Image
+              src='/logo.png'
+              alt='Logo'
+              width={100}
+              height={30}
+              className='cursor-pointer'
               onClick={() => {
                 router.push('/');
               }}
@@ -129,8 +137,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               </p>
             )}
           </div>
-          <LogoCheck
-            className={`w-[24px] h-[24px] cursor-pointer ${isTabletOpen ? 'hidden' : 'block'} `}
+          <Image
+            src='/s-logo.png'
+            alt='Logo'
+            width={24}
+            height={24}
+            className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
             onClick={() => {
               router.push('/');
             }}
@@ -186,8 +198,12 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         )}
         {isMobileSidebarOpen && (
           <div className='flex items-center justify-between py-3 px-4'>
-            <TempLogo
-              className='w-[106px] h-[35px] cursor-pointer'
+            <Image
+              src='/logo.png'
+              alt='Logo'
+              width={100}
+              height={30}
+              className='cursor-pointer'
               onClick={() => {
                 router.push('/');
               }}
