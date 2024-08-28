@@ -1,20 +1,41 @@
+<br /><br/><br /><br/>
 <img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="60" />
-<br /><br/>
+<br /><br/><br />
 
-> 이 프로젝트는 개인과 그룹이 할 일을 효율적으로 관리할 수 있도록 돕는 웹 애플리케이션입니다. 사용자들은 할 일을 쉽게 추가하고 관리하며 완료할 수 있습니다.
+> 이 프로젝트는 **개인과 그룹이 할 일을 효율적으로 관리할 수 있도록 돕는 웹 애플리케이션**입니다. <br/>
+> 사용자들은 할 일을 쉽게 추가하고 관리하며 완료할 수 있습니다.
 >
-> 특히 협업이 필요한 그룹 작업의 경우, 실시간 업데이트와 담당자 라벨링, 달성률에 따른 이미지 제공 등을 통해 팀원 간 원활한 커뮤니케이션을 지원합니다.
-> 
-> 또한, 강력한 관리자 센터를 제공하여 전체 회원과 그룹을 효과적으로 관리할 수 있습니다. 개별 회원의 목표와 할 일을 포함해 그룹의 목표 및 게시글까지 종합적으로 관리할 수 있어, 서비스 운영과 사용자 경험 개선에 큰 도움을 줍니다.
+> 특히 협업이 필요한 그룹 작업의 경우, 팀원 간 **원활한 커뮤니케이션**을 위해 아래 기능을 추가 지원합니다. <br/>
+> 🔹 실시간 업데이트 <br/>
+> 🔹  담당자 라벨링 <br/>
+> 🔹  할 일 달성률에 따른 이미지 제공 <br/>
+>
+> <br/>
+>
+> 또한, **관리자 센터**를 제공하여 전체 회원과 그룹을 효과적으로 관리할 수 있습니다. <br/> 개별 회원의 목표와 할 일을 포함해 그룹의 목표 및 게시글까지 종합적으로 관리할 수 있어, 서비스 운영과 사용자 경험 개선에 큰 도움을 제공합니다.
 >
 
 <br/><br/><br/>
 
 ## 🔹 프로젝트 미리보기
-<br/><br/>
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/09fa9df8-43cc-44c3-aa9c-de7e71fb8ce3" alt="Jtodo Preview" width="80%">
-</div> 
+<br/>
+<details>
+<summary>유저 서비스 스크린샷 보기<img src="https://github.com/user-attachments/assets/a4f51226-a6c0-49e5-b3e3-1ccb9d150a16" alt="s-logo" width="3%">
+</summary>
+  <div align="center">
+    <br/>
+    <img src="https://github.com/user-attachments/assets/eb89bb52-3fb4-4579-bf35-e4228a9d7fbe" alt="Jtodo Preview" width="60%">
+    <br/><br/>
+  </div> 
+</details>
+<details>
+<summary> 관리자 서비스 스크린샷 보기<img src="https://github.com/user-attachments/assets/12efbc64-bc50-4d1e-b844-ea71e9ff8d3b" alt="s-logo" width="3%"></summary>
+  <div align="center">
+    <br/>
+    <img src="https://github.com/user-attachments/assets/c46be127-0210-4827-9128-69a59079b185" width="60%">
+    <br/><br/>
+  </div> 
+</details>
 <br/><br/><br/>
 
 ## Table of Contents
@@ -64,13 +85,14 @@ npm run dev
 
 ## 🚀 기술 스택
 <br/><br/>
-- **프론트엔드**: React, Next.js, TailwindCSS
+- **프론트엔드**: Next.js 14 (App Router), TailwindCSS
 - **백엔드**: Node.js, Express, MongoDB
-- **상태관리**: Redux Toolkit, React Query
+- **백엔드 통신**: Axios
+- **상태 관리**: TanStack Query v5
 - **테스팅**: Jest, React Testing Library
 - **CI/CD**: GitHub Actions, Docker
-- **모노레포 관리**: N
-- 
+ **모노레포 관리**: Yarn Workspaces, Turborepo
+  
 ### **프론트엔드**
 - **[Next.js 14](https://nextjs.org/)**: 서버 사이드 렌더링과 정적 사이트 생성을 지원하는 React 프레임워크로, App Router를 사용하여 페이지와 라우팅을 효율적으로 관리.
 - **[@tanstack/react-query](https://tanstack.com/query/latest)**: 데이터 페칭, 캐싱, 동기화 및 서버 상태 관리를 위한 솔루션.
@@ -132,9 +154,9 @@ npm run dev
 ## 🎯 트러블 슈팅 기록
 <br/><br/>
 
-- [ ] middleware
-- [ ] 어쩌구
-- [ ] 저쩌구
+- [ ] middleware를 사용하면서
+- [ ] axios를 사용하면서
+- [ ] tanstack query를 사용하면서 
 
 <br/><br/><br/>
 ## 🎥 시연 영상
@@ -153,5 +175,5 @@ npm run dev
 <br/><br/><br/>
 
 <div align="center">
-  <strong>TaskMaster Pro</strong> - 당신의 생산성을 혁신적으로 높이는 방법 🚀
+  <img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="20" /> - 당신의 생산성을 편리하게 높이는 방법 ⚡
 </div>
