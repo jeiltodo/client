@@ -51,7 +51,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           } bg-white flex-col overflow-hidden`}
       >
         <div
-          className={`sidebar-header flex ${isDesktopOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
+          className={`sidebar-header flex items-center ${isDesktopOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
             className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'}`}
@@ -73,7 +73,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <LogoCheck
-            className={`w-[26px] h-[26px] cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'} `}
+            className={`w-[24px] h-[24px] cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'} `}
             onClick={() => {
               router.push('/');
             }}
@@ -101,7 +101,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           } bg-white flex-col overflow-hidden`}
       >
         <div
-          className={`sidebar-header flex ${isTabletOpen ? 'items-center justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
+          className={`sidebar-header flex items-center ${isTabletOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
           <div
             className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
@@ -123,7 +123,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
           <LogoCheck
-            className={`w-[32px] h-[32px] cursor-pointer ${isTabletOpen ? 'hidden' : 'block'} `}
+            className={`w-[24px] h-[24px] cursor-pointer ${isTabletOpen ? 'hidden' : 'block'} `}
             onClick={() => {
               router.push('/');
             }}
