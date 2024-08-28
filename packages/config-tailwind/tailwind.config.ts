@@ -12,6 +12,7 @@ const config: Omit<Config, 'content'> = {
       modal_sm: '640px',
       desktop: '1024px',
       'max-tablet': { max: '480px' },
+      'desktop-2xl': '1220px',
     },
 
     extend: {
