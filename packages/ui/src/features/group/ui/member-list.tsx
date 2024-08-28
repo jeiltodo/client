@@ -22,6 +22,9 @@ export const MemberList = ({
   const { mode } = useBoardContext();
   const slidesCount = members.length;
 
+  const groupLeader = members.filter((member) => member.isLeader === true);
+  const groupMembers = members.filter((member) => member.isLeader !== true);
+
   const handleChangeLeader = (id: number) => {
     onChangeLeader(id);
   };
@@ -36,7 +39,7 @@ export const MemberList = ({
         modules={[Navigation, Pagination]}
         slidesPerView={slidesCount < 2 ? 1 : 2}
         slidesPerGroup={slidesCount < 2 ? 1 : 2}
-        spaceBetween={24}
+        spaceBetween={8}
         scrollbar={{ draggable: true }}
         navigation
         pagination={{ clickable: true }}
@@ -108,22 +111,22 @@ export const MemberList = ({
           },
         }}
       >
-        {members.map((member) =>
-          member.isLeader ? (
-            <SwiperSlide key={member.id}>
-              <Profile member={member} mode={mode} />
-            </SwiperSlide>
-          ) : (
-            <SwiperSlide key={member.id}>
-              <Profile
-                member={member}
-                mode={mode}
-                onChangeRadio={handleChangeLeader}
-                onClickRemove={handleManageMembers}
-              />
-            </SwiperSlide>
-          )
-        )}
+        {groupLeader.map((member) => (
+          <SwiperSlide>
+            <Profile key={member.id} member={member} mode={mode} />
+          </SwiperSlide>
+        ))}
+        {groupMembers.map((member) => (
+          <SwiperSlide>
+            <Profile
+              key={member.id}
+              member={member}
+              mode={mode}
+              onChangeRadio={handleChangeLeader}
+              onClickRemove={handleManageMembers}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
