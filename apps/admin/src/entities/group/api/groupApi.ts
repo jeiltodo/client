@@ -40,10 +40,10 @@ export const groupApi = {
     }
   },
 
-  deleteGroups: async (groupId: number[]): Promise<void> => {
+  deleteGroups: async (groupIds: number[]): Promise<void> => {
     try {
-      const response = await client.delete(`/admin/groups/`, {
-        data: { groupId },
+      const response = await client.delete(`/admin/groups`, {
+        data: { groupIds },
       });
       return response.data;
     } catch (error) {
