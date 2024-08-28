@@ -15,7 +15,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ type }) => {
     <div className='flex flex-col items-center desktop:py-[120px] tablet:py-16 tablet:px-[52px] py-12 px-4'>
       <h1 className='mb-[60px] flex items-center gap-5'>
         <Image
-          src={type === 'admin' ? '/admin/logo.png' : '/logo.png'}
+          src={type === 'admin' ? '/admin/assets/logo.png' : '/logo.png'}
           alt='Logo'
           width={180}
           height={50}
