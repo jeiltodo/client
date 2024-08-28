@@ -17,9 +17,12 @@ import {
   useWithdrawMutation,
 } from '../../../entities/user/hooks/useUser';
 import {
+  ACCESS_ADMIN_TOKEN_COOKIE_NAME,
   ACCESS_TOKEN_COOKIE_NAME,
+  REFRESH_ADMIN_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
 } from '../../../shared/config/token';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   userInfo: UserDataprops | undefined;
@@ -41,9 +44,15 @@ export const UserInfoModal = ({
   const debouncedEmail = useDebounce(email, 1000);
 
   const tokenData = {
-    accessToken: getCookie(ACCESS_TOKEN_COOKIE_NAME),
-    refreshToken: getCookie(REFRESH_TOKEN_COOKIE_NAME),
+    accessToken: isAdmin
+      ? getCookie(ACCESS_ADMIN_TOKEN_COOKIE_NAME)
+      : getCookie(ACCESS_TOKEN_COOKIE_NAME),
+    refreshToken: isAdmin
+      ? getCookie(REFRESH_ADMIN_TOKEN_COOKIE_NAME)
+      : getCookie(REFRESH_TOKEN_COOKIE_NAME),
   };
+
+  const router = useRouter();
 
   const updateUserMutation = useUpdateUserInfoMutation(isAdmin);
   const logoutMutation = useLogoutMutation(isAdmin);
@@ -97,16 +106,18 @@ export const UserInfoModal = ({
 
   const handleLogout = () => {
     logoutMutation.mutate(tokenData);
+    router.push('/login');
   };
 
   const handleWithdraw = () => {
     withdrawMutation.mutate();
+    router.push('/login');
   };
 
   useEffect(() => {
     setNickname(userInfo?.nickname || '');
     setEmail(userInfo?.email || '');
-  }, [userInfo])
+  }, [userInfo]);
 
   return (
     <BaseModal

@@ -34,8 +34,6 @@ export const useLogoutMutation = (admin = false) => {
       queryClient.clear(); // 모든 쿼리 캐시를 지웁니다.
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
-
-      window.location.reload();
     },
     onError: (error: Error) => {
       showToast({ message: '로그아웃에 실패했습니다.', type: 'confirm' });
