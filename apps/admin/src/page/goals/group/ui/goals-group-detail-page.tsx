@@ -1,8 +1,7 @@
 'use client';
 import { useMemo } from 'react';
 
-import { useTableContext } from '../../../../shared';
-import { GoalTodosIndividualTable } from '../../../../widgets/goals/individual';
+import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
@@ -41,7 +40,7 @@ export const PostsGroupDetailPage = () => {
       </h1>
       <LayoutTitle title={`할 일 관리 (${goalTitle})`} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
+        <TableToolBarWithCheck
           totalCount={data?.totalCount}
           searchedCount={data?.totalCount}
         />

@@ -2,13 +2,15 @@
 import { useMemo } from 'react';
 import { IndividualGoalTodos } from '../../../../entities/goals/individual';
 import { useGetAllIndividualGoalTodos } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
-import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
+import {
+  TableToolBarWithCheck,
+  useTableContext,
+} from '../../../../shared';
 import { GoalTodosIndividualTable } from '../../../../widgets/goals/individual';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
-import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsIndividualDetailPage = () => {

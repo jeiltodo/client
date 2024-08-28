@@ -1,7 +1,11 @@
 'use client';
 
 import { TablePagination } from '../../../../features/goals/individual';
-import { SearchFilter, useTableContext } from '../../../../shared';
+import {
+  SearchFilter,
+  TableToolBarWithCheck,
+  useTableContext,
+} from '../../../../shared';
 import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { useMemo } from 'react';
@@ -36,7 +40,7 @@ export const PostsGroupPage = () => {
 
       <SearchFilter filters={GOALS_GROUP_FIILTERS} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
+        <TableToolBarWithCheck
           totalCount={data?.totalCount}
           searchedCount={data?.searchedCount}
         />
