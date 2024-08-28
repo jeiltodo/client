@@ -3,6 +3,8 @@ import { SidebarAdmin } from '../../widgets/sidebar/ui/sidebar-admin';
 import { userOptions } from '../../entities/user';
 import { getQueryClient } from '@jeiltodo/ui/entities';
 
+export const runtime = 'edge';
+
 export default async function DashboardLayout({
   children,
 }: {
