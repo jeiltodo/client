@@ -20,9 +20,7 @@ export const useGetAllIndividualGoals = (params: {
   });
 };
 
-export const useDeleteIndividualGoal = (
-  onError: (_error: AxiosError) => void
-) => {
+export const useDeleteIndividualGoal = () => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 
@@ -32,13 +30,13 @@ export const useDeleteIndividualGoal = (
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: individualGoalsQueryKeys.all });
       showToast({
-        message: '개별 목표 삭제 성공!',
+        message: '목표 삭제 성공!',
         type: 'alert',
         isGroup: false,
       });
     },
     onError: () => {
-      showToast({ message: '개별 목표 삭제 실패!', type: 'confirm' });
+      showToast({ message: '목표 삭제 실패!', type: 'confirm' });
     },
   });
 };
@@ -54,9 +52,7 @@ export const useGetAllIndividualGoalTodos = (
   });
 };
 
-export const useDeleteIndividualGoalTodos = (
-  onError: (_error: AxiosError) => void
-) => {
+export const useDeleteIndividualGoalTodos = () => {
   const queryClient = useQueryClient();
   const showToast = useToast();
 

@@ -1,18 +1,19 @@
 'use client';
 import { useMemo } from 'react';
 
-import { useTableContext } from '../../../../shared';
-import { GoalTodosIndividualTable } from '../../../../widgets/goals/individual';
-import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
+import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
 import {
   GroupGoalTodos,
+  useDeleteGroupGoalTodos,
   useGetAllGroupGoalTodos,
 } from '../../../../entities/goals/group';
 import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
 import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
+import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsGroupDetailPage = () => {
   const searchParams = useSearchParams();
@@ -21,7 +22,7 @@ export const PostsGroupDetailPage = () => {
     ? params.goalId[0]
     : params.goalId;
   const goalTitle = searchParams.get('title') || '';
-
+  const showToast = useToast();
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetAllGroupGoalTodos(tableFilters, goalId);
 
@@ -32,6 +33,19 @@ export const PostsGroupDetailPage = () => {
     );
   }, [data?.todos, tableSort]);
 
+  const deleteGroupGoalTodosMutation = useDeleteGroupGoalTodos();
+
+  const handleDelete = (ids: number[]) => {
+    if (ids.length === 0) {
+      showToast({
+        message: '체크된 항목이 없습니다.',
+        type: 'confirm',
+      });
+    } else {
+      deleteGroupGoalTodosMutation.mutate(ids);
+    }
+  };
+
   if (isLoading || !data) return <LoadingSpinner />;
 
   return (
@@ -41,15 +55,18 @@ export const PostsGroupDetailPage = () => {
       </h1>
       <LayoutTitle title={`할 일 관리 (${goalTitle})`} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableToolBar
-          totalCount={data?.totalCount}
-          searchedCount={data?.totalCount}
-        />
-        {sortedTodos ? (
-          <GoalTodosGroupTable goalTitle={goalTitle} todos={sortedTodos} />
-        ) : (
-          <LoadingSpinner />
-        )}
+        <TableCheckListProvider tableData={data.todos}>
+          <TableToolBarWithCheck
+            onDelete={handleDelete}
+            totalCount={data?.totalCount}
+            searchedCount={data?.totalCount}
+          />
+          {sortedTodos ? (
+            <GoalTodosGroupTable goalTitle={goalTitle} todos={sortedTodos} />
+          ) : (
+            <LoadingSpinner />
+          )}
+        </TableCheckListProvider>
         <TablePagination
           totalCount={data.totalCount}
           currentPage={data.currentPage}

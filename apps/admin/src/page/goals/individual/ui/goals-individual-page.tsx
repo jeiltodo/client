@@ -1,7 +1,10 @@
 'use client';
 
 import { GOALS_INDIVIDUAL_FIILTERS } from '../../../../entities/goals/individual/constants/goals-individual-filters';
-import { useGetAllIndividualGoals } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
+import {
+  useDeleteIndividualGoal,
+  useGetAllIndividualGoals,
+} from '../../../../entities/goals/individual/hooks/useIndividualGoals';
 import { TablePagination } from '../../../../features/goals/individual';
 import {
   SearchFilter,
@@ -9,7 +12,7 @@ import {
   useTableContext,
 } from '../../../../shared';
 import { GoalsIndividualTable } from '../../../../widgets/goals/individual';
-import { LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
 import { IndividualGoal } from '../../../../entities/goals/individual';
 import { useMemo } from 'react';
@@ -18,7 +21,7 @@ import { TableCheckListProvider } from '../../../../shared/model/table/table-che
 export const PostsIndividualPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetAllIndividualGoals(tableFilters);
-
+  const showToast = useToast();
   const sortedGoals = useMemo(() => {
     return sortBy<IndividualGoal>(
       data?.goals || [],
@@ -26,7 +29,18 @@ export const PostsIndividualPage = () => {
     );
   }, [data?.goals, tableSort]);
 
-  const handleDelete = (ids: number[]) => {};
+  const deleteIndividualGoalMutation = useDeleteIndividualGoal();
+
+  const handleDelete = (ids: number[]) => {
+    if (ids.length === 0) {
+      showToast({
+        message: '체크된 항목이 없습니다.',
+        type: 'confirm',
+      });
+    } else {
+      deleteIndividualGoalMutation.mutate(ids);
+    }
+  };
   if (isLoading || !data) return <LoadingSpinner />;
 
   return (
