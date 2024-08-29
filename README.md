@@ -23,16 +23,26 @@
 > 사용자들은 할 일을 쉽게 추가하고 관리하며 완료할 수 있습니다.
 >
 > 특히 협업이 필요한 그룹 작업의 경우, 팀원 간 **원활한 커뮤니케이션**을 위해 아래 기능을 추가로 지원합니다. <br/>
-> 🔹 실시간 업데이트 <br/>
-> 🔹 담당자 라벨링<br/>
-> 🔹 할 일 달성률에 따른 이미지 제공 <br/>
+> 🔹 실시간 할 일 현황 업데이트 <br/>
+> 🔹 할 일 담당자 라벨링 <br/>
+> 🔹 할 일 달성률에 따른 프로필 이미지 제공 <br/>
 >
 > <br/>
 >
-> 또한, **관리자 센터**를 제공하여 전체 회원과 그룹을 효과적으로 관리할 수 있습니다. <br/> 개별 회원의 목표와 할 일을 포함해 그룹의 목표 및 게시글까지 종합적으로 관리할 수 있어, 서비스 운영과 사용자 경험 개선에 큰 도움을 제공합니다.
->
+> 또한, **관리자 센터**를 제공하여 전체 회원과 그룹을 효과적으로 관리할 수 있습니다. <br/> 개인 회원의 목표와 할 일을 포함해 그룹의 목표 및 게시글까지 종합적으로 관리할 수 있습니다.
+
+<br/><br/><br/>
+
+## 배포 주소
+### 유저 서비스
+- 🔗[https://jtodo.site](https://jtodo.site/login)
+
+### 어드민 서비스
+- 🔗[https://jtodo.site/admin](https://jtodo.site/admin/login)
+
+<br/><br/><br/>
 ## 👥 팀 소개
-<br/><br/>
+<br/>
 
 우리 jeil(제일) 팀 구성원과 프로젝트의 역할을 소개합니다.
 
@@ -48,13 +58,20 @@
 
 
 🧑‍💻이준영(팀리더) - [@Dragonite-Lee](https://github.com/Dragonite-Lee) 📧 email@example.com <br />
-:
+공용 : 공통 컴포넌트, AWS배포 <br />
+유저 : sidebar, 최근 할 일 페이지, 내 진행 상황 보드, 노트 에디터 <br />
+어드민 : 어드민 게시글 관리
 
 🧑‍💻최지영 - [@ohtmm](https://github.com/ohtmm) 📧 cwd05011@gmail.com <br />
-:
+공용 : 공통 컴포넌트 <br />
+유저 : 개인 대시보드 페이지, 그룹 대시보드 페이지, 개인 디테일 페이지 <br />
+어드민 : 어드민 회원 관리 <br />
 
 🧑‍💻안주연 - [@aajy](https://github.com/aajy) 📧 aajy.000@gmail.com <br />
-: 공통 컴포넌트, 노트 페이지, 어드민 그룹 관리
+공용 : 공통 컴포넌트 <br />
+유저 : 로그인 및 회원가입 페이지, 노트 모아보기 페이지, 그룹 디테일 페이지 <br />
+어드민 : 어드민 그룹 관리 <br />
+
 
 <br/><br/><br/>
 <br/><br/><br/>
@@ -269,18 +286,18 @@ npm run dev
 ## 🚀 기술 스택
 <br/>
 
-- **프론트엔드**: Next.js 14 (App Router), TailwindCSS
+- **프론트엔드**: Next.js 14 (App Router), Typescript, TailwindCSS
 - **백엔드**: Node.js, Express, MongoDB
 - **백엔드 통신**: Axios
 - **상태 관리**: TanStack Query v5
 - **CI/CD**: GitHub Actions, Docker
- **모노레포 관리**: Yarn Workspaces, Turborepo
+- **모노레포 관리**: Yarn Workspaces, Turborepo
   
 
 <br/><br/><br/>
 
 ## ⚡업데이트 예정(v.2.0)
-<br/><br/>
+<br/>
 
 - [ ] 현재는 개발 효율성을 위해 클라이언트 측 쿠키로 토큰을 관리하고 있습니다. <br/>
     향후 서비스 규모 확장과 보안 요구사항 증가에 따라 토큰 관리를 서버 측으로 전환할 계획입니다. <br/>
@@ -291,11 +308,14 @@ npm run dev
 
 
 ## 🎯 트러블 슈팅 기록
-<br/><br/>
+<br/>
+
+: 블로그로 회고할 예정입니다.
 
 - [ ] middleware를 사용하면서
-- [ ] axios를 사용하면서
-- [ ] tanstack query를 사용하면서 
+- [ ] axios를 사용하면서 -(모노레포의 토큰  분기 처리)
+- [ ] tanstack query를 사용하면서 - (invalidate 연산자 주의)
+- [ ] lint를 사용하면서
 
 <br/><br/><br/>
 ## 🎥 시연 영상
@@ -311,6 +331,25 @@ npm run dev
  -->
 <br/><br/><br/>
 
+## 한 줄 소감
+👩‍💻준영 :  <br />
+👩‍💻지영 :  <br />
+👩‍💻주연 : 기획부터 현재 배포까지 
+
+
+<br /><br />
+## 라이트 하우스
+
+### 유저 사이트
+
+ <img src="https://hackmd.io/_uploads/r1YlNIpsA.jpg" width="60%" />
+
+
+### 어드민 사이트
+
+ <img src="https://hackmd.io/_uploads/HJkFNLpsR.png" width="60%" />
+
+<br /><br /><br /><br />
 <div align="center">
   <img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="20" /> - 당신의 생산성을 편리하게 높이는 방법 ⚡
 </div>
