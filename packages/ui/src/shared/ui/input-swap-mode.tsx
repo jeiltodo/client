@@ -1,6 +1,6 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 interface Props {
   label: string;
@@ -11,8 +11,7 @@ interface Props {
   isAdmin?: boolean;
   onChange: (value: string) => void;
   onSwap: Dispatch<SetStateAction<boolean>>;
-  className?: string;
-  colorVariant?: 'blue' | 'orange';
+  className?: string; 
 }
 
 export const InputSwapMode = ({
@@ -24,16 +23,9 @@ export const InputSwapMode = ({
   isAdmin = false,
   onChange,
   onSwap,
-  className,
-  colorVariant = 'blue',
+  className, 
 }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [inputValue, setInputValue] = useState(defaultValue);
-
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
-
   const handleToggle = () => {
     if (isEditMode === true) {
       onChange(defaultValue);
@@ -56,7 +48,7 @@ export const InputSwapMode = ({
       <div className='flex w-full gap-0.5'>
         <input
           ref={inputRef}
-          value={inputValue}
+          value={value}
           readOnly={isEditMode === false}
           onChange={(e) => {
             onChange(e.target.value);

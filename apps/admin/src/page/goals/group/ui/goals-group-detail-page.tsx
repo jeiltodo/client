@@ -12,7 +12,6 @@ import {
   useGetAllGroupGoalTodos,
 } from '../../../../entities/goals/group';
 import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
-import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsGroupDetailPage = () => {
