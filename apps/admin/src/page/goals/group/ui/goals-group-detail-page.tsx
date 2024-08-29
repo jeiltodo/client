@@ -17,9 +17,9 @@ import { TableCheckListProvider } from '../../../../shared/model/table/table-che
 export const PostsGroupDetailPage = () => {
   const searchParams = useSearchParams();
   const params = useParams();
-  const goalId = Array.isArray(params.goalId)
-    ? params.goalId[0]
-    : params.goalId;
+  const goalId = Number(
+    Array.isArray(params.goalId) ? params.goalId[0] : params.goalId
+  );
   const goalTitle = searchParams.get('title') || '';
   const showToast = useToast();
   const { tableFilters, tableSort } = useTableContext();

@@ -44,10 +44,10 @@ export const useDeleteGroupGoal = () => {
 
 export const useGetAllGroupGoalTodos = (
   params: { page: number; limit: number | string },
-  goalId: string
+  goalId: number
 ) => {
   const query = useQuery({
-    queryKey: groupGoalsQueryKeys.detail(goalId),
+    queryKey: groupGoalsQueryKeys['detail-filters'](goalId, params),
     queryFn: () => groupGoalsApi.getAllGroupGoalTodos(params, goalId),
   });
 
