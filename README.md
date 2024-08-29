@@ -241,6 +241,8 @@ npm run dev
 - 그룹 대시보드
 - 어드민 전반 영상
 
+<br/><br/><br/>
+
 ## 프로젝트 수행절차 및 구조
 <br/>
 
@@ -307,7 +309,7 @@ npm run dev
 
 <br/><br/><br/>
 ## 🎥 시연 영상
-🔗드라이브 링크
+🔗[드라이브 링크](https://drive.google.com/drive/folders/1krgevTFPczQJfxkvUNm3-C3S4k7zBaT9)
 <br/><br/><br/>
 
 <!-- ## 🔗 링크
@@ -341,3 +343,4 @@ npm run dev
 <div align="center">
   <img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="20" /> - 당신의 생산성을 편리하게 높이는 방법 ⚡
 </div>
+<br /><br /><br /><br /><br /><br />
