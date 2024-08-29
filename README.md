@@ -24,14 +24,39 @@
 >
 > 특히 협업이 필요한 그룹 작업의 경우, 팀원 간 **원활한 커뮤니케이션**을 위해 아래 기능을 추가로 지원합니다. <br/>
 > 🔹 실시간 업데이트 <br/>
-> 🔹 담당자 라벨링 <br/>
+> 🔹 담당자 라벨링<br/>
 > 🔹 할 일 달성률에 따른 이미지 제공 <br/>
 >
 > <br/>
 >
 > 또한, **관리자 센터**를 제공하여 전체 회원과 그룹을 효과적으로 관리할 수 있습니다. <br/> 개별 회원의 목표와 할 일을 포함해 그룹의 목표 및 게시글까지 종합적으로 관리할 수 있어, 서비스 운영과 사용자 경험 개선에 큰 도움을 제공합니다.
 >
+## 👥 팀 소개
+<br/><br/>
 
+우리 jeil(제일) 팀 구성원과 프로젝트의 역할을 소개합니다.
+
+
+<!--
+| [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>이준영</b></sub>](https://github.com/Dragonite-Lee) | [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>최지영</b></sub>](https://github.com/ohtmm) | [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>안주연</b></sub>](https://github.com/aajy) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>유재영</b></sub>](https://github.com/Dragonite-Lee) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>신정섭</b></sub>](https://github.com/Dragonite-Lee) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>김은지</b></sub>](https://github.com/Dragonite-Lee) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 팀 리더 / 프론트엔드 개발자 | 프론트엔드 개발자 | 프론트엔드 개발자 | 백엔드 개발자 | 백엔드 개발자 | 디자이너 |
+| [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) |
+
+
+-- or 아래 간단 ver --- -->
+
+
+🧑‍💻이준영(팀리더) - [@Dragonite-Lee](https://github.com/Dragonite-Lee) 📧 email@example.com <br />
+:
+
+🧑‍💻최지영 - [@ohtmm](https://github.com/ohtmm) 📧 cwd05011@gmail.com <br />
+:
+
+🧑‍💻안주연 - [@aajy](https://github.com/aajy) 📧 aajy.000@gmail.com <br />
+: 공통 컴포넌트, 노트 페이지, 어드민 그룹 관리
+
+<br/><br/><br/>
 <br/><br/><br/>
 
 ## 🔹 프로젝트 미리보기
@@ -184,51 +209,42 @@ npm run dev
 
 <br/><br/><br/>
 
-## 기능별 화면 소개
+## 기능별 화면 소개 - 수행 결과
+
+- 목표 생성 및 목표 상세 페이지 확인
+- 할일 관리(대시보드에서 최근 등록한 할일과 목표 할일 체크 화면)
+- 최근 등록 할일 검색 탭 필터링
+- 노트 모아보기(목표상세페이지에서 노트 모아보기에서 수정 삭제기능)
+- 그룹 대시보드(그룹장이 아닌 화면에서그룹장 화면으로 넘어가서 그룹 정보 및 구성원 정보 변경, 할일 의 담당자 설정 프로그래스바 툴팁 확인)
+- 어드민 전반 영상
 
 ## 프로젝트 수행절차 및 구조
-<br/><br/>
-- ## ✅ `기술 스택` 선택
+<br/>
 
-- 최신 기술을 사용한 프로젝트를 하고 싶은 마음
-- 주은 강사님과 멘토쌤의 피드백 기반
+### 1. 기술 스택 선택
 
-<aside>
-<img src="/icons/verified_blue.svg" alt="/icons/verified_blue.svg" width="40px" /> 기술 스택
-
+최신 기술 사용 경험을 위해 아래 스택을 선택 하였습니다
 - next.js 14 App Router
 - tanstack query v5
 - typeScript
 - tailwind css
 - FSD 아키텍처 사용
 - 모노레포 도입을 위한 터보레포
-    - ⇒ 어드민 서비스와 우저 서비스를 하나의 레포로 관리해보자.
+    ⇒ 어드민 서비스와 유저 서비스를 하나의 레포로 관리
 - 도커를 이용한 EC2 인스턴스 배포
-</aside>
 
-## ✅ `피그마`로 확장하고 싶은 아이디어 정리
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/10e86d6c-30ed-4fcc-987b-77585a4b6bde/image.png)
+### 2. 피그마로 확장하고 싶은 아이디어 정리
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/c1b13051-dd57-4cad-9362-9ab7f5aeb907/image.png)
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/9f444719-4c88-4f58-80e3-38396882bc27/image.png)
+### 3. 기획문서 노션 작성
 
-## ✅슬리드 투두 기획안 기반의 `기획문서 노션` 작성
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/ca03ec40-68a2-4ddd-8a25-b69f0e471ee5/image.png)
+### 4. 디자이너님과 백엔드 개발자님과의 협업
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/607988e1-2553-4b28-82ae-078ebeda6df4/image.png)
+### 5. 그 외
 
-## ✅ 디자이너님과 백엔드 두 분과의 활발한 `디스코드 회의와 코멘트`
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/97286409-e264-43b6-b99b-aac1e8890226/image.png)
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/b60564f1-c971-45eb-9464-a4d6726f6c3b/image.png)
-
-## ✅ 그 외
-
-### prettierrc 공유
+#### - prettierrc 공유
 
 ```jsx
 {
@@ -243,26 +259,16 @@ npm run dev
 }
 ```
 
-- Git Wiki에 컨벤션 정리
-    
-    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/d6063130-786f-4138-a07a-17a7fd9ef907/image.png)
-    
+#### - Git Wiki에 컨벤션 정리
 
-## 작업을 시작하며
+#### - PR과 ISSUE 사용
 
-### PR과 ISSUE 활발한 사용
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/d51ceec8-f743-4c7e-aff0-5d5884d50a1a/image.png)
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/175a7c55-911d-4162-b85b-f934fc1a5c42/image.png)
-
-### wiki에 컨벤션 정리
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/bcfb5800-8640-4d98-93f2-9f3ce999b1ec/9cdcfd2f-934a-4424-90f0-540df3efb98e/image.png)
 <br/><br/><br/>
 
 ## 🚀 기술 스택
-<br/><br/>
+<br/>
+
 - **프론트엔드**: Next.js 14 (App Router), TailwindCSS
 - **백엔드**: Node.js, Express, MongoDB
 - **백엔드 통신**: Axios
@@ -273,7 +279,7 @@ npm run dev
 
 <br/><br/><br/>
 
-## 업데이트 예정(v.2.0)
+## ⚡업데이트 예정(v.2.0)
 <br/><br/>
 
 - [ ] 현재는 개발 효율성을 위해 클라이언트 측 쿠키로 토큰을 관리하고 있습니다. <br/>
@@ -283,25 +289,6 @@ npm run dev
 
 <br/><br/><br/>
 
-## 👥 팀 소개
-<br/><br/>
-
-우리 jeil(제일) 팀 구성원의 프로젝트의 역할을 소개합니다.
-
-
-
-| [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>이준영</b></sub>](https://github.com/Dragonite-Lee) | [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>최지영</b></sub>](https://github.com/ohtmm) | [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>안주연</b></sub>](https://github.com/aajy) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>유재영</b></sub>](https://github.com/Dragonite-Lee) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>신정섭</b></sub>](https://github.com/Dragonite-Lee) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>김은지</b></sub>](https://github.com/Dragonite-Lee) |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| 팀 리더 / 프론트엔드 개발자 | 프론트엔드 개발자 | 프론트엔드 개발자 | 백엔드 개발자 | 백엔드 개발자 | 디자이너 |
-| [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) |
-
-
--- or 아래 간단 ver ---
-
-🧑‍💻안주연 - [@aajy](https://github.com/aajy) 📧 aajy.000@gmail.com <br />
-🧑‍💻이준영 - [@Dragonite-Lee](https://github.com/Dragonite-Lee) 📧 email@example.com <br />
-🧑‍💻최지영 - [@Dragonite-Lee](https://github.com/ohtmm) 📧 email@example.com <br />
-<br/><br/><br/>
 
 ## 🎯 트러블 슈팅 기록
 <br/><br/>
@@ -312,18 +299,16 @@ npm run dev
 
 <br/><br/><br/>
 ## 🎥 시연 영상
-<br/><br/>
-
-[![TaskMaster Pro Demo](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+🔗드라이브 링크
 <br/><br/><br/>
 
-## 🔗 링크
-<br/><br/>
+<!-- ## 🔗 링크
+<br/>
 
-- [라이브 데모](https://taskmasterpro.example.com)
+ - [라이브 데모](https://taskmasterpro.example.com)
 - [기술 문서](https://docs.taskmasterpro.example.com)
 - [API 명세](https://api.taskmasterpro.example.com)
-
+ -->
 <br/><br/><br/>
 
 <div align="center">
