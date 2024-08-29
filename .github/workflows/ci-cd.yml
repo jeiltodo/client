@@ -24,8 +24,8 @@ jobs:
 
     - name: Build applications
       run: |
-        yarn build --filter=apps/user
-        yarn build --filter=apps/admin
+        yarn build --filter=user
+        yarn build --filter=admin
 
     - name: Build and push Docker images
       env:
@@ -48,8 +48,8 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
           docker login -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker pull ${{ secrets.DOCKER_USERNAME }}/user-app
-          docker pull ${{ secrets.DOCKER_USERNAME }}/admin-app
-          docker-compose down
-          docker-compose up -d
+          docker pull "${{ secrets.DOCKER_USERNAME }}"/user-app
+          docker pull "${{ secrets.DOCKER_USERNAME }}"/admin-app
+          docker compose down
+          docker compose up -d
           docker image prune -a -f

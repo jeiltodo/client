@@ -6,7 +6,7 @@ import { Field } from '../../../../../../packages/ui/src/shared/ui/field';
 import { UserInterface } from '../model/type';
 import { useState } from 'react';
 import { useUpdateMemberInfo } from '../../../entities/member/hooks/useUpdateMemberInfo';
-
+import { formatDateString } from '@jeiltodo/ui/shared';
 interface Props {
   member: UserInterface;
 }
@@ -70,7 +70,7 @@ export const MemberOverviewBoard = ({ member }: Props) => {
             }}
             onSwap={setIsEditEmailMode}
           />
-          <Field label='가입일'>{member.createdAt}</Field>
+          <Field label='가입일'>{formatDateString(member.createdAt)}</Field>
         </div>
       </div>
       <div className='w-full mt-4 flex justify-end'>
