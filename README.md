@@ -72,13 +72,19 @@
 유저 : 로그인 및 회원가입 페이지, 노트 모아보기 페이지, 그룹 디테일 페이지 <br />
 어드민 : 어드민 그룹 관리 <br />
 
+🫶함께 협업 해주신🫶 <br /><br />
+🧑‍💻신정섭 백엔드 개발자님 <br />
+🧑‍💻유재영 백엔드 개발자님 <br />
+🧑‍💻김은지 디자이너님 <br />
+
+
 
 <br/><br/><br/>
 <br/><br/><br/>
 
 ## 🔹 프로젝트 미리보기
 <br/>
-<details>
+<details open>
 <summary>유저 서비스 스크린샷 보기<img src="https://github.com/user-attachments/assets/a4f51226-a6c0-49e5-b3e3-1ccb9d150a16" alt="s-logo" width="3%">
 </summary>
   <div align="center">
@@ -87,7 +93,7 @@
     <br/><br/>
   </div> 
 </details>
-<details>
+<details open>
 <summary> 관리자 서비스 스크린샷 보기<img src="https://github.com/user-attachments/assets/12efbc64-bc50-4d1e-b844-ea71e9ff8d3b" alt="s-logo" width="3%"></summary>
   <div align="center">
     <br/>
@@ -229,10 +235,10 @@ npm run dev
 ## 기능별 화면 소개 - 수행 결과
 
 - 목표 생성 및 목표 상세 페이지 확인
-- 할일 관리(대시보드에서 최근 등록한 할일과 목표 할일 체크 화면)
+- 할일 관리
 - 최근 등록 할일 검색 탭 필터링
-- 노트 모아보기(목표상세페이지에서 노트 모아보기에서 수정 삭제기능)
-- 그룹 대시보드(그룹장이 아닌 화면에서그룹장 화면으로 넘어가서 그룹 정보 및 구성원 정보 변경, 할일 의 담당자 설정 프로그래스바 툴팁 확인)
+- 노트 모아보기
+- 그룹 대시보드
 - 어드민 전반 영상
 
 ## 프로젝트 수행절차 및 구조
