@@ -293,7 +293,7 @@ npm run dev
 <br/>
 
 - **프론트엔드**: Next.js 14 (App Router), Typescript, TailwindCSS
-- **백엔드**: Node.js, Express, MongoDB
+<!-- - **백엔드**: Node.js, Express, MongoDB-->
 - **백엔드 통신**: Axios
 - **상태 관리**: TanStack Query v5
 - **CI/CD**: GitHub Actions, Docker
@@ -337,23 +337,23 @@ npm run dev
  -->
 <br/><br/><br/>
 
-## 한 줄 소감
+<!-- ## 한 줄 소감
 👩‍💻준영 :  <br />
 👩‍💻지영 :  <br />
 👩‍💻주연 : 기획부터 현재 배포까지 
-
+-->
 
 <br /><br />
 ## 라이트 하우스
 
 ### 유저 사이트
 
- <img src="https://hackmd.io/_uploads/r1YlNIpsA.jpg" width="60%" />
+ <img src="https://github.com/user-attachments/assets/e2533a93-6a97-43c0-9c35-3a26a0510ecc" width="60%" />
 
 
 ### 어드민 사이트
 
- <img src="https://hackmd.io/_uploads/HJkFNLpsR.png" width="60%" />
+ <img src="https://github.com/user-attachments/assets/b64911a6-0fed-4931-b921-2bf19e809ec2" width="60%" />
 
 <br /><br /><br /><br />
 <div align="center">
