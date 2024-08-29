@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
@@ -14,9 +15,10 @@ import { useParams } from 'next/navigation';
 import { useGroupDetail } from '../../../entities/group';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
-import { GroupGoals, useGetAllGroupGoals } from '../../../entities/goals/group';
-import { useMemo } from 'react';
-import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
+import type { GroupGoals } from '../../../entities/goals/group';
+import { useGetAllGroupGoals } from '../../../entities/goals/group';
+import type { SortOptions } from '../../../shared/lib/sortBy';
+import { sortBy } from '../../../shared/lib/sortBy';
 import { GroupManagementDetailPagination } from '../../../features/group';
 import { useChangeLeader } from '../../../entities/group';
 import {
@@ -26,7 +28,7 @@ import {
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
 
-export const GroupManagementDetailPage = () => {
+export function GroupManagementDetailPage() {
   const params = useParams();
   const groupId = Number(params?.id);
 
@@ -102,4 +104,4 @@ export const GroupManagementDetailPage = () => {
       </div>
     </div>
   );
-};
+}
