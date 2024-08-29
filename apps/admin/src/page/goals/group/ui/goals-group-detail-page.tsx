@@ -12,15 +12,14 @@ import {
   useGetAllGroupGoalTodos,
 } from '../../../../entities/goals/group';
 import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
-import { TableToolBar } from '../../../../shared/ui/@x/table-toolbar/table-toobar';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export const PostsGroupDetailPage = () => {
   const searchParams = useSearchParams();
   const params = useParams();
-  const goalId = Array.isArray(params.goalId)
-    ? params.goalId[0]
-    : params.goalId;
+  const goalId = Number(
+    Array.isArray(params.goalId) ? params.goalId[0] : params.goalId
+  );
   const goalTitle = searchParams.get('title') || '';
   const showToast = useToast();
   const { tableFilters, tableSort } = useTableContext();

@@ -81,7 +81,6 @@ export const GroupOverviewBoard = ({
               isAdmin={isAdmin}
               onChange={setUpdatedValue}
               onSwap={setIsEditMode}
-              colorVariant='orange'
             />
           ) : (
             <Field label='그룹 이름'>{title}</Field>
