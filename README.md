@@ -1,4 +1,4 @@
-<br /><br/><br /><br/>
+![74F73717-D584-4D79-8CE0-276C2EB8D987_1_102_o](https://github.com/user-attachments/assets/8d25a23d-8bfa-4c5b-95e3-a9ce63228dfa)<br /><br/><br /><br/>
 <div align="center">
   <a href="https://jtodo.site/login">
     <img src="https://github.com/user-attachments/assets/821b19d0-b161-453b-867e-e3dc5275f958" width="auto" height="60" />
@@ -213,10 +213,20 @@ npm run dev
 
 - 목표 생성 및 목표 상세 페이지 확인
 - 할일 관리(대시보드에서 최근 등록한 할일과 목표 할일 체크 화면)
+- ![A4E1FA18-E31C-446A-B105-013BB8D9BDCD_1_102_o](https://github.com/user-attachments/assets/1806211a-bc36-4b6c-aa3d-d4bb007cead8)
+
 - 최근 등록 할일 검색 탭 필터링
+- ![9C6B2E2A-B33E-4492-8001-9448D6A8A7B3_1_102_o](https://github.com/user-attachments/assets/2f911fc4-b562-426b-82bc-ffc3fc7010f5)
+
 - 노트 모아보기(목표상세페이지에서 노트 모아보기에서 수정 삭제기능)
+- ![509AF06D-9A50-4FC0-93D8-966BE6C7E399_1_102_o](https://github.com/user-attachments/assets/5a34f2df-f263-4691-90c1-d201d339c89a)
+
 - 그룹 대시보드(그룹장이 아닌 화면에서그룹장 화면으로 넘어가서 그룹 정보 및 구성원 정보 변경, 할일 의 담당자 설정 프로그래스바 툴팁 확인)
+- ![74F73717-D584-4D79-8CE0-276C2EB8D987_1_102_o](https://github.com/user-attachments/assets/f29e1839-b83e-4dd0-96a6-7b9c753308a4)
+
 - 어드민 전반 영상
+- ![1451AC85-3CCD-4007-9AC7-7A6342F06F0A_1_102_o](https://github.com/user-attachments/assets/f4773b2f-2d44-49e2-bd2b-31d0a28ceb3c)
+
 
 ## 프로젝트 수행절차 및 구조
 <br/>
