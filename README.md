@@ -264,11 +264,11 @@ npm run dev
 
 ### 4. 디자이너님과 백엔드 개발자님과의 협업
 
-### 5. 그 외  Git Wiki에 컨벤션 정리, PR과 ISSUE 사용
+### 5. 모노레포 구조로 시작하며 shared에 해당하는 공용 컴포넌트 작업
 
-### 6. feature, fix브런치 -> develop브런치로 작업
+### 6. 컴포넌트 단위 -> 페이지 단위로 작업
 
-### 7. main 브런치 자동 배포
+### 7. 깃 플로우 : feature, fix -> develop -> main (자동 배포)
 
 
 <br/><br/><br/>
@@ -303,9 +303,10 @@ npm run dev
 : 블로그로 회고할 예정입니다.
 
 - [ ] middleware를 사용하면서
+- [ ] Nextjs App Router를 사용하면서
 - [ ] axios를 사용하면서 -(모노레포의 토큰  분기 처리)
 - [ ] tanstack query를 사용하면서 - (invalidate 연산자 주의)
-- [ ] lint를 사용하면서
+- [ ] Lint를 사용하면서
 
 <br/><br/><br/>
 ## 🎥 시연 영상
