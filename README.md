@@ -103,7 +103,8 @@
 </details>
 <br/><br/><br/>
  <hr/>
-<details open>
+
+<!-- <details open> 정렬 필요
   <summary><h2>📚 목차</h2></summary>
  
   <ul>
@@ -113,7 +114,7 @@
         <li><a href="#유저-서비스">유저 서비스</a></li>
         <li><a href="#어드민-서비스">어드민 서비스스</a></li>
       </ul>
-    </li> -->
+    </li>
     <li>
       <a href="#🔍-주요-기능-살펴보기">🔍 주요 기능 살펴보기</a>
       <ul>
@@ -130,7 +131,7 @@
     <li><a href="#🎥-시연-영상">🎥 시연 영상</a></li>
     <li><a href="#🔗링크">🔗 링크</a></li>
   </ul>
-</details>
+</details> -->
 
 <br/><br/>
 
