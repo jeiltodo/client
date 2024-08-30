@@ -46,16 +46,12 @@
 
 우리 jeil(제일) 팀 구성원과 프로젝트의 역할을 소개합니다.
 
-
-<!--
-| [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>이준영</b></sub>](https://github.com/Dragonite-Lee) | [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>최지영</b></sub>](https://github.com/ohtmm) | [<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>안주연</b></sub>](https://github.com/aajy) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>유재영</b></sub>](https://github.com/Dragonite-Lee) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>신정섭</b></sub>](https://github.com/Dragonite-Lee) |[<img src="https://via.placeholder.com/100" width="100px;"/><br /><sub><b>김은지</b></sub>](https://github.com/Dragonite-Lee) |
+| [<img src="https://github.com/user-attachments/assets/f7474a71-ec01-4f9b-b902-3f5745bbe6d4" /><br /><sub><b>이준영</b></sub>](https://github.com/Dragonite-Lee) | [<img src="https://github.com/user-attachments/assets/cf2091d4-3aec-4667-b6b7-4e7a21d29cb2" /><br /><sub><b>최지영</b></sub>](https://github.com/ohtmm) | [<img src="https://github.com/user-attachments/assets/b40a0ae0-d2e6-4354-ae08-e355c138cf35" /><br /><sub><b>안주연</b></sub>](https://github.com/aajy) |[<img src="https://github.com/user-attachments/assets/759064f2-5857-41bb-86c9-389623b8633e"/><br /><sub><b>유재영</b></sub>](https://github.com/Jy7733) |[<img src="https://github.com/user-attachments/assets/9f27a48d-f5f7-4145-9e6d-0cf53649dc3f"/><br /><sub><b>신정섭</b></sub>](https://github.com/) |[<img src="https://github.com/user-attachments/assets/02b94d7d-7a42-4818-bdd8-e63c49ed686d"/><br /><sub><b>김은지</b></sub>](https://github.com/eunji-uiux) |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| 팀 리더 / 프론트엔드 개발자 | 프론트엔드 개발자 | 프론트엔드 개발자 | 백엔드 개발자 | 백엔드 개발자 | 디자이너 |
-| [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/username) · [LinkedIn](https://linkedin.com/in/username) |
+| 프론트엔드 개발자 | 프론트엔드 개발자 | 프론트엔드 개발자 | 백엔드 개발자 | 백엔드 개발자 | 디자이너 |
+| [GitHub](https://github.com/Dragonite-Lee) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/ohtmm) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/aajy) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/Jy7733) | [GitHub](https://github.com/) · [LinkedIn](https://linkedin.com/in/username) | [GitHub](https://github.com/eunji-uiux) · [LinkedIn](www.linkedin.com/in/eunjikim-6754162b2) |
 
-
--- or 아래 간단 ver --- -->
-
+<br /><br />
 
 🧑‍💻이준영(팀리더) - [@Dragonite-Lee](https://github.com/Dragonite-Lee) 📧 email@example.com <br />
 공용 : 공통 컴포넌트, AWS배포 <br />
