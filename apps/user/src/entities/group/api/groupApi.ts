@@ -1,10 +1,11 @@
-import { GroupResponse, GroupPostResponse } from '../model/type';
-import { client, ResponseWith } from '../../../shared';
-import {
+import type {
   GroupCode,
   GroupTitleOrCode,
   GroupWithMembers,
 } from '@jeiltodo/ui/entities';
+import type { GroupResponse, GroupPostResponse } from '../model/type';
+import type { ResponseWith } from '../../../shared';
+import { client } from '../../../shared';
 
 export const groupApi = {
   // GET 요청: 개인 그룹 조회
@@ -40,7 +41,7 @@ export const groupApi = {
     }
   },
 
-  getGroupDetail: async (id: Number) => {
+  getGroupDetail: async (id: number) => {
     try {
       const response = await client.get<ResponseWith<GroupWithMembers>>(
         `/groups/${id}`

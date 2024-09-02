@@ -1,7 +1,7 @@
 import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
-import { GroupProps } from '../model/type';
 import Link from 'next/link';
 import { Group } from '@jeiltodo/icons';
+import type { GroupProps } from '../model/type';
 
 interface SidebarGroupNavProps {
   group: GroupProps[] | undefined;

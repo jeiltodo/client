@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupQueryKeys } from './queryKeys';
-import { groupApi } from '../api/groupApi';
 import { useToast } from '@jeiltodo/ui/shared';
+import { groupApi } from '../api/groupApi';
+import { groupQueryKeys } from './queryKeys';
 
 export const useChangeLeader = (groupId: number) => {
   const queryClient = useQueryClient();

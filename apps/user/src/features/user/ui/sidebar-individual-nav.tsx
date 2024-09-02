@@ -1,9 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Goal } from '../../../entities/goal';
 import Link from 'next/link';
 import { Individual } from '@jeiltodo/icons';
+import type { Goal } from '../../../entities/goal';
 
 interface SidebarIndividualNavProps {
   title: string;

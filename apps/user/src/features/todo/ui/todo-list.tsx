@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import type { Todo } from '../../../entities/todo';
 import { TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
@@ -14,7 +15,6 @@ import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { NoteDetailSlide } from '../../../widgets/note';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   todos: (Todo & { goal: Goal })[];

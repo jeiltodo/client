@@ -1,5 +1,5 @@
 export const getGroupColorClass = (colorCode: string) => {
-  const colorMap: { [key: string]: string } = {
+  const colorMap: Record<string, string> = {
     '1': 'bg-group-1',
   };
 

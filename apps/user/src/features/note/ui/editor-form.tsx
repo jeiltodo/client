@@ -1,8 +1,7 @@
 'use client';
 
 import { Counter, Input, LoadingSpinner } from '@jeiltodo/ui/shared';
-import { useEffect, useState } from 'react';
-import React, { useMemo } from 'react';
+import React, { useEffect, useState , useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { LinkDelete, LinkEmbed } from '@jeiltodo/icons';
@@ -125,7 +124,7 @@ export const EditorForm = ({
                 type='text'
                 name='title'
                 value={title}
-                autoFocus={true}
+                autoFocus
                 placeholder='노트의 제목을 입력해주세요'
                 onChange={handleTitleChange}
                 className='!px-0 w-full h-[46px] my-1 indent-2 placeholder:text-base placeholder:font-pretendard-medium bg-white'
@@ -137,12 +136,12 @@ export const EditorForm = ({
               <div className='flex flex-row text-right text-xs font-pretendard-medium text-slate-800 py-[12px]'>
                 <span>{`공백포함 : 총 `}</span>
                 <span className='inline-block min-w-[20px]'>{totalLength}</span>
-                <span className='pr-[2px]'>{`자 |`}</span>
+                <span className='pr-[2px]'>자 |</span>
                 <span>{`공백제외 : 총 `}</span>
                 <span className='inline-block min-w-[20px]'>
                   {lengthWithoutSpaces}
                 </span>
-                <span>{'자'}</span>
+                <span>자</span>
               </div>
               <Counter data={totalLength} limitNumber={10000} />
             </div>

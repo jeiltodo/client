@@ -10,13 +10,14 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
-import { GroupOverviewBoard, GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
+import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
+import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
+import { useParams } from 'next/navigation';
+import { MembersBoard } from "@jeiltodo/ui/src/widgets/group/ui/members-board";
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
 } from '../../../entities/group';
-import { useParams } from 'next/navigation';
 import { userOptions } from '../../../entities/user';
 import {
   useGroupCode,
@@ -33,7 +34,7 @@ import { ConfirmationModal } from '../../../shared';
 
 export const GroupDashboardPage = () => {
   const params = useParams();
-  const groupId = Number(params?.id);
+  const groupId = Number(params.id);
   const [goalModalOpen, setGoalModalOpen] = useState(false);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const {
@@ -159,7 +160,7 @@ export const GroupDashboardPage = () => {
           </React.Fragment>
         ))}
       </div>
-      <div ref={ref} className='h-4'></div>
+      <div ref={ref} className='h-4' />
       {goalModalOpen && (
         <GoalModal
           setGoalModalToggle={setGoalModalOpen}

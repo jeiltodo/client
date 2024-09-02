@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
 
 interface SidebarNavProps {
   icon: ForwardRefExoticComponent<

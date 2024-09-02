@@ -1,18 +1,18 @@
-import { Member } from '@jeiltodo/ui/entities';
-import { Todo } from '../../todo';
+import type { Member } from '@jeiltodo/ui/entities';
+import type { Todo } from '../../todo';
 
 export type GoalWithTodos = Goal & { todos: Todo[] };
 
-export type Goal = {
+export interface Goal {
   id: number;
   title: string;
   memberId: number;
   createdAt: string;
   updatedAt: string;
   progress: number;
-};
+}
 
-export type UserProgress = { progress: number };
+export interface UserProgress { progress: number }
 
 export interface SingleGoalResponse {
   msg: string;
@@ -64,7 +64,7 @@ export type GroupMember = Pick<Member, 'nickname' | 'color'> & {
 };
 export type GroupTodo = Todo & { memberInCharge: string | null };
 
-export type GroupGoal = {
+export interface GroupGoal {
   title: string;
   id: number;
   userId: number;
@@ -74,7 +74,7 @@ export type GroupGoal = {
     completedPercent: number;
     members: GroupMember[];
   };
-};
+}
 
 export type GroupGoalWithTodos = GroupGoal & {
   todos: GroupTodo[];

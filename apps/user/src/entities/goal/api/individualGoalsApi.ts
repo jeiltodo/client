@@ -1,4 +1,5 @@
-import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
+import type { ResponsePageListWith, ResponseWith } from '../../../shared';
+import { client } from '../../../shared';
 import { SingleGoalTodosResponse } from '../../todo';
 import type {
   Goal,

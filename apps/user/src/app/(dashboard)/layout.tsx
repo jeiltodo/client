@@ -23,11 +23,9 @@ export default async function DashboardLayout({
   await queryClient.prefetchQuery(progressAllOptions());
 
   return (
-    <>
-      <HydrationBoundary state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
         <SidebarUser />
         <main>{children}</main>
       </HydrationBoundary>
-    </>
   );
 }

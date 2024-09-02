@@ -2,8 +2,8 @@ import './style/globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
-import { QueryProvider } from '../shared';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryProvider } from '../shared';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',
@@ -24,7 +24,7 @@ export default function RootLayout({
         <QueryProvider>
           <ToastContainer limit={5} />
           {children}
-          <ReactQueryDevtools initialIsOpen={true} />
+          <ReactQueryDevtools initialIsOpen />
         </QueryProvider>
       </body>
     </html>

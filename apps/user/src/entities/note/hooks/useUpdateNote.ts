@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { NotePatchParam, patchNote } from '../api/noteApi';
 import { useToast } from '@jeiltodo/ui/shared';
+import type { NotePatchParam} from '../api/noteApi';
+import { patchNote } from '../api/noteApi';
 
 export const useUpdateNote = (noteId: number) => {
   const queryClient = useQueryClient();

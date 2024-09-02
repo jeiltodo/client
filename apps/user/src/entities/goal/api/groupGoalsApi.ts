@@ -1,10 +1,13 @@
-import {
-  GroupGoalsResponse,
+import type {
   GroupGoalWithTodos,
-  SingleGoalResponse,
+  SingleGoalResponse} from '../model/type';
+import {
+  GroupGoalsResponse
 } from '../model/type';
-import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
-import { GoalProps, GroupProps } from '../../../features/group';
+import type { ResponsePageListWith, ResponseWith } from '../../../shared';
+import { client } from '../../../shared';
+import type { GoalProps} from '../../../features/group';
+import { GroupProps } from '../../../features/group';
 
 export const groupGoalsApi = {
   getSingleGroupGoal: async (goalId: number) => {

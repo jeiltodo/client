@@ -1,11 +1,13 @@
-import { client, ResponseWith } from '../../../shared';
-import {
+import type { ResponseWith } from '../../../shared';
+import { client } from '../../../shared';
+import type {
   ResponsePageListRecentTodo,
-  SingleGoalTodosResponse,
-  Todo,
   TodoCreateBody,
   Todos,
-  TodoUpdateBody,
+  TodoUpdateBody} from '../model/type';
+import {
+  SingleGoalTodosResponse,
+  Todo
 } from '../model/type';
 
 export const todoApi = {

@@ -1,13 +1,13 @@
 'use client';
 
 import { Button } from '@jeiltodo/ui/shared';
-import { GroupGoalWithTodos } from '../../../entities/goal';
 import { ArrowRight, PlusOrange } from '@jeiltodo/icons';
 import { useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import type { GroupGoalWithTodos } from '../../../entities/goal';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';
-import { useParams, useRouter } from 'next/navigation';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { TodoModal } from '../../../entities/todo';
 import { useGroupDetail } from '../../../entities/group';

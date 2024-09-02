@@ -1,1 +1,1 @@
-export type todoQuery = { goalIds: number[] | []; status?: boolean | null };
+export interface todoQuery { goalIds: number[] | []; status?: boolean | null }

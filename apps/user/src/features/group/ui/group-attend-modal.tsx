@@ -1,8 +1,7 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
-
-import { Button, Input } from '@jeiltodo/ui/shared';
-import { BaseModal } from '@jeiltodo/ui/shared';
+import type { Dispatch, SetStateAction} from 'react';
+import { useState } from 'react';
+import { Button, Input , BaseModal } from '@jeiltodo/ui/shared';
 
 interface GroupAttendModalProps {
   setGroupAttendToggle: Dispatch<SetStateAction<boolean>>;
