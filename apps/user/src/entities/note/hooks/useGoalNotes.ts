@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { noteQueryKeys } from '../queryKeys';
-import { getGoalNotes, GetGoalNotesParam } from '../api/noteApi';
+import type { GetGoalNotesParam } from '../api/noteApi';
+import { getGoalNotes } from '../api/noteApi';
 import { calculateTotalPages } from '../../../shared';
 
 interface PageInfo {

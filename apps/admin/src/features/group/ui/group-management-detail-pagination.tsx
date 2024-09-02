@@ -6,10 +6,10 @@ interface GroupManagementDetailPaginationProps {
   currentPage: number;
 }
 
-export const GroupManagementDetailPagination = ({
+export function GroupManagementDetailPagination({
   totalCount,
   currentPage,
-}: GroupManagementDetailPaginationProps) => {
+}: GroupManagementDetailPaginationProps) {
   const { tableFilters, setTableFilters } = useTableContext();
   const handleNextPage = () => {
     const totalPages = calculateTotalPages(
@@ -30,12 +30,12 @@ export const GroupManagementDetailPagination = ({
   };
   return (
     <Pagination
-      onClickPage={handleClickPage}
-      onPrev={handlePrevPage}
-      onNext={handleNextPage}
-      totalCount={totalCount}
-      limit={Number(tableFilters.limit)}
       currentPage={currentPage}
+      limit={Number(tableFilters.limit)}
+      onClickPage={handleClickPage}
+      onNext={handleNextPage}
+      onPrev={handlePrevPage}
+      totalCount={totalCount}
     />
   );
-};
+}

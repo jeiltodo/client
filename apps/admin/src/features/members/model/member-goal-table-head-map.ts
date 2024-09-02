@@ -1,4 +1,4 @@
-import { MemberGoal } from '../../../entities/member';
+import type { MemberGoal } from '../../../entities/member';
 import type { TableHeadMap } from '../../../shared/ui/table/type';
 
 export const MEMBER_GOAL_TABLE_HEAD_MAP: TableHeadMap<MemberGoal>[] = [

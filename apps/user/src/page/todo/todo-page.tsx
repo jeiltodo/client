@@ -1,13 +1,15 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import { RecentFilter } from '../../entities/user';
-import { TodoModal, todoQuery, useRecentTodo } from '../../entities/todo';
 import { useInView } from 'react-intersection-observer';
-import { Goal, individualGoalsOptions, userOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
-import { TodoList } from '../../features/todo';
 import { BackButton, Button, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { Back, PlusBlue } from '@jeiltodo/icons';
+import { RecentFilter } from '../../entities/user';
+import type { todoQuery} from '../../entities/todo';
+import { TodoModal, useRecentTodo } from '../../entities/todo';
+import type { Goal} from '../../entities/goal';
+import { individualGoalsOptions, userOptions } from '../../entities/goal';
+import { TodoList } from '../../features/todo';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
@@ -65,7 +67,7 @@ export const TodoPage = () => {
           <div className='flex'>
             <BackButton />
             <div className='text-lg font-semibold text-slate-900 pl-2 min-w-[166px]'>
-              최근 등록한 할 일 ({allTodos?.length})
+              최근 등록한 할 일 ({allTodos.length})
             </div>
           </div>
           <Button

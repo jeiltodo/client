@@ -104,7 +104,7 @@ export const IndividualGoalDetailPage = ({
             {isConfirmOpen && (
               <ConfirmationModal
                 setModalToggle={setIsConfirmOpen}
-                submitButtonText={'삭제'}
+                submitButtonText="삭제"
                 onSubmit={handleDelete}
               >
                 정말 삭제 하시겠어요?

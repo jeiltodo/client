@@ -1,8 +1,8 @@
 import { TodoRecently } from '@jeiltodo/icons';
-import { GroupsInterface } from '../model/type';
+import { useParams } from 'next/navigation';
+import type { GroupsInterface } from '../model/type';
 import { GroupCard } from '../../../entities/member/ui/group-card';
 import { useLeaveGroup } from '../../../entities/group/hooks/useLeaveGroup';
-import { useParams } from 'next/navigation';
 
 interface GroupBoardProps {
   groups: GroupsInterface[];
@@ -27,14 +27,14 @@ export const GroupBoard: React.FC<GroupBoardProps> = ({ groups }) => {
         </div>
       </div>
       <div
-        className={`mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide`}
+        className="mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide"
       >
         {groups.map((group) => (
           <GroupCard
             key={group.id}
             name={group.title}
+            onLeaveGroup={() => { handleLeaveGroup(group.id); }}
             registerAt={group.registerAt}
-            onLeaveGroup={() => handleLeaveGroup(group.id)}
           />
         ))}
       </div>

@@ -1,11 +1,11 @@
 'use client';
 
 import { ButtonGroup } from '@jeiltodo/ui/shared';
-import { TableFilter } from '../../../model/table/type';
+import { useState } from 'react';
+import type { TableFilter } from '../../../model/table/type';
 import { FilterForm } from './filter-form';
 import { FilterClear } from './filter-clear';
 import { FilterSearch } from './filter-search';
-import { useState } from 'react';
 
 interface SearchFilterProps {
   filters: TableFilter[];

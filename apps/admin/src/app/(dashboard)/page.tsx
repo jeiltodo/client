@@ -1,12 +1,12 @@
 import { MemberManagementPage } from '../../page/members';
 import { TableProvider } from '../../shared';
 
-const Page = () => {
+function Page() {
   return (
     <TableProvider>
       <MemberManagementPage />
     </TableProvider>
   );
-};
+}
 
 export default Page;

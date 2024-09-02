@@ -1,8 +1,6 @@
 'use client';
-import { Dispatch, PropsWithChildren, SetStateAction } from 'react';
-
-import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
-import { BaseModal } from '@jeiltodo/ui/shared';
+import type { Dispatch, PropsWithChildren, SetStateAction } from 'react';
+import { Button, ButtonGroup , BaseModal } from '@jeiltodo/ui/shared';
 
 interface Props extends PropsWithChildren {
   setModalToggle: Dispatch<SetStateAction<boolean>>;

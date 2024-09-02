@@ -1,6 +1,6 @@
 
 import { client } from '@jeiltodo/ui/shared';
-import { UserInfoResponse } from '../model/type';
+import type { UserInfoResponse } from '../model/type';
 
 export const userApi = {
   getUserInfo: async (): Promise<UserInfoResponse> => {

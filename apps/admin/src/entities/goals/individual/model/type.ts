@@ -16,14 +16,14 @@ export interface IndividualGoalTodos {
   updatedAt: string;
 }
 
-export type IndividualGoalsQueryParams = {
+export interface IndividualGoalsQueryParams {
   page: number;
   limit: number;
   nickname?: string;
   title?: string;
   createdAfter?: string;
   createdBefore?: string;
-};
+}
 
 export interface ResponseGetAllIndividualGoals {
   msg: string;

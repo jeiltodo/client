@@ -1,10 +1,10 @@
 'use client';
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
-import { Goal } from '../../goal';
+import type { Goal } from '../../goal';
 import { getUniqueNumbers } from '../../../shared';
 import { statusMap } from '../../user/model/status-filter-map';
-import { todoQuery } from '../hooks/todoQuery';
+import type { todoQuery } from '../hooks/todoQuery';
 
 interface Props {
   goals: Pick<Goal, 'id' | 'title'>[];

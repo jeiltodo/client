@@ -1,9 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import {
+import { useParams, useRouter } from 'next/navigation';
+import { useToast } from '@jeiltodo/ui/shared';
+import { useQuery } from '@tanstack/react-query';
+import type {
   FormattedGoalWithTodos,
-  MemgberInCharge,
+  MemgberInCharge} from '../../../entities/todo';
+import {
   TodoAssignee,
   TodoButtons,
   TodoModal,
@@ -13,11 +17,8 @@ import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
-import { useParams, useRouter } from 'next/navigation';
 import { useGroupDetail } from '../../../entities/group';
 import { NoteDetailSlide } from '../../../widgets/note';
-import { useToast } from '@jeiltodo/ui/shared';
-import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../../entities/goal';
 
 interface Props {
@@ -26,7 +27,7 @@ interface Props {
 
 export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   const params = useParams();
-  const groupId = Number(params!.id);
+  const groupId = Number(params.id);
   const router = useRouter();
 
   const [editModalId, setEditModalId] = useState<number | null>(null);
@@ -109,7 +110,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
               key={id}
               todo={{ id, title, isDone }}
               disabled={memberInCharge === null}
-              isGroup={true}
+              isGroup
               onCheck={handleCheck}
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
@@ -118,7 +119,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
             onClickEdit={() => handleClickEdit(id)}
             onClickRemove={() => handleClickRemove(id)}
             onClickNote={() => handleClickNote(id, memberInCharge, noteId)}
-            isGroup={true}
+            isGroup
           />
           {editModalId === id && (
             <TodoModal

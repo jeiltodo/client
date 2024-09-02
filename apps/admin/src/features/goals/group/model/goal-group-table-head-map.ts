@@ -1,4 +1,4 @@
-import { GroupGoals } from '../../../../entities/goals/group';
+import type { GroupGoals } from '../../../../entities/goals/group';
 import type { TableHeadMap } from '../../../../shared/ui/table/type';
 
 export const GOAL_GROUP_TABLE_HEAD_MAP: TableHeadMap<GroupGoals>[] = [

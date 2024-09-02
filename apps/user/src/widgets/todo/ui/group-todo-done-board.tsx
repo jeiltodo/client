@@ -17,7 +17,7 @@ export const GroupTodoDoneBoard = ({
         todo.memberInCharge !== null &&
         todo.memberInCharge.nickname === userName
     )
-    .filter((todo) => todo.isDone === false);
+    .filter((todo) => !todo.isDone);
 
   const userDoneForList = todos
     .filter(
@@ -25,7 +25,7 @@ export const GroupTodoDoneBoard = ({
         todo.memberInCharge !== null &&
         todo.memberInCharge.nickname === userName
     )
-    .filter((todo) => todo.isDone === true);
+    .filter((todo) => todo.isDone);
 
   const userNotDone = userTodosForList.map((todo) => {
     return {
@@ -33,7 +33,7 @@ export const GroupTodoDoneBoard = ({
       title: todo.title,
       isDone: todo.isDone,
       noteId: todo.noteId ?? undefined,
-      goal: goal,
+      goal,
     };
   });
 
@@ -43,7 +43,7 @@ export const GroupTodoDoneBoard = ({
       title: todo.title,
       isDone: todo.isDone,
       noteId: todo.noteId ?? undefined,
-      goal: goal,
+      goal,
     };
   });
 
@@ -55,7 +55,7 @@ export const GroupTodoDoneBoard = ({
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 To do
             </p>
-            <TodoList todos={userNotDone} isGroup={true} />
+            <TodoList todos={userNotDone} isGroup />
           </div>
         ) : (
           <div className='min-h-[96px] desktop:min-h-[228px] flex flex-col'>
@@ -74,7 +74,7 @@ export const GroupTodoDoneBoard = ({
             <p className='text-sm font-semibold text-slate-800 mb-3'>
               {userName}의 Done
             </p>
-            <TodoList todos={userDone} isGroup={true} />
+            <TodoList todos={userDone} isGroup />
           </div>
         ) : (
           <div className='min-h-[96px] desktop:min-h-[228px] flex flex-col'>

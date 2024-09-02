@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { membersQueryKeys } from './queryKeys';
 import { memberApi } from '../api/memberApi';
+import { membersQueryKeys } from './queryKeys';
 
 export const useGetMemberDetail = (id: number) => {
   return useQuery({

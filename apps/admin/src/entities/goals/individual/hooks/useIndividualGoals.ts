@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { individualGoalsApi } from '../api/goalsApi';
-import { individualGoalsQueryKeys } from '../hooks/queryKeys';
 import { AxiosError } from 'axios';
 import { useToast } from '@jeiltodo/ui/shared';
+import { individualGoalsApi } from '../api/goalsApi';
+import { individualGoalsQueryKeys } from "./queryKeys";
 
 export const useGetAllIndividualGoals = (params: {
   page: number;

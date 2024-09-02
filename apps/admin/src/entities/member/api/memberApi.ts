@@ -1,6 +1,7 @@
-import { client, ResponseWith } from '@jeiltodo/ui/shared';
-import { Member, MemberDetail, MemberQueryParams } from './type';
-import { ResponsePageListWith } from '../../../shared/model/type';
+import type { ResponseWith } from '@jeiltodo/ui/shared';
+import { client } from '@jeiltodo/ui/shared';
+import type { ResponsePageListWith } from '../../../shared/model/type';
+import type { Member, MemberDetail, MemberQueryParams } from './type';
 
 export const memberApi = {
   getMemberList: async (params: MemberQueryParams) => {

@@ -3,11 +3,10 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
+import { useToast } from '@jeiltodo/ui/shared';
 import { goalQueryKeys } from '../../goal/hooks/queryKey';
 import { individualGoalsApi } from '../../goal';
-import { useToast } from '@jeiltodo/ui/shared';
 
 export const individualGoalsOptions = () =>
   queryOptions({

@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { todoQueryKeys } from './queryKey';
 import { todoApi } from '../api/todoApi';
+import { todoQueryKeys } from './queryKey';
 
 interface PageLimit {
   limit: number;
@@ -20,8 +20,8 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
       todoApi.getRecentTodo({
         page: pageParam || 1,
         limit,
-        goalIds: goalIds,
-        isDone: isDone,
+        goalIds,
+        isDone,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

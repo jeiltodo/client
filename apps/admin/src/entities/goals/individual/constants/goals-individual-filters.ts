@@ -1,4 +1,4 @@
-import { TableFilter } from '../../../../shared';
+import type { TableFilter } from '../../../../shared';
 
 export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
   {

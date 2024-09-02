@@ -1,7 +1,7 @@
 'use client';
 
 import { Checkbox } from '@jeiltodo/ui/shared';
-import { Todo } from '..';
+import type { Todo } from '..';
 
 interface Props {
   todo: Todo;

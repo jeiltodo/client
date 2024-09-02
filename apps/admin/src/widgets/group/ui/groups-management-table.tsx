@@ -11,9 +11,9 @@ interface GroupsManagementTableProps {
   groups: Groups[];
 }
 
-export const GroupsManagementTable = ({
+export function GroupsManagementTable({
   groups: groupRows,
-}: GroupsManagementTableProps) => {
+}: GroupsManagementTableProps) {
   const router = useRouter();
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
     useTableCheck();
@@ -36,7 +36,7 @@ export const GroupsManagementTable = ({
       </Table.Header>
       <Table.Body>
         {groupRows.map((group, id) => (
-          <Table.Row key={group.title + id} className='hover:bg-slate-50 '>
+          <Table.Row className='hover:bg-slate-50 ' key={group.title + id}>
             <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(group.id)}
@@ -70,4 +70,4 @@ export const GroupsManagementTable = ({
       </Table.Body>
     </Table>
   );
-};
+}

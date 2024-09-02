@@ -1,4 +1,4 @@
-import { TableQueries } from '../../../../shared';
+import type { TableQueries } from '../../../../shared';
 
 export const individualGoalsQueryKeys = {
   all: ['goalsIndividual'] as const,

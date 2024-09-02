@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { memberApi } from '../api/memberApi';
-import { UserInterface } from '../../../widgets/members/model/type';
+import type { UserInterface } from '../../../widgets/members/model/type';
 
 export const useUpdateMemberInfo = (memberId: number) => {
   const queryClient = useQueryClient();

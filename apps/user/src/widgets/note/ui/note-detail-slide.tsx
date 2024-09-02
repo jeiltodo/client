@@ -1,7 +1,6 @@
 'use client';
 import ReactDOM from 'react-dom';
 import { DeleteMenu, LinkEmbed } from '@jeiltodo/icons';
-
 import {
   BoardTitle,
   Button,
@@ -10,9 +9,9 @@ import {
   LoadingSpinner,
   TodoTitle,
 } from '@jeiltodo/ui/shared';
+import { useRouter } from 'next/navigation';
 import { useNoteDetail } from '../../../entities/note/hooks/useNoteDetail';
 import { useDeleteNote } from '../../../entities/note';
-import { useRouter } from 'next/navigation';
 
 interface NoteDetailSlideProps {
   goalId: number;
@@ -55,7 +54,7 @@ export const NoteDetailSlide = ({
           e.stopPropagation();
           setToggle(false);
         }}
-      ></div>
+       />
       {/* slide */}
       <div className='p-6 pb-8 h-screen bg-white desktop:!w-[800px] tablet:!w-[512px] w-full fixed top-[0px] right-[0px]'>
         {isLoading ? (

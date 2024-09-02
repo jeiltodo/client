@@ -1,10 +1,11 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { signUpApi, SignUpBody } from '../../entities/session';
 import { useToast } from '@jeiltodo/ui/shared';
 import { useCallback } from 'react';
-import { SignUpForm } from '../../features/session';
 import Image from 'next/image';
+import { signUpApi } from '../../entities/session';
+import type { SignUpBody } from '../../entities/session';
+import { SignUpForm } from '../../features/session';
 
 export const SignUpPage: React.FC = () => {
   const router = useRouter();

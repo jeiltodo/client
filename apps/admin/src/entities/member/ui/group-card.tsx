@@ -6,11 +6,11 @@ interface GroupCardProps {
   onLeaveGroup: () => void;
 }
 
-export const GroupCard = ({
+export function GroupCard({
   name,
   registerAt,
   onLeaveGroup,
-}: GroupCardProps) => {
+}: GroupCardProps) {
   return (
     <div className='w-full bg-blue-50 flex items-end justify-between p-6 rounded-xl'>
       <div className='flex items-center justify-start gap-2'>
@@ -30,12 +30,12 @@ export const GroupCard = ({
         </div>
       </div>
       <Button
-        variant='outline'
         className='w-[84px] h-[36px]'
         onClick={onLeaveGroup}
+        variant='outline'
       >
         탈퇴
       </Button>
     </div>
   );
-};
+}

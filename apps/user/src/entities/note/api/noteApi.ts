@@ -1,5 +1,6 @@
-import { Note } from '@jeiltodo/ui/shared';
-import { client, ResponseWith } from '../../../shared';
+import type { Note } from '@jeiltodo/ui/shared';
+import type { ResponseWith } from '../../../shared';
+import { client } from '../../../shared';
 import type { NoteGetResponse, NoteResponse } from '../model/type';
 
 // GET 요청 : 목표에 따른 노트 리스트 조회

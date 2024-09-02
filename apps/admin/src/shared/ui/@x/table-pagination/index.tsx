@@ -6,7 +6,7 @@ interface Props {
   currentPage: number;
 }
 
-export const TablePagination = ({ totalCount, currentPage }: Props) => {
+export function TablePagination({ totalCount, currentPage }: Props) {
   const { tableFilters, setTableFilters } = useTableContext();
   const handleNextPage = () => {
     const totalPages = calculateTotalPages(
@@ -27,12 +27,12 @@ export const TablePagination = ({ totalCount, currentPage }: Props) => {
   };
   return (
     <Pagination
-      onClickPage={handleClickPage}
-      onPrev={handlePrevPage}
-      onNext={handleNextPage}
-      totalCount={totalCount}
-      limit={Number(tableFilters.limit)}
       currentPage={currentPage}
+      limit={Number(tableFilters.limit)}
+      onClickPage={handleClickPage}
+      onNext={handleNextPage}
+      onPrev={handlePrevPage}
+      totalCount={totalCount}
     />
   );
-};
+}

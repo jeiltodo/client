@@ -1,9 +1,8 @@
 'use client';
 import { BoardTitle, Flyout, ProgressBar } from '@jeiltodo/ui/shared';
-
 import { useEffect, useRef, useState } from 'react';
 import { Kebab } from '@jeiltodo/icons';
-import { Goal } from '../../../entities/goal';
+import type { Goal } from '../../../entities/goal';
 
 interface TitleProgressBarCardProps {
   goalData: Goal;

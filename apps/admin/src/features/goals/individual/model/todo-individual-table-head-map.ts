@@ -1,4 +1,4 @@
-import { IndividualGoalTodos } from '../../../../entities/goals/individual';
+import type { IndividualGoalTodos } from '../../../../entities/goals/individual';
 import type { TableHeadMap } from '../../../../shared/ui/table/type';
 
 export const TODO_INDIVIDUAL_TABLE_HEAD_MAP: TableHeadMap<IndividualGoalTodos>[] = [

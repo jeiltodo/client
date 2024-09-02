@@ -1,15 +1,11 @@
 'use client';
 
 import React from 'react';
-
 import { useRouter } from 'next/navigation';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
-
-import { Table } from '../../../../shared';
-import { useTableCheck } from '../../../../shared';
-
+import { Table , useTableCheck } from '../../../../shared';
 import { TableHeadList } from '../../../../features/members';
-import { GroupGoals } from '../../../../entities/goals/group';
+import type { GroupGoals } from '../../../../entities/goals/group';
 import { GOAL_GROUP_TABLE_HEAD_MAP } from '../../../../features/goals/group';
 
 interface Props {
@@ -40,7 +36,7 @@ export function GoalsGroupTable({ goals: goalGroupRows }: Props) {
       </Table.Header>
       <Table.Body>
         {goalGroupRows.map((goal) => (
-          <Table.Row key={goal.id} className='hover:bg-slate-50'>
+          <Table.Row className='hover:bg-slate-50' key={goal.id}>
             <Table.Cell>
               <Checkbox
                 className='text-center'

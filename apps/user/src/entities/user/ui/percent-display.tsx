@@ -11,7 +11,7 @@ export const PercentDisplay: React.FC<PercentDisplayProps> = ({ value }) => {
 
   useEffect(() => {
     if (!change) return;
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setChange(null);
 
       return () => {
@@ -44,7 +44,7 @@ export const PercentDisplay: React.FC<PercentDisplayProps> = ({ value }) => {
       {change !== null && (
       <span
         className={`ml-2 text-base font-medium animate-fade-in-out
-            ${change?.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}
+            ${change.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}
       >
         {change}
       </span>

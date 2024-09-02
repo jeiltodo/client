@@ -1,5 +1,5 @@
-import { Member } from '@jeiltodo/ui/entities';
-import { Goal } from '@jeiltodo/ui/shared';
+import type { Member } from '@jeiltodo/ui/entities';
+import type { Goal } from '@jeiltodo/ui/shared';
 
 // 그룹 리스트
 export interface GroupsResponse {

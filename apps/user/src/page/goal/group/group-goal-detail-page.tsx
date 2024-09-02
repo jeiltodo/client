@@ -1,25 +1,24 @@
 'use client';
 import { Button, LayoutTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
+import { PlusOrange } from '@jeiltodo/icons';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
-
 import {
   useGroupGoals,
   useGroupSingleGoal,
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
-
-import { PlusOrange } from '@jeiltodo/icons';
 import { useGroupDetail } from '../../../entities/group';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';
 import { GoalModal } from '../../../features/goal';
 import { ConfirmationModal } from '../../../shared';
-import { SingleGroupGoalTodo, TodoModal } from '../../../entities/todo';
+import type { SingleGroupGoalTodo} from '../../../entities/todo';
+import { TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
-import { useQuery } from '@tanstack/react-query';
 import { userOptions } from '../../../entities/goal';
 
 export const GroupGoalDetailPage = ({
@@ -85,7 +84,7 @@ export const GroupGoalDetailPage = ({
               onEditGoal={openEditModal}
               onDeleteGoal={openDeleteModal}
             />
-            <NotesPushButton goalData={singleGroupGoal} isGroup={true} />
+            <NotesPushButton goalData={singleGroupGoal} isGroup />
             <div className='flex items-center justify-end'>
               <Button
                 variant='text-group-color'
@@ -117,7 +116,7 @@ export const GroupGoalDetailPage = ({
             {isConfirmOpen && (
               <ConfirmationModal
                 setModalToggle={setIsConfirmOpen}
-                submitButtonText={'삭제'}
+                submitButtonText="삭제"
                 onSubmit={handleDelete}
               >
                 정말 삭제 하시겠어요?
@@ -129,7 +128,7 @@ export const GroupGoalDetailPage = ({
                 setTodoModalToggle={setIsAddTodoModalOpen}
                 initialGoal={singleGroupGoal}
                 goals={groupGoalsForModal}
-                shouldCharge={true}
+                shouldCharge
               />
             )}
           </>

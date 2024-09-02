@@ -1,6 +1,7 @@
 import { Dropdown } from '@jeiltodo/ui/shared';
-import { Goal, GoalIdAndTitle } from '../model/type';
-import { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import type { GoalIdAndTitle } from '../model/type';
+import { Goal } from '../model/type';
 
 interface Props {
   goals: GoalIdAndTitle[];
@@ -11,7 +12,7 @@ interface Props {
 export const GoalDropdown = ({ goals, defaultGoal, onSelect }: Props) => {
   return (
     <Dropdown
-      hasInitialValue={true}
+      hasInitialValue
       onSelect={onSelect}
       size='fixed'
       round='round'

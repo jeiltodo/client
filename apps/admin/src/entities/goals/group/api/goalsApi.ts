@@ -1,5 +1,5 @@
 import { client } from '@jeiltodo/ui/shared';
-import {
+import type {
   ResponseGetAllGroupGoals,
   ResponseGetAllGroupGoalTodos,
 } from '../model/type';
