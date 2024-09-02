@@ -1,19 +1,20 @@
 'use client';
 import { useMemo } from 'react';
-import { IndividualGoalTodos } from '../../../../entities/goals/individual';
+import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
+import { useParams, useSearchParams } from 'next/navigation';
+import type { IndividualGoalTodos } from '../../../../entities/goals/individual';
 import {
   useDeleteIndividualGoalTodos,
   useGetAllIndividualGoalTodos,
 } from '../../../../entities/goals/individual/hooks/useIndividualGoals';
 import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
 import { GoalTodosIndividualTable } from '../../../../widgets/goals/individual';
-import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
-import { useParams, useSearchParams } from 'next/navigation';
-import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
+import type { SortOptions } from '../../../../shared/lib/sortBy';
+import { sortBy } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
-export const PostsIndividualDetailPage = () => {
+export function PostsIndividualDetailPage() {
   const searchParams = useSearchParams();
   const params = useParams();
   const goalId = Number(
@@ -57,8 +58,8 @@ export const PostsIndividualDetailPage = () => {
         <TableCheckListProvider tableData={data.todos}>
           <TableToolBarWithCheck
             onDelete={handleDelete}
-            totalCount={data?.totalCount}
-            searchedCount={data?.totalCount}
+            searchedCount={data.totalCount}
+            totalCount={data.totalCount}
           />
           {sortedTodos ? (
             <GoalTodosIndividualTable
@@ -70,10 +71,10 @@ export const PostsIndividualDetailPage = () => {
           )}
         </TableCheckListProvider>
         <TablePagination
-          totalCount={data.totalCount}
           currentPage={data.currentPage}
+          totalCount={data.totalCount}
         />
       </div>
     </div>
   );
-};
+}

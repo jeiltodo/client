@@ -1,4 +1,4 @@
-import { GroupsInterface } from '../../../widgets/members/model/type';
+import type { GroupsInterface } from '../../../widgets/members/model/type';
 
 export interface Member {
   id: number;
@@ -9,14 +9,14 @@ export interface Member {
   groupCount: number;
 }
 
-export type MemberQueryParams = {
+export interface MemberQueryParams {
   page: number;
   limit: number | string;
   nickname?: string;
   email?: string;
   createdAfter?: string;
   createdBefore?: string;
-};
+}
 
 // export type MemberGroup = {
 //   id: number;
@@ -24,12 +24,12 @@ export type MemberQueryParams = {
 //   registerAt: string;
 // };
 
-export type MemberGoal = {
+export interface MemberGoal {
   id: number;
   title: string;
   progressRate: number;
-};
-export type MemberDetail = {
+}
+export interface MemberDetail {
   id: number;
   email: string;
   nickname: string;
@@ -37,4 +37,4 @@ export type MemberDetail = {
   createdAt: string;
   updatedAt: string;
   groups: GroupsInterface[];
-};
+}

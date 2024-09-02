@@ -1,20 +1,21 @@
 'use client';
 import { useMemo } from 'react';
-
-import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
 import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
-import { sortBy, SortOptions } from '../../../../shared/lib/sortBy';
+import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
+import type { SortOptions } from '../../../../shared/lib/sortBy';
+import { sortBy } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
+import type {
+  GroupGoalTodos} from '../../../../entities/goals/group';
 import {
-  GroupGoalTodos,
   useDeleteGroupGoalTodos,
   useGetAllGroupGoalTodos,
 } from '../../../../entities/goals/group';
 import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
-export const PostsGroupDetailPage = () => {
+export function PostsGroupDetailPage() {
   const searchParams = useSearchParams();
   const params = useParams();
   const goalId = Number(
@@ -57,8 +58,8 @@ export const PostsGroupDetailPage = () => {
         <TableCheckListProvider tableData={data.todos}>
           <TableToolBarWithCheck
             onDelete={handleDelete}
-            totalCount={data?.totalCount}
-            searchedCount={data?.totalCount}
+            searchedCount={data.totalCount}
+            totalCount={data.totalCount}
           />
           {sortedTodos ? (
             <GoalTodosGroupTable goalTitle={goalTitle} todos={sortedTodos} />
@@ -67,10 +68,10 @@ export const PostsGroupDetailPage = () => {
           )}
         </TableCheckListProvider>
         <TablePagination
-          totalCount={data.totalCount}
           currentPage={data.currentPage}
+          totalCount={data.totalCount}
         />
       </div>
     </div>
   );
-};
+}

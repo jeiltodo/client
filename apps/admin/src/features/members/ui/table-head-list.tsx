@@ -1,10 +1,10 @@
 import { Table } from '../../../shared';
 
-type SimpleTableHeadMap<T> = {
+interface SimpleTableHeadMap<T> {
   criteria: keyof T;
   title: string;
   withSort?: boolean;
-};
+}
 
 interface TableHeadListProps<T> {
   headMap: SimpleTableHeadMap<T>[];
@@ -16,14 +16,14 @@ export function TableHeadList<T>({ headMap }: TableHeadListProps<T>) {
       {headMap.map(({ criteria, title, withSort }) => {
         return withSort ? (
           <Table.HeadWithSort
-            key={criteria as string}
-            criteria={criteria as string}
             className='text-left'
+            criteria={criteria as string}
+            key={criteria as string}
           >
             {title}
           </Table.HeadWithSort>
         ) : (
-          <Table.Head key={criteria as string} className='text-left'>
+          <Table.Head className='text-left' key={criteria as string}>
             {title}
           </Table.Head>
         );

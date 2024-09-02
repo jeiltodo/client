@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { groupGoalsApi } from '../api/goalsApi'; // API 모듈 경로에 맞게 수정
-import { groupGoalsQueryKeys } from './queryKeys'; // 쿼리 키 모듈 경로에 맞게 수정
 import { AxiosError } from 'axios';
 import { useToast } from '@jeiltodo/ui/shared';
+import { groupGoalsApi } from '../api/goalsApi'; // API 모듈 경로에 맞게 수정
+import { groupGoalsQueryKeys } from './queryKeys'; // 쿼리 키 모듈 경로에 맞게 수정
 
 export const useGetAllGroupGoals = (params: {
   page: number;

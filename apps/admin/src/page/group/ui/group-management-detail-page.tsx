@@ -1,18 +1,19 @@
 'use client';
 
 import { useMemo } from 'react';
-import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
+import type {
+  Goal} from '@jeiltodo/ui/shared';
 import {
   BoardTitle,
-  Goal,
   LayoutTitle,
   LoadingSpinner,
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useParams } from 'next/navigation';
-import { useGroupDetail } from '../../../entities/group';
+import { MembersBoard } from "@jeiltodo/ui/src/widgets/group/ui/members-board";
+import { useGroupDetail , useChangeLeader } from '../../../entities/group';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
 import type { GroupGoals } from '../../../entities/goals/group';
@@ -20,7 +21,6 @@ import { useGetAllGroupGoals } from '../../../entities/goals/group';
 import type { SortOptions } from '../../../shared/lib/sortBy';
 import { sortBy } from '../../../shared/lib/sortBy';
 import { GroupManagementDetailPagination } from '../../../features/group';
-import { useChangeLeader } from '../../../entities/group';
 import {
   useGroupCode,
   useGroupTitleAndCode,
@@ -30,7 +30,7 @@ import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
 
 export function GroupManagementDetailPage() {
   const params = useParams();
-  const groupId = Number(params?.id);
+  const groupId = Number(params.id);
 
   const { tableFilters, tableSort } = useTableContext();
   const { data: newCode } = useGroupCode(groupId);
@@ -38,7 +38,7 @@ export function GroupManagementDetailPage() {
   const { data: groupGoals, isLoading: isGoalsLoading } = useGetAllGroupGoals({
     page: tableFilters.page,
     limit: tableFilters.limit as number,
-    groupId: groupId,
+    groupId,
   });
   const sortedGoals = useMemo(() => {
     return sortBy<GroupGoals>(
@@ -75,15 +75,15 @@ export function GroupManagementDetailPage() {
       <div className='w-full flex flex-nowrap gap-4 '>
         <GroupOverviewBoard
           group={group.data}
-          spareCode={newCode ?? ''}
+          isAdmin
           onSave={handleSave}
-          isAdmin={true}
+          spareCode={newCode ?? ''}
         />
 
         <MembersBoardProvider>
           <MembersBoard
-            isAdmin={true}
             group={group.data}
+            isAdmin
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}
           />
@@ -91,15 +91,15 @@ export function GroupManagementDetailPage() {
       </div>
 
       <div className='w-[930px] pb-[16px] py-4 px-5 bg-white rounded-xl mt-5'>
-        <BoardTitle title='그룹 목표' icon='flag' />
+        <BoardTitle icon='flag' title='그룹 목표' />
         <TableToolBar
-          totalCount={groupGoals.searchedCount}
           searchedCount={groupGoals.searchedCount}
+          totalCount={groupGoals.searchedCount}
         />
         <GroupManagementDetailTable goals={sortedGoals} />
         <GroupManagementDetailPagination
-          totalCount={groupGoals.searchedCount}
           currentPage={groupGoals.currentPage}
+          totalCount={groupGoals.searchedCount}
         />
       </div>
     </div>

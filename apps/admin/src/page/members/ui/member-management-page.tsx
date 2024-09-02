@@ -1,6 +1,7 @@
 'use client';
 
 import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
+import { useMemo } from 'react';
 import { MembersTable } from '../../../widgets/members/ui/members-table';
 import {
   SearchFilter,
@@ -10,13 +11,13 @@ import {
 import { MEMBERS_FIILTERS } from '../../../entities/member/constants/members-filters';
 import { TablePagination } from '../../../features/goals/individual';
 import { useGetMembers } from '../../../entities/member/hooks/useGetMembers';
-import { useMemo } from 'react';
-import { Member } from '../../../entities/member';
-import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
+import type { Member } from '../../../entities/member';
+import type { SortOptions } from '../../../shared/lib/sortBy';
+import { sortBy } from '../../../shared/lib/sortBy';
 import { TableCheckListProvider } from '../../../shared/model/table/table-checklist-provider';
 import { useDeleteMembers } from '../../../entities/member/hooks/useDeleteMembers';
 
-export const MemberManagementPage = () => {
+export function MemberManagementPage() {
   const showToast = useToast();
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useGetMembers(tableFilters);
@@ -47,7 +48,7 @@ export const MemberManagementPage = () => {
       <h1 className='sr-only'>
         jtodo 서비스의 회원을 조회, 삭제할 수 있는 관리 페이지입니다.
       </h1>
-      <LayoutTitle title='회원 관리' isFirstPage />
+      <LayoutTitle isFirstPage title='회원 관리' />
 
       <SearchFilter filters={MEMBERS_FIILTERS} />
 
@@ -55,8 +56,8 @@ export const MemberManagementPage = () => {
         <TableCheckListProvider tableData={data.members}>
           <TableToolBarWithCheck
             onDelete={handleDelete}
-            totalCount={data?.totalCount}
-            searchedCount={data?.searchedCount}
+            searchedCount={data.searchedCount}
+            totalCount={data.totalCount}
           />
           {sortedMembers || data.members.length !== 0 ? (
             <MembersTable members={sortedMembers} />
@@ -67,10 +68,10 @@ export const MemberManagementPage = () => {
           )}
         </TableCheckListProvider>
         <TablePagination
-          totalCount={data.searchedCount}
           currentPage={data.currentPage}
+          totalCount={data.searchedCount}
         />
       </div>
     </div>
   );
-};
+}

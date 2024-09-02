@@ -1,4 +1,4 @@
-import { TableFilter } from '../../../shared/model/table/type';
+import type { TableFilter } from '../../../shared/model/table/type';
 
 export const GROUP_SEARCH_FILTERS: TableFilter[] = [
   {

@@ -18,13 +18,13 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <head>
-        <link rel='icon' href='/favicon.ico' />
+        <link href='/favicon.ico' rel='icon' />
       </head>
       <body className='bg-slate-100'>
         <QueryProvider>
           <ToastContainer limit={5} />
           {children}
-          <ReactQueryDevtools initialIsOpen={true} />
+          <ReactQueryDevtools initialIsOpen />
         </QueryProvider>
       </body>
     </html>

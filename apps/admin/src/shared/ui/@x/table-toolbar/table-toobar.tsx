@@ -18,10 +18,10 @@ export function TableToolBar({ searchedCount, totalCount }: TableToolBarProps) {
   return (
     <div className='w-full justify-between items-center flex pl-4 py-3'>
       <div className='flex gap-4 items-center'>
-        <SearchSummary totalCount={totalCount} searchedCount={searchedCount} />
+        <SearchSummary searchedCount={searchedCount} totalCount={totalCount} />
       </div>
       <Dropdown
-        hasInitialValue={true}
+        hasInitialValue
         onSelect={handleSelectDropdown}
         round='rect'
         size='sm'

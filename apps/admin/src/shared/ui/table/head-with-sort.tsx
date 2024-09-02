@@ -1,8 +1,8 @@
 'use client';
 import { Sort } from '@jeiltodo/icons';
+import { useTableContext } from '../../hooks/table/useTableContext';
 import type { TableHeadProps } from './head';
 import { TableHead } from './head';
-import { useTableContext } from '../../hooks/table/useTableContext';
 
 interface HeadWithSortProps extends TableHeadProps {
   criteria: string;

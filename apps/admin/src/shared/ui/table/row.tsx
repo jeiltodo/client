@@ -6,7 +6,7 @@ export const TableRow: React.FC<{
   onClick?: () => void;
 }> = ({ children, className, onClick }) => {
   return (
-    <tr onClick={onClick} className={`border-b border-slate-100 ${className}`}>
+    <tr className={`border-b border-slate-100 ${className}`} onClick={onClick}>
       {children}
     </tr>
   );

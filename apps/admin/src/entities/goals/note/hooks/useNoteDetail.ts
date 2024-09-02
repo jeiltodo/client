@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { noteQueryKeys } from './queryKeys';
-import { noteApi } from '../api/noteApi';
 import { useToast } from '@jeiltodo/ui/shared';
+import { noteApi } from '../api/noteApi';
+import { noteQueryKeys } from './queryKeys';
 
 export const useNoteDetail = (noteId: number) => {
   return useQuery({

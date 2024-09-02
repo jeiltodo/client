@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { groupApi } from '../api/groupApi';
+import type { TableQueries } from '../../../shared';
 import { groupQueryKeys } from './querykey';
-import { TableQueries } from '../../../shared';
 
 export const useSearchGroups = (params: TableQueries) => {
   const query = useQuery({

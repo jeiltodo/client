@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
 
 interface SidebarNavProps {
   icon: ForwardRefExoticComponent<
@@ -10,12 +10,12 @@ interface SidebarNavProps {
   subItems?: { title: string; href: string }[];
 }
 
-export const SidebarNav = ({
+export function SidebarNav({
   icon: Icon,
   title,
   href,
   subItems,
-}: SidebarNavProps) => {
+}: SidebarNavProps) {
   return (
     <div className='px-5 py-4 border-t-[1px] border-slate-200'>
       {subItems ? (
@@ -27,8 +27,8 @@ export const SidebarNav = ({
         </div>
       ) : (
         <Link
-          href={href || ''}
-          className='hover:bg-slate-50 active:bg-slate-100 w-full h-9 rounded-lg  flex items-center justify-start gap-2' 
+          className='hover:bg-slate-50 active:bg-slate-100 w-full h-9 rounded-lg  flex items-center justify-start gap-2'
+          href={href || ''} 
         >
           <Icon className='w-6 h-6' />
           <div className='block text-lg font-pretendard-medium text-slate-800'>
@@ -37,19 +37,17 @@ export const SidebarNav = ({
         </Link>
       )}
 
-      {subItems && (
-        <div className='flex flex-col items-start pl-5 mt-2'>
+      {subItems ? <div className='flex flex-col items-start pl-5 mt-2'>
           {subItems.map((subItem, index) => (
             <Link
-              key={index}
-              href={subItem.href}
               className='block py-2 text-sm hover:bg-slate-50 active:bg-slate-100 w-full h-9 rounded-lg font-pretendard-medium text-slate-700'
+              href={subItem.href}
+              key={index}
             >
               · {subItem.title}
             </Link>
           ))}
-        </div>
-      )}
+        </div> : null}
     </div>
   );
-};
+}
