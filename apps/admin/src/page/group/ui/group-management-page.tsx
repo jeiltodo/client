@@ -8,8 +8,7 @@ import {
   TableToolBarWithCheck,
   useTableContext,
 } from '../../../shared';
-import type {
-  Groups} from '../../../entities/group';
+import type { Groups } from '../../../entities/group';
 import {
   GROUP_SEARCH_FILTERS,
   useDeleteGroups,
@@ -20,7 +19,6 @@ import type { SortOptions } from '../../../shared/lib/sortBy';
 import { sortBy } from '../../../shared/lib/sortBy';
 import { TableCheckListProvider } from '../../../shared/model/table/table-checklist-provider';
 
-// eslint-disable-next-line react/function-component-definition
 export const GroupManagementPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useSearchGroups(tableFilters);
@@ -55,7 +53,7 @@ export const GroupManagementPage = () => {
             searchedCount={data.searchCount || 0}
             totalCount={data.totalCount}
           />
-          {sortedGroups ? (
+          {sortedGroups.length > 0 ? (
             <GroupsManagementTable groups={sortedGroups} />
           ) : (
             <LoadingSpinner />

@@ -26,7 +26,7 @@ export const SearchFilter: React.FC<SearchFilterProps> = ({ filters }) => {
         <FilterForm
           filters={filters}
           filtersState={formFilters}
-          updatefiltersState={setFormFilters}
+          updateFiltersState={setFormFilters}
         />
       </div>
       <div className='flex items-center justify-end border-t-[1px] border-slate-200 pt-3'>

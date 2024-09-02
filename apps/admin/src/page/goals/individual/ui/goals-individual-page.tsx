@@ -2,7 +2,7 @@
 
 import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { useMemo } from 'react';
-import { GOALS_INDIVIDUAL_FIILTERS } from '../../../../entities/goals/individual/constants/goals-individual-filters';
+import { GOALS_INDIVIDUAL_FILTERS } from '../../../../entities/goals/individual/constants/goals-individual-filters';
 import {
   useDeleteIndividualGoal,
   useGetAllIndividualGoals,
@@ -51,7 +51,7 @@ export function PostsIndividualPage() {
       </h1>
       <LayoutTitle isFirstPage title='게시글 관리 - 개인 게시글' />
 
-      <SearchFilter filters={GOALS_INDIVIDUAL_FIILTERS} />
+      <SearchFilter filters={GOALS_INDIVIDUAL_FILTERS} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableCheckListProvider tableData={data.goals}>
           <TableToolBarWithCheck
@@ -59,7 +59,7 @@ export function PostsIndividualPage() {
             searchedCount={data.searchedCount}
             totalCount={data.totalCount}
           />
-          {sortedGoals ? (
+          {sortedGoals.length > 0 ? (
             <GoalsIndividualTable goals={sortedGoals} />
           ) : (
             <LoadingSpinner />

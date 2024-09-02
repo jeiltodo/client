@@ -1,6 +1,6 @@
 'use client';
 import type { PropsWithChildren } from 'react';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export interface TableCheckListContextProps {
   checkList: {
@@ -24,13 +24,14 @@ interface WithId {
   id: number;
 }
 
-interface Props<T extends WithId> extends PropsWithChildren {
+interface TableCheckListProviderProps<T extends WithId>
+  extends PropsWithChildren {
   tableData: T[];
 }
 export function TableCheckListProvider<T extends WithId>({
   children,
   tableData,
-}: Props<T>) {
+}: TableCheckListProviderProps<T>) {
   const tableCheckList = tableData.map((table) => ({
     id: table.id,
     isChecked: false,

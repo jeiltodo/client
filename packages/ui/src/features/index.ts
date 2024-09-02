@@ -1,4 +1,3 @@
-export { MemberList } from './group/ui/member-list';
 export * from './user/model/type';
 export * from './user/model/validation';
 export * from './user/ui/login-form';
