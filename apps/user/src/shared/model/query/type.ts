@@ -1,5 +1,5 @@
 export interface PageList {
-  currPage: number;
+  currentPage: number;
   totalCount: number;
 }
 

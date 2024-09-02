@@ -1,12 +1,8 @@
-import type {
-  GroupGoalWithTodos,
-  SingleGoalResponse} from '../model/type';
-import {
-  GroupGoalsResponse
-} from '../model/type';
+import type { GroupGoalWithTodos, SingleGoalResponse } from '../types';
+import { GroupGoalsResponse } from '../types';
 import type { ResponsePageListWith, ResponseWith } from '../../../shared';
 import { client } from '../../../shared';
-import type { GoalProps} from '../../../features/group';
+import type { GoalProps } from '../../../features/group';
 import { GroupProps } from '../../../features/group';
 
 export const groupGoalsApi = {

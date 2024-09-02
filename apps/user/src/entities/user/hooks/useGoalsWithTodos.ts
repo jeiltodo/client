@@ -1,14 +1,12 @@
+import { calculateTotalPages } from '@jeiltodo/ui/shared';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { individualGoalsApi } from '../../goal/api/individualGoalsApi';
 import { goalQueryKeys } from '../../goal/hooks/queryKey';
+import type { ResponsePageListWith } from '../../../shared/model/query/type';
+import { individualGoalsApi } from '../../goal/api';
+import type { GoalWithTodos } from '../../goal/model';
 
 interface PageLimit {
   limit: number;
-}
-
-interface GoalWithTodosResponse {
-  totalCount: number;
-  currPage: number;
 }
 
 export const useGoalsWithTodos = ({ limit }: PageLimit) => {
@@ -17,20 +15,14 @@ export const useGoalsWithTodos = ({ limit }: PageLimit) => {
     queryFn: ({ pageParam }) =>
       individualGoalsApi.getGoalWithTodos({ page: pageParam, limit }),
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      const { totalCount, currPage } = lastPage.data as GoalWithTodosResponse;
-
+    getNextPageParam: (
+      lastPage: ResponsePageListWith<{ goals: GoalWithTodos[] }>
+    ) => {
+      const {
+        data: { totalCount, currentPage },
+      } = lastPage;
       const totalPages = calculateTotalPages(totalCount, limit);
-      return currPage < totalPages ? currPage + 1 : undefined;
+      return currentPage < totalPages ? currentPage + 1 : undefined;
     },
   });
 };
-
-/*
-////////////////////////////////////////////////////////////////////////////////
-*/
-function calculateTotalPages(totalCount: number, itemsPerPage: number): number {
-  const fullPages = Math.floor(totalCount / itemsPerPage);
-  const hasPartialPage = totalCount % itemsPerPage !== 0;
-  return fullPages + (hasPartialPage ? 1 : 0);
-}

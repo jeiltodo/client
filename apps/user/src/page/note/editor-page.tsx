@@ -3,10 +3,18 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Back, DeleteCircle } from '@jeiltodo/icons';
-import { BaseModal, BoardTitle, TodoTitle, useToast , Button, ButtonGroup } from '@jeiltodo/ui/shared';
+import {
+  BaseModal,
+  BoardTitle,
+  TodoTitle,
+  useToast,
+  Button,
+  ButtonGroup,
+  MINUTES_WITH_MS,
+} from '@jeiltodo/ui/shared';
 import { EditorForm } from '../../features/note';
-import { ConfirmationModal, MINUTES_WITH_MS } from '../../shared';
-import type { Note} from '../../entities/note';
+import { ConfirmationModal } from '../../shared';
+import type { Note } from '../../entities/note';
 import { useCreateNote, useUpdateNote } from '../../entities/note';
 
 interface Props {
@@ -65,7 +73,7 @@ export const EditorPage = ({ note }: Props) => {
 
   const getLocalSave = () => {
     const savedData = localStorage.getItem(`todo${todoId}`);
-    const parsedData = savedData
+    const parsedData: { title: string; content: string } = savedData
       ? JSON.parse(savedData)
       : { title: '', content: '' };
     setTitle(parsedData.title);
@@ -117,7 +125,7 @@ export const EditorPage = ({ note }: Props) => {
       className='flex flex-col max-w-[792px] min-w-[248px]'
       style={{ minHeight: 'calc(100vh - 48px)' }}
     >
-      <div className="flex flex-row items-center justify-between mb-[16px]">
+      <div className='flex flex-row items-center justify-between mb-[16px]'>
         <div className='flex items-center justify-start gap-2'>
           <Back
             className='w-6 h-6 cursor-pointer'
@@ -207,7 +215,7 @@ export const EditorPage = ({ note }: Props) => {
       {isConfirmOpen && (
         <ConfirmationModal
           setModalToggle={setIsConfirmOpen}
-          submitButtonText="확인"
+          submitButtonText='확인'
           onSubmit={handleBackClick}
         >
           정말 나가시겠어요? <br />

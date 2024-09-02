@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["@jeiltodo/eslint-config/react.js"],
+  extends: ['@jeiltodo/eslint-config/react.js'],
   rules: {
     // 모든 린트 규칙 비활성화
     'import/no-extraneous-dependencies': 'off',
@@ -14,5 +14,6 @@ module.exports = {
     'no-undef': 'off',
     'no-empty': 'off',
     'no-redeclare': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
   },
 };

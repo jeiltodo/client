@@ -1,7 +1,7 @@
 import { Dropdown } from '@jeiltodo/ui/shared';
 import type { Dispatch, SetStateAction } from 'react';
-import type { GoalIdAndTitle } from '../model/type';
-import { Goal } from '../model/type';
+import type { GoalIdAndTitle } from '../types';
+import { GoalWithProgress } from '../types';
 
 interface Props {
   goals: GoalIdAndTitle[];

@@ -1,18 +1,16 @@
+import { client } from '@jeiltodo/ui/shared';
 import type { ResponsePageListWith, ResponseWith } from '../../../shared';
-import { client } from '../../../shared';
-import { SingleGoalTodosResponse } from '../../todo';
 import type {
-  Goal,
+  GoalWithProgress,
   GoalWithTodos,
-  IndividualGoalsResponse,
-  SingleGoalResponse,
-  UserProgress,
-} from '../model/type';
+  IndividualGoal,
+  IndividualProgress,
+} from '../types';
 
 export const individualGoalsApi = {
   getAllProgress: async () => {
     try {
-      const response = await client.get<ResponseWith<UserProgress>>(
+      const response = await client.get<ResponseWith<IndividualProgress>>(
         '/individual/goals/progress'
       );
       return response.data;
@@ -37,7 +35,7 @@ export const individualGoalsApi = {
   },
   getSingleGoal: async (goalId: number) => {
     try {
-      const response = await client.get<ResponseWith<Goal>>(
+      const response = await client.get<ResponseWith<GoalWithProgress>>(
         `/individual/goals/single/${goalId}`
       );
       return response.data;
@@ -51,7 +49,7 @@ export const individualGoalsApi = {
   getGoals: async () => {
     try {
       const response =
-        await client.get<ResponseWith<{ individualGoals: Goal[] }>>(
+        await client.get<ResponseWith<{ individualGoals: GoalWithProgress[] }>>(
           '/individual/goals'
         );
       return response.data;
@@ -63,14 +61,9 @@ export const individualGoalsApi = {
   },
 
   // POST 요청: 새로운 개인 목표 생성
-  createGoal: async ({
-    title,
-  }: {
-    title: string;
-  }): Promise<IndividualGoalsResponse> => {
+  createGoal: async ({ title }: { title: string }) => {
     try {
-      const response = await client.post('/individual/goals', { title });
-      return response.data;
+      await client.post('/individual/goals', { title });
     } catch (error) {
       console.error('Failed to create individual goal:', error);
       throw error;
@@ -85,12 +78,11 @@ export const individualGoalsApi = {
     title: string;
   }) => {
     try {
-      const response = await client.patch<IndividualGoalsResponse>(
-        `/individual/goals/${goalId}`,
-        {
-          title,
-        }
-      );
+      const response = await client.patch<
+        ResponseWith<{ goals: IndividualGoal[] }>
+      >(`/individual/goals/${goalId}`, {
+        title,
+      });
       return response.data;
     } catch (error) {
       console.error('Fail to patch individual goals:', error);
