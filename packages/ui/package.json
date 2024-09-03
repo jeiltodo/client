@@ -13,7 +13,6 @@
     "./entities": "./src/entities/index.ts",
     "./features": "./src/features/index.ts",
     "./widgets": "./src/widgets/index.ts",
-    "./widgets/*": "./src/widgets/*",
     "./page": "./src/page/index.ts"
   },
   "license": "MIT",

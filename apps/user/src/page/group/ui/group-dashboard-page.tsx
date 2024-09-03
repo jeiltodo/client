@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
 import { useParams } from 'next/navigation';
-import { MembersBoard } from '@jeiltodo/ui/widgets/group/ui/members-board.jsx';
+import { MembersBoard } from '@jeiltodo/ui/widgets';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
