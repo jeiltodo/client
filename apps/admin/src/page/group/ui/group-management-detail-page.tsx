@@ -3,8 +3,7 @@
 import { useMemo } from 'react';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
-import type {
-  Goal} from '@jeiltodo/ui/shared';
+import type { Goal } from '@jeiltodo/ui/shared';
 import {
   BoardTitle,
   LayoutTitle,
@@ -12,8 +11,9 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useParams } from 'next/navigation';
-import { MembersBoard } from "@jeiltodo/ui/src/widgets/group/ui/members-board";
-import { useGroupDetail , useChangeLeader } from '../../../entities/group';
+// import { MembersBoard
+import { MembersBoard } from '@jeiltodo/ui/widgets/group/ui/members-board.jsx';
+import { useGroupDetail, useChangeLeader } from '../../../entities/group';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
 import type { GroupGoals } from '../../../entities/goals/group';

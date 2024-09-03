@@ -1,12 +1,15 @@
 import { calculateTotalPages, Pagination } from '@jeiltodo/ui/shared';
 import { useTableContext } from '../../..';
 
-interface Props {
+interface TablePaginationProps {
   totalCount: number;
   currentPage: number;
 }
 
-export function TablePagination({ totalCount, currentPage }: Props) {
+export function TablePagination({
+  totalCount,
+  currentPage,
+}: TablePaginationProps) {
   const { tableFilters, setTableFilters } = useTableContext();
   const handleNextPage = () => {
     const totalPages = calculateTotalPages(

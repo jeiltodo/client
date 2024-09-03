@@ -17,7 +17,6 @@ export const LoadingSpinner = () => {
           JTODO
         </h1>
       </div>
-     </div>
+    </div>
   );
 };
-

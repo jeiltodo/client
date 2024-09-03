@@ -10,13 +10,12 @@ import {
 } from '../../../../shared';
 import type { SortOptions } from '../../../../shared/lib/sortBy';
 import { sortBy } from '../../../../shared/lib/sortBy';
-import type {
-  GroupGoals} from '../../../../entities/goals/group';
+import type { GroupGoals } from '../../../../entities/goals/group';
 import {
   useDeleteGroupGoal,
   useGetAllGroupGoals,
 } from '../../../../entities/goals/group';
-import { GOALS_GROUP_FIILTERS } from '../../../../entities/goals/group/constants/goals-group-filters';
+import { GOALS_GROUP_FILTERS } from '../../../../entities/goals/group/constants/goals-group-filters';
 import { GoalsGroupTable } from '../../../../widgets/goals/group/ui/goal-group-table';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
@@ -54,7 +53,7 @@ export function PostsGroupPage() {
       </h1>
       <LayoutTitle isFirstPage title='게시글 관리 - 그룹 게시글' />
 
-      <SearchFilter filters={GOALS_GROUP_FIILTERS} />
+      <SearchFilter filters={GOALS_GROUP_FILTERS} />
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
         <TableCheckListProvider tableData={data.goals}>
           <TableToolBarWithCheck
@@ -62,7 +61,7 @@ export function PostsGroupPage() {
             searchedCount={data.searchedCount}
             totalCount={data.totalCount}
           />
-          {sortedGoals ? (
+          {sortedGoals.length > 0 ? (
             <GoalsGroupTable goals={sortedGoals} />
           ) : (
             <LoadingSpinner />

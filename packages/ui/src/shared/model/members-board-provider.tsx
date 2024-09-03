@@ -9,10 +9,10 @@ import {
 
 import { BoardMode } from './type';
 
-type MembersBoardContextType = {
+export interface MembersBoardContextType {
   mode: BoardMode;
   changeMode: Dispatch<SetStateAction<BoardMode>>;
-};
+}
 
 export const MembersBoardContext =
   createContext<MembersBoardContextType | null>(null);
