@@ -6,8 +6,7 @@ import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
 import type { SortOptions } from '../../../../shared/lib/sortBy';
 import { sortBy } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
-import type {
-  GroupGoalTodos} from '../../../../entities/goals/group';
+import type { GroupGoalTodos } from '../../../../entities/goals/group';
 import {
   useDeleteGroupGoalTodos,
   useGetAllGroupGoalTodos,
@@ -61,7 +60,7 @@ export function PostsGroupDetailPage() {
             searchedCount={data.totalCount}
             totalCount={data.totalCount}
           />
-          {sortedTodos ? (
+          {sortedTodos.length > 0 ? (
             <GoalTodosGroupTable goalTitle={goalTitle} todos={sortedTodos} />
           ) : (
             <LoadingSpinner />

@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { AdminNote } from '@jeiltodo/icons';
-import { Table , useTableCheck } from '../../../../shared';
+import { Table, useTableCheck } from '../../../../shared';
 import type { IndividualGoalTodos } from '../../../../entities/goals/individual';
 import { TODO_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
 import { NoteDetailSlide } from '../../../../entities/goals/note';
 
-interface Props {
+interface GoalTodosIndividualTableProps {
   goalTitle: string;
   todos: IndividualGoalTodos[];
 }
@@ -17,7 +17,7 @@ interface Props {
 export function GoalTodosIndividualTable({
   goalTitle,
   todos: todoIndividualRows,
-}: Props) {
+}: GoalTodosIndividualTableProps) {
   const [noteToggle, setNoteToggle] = useState<boolean>(false);
   const [noteModalId, setNoteModalId] = useState<number | null>(null);
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
@@ -62,15 +62,24 @@ export function GoalTodosIndividualTable({
               {formatDateString(todo.updatedAt)}
             </Table.Cell>
             <Table.Cell className='text-center'>
-              {todo.noteId ? <button onClick={() => { handleClickNote(todo.id); }}>
+              {todo.noteId ? (
+                <button
+                  onClick={() => {
+                    handleClickNote(todo.id);
+                  }}
+                  type='button'
+                >
                   <AdminNote className='w-9 h-9' />
-                </button> : null}
+                </button>
+              ) : null}
             </Table.Cell>
-            {noteToggle && noteModalId === todo.id ? <NoteDetailSlide
+            {noteToggle && noteModalId === todo.id ? (
+              <NoteDetailSlide
                 goalTitle={goalTitle}
                 noteId={todo.noteId}
                 setToggle={setNoteToggle}
-              /> : null}
+              />
+            ) : null}
           </Table.Row>
         ))}
       </Table.Body>

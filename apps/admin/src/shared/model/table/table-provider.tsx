@@ -1,6 +1,6 @@
 'use client';
 import type { PropsWithChildren } from 'react';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import { TABLE_DEFAULT_LIMIT, TABLE_DEFAULT_PAGE } from '../../constants/table';
 import type { TableQueries } from './type';
 

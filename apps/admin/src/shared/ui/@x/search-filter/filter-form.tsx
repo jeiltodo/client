@@ -1,20 +1,20 @@
 'use client';
 
 import { Button, ButtonGroup, Input } from '@jeiltodo/ui/shared';
-import type { Dispatch, SetStateAction} from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import React, { useState } from 'react';
 import type { TableFilter, TableQueryName } from '../../../model/table/type';
 
 interface FilterFormProps {
   filters: TableFilter[];
   filtersState: Record<string, string>;
-  updatefiltersState: Dispatch<SetStateAction<Record<string, string>>>;
+  updateFiltersState: Dispatch<SetStateAction<Record<string, string>>>;
 }
 
 export const FilterForm: React.FC<FilterFormProps> = ({
   filters,
   filtersState,
-  updatefiltersState,
+  updateFiltersState,
 }) => {
   const [activeBtn, setActiveBtn] = useState<string>('');
   const [createdAfter, setCreatedAfter] = useState<string>('');
@@ -59,7 +59,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({
 
     filters.forEach((field) => {
       if (field.label === '기간') {
-        updatefiltersState((prev) => ({
+        updateFiltersState((prev) => ({
           ...prev,
           createdAfter: start,
           createdBefore: end,
@@ -79,7 +79,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({
       if (filter.label === '기간') {
         const newStart = isStart ? value : createdAfter;
         const newEnd = isStart ? createdBefore : value;
-        updatefiltersState((prev) => ({
+        updateFiltersState((prev) => ({
           ...prev,
           createdAfter: newStart,
           createdBefore: newEnd,
@@ -145,7 +145,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({
                 className='block w-[810px] h-[48px] rounded-md'
                 name={field.query}
                 onChange={(e) => {
-                  updatefiltersState((prev) => ({
+                  updateFiltersState((prev) => ({
                     ...prev,
                     [field.query]: e.target.value,
                   }));

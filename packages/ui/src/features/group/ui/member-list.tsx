@@ -13,7 +13,6 @@ interface MemberListProps {
   onClientRemoveMember: (id: number) => void;
 }
 
-// eslint-disable-next-line react/function-component-definition
 export const MemberList = ({
   members,
   onClientChangeLeader: onChangeLeader,
@@ -22,8 +21,8 @@ export const MemberList = ({
   const { mode } = useBoardContext();
   const slidesCount = members.length;
 
-  const groupLeader = members.filter((member) => member.isLeader === true);
-  const groupMembers = members.filter((member) => member.isLeader !== true);
+  const groupLeader = members.filter((member) => member.isLeader);
+  const groupMembers = members.filter((member) => !member.isLeader);
 
   const handleChangeLeader = (id: number) => {
     onChangeLeader(id);
@@ -36,14 +35,6 @@ export const MemberList = ({
   return (
     <div className='relative px-3'>
       <Swiper
-        modules={[Navigation, Pagination]}
-        slidesPerView={slidesCount < 2 ? 1 : 2}
-        slidesPerGroup={slidesCount < 2 ? 1 : 2}
-        spaceBetween={8}
-        scrollbar={{ draggable: true }}
-        navigation
-        pagination={{ clickable: true }}
-        centeredSlides={false}
         breakpoints={{
           370: {
             slidesPerView: slidesCount < 3 ? slidesCount : 3,
@@ -110,16 +101,23 @@ export const MemberList = ({
             slidesPerGroup: slidesCount < 9 ? slidesCount : 9,
           },
         }}
+        centeredSlides={false}
+        modules={[Navigation, Pagination]}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        slidesPerGroup={slidesCount < 2 ? 1 : 2}
+        slidesPerView={slidesCount < 2 ? 1 : 2}
+        spaceBetween={8}
       >
         {groupLeader.map((member) => (
-          <SwiperSlide>
-            <Profile key={member.id} member={member} mode={mode} />
+          <SwiperSlide key={member.id}>
+            <Profile member={member} mode={mode} />
           </SwiperSlide>
         ))}
         {groupMembers.map((member) => (
-          <SwiperSlide>
+          <SwiperSlide key={member.id}>
             <Profile
-              key={member.id}
               member={member}
               mode={mode}
               onChangeRadio={handleChangeLeader}

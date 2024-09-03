@@ -21,8 +21,8 @@ export * from './ui/base-modal';
 export * from './ui/input-swap-mode';
 export * from './ui/field';
 
-export * from './hooks/useBoardContext';
-export * from './hooks/useDebounce';
+export * from './hooks/use-board-context';
+export * from './hooks/use-debounce';
 
 export * from './model/members-board-provider';
 export * from './model/type';
