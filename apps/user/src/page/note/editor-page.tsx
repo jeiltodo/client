@@ -12,8 +12,8 @@ import {
   ButtonGroup,
   MINUTES_WITH_MS,
 } from '@jeiltodo/ui/shared';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import { EditorForm } from '../../features/note';
-import { ConfirmationModal } from '../../shared';
 import type { Note } from '../../entities/note';
 import { useCreateNote, useUpdateNote } from '../../entities/note';
 

@@ -14,6 +14,7 @@ import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
 import { useParams } from 'next/navigation';
 import { MembersBoard } from '@jeiltodo/ui/widgets';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
@@ -30,7 +31,6 @@ import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroupGoal';
 import { useDisbandGroup } from '../../../entities/group/hooks/useDisbandGroup';
 import { useLeaveGroup } from '../../../entities/group/hooks/useLeaveGroup';
-import { ConfirmationModal } from '../../../shared';
 
 export const GroupDashboardPage = () => {
   const params = useParams();

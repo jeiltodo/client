@@ -4,13 +4,13 @@ import { PlusBlue } from '@jeiltodo/icons';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { useIndividualSingleGoal } from '../../../entities/user/hooks/useSingleIndivGoals';
 import { userOptions } from '../../../entities/user';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 import { TitleProgressBarCard } from '../../../widgets/goal';
 import { GoalModal } from '../../../features/goal';
-import { ConfirmationModal } from '../../../shared';
 import {
   useDeleteSingleGoal,
   useEditSingleGoal,
@@ -104,7 +104,7 @@ export const IndividualGoalDetailPage = ({
             {isConfirmOpen && (
               <ConfirmationModal
                 setModalToggle={setIsConfirmOpen}
-                submitButtonText="삭제"
+                submitButtonText='삭제'
                 onSubmit={handleDelete}
               >
                 정말 삭제 하시겠어요?

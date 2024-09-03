@@ -15,7 +15,7 @@ import {
   useEmailDuplicateQuery,
   useLogoutMutation,
   useWithdrawMutation,
-} from '../../../entities/user/hooks/useUser';
+} from '../hooks/useUser';
 import {
   ACCESS_ADMIN_TOKEN_COOKIE_NAME,
   ACCESS_TOKEN_COOKIE_NAME,
@@ -23,8 +23,9 @@ import {
   REFRESH_TOKEN_COOKIE_NAME,
 } from '../../../shared/config/token';
 import { useRouter } from 'next/navigation';
+import { ConfirmationModal } from '../../../shared/ui/@x';
 
-interface Props {
+interface UserInfoModalProps {
   userInfo: UserDataprops | undefined;
   setInfoToggle: Dispatch<SetStateAction<boolean>>;
   isAdmin?: boolean; // 관리자 여부를 판단하는 플래그 추가
@@ -34,11 +35,12 @@ export const UserInfoModal = ({
   userInfo,
   setInfoToggle,
   isAdmin = false,
-}: Props) => {
+}: UserInfoModalProps) => {
   const [nickname, setNickname] = useState(userInfo?.nickname || '');
   const [email, setEmail] = useState(userInfo?.email || '');
   const [nicknameMessage, setNicknameMessage] = useState('');
   const [emailMessage, setEmailMessage] = useState('');
+  const [withDrawModalOpen, setWithDrawModalOpen] = useState(false);
 
   const debouncedNickname = useDebounce(nickname, 1000);
   const debouncedEmail = useDebounce(email, 1000);
@@ -110,6 +112,7 @@ export const UserInfoModal = ({
   };
 
   const handleWithdraw = () => {
+    setWithDrawModalOpen(false);
     withdrawMutation.mutate();
     router.push('/login');
   };
@@ -120,87 +123,102 @@ export const UserInfoModal = ({
   }, [userInfo]);
 
   return (
-    <BaseModal
-      title='사용자 설정'
-      setToggle={setInfoToggle}
-      width='modal_sm:w-[390px]'
-    >
-      <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px]'>
-        <div className='flex flex-col gap-3 w-full'>
-          <p className='text-sm font-pretendard-semibold text-slate-500'>
-            이름
-          </p>
-          <Input
-            onChange={(e) => {
-              setNickname(e.target.value);
-            }}
-            value={nickname}
-            type='text'
-            placeholder='이름을 적어주세요.'
-            className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
-            autoFocus={true}
-          />
+    <>
+      <BaseModal
+        setToggle={setInfoToggle}
+        title='사용자 설정'
+        width='modal_sm:w-[390px]'
+      >
+        <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px]'>
+          <div className='flex flex-col gap-3 w-full'>
+            <p className='text-sm font-pretendard-semibold text-slate-500'>
+              이름
+            </p>
+            <Input
+              autoFocus={true}
+              className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
+              onChange={(e) => {
+                setNickname(e.target.value);
+              }}
+              placeholder='이름을 적어주세요.'
+              type='text'
+              value={nickname}
+            />
+          </div>
+          <Button
+            className='w-[84px] h-[36px]'
+            isDisabled={
+              nickname === userInfo?.nickname ||
+              !!nicknameData?.data.duplicated ||
+              nickname.length === 0
+            }
+            onClick={handleSave}
+            variant='primary'
+          >
+            저장
+          </Button>
         </div>
-        <Button
-          variant='primary'
-          className='w-[84px] h-[36px]'
-          onClick={handleSave}
-          isDisabled={
-            nickname === userInfo?.nickname ||
-            !!nicknameData?.data.duplicated ||
-            nickname.length === 0
-          }
-        >
-          저장
-        </Button>
-      </div>
-      <p className='text-sm font-normal text-error mt-3'>{nicknameMessage}</p>
-      <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px] mt-3'>
-        <div className='flex flex-col gap-3 w-full'>
-          <p className='text-sm font-pretendard-semibold text-slate-500'>
-            이메일
-          </p>
-          <Input
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            value={email}
-            type='email'
-            placeholder='이메일을 적어주세요.'
-            className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
-          />
+        <p className='text-sm font-normal text-error mt-3'>{nicknameMessage}</p>
+        <div className='flex tablet:flex-row mobile:flex-col tablet:items-end mobile:justify-start mobile:items-end tablet:gap-[38px] mobile:gap-[12px] mt-3'>
+          <div className='flex flex-col gap-3 w-full'>
+            <p className='text-sm font-pretendard-semibold text-slate-500'>
+              이메일
+            </p>
+            <Input
+              className='tablet:w-[220px] mobile:w-full h-[28px] text-base font-medium text-slate-700 placeholder:text-slate-300'
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              placeholder='이메일을 적어주세요.'
+              type='email'
+              value={email}
+            />
+          </div>
+          <Button
+            className='w-[84px] h-[36px]'
+            isDisabled={
+              email === userInfo?.email ||
+              !!emailData?.data.duplicated ||
+              email.length === 0
+            }
+            onClick={handleSave}
+            variant='primary'
+          >
+            저장
+          </Button>
         </div>
-        <Button
-          variant='primary'
-          className='w-[84px] h-[36px]'
-          onClick={handleSave}
-          isDisabled={
-            email === userInfo?.email ||
-            !!emailData?.data.duplicated ||
-            email.length === 0
-          }
-        >
-          저장
-        </Button>
-      </div>
-      <p className='text-sm font-normal text-error mt-3'>{emailMessage}</p>
+        <p className='text-sm font-normal text-error mt-3'>{emailMessage}</p>
 
-      <div className='flex items-center justify-between gap-1 pt-4 mt-4 border-t-[1px] border-slate-200'>
-        <Button
-          className='w-[150px] h-[44px]'
-          variant='outline'
-          onClick={handleWithdraw}
+        <div className='flex items-center justify-between gap-1 pt-4 mt-4 border-t-[1px] border-slate-200'>
+          <Button
+            className='w-[150px] h-[44px]'
+            onClick={() => {
+              setWithDrawModalOpen(true);
+            }}
+            variant='outline'
+          >
+            회원탈퇴
+          </Button>
+          <Button
+            className='w-[150px] h-[44px]'
+            onClick={handleLogout}
+            variant='outline'
+          >
+            로그아웃
+          </Button>
+        </div>
+      </BaseModal>
+      {withDrawModalOpen ? (
+        <ConfirmationModal
+          onSubmit={() => {
+            handleWithdraw();
+          }}
+          setModalToggle={setWithDrawModalOpen}
+          submitButtonText='탈퇴'
         >
-          회원탈퇴
-        </Button>
-        <Button
-          className='w-[150px] h-[44px]'
-          variant='outline'
-          onClick={handleLogout}
-        >
-          로그아웃
-        </Button>
-      </div>
-    </BaseModal>
+          정말 탈퇴하시겠습니까? <br /> 그룹장인 경우 그룹이 삭제됩니다.
+        </ConfirmationModal>
+      ) : null}
+    </>
   );
 };
