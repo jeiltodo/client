@@ -1,6 +1,6 @@
 import { BlueMarker, Flag, OrangeMarker } from '@jeiltodo/icons';
 
-interface Props {
+interface BoardTitleProps {
   icon?: string;
   flagColor?: string;
   iconSize?: number;
@@ -14,18 +14,18 @@ export const BoardTitle = ({
   iconSize = 40,
   title,
   className,
-}: Props) => {
+}: BoardTitleProps) => {
   return (
     <div className={`flex gap-2 items-center ${className}`}>
       <span className='rounded-[15px] overflow-hidden'>
         {icon === 'OrangeMarker' && (
-          <OrangeMarker width={iconSize} height={iconSize} />
+          <OrangeMarker height={iconSize} width={iconSize} />
         )}
         {icon === 'BlueMarker' && (
-          <BlueMarker width={iconSize} height={iconSize} />
+          <BlueMarker height={iconSize} width={iconSize} />
         )}
         {icon === 'flag' && (
-          <Flag width={iconSize} height={iconSize} color={flagColor} />
+          <Flag color={flagColor} height={iconSize} width={iconSize} />
         )}
       </span>
       <span

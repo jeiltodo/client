@@ -6,7 +6,7 @@ export const useLeaveGroup = (memberId: number) => {
   return useMutation({
     mutationFn: (groupId: number) => groupApi.leaveGroup(groupId, memberId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('members'),
       });
     },

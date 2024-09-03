@@ -52,7 +52,6 @@ export interface GroupErrorResponse {
   code: number;
 }
 
-//임시 그룹 목표
 export interface GroupGoalsResponse {
   msg: string;
   code: number;

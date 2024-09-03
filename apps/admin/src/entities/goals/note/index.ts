@@ -1,8 +1,11 @@
-export * from './api/noteApi';
+export { noteApi } from './api/noteApi';
 
-export * from './model/type';
+export type {
+  ResponseGetNodeDetail,
+  ResponseGetNoteDetailData,
+} from './model/type';
 
-export * from './ui/note-detail-slide';
+export { NoteDetailSlide } from './ui/note-detail-slide';
 
-export * from './hooks/queryKeys';
-export * from './hooks/useNoteDetail';
+export { noteQueryKeys } from './hooks/queryKeys';
+export { useNoteDetail, useDeleteNoteMutation } from './hooks/useNoteDetail';

@@ -27,10 +27,10 @@ export function GroupManagementDetailTable({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {goals.map((goal, id) => (
+        {goals.map((goal) => (
           <Table.Row
             className='hover:bg-slate-50'
-            key={goal.title + id}
+            key={`${goal.title}+ ${goal.id}`}
             onClick={() => {
               handleClick(goal.id, goal.title);
             }}

@@ -35,8 +35,11 @@ export function GroupsManagementTable({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {groupRows.map((group, id) => (
-          <Table.Row className='hover:bg-slate-50 ' key={group.title + id}>
+        {groupRows.map((group) => (
+          <Table.Row
+            className='hover:bg-slate-50 '
+            key={group.title + group.id}
+          >
             <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(group.id)}

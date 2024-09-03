@@ -1,8 +1,14 @@
-export * from './model/type';
+export type {
+  GroupGoals,
+  GroupGoalTodos,
+  GroupGoalsQueryParams,
+  ResponseGetAllGroupGoals,
+  ResponseGetAllGroupGoalTodos,
+} from './model/type';
 
-export * from './api/goalsApi';
+export { groupGoalsApi } from './api/goalsApi';
 
-export * from './hooks/queryKeys';
-export * from './hooks/useGroupGoals';
+export { groupGoalsQueryKeys } from './hooks/queryKeys';
+export { useGetAllGroupGoals } from './hooks/useGroupGoals';
 
 export { GOALS_GROUP_FILTERS } from './constants/goals-group-filters';

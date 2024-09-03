@@ -11,7 +11,6 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useParams } from 'next/navigation';
-// import { MembersBoard
 import { MembersBoard } from '@jeiltodo/ui/widgets/group/ui/members-board.jsx';
 import { useGroupDetail, useChangeLeader } from '../../../entities/group';
 import { GroupManagementDetailTable } from '../../../widgets/group';

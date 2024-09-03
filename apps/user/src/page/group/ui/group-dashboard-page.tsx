@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
 import { useParams } from 'next/navigation';
-import { MembersBoard } from "@jeiltodo/ui/src/widgets/group/ui/members-board";
+import { MembersBoard } from '@jeiltodo/ui/widgets/group/ui/members-board.jsx';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
@@ -48,7 +48,7 @@ export const GroupDashboardPage = () => {
   const { ref, inView } = useInView();
 
   const { data: user } = useQuery(userOptions());
-  const { data: group, isLoading } = useGroupDetail(groupId);
+  const { data: group } = useGroupDetail(groupId);
   const { data: newCode } = useGroupCode(groupId);
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
@@ -101,6 +101,7 @@ export const GroupDashboardPage = () => {
           <button
             onClick={handleModalOpen}
             className='rounded-xl bg-orange-950 py-2 px-4 text-white font-semibold'
+            type='button'
           >
             해체하기
           </button>
@@ -108,6 +109,7 @@ export const GroupDashboardPage = () => {
           <button
             onClick={handleModalOpen}
             className='rounded-xl bg-orange-950 py-2 px-4 text-white font-semibold'
+            type='button'
           >
             탈퇴하기
           </button>
