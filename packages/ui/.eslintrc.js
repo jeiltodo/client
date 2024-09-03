@@ -14,6 +14,7 @@ module.exports = {
     'no-undef': 'off',
     'no-empty': 'off',
     'no-redeclare': 'off',
+    'no-nested-ternary': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
   },
 };

@@ -41,7 +41,8 @@ export function MemberManagementPage() {
     }
   };
 
-  if (isLoading || !data || !data.members) return <LoadingSpinner />;
+  if (isLoading || !data || data.members.length === 0)
+    return <LoadingSpinner />;
 
   return (
     <div>
@@ -59,7 +60,7 @@ export function MemberManagementPage() {
             searchedCount={data.searchedCount}
             totalCount={data.totalCount}
           />
-          {sortedMembers || data.members.length !== 0 ? (
+          {Boolean(sortedMembers) || data.members.length !== 0 ? (
             <MembersTable members={sortedMembers} />
           ) : (
             <div className='min-h-[120px] flex justify-center items-center text-lg text-slate-500 font-semibold'>
