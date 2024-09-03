@@ -24,7 +24,7 @@ export const UserDashboardPage = () => {
     if (inView) {
       hasNextPage && fetchNextPage();
     }
-  }, [inView]);
+  }, [fetchNextPage, hasNextPage, inView]);
 
   return (
     <div className='flex flex-col items-start gap-4 w-full'>

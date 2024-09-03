@@ -1,13 +1,10 @@
+import { client } from '@jeiltodo/ui/shared';
 import type { ResponseWith } from '../../../shared';
-import { client } from '../../../shared';
 import type {
   ResponsePageListRecentTodo,
   TodoCreateBody,
   Todos,
-  TodoUpdateBody} from '../model/type';
-import {
-  SingleGoalTodosResponse,
-  Todo
+  TodoUpdateBody,
 } from '../model/type';
 
 export const todoApi = {

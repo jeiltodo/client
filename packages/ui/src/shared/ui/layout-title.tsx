@@ -7,12 +7,12 @@ interface LayoutTitleProps {
   isFirstPage?: boolean;
 }
 
-export const LayoutTitle = ({
+export function LayoutTitle({
   title,
   children,
   className,
   isFirstPage = false,
-}: LayoutTitleProps) => {
+}: LayoutTitleProps) {
   return (
     <div
       className={`flex flex-row items-center justify-between mb-[16px] ${className}`}
@@ -24,4 +24,4 @@ export const LayoutTitle = ({
       <div>{children}</div>
     </div>
   );
-};
+}

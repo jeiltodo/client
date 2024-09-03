@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { calculateTotalPages } from '@jeiltodo/ui/shared';
 import { todoApi } from '../api/todoApi';
 import { todoQueryKeys } from './queryKey';
 
@@ -25,7 +26,8 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const { totalCount, currentPage } = lastPage.data as GoalWithTodosResponse;
+      const { totalCount, currentPage } =
+        lastPage.data as GoalWithTodosResponse;
       const totalPages = calculateTotalPages(totalCount, limit);
       return currentPage < totalPages ? currentPage + 1 : undefined;
     },
@@ -44,10 +46,10 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
             goal: {
               id: todo.goal.id,
               title: todo.goal.title,
-              memberId: 0, // 기본값 설정
-              createdAt: '', // 기본값 설정
-              updatedAt: '', // 기본값 설정
-              progress: 0, // 기본값 설정
+              memberId: 0,
+              createdAt: '',
+              updatedAt: '',
+              progress: 0,
             },
           })),
         },
@@ -55,12 +57,3 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
     }),
   });
 };
-
-/*
-////////////////////////////////////////////////////////////////////////////////
-*/
-function calculateTotalPages(totalCount: number, itemsPerPage: number): number {
-  const fullPages = Math.floor(totalCount / itemsPerPage);
-  const hasPartialPage = totalCount % itemsPerPage !== 0;
-  return fullPages + (hasPartialPage ? 1 : 0);
-}

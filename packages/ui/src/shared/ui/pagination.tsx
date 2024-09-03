@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from '@jeiltodo/icons';
 import { calculateTotalPages } from '../lib/calculateTotalPages';
 
-interface Props {
+interface PaginationProps {
   totalCount: number;
   limit: number;
   currentPage: number;
@@ -23,18 +23,14 @@ export function Pagination({
   variant = 'primary',
   className,
   isGroup = false,
-}: Props) {
+}: PaginationProps) {
   const pageCount = calculateTotalPages(totalCount, limit);
 
-  const getClassNames = (variant: string, isGroup: boolean): string => {
-    if (variant === 'primary') {
-      return isGroup
-        ? 'bg-groupColor-500 text-white'
-        : 'bg-blue-500 text-white';
+  const getClassNames = (vari: string, isGr: boolean): string => {
+    if (vari === 'primary') {
+      return isGr ? 'bg-groupColor-500 text-white' : 'bg-blue-500 text-white';
     } else {
-      return isGroup
-        ? 'bg-white text-groupColor-500'
-        : 'bg-white text-blue-500';
+      return isGr ? 'bg-white text-groupColor-500' : 'bg-white text-blue-500';
     }
   };
 
@@ -49,7 +45,8 @@ export function Pagination({
         onClick={onPrev}
       />
       {Array.from({ length: pageCount < 1 ? 1 : pageCount }).map((_, idx) => (
-        <span
+        <button
+          type='button'
           key={idx}
           className={`cursor-pointer inline-flex justify-center items-center w-5 h-5 text-sm font-medium rounded-md ${currentPage === idx + 1 ? getClassNames(variant, isGroup) : variant === 'primary' ? 'text-slate-400 ' : 'text-slate-950'} `}
           onClick={() => {
@@ -57,7 +54,7 @@ export function Pagination({
           }}
         >
           {idx + 1}
-        </span>
+        </button>
       ))}
       <ArrowRight
         width={24}
