@@ -1,21 +1,19 @@
 'use client';
+
+import { useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { BoardTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
-import { useMemo } from 'react';
-import { Pagination, useTableContext } from '../../../shared';
-import { MemberGoalTable } from '../../../widgets/members/ui/member-goal-table';
+import { useTableContext } from '../../../shared';
+import { sortBy } from '../../../shared/lib/sortBy';
 import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
 import { useGetMemberDetail } from '../../../entities/member/hooks/useGetMemberDetaili';
+import { useGetAllIndividualGoals } from '../../../entities/goals/individual';
+import { TablePagination } from '../../../features/goals/individual';
 import { GroupBoard } from '../../../widgets/members';
 import { MemberOverviewBoard } from '../../../widgets/members/ui/member-overview-board';
-import type {
-  IndividualGoal} from '../../../entities/goals/individual';
-import {
-  useGetAllIndividualGoals,
-} from '../../../entities/goals/individual';
-import { TablePagination } from '../../../features/goals/individual';
+import { MemberGoalTable } from '../../../widgets/members/ui/member-goal-table';
 import type { SortOptions } from '../../../shared/lib/sortBy';
-import { sortBy } from '../../../shared/lib/sortBy';
+import type { IndividualGoal } from '../../../entities/goals/individual';
 
 export function MemberDetailPage() {
   const { tableFilters, tableSort } = useTableContext();
@@ -44,12 +42,12 @@ export function MemberDetailPage() {
       </h1>
       <div className='w-full flex gap-5'>
         <MemberOverviewBoard member={rest} />
-        <GroupBoard groups={memberDetail.groups} />
+        <GroupBoard groups={groups} />
       </div>
       <div className='w-[930px] py-5 px-5 bg-white rounded-xl mt-5 relative'>
         <BoardTitle className='mb-5' title='개인 목표' />
         <TableToolBar totalCount={goals.goals.length} />
-        {sortedGoals || goals.goals.length !== 0 ? (
+        {sortedGoals.length !== 0 || goals.goals.length !== 0 ? (
           <MemberGoalTable memberGoals={sortedGoals} />
         ) : (
           <div className='min-h-[120px] flex justify-center items-center text-lg text-slate-500 font-semibold'>

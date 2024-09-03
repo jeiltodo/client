@@ -1,17 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { BoardLayout } from "@jeiltodo/ui/src/shared/ui/@x/board-layout";
-import { InputSwapMode } from "@jeiltodo/ui/src/shared/ui/input-swap-mode";
-import { Field } from "@jeiltodo/ui/src/shared/ui/field";
+import {
+  BoardLayout,
+  Field,
+  formatDateString,
+  InputSwapMode,
+} from '@jeiltodo/ui/shared';
 import type { UserInterface } from '../model/type';
 import { useUpdateMemberInfo } from '../../../entities/member/hooks/useUpdateMemberInfo';
-import { formatDateString } from '@jeiltodo/ui/shared';
-interface Props {
+
+interface MemberOverviewBoardProps {
   member: UserInterface;
 }
 
-export function MemberOverviewBoard({ member }: Props) {
+export function MemberOverviewBoard({ member }: MemberOverviewBoardProps) {
   const [isEditNameMode, setIsEditNameMode] = useState<boolean>(false);
   const [isEditEmailMode, setIsEditEmailMode] = useState<boolean>(false);
   const { mutate: updateMember } = useUpdateMemberInfo(member.id);

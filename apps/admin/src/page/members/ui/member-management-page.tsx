@@ -28,7 +28,7 @@ export function MemberManagementPage() {
       data?.members || [],
       tableSort as SortOptions<Member>
     );
-  }, [data?.members, tableSort]);
+  }, [data, tableSort]);
 
   const handleDelete = (ids: number[]) => {
     if (ids.length === 0) {
@@ -54,7 +54,7 @@ export function MemberManagementPage() {
       <SearchFilter filters={MEMBERS_FIILTERS} />
 
       <div className='w-[930px] pb-[16px] px-5 bg-white rounded-xl mt-5 relative'>
-        <TableCheckListProvider tableData={data.members}>
+        <TableCheckListProvider tableData={sortedMembers}>
           <TableToolBarWithCheck
             onDelete={handleDelete}
             searchedCount={data.searchedCount}

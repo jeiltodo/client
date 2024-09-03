@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
-interface Props {
+interface InputSwapModeProps {
   label: string;
   value: string;
   defaultValue: string;
@@ -11,7 +11,7 @@ interface Props {
   isAdmin?: boolean;
   onChange: (value: string) => void;
   onSwap: Dispatch<SetStateAction<boolean>>;
-  className?: string; 
+  className?: string;
 }
 
 export const InputSwapMode = ({
@@ -23,11 +23,11 @@ export const InputSwapMode = ({
   isAdmin = false,
   onChange,
   onSwap,
-  className, 
-}: Props) => {
+  className,
+}: InputSwapModeProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleToggle = () => {
-    if (isEditMode === true) {
+    if (isEditMode) {
       onChange(defaultValue);
     }
     onSwap((prev) => !prev);
@@ -49,17 +49,17 @@ export const InputSwapMode = ({
         <input
           ref={inputRef}
           value={value}
-          readOnly={isEditMode === false}
+          readOnly={isEditMode}
           onChange={(e) => {
             onChange(e.target.value);
           }}
-          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b  focus:outline-none ${isEditMode === false ? 'border-transparent' : ' border-slate-800'}`}
+          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b  focus:outline-none ${isEditMode ? ' border-slate-800' : 'border-transparent'}`}
         />
         <button
           onClick={handleToggle}
-          className={`inline-block min-w-[84px] h-9 border rounded-xl ${isEditMode === false ? (isGroup ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'border-blue-500 text-blue-500 ') : 'bg-slate-900 text-white '}`}
+          className={`inline-block min-w-[84px] h-9 border rounded-xl ${!isEditMode ? (isGroup ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'border-blue-500 text-blue-500 ') : 'bg-slate-900 text-white '}`}
         >
-          {isEditMode === false ? '수정' : '취소'}
+          {isEditMode ? '수정' : '취소'}
         </button>
       </div>
     </div>
