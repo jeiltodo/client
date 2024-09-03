@@ -14,10 +14,10 @@ export * from './ui/pagination';
 export * from './ui/loading-spinner';
 export * from './ui/back-button';
 export * from './ui/toast';
-export * from './ui/base-modal'
+export * from './ui/base-modal';
 
-export * from './hooks/useBoardContext';
-export * from './hooks/useDebounce';
+export * from './hooks/use-board-context';
+export * from './hooks/use-debounce';
 
 export * from './model/members-board-provider';
 export * from './model/type';

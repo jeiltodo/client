@@ -61,7 +61,7 @@ export function PostsIndividualDetailPage() {
             searchedCount={data.totalCount}
             totalCount={data.totalCount}
           />
-          {sortedTodos ? (
+          {sortedTodos.length > 0 ? (
             <GoalTodosIndividualTable
               goalTitle={goalTitle}
               todos={sortedTodos}

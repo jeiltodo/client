@@ -3,16 +3,18 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
-import { Table , useTableCheck } from '../../../../shared';
+import { Table, useTableCheck } from '../../../../shared';
 import { TableHeadList } from '../../../../features/members';
 import type { GroupGoals } from '../../../../entities/goals/group';
 import { GOAL_GROUP_TABLE_HEAD_MAP } from '../../../../features/goals/group';
 
-interface Props {
+interface GoalsGroupTableProps {
   goals: GroupGoals[];
 }
 
-export function GoalsGroupTable({ goals: goalGroupRows }: Props) {
+export function GoalsGroupTable({
+  goals: goalGroupRows,
+}: GoalsGroupTableProps) {
   const router = useRouter();
   const handleClick = (id: number, title: string) => {
     const queryString = new URLSearchParams({ title }).toString();
