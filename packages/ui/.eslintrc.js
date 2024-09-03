@@ -15,6 +15,7 @@ module.exports = {
     'no-empty': 'off',
     'no-redeclare': 'off',
     'no-nested-ternary': 'off',
+    'unicorn/filename-case': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
   },
 };

@@ -1,9 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { userApi } from '../api/userApi';
-import { useToast } from '../../../shared';
+import { deleteCookie, useToast } from '../../../shared';
 import { userQueryKeys } from './queryKeys';
 import { LogoutData, UserData } from '../model/type';
-import { deleteCookie } from '../../../../../../apps/user/src/shared';
 
 export const useUpdateUserInfoMutation = (admin = false) => {
   const queryClient = useQueryClient();
@@ -11,8 +10,8 @@ export const useUpdateUserInfoMutation = (admin = false) => {
 
   return useMutation({
     mutationFn: (data: UserData) => userApi.updateUserInfo(data, admin),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         queryKey: userQueryKeys.all,
       });
       showToast({ message: '회원 정보가 수정되었습니다.', type: 'alert' });
@@ -64,7 +63,7 @@ export const useNicknameDuplicateQuery = (nickname: string, admin = false) => {
   return useQuery({
     queryKey: userQueryKeys.nicknameDuplicate(nickname),
     queryFn: () => userApi.nicknameDuplicate(nickname, admin),
-    enabled: nickname !== null
+    enabled: nickname.trim().length !== 0,
   });
 };
 
@@ -73,6 +72,6 @@ export const useEmailDuplicateQuery = (email: string, admin = false) => {
   return useQuery({
     queryKey: userQueryKeys.emailDuplicate(email),
     queryFn: () => userApi.emailDuplicate(email, admin),
-    enabled: email !== null
+    enabled: email.trim().length !== 0,
   });
 };
