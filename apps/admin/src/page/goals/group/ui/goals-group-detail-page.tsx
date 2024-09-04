@@ -6,11 +6,11 @@ import { TableToolBarWithCheck, useTableContext } from '../../../../shared';
 import type { SortOptions } from '../../../../shared/lib/sortBy';
 import { sortBy } from '../../../../shared/lib/sortBy';
 import { TablePagination } from '../../../../features/goals/individual';
-import type { GroupGoalTodos } from '../../../../entities/goals/group';
+import type { GroupGoalTodos } from '../../../../entities/goals/group/model';
 import {
   useDeleteGroupGoalTodos,
   useGetAllGroupGoalTodos,
-} from '../../../../entities/goals/group';
+} from '../../../../entities/goals/group/hooks';
 import { GoalTodosGroupTable } from '../../../../widgets/goals/group';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 

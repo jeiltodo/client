@@ -19,16 +19,6 @@ export interface GroupGoalTodos {
   updatedAt: string;
 }
 
-export interface GroupGoalsQueryParams {
-  page: number;
-  limit: number;
-  nickname?: string;
-  groupName?: string;
-  title?: string;
-  createdAfter?: string;
-  createdBefore?: string;
-}
-
 export interface ResponseGetAllGroupGoals {
   msg: string;
   code: number;

@@ -8,7 +8,7 @@ import {
   Input,
   useDebounce,
 } from '@jeiltodo/ui/shared';
-import { UserDataprops } from '../../../features';
+import { UserDataProps } from '../../../features/user/model';
 import {
   useUpdateUserInfoMutation,
   useNicknameDuplicateQuery,
@@ -26,7 +26,7 @@ import { useRouter } from 'next/navigation';
 import { ConfirmationModal } from '../../../shared/ui/@x';
 
 interface UserInfoModalProps {
-  userInfo: UserDataprops | undefined;
+  userInfo: UserDataProps | undefined;
   setInfoToggle: Dispatch<SetStateAction<boolean>>;
   isAdmin?: boolean; // 관리자 여부를 판단하는 플래그 추가
 }

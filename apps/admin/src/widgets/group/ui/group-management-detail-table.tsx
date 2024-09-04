@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Table } from '../../../shared';
 import { TableHeadList } from '../../../features/members';
 import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
-import type { GroupGoals } from '../../../entities/goals/group';
+import type { GroupGoals } from '../../../entities/goals/group/model';
 
 interface GroupsManagementDetailTableProps {
   goals: GroupGoals[];

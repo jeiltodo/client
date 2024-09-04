@@ -10,12 +10,12 @@ import {
 } from '../../../../shared';
 import type { SortOptions } from '../../../../shared/lib/sortBy';
 import { sortBy } from '../../../../shared/lib/sortBy';
-import type { GroupGoals } from '../../../../entities/goals/group';
+import type { GroupGoals } from '../../../../entities/goals/group/model';
 import {
   useDeleteGroupGoal,
   useGetAllGroupGoals,
-} from '../../../../entities/goals/group';
-import { GOALS_GROUP_FILTERS } from '../../../../entities/goals/group/constants/goals-group-filters';
+} from '../../../../entities/goals/group/hooks';
+import { GOALS_GROUP_FILTERS } from '../../../../entities/goals/group/constants';
 import { GoalsGroupTable } from '../../../../widgets/goals/group/ui/goal-group-table';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
