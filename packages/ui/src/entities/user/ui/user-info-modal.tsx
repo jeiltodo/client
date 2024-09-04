@@ -8,7 +8,7 @@ import {
   Input,
   useDebounce,
 } from '@jeiltodo/ui/shared';
-import { UserDataProps } from '../../../features/user/model';
+import type { UserDataProps } from '../../../features/user/model';
 import {
   useUpdateUserInfoMutation,
   useNicknameDuplicateQuery,

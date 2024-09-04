@@ -1,12 +1,12 @@
 export type BoardMode = 'default' | 'change-leader' | 'manage-members';
 
-export type Goal = {
+export interface Goal {
   id: number;
   title: string;
   progress?: number;
-};
+}
 
-export type Todo = {
+export interface Todo {
   id: number;
   isDone: boolean;
   title: string;
@@ -14,9 +14,9 @@ export type Todo = {
   updatedAt: string;
   createdAt: string;
   goal: Goal;
-};
+}
 
-export type Note = {
+export interface Note {
   id: number;
   title: string;
   content: string;
@@ -24,13 +24,13 @@ export type Note = {
   updatedAt: Date | string;
   linkUrl?: string;
   todo: Todo;
-};
+}
 
-export type NoteResponse = {
+export interface NoteResponse {
   currentPage: number;
   notes: Note[] | [];
   totalCount: number;
-};
+}
 
 export interface ResponseWith<T> {
   msg: string;

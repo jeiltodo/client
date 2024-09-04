@@ -12,7 +12,9 @@
     "./shared": "./src/shared/index.ts",
     "./shared/ui/@x": "./src/shared/ui/@x/index.ts",
     "./entities": "./src/entities/index.ts",
-    "./features": "./src/features/index.ts",
+    "./features/group/ui": "./src/features/group/ui/index.ts",
+    "./features/user/ui": "./src/features/user/ui/index.ts",
+    "./features/user/model": "./src/features/user/model/index.ts",
     "./widgets": "./src/widgets/index.ts",
     "./page": "./src/page/index.ts"
   },

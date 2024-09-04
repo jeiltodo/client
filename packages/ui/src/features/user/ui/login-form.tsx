@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Input, useToast } from '@jeiltodo/ui/shared';
 import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
-import { validateLogIn } from '../model/validation';
+import { validateLogIn } from '../model';
 
 interface LoginFormProps {
   isAdmin: boolean;
@@ -36,6 +36,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
       }
     } catch (error) {
       // 네트워크 에러 등 예외 처리
+      //console.log대신 Sentry 추가
       console.error('Login error:', error);
     }
   };
@@ -65,7 +66,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-full flex flex-col items-center'>
+    <form
+      className='w-full flex flex-col items-center'
+      onSubmit={(e) => {
+        void handleSubmit(e);
+      }}
+    >
       <div className='w-full tablet:max-w-[640px] desktop:w-[640px] flex flex-col gap-y-3 mb-[48px]'>
         <label className='font-pretendard-semibold text-base' htmlFor='email'>
           아이디

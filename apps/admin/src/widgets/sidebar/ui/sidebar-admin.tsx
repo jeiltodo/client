@@ -1,13 +1,12 @@
 'use client';
 import { Sidebar } from '@jeiltodo/ui/shared';
 import { Home, Group, Post } from '@jeiltodo/icons';
-import { SidebarUserInfo } from '@jeiltodo/ui/features';
+import { SidebarUserInfo } from '@jeiltodo/ui/features/user/ui';
 import { useQuery } from '@tanstack/react-query';
 import { SidebarNav } from '../../../shared';
 import { userOptions } from '../../../entities/user';
 
 export function SidebarAdmin() {
-
   const { data: userInfo } = useQuery(userOptions());
 
   return (
