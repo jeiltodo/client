@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { groupApi } from '../api/groupApi';
+import { groupApi } from '../api';
 import { groupQueryKeys } from './queryKeys';
 
 export const useGroupCode = (groupId: number) => {

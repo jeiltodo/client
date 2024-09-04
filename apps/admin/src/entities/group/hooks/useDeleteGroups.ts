@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@jeiltodo/ui/shared';
-import { groupApi } from '../api/groupApi';
+import { groupApi } from '../api';
 import { groupQueryKeys } from './queryKeys';
 
 export const useDeleteGroups = () => {

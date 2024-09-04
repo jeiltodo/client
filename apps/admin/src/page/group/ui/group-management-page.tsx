@@ -8,12 +8,12 @@ import {
   TableToolBarWithCheck,
   useTableContext,
 } from '../../../shared';
-import type { Groups } from '../../../entities/group';
+import type { GroupsWidthMembers } from '../../../entities/group/model';
+import { GROUP_SEARCH_FILTERS } from '../../../entities/group/constants';
 import {
-  GROUP_SEARCH_FILTERS,
   useDeleteGroups,
   useSearchGroups,
-} from '../../../entities/group';
+} from '../../../entities/group/hooks';
 import { GroupManagementPagination } from '../../../features/group';
 import type { SortOptions } from '../../../shared/lib/sortBy';
 import { sortBy } from '../../../shared/lib/sortBy';
@@ -25,7 +25,10 @@ export const GroupManagementPage = () => {
   const deleteGroupMutation = useDeleteGroups();
   const showToast = useToast();
   const sortedGroups = useMemo(() => {
-    return sortBy<Groups>(data?.groups || [], tableSort as SortOptions<Groups>);
+    return sortBy<GroupsWidthMembers>(
+      data?.groups || [],
+      tableSort as SortOptions<GroupsWidthMembers>
+    );
   }, [data?.groups, tableSort]);
 
   const handleDelete = (ids: number[]) => {

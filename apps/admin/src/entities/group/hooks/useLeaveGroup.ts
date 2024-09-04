@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
+import { groupApi } from '../api';
 
 export const useLeaveGroup = (memberId: number) => {
   const queryClient = useQueryClient();

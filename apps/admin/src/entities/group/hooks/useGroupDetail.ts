@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
+import { groupApi } from '../api';
 import { groupQueryKeys } from './queryKeys';
 
 export const useGroupDetail = (groupId: number) => {

@@ -12,7 +12,7 @@ import {
 } from '@jeiltodo/ui/shared';
 import { useParams } from 'next/navigation';
 import { MembersBoard } from '@jeiltodo/ui/widgets';
-import { useGroupDetail, useChangeLeader } from '../../../entities/group';
+import { useGroupDetail, useChangeLeader } from '../../../entities/group/hooks';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
 import type { GroupGoals } from '../../../entities/goals/group/model';
