@@ -1,5 +1,5 @@
 'use client';
-'use client';
+
 import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { BoardMode } from '@jeiltodo/ui/shared';
@@ -16,7 +16,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
     changeMode(mode);
   };
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     changeMode('default');
   };
 
@@ -52,7 +52,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
             variant={isAdmin ? 'outline' : 'outline-no-border'}
             className='bg-white px-[10px] min-w-[84px] h-[36px]'
             onClick={() => {
-              handleCancle();
+              handleCancel();
             }}
           >
             취소
