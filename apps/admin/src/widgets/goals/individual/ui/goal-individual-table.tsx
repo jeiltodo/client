@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { Table, useTableCheck } from '../../../../shared';
-import type { IndividualGoal } from '../../../../entities/goals/individual';
+import type { IndividualGoal } from '../../../../entities/goals/individual/model';
 import { GOAL_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
 
