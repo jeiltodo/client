@@ -5,7 +5,7 @@ import { Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { AdminNote } from '@jeiltodo/icons';
 import { Table, useTableCheck } from '../../../../shared';
 import { TableHeadList } from '../../../../features/members';
-import { NoteDetailSlide } from '../../../../entities/goals/note';
+import { NoteDetailSlide } from '../../../../entities/goals/note/ui';
 import type { GroupGoalTodos } from '../../../../entities/goals/group/model';
 import { TODO_GROUP_TABLE_HEAD_MAP } from '../../../../features/goals/group';
 

@@ -7,7 +7,7 @@ import { Table, useTableCheck } from '../../../../shared';
 import type { IndividualGoalTodos } from '../../../../entities/goals/individual/model';
 import { TODO_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
-import { NoteDetailSlide } from '../../../../entities/goals/note';
+import { NoteDetailSlide } from '../../../../entities/goals/note/ui';
 
 interface GoalTodosIndividualTableProps {
   goalTitle: string;
