@@ -13,14 +13,14 @@ import {
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 import { useGroupDetail } from '../../../entities/group';
-import { TitleProgressBarCard } from '../../../widgets/goal';
+import { TitleProgressBarCard } from '../../../widgets/goal/ui';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';
-import { GoalModal } from '../../../features/goal';
+import { GoalModal } from '../../../features/goal/ui';
 import type { SingleGroupGoalTodo } from '../../../entities/todo';
 import { TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
-import { userOptions } from '../../../entities/goal';
+import { userOptions } from '../../../entities/goal/hooks';
 
 export const GroupGoalDetailPage = ({
   params,
@@ -96,8 +96,7 @@ export const GroupGoalDetailPage = ({
                 className='flex gap-1 items-center text-sm h-[20px]'
                 onClick={openAddTodoModal}
               >
-                <PlusOrange width={16} height={16} />
-                할일 추가
+                <PlusOrange width={16} height={16} />할 일 추가
               </Button>
             </div>
             {user?.id && (

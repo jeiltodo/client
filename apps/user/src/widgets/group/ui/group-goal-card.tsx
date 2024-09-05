@@ -4,7 +4,7 @@ import { Button } from '@jeiltodo/ui/shared';
 import { ArrowRight, PlusOrange } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import type { GroupGoalWithTodos } from '../../../entities/goal';
+import type { GroupGoalWithTodos } from '../../../entities/goal/types';
 import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';

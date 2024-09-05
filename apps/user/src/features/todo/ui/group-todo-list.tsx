@@ -16,7 +16,7 @@ import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { useGroupDetail } from '../../../entities/group';
 import { NoteDetailSlide } from '../../../widgets/note';
-import { userOptions } from '../../../entities/goal';
+import { userOptions } from '../../../entities/user';
 
 interface Props {
   goalWithTodos: FormattedGoalWithTodos;

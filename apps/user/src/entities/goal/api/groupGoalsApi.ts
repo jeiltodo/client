@@ -2,7 +2,6 @@ import { client } from '@jeiltodo/ui/shared';
 import type { GoalWithProgress, GroupGoalWithTodos } from '../types';
 import type { ResponseWith } from '../../../shared';
 import type { GoalProps } from '../../../features/group';
-import type { SingleGoalTodosResponse } from '../../todo';
 
 export const groupGoalsApi = {
   getSingleGroupGoal: async (

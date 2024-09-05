@@ -6,7 +6,7 @@ import { userOptions } from '../../entities/user';
 import {
   individualGoalsOptions,
   progressAllOptions,
-} from '../../entities/goal';
+} from '../../entities/goal/hooks';
 
 export const runtime = 'edge';
 
@@ -24,8 +24,8 @@ export default async function DashboardLayout({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-        <SidebarUser />
-        <main>{children}</main>
-      </HydrationBoundary>
+      <SidebarUser />
+      <main>{children}</main>
+    </HydrationBoundary>
   );
 }

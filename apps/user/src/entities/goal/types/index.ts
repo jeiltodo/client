@@ -48,6 +48,10 @@ export interface GroupGoalWithProgress {
 
 export type GroupGoalWithTodos = GroupGoal & {
   todos: GroupTodo[];
+  progress: {
+    completedPercent: number;
+    members: GroupMember[];
+  };
 };
 
 export type GoalIdAndTitle = Pick<GoalWithProgress, 'id' | 'title'>;
