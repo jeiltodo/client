@@ -18,10 +18,9 @@ export const memberApi = {
 
   deleteMembers: async (memberIds: number[]) => {
     try {
-      const response = await client.delete(`/admin/member/delete`, {
+      await client.delete(`/admin/member/delete`, {
         data: { memberIds },
       });
-      return response.data;
     } catch (error) {
       console.error('Fail fetch userInfo:', error);
       throw error;
@@ -45,11 +44,7 @@ export const memberApi = {
     updated: Partial<{ nickname: string; email: string }>
   ) => {
     try {
-      const response = await client.patch(
-        `/admin/member/update/${memberId}`,
-        updated
-      );
-      return response.data;
+      await client.patch(`/admin/member/update/${memberId}`, updated);
     } catch (error) {
       console.error('Fail fetch userInfo:', error);
       throw error;

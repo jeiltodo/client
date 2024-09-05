@@ -5,8 +5,8 @@ export const useDeleteMembers = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: memberApi.deleteMembers,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('members'),
       });
     },

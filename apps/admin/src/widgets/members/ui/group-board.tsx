@@ -10,7 +10,7 @@ interface GroupBoardProps {
 
 export const GroupBoard: React.FC<GroupBoardProps> = ({ groups }) => {
   const params = useParams();
-  const GROUP_TOTAL_COUNT = 10;
+  // const GROUP_TOTAL_COUNT = 10;
   const { mutate: leaveGroup } = useLeaveGroup(Number(params.id));
 
   const handleLeaveGroup = (groupId: number) => {
@@ -26,14 +26,14 @@ export const GroupBoard: React.FC<GroupBoardProps> = ({ groups }) => {
           {/* <span className='text-blue-500'>{GROUP_TOTAL_COUNT}</span> */}
         </div>
       </div>
-      <div
-        className="mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide"
-      >
+      <div className='mt-4 h-[284px] flex flex-col items-center gap-4 overflow-y-scroll scrollbar-hide'>
         {groups.map((group) => (
           <GroupCard
             key={group.id}
             name={group.title}
-            onLeaveGroup={() => { handleLeaveGroup(group.id); }}
+            onLeaveGroup={() => {
+              handleLeaveGroup(group.id);
+            }}
             registerAt={group.registerAt}
           />
         ))}

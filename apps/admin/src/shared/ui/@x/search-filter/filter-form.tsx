@@ -90,8 +90,11 @@ export const FilterForm: React.FC<FilterFormProps> = ({
 
   return (
     <div className='flex flex-col gap-3 '>
-      {filters.map((field, id) => (
-        <div className='font-pretendard-medium' key={id}>
+      {filters.map((field) => (
+        <div
+          className='font-pretendard-medium'
+          key={`${field.label}-${field.query}`}
+        >
           {field.label === '기간' ? (
             <div className='flex items-center justify-start'>
               <label className='flex items-center w-[80px] h-[48px] font-pretendard-medium font-normal text-[14px]'>

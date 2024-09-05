@@ -7,11 +7,11 @@ export const useUpdateMemberInfo = (memberId: number) => {
   return useMutation({
     mutationFn: (updated: Partial<Pick<UserInterface, 'nickname' | 'email'>>) =>
       memberApi.updateMemberInfo(memberId, updated),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes(memberId),
       });
-      queryClient.invalidateQueries({
+      await queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('members'),
       });
     },
