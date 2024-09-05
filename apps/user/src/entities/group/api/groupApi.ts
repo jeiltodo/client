@@ -41,7 +41,9 @@ export const groupApi = {
     }
   },
 
-  getGroupDetail: async (id: number) => {
+  getGroupDetail: async (
+    id: number
+  ): Promise<ResponseWith<GroupWithMembers>> => {
     try {
       const response = await client.get<ResponseWith<GroupWithMembers>>(
         `/groups/${id}`
@@ -53,7 +55,7 @@ export const groupApi = {
     }
   },
 
-  reissueGroupoCode: async (id: number) => {
+  reissueGroupCode: async (id: number) => {
     try {
       const response = await client.get<ResponseWith<GroupCode>>(
         `/groups/code/${id}`

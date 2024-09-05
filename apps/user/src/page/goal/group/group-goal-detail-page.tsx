@@ -4,6 +4,8 @@ import { PlusOrange } from '@jeiltodo/icons';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
+import type { Group } from '@jeiltodo/ui/entities';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import {
   useGroupGoals,
@@ -34,12 +36,12 @@ export const GroupGoalDetailPage = ({
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const { data: user } = useQuery(userOptions());
-  const { data: group } = useGroupDetail(groupId);
+  const { data: group } = useGroupDetail(groupId) as { data: Group };
   const { data: groupGoals } = useGroupGoals(groupId);
 
   const { data: singleGroupGoal, isLoading } = useGroupSingleGoal(goalId);
   const { data: singleGroupGoalTodo } =
-    useSingleGoalTodo<SingleGroupGoalTodo>(goalId);
+    useSingleGoalTodo<SingleGroupGoalTodo[]>(goalId);
   const { mutate: editGroupGoal } = useUpdateGroupGoal(groupId);
   const { mutate: deleteGroupGoal } = useDeleteGroupGoal(groupId);
 
@@ -47,7 +49,11 @@ export const GroupGoalDetailPage = ({
     groupGoals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
 
   const handleEdit = ({ title }: { title: string }) => {
-    editGroupGoal({ id: singleGroupGoal!.id, title });
+    if (singleGroupGoal) {
+      editGroupGoal({ id: singleGroupGoal.id, title });
+    } else {
+      console.error('singleGroupGoal is null or undefined');
+    }
   };
 
   const handleDelete = () => {
@@ -74,7 +80,7 @@ export const GroupGoalDetailPage = ({
   };
   return (
     <div className='max-w-[1200px]'>
-      <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
+      <LayoutTitle title={`${group.title} 목표`} />
       <div className='flex flex-col gap-y-6 relative'>
         {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
           <>
@@ -103,7 +109,7 @@ export const GroupGoalDetailPage = ({
             )}
             {isGoalToggleOpen && (
               <GoalModal
-                goalCreator={group?.title ?? '그룹'}
+                goalCreator={group.title}
                 initialGoal={{
                   id: singleGroupGoal.id,
                   title: singleGroupGoal.title,
@@ -123,7 +129,7 @@ export const GroupGoalDetailPage = ({
             )}
             {isAddTodoModalOpen && (
               <TodoModal
-                todoCreator={group?.title ?? '그룹'}
+                todoCreator={group.title}
                 setTodoModalToggle={setIsAddTodoModalOpen}
                 initialGoal={singleGroupGoal}
                 goals={groupGoalsForModal}
