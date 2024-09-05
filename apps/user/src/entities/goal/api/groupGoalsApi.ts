@@ -1,14 +1,13 @@
-import type { GroupGoalWithTodos, SingleGoalResponse } from '../types';
-import { GroupGoalsResponse } from '../types';
-import type { ResponsePageListWith, ResponseWith } from '../../../shared';
-import { client } from '../../../shared';
+import { client } from '@jeiltodo/ui/shared';
+import type { GroupGoalWithTodos } from '../types';
+import type { ResponseWith } from '../../../shared';
 import type { GoalProps } from '../../../features/group';
-import { GroupProps } from '../../../features/group';
+import type { SingleGoalTodosResponse } from '../../todo';
 
 export const groupGoalsApi = {
   getSingleGroupGoal: async (goalId: number) => {
     try {
-      const response = await client.get<SingleGoalResponse>(
+      const response = await client.get<SingleGoalTodosResponse>(
         `/group/goals/single/${goalId}`
       );
       return response.data;
@@ -37,7 +36,11 @@ export const groupGoalsApi = {
   ) => {
     try {
       const response = await client.get<
-        ResponsePageListWith<{ goals: GroupGoalWithTodos[] }>
+        ResponseWith<{
+          totalCount: number;
+          currPage: number;
+          goals: GroupGoalWithTodos[];
+        }>
       >(`/group/goals/todos/${groupId}`, {
         params,
       });

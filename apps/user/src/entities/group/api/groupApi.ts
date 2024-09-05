@@ -3,9 +3,9 @@ import type {
   GroupTitleOrCode,
   GroupWithMembers,
 } from '@jeiltodo/ui/entities';
+import { client } from '@jeiltodo/ui/shared';
 import type { GroupResponse, GroupPostResponse } from '../model/type';
 import type { ResponseWith } from '../../../shared';
-import { client } from '../../../shared';
 
 export const groupApi = {
   // GET 요청: 개인 그룹 조회

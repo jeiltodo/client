@@ -15,8 +15,7 @@ import { TitleProgressBarCard } from '../../../widgets/goal';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';
 import { GoalModal } from '../../../features/goal';
-import { ConfirmationModal } from '../../../shared';
-import type { SingleGroupGoalTodo} from '../../../entities/todo';
+import type { SingleGroupGoalTodo } from '../../../entities/todo';
 import { TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
 import { userOptions } from '../../../entities/goal';
@@ -40,7 +39,7 @@ export const GroupGoalDetailPage = ({
 
   const { data: singleGroupGoal, isLoading } = useGroupSingleGoal(goalId);
   const { data: singleGroupGoalTodo } =
-    useSingleGoalTodo<SingleGroupGoalTodo[]>(goalId);
+    useSingleGoalTodo<SingleGroupGoalTodo>(goalId);
   const { mutate: editGroupGoal } = useUpdateGroupGoal(groupId);
   const { mutate: deleteGroupGoal } = useDeleteGroupGoal(groupId);
 
@@ -116,7 +115,7 @@ export const GroupGoalDetailPage = ({
             {isConfirmOpen && (
               <ConfirmationModal
                 setModalToggle={setIsConfirmOpen}
-                submitButtonText="삭제"
+                submitButtonText='삭제'
                 onSubmit={handleDelete}
               >
                 정말 삭제 하시겠어요?

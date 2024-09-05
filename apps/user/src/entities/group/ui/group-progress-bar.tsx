@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { GroupMember } from '../../goal';
+import type { GroupMember } from '../../goal/types';
 
 interface Props {
   progress: { completedPercent: number; members: GroupMember[] };
@@ -11,7 +11,6 @@ interface Props {
 export const GroupProgressBar = ({ progress, className }: Props) => {
   const [hoveredMember, setHoveredMember] = useState<string | null>(null);
   const { members, completedPercent } = progress;
-  let accumulatedPercent = 0;
 
   return (
     <div className='flex items-center justify-start gap-2'>
@@ -19,10 +18,9 @@ export const GroupProgressBar = ({ progress, className }: Props) => {
         className={`w-full h-1 bg-gray-200 rounded-md flex items-center ${className}`}
       >
         {members.map((member, index) => {
-          accumulatedPercent += member.contributionPercent;
           return (
             <div
-              key={index}
+              key={`${member.nickname}-${member.color}`}
               className={`relative h-full transition-all duration-500 ease-in-out ${
                 index === 0 ? 'rounded-l-md' : ''
               } ${index === members.length - 1 ? 'rounded-r-md' : ''}`}

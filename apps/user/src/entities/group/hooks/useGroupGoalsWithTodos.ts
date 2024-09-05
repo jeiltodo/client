@@ -1,16 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { calculateTotalPages } from '@jeiltodo/ui/shared';
 import { goalQueryKeys } from '../../goal/hooks/queryKey';
 import { groupGoalsApi } from '../../goal/api/groupGoalsApi';
-import { calculateTotalPages } from '../../../shared';
 
 interface Props {
   groupId: number;
   limit: number;
-}
-
-interface PageInfo {
-  totalCount: number;
-  currPage: number;
 }
 
 export const useGroupGoalsWithTodos = ({ groupId, limit }: Props) => {
@@ -23,7 +18,7 @@ export const useGroupGoalsWithTodos = ({ groupId, limit }: Props) => {
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const { totalCount, currPage } = lastPage.data as PageInfo;
+      const { totalCount, currPage } = lastPage.data;
 
       const totalPages = calculateTotalPages(totalCount, limit);
       return currPage < totalPages ? currPage + 1 : undefined;
