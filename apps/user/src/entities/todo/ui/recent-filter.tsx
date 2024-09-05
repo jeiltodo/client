@@ -3,8 +3,7 @@ import { Button, ButtonGroup, getUniqueNumbers } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
 import { statusMap } from '../../user/model/status-filter-map';
 import type { todoQuery } from '../hooks/todoQuery';
-import type { Goal } from '../../goal/model';
-
+import type { Goal } from '@jeiltodo/ui/shared';
 interface Props {
   goals: Pick<Goal, 'id' | 'title'>[];
   onClickFilter: (_: todoQuery) => void;
