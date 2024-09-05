@@ -51,8 +51,8 @@ export function sortBy<T>(array: T[], options: SortOptions<T>): T[] {
   }
 
   return [...array].sort((a, b) => {
-    const aValue = a[criteria] as SortableValue;
-    const bValue = b[criteria] as SortableValue;
+    const aValue = a[criteria];
+    const bValue = b[criteria];
 
     if (aValue === undefined && bValue === undefined) return 0;
     if (aValue === undefined) return isAscending ? 1 : -1;
@@ -60,7 +60,7 @@ export function sortBy<T>(array: T[], options: SortOptions<T>): T[] {
 
     const type = determineType(
       criteria as keyof ObjectWithOptionalFields,
-      aValue
+      aValue as SortableValue
     );
     let result: number;
 
@@ -83,7 +83,13 @@ export function sortBy<T>(array: T[], options: SortOptions<T>): T[] {
         }
         break;
       case 'boolean':
-        result = aValue === bValue ? 0 : aValue ? -1 : 1;
+        if (aValue === bValue) {
+          result = 0;
+        } else if (aValue) {
+          result = -1;
+        } else {
+          result = 1;
+        }
         break;
       case 'localeEN':
         result = String(aValue).localeCompare(String(bValue), 'en');
