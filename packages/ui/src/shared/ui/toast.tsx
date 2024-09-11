@@ -1,5 +1,5 @@
 import { toast, ToastOptions } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
 import { Check, CheckGroup, DeleteCircleError } from '@jeiltodo/icons';
 
 interface Toast {
