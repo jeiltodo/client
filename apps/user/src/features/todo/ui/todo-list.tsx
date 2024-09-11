@@ -10,11 +10,11 @@ import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import {
   individualGoalsOptions,
   userOptions,
-  type Goal,
-} from '../../../entities/goal';
+} from '../../../entities/goal/hooks';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { NoteDetailSlide } from '../../../widgets/note';
+import { Goal } from '@jeiltodo/ui/shared';
 
 interface Props {
   todos: (Todo & { goal: Goal })[];

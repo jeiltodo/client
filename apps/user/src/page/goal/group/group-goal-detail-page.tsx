@@ -4,6 +4,8 @@ import { PlusOrange } from '@jeiltodo/icons';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
+import type { Group } from '@jeiltodo/ui/entities';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import {
   useGroupGoals,
@@ -11,14 +13,14 @@ import {
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
 import { useGroupDetail } from '../../../entities/group';
-import { TitleProgressBarCard } from '../../../widgets/goal';
+import { TitleProgressBarCard } from '../../../widgets/goal/ui';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';
-import { GoalModal } from '../../../features/goal';
+import { GoalModal } from '../../../features/goal/ui';
 import type { SingleGroupGoalTodo } from '../../../entities/todo';
 import { TodoModal } from '../../../entities/todo';
 import { GroupTodoDoneBoard } from '../../../features/todo';
-import { userOptions } from '../../../entities/goal';
+import { userOptions } from '../../../entities/goal/hooks';
 
 export const GroupGoalDetailPage = ({
   params,
@@ -34,7 +36,7 @@ export const GroupGoalDetailPage = ({
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const { data: user } = useQuery(userOptions());
-  const { data: group } = useGroupDetail(groupId);
+  const { data: group } = useGroupDetail(groupId) as { data: Group };
   const { data: groupGoals } = useGroupGoals(groupId);
 
   const { data: singleGroupGoal, isLoading } = useGroupSingleGoal(goalId);
@@ -46,8 +48,12 @@ export const GroupGoalDetailPage = ({
   const groupGoalsForModal =
     groupGoals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
 
-  const handleEdit = ({ id, title }: { id: number; title: string }) => {
-    editGroupGoal({ id, title });
+  const handleEdit = ({ title }: { title: string }) => {
+    if (singleGroupGoal) {
+      editGroupGoal({ id: singleGroupGoal.id, title });
+    } else {
+      console.error('singleGroupGoal is null or undefined');
+    }
   };
 
   const handleDelete = () => {
@@ -74,7 +80,7 @@ export const GroupGoalDetailPage = ({
   };
   return (
     <div className='max-w-[1200px]'>
-      <LayoutTitle title={`${group?.title ?? '그룹'} 목표`} />
+      <LayoutTitle title={`${group.title} 목표`} />
       <div className='flex flex-col gap-y-6 relative'>
         {!isLoading && singleGroupGoal && singleGroupGoalTodo ? (
           <>
@@ -90,8 +96,7 @@ export const GroupGoalDetailPage = ({
                 className='flex gap-1 items-center text-sm h-[20px]'
                 onClick={openAddTodoModal}
               >
-                <PlusOrange width={16} height={16} />
-                할일 추가
+                <PlusOrange width={16} height={16} />할 일 추가
               </Button>
             </div>
             {user?.id && (
@@ -103,7 +108,7 @@ export const GroupGoalDetailPage = ({
             )}
             {isGoalToggleOpen && (
               <GoalModal
-                goalCreator={group?.title ?? '그룹'}
+                goalCreator={group.title}
                 initialGoal={{
                   id: singleGroupGoal.id,
                   title: singleGroupGoal.title,
@@ -123,7 +128,7 @@ export const GroupGoalDetailPage = ({
             )}
             {isAddTodoModalOpen && (
               <TodoModal
-                todoCreator={group?.title ?? '그룹'}
+                todoCreator={group.title}
                 setTodoModalToggle={setIsAddTodoModalOpen}
                 initialGoal={singleGroupGoal}
                 goals={groupGoalsForModal}

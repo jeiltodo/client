@@ -3,8 +3,8 @@ import { Goal } from '../../../shared';
 export interface Group {
   id: number;
   title: string;
-  createdAt?: string;
-  updatedAT?: string;
+  createdAt: string;
+  updatedAT: string;
   secretCode: string;
   createUser: string;
 }
@@ -19,7 +19,7 @@ export interface Member {
 
 export type GroupWithMembers = Group & {
   members: Member[];
-  goals?: Goal[];
+  goals: Goal[] | null;
 };
 
 export type GroupCode = Pick<Group, 'secretCode'>;

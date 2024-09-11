@@ -24,8 +24,8 @@ import {
   useGroupCode,
   useGroupTitleAndCode,
 } from '../../../entities/group/hooks/useGroupTitleAndCode';
-import { GroupGoalCard } from '../../../widgets/group/ui/grouop-goal-card';
-import { GoalModal } from '../../../features/goal';
+import { GroupGoalCard } from '../../../widgets/group/ui/group-goal-card';
+import { GoalModal } from '../../../features/goal/ui';
 import { useChangeLeader } from '../../../entities/group/hooks/useChangeLeader';
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroupGoal';

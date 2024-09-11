@@ -9,15 +9,15 @@ import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import { useIndividualSingleGoal } from '../../../entities/user/hooks/useSingleIndivGoals';
 import { userOptions } from '../../../entities/user';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
-import { TitleProgressBarCard } from '../../../widgets/goal';
-import { GoalModal } from '../../../features/goal';
+import { TitleProgressBarCard } from '../../../widgets/goal/ui';
+import { GoalModal } from '../../../features/goal/ui';
 import {
   useDeleteSingleGoal,
   useEditSingleGoal,
-} from '../../../entities/user/hooks/useSingleGoalMuate';
+} from '../../../entities/user/hooks/useSingleGoalMutate';
 import type { SingleGoalTodo } from '../../../entities/todo';
 import { TodoModal } from '../../../entities/todo';
-import { useIndividualGoals } from '../../../entities/goal';
+import { useIndividualGoals } from '../../../entities/goal/hooks';
 import { IndividualTodoDoneBoard } from '../../../widgets/todo';
 
 export const IndividualGoalDetailPage = ({

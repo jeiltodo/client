@@ -1,10 +1,10 @@
 'use client';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import { Button, Input , BaseModal } from '@jeiltodo/ui/shared';
+import { Button, Input, BaseModal } from '@jeiltodo/ui/shared';
 import type { Todo } from '../model/type';
-import type { GoalIdAndTitle } from '../../goal';
-import { GoalDropdown } from '../../goal';
+import type { GoalIdAndTitle } from '../../goal/types';
+import { GoalDropdown } from '../../goal/ui';
 import { useCreateTodo } from '../hooks/useCreateTodo';
 import { useUpdateTodo } from '../hooks/useUpdateTodo';
 

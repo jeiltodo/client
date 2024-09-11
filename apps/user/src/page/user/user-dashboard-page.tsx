@@ -11,7 +11,10 @@ import {
   RecentTodoCard,
   UserGoalCard,
 } from '../../widgets/user';
-import { useGoalsWithTodos, progressAllOptions } from '../../entities/goal';
+import {
+  useGoalsWithTodos,
+  progressAllOptions,
+} from '../../entities/goal/hooks';
 
 export const UserDashboardPage = () => {
   const { data: progress } = useQuery(progressAllOptions());

@@ -6,12 +6,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { TodoList } from '../../../features/todo';
-import {
-  useIndividualGoals,
-  userOptions,
-} from '../../../entities/goal';
-import type {
-  GoalWithTodos} from '../../../entities/goal';
+import { useIndividualGoals, userOptions } from '../../../entities/goal/hooks';
+import type { GoalWithTodos } from '../../../entities/goal/model';
 import { TodoModal } from '../../../entities/todo';
 
 export const UserGoalCard = (goal: GoalWithTodos) => {

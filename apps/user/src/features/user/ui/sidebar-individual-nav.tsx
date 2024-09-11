@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Individual } from '@jeiltodo/icons';
-import type { Goal } from '../../../entities/goal';
+import type { Goal } from '@jeiltodo/ui/shared';
 
 interface SidebarIndividualNavProps {
   title: string;

@@ -7,10 +7,10 @@ import { PlusBlue } from '@jeiltodo/icons';
 import { RecentFilter } from '../../entities/user';
 import type { todoQuery } from '../../entities/todo';
 import { TodoModal, useRecentTodo } from '../../entities/todo';
-import { userOptions } from '../../entities/goal';
+import { userOptions } from '../../entities/goal/hooks';
 import { TodoList } from '../../features/todo';
 import { individualGoalsOptions } from '../../entities/user/hooks/individualGoalOptions';
-import type { Goal } from '../../entities/goal/model';
+import type { Goal } from '@jeiltodo/ui/shared';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
