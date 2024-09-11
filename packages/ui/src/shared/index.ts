@@ -1,6 +1,3 @@
-export * from './ui/@x/board-layout';
-export * from './ui/@x/sidebar';
-
 export * from './ui/button';
 export * from './ui/dropdown';
 export * from './ui/input';

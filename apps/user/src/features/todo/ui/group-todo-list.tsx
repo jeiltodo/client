@@ -4,22 +4,19 @@ import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useToast } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import type {
   FormattedGoalWithTodos,
-  MemgberInCharge} from '../../../entities/todo';
-import {
-  TodoAssignee,
-  TodoButtons,
-  TodoModal,
+  MemgberInCharge,
 } from '../../../entities/todo';
+import { TodoAssignee, TodoButtons, TodoModal } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { useGroupDetail } from '../../../entities/group';
 import { NoteDetailSlide } from '../../../widgets/note';
-import { userOptions } from '../../../entities/goal';
+import { userOptions } from '../../../entities/user';
 
 interface Props {
   goalWithTodos: FormattedGoalWithTodos;
@@ -104,7 +101,10 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   return (
     <ul className='w-full flex flex-wrap gap-1'>
       {todos.map(({ id, title, isDone, memberInCharge, noteId }) => (
-        <li key={id} className='list-none w-full flex items-center justify-between group hover:bg-white active:bg-white p-[2px] rounded-lg'>
+        <li
+          key={id}
+          className='list-none w-full flex items-center justify-between group hover:bg-white active:bg-white p-[2px] rounded-lg'
+        >
           <span className='inline-flex gap-4 items-center '>
             <TodoContent
               key={id}

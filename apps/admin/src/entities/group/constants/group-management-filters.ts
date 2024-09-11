@@ -1,6 +1,13 @@
 import type { TableHeadMap } from '../../../shared/ui/table/type';
+import type { GroupsWidthMembers } from '../model';
 
-export const GROUP_TABLE_HEAD_MAP: TableHeadMap<any>[] = [
+interface GroupGoal {
+  id: number;
+  title: string;
+  progressRate: number;
+}
+
+export const GROUP_TABLE_HEAD_MAP: TableHeadMap<GroupsWidthMembers>[] = [
   {
     criteria: 'id',
     title: 'id',
@@ -28,7 +35,7 @@ export const GROUP_TABLE_HEAD_MAP: TableHeadMap<any>[] = [
   },
 ];
 
-export const GROUP_DETAIL_TABLE_HEAD_MAP: TableHeadMap<any>[] = [
+export const GROUP_DETAIL_TABLE_HEAD_MAP: TableHeadMap<GroupGoal>[] = [
   {
     criteria: 'id',
     title: 'id',

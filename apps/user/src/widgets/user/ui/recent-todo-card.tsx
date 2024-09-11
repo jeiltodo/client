@@ -1,7 +1,7 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '@jeiltodo/ui/shared';
-import { individualGoalsOptions } from '../../../entities/goal';
+import { individualGoalsOptions } from '../../../entities/goal/hooks';
 import { useRecentTodo } from '../../../entities/todo/hooks/useRecentTodo';
 import { TodoList } from '../../../features/todo';
 

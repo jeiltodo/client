@@ -2,7 +2,7 @@ import { client } from '@jeiltodo/ui/shared';
 import type {
   ResponseGetAllGroupGoals,
   ResponseGetAllGroupGoalTodos,
-} from '../model/type';
+} from '../model';
 
 export const groupGoalsApi = {
   //목표 관리

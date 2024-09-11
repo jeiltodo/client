@@ -23,7 +23,7 @@ export function useTableCheck() {
   };
 
   const getIsChecked = (id: number): boolean => {
-    const checkItem = checkList.find((checkItem) => checkItem.id === id);
+    const checkItem = checkList.find((checked) => checked.id === id);
     return checkItem?.isChecked ?? false;
   };
 

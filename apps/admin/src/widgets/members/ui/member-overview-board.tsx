@@ -80,6 +80,7 @@ export function MemberOverviewBoard({ member }: MemberOverviewBoardProps) {
         <button
           className='inline-block w-[84px] h-9 border bg-blue-500 text-white rounded-xl'
           onClick={handleSave}
+          type='button'
         >
           저장
         </button>

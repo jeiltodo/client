@@ -28,7 +28,7 @@ export function SidebarNav({
       ) : (
         <Link
           className='hover:bg-slate-50 active:bg-slate-100 w-full h-9 rounded-lg  flex items-center justify-start gap-2'
-          href={href || ''} 
+          href={href || ''}
         >
           <Icon className='w-6 h-6' />
           <div className='block text-lg font-pretendard-medium text-slate-800'>
@@ -37,17 +37,19 @@ export function SidebarNav({
         </Link>
       )}
 
-      {subItems ? <div className='flex flex-col items-start pl-5 mt-2'>
-          {subItems.map((subItem, index) => (
+      {subItems ? (
+        <div className='flex flex-col items-start pl-5 mt-2'>
+          {subItems.map((subItem) => (
             <Link
               className='block py-2 text-sm hover:bg-slate-50 active:bg-slate-100 w-full h-9 rounded-lg font-pretendard-medium text-slate-700'
               href={subItem.href}
-              key={index}
+              key={subItem.href}
             >
               · {subItem.title}
             </Link>
           ))}
-        </div> : null}
+        </div>
+      ) : null}
     </div>
   );
 }

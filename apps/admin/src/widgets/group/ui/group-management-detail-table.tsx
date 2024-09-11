@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Table } from '../../../shared';
 import { TableHeadList } from '../../../features/members';
 import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
-import type { GroupGoals } from '../../../entities/goals/group';
+import type { GroupGoals } from '../../../entities/goals/group/model';
 
 interface GroupsManagementDetailTableProps {
   goals: GroupGoals[];
@@ -27,10 +27,10 @@ export function GroupManagementDetailTable({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {goals.map((goal, id) => (
+        {goals.map((goal) => (
           <Table.Row
             className='hover:bg-slate-50'
-            key={goal.title + id}
+            key={`${goal.title}+ ${goal.id}`}
             onClick={() => {
               handleClick(goal.id, goal.title);
             }}

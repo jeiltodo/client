@@ -112,7 +112,7 @@ export const NoteDetailSlide = ({
                 <div className='flex items-center justify-start gap-2 bg-slate-200 h-[38px] py-[7px] px-[6px] rounded-[20px] w-full mt-1'>
                   <LinkEmbed className='h-[18px] w-[18px]' />
                   <div className='text-base font-normal text-slate-800 truncate pt-[2px]'>
-                    {noteDetail?.linkUrl}
+                    {noteDetail.linkUrl}
                   </div>
                 </div>
               )}

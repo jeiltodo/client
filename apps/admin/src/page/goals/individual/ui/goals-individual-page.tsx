@@ -2,7 +2,7 @@
 
 import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { useMemo } from 'react';
-import { GOALS_INDIVIDUAL_FILTERS } from '../../../../entities/goals/individual/constants/goals-individual-filters';
+import { GOALS_INDIVIDUAL_FILTERS } from '../../../../entities/goals/individual/constants';
 import {
   useDeleteIndividualGoal,
   useGetAllIndividualGoals,
@@ -16,7 +16,7 @@ import {
 import { GoalsIndividualTable } from '../../../../widgets/goals/individual';
 import type { SortOptions } from '../../../../shared/lib/sortBy';
 import { sortBy } from '../../../../shared/lib/sortBy';
-import type { IndividualGoal } from '../../../../entities/goals/individual';
+import type { IndividualGoal } from '../../../../entities/goals/individual/model';
 import { TableCheckListProvider } from '../../../../shared/model/table/table-checklist-provider';
 
 export function PostsIndividualPage() {

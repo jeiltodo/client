@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Button, Sidebar , useToast } from '@jeiltodo/ui/shared';
+import { Button, Sidebar, useToast } from '@jeiltodo/ui/shared';
 import { Search, PlusBlack } from '@jeiltodo/icons';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { SidebarUserInfo } from '@jeiltodo/ui/features';
 import type { AxiosError } from 'axios';
+import { SidebarUserInfo } from '@jeiltodo/ui/features/user/ui';
 import { SidebarIndividualNav } from '../../../features/user/ui/sidebar-individual-nav';
 import { SidebarGroupNav } from '../../../features/group/ui/sidebar-group-nav';
 import { GoalModal } from '../../../features/goal/ui/goal-modal';

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { BoardTitle } from '../board-title';
 
-interface Props extends PropsWithChildren {
+interface BoardLayoutProps extends PropsWithChildren {
   title: string;
   className?: string;
   isAdmin?: boolean;
@@ -12,19 +12,16 @@ export const BoardLayout = ({
   children,
   className,
   isAdmin = false,
-}: Props) => {
+}: BoardLayoutProps) => {
+  const getIconType = () => {
+    if (title.includes('그룹')) {
+      return !isAdmin ? 'OrangeMarker' : 'BlueMarker';
+    }
+    return 'BlueMarker';
+  };
   return (
     <div className={`bg-white p-6 rounded-lg ${className}`}>
-      <BoardTitle
-        title={title}
-        icon={
-          title.includes('그룹')
-            ? !isAdmin
-              ? 'OrangeMarker'
-              : 'BlueMarker'
-            : 'BlueMarker'
-        }
-      />
+      <BoardTitle icon={getIconType()} title={title} />
       {children}
     </div>
   );

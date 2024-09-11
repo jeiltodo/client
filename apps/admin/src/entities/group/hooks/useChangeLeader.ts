@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
-import { groupQueryKeys } from './querykey';
+import { groupApi } from '../api';
+import { groupQueryKeys } from './queryKeys';
 
 export const useChangeLeader = (groupId: number) => {
   const queryClient = useQueryClient();
@@ -8,7 +8,7 @@ export const useChangeLeader = (groupId: number) => {
   return useMutation({
     mutationFn: (memberId: number) => groupApi.changeLeader(groupId, memberId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: groupQueryKeys.detail(groupId),
       });
     },

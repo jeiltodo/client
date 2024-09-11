@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 import { Table, useTableCheck } from '../../../shared';
 import { TableHeadList } from '../../../features/members';
 import { GROUP_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
-import type { Groups } from '../../../entities/group/model/type';
+import type { GroupsWidthMembers } from '../../../entities/group/model/type';
 
 interface GroupsManagementTableProps {
-  groups: Groups[];
+  groups: GroupsWidthMembers[];
 }
 
 export function GroupsManagementTable({
@@ -35,8 +35,11 @@ export function GroupsManagementTable({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {groupRows.map((group, id) => (
-          <Table.Row className='hover:bg-slate-50 ' key={group.title + id}>
+        {groupRows.map((group) => (
+          <Table.Row
+            className='hover:bg-slate-50 '
+            key={group.title + group.id}
+          >
             <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(group.id)}

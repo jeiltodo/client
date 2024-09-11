@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@jeiltodo/ui/shared';
-import { individualGoalsApi } from '../../goal';
+import { individualGoalsApi } from '../../goal/api';
 
 export const useEditSingleGoal = () => {
   const queryClient = useQueryClient();

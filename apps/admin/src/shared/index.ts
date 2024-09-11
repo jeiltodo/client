@@ -1,6 +1,5 @@
 export * from './hooks/table/useTableCheck';
 export { useTableContext } from './hooks/table/useTableContext';
-export * from './hooks/table/useTableSort';
 
 export * from './model/table/table-provider';
 export * from './model/table/type';

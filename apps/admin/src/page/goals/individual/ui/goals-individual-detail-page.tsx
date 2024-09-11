@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
 import { useParams, useSearchParams } from 'next/navigation';
-import type { IndividualGoalTodos } from '../../../../entities/goals/individual';
+import type { IndividualGoalTodos } from '../../../../entities/goals/individual/model';
 import {
   useDeleteIndividualGoalTodos,
   useGetAllIndividualGoalTodos,

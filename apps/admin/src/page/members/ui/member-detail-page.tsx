@@ -7,13 +7,13 @@ import { useTableContext } from '../../../shared';
 import { sortBy } from '../../../shared/lib/sortBy';
 import { TableToolBar } from '../../../shared/ui/@x/table-toolbar/table-toobar';
 import { useGetMemberDetail } from '../../../entities/member/hooks/useGetMemberDetaili';
-import { useGetAllIndividualGoals } from '../../../entities/goals/individual';
+import { useGetAllIndividualGoals } from '../../../entities/goals/individual/hooks';
 import { TablePagination } from '../../../features/goals/individual';
 import { GroupBoard } from '../../../widgets/members';
 import { MemberOverviewBoard } from '../../../widgets/members/ui/member-overview-board';
 import { MemberGoalTable } from '../../../widgets/members/ui/member-goal-table';
 import type { SortOptions } from '../../../shared/lib/sortBy';
-import type { IndividualGoal } from '../../../entities/goals/individual';
+import type { IndividualGoal } from '../../../entities/goals/individual/model';
 
 export function MemberDetailPage() {
   const { tableFilters, tableSort } = useTableContext();

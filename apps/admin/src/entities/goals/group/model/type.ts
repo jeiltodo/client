@@ -1,5 +1,3 @@
-import { TableFilter } from "../../../../shared";
-
 export interface GroupGoals {
   id: number;
   title: string;
@@ -21,61 +19,51 @@ export interface GroupGoalTodos {
   updatedAt: string;
 }
 
-export interface GroupGoalsQueryParams {
-  page: number;
-  limit: number;
-  nickname?: string;
-  groupName?: string;
-  title?: string;
-  createdAfter?: string;
-  createdBefore?: string;
-}
-
 export interface ResponseGetAllGroupGoals {
   msg: string;
   code: number;
-  data: ResponseGetAllGroupGoalsData
+  data: ResponseGetAllGroupGoalsData;
 }
 
 export interface ResponseGetAllGroupGoalTodos {
   msg: string;
   code: number;
-  data: ResponseGetAllGroupGoalTodosData
+  data: ResponseGetAllGroupGoalTodosData;
 }
 
 /*
- *================================================================= 
+ *=================================================================
  */
 
- interface GroupGoalsGroup {
+interface GroupGoalsGroup {
   id: number;
   title: string;
- }
+}
 
- interface GroupGoalsMember {
+interface GroupGoalsMember {
   id: number;
   nickname: string;
- }
+}
 
- interface GroupGoalTodosWriter {
+interface GroupGoalTodosWriter {
   id: number;
   nickname: string;
- }
+}
 
- interface GroupGoalTodosCharge {
+interface GroupGoalTodosCharge {
   id: number;
   nickname: string;
- }
+}
 
- interface ResponseGetAllGroupGoalsData {
+interface ResponseGetAllGroupGoalsData {
   totalCount: number;
   currentPage: number;
   searchedCount: number;
-  goals: GroupGoals[]
- }
+  goals: GroupGoals[];
+}
 
- interface ResponseGetAllGroupGoalTodosData {
+interface ResponseGetAllGroupGoalTodosData {
   totalCount: number;
   currentPage: number;
-  todos: GroupGoalTodos[]
- }
+  todos: GroupGoalTodos[];
+}

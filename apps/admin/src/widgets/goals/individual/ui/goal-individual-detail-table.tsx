@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { AdminNote } from '@jeiltodo/icons';
 import { Table, useTableCheck } from '../../../../shared';
-import type { IndividualGoalTodos } from '../../../../entities/goals/individual';
+import type { IndividualGoalTodos } from '../../../../entities/goals/individual/model';
 import { TODO_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
-import { NoteDetailSlide } from '../../../../entities/goals/note';
+import { NoteDetailSlide } from '../../../../entities/goals/note/ui';
 
 interface GoalTodosIndividualTableProps {
   goalTitle: string;

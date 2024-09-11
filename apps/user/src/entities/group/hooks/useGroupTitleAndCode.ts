@@ -7,7 +7,7 @@ import { groupQueryKeys } from './queryKeys';
 export const useGroupCode = (id: number) => {
   return useQuery({
     queryKey: groupQueryKeys.code(id),
-    queryFn: () => groupApi.reissueGroupoCode(id),
+    queryFn: () => groupApi.reissueGroupCode(id),
     select: (data) => data.data.secretCode,
   });
 };

@@ -1,5 +1,5 @@
 export type {
-  GoalWithProgress as Goal,
+  GoalWithProgress,
   GoalWithTodos,
   IndividualGoal,
   GroupGoal,

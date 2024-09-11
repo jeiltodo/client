@@ -15,9 +15,16 @@ module.exports = {
     'no-empty': 'off',
     'no-redeclare': 'off',
     'no-nested-ternary': 'off',
+    'no-implicit-coercion': [
+      'error',
+      {
+        allow: ['!!'],
+      },
+    ],
     'unicorn/filename-case': 'off',
     'react/function-component-definition': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'jsx-a11y/no-autofocus': 'off',
   },
 };

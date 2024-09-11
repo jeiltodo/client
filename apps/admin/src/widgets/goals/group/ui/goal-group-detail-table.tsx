@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import { Checkbox, formatDateString } from '@jeiltodo/ui/shared';
 import { AdminNote } from '@jeiltodo/icons';
-import { Table , useTableCheck } from '../../../../shared';
+import { Table, useTableCheck } from '../../../../shared';
 import { TableHeadList } from '../../../../features/members';
-import { NoteDetailSlide } from '../../../../entities/goals/note';
-import type { GroupGoalTodos } from '../../../../entities/goals/group';
+import { NoteDetailSlide } from '../../../../entities/goals/note/ui';
+import type { GroupGoalTodos } from '../../../../entities/goals/group/model';
 import { TODO_GROUP_TABLE_HEAD_MAP } from '../../../../features/goals/group';
 
-interface Props {
+interface GoalTodosGroupTableProps {
   goalTitle: string;
   todos: GroupGoalTodos[];
 }
@@ -17,7 +17,7 @@ interface Props {
 export function GoalTodosGroupTable({
   goalTitle,
   todos: todoGroupRows,
-}: Props) {
+}: GoalTodosGroupTableProps) {
   const [noteToggle, setNoteToggle] = useState<boolean>(false);
   const [noteModalId, setNoteModalId] = useState<number | null>(null);
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
@@ -60,21 +60,30 @@ export function GoalTodosGroupTable({
               {todo.writer.nickname}
             </Table.Cell>
             <Table.Cell className='text-center'>
-              {todo.memberInCharge ? todo.memberInCharge.nickname : null}
+              {todo.memberInCharge.nickname}
             </Table.Cell>
             <Table.Cell className='text-center'>
               {formatDateString(todo.updatedAt)}
             </Table.Cell>
             <Table.Cell className='text-center'>
-              {todo.noteId ? <button onClick={() => { handleClickNote(todo.id); }}>
+              {todo.noteId ? (
+                <button
+                  onClick={() => {
+                    handleClickNote(todo.id);
+                  }}
+                  type='button'
+                >
                   <AdminNote className='w-9 h-9' />
-                </button> : null}
+                </button>
+              ) : null}
             </Table.Cell>
-            {noteToggle && noteModalId === todo.id ? <NoteDetailSlide
+            {noteToggle && noteModalId === todo.id ? (
+              <NoteDetailSlide
                 goalTitle={goalTitle}
                 noteId={todo.noteId}
                 setToggle={setNoteToggle}
-              /> : null}
+              />
+            ) : null}
           </Table.Row>
         ))}
       </Table.Body>

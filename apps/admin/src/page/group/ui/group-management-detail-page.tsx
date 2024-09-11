@@ -11,13 +11,12 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useParams } from 'next/navigation';
-// import { MembersBoard
-import { MembersBoard } from '@jeiltodo/ui/widgets/group/ui/members-board.jsx';
-import { useGroupDetail, useChangeLeader } from '../../../entities/group';
+import { MembersBoard } from '@jeiltodo/ui/widgets';
+import { useGroupDetail, useChangeLeader } from '../../../entities/group/hooks';
 import { GroupManagementDetailTable } from '../../../widgets/group';
 import { useTableContext } from '../../../shared';
-import type { GroupGoals } from '../../../entities/goals/group';
-import { useGetAllGroupGoals } from '../../../entities/goals/group';
+import type { GroupGoals } from '../../../entities/goals/group/model';
+import { useGetAllGroupGoals } from '../../../entities/goals/group/hooks';
 import type { SortOptions } from '../../../shared/lib/sortBy';
 import { sortBy } from '../../../shared/lib/sortBy';
 import { GroupManagementDetailPagination } from '../../../features/group';
