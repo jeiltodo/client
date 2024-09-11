@@ -14,7 +14,7 @@ import {
   groupOptions,
   useGroupMutation,
   useGroupAttendMutation,
-} from '../../../entities/group';
+} from '../../../entities/group/hooks';
 import {
   individualGoalsOptions,
   useIndividualGoalMutation,

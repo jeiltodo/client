@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { getQueryClient } from '@jeiltodo/ui/entities';
 import { SidebarUser } from '../../widgets/user';
-import { groupOptions } from '../../entities/group/index';
+import { groupOptions } from '../../entities/group/hooks';
 import { userOptions } from '../../entities/user';
 import {
   individualGoalsOptions,

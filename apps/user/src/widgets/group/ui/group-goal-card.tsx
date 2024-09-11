@@ -5,12 +5,12 @@ import { ArrowRight, PlusOrange } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import type { GroupGoalWithTodos } from '../../../entities/goal/types';
-import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar';
+import { GroupProgressBar } from '../../../entities/group/ui';
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { TodoModal } from '../../../entities/todo';
-import { useGroupDetail } from '../../../entities/group';
+import { useGroupDetail } from '../../../entities/group/hooks';
 
 export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const params: { id: string } = useParams();
@@ -21,9 +21,9 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const { data: groupGoals } = useGroupGoals(groupId);
   const { data: group } = useGroupDetail(groupId);
   const goalIdAndTitles =
-    groupGoals?.map((goal) => ({
-      id: goal.id,
-      title: goal.title,
+    groupGoals?.map((groupGoal) => ({
+      id: groupGoal.id,
+      title: groupGoal.title,
     })) ?? [];
 
   const notDone = formatGroupTodos(goal, false);

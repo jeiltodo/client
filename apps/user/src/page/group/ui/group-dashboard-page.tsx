@@ -18,7 +18,7 @@ import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
-} from '../../../entities/group';
+} from '../../../entities/group/hooks';
 import { userOptions } from '../../../entities/user';
 import {
   useGroupCode,
