@@ -11,7 +11,7 @@ export interface GroupPageResponse {
   totalCount: number;
   searchCount: number;
   current_page: number;
-  groups: GroupsWidthMembers[];
+  groups: GroupsWithMembers[];
 }
 
 export interface GroupMembers {
@@ -46,7 +46,7 @@ export interface Groups {
   updatedAt: string;
 }
 
-export type GroupsWidthMembers = Groups & { members: GroupMembers[] };
+export type GroupsWithMembers = Groups & { members: GroupMembers[] };
 
 export interface GroupErrorResponse {
   msg: string;

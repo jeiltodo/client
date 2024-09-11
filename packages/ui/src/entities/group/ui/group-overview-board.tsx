@@ -4,21 +4,21 @@ import { BoardLayout } from '../../../shared/ui/@x/board-layout';
 import { InputSwapMode } from '../../../shared/ui/input-swap-mode';
 import { Field } from '../../../shared/ui/field';
 import { useState } from 'react';
-import { GroupTitleOrCode, GroupWithMembers } from '../model/type';
+import { GroupOverview, GroupTitleOrCode } from '../model/type';
 import { formatDateString } from '../../../shared';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopyUser } from '@jeiltodo/icons';
 
 interface GroupOverviewBoardProps {
   isAdmin?: boolean;
-  group: GroupWithMembers;
+  group: GroupOverview;
   userId?: number;
   spareCode: string;
   onSave: (info: GroupTitleOrCode) => void;
 }
 
 export const GroupOverviewBoard = ({
-  group: { id, title, secretCode, members, createUser, createdAt },
+  group: { title, secretCode, members, createUser, createdAt },
   userId,
   spareCode,
   onSave,

@@ -5,7 +5,7 @@ export type {
   GroupResponse,
   GroupDetailResponse,
   Groups,
-  GroupsWidthMembers,
+  GroupsWithMembers as GroupsWidthMembers,
   GroupErrorResponse,
   GroupGoalsResponse,
   GroupGoalsPageResponse,
