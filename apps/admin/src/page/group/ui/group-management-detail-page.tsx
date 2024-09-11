@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
+import type { GroupOverview, GroupTitleOrCode } from '@jeiltodo/ui/entities';
 import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
 import type { Goal } from '@jeiltodo/ui/shared';
 import {
@@ -65,6 +65,12 @@ export function GroupManagementDetailPage() {
   if (isLoading || !group) return <LoadingSpinner />;
   if (isGoalsLoading || !groupGoals) return <LoadingSpinner />;
 
+  const groupOverview: GroupOverview = {
+    title: group.title,
+    secretCode: group.secretCode,
+    createUser: group.createUser,
+    members: group.members,
+  };
   return (
     <div className='w-[930px]'>
       <h1 className='sr-only'>
@@ -73,7 +79,7 @@ export function GroupManagementDetailPage() {
       <LayoutTitle title='그룹 관리' />
       <div className='w-full flex flex-nowrap gap-4 '>
         <GroupOverviewBoard
-          group={group.data}
+          group={groupOverview}
           isAdmin
           onSave={handleSave}
           spareCode={newCode ?? ''}
@@ -81,7 +87,7 @@ export function GroupManagementDetailPage() {
 
         <MembersBoardProvider>
           <MembersBoard
-            group={group.data}
+            members={group.members}
             isAdmin
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}

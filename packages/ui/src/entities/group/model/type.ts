@@ -28,3 +28,11 @@ export interface GroupTitleOrCode {
   secretCode?: string;
   title?: string;
 }
+
+export interface GroupOverview {
+  title: string;
+  secretCode: string;
+  members: Member[];
+  createUser: string;
+  createdAt?: string;
+}

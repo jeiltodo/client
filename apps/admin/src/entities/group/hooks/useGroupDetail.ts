@@ -6,6 +6,6 @@ export const useGroupDetail = (groupId: number) => {
   return useQuery({
     queryKey: groupQueryKeys.detail(groupId),
     queryFn: () => groupApi.getGroup(groupId),
-    select: (data) => data,
+    select: (data) => data.data,
   });
 };

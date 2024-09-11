@@ -3,12 +3,12 @@ import { BgGroupAvatar, GroupFill } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features/group/ui';
-import { GroupWithMembers } from '../../../entities';
+import { GroupWithMembers, Member } from '../../../entities';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
 import { useState } from 'react';
 
 interface MembersBoardProps {
-  group: GroupWithMembers;
+  members: Member[];
   userId?: number;
   onChangeLeader: (id: number) => void;
   onRemoveMember: (id: number) => void;
@@ -16,7 +16,7 @@ interface MembersBoardProps {
 }
 
 const MembersBoard = ({
-  group,
+  members,
   userId,
   onChangeLeader,
   onRemoveMember,
@@ -24,17 +24,17 @@ const MembersBoard = ({
 }: MembersBoardProps) => {
   const { mode } = useBoardContext();
 
-  const leaderId = group.members.find((member) => member.isLeader)!.id;
+  const leaderId = members.find((member) => member.isLeader)!.id;
   const isUserALeader = userId ? leaderId === userId : isAdmin;
   const [newLeaderId, setNewLeaderId] = useState<number>(leaderId);
   const [deletedId, setDeletedId] = useState<number | null>(null);
 
-  const sortedMembers = group.members
+  const sortedMembers = members
     .map((member) => ({ id: member.id, rank: member.contributionRank }))
     .sort((a, b) => a.rank - b.rank);
   const lowestRankNum = sortedMembers.pop()!.rank;
 
-  const formattedMembers = group.members
+  const formattedMembers = members
     .map((member) => ({
       ...member,
       contributionRank: getFormattedRanks(
@@ -74,7 +74,7 @@ const MembersBoard = ({
               </span>
             </div>
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
-              <span className='text-slate-800'>{group.members.length}</span>
+              <span className='text-slate-800'>{members.length}</span>
               <span
                 className={isAdmin ? 'text-blue-500' : 'text-groupColor-500'}
               >
