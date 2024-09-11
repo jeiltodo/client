@@ -75,14 +75,14 @@ export const EditorForm = ({
     const plainText = doc.body.textContent || '';
 
     // 전체 글자 수 (공백 포함)
-    const totalLength = plainText.length;
+    const Length = plainText.length;
 
     // 공백을 제거하고 글자 수 계산
     const contentWithoutSpaces = plainText.replace(/\s+/g, '');
     setLengthWithoutSpaces(contentWithoutSpaces.length);
 
     // 여기에 전체 글자 수를 저장하는 상태 변수를 추가하세요
-    setTotalLength(totalLength);
+    setTotalLength(Length);
   }, [content]);
 
   const modules = useMemo(

@@ -11,6 +11,6 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     'react/jsx-no-leaked-render': 'off',
     'react/jsx-sort-props': 'off',
-    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off'
   },
 };

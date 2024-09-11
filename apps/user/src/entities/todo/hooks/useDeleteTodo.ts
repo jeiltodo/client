@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@jeiltodo/ui/shared';
-import { todoApi } from "..";
+import { todoApi } from '../api/todoApi';
 
 export const useDeleteTodo = () => {
   const queryClient = useQueryClient();

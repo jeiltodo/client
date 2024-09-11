@@ -8,6 +8,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-unused-vars': 'off',
     'no-unsafe-return': 'off',
     'no-cycle': 'off',
@@ -26,5 +27,10 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'jsx-a11y/no-autofocus': 'off',
+    'import/no-named-as-default-member': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    'react/no-array-index-key': 'off',
+    '@typescript-eslint/require-await': 'off',
   },
 };

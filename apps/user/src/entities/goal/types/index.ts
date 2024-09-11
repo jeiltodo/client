@@ -1,4 +1,4 @@
-import type { Member } from '@jeiltodo/ui/entities';
+import type { Member } from '@jeiltodo/ui/entities/group';
 import type { Todo } from '../../todo';
 
 export interface IndividualGoal {

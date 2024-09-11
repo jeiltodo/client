@@ -1,4 +1,4 @@
-import type { Member } from '@jeiltodo/ui/entities';
+import type { Member } from '@jeiltodo/ui/entities/group';
 import type { Goal } from '@jeiltodo/ui/shared';
 
 // 그룹 리스트

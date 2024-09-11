@@ -4,7 +4,7 @@ import { ChangeEvent, InputHTMLAttributes } from 'react';
 
 type InputType = 'text' | 'password' | 'email' | 'number' | 'tel' | 'url' | 'date';
 
-interface Props
+interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   type: InputType;
@@ -25,20 +25,20 @@ export const Input = ({
   minLength,
   'aria-label': ariaLabel,
   ...rest
-}: Props) => {
+}: InputProps) => {
   return (
     <input
-      type={type}
-      readOnly={readOnly}
-      value={value}
-      onChange={onChange}
+      aria-label={ariaLabel}
       className={`text-base text-slate-800  placeholder-slate-400 rounded-xl py-3 px-6 border border-slate-50 font-pretendard-regular placeholder:font-pretendard-regular hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none ${className}`}
+      disabled={disabled}
       maxLength={maxLength}
       minLength={minLength}
-      disabled={disabled}
-      required={required}
+      onChange={onChange}
       placeholder={placeholder}
-      aria-label={ariaLabel}
+      readOnly={readOnly}
+      required={required}
+      type={type}
+      value={value}
       {...rest}
     />
   );

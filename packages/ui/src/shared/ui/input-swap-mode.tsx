@@ -47,17 +47,18 @@ export const InputSwapMode = ({
 
       <div className='flex w-full gap-0.5'>
         <input
-          ref={inputRef}
-          value={value}
-          readOnly={isEditMode}
+          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b  focus:outline-none ${isEditMode ? ' border-slate-800' : 'border-transparent'}`}
           onChange={(e) => {
             onChange(e.target.value);
           }}
-          className={`inline-block w-full text-lg text-slate-800 font-semibold border-b  focus:outline-none ${isEditMode ? ' border-slate-800' : 'border-transparent'}`}
+          readOnly={isEditMode}
+          ref={inputRef}
+          value={value}
         />
         <button
-          onClick={handleToggle}
           className={`inline-block min-w-[84px] h-9 border rounded-xl ${!isEditMode ? (isGroup ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'border-blue-500 text-blue-500 ') : 'bg-slate-900 text-white '}`}
+          onClick={handleToggle}
+          type='button'
         >
           {isEditMode ? '수정' : '취소'}
         </button>

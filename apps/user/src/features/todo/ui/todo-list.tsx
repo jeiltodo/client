@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
+import type { Goal } from '@jeiltodo/ui/shared';
 import type { Todo } from '../../../entities/todo';
-import { TodoButtons, TodoModal } from '../../../entities/todo';
+import { TodoButtons } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import {
   individualGoalsOptions,
@@ -14,7 +15,7 @@ import {
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { NoteDetailSlide } from '../../../widgets/note';
-import { Goal } from '@jeiltodo/ui/shared';
+import { TodoModal } from '../../../entities/todo/ui';
 
 interface Props {
   todos: (Todo & { goal: Goal })[];

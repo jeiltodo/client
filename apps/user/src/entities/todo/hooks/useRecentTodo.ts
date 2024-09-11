@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { calculateTotalPages } from '@jeiltodo/ui/shared';
 import { todoApi } from '../api/todoApi';
-import { todoQueryKeys } from './queryKey';
+import { todoQueryKeys } from './queryKeys';
 
 interface PageLimit {
   limit: number;
@@ -16,7 +16,7 @@ interface GoalWithTodosResponse {
 
 export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
   return useInfiniteQuery({
-    queryKey: todoQueryKeys.individual.all({ limit, goalIds, isDone }),
+    queryKey: todoQueryKeys.individual.default({ limit, goalIds, isDone }),
     queryFn: ({ pageParam }) =>
       todoApi.getRecentTodo({
         page: pageParam || 1,

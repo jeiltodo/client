@@ -10,11 +10,11 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
-import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
 import { useParams } from 'next/navigation';
 import { MembersBoard } from '@jeiltodo/ui/widgets';
 import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
+import type { GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
+import { GroupOverviewBoard } from '@jeiltodo/ui/entities/group';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
@@ -82,7 +82,7 @@ export const GroupDashboardPage = () => {
     if (inView) {
       hasNextPage && fetchNextPage();
     }
-  }, [inView]);
+  }, [fetchNextPage, hasNextPage, inView]);
 
   if (!group) {
     return <LoadingSpinner />;
@@ -125,7 +125,7 @@ export const GroupDashboardPage = () => {
 
         <MembersBoardProvider>
           <MembersBoard
-            group={group}
+            members={group.members}
             userId={user?.id}
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}

@@ -9,8 +9,8 @@ import { GroupProgressBar } from '../../../entities/group/ui/group-progress-bar'
 import { GroupTodoList } from '../../../features/todo/ui/group-todo-list';
 import { formatGroupTodos } from '../model/formatGroupTodos';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
-import { TodoModal } from '../../../entities/todo';
 import { useGroupDetail } from '../../../entities/group';
+import { TodoModal } from '../../../entities/todo/ui';
 
 export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const params: { id: string } = useParams();
@@ -21,9 +21,9 @@ export const GroupGoalCard = (goal: GroupGoalWithTodos) => {
   const { data: groupGoals } = useGroupGoals(groupId);
   const { data: group } = useGroupDetail(groupId);
   const goalIdAndTitles =
-    groupGoals?.map((goal) => ({
-      id: goal.id,
-      title: goal.title,
+    groupGoals?.map((item) => ({
+      id: item.id,
+      title: item.title,
     })) ?? [];
 
   const notDone = formatGroupTodos(goal, false);

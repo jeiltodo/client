@@ -6,11 +6,10 @@ export const useNoteDetail = (noteId: string) => {
   const { data, error, isLoading } = useQuery({
     queryKey: noteQueryKeys.note.noteDetail(noteId),
     queryFn: () => getNoteDetail(Number(noteId)),
-    select: (data) => data.data,
     enabled: noteId !== 'new',
   });
   return {
-    noteDetail: data,
+    noteDetail: data?.data,
     error,
     isLoading,
   };

@@ -18,9 +18,10 @@ export const TodoAssignee = ({ todoId, asignee }: Props) => {
     return name.slice(0, 1);
   };
   return (
-    <span
+    <button
       className={`inline-flex justify-center items-center min-w-[18px] min-h-[18px] rounded-full cursor-pointer ${!asignee && ' border border-dashed border-slate-500'} `}
       onClick={handleAssign}
+      type='button'
     >
       {asignee && (
         <span
@@ -30,6 +31,6 @@ export const TodoAssignee = ({ todoId, asignee }: Props) => {
           {getInitialLetter(asignee.nickname)}
         </span>
       )}
-    </span>
+    </button>
   );
 };

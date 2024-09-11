@@ -4,7 +4,7 @@ export const todoQueryKeys = {
   list: (goalId: number) => [...todoQueryKeys.todos, 'list', goalId] as const,
 
   individual: {
-    default: () => [...todoQueryKeys.todos, 'individual'] as const,
+    default: (params?: { limit?: number; goalIds?: string; isDone?: boolean | null }) => [...todoQueryKeys.todos, 'individual', 'all', params] as const,
     single: (goalId: number) =>
       [...todoQueryKeys.individual.default(), 'single', goalId] as const,
   },

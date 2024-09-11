@@ -1,9 +1,6 @@
-import type {
-  GroupCode,
-  GroupTitleOrCode,
-  GroupWithMembers,
-} from '@jeiltodo/ui/entities';
+
 import { client } from '@jeiltodo/ui/shared';
+import type { GroupCode, GroupTitleOrCode, GroupWithMembers } from '@jeiltodo/ui/entities/group';
 import type { GroupResponse, GroupPostResponse } from '../model/type';
 import type { ResponseWith } from '../../../shared';
 

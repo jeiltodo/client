@@ -1,5 +1,5 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { getQueryClient } from '@jeiltodo/ui/entities';
+import { getQueryClient } from '@jeiltodo/ui/entities/user';
 import { SidebarUser } from '../../widgets/user';
 import { groupOptions } from '../../entities/group/index';
 import { userOptions } from '../../entities/user';
