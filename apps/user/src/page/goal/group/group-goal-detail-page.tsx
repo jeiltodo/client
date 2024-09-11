@@ -39,15 +39,15 @@ export const GroupGoalDetailPage = ({
 
   const { data: singleGroupGoal, isLoading } = useGroupSingleGoal(goalId);
   const { data: singleGroupGoalTodo } =
-    useSingleGoalTodo<SingleGroupGoalTodo>(goalId);
+    useSingleGoalTodo<SingleGroupGoalTodo[]>(goalId);
   const { mutate: editGroupGoal } = useUpdateGroupGoal(groupId);
   const { mutate: deleteGroupGoal } = useDeleteGroupGoal(groupId);
 
   const groupGoalsForModal =
     groupGoals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
 
-  const handleEdit = ({ title }: { title: string }) => {
-    editGroupGoal({ id: singleGroupGoal!.id, title });
+  const handleEdit = ({ id, title }: { id: number; title: string }) => {
+    editGroupGoal({ id, title });
   };
 
   const handleDelete = () => {
