@@ -8,6 +8,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-imports': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-unused-vars': 'off',
     'no-unsafe-return': 'off',
     'no-cycle': 'off',
