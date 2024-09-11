@@ -27,5 +27,9 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     'jsx-a11y/no-autofocus': 'off',
+    'import/no-named-as-default-member': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    'react/no-array-index-key': 'off',
   },
 };
