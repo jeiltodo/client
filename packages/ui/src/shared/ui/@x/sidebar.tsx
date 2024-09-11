@@ -53,16 +53,16 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}
           >
             <Image
-              src={type ? '/admin/assets/logo.png' : '/logo.png'}
               alt='Logo'
-              width={100}
-              height={30}
               className='cursor-pointer'
+              height={30}
               onClick={() => {
                 router.push('/');
               }}
+              src={type ? '/admin/assets/logo.png' : '/assets/logo.png'}
+              width={100}
             />
-            {type && (
+            {type ? (
               <h1
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
                   isDesktopOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
@@ -70,28 +70,29 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               >
                 {type}
               </h1>
-            )}
+            ) : null}
           </div>
           <Image
-            src={type ? '/admin/assets/s-logo.png' : '/s-logo.png'}
             alt='Logo'
-            width={24}
-            height={24}
             className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
+            height={24}
             onClick={() => {
               router.push('/');
             }}
+            src={type ? '/admin/assets/s-logo.png' : '/assets/s-logo.png'}
+            width={24}
           />
-          <div
-            onClick={toggleDesktopSidebar}
+          <button
             className='cursor-pointer flex items-center justify-center w-[32px] h-[32px]'
+            onClick={toggleDesktopSidebar}
+            type='button'
           >
             {isDesktopOpen ? (
               <Fold className='w-6 h-6' />
             ) : (
               <Expand className='w-6 h-6' />
             )}
-          </div>
+          </button>
         </div>
         <div
           className={`transition-all duration-300 ease-in-out ${
@@ -118,16 +119,16 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
           >
             <Image
-              src={type ? '/admin/assets/logo.png' : '/logo.png'}
               alt='Logo'
-              width={100}
-              height={30}
               className='cursor-pointer'
+              height={30}
               onClick={() => {
                 router.push('/');
               }}
+              src={type ? '/admin/assets/logo.png' : '/assets/logo.png'}
+              width={100}
             />
-            {type && (
+            {type ? (
               <p
                 className={`font-pretendard-semibold text-sm text-[#3182F6] transition-all duration-200 whitespace-nowrap overflow-hidden ${
                   isTabletOpen ? 'opacity-100 w-auto' : 'opacity-0 w-0'
@@ -135,28 +136,29 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               >
                 {type}
               </p>
-            )}
+            ) : null}
           </div>
           <Image
-            src={type ? '/admin/assets/s-logo.png' : '/s-logo.png'}
             alt='Logo'
-            width={24}
-            height={24}
             className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
+            height={24}
             onClick={() => {
               router.push('/');
             }}
+            src={type ? '/admin/assets/s-logo.png' : '/assets/s-logo.png'}
+            width={24}
           />
-          <div
-            onClick={toggleTabletSidebar}
+          <button
             className='cursor-pointer flex items-center justify-center w-[32px] h-[32px]'
+            onClick={toggleTabletSidebar}
+            type='button'
           >
             {isTabletOpen ? (
               <Fold className='w-6 h-6' />
             ) : (
               <Expand className='w-6 h-6' />
             )}
-          </div>
+          </button>
         </div>
         <div
           className={`transition-all duration-300 ease-in-out ${
@@ -169,16 +171,17 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
         </div>
       </div>
 
-      {isTabletOpen && (
-        <div
+      {isTabletOpen ? (
+        <button
+          className='desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-all duration-200 ease-in-out'
           onClick={toggleTabletSidebar}
-          className={`desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-all duration-200 ease-in-out`}
           style={{
-            width: `calc(100% - ${isTabletOpen ? '280px' : '60px'})`,
+            width: `calc(100% - '280px'})`,
             height: '100%',
           }}
-        ></div>
-      )}
+          type='button'
+        />
+      ) : null}
 
       {/* 모바일 버전 */}
       <div
@@ -188,7 +191,11 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
       >
         {!isMobileSidebarOpen && (
           <div className='flex items-center justify-start gap-4 py-3 px-4'>
-            <button onClick={toggleMobileSidebar} className='cursor-pointer'>
+            <button
+              className='cursor-pointer'
+              onClick={toggleMobileSidebar}
+              type='button'
+            >
               <HamburgerMenu className='w-6 h-6' />
             </button>
             {pathname === '/' && (
@@ -196,25 +203,29 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             )}
           </div>
         )}
-        {isMobileSidebarOpen && (
+        {isMobileSidebarOpen ? (
           <div className='flex items-center justify-between py-3 px-4'>
             <Image
-              src={type ? '/admin/assets/logo.png' : '/logo.png'}
               alt='Logo'
-              width={100}
-              height={30}
               className='cursor-pointer'
+              height={30}
               onClick={() => {
                 router.push('/');
               }}
+              src={type ? '/admin/assets/logo.png' : '/assets/logo.png'}
+              width={100}
             />
-            <button onClick={toggleMobileSidebar} className='cursor-pointer'>
+            <button
+              className='cursor-pointer'
+              onClick={toggleMobileSidebar}
+              type='button'
+            >
               <DeleteMenu className='w-6 h-6' />
             </button>
           </div>
-        )}
+        ) : null}
 
-        {isMobileSidebarOpen && <>{children}</>}
+        {isMobileSidebarOpen ? <>{children}</> : null}
       </div>
     </div>
   );

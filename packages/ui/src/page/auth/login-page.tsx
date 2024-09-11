@@ -19,7 +19,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ type }) => {
             alt='Logo'
             height={45}
             priority
-            src={type === 'admin' ? '/admin/assets/logo.png' : '/logo.png'}
+            src={
+              type === 'admin' ? '/admin/assets/logo.png' : '/assets/logo.png'
+            }
             style={{ width: 'auto', height: '100%' }}
             width={180}
           />
