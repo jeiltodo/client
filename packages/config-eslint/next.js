@@ -35,6 +35,9 @@ module.exports = {
     'import/no-default-export': 'off',
     'no-console': 'off',
     'unicorn/filename-case': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    'react/function-component-definition': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
   },
 };

@@ -117,10 +117,11 @@ export function Button({
   return (
     <button
       className={buttonClasses}
+      type='button'
       {...props}
-      style={{ outline: 'none', boxShadow: 'none' }}
-      onClick={onClick ? onClick : voidFn}
       disabled={isDisabled}
+      onClick={onClick ? onClick : voidFn}
+      style={{ outline: 'none', boxShadow: 'none' }}
     >
       {children}
     </button>

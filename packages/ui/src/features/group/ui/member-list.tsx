@@ -1,5 +1,5 @@
 'use client';
-import { Member, Profile } from '../../../entities';
+import { Member, Profile } from '../../../entities/user';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

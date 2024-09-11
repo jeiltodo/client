@@ -2,7 +2,7 @@
 import { ImgProfile } from '@jeiltodo/icons';
 import { UserDataProps } from '../model';
 import { useState } from 'react';
-import { UserInfoModal } from '../../../entities';
+import { UserInfoModal } from '../../../entities/user';
 
 interface SidebarUserInfoProps {
   userInfo: UserDataProps | undefined; // userInfo를 직접 받는 형태로 수정
@@ -18,13 +18,11 @@ export const SidebarUserInfo = ({
 
   return (
     <>
-      {infoToggle && (
-        <UserInfoModal
+      {infoToggle ? <UserInfoModal
           userInfo={userInfo}
           setInfoToggle={setInfoToggle}
           isAdmin={isAdmin}
-        />
-      )}
+        /> : null}
       <div className='mt-3 mb-[18px] py-3'>
         <div className='tablet:flex mobile:hidden tablet:px-5 mobile:px-4 items-start gap-3'>
           <ImgProfile className='w-16 h-16' />

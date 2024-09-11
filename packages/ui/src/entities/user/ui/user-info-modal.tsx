@@ -81,7 +81,7 @@ export const UserInfoModal = ({
     } else {
       setNicknameMessage('');
     }
-  }, [nicknameData, debouncedNickname]);
+  }, [nicknameData, debouncedNickname, userInfo?.nickname]);
 
   useEffect(() => {
     if (
@@ -98,7 +98,7 @@ export const UserInfoModal = ({
     } else {
       setEmailMessage('');
     }
-  }, [emailData, debouncedEmail]);
+  }, [emailData, debouncedEmail, userInfo?.email]);
 
   const handleSave = () => {
     updateUserMutation.mutate({ nickname, email });
