@@ -12,7 +12,7 @@ import {
   useGroupSingleGoal,
 } from '../../../entities/group/hooks/useGroupGoals';
 import { useSingleGoalTodo } from '../../../entities/todo/hooks/useSingleGoalTodo';
-import { useGroupDetail } from '../../../entities/group';
+import { useGroupDetail } from '../../../entities/group/hooks';
 import { TitleProgressBarCard } from '../../../widgets/goal/ui';
 import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroupGoal';
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';

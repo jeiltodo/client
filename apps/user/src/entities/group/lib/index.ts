@@ -1,0 +1,1 @@
+export { getGroupColorClass } from './getGroupColor';

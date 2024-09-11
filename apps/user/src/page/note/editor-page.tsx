@@ -14,8 +14,8 @@ import {
 } from '@jeiltodo/ui/shared';
 import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import { EditorForm } from '../../features/note';
-import type { Note } from '../../entities/note';
-import { useCreateNote, useUpdateNote } from '../../entities/note';
+import type { Note } from '../../entities/note/model';
+import { useCreateNote, useUpdateNote } from '../../entities/note/hooks';
 
 interface Props {
   note?: Note;

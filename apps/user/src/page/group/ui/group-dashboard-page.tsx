@@ -18,7 +18,7 @@ import { GroupOverviewBoard } from '@jeiltodo/ui/entities/group';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
-} from '../../../entities/group';
+} from '../../../entities/group/hooks';
 import { userOptions } from '../../../entities/user';
 import {
   useGroupCode,

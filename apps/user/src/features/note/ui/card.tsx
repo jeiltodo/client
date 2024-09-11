@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import { NoteDetailSlide } from '../../../widgets/note/ui/note-detail-slide';
-import { useDeleteNote } from '../../../entities/note/hooks/useDeleteNote';
+import { useDeleteNote } from '../../../entities/note/hooks';
 
 interface CardProps {
   noteData: Note;

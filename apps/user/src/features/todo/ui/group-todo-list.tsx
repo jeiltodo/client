@@ -14,7 +14,7 @@ import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
-import { useGroupDetail } from '../../../entities/group';
+import { useGroupDetail } from '../../../entities/group/hooks';
 import { NoteDetailSlide } from '../../../widgets/note';
 import { userOptions } from '../../../entities/user';
 import { TodoModal } from '../../../entities/todo/ui';
