@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { todoApi } from "..";
+import { todoApi } from '../api/todoApi';
 
 export const useAssignTodo = () => {
   const queryClient = useQueryClient();

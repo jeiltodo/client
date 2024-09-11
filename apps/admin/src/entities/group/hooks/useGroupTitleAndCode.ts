@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { GroupTitleOrCode } from '@jeiltodo/ui/entities';
+import type { GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
 import { groupApi } from '../api';
 import { groupQueryKeys } from './queryKeys';
 

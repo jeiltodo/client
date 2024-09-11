@@ -6,7 +6,7 @@ interface GetServerTokenProps {
   isAdmin: boolean;
 }
 
-export  function getServerToken({ isAdmin }: GetServerTokenProps) {
+export async function getServerToken({ isAdmin }: GetServerTokenProps) {
   const tokenName = isAdmin ? 'accessAdminToken' : 'accessToken';
   const token = cookies().get(tokenName)?.value;
   

@@ -1,4 +1,3 @@
-import { SVGProps, ForwardRefExoticComponent, RefAttributes } from 'react';
 import Link from 'next/link';
 import { Group } from '@jeiltodo/icons';
 import type { GroupProps } from '../model/type';

@@ -4,13 +4,14 @@ import { useInView } from 'react-intersection-observer';
 import { useQuery } from '@tanstack/react-query';
 import { BackButton, Button, LoadingSpinner } from '@jeiltodo/ui/shared';
 import { PlusBlue } from '@jeiltodo/icons';
+import type { Goal } from '@jeiltodo/ui/shared';
 import { RecentFilter } from '../../entities/user';
-import type { todoQuery } from '../../entities/todo';
-import { TodoModal, useRecentTodo } from '../../entities/todo';
 import { userOptions } from '../../entities/goal/hooks';
 import { TodoList } from '../../features/todo';
 import { individualGoalsOptions } from '../../entities/user/hooks/individualGoalOptions';
-import type { Goal } from '@jeiltodo/ui/shared';
+import { TodoModal } from '../../entities/todo/ui';
+import type { todoQuery} from '../../entities/todo/hooks';
+import { useRecentTodo } from '../../entities/todo/hooks';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());

@@ -1,9 +1,9 @@
 import './style/globals.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
- import { QueryProvider } from '../shared';
 import { ToastContainer } from 'react-toastify';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryProvider } from '../shared';
 
 export const metadata: Metadata = {
   title: 'USER | jeiltodo',

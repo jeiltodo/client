@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
-import type { Group } from '@jeiltodo/ui/entities';
+import type { Group } from '@jeiltodo/ui/entities/group';
 import { NotesPushButton } from '../../../features/goal/ui/notes-push-button';
 import {
   useGroupGoals,
@@ -18,8 +18,8 @@ import { useDeleteGroupGoal } from '../../../entities/group/hooks/useDeleteGroup
 import { useUpdateGroupGoal } from '../../../entities/group/hooks/useUpdateGroupGoal';
 import { GoalModal } from '../../../features/goal/ui';
 import type { SingleGroupGoalTodo } from '../../../entities/todo';
-import { TodoModal } from '../../../entities/todo';
-import { GroupTodoDoneBoard } from '../../../features/todo';
+import { TodoModal } from '../../../entities/todo/ui';
+import { GroupTodoDoneBoard } from '../../../widgets/todo/ui/group-todo-done-board';
 import { userOptions } from '../../../entities/goal/hooks';
 
 export const GroupGoalDetailPage = ({

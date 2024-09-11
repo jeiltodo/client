@@ -1,7 +1,6 @@
 import { Kebab, NoteView, NoteViewGroup } from '@jeiltodo/icons';
 import { Flyout } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
-import { MemgberInCharge } from '../model/type';
 
 interface Props {
   onClickNote: () => void;
@@ -15,24 +14,24 @@ export const TodoButtons = ({
   onClickNote,
   isGroup = false,
 }: Props) => {
-  const [isFlyoutOpen, setFlyoutOpen] = useState(false);
+  const [isFlyoutOpen, setIsFlyoutOpen] = useState(false);
 
   const handleKebab = () => {
-    setFlyoutOpen((prev) => !prev);
+    setIsFlyoutOpen((prev) => !prev);
   };
 
   const handleEdit = () => {
     onClickEdit();
-    setFlyoutOpen(false);
+    setIsFlyoutOpen(false);
   };
 
   const handleRemove = () => {
     onClickRemove();
-    setFlyoutOpen(false);
+    setIsFlyoutOpen(false);
   };
 
   return (
-    <div className='relative flex items-center' onMouseLeave={() => setFlyoutOpen(false)}>
+    <div className='relative flex items-center' onMouseLeave={() => setIsFlyoutOpen(false)}>
       <span className='inline-flex items-center  gap-2 opacity-0 transition-opacity group-hover:opacity-100'>
         {isGroup ? (
           <NoteViewGroup
