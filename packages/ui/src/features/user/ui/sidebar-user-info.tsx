@@ -18,11 +18,13 @@ export const SidebarUserInfo = ({
 
   return (
     <>
-      {infoToggle ? <UserInfoModal
-          userInfo={userInfo}
-          setInfoToggle={setInfoToggle}
+      {infoToggle ? (
+        <UserInfoModal
           isAdmin={isAdmin}
-        /> : null}
+          setInfoToggle={setInfoToggle}
+          userInfo={userInfo}
+        />
+      ) : null}
       <div className='mt-3 mb-[18px] py-3'>
         <div className='tablet:flex mobile:hidden tablet:px-5 mobile:px-4 items-start gap-3'>
           <ImgProfile className='w-16 h-16' />
@@ -35,17 +37,20 @@ export const SidebarUserInfo = ({
                 {userInfo?.email}
               </h2>
             </div>
-            <span
+            <button
               className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
-              onClick={() => setInfoToggle(true)}
+              onClick={() => {
+                setInfoToggle(true);
+              }}
+              type='button'
             >
               사용자 설정
-            </span>
+            </button>
           </div>
         </div>
         <div className='tablet:hidden mobile:flex tablet:px-5 mobile:px-4 items-end justify-between'>
           <div className='flex items-center justify-start gap-2'>
-            <ImgProfile width={32} height={32} className='w-8 h-8' />
+            <ImgProfile className='w-8 h-8' height={32} width={32} />
             <div>
               <div>
                 <h2 className='text-xs font-pretendard-semibold text-slate-800'>
@@ -57,12 +62,15 @@ export const SidebarUserInfo = ({
               </div>
             </div>
           </div>
-          <div
+          <button
             className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
-            onClick={() => setInfoToggle(true)}
+            onClick={() => {
+              setInfoToggle(true);
+            }}
+            type='button'
           >
             사용자 설정
-          </div>
+          </button>
         </div>
       </div>
     </>

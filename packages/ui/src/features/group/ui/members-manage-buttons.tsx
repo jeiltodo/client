@@ -39,6 +39,7 @@ export const MembersManageButtons = ({
             onClick={() => {
               handleChangeMode('change-leader');
             }}
+            type='button'
           >
             그룹장 변경
           </button>
@@ -47,6 +48,7 @@ export const MembersManageButtons = ({
             onClick={() => {
               handleChangeMode('manage-members');
             }}
+            type='button'
           >
             구성원 관리
           </button>
@@ -55,20 +57,22 @@ export const MembersManageButtons = ({
       {mode !== 'default' && (
         <ButtonGroup>
           <Button
-            variant={isAdmin ? 'outline' : 'outline-no-border'}
             className='bg-white px-[10px] min-w-[84px] h-[36px]'
             onClick={() => {
               handleCancel();
             }}
+            type='button'
+            variant={isAdmin ? 'outline' : 'outline-no-border'}
           >
             취소
           </Button>
           <Button
-            variant={isAdmin ? 'dark' : 'group-dark'}
             className='min-w-[84px] h-[36px]'
             onClick={() => {
               handleSave();
             }}
+            type='button'
+            variant={isAdmin ? 'dark' : 'group-dark'}
           >
             저장
           </Button>

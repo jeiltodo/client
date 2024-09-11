@@ -1,11 +1,12 @@
 'use client';
-import { Member, Profile } from '../../../entities/user';
+import { Member } from '../../../entities/group/model/type';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+import { Profile } from '../../../entities/group/ui/profile';
 
 interface MemberListProps {
   members: Member[];
