@@ -1,6 +1,6 @@
+import type { Goal } from '@jeiltodo/ui/shared';
 import type { SingleGroupGoalTodo } from '../../../entities/todo';
 import { TodoList } from '../../../features/todo';
-import type { Goal } from '@jeiltodo/ui/shared';
 
 export const GroupTodoDoneBoard = ({
   todos,

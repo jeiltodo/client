@@ -16,9 +16,9 @@ import {
   useEditSingleGoal,
 } from '../../../entities/user/hooks/useSingleGoalMutate';
 import type { SingleGoalTodo } from '../../../entities/todo';
-import { TodoModal } from '../../../entities/todo';
 import { useIndividualGoals } from '../../../entities/goal/hooks';
 import { IndividualTodoDoneBoard } from '../../../widgets/todo';
+import { TodoModal } from '../../../entities/todo/ui';
 
 export const IndividualGoalDetailPage = ({
   params,

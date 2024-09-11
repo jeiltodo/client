@@ -108,28 +108,28 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
           />
           <div className='absolute h-6 right-0 top-4'>
             <button
-              type='button'
-              onClick={togglePasswordVisibility}
               className={`block pr-16 transition-opacity duration-200 ${
                 isPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
+              onClick={togglePasswordVisibility}
+              type='button'
             >
               <VisibilityOn
-                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
                 aria-label='비밀번호 보기'
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
               />
             </button>
 
             <button
-              type='button'
-              onClick={togglePasswordVisibility}
               className={`block pr-16 transition-opacity duration-200 ${
                 !isPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
+              onClick={togglePasswordVisibility}
+              type='button'
             >
               <VisibilityOff
-                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
                 aria-label='비밀번호 가리기'
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
               />
             </button>
           </div>

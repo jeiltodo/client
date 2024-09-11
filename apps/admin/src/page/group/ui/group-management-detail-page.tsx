@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { GroupOverview, GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { GroupOverviewBoard } from '@jeiltodo/ui/entities';
+import type { GroupOverview, GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
+import { GroupOverviewBoard } from '@jeiltodo/ui/entities/group';
 import type { Goal } from '@jeiltodo/ui/shared';
 import {
   BoardTitle,
@@ -87,8 +87,8 @@ export function GroupManagementDetailPage() {
 
         <MembersBoardProvider>
           <MembersBoard
-            members={group.members}
             isAdmin
+            members={group.members}
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}
           />

@@ -9,7 +9,7 @@ import type {
   FormattedGoalWithTodos,
   MemgberInCharge,
 } from '../../../entities/todo';
-import { TodoAssignee, TodoButtons, TodoModal } from '../../../entities/todo';
+import { TodoAssignee, TodoButtons } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
@@ -17,6 +17,7 @@ import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
 import { useGroupDetail } from '../../../entities/group/hooks';
 import { NoteDetailSlide } from '../../../widgets/note';
 import { userOptions } from '../../../entities/user';
+import { TodoModal } from '../../../entities/todo/ui';
 
 interface Props {
   goalWithTodos: FormattedGoalWithTodos;
@@ -41,7 +42,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   const { data: group } = useGroupDetail(groupId);
   const { data: groupGoals } = useGroupGoals(groupId);
   const goalsForTodoModal =
-    groupGoals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
+    groupGoals?.map((item) => ({ id: item.id, title: item.title })) ?? [];
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();

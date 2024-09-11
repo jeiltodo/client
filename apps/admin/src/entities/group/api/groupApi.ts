@@ -1,6 +1,6 @@
 import type { ResponseWith } from '@jeiltodo/ui/shared';
 import { client } from '@jeiltodo/ui/shared';
-import type { GroupCode, GroupTitleOrCode } from '@jeiltodo/ui/entities';
+import type { GroupCode, GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
 import type { GroupResponse, GroupsResponse } from '../model';
 import type { TableQueries } from '../../../shared';
 

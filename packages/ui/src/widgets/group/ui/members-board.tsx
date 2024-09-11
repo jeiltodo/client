@@ -3,7 +3,7 @@ import { BgGroupAvatar, GroupFill } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import { useBoardContext } from '@jeiltodo/ui/shared';
 import { MemberList } from '../../../features/group/ui';
-import { GroupWithMembers, Member } from '../../../entities';
+import { GroupWithMembers, Member } from '../../../entities/group/model/type';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
 import { useState } from 'react';
 
