@@ -15,6 +15,7 @@ module.exports = {
     'no-empty': 'off',
     'no-redeclare': 'off',
     'no-nested-ternary': 'off',
+    'unicorn/filename-case': 'off',
     'react/function-component-definition': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',

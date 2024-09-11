@@ -1,4 +1,4 @@
-import { client } from '../../../../../../apps/user/src/shared';
+import { client } from '../../../shared';
 import {
   DuplicateResponse,
   LogoutData,
@@ -13,38 +13,26 @@ export const userApi = {
     data: UserData,
     admin = false
   ): Promise<UserPatchResponse> => {
-    try {
-      const response = await client.patch('/member/info/update', data, {
-        headers: admin ? { 'X-Admin-Request': 'true' } : {},
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await client.patch('/member/info/update', data, {
+      headers: admin ? { 'X-Admin-Request': 'true' } : {},
+    });
+    return response.data;
   },
 
   // 로그아웃
   logoutUserInfo: async (data: LogoutData, admin = false) => {
-    try {
-      const response = await client.post('/member/logout', data, {
-        headers: admin ? { 'X-Admin-Request': 'true' } : {},
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await client.post('/member/logout', data, {
+      headers: admin ? { 'X-Admin-Request': 'true' } : {},
+    });
+    return response.data;
   },
 
   // 회원 탈퇴
   withdrawUserInfo: async (admin = false) => {
-    try {
-      const response = await client.delete('/member/withdraw', {
-        headers: admin ? { 'X-Admin-Request': 'true' } : {},
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await client.delete('/member/withdraw', {
+      headers: admin ? { 'X-Admin-Request': 'true' } : {},
+    });
+    return response.data;
   },
 
   // 닉네임 중복
@@ -52,15 +40,11 @@ export const userApi = {
     nickname: string,
     admin = false
   ): Promise<DuplicateResponse> => {
-    try {
-      const response = await client.get(`/member/nickname/duplicate`, {
-        params: { nickname },
-        headers: admin ? { 'X-Admin-Request': 'true' } : {},
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await client.get(`/member/nickname/duplicate`, {
+      params: { nickname },
+      headers: admin ? { 'X-Admin-Request': 'true' } : {},
+    });
+    return response.data;
   },
 
   // 이메일 중복
@@ -68,14 +52,10 @@ export const userApi = {
     email: string,
     admin = false
   ): Promise<DuplicateResponse> => {
-    try {
-      const response = await client.get(`/member/email/duplicate`, {
-        params: { email },
-        headers: admin ? { 'X-Admin-Request': 'true' } : {},
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await client.get(`/member/email/duplicate`, {
+      params: { email },
+      headers: admin ? { 'X-Admin-Request': 'true' } : {},
+    });
+    return response.data;
   },
 };
