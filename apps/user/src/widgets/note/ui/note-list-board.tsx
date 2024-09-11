@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { LoadingSpinner } from '@jeiltodo/ui/shared';
 import { Card, GoalTitleCard } from '../../../features/note';
-import { useGoalNotes } from '../../../entities/note/hooks/useGoalNotes';
+import { useGoalNotes } from '../../../entities/note/hooks';
 
 export const NoteListBoard = () => {
   const params: { goalId: string } = useParams();

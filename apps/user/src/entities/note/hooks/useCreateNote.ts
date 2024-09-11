@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '@jeiltodo/ui/shared';
-import type { NotePostParam } from '../api/noteApi';
-import { createNote } from '../api/noteApi';
+import type { NotePostParam } from '../api';
+import { createNote } from '../api';
 
 export const useCreateNote = (todoId: number) => {
   const queryClient = useQueryClient();

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteNote } from '../api/noteApi';
+import { deleteNote } from '../api';
 
 export const useDeleteNote = (noteId: number) => {
   const queryClient = useQueryClient();

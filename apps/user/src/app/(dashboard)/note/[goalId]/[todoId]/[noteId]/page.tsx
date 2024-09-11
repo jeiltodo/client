@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { LoadingSpinner } from '@jeiltodo/ui/shared';
-import { useNoteDetail } from '../../../../../../entities/note';
+import { useNoteDetail } from '../../../../../../entities/note/hooks';
 import { EditorPage } from '../../../../../../page/note';
 
 export default function NoteEditor() {
