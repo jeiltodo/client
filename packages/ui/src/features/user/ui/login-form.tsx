@@ -141,7 +141,6 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
         </div>
       </div>
       <Button
-      type='submit'
         className='w-full max-w-[640px] mb-[40px]'
         isDisabled={!email.trim() || !password.trim()}
         type='submit'
