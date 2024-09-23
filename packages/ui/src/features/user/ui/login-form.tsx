@@ -144,6 +144,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
       type='submit'
         className='w-full max-w-[640px] mb-[40px]'
         isDisabled={!email.trim() || !password.trim()}
+        type='submit'
         variant='primary'
       >
         로그인하기
