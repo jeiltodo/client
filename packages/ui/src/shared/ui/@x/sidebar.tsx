@@ -36,22 +36,17 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
   }, [pathname]);
 
   return (
-    <div
-      className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}
-    >
+    <nav className={`min-w-[60px] desktop:min-w-[280px] relative z-30 ${isMobileSidebarOpen ? ' overflow-hidden' : ' overflow-auto'}`}>
       {/* 데스크톱 버전 */}
-      <div
-        className={`desktop:flex hidden h-full fixed top-0 left-0 z-10
-          transition-all duration-200 ease-in-out ${
-            isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
-          } bg-white flex-col overflow-hidden`}
+      <section
+        className={`desktop:flex hidden h-full fixed top-0 left-0 z-10 transition-all duration-200 ease-in-out  ${
+          isDesktopOpen ? 'w-[280px]' : 'w-[60px]'
+        } bg-white flex-col overflow-hidden`}
       >
-        <div
+        <header
           className={`sidebar-header flex items-center ${isDesktopOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
-          <div
-            className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}
-          >
+          <div className={`items-center gap-2 ${isDesktopOpen ? 'flex' : 'hidden'} `}>
             <Image
               alt='Logo'
               className='cursor-pointer'
@@ -74,7 +69,7 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
           </div>
           <Image
             alt='Logo'
-            className={`cursor-pointer ${isDesktopOpen ? 'hidden' : 'block'}`}
+            className={`cursor-pointer ${isDesktopOpen ? 'opacity-0' : 'opacity-100'}`}
             height={24}
             onClick={() => {
               router.push('/');
@@ -87,37 +82,28 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             onClick={toggleDesktopSidebar}
             type='button'
           >
-            {isDesktopOpen ? (
-              <Fold className='w-6 h-6' />
-            ) : (
-              <Expand className='w-6 h-6' />
-            )}
+            {isDesktopOpen ? <Fold className='w-6 h-6' /> : <Expand className='w-6 h-6' />}
           </button>
-        </div>
+        </header>
         <div
-          className={`transition-all duration-300 ease-in-out ${
-            isDesktopOpen
-              ? 'opacity-100 translate-x-0 delay-50'
-              : 'opacity-0 -translate-x-full'
+          className={`transition-opacity duration-300 ease-out ${
+            isDesktopOpen ? 'opacity-100 block' : 'opacity-0 hidden'
           }`}
         >
           {children}
         </div>
-      </div>
+      </section>
 
       {/* 태블릿 버전 */}
-      <div
-        className={`desktop:hidden tablet:flex hidden h-full fixed top-0 left-0 z-10
-          transition-all duration-200 ease-in-out ${
-            isTabletOpen ? 'w-[280px]' : 'w-[60px]'
-          } bg-white flex-col overflow-hidden`}
+      <section
+        className={`desktop:hidden tablet:flex hidden h-full fixed top-0 left-0 z-10 transition-all duration-200 ease-in-out ${
+          isTabletOpen ? 'w-[280px]' : 'w-[60px]'
+        } bg-white flex-col overflow-hidden`}
       >
-        <div
+        <header
           className={`sidebar-header flex items-center ${isTabletOpen ? 'justify-between pt-3 px-5' : 'flex-col justify-center gap-3 pt-4 px-4'}`}
         >
-          <div
-            className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}
-          >
+          <div className={`items-center gap-2 ${isTabletOpen ? 'flex' : 'hidden'}`}>
             <Image
               alt='Logo'
               className='cursor-pointer'
@@ -153,58 +139,33 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
             onClick={toggleTabletSidebar}
             type='button'
           >
-            {isTabletOpen ? (
-              <Fold className='w-6 h-6' />
-            ) : (
-              <Expand className='w-6 h-6' />
-            )}
+            {isTabletOpen ? <Fold className='w-6 h-6' /> : <Expand className='w-6 h-6' />}
           </button>
-        </div>
+        </header>
         <div
           className={`transition-all duration-300 ease-in-out ${
-            isTabletOpen
-              ? 'opacity-100 translate-x-0 delay-50'
-              : 'opacity-0 -translate-x-full'
+            isTabletOpen ? 'opacity-100 translate-x-0 delay-50' : 'opacity-0 -translate-x-full'
           }`}
         >
           {children}
         </div>
-      </div>
-
-      {isTabletOpen ? (
-        <button
-          className='desktop:hidden tablet:block mobile:hidden fixed top-0 right-0 opacity-50 bg-[#000000] z-20 transition-all duration-200 ease-in-out'
-          onClick={toggleTabletSidebar}
-          style={{
-            width: `calc(100% - '280px'})`,
-            height: '100%',
-          }}
-          type='button'
-        />
-      ) : null}
+      </section>
 
       {/* 모바일 버전 */}
-      <div
+      <section
         className={`tablet:hidden flex top-0 left-0 w-full transition-all duration-200 ease-in-out ${
           isMobileSidebarOpen ? 'h-full' : 'h-[48px]'
         } bg-white flex-col fixed overflow-hidden`}
       >
-        {!isMobileSidebarOpen && (
-          <div className='flex items-center justify-start gap-4 py-3 px-4'>
-            <button
-              className='cursor-pointer'
-              onClick={toggleMobileSidebar}
-              type='button'
-            >
+        <header className='flex items-center justify-start gap-4 py-3 px-4'>
+          {!isMobileSidebarOpen && (
+            <button className='cursor-pointer' onClick={toggleMobileSidebar} type='button'>
               <HamburgerMenu className='w-6 h-6' />
             </button>
-            {pathname === '/' && (
-              <div className='text-base font-pretendard-semibold'>대시보드</div>
-            )}
-          </div>
-        )}
-        {isMobileSidebarOpen ? (
-          <div className='flex items-center justify-between py-3 px-4'>
+          )}
+          {pathname === '/' && <div className='text-base font-pretendard-semibold'>대시보드</div>}
+        </header>
+        {isMobileSidebarOpen ? <header className='flex items-center justify-between py-3 px-4'>
             <Image
               alt='Logo'
               className='cursor-pointer'
@@ -215,19 +176,14 @@ export const Sidebar = ({ type, children }: SidebarProps) => {
               src={type ? '/admin/assets/logo.png' : '/assets/logo.png'}
               width={100}
             />
-            <button
-              className='cursor-pointer'
-              onClick={toggleMobileSidebar}
-              type='button'
-            >
+            <button className='cursor-pointer' onClick={toggleMobileSidebar} type='button'>
               <DeleteMenu className='w-6 h-6' />
             </button>
-          </div>
-        ) : null}
+          </header> : null}
 
         {isMobileSidebarOpen ? <>{children}</> : null}
-      </div>
-    </div>
+      </section>
+    </nav>
   );
 };
 

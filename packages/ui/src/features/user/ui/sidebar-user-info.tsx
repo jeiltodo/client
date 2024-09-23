@@ -5,11 +5,10 @@ import { useState } from 'react';
 import { UserInfoModal } from '../../../entities/user';
 
 interface SidebarUserInfoProps {
-  userInfo: UserDataProps | undefined; // userInfo를 직접 받는 형태로 수정
+  userInfo: UserDataProps | undefined;
   isAdmin?: boolean;
 }
 
-// UserDataProps를 사용하는 컴포넌트
 export const SidebarUserInfo = ({
   userInfo,
   isAdmin = false,
@@ -18,61 +17,59 @@ export const SidebarUserInfo = ({
 
   return (
     <>
-      {infoToggle ? (
-        <UserInfoModal
+      {infoToggle ? <UserInfoModal
           isAdmin={isAdmin}
           setInfoToggle={setInfoToggle}
           userInfo={userInfo}
-        />
-      ) : null}
-      <div className='mt-3 mb-[18px] py-3'>
-        <div className='tablet:flex mobile:hidden tablet:px-5 mobile:px-4 items-start gap-3'>
+        /> : null}
+      <section className='mt-3 mb-[18px] py-3'>
+        <article className='tablet:flex mobile:hidden tablet:px-5 mobile:px-4 items-start gap-3'>
           <ImgProfile className='w-16 h-16' />
           <div>
-            <div>
+            <header>
               <h2 className='text-sm font-pretendard-semibold text-slate-800'>
                 {userInfo?.nickname}
               </h2>
-              <h2 className='text-sm font-pretendard-semibold text-slate-600'>
+              <p className='text-sm font-pretendard-semibold text-slate-600'>
                 {userInfo?.email}
-              </h2>
+              </p>
+            </header>
+            <footer>
+              <button
+                className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
+                onClick={() => { setInfoToggle(true); }}
+                type='button'
+              >
+                사용자 설정
+              </button>
+            </footer>
+          </div>
+        </article>
+        <article className='tablet:hidden mobile:flex tablet:px-5 mobile:px-4 items-end justify-between'>
+          <div className='flex items-center justify-start gap-2'>
+            <ImgProfile className='w-8 h-8' height={32} width={32} />
+            <div>
+              <header>
+                <h2 className='text-xs font-pretendard-semibold text-slate-800'>
+                  {userInfo?.nickname}
+                </h2>
+                <p className='text-xs font-pretendard-semibold text-slate-600'>
+                  {userInfo?.email}
+                </p>
+              </header>
             </div>
+          </div>
+          <footer>
             <button
               className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
-              onClick={() => {
-                setInfoToggle(true);
-              }}
+              onClick={() => { setInfoToggle(true); }}
               type='button'
             >
               사용자 설정
             </button>
-          </div>
-        </div>
-        <div className='tablet:hidden mobile:flex tablet:px-5 mobile:px-4 items-end justify-between'>
-          <div className='flex items-center justify-start gap-2'>
-            <ImgProfile className='w-8 h-8' height={32} width={32} />
-            <div>
-              <div>
-                <h2 className='text-xs font-pretendard-semibold text-slate-800'>
-                  {userInfo?.nickname}
-                </h2>
-                <h2 className='text-xs font-pretendard-semibold text-slate-600'>
-                  {userInfo?.email}
-                </h2>
-              </div>
-            </div>
-          </div>
-          <button
-            className='inline-block mt-2 text-xs font-normal text-slate-400 cursor-pointer'
-            onClick={() => {
-              setInfoToggle(true);
-            }}
-            type='button'
-          >
-            사용자 설정
-          </button>
-        </div>
-      </div>
+          </footer>
+        </article>
+      </section>
     </>
   );
 };

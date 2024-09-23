@@ -1,4 +1,5 @@
 import './style/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '@jeiltodo/ui/styles.css';
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
