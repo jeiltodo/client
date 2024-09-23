@@ -6,6 +6,7 @@ import React, {
   ReactNode,
   useEffect,
   useMemo,
+  useCallback,
 } from 'react';
 import { FullArrowDown, FullArrowUp } from '@jeiltodo/icons';
 
@@ -72,8 +73,9 @@ const DropdownToggle = ({ children }: DropdownToggleProps) => {
   const { isOpen, toggle, selectedText, size, round } = useDropdownContext();
   return (
     <button
-      onClick={toggle}
       className={`flex items-center justify-between ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-medium`}
+      onClick={toggle}
+      type='button'
     >
       <div
         className={`flex items-center ${selectedText ? 'text-black' : 'text-slate-400'}`}
@@ -118,8 +120,15 @@ const DropdownItem = ({ children, value }: DropdownItemProps) => {
 
   return (
     <div
-      onClick={handleClick}
       className={`cursor-pointer ${sizeClass[size]} ${roundClass[round]} bg-slate-50 text-sm font-pretendard-semibold hover:bg-slate-300 transition-all duration-300 ease-in-out`}
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleClick();
+        }
+      }}
+      role='button'
+      tabIndex={0}
     >
       {children}
     </div>
@@ -145,12 +154,11 @@ export const Dropdown = ({
     setIsOpen(!isOpen);
   };
 
-  const selectValue = (value: string | number) => {
+  const selectValue = useCallback((value: string | number) => {
     setSelectedValue(value);
-    if (onSelect) {
-      onSelect(value);
-    }
-  };
+
+    onSelect(value);
+  },[onSelect]);
 
   const selectText = (text: ReactNode) => {
     setSelectedText(text);
@@ -160,7 +168,7 @@ export const Dropdown = ({
     if (!hasInitialValue) return null;
 
     let initialItem: InitialItem = null;
-    if (hasInitialValue && defaultValue) {
+    if (defaultValue) {
       initialItem = defaultValue;
       return initialItem;
     }
@@ -181,7 +189,7 @@ export const Dropdown = ({
       }
     });
     return initialItem;
-  }, [hasInitialValue, children]);
+  }, [hasInitialValue, defaultValue, children]);
 
   // 상태 업데이트
   useEffect(() => {
@@ -189,7 +197,7 @@ export const Dropdown = ({
       selectValue(initialValue.value);
       selectText(initialValue.text);
     }
-  }, [initialValue, selectedValue]);
+  }, [initialValue, selectValue, selectedValue]);
 
   return (
     <DropdownContext.Provider

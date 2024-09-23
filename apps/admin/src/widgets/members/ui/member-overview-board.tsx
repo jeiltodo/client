@@ -1,17 +1,20 @@
 'use client';
 
-import { BoardLayout } from '../../../../../../packages/ui/src/shared/ui/@x/board-layout';
-import { InputSwapMode } from '../../../../../../packages/ui/src/shared/ui/input-swap-mode';
-import { Field } from '../../../../../../packages/ui/src/shared/ui/field';
-import { UserInterface } from '../model/type';
 import { useState } from 'react';
+import {
+  BoardLayout,
+  Field,
+  formatDateString,
+  InputSwapMode,
+} from '@jeiltodo/ui/shared';
+import type { UserInterface } from '../model/type';
 import { useUpdateMemberInfo } from '../../../entities/member/hooks/useUpdateMemberInfo';
-import { formatDateString } from '@jeiltodo/ui/shared';
-interface Props {
+
+interface MemberOverviewBoardProps {
   member: UserInterface;
 }
 
-export const MemberOverviewBoard = ({ member }: Props) => {
+export function MemberOverviewBoard({ member }: MemberOverviewBoardProps) {
   const [isEditNameMode, setIsEditNameMode] = useState<boolean>(false);
   const [isEditEmailMode, setIsEditEmailMode] = useState<boolean>(false);
   const { mutate: updateMember } = useUpdateMemberInfo(member.id);
@@ -51,36 +54,37 @@ export const MemberOverviewBoard = ({ member }: Props) => {
       <div className='pt-4 flex gap-9 border-b border-slate-200 pb-4'>
         <div className='flex flex-wrap gap-4'>
           <InputSwapMode
-            label='이름'
             defaultValue={member.nickname}
-            value={updatedNickname}
             isEditMode={isEditNameMode}
+            label='이름'
             onChange={(nickname) => {
               handleChangeName(nickname);
             }}
             onSwap={setIsEditNameMode}
+            value={updatedNickname}
           />
           <InputSwapMode
-            label='이름'
             defaultValue={member.email}
-            value={updatedEmail}
             isEditMode={isEditEmailMode}
+            label='이름'
             onChange={(email) => {
               handleChangeEmail(email);
             }}
             onSwap={setIsEditEmailMode}
+            value={updatedEmail}
           />
           <Field label='가입일'>{formatDateString(member.createdAt)}</Field>
         </div>
       </div>
       <div className='w-full mt-4 flex justify-end'>
         <button
-          onClick={handleSave}
           className='inline-block w-[84px] h-9 border bg-blue-500 text-white rounded-xl'
+          onClick={handleSave}
+          type='button'
         >
           저장
         </button>
       </div>
     </BoardLayout>
   );
-};
+}

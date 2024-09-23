@@ -1,17 +1,15 @@
 'use client';
 
 import { Button, ProgressBar } from '@jeiltodo/ui/shared';
-import {
-  GoalWithTodos,
-  useIndividualGoals,
-  userOptions,
-} from '../../../entities/goal';
-import { TodoModal } from '../../../entities/todo';
-import { TodoList } from '../../../features/todo';
 import { ArrowRight, Plus } from '@jeiltodo/icons';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { TodoList } from '../../../features/todo';
+import { useIndividualGoals, userOptions } from '../../../entities/goal/hooks';
+import type { GoalWithTodos } from '../../../entities/goal/model';
+import { TodoModal } from '../../../entities/todo/ui';
+
 
 export const UserGoalCard = (goal: GoalWithTodos) => {
   const router = useRouter();

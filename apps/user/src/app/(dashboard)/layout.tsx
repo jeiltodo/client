@@ -1,12 +1,12 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { getQueryClient } from '@jeiltodo/ui/entities';
+import { getQueryClient } from '@jeiltodo/ui/entities/user';
 import { SidebarUser } from '../../widgets/user';
-import { groupOptions } from '../../entities/group/index';
+import { groupOptions } from '../../entities/group/hooks';
 import { userOptions } from '../../entities/user';
 import {
   individualGoalsOptions,
   progressAllOptions,
-} from '../../entities/goal';
+} from '../../entities/goal/hooks';
 
 export const runtime = 'edge';
 
@@ -23,11 +23,9 @@ export default async function DashboardLayout({
   await queryClient.prefetchQuery(progressAllOptions());
 
   return (
-    <>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <SidebarUser />
-        <main>{children}</main>
-      </HydrationBoundary>
-    </>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <SidebarUser />
+      <main>{children}</main>
+    </HydrationBoundary>
   );
 }

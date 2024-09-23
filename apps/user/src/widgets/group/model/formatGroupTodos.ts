@@ -1,4 +1,4 @@
-import { GroupGoalWithTodos } from '../../../entities/goal';
+import type { GroupGoalWithTodos } from '../../../entities/goal/types';
 
 export const formatGroupTodos = (goal: GroupGoalWithTodos, done: boolean) => {
   const updatedTodos = goal.todos

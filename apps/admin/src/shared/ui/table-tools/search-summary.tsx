@@ -20,7 +20,7 @@ export function SearchSummary({
           <span className='text-slate-800 font-medium text-sm'>
             전체 : {totalCount} 개
           </span>
-          <span className='w-px h-3 bg-slate-600'></span>
+          <span className='w-px h-3 bg-slate-600' />
           <span className='text-slate-800 font-medium text-sm'>
             검색 : {searchedCount} 개
           </span>

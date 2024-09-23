@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Todo, todoApi } from '../../../entities/todo';
 import { useToast } from '@jeiltodo/ui/shared';
+import type { Todo } from '../model';
+import { todoApi } from '../api/todoApi';
 
 export const useUpdateTodo = () => {
   const queryClient = useQueryClient();

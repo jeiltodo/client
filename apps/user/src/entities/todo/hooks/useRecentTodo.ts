@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { todoQueryKeys } from './queryKey';
+import { calculateTotalPages } from '@jeiltodo/ui/shared';
 import { todoApi } from '../api/todoApi';
+import { todoQueryKeys } from './queryKeys';
 
 interface PageLimit {
   limit: number;
@@ -15,17 +16,18 @@ interface GoalWithTodosResponse {
 
 export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
   return useInfiniteQuery({
-    queryKey: todoQueryKeys.individual.all({ limit, goalIds, isDone }),
+    queryKey: todoQueryKeys.individual.default({ limit, goalIds, isDone }),
     queryFn: ({ pageParam }) =>
       todoApi.getRecentTodo({
         page: pageParam || 1,
         limit,
-        goalIds: goalIds,
-        isDone: isDone,
+        goalIds,
+        isDone,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const { totalCount, currentPage } = lastPage.data as GoalWithTodosResponse;
+      const { totalCount, currentPage } =
+        lastPage.data as GoalWithTodosResponse;
       const totalPages = calculateTotalPages(totalCount, limit);
       return currentPage < totalPages ? currentPage + 1 : undefined;
     },
@@ -44,10 +46,10 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
             goal: {
               id: todo.goal.id,
               title: todo.goal.title,
-              memberId: 0, // 기본값 설정
-              createdAt: '', // 기본값 설정
-              updatedAt: '', // 기본값 설정
-              progress: 0, // 기본값 설정
+              memberId: 0,
+              createdAt: '',
+              updatedAt: '',
+              progress: 0,
             },
           })),
         },
@@ -55,12 +57,3 @@ export const useRecentTodo = ({ limit, goalIds, isDone }: PageLimit) => {
     }),
   });
 };
-
-/*
-////////////////////////////////////////////////////////////////////////////////
-*/
-function calculateTotalPages(totalCount: number, itemsPerPage: number): number {
-  const fullPages = Math.floor(totalCount / itemsPerPage);
-  const hasPartialPage = totalCount % itemsPerPage !== 0;
-  return fullPages + (hasPartialPage ? 1 : 0);
-}

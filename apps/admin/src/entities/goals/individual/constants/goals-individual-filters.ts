@@ -1,6 +1,6 @@
-import { TableFilter } from '../../../../shared';
+import type { TableFilter } from '../../../../shared';
 
-export const GOALS_INDIVIDUAL_FIILTERS: TableFilter[] = [
+export const GOALS_INDIVIDUAL_FILTERS: TableFilter[] = [
   {
     label: '키워드',
     query: 'title',

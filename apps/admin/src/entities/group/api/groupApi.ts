@@ -1,7 +1,7 @@
 import type { ResponseWith } from '@jeiltodo/ui/shared';
 import { client } from '@jeiltodo/ui/shared';
-import type { GroupCode, GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import type { GroupResponse, GroupsResponse } from '../model/type';
+import type { GroupCode, GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
+import type { GroupResponse, GroupsResponse } from '../model';
 import type { TableQueries } from '../../../shared';
 
 export const groupApi = {
@@ -42,21 +42,17 @@ export const groupApi = {
 
   deleteGroups: async (groupIds: number[]): Promise<void> => {
     try {
-      const response = await client.delete(`/admin/groups`, {
+      await client.delete(`/admin/groups`, {
         data: { groupIds },
       });
-      return response.data;
     } catch (error) {
       console.error('Fail delete group:', error);
       throw error;
     }
   },
-  leaveGroup: async (groupId: number, memberId: number) => {
+  leaveGroup: async (groupId: number, memberId: number): Promise<void> => {
     try {
-      const response = await client.delete(
-        `/admin/groups/${groupId}/members/${memberId}`
-      );
-      return response.data;
+      await client.delete(`/admin/groups/${groupId}/members/${memberId}`);
     } catch (error) {
       console.error('Fail fetch userInfo:', error);
       throw error;
@@ -65,22 +61,16 @@ export const groupApi = {
 
   changeLeader: async (groupId: number, memberId: number): Promise<void> => {
     try {
-      const response = await client.patch(
-        `/admin/groups/${groupId}/leader/${memberId}`
-      );
-      return response.data;
+      await client.patch(`/admin/groups/${groupId}/leader/${memberId}`);
     } catch (error) {
       console.error('Fail change leader:', error);
       throw error;
     }
   },
 
-  removeMember: async (groupId: number, memberId: number) => {
+  removeMember: async (groupId: number, memberId: number): Promise<void> => {
     try {
-      const response = await client.delete(
-        `/admin/groups/${groupId}/members/${memberId}`
-      );
-      return response.data;
+      await client.delete(`/admin/groups/${groupId}/members/${memberId}`);
     } catch (error) {
       console.error('Fail remove member:', error);
       throw error;

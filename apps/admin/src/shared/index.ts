@@ -1,11 +1,9 @@
 export * from './hooks/table/useTableCheck';
-export * from './hooks/table/useTableContext';
-export * from './hooks/table/useTableSort';
+export { useTableContext } from './hooks/table/useTableContext';
 
 export * from './model/table/table-provider';
 export * from './model/table/type';
 
-export * from '../../../../packages/ui/src/shared/ui/pagination';
 export * from './ui/@x/search-filter';
 export * from './ui/@x/table-toolbar';
 

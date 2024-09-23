@@ -3,10 +3,10 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
-import { AxiosError } from 'axios';
-import { groupQueryKeys } from './queryKeys';
+import type { AxiosError } from 'axios';
 import { useToast } from '@jeiltodo/ui/shared';
+import { groupApi } from '../api/groupApi';
+import { groupQueryKeys } from './queryKeys';
 
 export const groupOptions = () =>
   queryOptions({
@@ -23,7 +23,7 @@ export const useGroupMutation = (onError: (_error: AxiosError) => void) => {
       queryClient.invalidateQueries({ queryKey: groupQueryKeys.all });
       showToast({ message: '그룹 생성 성공!', type: 'alert', isGroup: true });
     },
-    onError: onError,
+    onError,
   });
 };
 
@@ -38,6 +38,6 @@ export const useGroupAttendMutation = (
       queryClient.invalidateQueries({ queryKey: groupQueryKeys.all });
       showToast({ message: '그룹 참여 성공!', type: 'alert', isGroup: true });
     },
-    onError: onError,
+    onError,
   });
 };

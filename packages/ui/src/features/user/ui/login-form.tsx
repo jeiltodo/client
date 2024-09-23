@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Input, useToast } from '@jeiltodo/ui/shared';
 import { VisibilityOff, VisibilityOn } from '@jeiltodo/icons';
-import { validateLogIn } from '../model/validation';
+import { validateLogIn } from '../model';
 
 interface LoginFormProps {
   isAdmin: boolean;
@@ -36,6 +36,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
       }
     } catch (error) {
       // 네트워크 에러 등 예외 처리
+      //console.log대신 Sentry 추가
       console.error('Login error:', error);
     }
   };
@@ -65,7 +66,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='w-full flex flex-col items-center'>
+    <form
+      className='w-full flex flex-col items-center'
+      onSubmit={(e) => {
+        void handleSubmit(e);
+      }}
+    >
       <div className='w-full tablet:max-w-[640px] desktop:w-[640px] flex flex-col gap-y-3 mb-[48px]'>
         <label className='font-pretendard-semibold text-base' htmlFor='email'>
           아이디
@@ -102,28 +108,28 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
           />
           <div className='absolute h-6 right-0 top-4'>
             <button
-              type='button'
-              onClick={togglePasswordVisibility}
               className={`block pr-16 transition-opacity duration-200 ${
                 isPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
+              onClick={togglePasswordVisibility}
+              type='button'
             >
               <VisibilityOn
-                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
                 aria-label='비밀번호 보기'
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
               />
             </button>
 
             <button
-              type='button'
-              onClick={togglePasswordVisibility}
               className={`block pr-16 transition-opacity duration-200 ${
                 !isPasswordVisible ? 'opacity-100' : 'opacity-0'
               }`}
+              onClick={togglePasswordVisibility}
+              type='button'
             >
               <VisibilityOff
-                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
                 aria-label='비밀번호 가리기'
+                className='w-5 h-5 absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2'
               />
             </button>
           </div>
@@ -135,8 +141,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ isAdmin }) => {
         </div>
       </div>
       <Button
+      type='submit'
         className='w-full max-w-[640px] mb-[40px]'
         isDisabled={!email.trim() || !password.trim()}
+        type='submit'
         variant='primary'
       >
         로그인하기

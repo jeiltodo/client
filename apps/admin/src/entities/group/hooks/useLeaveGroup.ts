@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
+import { groupApi } from '../api';
 
 export const useLeaveGroup = (memberId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (groupId: number) => groupApi.leaveGroup(groupId, memberId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('members'),
       });
     },

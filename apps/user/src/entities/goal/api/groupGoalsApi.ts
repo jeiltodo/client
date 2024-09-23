@@ -1,15 +1,14 @@
-import {
-  GroupGoalsResponse,
-  GroupGoalWithTodos,
-  SingleGoalResponse,
-} from '../model/type';
-import { client, ResponsePageListWith, ResponseWith } from '../../../shared';
-import { GoalProps, GroupProps } from '../../../features/group';
+import { client } from '@jeiltodo/ui/shared';
+import type { GoalWithProgress, GroupGoalWithTodos } from '../types';
+import type { ResponseWith } from '../../../shared';
+import type { GoalProps } from '../../../features/group';
 
 export const groupGoalsApi = {
-  getSingleGroupGoal: async (goalId: number) => {
+  getSingleGroupGoal: async (
+    goalId: number
+  ): Promise<ResponseWith<GoalWithProgress>> => {
     try {
-      const response = await client.get<SingleGoalResponse>(
+      const response = await client.get<ResponseWith<GoalWithProgress>>(
         `/group/goals/single/${goalId}`
       );
       return response.data;
@@ -20,7 +19,9 @@ export const groupGoalsApi = {
     }
   },
   // GET 요청: 그룹의 목표 목록 조회
-  getGroupGoals: async (groupId: null | number) => {
+  getGroupGoals: async (
+    groupId: null | number
+  ): Promise<ResponseWith<{ groupGoals: GoalProps[] }>> => {
     try {
       const response = await client.get<
         ResponseWith<{ groupGoals: GoalProps[] }>
@@ -38,7 +39,11 @@ export const groupGoalsApi = {
   ) => {
     try {
       const response = await client.get<
-        ResponsePageListWith<{ goals: GroupGoalWithTodos[] }>
+        ResponseWith<{
+          totalCount: number;
+          currPage: number;
+          goals: GroupGoalWithTodos[];
+        }>
       >(`/group/goals/todos/${groupId}`, {
         params,
       });

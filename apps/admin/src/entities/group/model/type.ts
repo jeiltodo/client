@@ -1,5 +1,5 @@
-import { Member } from '@jeiltodo/ui/entities';
-import { Goal } from '@jeiltodo/ui/shared';
+import type { Member } from '@jeiltodo/ui/entities/group';
+import type { Goal } from '@jeiltodo/ui/shared';
 
 // 그룹 리스트
 export interface GroupsResponse {
@@ -11,7 +11,7 @@ export interface GroupPageResponse {
   totalCount: number;
   searchCount: number;
   current_page: number;
-  groups: Groups[];
+  groups: GroupsWithMembers[];
 }
 
 export interface GroupMembers {
@@ -44,15 +44,15 @@ export interface Groups {
   createUser: string;
   createdAt: string;
   updatedAt: string;
-  members: GroupMembers[];
 }
+
+export type GroupsWithMembers = Groups & { members: GroupMembers[] };
 
 export interface GroupErrorResponse {
   msg: string;
   code: number;
 }
 
-//임시 그룹 목표
 export interface GroupGoalsResponse {
   msg: string;
   code: number;

@@ -1,9 +1,9 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useNoteDetail } from '../../../../../../entities/note';
-import { EditorPage } from '../../../../../../page/note';
 import { LoadingSpinner } from '@jeiltodo/ui/shared';
+import { useNoteDetail } from '../../../../../../entities/note/hooks';
+import { EditorPage } from '../../../../../../page/note';
 
 export default function NoteEditor() {
   const params = useParams();

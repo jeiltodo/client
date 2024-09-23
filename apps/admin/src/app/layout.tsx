@@ -1,5 +1,7 @@
 import './style/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '@jeiltodo/ui/styles.css';
+
 import type { Metadata } from 'next';
 import { ToastContainer } from 'react-toastify';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -18,13 +20,13 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <head>
-        <link rel='icon' href='/favicon.ico' />
+        <link href='/favicon.ico' rel='icon' />
       </head>
       <body className='bg-slate-100'>
         <QueryProvider>
           <ToastContainer limit={5} />
           {children}
-          <ReactQueryDevtools initialIsOpen={true} />
+          <ReactQueryDevtools initialIsOpen />
         </QueryProvider>
       </body>
     </html>

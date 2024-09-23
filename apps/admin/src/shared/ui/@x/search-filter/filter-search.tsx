@@ -5,17 +5,17 @@ interface FilterSearchProps {
   filtersState: Record<string, string>;
 }
 
-export const FilterSearch = ({ filtersState }: FilterSearchProps) => {
+export function FilterSearch({ filtersState }: FilterSearchProps) {
   const { setTableFilters } = useTableContext();
   return (
     <Button
-      variant='primary'
       className='w-[84px] h-[36px]'
       onClick={() => {
         setTableFilters((prev) => ({ ...prev, page: 1, ...filtersState }));
       }}
+      variant='primary'
     >
       검색
     </Button>
   );
-};
+}

@@ -1,5 +1,5 @@
 import { client } from "@jeiltodo/ui/shared";
-import { ResponseGetNodeDetail } from "../model/type";
+import type { ResponseGetNodeDetail } from "../model/type";
 
 export const noteApi = {
   getNoteDetail: async (

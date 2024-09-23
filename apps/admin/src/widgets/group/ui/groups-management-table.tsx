@@ -5,15 +5,15 @@ import { useRouter } from 'next/navigation';
 import { Table, useTableCheck } from '../../../shared';
 import { TableHeadList } from '../../../features/members';
 import { GROUP_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
-import type { Groups } from '../../../entities/group/model/type';
+import type { GroupsWithMembers } from '../../../entities/group/model/type';
 
 interface GroupsManagementTableProps {
-  groups: Groups[];
+  groups: GroupsWithMembers[];
 }
 
-export const GroupsManagementTable = ({
+export function GroupsManagementTable({
   groups: groupRows,
-}: GroupsManagementTableProps) => {
+}: GroupsManagementTableProps) {
   const router = useRouter();
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
     useTableCheck();
@@ -35,8 +35,11 @@ export const GroupsManagementTable = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {groupRows.map((group, id) => (
-          <Table.Row key={group.title + id} className='hover:bg-slate-50 '>
+        {groupRows.map((group) => (
+          <Table.Row
+            className='hover:bg-slate-50 '
+            key={group.title + group.id}
+          >
             <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(group.id)}
@@ -70,4 +73,4 @@ export const GroupsManagementTable = ({
       </Table.Body>
     </Table>
   );
-};
+}

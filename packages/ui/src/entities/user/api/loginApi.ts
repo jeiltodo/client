@@ -5,11 +5,11 @@ import { AuthBody, Token } from '../model/type';
 export const loginApi = async (
   credentials: AuthBody,
   isAdmin: boolean // 어드민 여부를 판단하는 파라미터 추가
-) => {
+): Promise<ResponseWith<Token | null>> => {
   try {
     // 어드민 여부에 따라 요청 URL을 다르게 설정
     const url = isAdmin ? '/admin/member/signin' : '/member/signin';
-  
+
     const response = await client.post<ResponseWith<Token | null>>(
       url,
       credentials
@@ -32,6 +32,8 @@ export const loginApi = async (
         return Promise.resolve(error.response.data); // 오류를 포함한 응답 반환
       }
     }
-    return Promise.reject(error); // 네트워크 오류 등 처리할 수 없는 오류는 reject
+    return Promise.reject(
+      new Error('Network error or unexpected error occurred')
+    ); // 네트워크 오류 등 처리할 수 없는 오류는 reject
   }
 };

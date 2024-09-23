@@ -1,19 +1,20 @@
 'use client';
 
 import { Button, ButtonGroup, Input } from '@jeiltodo/ui/shared';
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { TableFilter, TableQueryName } from '../../../model/table/type';
+import type { Dispatch, SetStateAction } from 'react';
+import React, { useState } from 'react';
+import type { TableFilter, TableQueryName } from '../../../model/table/type';
 
 interface FilterFormProps {
   filters: TableFilter[];
   filtersState: Record<string, string>;
-  updatefiltersState: Dispatch<SetStateAction<Record<string, string>>>;
+  updateFiltersState: Dispatch<SetStateAction<Record<string, string>>>;
 }
 
 export const FilterForm: React.FC<FilterFormProps> = ({
   filters,
   filtersState,
-  updatefiltersState,
+  updateFiltersState,
 }) => {
   const [activeBtn, setActiveBtn] = useState<string>('');
   const [createdAfter, setCreatedAfter] = useState<string>('');
@@ -58,7 +59,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({
 
     filters.forEach((field) => {
       if (field.label === '기간') {
-        updatefiltersState((prev) => ({
+        updateFiltersState((prev) => ({
           ...prev,
           createdAfter: start,
           createdBefore: end,
@@ -78,7 +79,7 @@ export const FilterForm: React.FC<FilterFormProps> = ({
       if (filter.label === '기간') {
         const newStart = isStart ? value : createdAfter;
         const newEnd = isStart ? createdBefore : value;
-        updatefiltersState((prev) => ({
+        updateFiltersState((prev) => ({
           ...prev,
           createdAfter: newStart,
           createdBefore: newEnd,
@@ -89,8 +90,11 @@ export const FilterForm: React.FC<FilterFormProps> = ({
 
   return (
     <div className='flex flex-col gap-3 '>
-      {filters.map((field, id) => (
-        <div key={id} className='font-pretendard-medium'>
+      {filters.map((field) => (
+        <div
+          className='font-pretendard-medium'
+          key={`${field.label}-${field.query}`}
+        >
           {field.label === '기간' ? (
             <div className='flex items-center justify-start'>
               <label className='flex items-center w-[80px] h-[48px] font-pretendard-medium font-normal text-[14px]'>
@@ -99,13 +103,13 @@ export const FilterForm: React.FC<FilterFormProps> = ({
               <ButtonGroup gap={2}>
                 {['오늘', '3일', '7일', '30일', '기간'].map((label) => (
                   <Button
-                    key={label}
-                    isSelected={activeBtn === label}
-                    variant='outline-date'
                     className='w-[84px] h-[36px]'
+                    isSelected={activeBtn === label}
+                    key={label}
                     onClick={() => {
                       handleButtonClick(label);
                     }}
+                    variant='outline-date'
                   >
                     {label}
                   </Button>
@@ -114,23 +118,23 @@ export const FilterForm: React.FC<FilterFormProps> = ({
               {activeBtn === '기간' && (
                 <div className='ml-2 flex items-center justify-start gap-2'>
                   <input
-                    type='date'
+                    className='px-2 block w-[138px] h-[36px] text-base text-slate-800  placeholder-slate-400 rounded-[8px] border border-slate-50 hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none'
                     name={`${field.query}Start`}
-                    value={createdAfter}
                     onChange={(e) => {
                       handleDateChange(e.target.value, true);
                     }}
-                    className='px-2 block w-[138px] h-[36px] text-base text-slate-800  placeholder-slate-400 rounded-[8px] border border-slate-50 hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none'
+                    type='date'
+                    value={createdAfter}
                   />
                   <div>~</div>
                   <input
-                    type='date'
+                    className='px-2 block w-[138px] h-[36px] text-base text-slate-800  placeholder-slate-400 rounded-[8px] border border-slate-50 hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none'
                     name={`${field.query}End`}
-                    value={createdBefore}
                     onChange={(e) => {
                       handleDateChange(e.target.value, false);
                     }}
-                    className='px-2 block w-[138px] h-[36px] text-base text-slate-800  placeholder-slate-400 rounded-[8px] border border-slate-50 hover:border-blue-300 focus:border-blue-500 bg-slate-50 focus:outline-none'
+                    type='date'
+                    value={createdBefore}
                   />
                 </div>
               )}
@@ -141,17 +145,17 @@ export const FilterForm: React.FC<FilterFormProps> = ({
                 {field.label}
               </label>
               <Input
-                type={field.type || 'text'}
+                className='block w-[810px] h-[48px] rounded-md'
                 name={field.query}
-                value={filtersState?.[field.query as TableQueryName]}
                 onChange={(e) => {
-                  updatefiltersState((prev) => ({
+                  updateFiltersState((prev) => ({
                     ...prev,
                     [field.query]: e.target.value,
                   }));
                 }}
                 placeholder={field.placeholder}
-                className='block w-[810px] h-[48px] rounded-md'
+                type={field.type || 'text'}
+                value={filtersState[field.query as TableQueryName]}
               />
             </div>
           )}

@@ -1,4 +1,4 @@
-import { Member } from '../../../entities/member';
+import type { Member } from '../../../entities/member';
 import type { TableHeadMap } from '../../../shared/ui/table/type';
 
 export const MEMBER_TABLE_HEAD_MAP: TableHeadMap<Member>[] = [

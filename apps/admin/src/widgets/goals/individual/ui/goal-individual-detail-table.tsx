@@ -1,19 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-
 import { Checkbox, formatDateString } from '@jeiltodo/ui/shared';
-
-import { Table } from '../../../../shared';
-import { useTableCheck } from '../../../../shared';
-
-import { IndividualGoalTodos } from '../../../../entities/goals/individual';
+import { AdminNote } from '@jeiltodo/icons';
+import { Table, useTableCheck } from '../../../../shared';
+import type { IndividualGoalTodos } from '../../../../entities/goals/individual/model';
 import { TODO_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
-import { AdminNote } from '@jeiltodo/icons';
-import { NoteDetailSlide } from '../../../../entities/goals/note';
+import { NoteDetailSlide } from '../../../../entities/goals/note/ui';
 
-interface Props {
+interface GoalTodosIndividualTableProps {
   goalTitle: string;
   todos: IndividualGoalTodos[];
 }
@@ -21,7 +17,7 @@ interface Props {
 export function GoalTodosIndividualTable({
   goalTitle,
   todos: todoIndividualRows,
-}: Props) {
+}: GoalTodosIndividualTableProps) {
   const [noteToggle, setNoteToggle] = useState<boolean>(false);
   const [noteModalId, setNoteModalId] = useState<number | null>(null);
   const { isAllChecked, getIsChecked, handleAllCheck, handleCheck } =
@@ -45,7 +41,7 @@ export function GoalTodosIndividualTable({
       </Table.Header>
       <Table.Body>
         {todoIndividualRows.map((todo) => (
-          <Table.Row key={todo.id} className='hover:bg-slate-50 '>
+          <Table.Row className='hover:bg-slate-50 ' key={todo.id}>
             <Table.Cell className='text-center '>
               <Checkbox
                 className='text-center'
@@ -66,19 +62,24 @@ export function GoalTodosIndividualTable({
               {formatDateString(todo.updatedAt)}
             </Table.Cell>
             <Table.Cell className='text-center'>
-              {todo.noteId && (
-                <button onClick={() => handleClickNote(todo.id)}>
+              {todo.noteId ? (
+                <button
+                  onClick={() => {
+                    handleClickNote(todo.id);
+                  }}
+                  type='button'
+                >
                   <AdminNote className='w-9 h-9' />
                 </button>
-              )}
+              ) : null}
             </Table.Cell>
-            {noteToggle && noteModalId === todo.id && (
+            {noteToggle && noteModalId === todo.id ? (
               <NoteDetailSlide
                 goalTitle={goalTitle}
                 noteId={todo.noteId}
                 setToggle={setNoteToggle}
               />
-            )}
+            ) : null}
           </Table.Row>
         ))}
       </Table.Body>

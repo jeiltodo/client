@@ -1,5 +1,4 @@
 import { toast, ToastOptions } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Check, CheckGroup, DeleteCircleError } from '@jeiltodo/icons';
 
 interface Toast {
@@ -32,7 +31,7 @@ export const useToast = () => {
     const alertConfig: ToastOptions = {
       //커스터마이징 옵션
       position: 'top-center',
-      autoClose: autoClose,
+      autoClose,
       hideProgressBar: true,
       closeOnClick: true,
       rtl: false, //알림 좌우 반전 안 함
@@ -45,7 +44,7 @@ export const useToast = () => {
     const confirmConfig: ToastOptions = {
       //커스터마이징 옵션
       position: 'top-center',
-      autoClose: autoClose,
+      autoClose,
       hideProgressBar: true,
       closeOnClick: true,
       rtl: false, //알림 좌우 반전 안 함

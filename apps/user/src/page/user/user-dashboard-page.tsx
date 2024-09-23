@@ -1,17 +1,20 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useGoalsWithTodos, progressAllOptions } from '../../entities/goal';
-import {
-  ProgressBoard,
-  RecentTodoCard,
-  UserGoalCard,
-} from '../../widgets/user';
 import { useInView } from 'react-intersection-observer';
 import { BoardTitle, LoadingSpinner } from '@jeiltodo/ui/shared';
 import Link from 'next/link';
 import { ArrowRightGray } from '@jeiltodo/icons';
 import { useQuery } from '@tanstack/react-query';
+import {
+  ProgressBoard,
+  RecentTodoCard,
+  UserGoalCard,
+} from '../../widgets/user';
+import {
+  useGoalsWithTodos,
+  progressAllOptions,
+} from '../../entities/goal/hooks';
 
 export const UserDashboardPage = () => {
   const { data: progress } = useQuery(progressAllOptions());
@@ -24,7 +27,7 @@ export const UserDashboardPage = () => {
     if (inView) {
       hasNextPage && fetchNextPage();
     }
-  }, [inView]);
+  }, [fetchNextPage, hasNextPage, inView]);
 
   return (
     <div className='flex flex-col items-start gap-4 w-full'>
@@ -60,7 +63,7 @@ export const UserDashboardPage = () => {
                 ))}
               </React.Fragment>
             ))}
-            <div ref={ref} className='h-6'></div>
+            <div ref={ref} className='h-6' />
           </div>
         )}
       </div>

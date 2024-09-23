@@ -1,9 +1,9 @@
 'use client';
 
 import { Checkbox } from '@jeiltodo/ui/shared';
-import { Todo } from '..';
+import type { Todo } from '../model';
 
-interface Props {
+interface TodoContentProps {
   todo: Todo;
   onCheck: (id: number) => void;
   disabled?: boolean;
@@ -15,8 +15,8 @@ export const TodoContent = ({
   onCheck,
   disabled,
   isGroup = false,
-}: Props) => {
-  const { id, title, isDone, noteId } = todo;
+}: TodoContentProps) => {
+  const { id, title, isDone } = todo;
 
   return (
     <span className='inline-flex gap-2 items-center '>

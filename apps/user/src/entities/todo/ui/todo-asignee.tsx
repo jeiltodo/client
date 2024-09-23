@@ -18,18 +18,19 @@ export const TodoAssignee = ({ todoId, asignee }: Props) => {
     return name.slice(0, 1);
   };
   return (
-    <span
+    <button
       className={`inline-flex justify-center items-center min-w-[18px] min-h-[18px] rounded-full cursor-pointer ${!asignee && ' border border-dashed border-slate-500'} `}
       onClick={handleAssign}
+      type='button'
     >
       {asignee && (
         <span
-          className={`inline-flex w-full h-full  min-w-6 min-h-6 rounded-full justify-center items-center text-xs text-white pt-0.5`}
+          className="inline-flex w-full h-full  min-w-6 min-h-6 rounded-full justify-center items-center text-xs text-white pt-0.5"
           style={{ backgroundColor: asignee.color }}
         >
           {getInitialLetter(asignee.nickname)}
         </span>
       )}
-    </span>
+    </button>
   );
 };

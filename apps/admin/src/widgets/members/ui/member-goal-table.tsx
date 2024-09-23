@@ -1,22 +1,18 @@
 'use client';
 
 import React from 'react';
-
 import { useRouter } from 'next/navigation';
-
+import { ProgressBar } from '@jeiltodo/ui/shared';
 import { Table } from '../../../shared/ui/table';
-
-import { MemberGoal } from '../../../entities/member';
 import { TableHeadList } from '../../../features/members/ui/table-head-list';
 import { MEMBER_GOAL_TABLE_HEAD_MAP } from '../../../features/members/model/member-goal-table-head-map';
-import { ProgressBar } from '@jeiltodo/ui/shared';
-import { IndividualGoal } from '../../../entities/goals/individual';
+import type { IndividualGoal } from '../../../entities/goals/individual/model';
 
-interface Props {
+interface MemberGoalTableProps {
   memberGoals: IndividualGoal[];
 }
 
-export function MemberGoalTable({ memberGoals }: Props) {
+export function MemberGoalTable({ memberGoals }: MemberGoalTableProps) {
   const router = useRouter();
   const handleClick = (goalId: number, goalTitle: string) => {
     const url = `/goals/individual/${goalId}?title=${goalTitle}`;
@@ -33,8 +29,8 @@ export function MemberGoalTable({ memberGoals }: Props) {
       <Table.Body>
         {memberGoals.map((goal) => (
           <Table.Row
-            key={goal.id}
             className='cursor-pointer hover:bg-slate-50'
+            key={goal.id}
             onClick={() => {
               handleClick(goal.id, goal.title);
             }}

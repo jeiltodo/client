@@ -26,44 +26,42 @@ export const Profile = ({
   onClickRemove,
 }: ProfileProps) => {
   return (
-    <div className={`flex flex-col items-center w-20 pt-6`}>
-      {isLeader === true && mode !== 'change-leader' && (
-        <span className='absolute top-[-4px] inline-block w-full  text-center font-semibold text-sm text-white'>
+    <div className="flex flex-col items-center w-20 pt-6">
+      {isLeader && mode !== 'change-leader' ? <span className='absolute top-[-4px] inline-block w-full  text-center font-semibold text-sm text-white'>
           그룹장
-        </span>
-      )}
+        </span> : null}
       <div className='relative'>
-        {isLeader === false && mode === 'change-leader' && (
+        {!isLeader && mode === 'change-leader' && (
           <Radio
+            className='absolute right-[-16px] top-[-8px] z-10'
             id={id}
             onChange={() => {
               onChangeRadio && onChangeRadio(id);
             }}
-            className='absolute right-[-16px] top-[-8px] z-10'
           />
         )}
-        {isLeader === false && mode === 'manage-members' && (
+        {!isLeader && mode === 'manage-members' && (
           <XWhiteCircle
-            width={20}
-            height={20}
             className='absolute right-[-8px] top-[-8px] z-10 cursor-pointer'
+            height={20}
             onClick={() => {
               onClickRemove && onClickRemove(id);
             }}
+            width={20}
           />
         )}
-        <div style={{ color }} className='relative'>
-          <AvatarDefault width={64} height={64} />
-          <MemberHat width={38} className='absolute top-[12px] left-[14px]' />
+        <div className='relative' style={{ color }}>
+          <AvatarDefault height={64} width={64} />
+          <MemberHat className='absolute top-[12px] left-[14px]' width={38} />
         </div>
         {contributionRank === RANK_LOWEST && (
-          <AvatarRags width={64} height={64} className='absolute inset-0' />
+          <AvatarRags className='absolute inset-0' height={64} width={64} />
         )}
         {contributionRank === RANK_HIGHST && (
           <AvatarSunglasses
-            width={64}
-            height={64}
             className='absolute inset-0'
+            height={64}
+            width={64}
           />
         )}
       </div>

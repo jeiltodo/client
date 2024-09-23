@@ -3,11 +3,19 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Back, DeleteCircle } from '@jeiltodo/icons';
-import { BaseModal, BoardTitle, TodoTitle, useToast } from '@jeiltodo/ui/shared';
+import {
+  BaseModal,
+  BoardTitle,
+  TodoTitle,
+  useToast,
+  Button,
+  ButtonGroup,
+  MINUTES_WITH_MS,
+} from '@jeiltodo/ui/shared';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
 import { EditorForm } from '../../features/note';
-import { ConfirmationModal, MINUTES_WITH_MS } from '../../shared';
-import { Note, useCreateNote, useUpdateNote } from '../../entities/note';
-import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
+import type { Note } from '../../entities/note/model';
+import { useCreateNote, useUpdateNote } from '../../entities/note/hooks';
 
 interface Props {
   note?: Note;
@@ -15,13 +23,13 @@ interface Props {
 
 export const EditorPage = ({ note }: Props) => {
   const searchParams = useSearchParams();
-  const goalTitle = searchParams!.get('title');
-  const todoTitle = searchParams!.get('todo');
+  const goalTitle = searchParams.get('title');
+  const todoTitle = searchParams.get('todo');
 
   const params = useParams();
-  const noteId = params?.noteId as string;
-  const goalId = Number(params!.goalId);
-  const todoId = Number(params!.todoId);
+  const noteId = params.noteId as string;
+  const goalId = Number(params.goalId);
+  const todoId = Number(params.todoId);
 
   const [title, setTitle] = useState<string>(note?.title ?? '');
   const [content, setContent] = useState<string>(note?.content ?? '');
@@ -65,7 +73,7 @@ export const EditorPage = ({ note }: Props) => {
 
   const getLocalSave = () => {
     const savedData = localStorage.getItem(`todo${todoId}`);
-    const parsedData = savedData
+    const parsedData: { title: string; content: string } = savedData
       ? JSON.parse(savedData)
       : { title: '', content: '' };
     setTitle(parsedData.title);
@@ -117,7 +125,7 @@ export const EditorPage = ({ note }: Props) => {
       className='flex flex-col max-w-[792px] min-w-[248px]'
       style={{ minHeight: 'calc(100vh - 48px)' }}
     >
-      <div className={`flex flex-row items-center justify-between mb-[16px]`}>
+      <div className='flex flex-row items-center justify-between mb-[16px]'>
         <div className='flex items-center justify-start gap-2'>
           <Back
             className='w-6 h-6 cursor-pointer'
@@ -207,7 +215,7 @@ export const EditorPage = ({ note }: Props) => {
       {isConfirmOpen && (
         <ConfirmationModal
           setModalToggle={setIsConfirmOpen}
-          submitButtonText={'확인'}
+          submitButtonText='확인'
           onSubmit={handleBackClick}
         >
           정말 나가시겠어요? <br />

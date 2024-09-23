@@ -1,4 +1,4 @@
-import { GroupGoals } from '../../../../entities/goals/group';
+import type { GroupGoals } from '../../../../entities/goals/group/model';
 import type { TableHeadMap } from '../../../../shared/ui/table/type';
 
 export const GOAL_GROUP_TABLE_HEAD_MAP: TableHeadMap<GroupGoals>[] = [
@@ -26,5 +26,5 @@ export const GOAL_GROUP_TABLE_HEAD_MAP: TableHeadMap<GroupGoals>[] = [
     criteria: 'updatedAt',
     title: '수정 일자',
     withSort: true,
-  }
+  },
 ];

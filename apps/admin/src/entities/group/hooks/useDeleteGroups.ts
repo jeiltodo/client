@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
 import { useToast } from '@jeiltodo/ui/shared';
-import { groupQueryKeys } from './querykey';
+import { groupApi } from '../api';
+import { groupQueryKeys } from './queryKeys';
 
 export const useDeleteGroups = () => {
   const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ export const useDeleteGroups = () => {
   return useMutation({
     mutationFn: (groupId: number[]) => groupApi.deleteGroups(groupId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: groupQueryKeys.all,
       });
       showToast({

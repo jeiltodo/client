@@ -1,11 +1,11 @@
 'use client';
 
-interface Props {
+interface ProgressBarProps {
   progress: number;
   className?: string;
 }
 
-export const ProgressBar = ({ progress, className }: Props) => {
+export const ProgressBar = ({ progress, className }: ProgressBarProps) => {
   return (
     <div className='flex items-center justify-start gap-2'>
       <div

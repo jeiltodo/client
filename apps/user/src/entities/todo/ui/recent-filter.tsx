@@ -1,14 +1,12 @@
 'use client';
-import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
+import { Button, ButtonGroup, getUniqueNumbers } from '@jeiltodo/ui/shared';
 import { useState } from 'react';
-import { Goal } from '../../goal';
-import { getUniqueNumbers } from '../../../shared';
 import { statusMap } from '../../user/model/status-filter-map';
-import { todoQuery } from '../hooks/todoQuery';
-
+import type { todoQuery } from '../hooks/todoQuery';
+import type { Goal } from '@jeiltodo/ui/shared';
 interface Props {
   goals: Pick<Goal, 'id' | 'title'>[];
-  onClickFilter: (query: todoQuery) => void;
+  onClickFilter: (_: todoQuery) => void;
 }
 
 export const RecentFilter = ({ goals, onClickFilter }: Props) => {
@@ -18,31 +16,30 @@ export const RecentFilter = ({ goals, onClickFilter }: Props) => {
     boolean | null | undefined
   >(null);
 
-  const updateFilter = (
-    goalIds: number[],
-    status: boolean | null | undefined
-  ) => {
-    setSelectedGoals(goalIds);
+  const updateFilter = (ids: number[], status: boolean | null | undefined) => {
+    setSelectedGoals(ids);
     setSelectedStatus(status);
-    onClickFilter({ goalIds, status });
+    onClickFilter({ goalIds: ids, status });
   };
 
   const handleGoalClick = (id: number) => {
     const updated = getUniqueNumbers(selectedGoals, id);
-    updateFilter(
-      updated.length === 0 ? [] : updated,
-      updated.length === 0
-        ? undefined
-        : selectedGoals.length === 0
-          ? null
-          : selectedStatus
-    );
+    let status;
+    if (updated.length === 0) {
+      status = undefined;
+    } else if (selectedGoals.length === 0) {
+      status = null;
+    } else {
+      status = selectedStatus;
+    }
+
+    updateFilter(updated.length === 0 ? [] : updated, status);
   };
 
   const handleSelectAllGoals = () => updateFilter(goalIds, null);
   const handleDeselectAllGoals = () => updateFilter([], undefined);
   const handleStatusClick = (label: string) =>
-    updateFilter(selectedGoals, statusMap[label]);
+    updateFilter(selectedGoals, statusMap[label] as boolean | null | undefined);
 
   return (
     <>

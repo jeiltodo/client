@@ -1,4 +1,4 @@
-import { Todo } from '../../todo';
+import type { Todo } from '../../todo';
 
 export interface Note {
 	id: number;

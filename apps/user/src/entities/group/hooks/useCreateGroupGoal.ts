@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupGoalsApi } from '../../goal/api/groupGoalsApi';
 import { useToast } from '@jeiltodo/ui/shared';
+import { groupGoalsApi } from '../../goal/api/groupGoalsApi';
 
 export const useCreateGroupGoal = (groupId: number) => {
   const queryClient = useQueryClient();

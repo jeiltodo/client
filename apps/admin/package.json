@@ -16,13 +16,15 @@
     "next": "^14.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@jeiltodo/eslint-config": "*",
     "@jeiltodo/tailwind-config": "*",
     "@jeiltodo/typescript-config": "*",
     "@next/eslint-plugin-next": "^14.2.3",
+    "@tanstack/react-query-devtools": "^5.51.23",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",

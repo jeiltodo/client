@@ -1,23 +1,19 @@
 'use client';
 
 import React from 'react';
-
 import { useRouter } from 'next/navigation';
-
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
-
 import { Table } from '../../../shared/ui/table';
 import { useTableCheck } from '../../../shared';
-
-import { Member } from '../../../entities/member';
+import type { Member } from '../../../entities/member';
 import { TableHeadList } from '../../../features/members/ui/table-head-list';
 import { MEMBER_TABLE_HEAD_MAP } from '../../../features/members/model/member-table-head-map';
 
-interface Props {
+interface MembersTableProps {
   members: Member[];
 }
 
-export function MembersTable({ members }: Props) {
+export function MembersTable({ members }: MembersTableProps) {
   const router = useRouter();
   const handleClick = (path: string) => {
     router.push(path);
@@ -39,8 +35,8 @@ export function MembersTable({ members }: Props) {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {members.map((member, id) => (
-          <Table.Row key={id} className='hover:bg-slate-50'>
+        {members.map((member) => (
+          <Table.Row className='hover:bg-slate-50' key={member.id}>
             <Table.Cell className='text-center'>
               <Checkbox
                 isChecked={getIsChecked(member.id)}

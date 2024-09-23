@@ -1,7 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { noteQueryKeys } from '../queryKeys';
-import { getGoalNotes, GetGoalNotesParam } from '../api/noteApi';
-import { calculateTotalPages } from '../../../shared';
+import { calculateTotalPages } from '@jeiltodo/ui/shared';
+import type { GetGoalNotesParam } from '../api';
+import { getGoalNotes } from '../api';
+import { noteQueryKeys } from './queryKeys';
 
 interface PageInfo {
   totalCount: number;

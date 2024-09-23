@@ -10,30 +10,31 @@ import {
   MembersBoardProvider,
 } from '@jeiltodo/ui/shared';
 import { useQuery } from '@tanstack/react-query';
-import { GroupOverviewBoard, GroupTitleOrCode } from '@jeiltodo/ui/entities';
-import { MembersBoard } from '../../../../../../packages/ui/src/widgets/group/ui/members-board';
+import { useParams } from 'next/navigation';
+import { MembersBoard } from '@jeiltodo/ui/widgets';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
+import type { GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
+import { GroupOverviewBoard } from '@jeiltodo/ui/entities/group';
 import {
   useGroupDetail,
   useGroupGoalsWithTodos,
-} from '../../../entities/group';
-import { useParams } from 'next/navigation';
+} from '../../../entities/group/hooks';
 import { userOptions } from '../../../entities/user';
 import {
   useGroupCode,
   useGroupTitleAndCode,
 } from '../../../entities/group/hooks/useGroupTitleAndCode';
-import { GroupGoalCard } from '../../../widgets/group/ui/grouop-goal-card';
-import { GoalModal } from '../../../features/goal';
+import { GroupGoalCard } from '../../../widgets/group/ui/group-goal-card';
+import { GoalModal } from '../../../features/goal/ui';
 import { useChangeLeader } from '../../../entities/group/hooks/useChangeLeader';
 import { useRemoveMember } from '../../../entities/group/hooks/useRemoveMember';
 import { useCreateGroupGoal } from '../../../entities/group/hooks/useCreateGroupGoal';
 import { useDisbandGroup } from '../../../entities/group/hooks/useDisbandGroup';
 import { useLeaveGroup } from '../../../entities/group/hooks/useLeaveGroup';
-import { ConfirmationModal } from '../../../shared';
 
 export const GroupDashboardPage = () => {
   const params = useParams();
-  const groupId = Number(params?.id);
+  const groupId = Number(params.id);
   const [goalModalOpen, setGoalModalOpen] = useState(false);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const {
@@ -47,7 +48,7 @@ export const GroupDashboardPage = () => {
   const { ref, inView } = useInView();
 
   const { data: user } = useQuery(userOptions());
-  const { data: group, isLoading } = useGroupDetail(groupId);
+  const { data: group } = useGroupDetail(groupId);
   const { data: newCode } = useGroupCode(groupId);
   const { mutate: updateTitleOrCode } = useGroupTitleAndCode(groupId);
   const { mutate: changeLeader } = useChangeLeader(groupId);
@@ -81,7 +82,7 @@ export const GroupDashboardPage = () => {
     if (inView) {
       hasNextPage && fetchNextPage();
     }
-  }, [inView]);
+  }, [fetchNextPage, hasNextPage, inView]);
 
   if (!group) {
     return <LoadingSpinner />;
@@ -100,6 +101,7 @@ export const GroupDashboardPage = () => {
           <button
             onClick={handleModalOpen}
             className='rounded-xl bg-orange-950 py-2 px-4 text-white font-semibold'
+            type='button'
           >
             해체하기
           </button>
@@ -107,6 +109,7 @@ export const GroupDashboardPage = () => {
           <button
             onClick={handleModalOpen}
             className='rounded-xl bg-orange-950 py-2 px-4 text-white font-semibold'
+            type='button'
           >
             탈퇴하기
           </button>
@@ -122,7 +125,7 @@ export const GroupDashboardPage = () => {
 
         <MembersBoardProvider>
           <MembersBoard
-            group={group}
+            members={group.members}
             userId={user?.id}
             onChangeLeader={handleChangeLeader}
             onRemoveMember={handleRemoveMember}
@@ -159,7 +162,7 @@ export const GroupDashboardPage = () => {
           </React.Fragment>
         ))}
       </div>
-      <div ref={ref} className='h-4'></div>
+      <div ref={ref} className='h-4' />
       {goalModalOpen && (
         <GoalModal
           setGoalModalToggle={setGoalModalOpen}

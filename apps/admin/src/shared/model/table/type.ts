@@ -3,9 +3,11 @@ export type TableQueryName =
   | 'title'
   | 'createdAfter'
   | 'createdBefore'
-  | 'email'
-  | 'nickname';
-type PaginationQuery = { page: number; limit: string | number };
+  | 'email';
+interface PaginationQuery {
+  page: number;
+  limit: string | number;
+}
 
 export type TableQueries = Partial<Record<TableQueryName, string>> &
   PaginationQuery;

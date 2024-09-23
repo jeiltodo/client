@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@jeiltodo/ui/shared';
+import { groupApi } from '../api/groupApi';
 
 export const useLeaveGroup = (groupId: number) => {
   const queryClient = useQueryClient();

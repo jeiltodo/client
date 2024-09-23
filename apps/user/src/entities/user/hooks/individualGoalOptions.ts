@@ -3,11 +3,10 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-
-import { AxiosError } from 'axios';
-import { goalQueryKeys } from '../../goal/hooks/queryKey';
-import { individualGoalsApi } from '../../goal';
+import type { AxiosError } from 'axios';
 import { useToast } from '@jeiltodo/ui/shared';
+import { goalQueryKeys } from '../../goal/hooks/queryKey';
+import { individualGoalsApi } from '../../goal/api';
 
 export const individualGoalsOptions = () =>
   queryOptions({
@@ -29,7 +28,10 @@ export const useIndividualGoalMutation = () => {
     },
     onError: (error: AxiosError) => {
       if (error.response?.status === 400) {
-        showToast({ message: '목표는 30글자 이하로 작성해 주세요.', type: 'confirm' });
+        showToast({
+          message: '목표는 30글자 이하로 작성해 주세요.',
+          type: 'confirm',
+        });
       }
     },
   });

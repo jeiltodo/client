@@ -1,13 +1,17 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import { RecentFilter } from '../../entities/user';
-import { TodoModal, todoQuery, useRecentTodo } from '../../entities/todo';
 import { useInView } from 'react-intersection-observer';
-import { Goal, individualGoalsOptions, userOptions } from '../../entities/goal';
 import { useQuery } from '@tanstack/react-query';
-import { TodoList } from '../../features/todo';
 import { BackButton, Button, LoadingSpinner } from '@jeiltodo/ui/shared';
-import { Back, PlusBlue } from '@jeiltodo/icons';
+import { PlusBlue } from '@jeiltodo/icons';
+import type { Goal } from '@jeiltodo/ui/shared';
+import { RecentFilter } from '../../entities/user';
+import { userOptions } from '../../entities/goal/hooks';
+import { TodoList } from '../../features/todo';
+import { individualGoalsOptions } from '../../entities/user/hooks/individualGoalOptions';
+import { TodoModal } from '../../entities/todo/ui';
+import type { todoQuery} from '../../entities/todo/hooks';
+import { useRecentTodo } from '../../entities/todo/hooks';
 
 export const TodoPage = () => {
   const { data: individualGoalsData } = useQuery(individualGoalsOptions());
@@ -19,25 +23,22 @@ export const TodoPage = () => {
       title,
     })) || [];
 
-  const [query, setQuery] = useState<todoQuery>({
+  const [todoQuery, setTodoQuery] = useState<todoQuery>({
     goalIds: individualGoalsData?.map((goal) => goal.id) || [],
     status: null,
   });
   const [modalOpen, setModalOpen] = useState(false);
 
-  const goalIdsString = query.goalIds.join(',');
+  const goalIdsString = todoQuery.goalIds.join(',');
   const { data, hasNextPage, fetchNextPage, isLoading } = useRecentTodo({
     limit: 15,
     goalIds: goalIdsString,
-    isDone: query.status,
+    isDone: todoQuery.status,
   });
 
-  const handleClick = useCallback(
-    (query: todoQuery) => {
-      setQuery(query);
-    },
-    [query]
-  );
+  const handleClick = useCallback((query: todoQuery) => {
+    setTodoQuery(query);
+  }, []);
   const allTodos = data?.pages.flatMap((page) => page.data.todos) ?? [];
 
   const handleAddModal = () => {
@@ -49,7 +50,7 @@ export const TodoPage = () => {
     if (inView) {
       hasNextPage && fetchNextPage();
     }
-  }, [inView]);
+  }, [fetchNextPage, hasNextPage, inView]);
 
   return (
     <div className='max-w-[1200px]'>
@@ -65,7 +66,7 @@ export const TodoPage = () => {
           <div className='flex'>
             <BackButton />
             <div className='text-lg font-semibold text-slate-900 pl-2 min-w-[166px]'>
-              최근 등록한 할 일 ({allTodos?.length})
+              최근 등록한 할 일 ({allTodos.length})
             </div>
           </div>
           <Button

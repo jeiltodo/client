@@ -7,10 +7,10 @@ interface DeleteButtonProps {
 export function DeleteButton({ onDelete }: DeleteButtonProps) {
   return (
     <Trash
+      className='cursor-pointer'
+      height={24}
       onClick={onDelete}
       width={24}
-      height={24}
-      className='cursor-pointer'
     />
   );
 }

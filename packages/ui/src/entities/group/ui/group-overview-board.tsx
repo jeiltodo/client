@@ -4,21 +4,21 @@ import { BoardLayout } from '../../../shared/ui/@x/board-layout';
 import { InputSwapMode } from '../../../shared/ui/input-swap-mode';
 import { Field } from '../../../shared/ui/field';
 import { useState } from 'react';
-import { GroupTitleOrCode, GroupWithMembers } from '../model/type';
+import { GroupOverview, GroupTitleOrCode } from '../model/type';
 import { formatDateString } from '../../../shared';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { CopyUser } from '@jeiltodo/icons';
 
 interface GroupOverviewBoardProps {
   isAdmin?: boolean;
-  group: GroupWithMembers;
+  group: GroupOverview;
   userId?: number;
   spareCode: string;
   onSave: (info: GroupTitleOrCode) => void;
 }
 
 export const GroupOverviewBoard = ({
-  group: { id, title, secretCode, members, createUser, createdAt },
+  group: { title, secretCode, members, createUser, createdAt },
   userId,
   spareCode,
   onSave,
@@ -28,24 +28,25 @@ export const GroupOverviewBoard = ({
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   const [updatedCode, setUpdatedCode] = useState<string>(spareCode);
-  const [updatedTitle, setUpdatedValue] = useState(title);
+  const [updatedTitle, setUpdatedTitle] = useState(title);
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   const isUserALeader = () => {
     if (!userId && isAdmin) {
       return true;
-    } else {
-      return members.find((member) => member.isLeader)?.id === userId;
     }
+    return members.find((member) => member.isLeader)?.id === userId;
   };
 
   const handleReissue = () => {
-    if (isRequested === true) {
+    if (isRequested) {
       setUpdatedCode(secretCode);
     } else {
       setUpdatedCode(spareCode);
@@ -61,11 +62,27 @@ export const GroupOverviewBoard = ({
     setIsEditMode(false);
   };
 
+  const getRequestedButtonClass = () => {
+    if (!isRequested) {
+      return isAdmin
+        ? 'border-blue-500 text-blue-500'
+        : 'border-groupColor-500 text-groupColor-500';
+    }
+    return 'bg-slate-900 text-white ';
+  };
+
+  const GetSaveButtonClass = () => {
+    if (isRequested && isEditMode) {
+      return isAdmin ? 'bg-blue-500' : 'bg-orange-500';
+    }
+    return 'bg-slate-200';
+  };
+
   return (
     <BoardLayout
-      title='그룹 정보'
       className={isAdmin ? 'w-[450px]' : 'tablet:min-w-[300px]'}
       isAdmin={isAdmin}
+      title='그룹 정보'
     >
       <div
         className={`pt-4 flex gap-9 ${isUserALeader() && 'border-b border-slate-200 pb-4'}`}
@@ -73,14 +90,14 @@ export const GroupOverviewBoard = ({
         <div className='w-full flex flex-wrap gap-2'>
           {isUserALeader() || isAdmin ? (
             <InputSwapMode
-              label='그룹 이름'
-              value={updatedTitle}
               defaultValue={title}
+              isAdmin={isAdmin}
               isEditMode={isEditMode}
               isGroup={true}
-              isAdmin={isAdmin}
-              onChange={setUpdatedValue}
+              label='그룹 이름'
+              onChange={setUpdatedTitle}
               onSwap={setIsEditMode}
+              value={updatedTitle}
             />
           ) : (
             <Field label='그룹 이름'>{title}</Field>
@@ -89,48 +106,53 @@ export const GroupOverviewBoard = ({
             <Field label='초대코드'>
               <div className='flex items-end gap-2'>
                 <div>{isRequested ? updatedCode : secretCode}</div>
-                <CopyToClipboard text={secretCode} onCopy={handleCopy}>
-                  <button className='cursor-pointer inline-block min-h-[28px]'>
+                <CopyToClipboard onCopy={handleCopy} text={secretCode}>
+                  <button
+                    className='cursor-pointer inline-block min-h-[28px]'
+                    type='button'
+                  >
                     <CopyUser className='w-6 h-6' />
                   </button>
                 </CopyToClipboard>
-                {copied && (
+                {copied ? (
                   <span
                     className={`text-sm ${isAdmin ? 'text-blue-500' : 'text-orange-500'} ml-2`}
                   >
                     Copied!
                   </span>
-                )}
+                ) : null}
               </div>
             </Field>
-            {(isUserALeader() || isAdmin) && (
+            {isUserALeader() || isAdmin ? (
               <button
+                className={`inline-block min-w-[84px] h-9 border rounded-xl ${getRequestedButtonClass()}`}
                 onClick={handleReissue}
-                className={`inline-block min-w-[84px] h-9 border rounded-xl ${isRequested === false ? (isAdmin ? 'border-blue-500 text-blue-500' : 'border-groupColor-500 text-groupColor-500') : 'bg-slate-900 text-white '}`}
+                type='button'
               >
-                {isRequested === false ? '재발행' : '취소'}
+                {!isRequested ? '재발행' : '취소'}
               </button>
-            )}
+            ) : null}
           </div>
-          {!isAdmin && createdAt && (
+          {!isAdmin && createdAt ? (
             <div className='flex w-50%'>
               <Field label='만든 사람'>{createUser}</Field>
               <Field label='만든 날'>{formatDateString(createdAt)}</Field>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
-      {(isUserALeader() || isAdmin) && (
+      {isUserALeader() || isAdmin ? (
         <div className='w-full mt-4 flex justify-end'>
           <button
-            disabled={isRequested !== true && isEditMode !== true}
+            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${GetSaveButtonClass()}`}
+            disabled={!isRequested && !isEditMode}
             onClick={handleSave}
-            className={`cursor-pointer inline-block w-[84px] h-9 border text-white rounded-xl ${isRequested === true || isEditMode === true ? (isAdmin ? 'bg-blue-500' : 'bg-orange-500') : 'bg-slate-200'}`}
+            type='button'
           >
             저장
           </button>
         </div>
-      )}
+      ) : null}
     </BoardLayout>
   );
 };

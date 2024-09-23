@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
-import { groupQueryKeys } from './querykey';
-import { GroupTitleOrCode } from '@jeiltodo/ui/entities';
+import type { GroupTitleOrCode } from '@jeiltodo/ui/entities/group';
+import { groupApi } from '../api';
+import { groupQueryKeys } from './queryKeys';
 
 export const useGroupCode = (groupId: number) => {
   return useQuery({
@@ -17,7 +17,7 @@ export const useGroupTitleAndCode = (groupId: number) => {
     mutationFn: (groupBody: GroupTitleOrCode) =>
       groupApi.updateGroupTitleOrCode(groupId, groupBody),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('detail'),
       });
     },

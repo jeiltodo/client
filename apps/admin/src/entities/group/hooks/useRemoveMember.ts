@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupQueryKeys } from './querykey';
-import { groupApi } from '../api/groupApi';
+import { groupApi } from '../api';
+import { groupQueryKeys } from './queryKeys';
 
 export const useRemoveMember = (groupId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (memberId: number) => groupApi.removeMember(groupId, memberId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: groupQueryKeys.detail(groupId),
       });
     },

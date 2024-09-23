@@ -1,40 +1,40 @@
 'use client';
-import { BgGroupAvatar, GroupFill, Group as GroupIcon } from '@jeiltodo/icons';
+import { BgGroupAvatar, GroupFill } from '@jeiltodo/icons';
 import { MembersManageButtons } from '../../../features/group/ui/members-manage-buttons';
 import { useBoardContext } from '@jeiltodo/ui/shared';
-import { MemberList } from '../../../features';
-import { GroupWithMembers } from '../../../entities';
+import { MemberList } from '../../../features/group/ui';
+import { GroupWithMembers, Member } from '../../../entities/group/model/type';
 import { getFormattedRanks } from '../../../entities/group/lib/getFormattedRanks';
 import { useState } from 'react';
 
-interface Props {
-  group: GroupWithMembers;
+interface MembersBoardProps {
+  members: Member[];
   userId?: number;
   onChangeLeader: (id: number) => void;
   onRemoveMember: (id: number) => void;
   isAdmin?: boolean;
 }
-// eslint-disable-next-line react/function-component-definition
-export const MembersBoard = ({
-  group,
+
+const MembersBoard = ({
+  members,
   userId,
   onChangeLeader,
   onRemoveMember,
   isAdmin = false,
-}: Props) => {
+}: MembersBoardProps) => {
   const { mode } = useBoardContext();
 
-  const leaderId = group.members.find((member) => member.isLeader)!.id;
+  const leaderId = members.find((member) => member.isLeader)!.id;
   const isUserALeader = userId ? leaderId === userId : isAdmin;
   const [newLeaderId, setNewLeaderId] = useState<number>(leaderId);
   const [deletedId, setDeletedId] = useState<number | null>(null);
 
-  const sortedMembers = group.members
+  const sortedMembers = members
     .map((member) => ({ id: member.id, rank: member.contributionRank }))
     .sort((a, b) => a.rank - b.rank);
   const lowestRankNum = sortedMembers.pop()!.rank;
 
-  const formattedMembers = group.members
+  const formattedMembers = members
     .map((member) => ({
       ...member,
       contributionRank: getFormattedRanks(
@@ -45,8 +45,8 @@ export const MembersBoard = ({
     }))
     .filter((member) => member.id !== deletedId);
 
-  const handleClientChange = (newLeaderId: number) => {
-    setNewLeaderId(newLeaderId);
+  const handleClientChange = (selectedLeaderId: number) => {
+    setNewLeaderId(selectedLeaderId);
   };
 
   const handleClientRemove = (memberId: number) => {
@@ -68,13 +68,13 @@ export const MembersBoard = ({
           <div className='flex gap-4 items-center'>
             {/* desktop:hidden !xl:flex */}
             <div className='hidden tablet:flex gap-2 items-center'>
-              <GroupFill width={40} height={40} />
+              <GroupFill height={40} width={40} />
               <span className='font-semibold text-lg text-nowrap text-white'>
                 구성원
               </span>
             </div>
             <div className='bg-white opacity-50 rounded-md w-fit h-fit px-1 py-0 flex justify-center items-center bottom-1'>
-              <span className='text-slate-800'>{group.members.length}</span>
+              <span className='text-slate-800'>{members.length}</span>
               <span
                 className={isAdmin ? 'text-blue-500' : 'text-groupColor-500'}
               >
@@ -83,9 +83,9 @@ export const MembersBoard = ({
             </div>
           </div>
 
-          {(isUserALeader || isAdmin) && (
-            <MembersManageButtons onSave={handleSave} isAdmin={isAdmin} />
-          )}
+          {isUserALeader || isAdmin ? (
+            <MembersManageButtons isAdmin={isAdmin} onSave={handleSave} />
+          ) : null}
         </div>
         <div className='flex h-4/5 items-center -mt-6 overflow-hidden tablet:pb-6 desktop:pb-0'>
           <div className='px-4 w-full'>
@@ -97,11 +97,13 @@ export const MembersBoard = ({
           </div>
         </div>
         <BgGroupAvatar
-          width={164}
-          height={164}
           className='block w-[120px] h-[120px] right-[-12px] bottom-[-16px] desktop:w-[184px] desktop:h-[184px] absolute z-1 desktop:right-[-32px] desktop:bottom-[-24px]'
+          height={164}
+          width={164}
         />
       </div>
     </div>
   );
 };
+
+export { MembersBoard };

@@ -1,19 +1,19 @@
 'use client';
 
 import { ProgressBar } from '@jeiltodo/ui/shared';
+import { useRouter } from 'next/navigation';
 import { Table } from '../../../shared';
 import { TableHeadList } from '../../../features/members';
 import { GROUP_DETAIL_TABLE_HEAD_MAP } from '../../../entities/group/constants/group-management-filters';
-import type { GroupGoals } from '../../../entities/goals/group';
-import { useRouter } from 'next/navigation';
+import type { GroupGoals } from '../../../entities/goals/group/model';
 
 interface GroupsManagementDetailTableProps {
   goals: GroupGoals[];
 }
 
-export const GroupManagementDetailTable = ({
+export function GroupManagementDetailTable({
   goals,
-}: GroupsManagementDetailTableProps) => {
+}: GroupsManagementDetailTableProps) {
   const router = useRouter();
   const handleClick = (goalId: number, goalTitle: string) => {
     const url = `/goals/group/${goalId}?title=${goalTitle}`;
@@ -27,10 +27,10 @@ export const GroupManagementDetailTable = ({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {goals.map((goal, id) => (
+        {goals.map((goal) => (
           <Table.Row
-            key={goal.title + id}
             className='hover:bg-slate-50'
+            key={`${goal.title}+ ${goal.id}`}
             onClick={() => {
               handleClick(goal.id, goal.title);
             }}
@@ -45,4 +45,4 @@ export const GroupManagementDetailTable = ({
       </Table.Body>
     </Table>
   );
-};
+}

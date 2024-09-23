@@ -1,24 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import {
+import { useParams, useRouter } from 'next/navigation';
+import { useToast } from '@jeiltodo/ui/shared';
+import { useQuery } from '@tanstack/react-query';
+import { ConfirmationModal } from '@jeiltodo/ui/shared/ui/@x';
+import type {
   FormattedGoalWithTodos,
   MemgberInCharge,
-  TodoAssignee,
-  TodoButtons,
-  TodoModal,
 } from '../../../entities/todo';
+import { TodoAssignee, TodoButtons } from '../../../entities/todo';
 import { TodoContent } from '../../../entities/todo/ui/todo-item';
-import { ConfirmationModal } from '../../../shared';
 import { useCheckTodo } from '../../../entities/todo/hooks/useCheckTodo';
 import { useDeleteTodo } from '../../../entities/todo/hooks/useDeleteTodo';
 import { useGroupGoals } from '../../../entities/group/hooks/useGroupGoals';
-import { useParams, useRouter } from 'next/navigation';
-import { useGroupDetail } from '../../../entities/group';
+import { useGroupDetail } from '../../../entities/group/hooks';
 import { NoteDetailSlide } from '../../../widgets/note';
-import { useToast } from '@jeiltodo/ui/shared';
-import { useQuery } from '@tanstack/react-query';
-import { userOptions } from '../../../entities/goal';
+import { userOptions } from '../../../entities/user';
+import { TodoModal } from '../../../entities/todo/ui';
 
 interface Props {
   goalWithTodos: FormattedGoalWithTodos;
@@ -26,7 +25,7 @@ interface Props {
 
 export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   const params = useParams();
-  const groupId = Number(params!.id);
+  const groupId = Number(params.id);
   const router = useRouter();
 
   const [editModalId, setEditModalId] = useState<number | null>(null);
@@ -43,7 +42,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   const { data: group } = useGroupDetail(groupId);
   const { data: groupGoals } = useGroupGoals(groupId);
   const goalsForTodoModal =
-    groupGoals?.map((goal) => ({ id: goal.id, title: goal.title })) ?? [];
+    groupGoals?.map((item) => ({ id: item.id, title: item.title })) ?? [];
 
   const { mutate: checkTodo } = useCheckTodo();
   const { mutate: deleteTodo } = useDeleteTodo();
@@ -103,13 +102,16 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
   return (
     <ul className='w-full flex flex-wrap gap-1'>
       {todos.map(({ id, title, isDone, memberInCharge, noteId }) => (
-        <li key={id} className='list-none w-full flex items-center justify-between group hover:bg-white active:bg-white p-[2px] rounded-lg'>
+        <li
+          key={id}
+          className='list-none w-full flex items-center justify-between group hover:bg-white active:bg-white p-[2px] rounded-lg'
+        >
           <span className='inline-flex gap-4 items-center '>
             <TodoContent
               key={id}
               todo={{ id, title, isDone }}
               disabled={memberInCharge === null}
-              isGroup={true}
+              isGroup
               onCheck={handleCheck}
             />
             <TodoAssignee asignee={memberInCharge} todoId={id} />
@@ -118,7 +120,7 @@ export const GroupTodoList = ({ goalWithTodos: { goal, todos } }: Props) => {
             onClickEdit={() => handleClickEdit(id)}
             onClickRemove={() => handleClickRemove(id)}
             onClickNote={() => handleClickNote(id, memberInCharge, noteId)}
-            isGroup={true}
+            isGroup
           />
           {editModalId === id && (
             <TodoModal

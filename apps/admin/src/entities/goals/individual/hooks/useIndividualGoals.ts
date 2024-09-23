@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { individualGoalsApi } from '../api/goalsApi';
-import { individualGoalsQueryKeys } from '../hooks/queryKeys';
-import { AxiosError } from 'axios';
 import { useToast } from '@jeiltodo/ui/shared';
+import { individualGoalsApi } from '../api';
+import { individualGoalsQueryKeys } from './queryKeys';
 
 export const useGetAllIndividualGoals = (params: {
   page: number;
@@ -28,7 +27,9 @@ export const useDeleteIndividualGoal = () => {
     mutationFn: (goalIds: number[]) =>
       individualGoalsApi.deleteIndividualGoal({ goalIds }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: individualGoalsQueryKeys.all });
+      void queryClient.invalidateQueries({
+        queryKey: individualGoalsQueryKeys.all,
+      });
       showToast({
         message: '목표 삭제 성공!',
         type: 'alert',
@@ -60,7 +61,7 @@ export const useDeleteIndividualGoalTodos = () => {
     mutationFn: (todoIds: number[]) =>
       individualGoalsApi.deleteIndividualGoalTodos({ todoIds }),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         predicate: (query) => query.queryKey.includes('todo'),
       });
       showToast({ message: '할 일 삭제 성공!', type: 'alert', isGroup: false });

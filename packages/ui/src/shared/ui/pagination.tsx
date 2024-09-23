@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from '@jeiltodo/icons';
 import { calculateTotalPages } from '../lib/calculateTotalPages';
 
-interface Props {
+interface PaginationProps {
   totalCount: number;
   limit: number;
   currentPage: number;
@@ -23,19 +23,15 @@ export function Pagination({
   variant = 'primary',
   className,
   isGroup = false,
-}: Props) {
+}: PaginationProps) {
   const pageCount = calculateTotalPages(totalCount, limit);
 
-  const getClassNames = (variant: string, isGroup: boolean): string => {
-    if (variant === 'primary') {
-      return isGroup
-        ? 'bg-groupColor-500 text-white'
-        : 'bg-blue-500 text-white';
-    } else {
-      return isGroup
-        ? 'bg-white text-groupColor-500'
-        : 'bg-white text-blue-500';
-    }
+  const getClassNames = (vari: string, isGr: boolean): string => {
+    if (vari === 'primary') {
+      return isGr ? 'bg-groupColor-500 text-white' : 'bg-blue-500 text-white';
+    } 
+      return isGr ? 'bg-white text-groupColor-500' : 'bg-white text-blue-500';
+    
   };
 
   return (
@@ -43,27 +39,28 @@ export function Pagination({
       className={`flex w-full justify-center items-center gap-2 my-4 ${className}`}
     >
       <ArrowLeft
-        width={24}
-        height={24}
         className='mr-1 cursor-pointer'
+        height={24}
         onClick={onPrev}
+        width={24}
       />
       {Array.from({ length: pageCount < 1 ? 1 : pageCount }).map((_, idx) => (
-        <span
-          key={idx}
+        <button
           className={`cursor-pointer inline-flex justify-center items-center w-5 h-5 text-sm font-medium rounded-md ${currentPage === idx + 1 ? getClassNames(variant, isGroup) : variant === 'primary' ? 'text-slate-400 ' : 'text-slate-950'} `}
+          key={idx}
           onClick={() => {
             onClickPage(idx + 1);
           }}
+          type='button'
         >
           {idx + 1}
-        </span>
+        </button>
       ))}
       <ArrowRight
-        width={24}
-        height={24}
         className='ml-1 cursor-pointer'
+        height={24}
         onClick={onNext}
+        width={24}
       />
     </div>
   );

@@ -1,8 +1,7 @@
 'use client';
-import { Dispatch, SetStateAction, useState } from 'react';
-
-import { Button, Input } from '@jeiltodo/ui/shared';
-import { BaseModal } from '@jeiltodo/ui/shared';
+import type { Dispatch, SetStateAction} from 'react';
+import { useState } from 'react';
+import { Button, Input , BaseModal } from '@jeiltodo/ui/shared';
 
 interface LinkModalProps {
   setLinkModalToggle: Dispatch<SetStateAction<boolean>>;
@@ -29,7 +28,7 @@ export const LinkModal = ({
         '(\\#[-a-z\\d_\\/\\u0021-\\uFFFF]*)?$', // 프래그먼트 (확장된 유니코드 포함)
       'i'
     );
-    return !!urlPattern.test(url);
+    return Boolean(urlPattern.test(url));
   };
 
   const handleLink = () => {

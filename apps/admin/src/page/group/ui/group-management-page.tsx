@@ -1,31 +1,34 @@
 'use client';
 
 import { LayoutTitle, LoadingSpinner, useToast } from '@jeiltodo/ui/shared';
+import { useMemo } from 'react';
 import { GroupsManagementTable } from '../../../widgets/group';
 import {
   SearchFilter,
   TableToolBarWithCheck,
   useTableContext,
 } from '../../../shared';
+import type { GroupsWidthMembers } from '../../../entities/group/model';
+import { GROUP_SEARCH_FILTERS } from '../../../entities/group/constants';
 import {
-  GROUP_SEARCH_FILTERS,
-  Groups,
   useDeleteGroups,
   useSearchGroups,
-} from '../../../entities/group';
+} from '../../../entities/group/hooks';
 import { GroupManagementPagination } from '../../../features/group';
-import { useMemo } from 'react';
-import { sortBy, SortOptions } from '../../../shared/lib/sortBy';
+import type { SortOptions } from '../../../shared/lib/sortBy';
+import { sortBy } from '../../../shared/lib/sortBy';
 import { TableCheckListProvider } from '../../../shared/model/table/table-checklist-provider';
 
-// eslint-disable-next-line react/function-component-definition
 export const GroupManagementPage = () => {
   const { tableFilters, tableSort } = useTableContext();
   const { data, isLoading } = useSearchGroups(tableFilters);
   const deleteGroupMutation = useDeleteGroups();
   const showToast = useToast();
   const sortedGroups = useMemo(() => {
-    return sortBy<Groups>(data?.groups || [], tableSort as SortOptions<Groups>);
+    return sortBy<GroupsWidthMembers>(
+      data?.groups || [],
+      tableSort as SortOptions<GroupsWidthMembers>
+    );
   }, [data?.groups, tableSort]);
 
   const handleDelete = (ids: number[]) => {
@@ -44,28 +47,28 @@ export const GroupManagementPage = () => {
       <h1 className='sr-only'>
         jtodo 서비스의 그룹 도메인을 조회, 삭제할 수 있는 관리 페이지입니다.
       </h1>
-      <LayoutTitle title='그룹 관리' isFirstPage={true} />
+      <LayoutTitle isFirstPage title='그룹 관리' />
       <SearchFilter filters={GROUP_SEARCH_FILTERS} />
       <div className='w-full pb-[16px] px-5 bg-white rounded-xl mt-5'>
         <TableCheckListProvider tableData={data.groups}>
           <TableToolBarWithCheck
             onDelete={handleDelete}
-            totalCount={data.totalCount}
             searchedCount={data.searchCount || 0}
+            totalCount={data.totalCount}
           />
-          {sortedGroups ? (
+          {sortedGroups.length > 0 ? (
             <GroupsManagementTable groups={sortedGroups} />
           ) : (
             <LoadingSpinner />
           )}
         </TableCheckListProvider>
         <GroupManagementPagination
+          currentPage={data.current_page}
           totalCount={
             tableFilters.title || tableFilters.nickname
               ? data.searchCount
               : data.totalCount
           }
-          currentPage={data.current_page}
         />
       </div>
     </div>

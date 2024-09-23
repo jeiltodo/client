@@ -1,15 +1,14 @@
 'use client';
 import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
-import { Button, Input } from '@jeiltodo/ui/shared';
-import { BaseModal } from '@jeiltodo/ui/shared';
+import { Button, Input, BaseModal } from '@jeiltodo/ui/shared';
 import type { Todo } from '../model/type';
-import type { GoalIdAndTitle } from '../../goal';
-import { GoalDropdown } from '../../goal';
+import type { GoalIdAndTitle } from '../../goal/types';
+import { GoalDropdown } from '../../goal/ui';
 import { useCreateTodo } from '../hooks/useCreateTodo';
 import { useUpdateTodo } from '../hooks/useUpdateTodo';
 
-interface Props {
+interface TodoModalProps {
   todoCreator: string;
   setTodoModalToggle: Dispatch<SetStateAction<boolean>>;
   goals: { id: number; title: string }[];
@@ -25,7 +24,7 @@ export const TodoModal = ({
   initialTodo,
   initialGoal,
   shouldCharge = false,
-}: Props) => {
+}: TodoModalProps) => {
   const [title, setTitle] = useState<string>(initialTodo?.title ?? '');
   const [goalId, setGoalId] = useState<number | string | undefined>(
     initialGoal?.id
@@ -64,7 +63,6 @@ export const TodoModal = ({
           defaultValue={initialTodo?.title}
           placeholder={initialTodo ? undefined : '할 일을 적어주세요'}
           className='text-base font-normal w-full'
-          autoFocus
         />
       </div>
       <div className='flex flex-col gap-3 mt-6'>

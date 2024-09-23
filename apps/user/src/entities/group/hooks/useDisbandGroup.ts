@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { groupApi } from '../api/groupApi';
 import { useToast } from '@jeiltodo/ui/shared';
 import { useRouter } from 'next/navigation';
+import { groupApi } from '../api/groupApi';
 
 export const useDisbandGroup = (groupId: number) => {
   const queryClient = useQueryClient();

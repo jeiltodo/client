@@ -1,22 +1,20 @@
 'use client';
 
 import React from 'react';
-
 import { useRouter } from 'next/navigation';
 import { Button, Checkbox, formatDateString } from '@jeiltodo/ui/shared';
-
-import { Table } from '../../../../shared';
-import { useTableCheck } from '../../../../shared';
-
-import { IndividualGoal } from '../../../../entities/goals/individual';
+import { Table, useTableCheck } from '../../../../shared';
+import type { IndividualGoal } from '../../../../entities/goals/individual/model';
 import { GOAL_INDIVIDUAL_TABLE_HEAD_MAP } from '../../../../features/goals/individual';
 import { TableHeadList } from '../../../../features/members';
 
-interface Props {
+interface GoalsIndividualTableProps {
   goals: IndividualGoal[];
 }
 
-export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
+export function GoalsIndividualTable({
+  goals: goalIndividualRows,
+}: GoalsIndividualTableProps) {
   const router = useRouter();
   const handleClick = (id: number, title: string) => {
     const queryString = new URLSearchParams({ title }).toString();
@@ -40,10 +38,10 @@ export function GoalsIndividualTable({ goals: goalIndividualRows }: Props) {
       </Table.Header>
       <Table.Body>
         {goalIndividualRows.map((goal) => (
-          <Table.Row key={goal.id} className='hover:bg-slate-50 '>
+          <Table.Row className='hover:bg-slate-50 ' key={goal.id}>
             <Table.Cell>
               <Checkbox
-              className='text-center'
+                className='text-center'
                 isChecked={getIsChecked(goal.id)}
                 onChange={() => {
                   handleCheck(goal.id);

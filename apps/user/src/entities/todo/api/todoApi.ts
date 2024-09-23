@@ -1,8 +1,7 @@
-import { client, ResponseWith } from '../../../shared';
-import {
+import { client } from '@jeiltodo/ui/shared';
+import type { ResponseWith } from '../../../shared';
+import type {
   ResponsePageListRecentTodo,
-  SingleGoalTodosResponse,
-  Todo,
   TodoCreateBody,
   Todos,
   TodoUpdateBody,

@@ -1,22 +1,28 @@
 'use client';
-'use client';
-import { Button, ButtonGroup } from '@jeiltodo/ui/shared';
-import { useBoardContext } from '@jeiltodo/ui/shared';
-import { BoardMode } from '@jeiltodo/ui/shared';
 
-interface Props {
+import {
+  Button,
+  ButtonGroup,
+  useBoardContext,
+  BoardMode,
+} from '@jeiltodo/ui/shared';
+
+interface MembersManageButtonsProps {
   onSave: () => void;
   isAdmin?: boolean;
 }
 
-export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
+export const MembersManageButtons = ({
+  onSave,
+  isAdmin = false,
+}: MembersManageButtonsProps) => {
   const { mode, changeMode } = useBoardContext();
 
-  const handleChangeMode = (mode: BoardMode) => {
-    changeMode(mode);
+  const handleChangeMode = (boardMode: BoardMode) => {
+    changeMode(boardMode);
   };
 
-  const handleCancle = () => {
+  const handleCancel = () => {
     changeMode('default');
   };
 
@@ -33,6 +39,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
             onClick={() => {
               handleChangeMode('change-leader');
             }}
+            type='button'
           >
             그룹장 변경
           </button>
@@ -41,6 +48,7 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
             onClick={() => {
               handleChangeMode('manage-members');
             }}
+            type='button'
           >
             구성원 관리
           </button>
@@ -49,20 +57,22 @@ export const MembersManageButtons = ({ onSave, isAdmin = false }: Props) => {
       {mode !== 'default' && (
         <ButtonGroup>
           <Button
-            variant={isAdmin ? 'outline' : 'outline-no-border'}
             className='bg-white px-[10px] min-w-[84px] h-[36px]'
             onClick={() => {
-              handleCancle();
+              handleCancel();
             }}
+            type='button'
+            variant={isAdmin ? 'outline' : 'outline-no-border'}
           >
             취소
           </Button>
           <Button
-            variant={isAdmin ? 'dark' : 'group-dark'}
             className='min-w-[84px] h-[36px]'
             onClick={() => {
               handleSave();
             }}
+            type='button'
+            variant={isAdmin ? 'dark' : 'group-dark'}
           >
             저장
           </Button>

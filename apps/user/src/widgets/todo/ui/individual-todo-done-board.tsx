@@ -1,5 +1,5 @@
+import type { Goal } from '@jeiltodo/ui/shared';
 import type { SingleGoalTodo } from '../../../entities/todo';
-import { Goal } from '../../../entities/goal';
 import { TodoList } from '../../../features/todo';
 
 export const IndividualTodoDoneBoard = ({
@@ -15,7 +15,7 @@ export const IndividualTodoDoneBoard = ({
       title: todo.title,
       isDone: todo.isDone,
       noteId: todo.noteId ?? undefined,
-      goal: goal,
+      goal,
     };
   });
 
