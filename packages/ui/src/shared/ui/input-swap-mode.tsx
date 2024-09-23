@@ -60,7 +60,7 @@ export const InputSwapMode = ({
           onClick={handleToggle}
           type='button'
         >
-          {isEditMode ? '수정' : '취소'}
+          {!isEditMode ? '수정' : '취소'}
         </button>
       </div>
     </div>
