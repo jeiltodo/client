@@ -53,7 +53,7 @@
 
 <br /><br />
 
-🧑‍💻이준영(팀리더) - [@Dragonite-Lee](https://github.com/Dragonite-Lee) 📧 email@example.com <br />
+🧑‍💻이준영(팀리더) - [@Dragonite-Lee](https://github.com/Dragonite-Lee) 📧 ross991222@gmail.com <br />
 공용 : 공통 컴포넌트, AWS배포 <br />
 유저 : sidebar, 최근 할 일 페이지, 내 진행 상황 보드, 노트 에디터 <br />
 어드민 : 어드민 게시글 관리
