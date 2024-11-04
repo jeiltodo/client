@@ -40,6 +40,23 @@
 ### 어드민 서비스
 - 🔗[https://jtodo.site/admin](https://jtodo.site/admin/login)
 
+<br/>
+
+## 🎥 시연 영상
+🔗[유저 서비스](https://drive.google.com/file/d/1wXfz_jboqlDOpIe4L28Yp1whyeGZV1RP/view?usp=drive_link)
+🔗[어드민 서비스](https://drive.google.com/file/d/1iv2qgIPGh43OzILAu7MqL7c5oOTOTqey/view?usp=drive_link)
+<br/><br/><br/>
+
+<!-- ## 🔗 링크
+
+🔗[드라이브 링크](https://drive.google.com/drive/folders/1krgevTFPczQJfxkvUNm3-C3S4k7zBaT9)
+
+<br/>
+
+ - [라이브 데모](https://taskmasterpro.example.com)
+- [기술 문서](https://docs.taskmasterpro.example.com)
+- [API 명세](https://api.taskmasterpro.example.com)
+ -->
 <br/><br/><br/>
 ## 👥 팀 소개
 <br/>
@@ -68,7 +85,7 @@
 유저 : 로그인 및 회원가입 페이지, 노트 모아보기 페이지, 그룹 디테일 페이지 <br />
 어드민 : 어드민 그룹 관리 <br />
 
-🫶함께 협업 해주신🫶 <br /><br />
+**함께 협업 해주신** <br /><br />
 🧑‍💻신정섭 백엔드 개발자님 <br />
 🧑‍💻유재영 백엔드 개발자님 <br />
 🧑‍💻김은지 디자이너님 <br />
@@ -306,18 +323,7 @@ npm run dev
 - [ ] Lint를 사용하면서
 
 <br/><br/><br/>
-## 🎥 시연 영상
-🔗[드라이브 링크](https://drive.google.com/drive/folders/1krgevTFPczQJfxkvUNm3-C3S4k7zBaT9)
-<br/><br/><br/>
 
-<!-- ## 🔗 링크
-<br/>
-
- - [라이브 데모](https://taskmasterpro.example.com)
-- [기술 문서](https://docs.taskmasterpro.example.com)
-- [API 명세](https://api.taskmasterpro.example.com)
- -->
-<br/><br/><br/>
 
 ## 한 줄 소감
 👩‍💻준영 : 규모가 큰 프로젝트를 진행하면서 협업의 힘을 실감했고, 각 단계마다 도전과 성장이 있어 즐거웠습니다<br />
